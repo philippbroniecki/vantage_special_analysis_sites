@@ -1,0 +1,1777 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>U.S. Opinion on Iran Policy | Vantage Data House</title>
+    <style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Backgrounds */
+  --bg:           #edf2f8;
+  --bg-deep:      #d6e3f0;
+  --surface:      #ffffff;
+  --surface-alt:  #f3f7fc;
+  --surface-hi:   #fafcff;
+
+  /* Typography */
+  --ink:          #0d1d2e;
+  --ink-soft:     #364d63;
+  --muted:        #5c7289;
+  --muted-faint:  #8aa2b5;
+
+  /* Borders */
+  --line:         #ccd8e5;
+  --line-soft:    #dce7f0;
+
+  /* Brand accent — teal */
+  --accent:       #1a6b73;
+  --accent-hover: #145d64;
+  --accent-tint:  rgba(26, 107, 115, 0.09);
+  --accent-tint2: rgba(26, 107, 115, 0.16);
+
+  /* Warm — pro-intervention orange */
+  --warm:         #c46525;
+  --warm-tint:    rgba(196, 101, 37, 0.09);
+
+  /* Cool — contra-intervention blue */
+  --cool:         #1f5f89;
+  --cool-tint:    rgba(31, 95, 137, 0.09);
+
+  /* Chart track */
+  --track:        rgba(135, 162, 188, 0.25);
+
+  /* Layered shadows */
+  --shadow-card:  0 1px 2px rgba(10, 25, 55, 0.04),
+                  0 4px 14px rgba(10, 25, 55, 0.055),
+                  0 0 0 1px rgba(10, 25, 55, 0.028);
+  --shadow-raise: 0 2px 5px rgba(10, 25, 55, 0.06),
+                  0 10px 28px rgba(10, 25, 55, 0.09),
+                  0 0 0 1px rgba(10, 25, 55, 0.04);
+
+  /* Hero gradient */
+  --hero-from:    #0c2240;
+  --hero-to:      #1c4a80;
+
+  /* Topbar backdrop */
+  --topbar-bg:    rgba(237, 242, 248, 0.86);
+
+  /* Radii */
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   20px;
+  --r-full: 9999px;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Heatmap scale (warm to cool) */
+  --heat-high:    rgba(196, 101, 37, 0.25);
+  --heat-mid:     rgba(135, 162, 188, 0.10);
+  --heat-low:     rgba(31, 95, 137, 0.20);
+}
+
+:root[data-theme='dark'] {
+  --bg:           #0c1520;
+  --bg-deep:      #07101a;
+  --surface:      #111c2b;
+  --surface-alt:  #172338;
+  --surface-hi:   #1c2c42;
+
+  --ink:          #e3ecf8;
+  --ink-soft:     #b0cbdf;
+  --muted:        #728ea8;
+  --muted-faint:  #4d6880;
+
+  --line:         #1e3049;
+  --line-soft:    #172640;
+
+  --accent:       #48b4be;
+  --accent-hover: #60c6d0;
+  --accent-tint:  rgba(72, 180, 190, 0.10);
+  --accent-tint2: rgba(72, 180, 190, 0.18);
+
+  --warm:         #e09058;
+  --warm-tint:    rgba(224, 144, 88, 0.11);
+
+  --cool:         #5aaad5;
+  --cool-tint:    rgba(90, 170, 213, 0.10);
+
+  --track:        rgba(85, 115, 150, 0.22);
+
+  --shadow-card:  0 1px 2px rgba(0,0,0,0.28),
+                  0 4px 16px rgba(0,0,0,0.26),
+                  0 0 0 1px rgba(255,255,255,0.038);
+  --shadow-raise: 0 2px 5px rgba(0,0,0,0.38),
+                  0 10px 32px rgba(0,0,0,0.42),
+                  0 0 0 1px rgba(255,255,255,0.055);
+
+  --hero-from:    #162e52;
+  --hero-to:      #0c1f3a;
+
+  --topbar-bg:    rgba(11, 20, 31, 0.90);
+
+  --heat-high:    rgba(224, 144, 88, 0.30);
+  --heat-mid:     rgba(85, 115, 150, 0.10);
+  --heat-low:     rgba(90, 170, 213, 0.22);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { color-scheme: light dark; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 14% 7%, rgba(26,107,115,0.14) 0%, transparent 46%),
+    radial-gradient(ellipse at 86% 0%,  rgba(196,101,37,0.10) 0%, transparent 38%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+.topbar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.topbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.6rem;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  flex-shrink: 0;
+  transition: background-color 280ms ease;
+  box-shadow: 0 0 0 2px var(--accent-tint2);
+}
+
+.brand-text {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 280ms ease;
+}
+
+/* ─── Theme Toggle ─── */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.88rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-card);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    box-shadow 180ms ease,
+    transform 150ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-raise);
+}
+
+.theme-toggle:active { transform: translateY(0); }
+
+.toggle-icon { font-size: 0.9rem; line-height: 1; }
+
+/* ============================================================
+   LAYOUT WRAPPER
+   ============================================================ */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.4rem 1.6rem 4rem;
+  display: grid;
+  gap: 1.35rem;
+}
+
+/* ============================================================
+   CARD BASE
+   ============================================================ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem 1.7rem;
+  transition:
+    background-color 280ms ease,
+    border-color 280ms ease,
+    box-shadow 280ms ease;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 2.1rem 2.2rem 1.85rem;
+  background: linear-gradient(148deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  border-color: transparent;
+  color: #edf5ff;
+}
+
+/* Decorative background orbs */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: var(--r-full);
+  pointer-events: none;
+}
+.hero::before {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(72,181,192,0.18) 0%, transparent 70%);
+  top: -110px;
+  right: -80px;
+}
+.hero::after {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(196,101,37,0.14) 0%, transparent 70%);
+  bottom: -50px;
+  left: 32%;
+}
+
+.hero-inner { position: relative; z-index: 1; }
+
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(155, 200, 220, 0.95);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow-pip {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--r-full);
+  background: #48b4be;
+  flex-shrink: 0;
+}
+
+.hero h1 {
+  font-size: clamp(1.55rem, 3.1vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.17;
+  color: #f4faff;
+  letter-spacing: -0.025em;
+  max-width: 660px;
+  margin-bottom: 1.1rem;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.27rem 0.7rem;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: var(--r-full);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(215, 235, 255, 0.90);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.meta-pill a { color: inherit; text-decoration: none; }
+.meta-pill a:hover { color: #fff; }
+
+/* ============================================================
+   SECTION HEADING
+   ============================================================ */
+.section-head { margin-bottom: 1.1rem; }
+
+.section-eyebrow {
+  font-size: 0.63rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+  margin-bottom: 0.28rem;
+  transition: color 280ms ease;
+}
+
+.section-head h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.18rem;
+  transition: color 280ms ease;
+}
+
+.section-head p {
+  font-size: 0.81rem;
+  color: var(--muted);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   SURVEY QUESTION CARD
+   ============================================================ */
+.question-label {
+  font-size: 0.63rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+  transition: color 280ms ease;
+}
+
+.question-blockquote {
+  margin-bottom: 1.15rem;
+  padding: 0.85rem 1.05rem 0.85rem 1.2rem;
+  border: 0;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-tint);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-style: italic;
+  font-size: 0.97rem;
+  line-height: 1.52;
+  color: var(--ink);
+  transition: background-color 280ms ease, border-color 280ms ease, color 280ms ease;
+}
+
+.question-opts {
+  list-style: none;
+  display: grid;
+  gap: 0.52rem;
+}
+
+.q-opt {
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.62rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-alt);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.q-opt-left {
+  display: grid;
+  gap: 0.38rem;
+  min-width: 0;
+}
+
+.q-opt-label {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  transition: color 280ms ease;
+}
+
+.q-opt-track {
+  height: 5px;
+  background: var(--track);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.q-opt-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.q-opt-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   DEMOGRAPHIC SUMMARY GRID
+   ============================================================ */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.chart-rows { display: grid; gap: 0.62rem; }
+
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 11rem) minmax(0, 1fr) 50px;
+  align-items: center;
+  gap: 0.62rem;
+}
+
+.bar-label {
+  font-size: 0.83rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 280ms ease;
+}
+
+.bar-track {
+  height: 7px;
+  background: var(--track);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.bar-value {
+  text-align: right;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   ARCHETYPE SECTION
+   ============================================================ */
+.archetype-grid { display: grid; gap: 0.65rem; }
+
+.archetype-row {
+  padding: 0.78rem 0.95rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-left-color: var(--line);
+  border-radius: var(--r-sm);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.archetype-row.majority-pro  { border-left-color: var(--warm); }
+.archetype-row.majority-contra { border-left-color: var(--cool); }
+
+.archetype-label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.55rem;
+  transition: color 280ms ease;
+}
+
+.archetype-bars { display: grid; gap: 0.36rem; }
+
+.mini-bar {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 50px;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.mini-tag {
+  font-size: 0.67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted-faint);
+  transition: color 280ms ease;
+}
+
+.mini-tag.pro    { color: var(--warm); }
+.mini-tag.contra { color: var(--cool); }
+
+.mini-meter {
+  height: 5px;
+  border-radius: var(--r-full);
+  background: var(--track);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.mini-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.mini-fill.pro    { background: var(--warm); }
+.mini-fill.contra { background: var(--cool); }
+
+.mini-value {
+  text-align: right;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   STATE CHART
+   ============================================================ */
+.state-chart { display: grid; gap: 0; }
+
+.tier-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0 0.32rem;
+  margin-top: 0.2rem;
+}
+
+.tier-divider:first-child { padding-top: 0; margin-top: 0; }
+
+.tier-badge {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 280ms ease;
+}
+
+.tier-badge.top { color: var(--warm); }
+.tier-badge.mid { color: var(--muted-faint); }
+.tier-badge.bot { color: var(--cool); }
+
+.tier-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line-soft);
+  transition: background-color 280ms ease;
+}
+
+.state-rows-group { display: grid; gap: 0; }
+
+.state-row {
+  display: grid;
+  grid-template-columns: 26px 162px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.21rem 0.25rem;
+  border-radius: var(--r-xs);
+  transition: background-color 150ms ease;
+}
+
+.state-row:hover { background: var(--surface-alt); }
+
+.state-rank {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--muted-faint);
+  text-align: right;
+  transition: color 280ms ease;
+}
+
+.state-name {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 280ms ease;
+}
+
+.state-track {
+  height: 5px;
+  background: var(--track);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.state-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.state-value {
+  text-align: right;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   CROSSTABS EXPLORER
+   ============================================================ */
+.xt-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: flex-end;
+  margin-bottom: 1.1rem;
+}
+
+.xt-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+
+.xt-control-label {
+  font-size: 0.63rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  transition: color 280ms ease;
+}
+
+.xt-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.42rem 2rem 0.42rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  background-color: var(--surface-alt);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235c7289'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  min-width: 140px;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.xt-select:hover { border-color: var(--accent); }
+.xt-select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+:root[data-theme='dark'] .xt-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23728ea8'/%3E%3C/svg%3E");
+}
+
+.xt-swap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 150ms ease;
+}
+
+.xt-swap-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(180deg); }
+
+.xt-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  transition: border-color 280ms ease;
+}
+
+.xt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.xt-table th,
+.xt-table td {
+  padding: 0.52rem 0.7rem;
+  text-align: center;
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color 200ms ease, border-color 280ms ease, color 280ms ease;
+}
+
+.xt-table th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  background: var(--surface-alt);
+}
+
+.xt-table th:first-child {
+  text-align: left;
+}
+
+.xt-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.xt-table tbody tr:last-child td { border-bottom: none; }
+
+.xt-table tbody tr:hover td { background: var(--surface-hi); }
+
+.xt-cell {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.xt-empty-state {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.xt-note {
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--muted-faint);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   TAKEAWAYS
+   ============================================================ */
+.takeaways-grid { display: grid; gap: 0.75rem; }
+
+.takeaway-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 0.95rem 1.05rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.takeaway-num {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: var(--r-full);
+  background: var(--accent-tint2);
+  color: var(--accent);
+  font-size: 0.71rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+.takeaway-text {
+  font-size: 0.88rem;
+  line-height: 1.58;
+  color: var(--ink-soft);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   DATA LOADING BANNER
+   ============================================================ */
+.data-banner {
+  padding: 0.6rem 1rem;
+  border-radius: var(--r-sm);
+  font-size: 0.78rem;
+  margin-bottom: 0.5rem;
+  display: none;
+}
+
+.data-banner.warn {
+  display: block;
+  background: var(--warm-tint);
+  border: 1px solid var(--warm);
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 480ms var(--ease-out),
+    transform 480ms var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 880px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar  { padding: 0 1rem; }
+  .layout  { padding: 1.1rem 1rem 3rem; gap: 1.1rem; }
+  .hero    { padding: 1.6rem 1.3rem 1.5rem; }
+  .card    { padding: 1.15rem 1.2rem; }
+
+  .q-opt {
+    grid-template-columns: 1fr;
+    gap: 0.42rem;
+  }
+  .q-opt-value { text-align: left; }
+
+  .bar-row {
+    grid-template-columns: minmax(90px, 8.5rem) minmax(0, 1fr) 44px;
+    gap: 0.48rem;
+  }
+
+  .state-row {
+    grid-template-columns: 22px 128px minmax(0, 1fr) 44px;
+    gap: 0.38rem;
+  }
+  .state-name  { font-size: 0.71rem; }
+  .state-value { font-size: 0.68rem; }
+
+  .xt-controls { gap: 0.5rem; }
+  .xt-select { min-width: 110px; font-size: 0.78rem; }
+}
+
+@media (max-width: 460px) {
+  .state-row {
+    grid-template-columns: 19px 100px minmax(0, 1fr) 40px;
+    gap: 0.3rem;
+  }
+  .state-name  { font-size: 0.66rem; }
+  .state-rank  { font-size: 0.58rem; }
+  .state-value { font-size: 0.64rem; }
+}
+    </style>
+  </head>
+
+  <body>
+
+    <!-- ─── TOPBAR ─── -->
+    <div class="topbar-wrap">
+      <nav class="topbar" aria-label="Site navigation">
+        <a class="brand" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">VDH Policy Lab</span>
+        </a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+          <span class="toggle-icon" id="toggleIcon" aria-hidden="true">&#9788;</span>
+          <span id="toggleLabel">Light</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ─── MAIN CONTENT ─── -->
+    <main class="layout">
+
+      <!-- DATA LOADING BANNER (shown if JSON fetch failed) -->
+      <div id="dataBanner" class="data-banner"></div>
+
+      <!-- HERO -->
+      <section class="hero card reveal">
+        <div class="hero-inner">
+          <p class="eyebrow">
+            <span class="eyebrow-pip" aria-hidden="true"></span>
+            Vantage Data House
+          </p>
+          <h1 id="heroTitle">How Americans Wanted the U.S. to Handle Iran&mdash;On the Eve of the Attack</h1>
+          <div class="hero-meta" aria-label="Survey metadata">
+            <span class="meta-pill">
+              <a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a>
+            </span>
+            <span class="meta-pill" id="metaSample">N = 1,602 respondents</span>
+            <span class="meta-pill" id="metaDates">February 25&#8211;27, 2026</span>
+            <span class="meta-pill">Poststratified ML estimates</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SURVEY QUESTION -->
+      <section class="card reveal" aria-labelledby="qCardHead">
+        <p class="question-label" id="qCardHead">Survey Question</p>
+        <blockquote id="questionPrompt" class="question-blockquote"></blockquote>
+        <ul id="questionOptions" class="question-opts" aria-label="Response options with topline results"></ul>
+      </section>
+
+      <!-- DEMOGRAPHICS 2×2 -->
+      <div class="summary-grid" role="region" aria-label="Military support by demographic group">
+        <article class="card reveal" aria-labelledby="h-party">
+          <div class="section-head">
+            <p class="section-eyebrow">Party ID</p>
+            <h2 id="h-party">Military Support by Party</h2>
+            <p>Moderate partisan gap</p>
+          </div>
+          <div id="partyChart" class="chart-rows"></div>
+        </article>
+
+        <article class="card reveal" aria-labelledby="h-race">
+          <div class="section-head">
+            <p class="section-eyebrow">Race</p>
+            <h2 id="h-race">Military Support by Race</h2>
+            <p>White respondents most supportive</p>
+          </div>
+          <div id="raceChart" class="chart-rows"></div>
+        </article>
+
+        <article class="card reveal" aria-labelledby="h-gender">
+          <div class="section-head">
+            <p class="section-eyebrow">Gender</p>
+            <h2 id="h-gender">Military Support by Gender</h2>
+            <p>Clear gender gap</p>
+          </div>
+          <div id="genderChart" class="chart-rows"></div>
+        </article>
+
+        <article class="card reveal" aria-labelledby="h-rus">
+          <div class="section-head">
+            <p class="section-eyebrow">Geography</p>
+            <h2 id="h-rus">Military Support by RUS</h2>
+            <p>Rural, suburban, and urban support levels</p>
+          </div>
+          <div id="rusChart" class="chart-rows"></div>
+        </article>
+      </div>
+
+      <!-- CROSSTABS EXPLORER -->
+      <section class="card reveal" aria-labelledby="h-crosstabs" id="crosstabSection">
+        <div class="section-head">
+          <p class="section-eyebrow">Interactive Explorer</p>
+          <h2 id="h-crosstabs">Crosstabs Explorer</h2>
+          <p>Select two demographic variables to view their cross-tabulation</p>
+        </div>
+        <div class="xt-controls" id="xtControls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="xtRowVar">Row variable</label>
+            <select class="xt-select" id="xtRowVar"></select>
+          </div>
+          <button class="xt-swap-btn" id="xtSwapBtn" type="button" aria-label="Swap row and column variables" title="Swap axes">&#8646;</button>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="xtColVar">Column variable</label>
+            <select class="xt-select" id="xtColVar"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="xtMetric">Metric</label>
+            <select class="xt-select" id="xtMetric"></select>
+          </div>
+        </div>
+        <div id="xtDisplay"></div>
+        <p class="xt-note" id="xtNote">Values are weighted poststratified estimates (percent).</p>
+      </section>
+
+      <!-- ARCHETYPES -->
+      <section class="card reveal" aria-labelledby="h-archetypes">
+        <div class="section-head">
+          <p class="section-eyebrow">Voter Archetypes</p>
+          <h2 id="h-archetypes">Pro vs. Contra Intervention by Archetype</h2>
+          <p>Orange border = majority pro-intervention &nbsp;&middot;&nbsp; Blue border = majority contra</p>
+        </div>
+        <div id="archetypeChart" class="archetype-grid"></div>
+      </section>
+
+      <!-- STATES -->
+      <section class="card reveal" aria-labelledby="h-states">
+        <div class="section-head">
+          <p class="section-eyebrow">Geographic</p>
+          <h2 id="h-states">State-Level Support for Military Force</h2>
+          <p>All 51 states ranked &nbsp;&middot;&nbsp; top and bottom tiers highlighted</p>
+        </div>
+        <div id="stateChart" class="state-chart"></div>
+      </section>
+
+      <!-- TAKEAWAYS -->
+      <section class="card reveal" aria-labelledby="h-takeaways">
+        <div class="section-head">
+          <p class="section-eyebrow">Key Findings</p>
+          <h2 id="h-takeaways">Takeaways</h2>
+          <p>High-level findings from modeled estimates</p>
+        </div>
+        <div id="takeaways" class="takeaways-grid"></div>
+      </section>
+
+    </main>
+
+    <script>
+/* ============================================================
+   EMBEDDED FALLBACK DATA
+   ============================================================
+   This embedded copy ensures the report renders correctly when
+   opened via file:// (e.g., direct open on iPhone/desktop) where
+   fetch() cannot load companion JSON files. When served over HTTP,
+   the page fetches generated JSON and uses that instead.
+   ============================================================ */
+const FALLBACK_REPORT = {
+  meta: {
+    source:     'Vantage Data House',
+    title:      'How Americans Wanted the U.S. to Handle Iran\u2014On the Eve of the Attack',
+    site:       'https://www.vantagedatahouse.com',
+    sample:     'N\u00a0=\u00a01,602\u00a0respondents',
+    fieldDates: 'February\u00a025\u201327,\u00a02026'
+  },
+  question: {
+    prompt: 'Thinking about the current situation with Iran, which comes closest to your view on U.S.\u00a0policy?'
+  },
+  questionResults: [
+    { label: 'The U.S. should use military force if necessary',                      value: 25.6, color: '#c46525' },
+    { label: 'The U.S. should use diplomacy and sanctions',                          value: 33.1, color: '#1a6b73' },
+    { label: 'The U.S. should take a less involved role in the situation with Iran', value: 26.7, color: '#5a7d9a' },
+    { label: 'Unsure',                                                               value: 14.6, color: '#a8b5c4' }
+  ],
+  topline: [
+    { label: 'Diplomacy & sanctions', value: 33.1, color: '#1a6b73' },
+    { label: 'Less involved role',    value: 26.7, color: '#5a7d9a' },
+    { label: 'Military force',        value: 25.6, color: '#c46525' },
+    { label: 'Unsure',                value: 14.6, color: '#a8b5c4' }
+  ],
+  partyMilitary: [
+    { label: 'Republicans',           value: 32.5, color: '#b03030' },
+    { label: 'Independents / Other',  value: 26.8, color: '#3a6080' },
+    { label: 'Democrats',             value: 17.7, color: '#2870a1' }
+  ],
+  raceMilitary: [
+    { label: 'White',    value: 27.2, color: '#5a7d9a' },
+    { label: 'Hispanic', value: 23.7, color: '#c46525' },
+    { label: 'Other',    value: 23.5, color: '#3a6080' },
+    { label: 'Black',    value: 17.1, color: '#1a6b73' }
+  ],
+  genderMilitary: [
+    { label: 'Male',   value: 30.0, color: '#2e5e82' },
+    { label: 'Female', value: 21.7, color: '#6a8fa8' }
+  ],
+  rusMilitary: [
+    { label: 'Rural',    value: 27.1, color: '#c46525' },
+    { label: 'Suburban', value: 28.4, color: '#5a7d9a' },
+    { label: 'Urban',    value: 21.0, color: '#1a6b73' }
+  ],
+  archetypePC: [
+    { label: 'Evangelical Republicans',    pro: 37.9, contra: 62.1 },
+    { label: 'Disaffected Young Men',      pro: 35.6, contra: 64.4 },
+    { label: 'Swing Moderates',            pro: 34.9, contra: 65.1 },
+    { label: 'White Working-Class',        pro: 32.7, contra: 67.3 },
+    { label: 'Hispanic Working-Class Men', pro: 31.5, contra: 68.5 },
+    { label: 'Soccer Moms',               pro: 30.5, contra: 69.5 },
+    { label: 'Black Gen Z Men',            pro: 24.0, contra: 76.0 },
+    { label: 'Gen Z Progressives',         pro: 20.8, contra: 79.2 }
+  ],
+  stateMilitary: [
+    { state: 'Tennessee',            value: 30.1, rank:  1, tier: 'Top 10'    },
+    { state: 'Florida',              value: 30.0, rank:  2, tier: 'Top 10'    },
+    { state: 'South Carolina',       value: 29.4, rank:  3, tier: 'Top 10'    },
+    { state: 'Indiana',              value: 28.9, rank:  4, tier: 'Top 10'    },
+    { state: 'Alabama',              value: 28.4, rank:  5, tier: 'Top 10'    },
+    { state: 'Arkansas',             value: 28.3, rank:  6, tier: 'Top 10'    },
+    { state: 'Wisconsin',            value: 28.3, rank:  7, tier: 'Top 10'    },
+    { state: 'Ohio',                 value: 28.2, rank:  8, tier: 'Top 10'    },
+    { state: 'Oklahoma',             value: 27.9, rank:  9, tier: 'Top 10'    },
+    { state: 'North Dakota',         value: 27.3, rank: 10, tier: 'Top 10'    },
+    { state: 'Kentucky',             value: 27.3, rank: 11, tier: 'Middle'    },
+    { state: 'New Hampshire',        value: 27.3, rank: 12, tier: 'Middle'    },
+    { state: 'North Carolina',       value: 27.0, rank: 13, tier: 'Middle'    },
+    { state: 'South Dakota',         value: 27.0, rank: 14, tier: 'Middle'    },
+    { state: 'Missouri',             value: 26.6, rank: 15, tier: 'Middle'    },
+    { state: 'Alaska',               value: 26.6, rank: 16, tier: 'Middle'    },
+    { state: 'Utah',                 value: 26.5, rank: 17, tier: 'Middle'    },
+    { state: 'Pennsylvania',         value: 26.3, rank: 18, tier: 'Middle'    },
+    { state: 'Kansas',               value: 26.3, rank: 19, tier: 'Middle'    },
+    { state: 'Wyoming',              value: 26.2, rank: 20, tier: 'Middle'    },
+    { state: 'Arizona',              value: 25.8, rank: 21, tier: 'Middle'    },
+    { state: 'Nebraska',             value: 25.8, rank: 22, tier: 'Middle'    },
+    { state: 'Maine',                value: 25.8, rank: 23, tier: 'Middle'    },
+    { state: 'West Virginia',        value: 25.6, rank: 24, tier: 'Middle'    },
+    { state: 'Texas',                value: 25.5, rank: 25, tier: 'Middle'    },
+    { state: 'Georgia',              value: 25.4, rank: 26, tier: 'Middle'    },
+    { state: 'New Jersey',           value: 25.4, rank: 27, tier: 'Middle'    },
+    { state: 'Idaho',                value: 25.3, rank: 28, tier: 'Middle'    },
+    { state: 'Louisiana',            value: 25.1, rank: 29, tier: 'Middle'    },
+    { state: 'Minnesota',            value: 25.0, rank: 30, tier: 'Middle'    },
+    { state: 'Michigan',             value: 25.0, rank: 31, tier: 'Middle'    },
+    { state: 'Delaware',             value: 24.9, rank: 32, tier: 'Middle'    },
+    { state: 'Rhode Island',         value: 24.6, rank: 33, tier: 'Middle'    },
+    { state: 'Massachusetts',        value: 24.2, rank: 34, tier: 'Middle'    },
+    { state: 'Connecticut',          value: 24.1, rank: 35, tier: 'Middle'    },
+    { state: 'Montana',              value: 23.7, rank: 36, tier: 'Middle'    },
+    { state: 'Oregon',               value: 23.7, rank: 37, tier: 'Middle'    },
+    { state: 'Iowa',                 value: 23.7, rank: 38, tier: 'Middle'    },
+    { state: 'Virginia',             value: 23.6, rank: 39, tier: 'Middle'    },
+    { state: 'Illinois',             value: 23.4, rank: 40, tier: 'Middle'    },
+    { state: 'Colorado',             value: 23.3, rank: 41, tier: 'Middle'    },
+    { state: 'Nevada',               value: 23.2, rank: 42, tier: 'Bottom 10' },
+    { state: 'New York',             value: 23.1, rank: 43, tier: 'Bottom 10' },
+    { state: 'Mississippi',          value: 23.0, rank: 44, tier: 'Bottom 10' },
+    { state: 'California',           value: 22.8, rank: 45, tier: 'Bottom 10' },
+    { state: 'Maryland',             value: 22.8, rank: 46, tier: 'Bottom 10' },
+    { state: 'Vermont',              value: 22.6, rank: 47, tier: 'Bottom 10' },
+    { state: 'Washington',           value: 22.4, rank: 48, tier: 'Bottom 10' },
+    { state: 'Hawaii',               value: 22.0, rank: 49, tier: 'Bottom 10' },
+    { state: 'New Mexico',           value: 21.1, rank: 50, tier: 'Bottom 10' },
+    { state: 'District of Columbia', value: 12.9, rank: 51, tier: 'Bottom 10' }
+  ]
+};
+
+/* ============================================================
+   GLOBALS
+   ============================================================ */
+let reportData = null;
+let stateMilitary = null;
+let crosstabsData = null;
+let dataSource = 'fallback'; // 'json' or 'fallback'
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+const fmtPct = (x) => `${x.toFixed(1)}%`;
+
+function safeGet(key) {
+  try { return localStorage.getItem(key); } catch { return null; }
+}
+function safeSet(key, val) {
+  try { localStorage.setItem(key, val); } catch { /* restricted context */ }
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  safeSet('vdh_iran2_theme', theme);
+  const icon  = document.getElementById('toggleIcon');
+  const label = document.getElementById('toggleLabel');
+  if (icon)  icon.textContent  = theme === 'dark' ? '\u263D' : '\u2600';
+  if (label) label.textContent = theme === 'dark' ? 'Dark'   : 'Light';
+}
+
+function initTheme() {
+  const saved   = safeGet('vdh_iran2_theme');
+  const sysDark = typeof matchMedia === 'function' &&
+                  matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved ?? (sysDark ? 'dark' : 'light'));
+  document.getElementById('themeToggle')?.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+  });
+}
+
+/* ============================================================
+   DATA LOADING — fetch JSON with embedded fallback
+   ============================================================
+   Strategy:
+   - Try to fetch iran_policy_data.json (works over HTTP).
+   - If fetch fails (file://, CORS, network error), use FALLBACK_REPORT.
+   - Crosstabs JSON is loaded separately; if unavailable, the
+     crosstabs section shows a graceful empty state.
+   ============================================================ */
+const isFileProtocol = location.protocol === 'file:';
+
+function getRuntimeBaseHref() {
+  // Keep fetch paths portable for both repo-root serving and standalone root deployment.
+  const marker = '/iran_policy/standalone_website/';
+  const { origin, pathname } = window.location;
+  if (pathname.includes(marker)) {
+    return new URL(marker, origin).toString();
+  }
+  const currentDir = pathname.endsWith('/')
+    ? pathname
+    : pathname.slice(0, pathname.lastIndexOf('/') + 1);
+  return new URL(currentDir || '/', origin).toString();
+}
+
+const DATA_BASE_HREF = getRuntimeBaseHref();
+const REPORT_DATA_URL = new URL('data/iran_policy_data.json', DATA_BASE_HREF).toString();
+const CROSSTABS_DATA_URL = new URL('data/iran_policy_crosstabs.json', DATA_BASE_HREF).toString();
+
+async function loadJSON(url) {
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${url}`);
+  return resp.json();
+}
+
+function classifyLoadError(err) {
+  const msg = String(err?.message || err || '');
+  if (isFileProtocol) return 'file-protocol';
+  if (/networkerror|failed to fetch|load failed/i.test(msg)) return 'network';
+  if (/cors|cross-origin/i.test(msg)) return 'cors';
+  if (/http 404/i.test(msg)) return '404';
+  if (/http [45]\d\d/i.test(msg)) return 'http-error';
+  if (/json|unexpected token|syntax/i.test(msg)) return 'parse';
+  return 'unknown';
+}
+
+async function loadData() {
+  const banner = document.getElementById('dataBanner');
+
+  // Attempt to load report data JSON
+  try {
+    const json = await loadJSON(REPORT_DATA_URL);
+    reportData = {
+      meta:            json.meta            || FALLBACK_REPORT.meta,
+      question:        json.question        || FALLBACK_REPORT.question,
+      questionResults: json.questionResults || FALLBACK_REPORT.questionResults,
+      topline:         json.topline         || FALLBACK_REPORT.topline,
+      partyMilitary:   json.partyMilitary   || FALLBACK_REPORT.partyMilitary,
+      raceMilitary:    json.raceMilitary    || FALLBACK_REPORT.raceMilitary,
+      genderMilitary:  json.genderMilitary  || FALLBACK_REPORT.genderMilitary,
+      rusMilitary:     json.rusMilitary     || FALLBACK_REPORT.rusMilitary,
+      archetypePC:     json.archetypePC     || FALLBACK_REPORT.archetypePC,
+    };
+    stateMilitary = json.stateMilitary || FALLBACK_REPORT.stateMilitary;
+    dataSource = 'json';
+    console.log('[VDH] Report data loaded from JSON.');
+  } catch (err) {
+    reportData    = FALLBACK_REPORT;
+    stateMilitary = FALLBACK_REPORT.stateMilitary;
+    dataSource    = 'fallback';
+    console.warn('[VDH] Report JSON fetch failed, using embedded fallback.', err);
+    if (banner) {
+      banner.className = 'data-banner warn';
+      banner.textContent = isFileProtocol
+        ? 'Opened via file:// \u2014 report data loaded from embedded fallback. Serve over HTTP for live JSON data and the interactive crosstabs explorer.'
+        : `Report JSON could not be loaded \u2014 using embedded fallback. Check that ${REPORT_DATA_URL} is reachable.`;
+    }
+  }
+
+  // Attempt to load crosstabs JSON
+  crosstabsLoadError = null;
+  try {
+    const json = await loadJSON(CROSSTABS_DATA_URL);
+    // Validate schema
+    if (!json.pairs || !Array.isArray(json.pairs)) {
+      throw new Error('Invalid crosstabs JSON: missing or non-array "pairs" key');
+    }
+    if (!json.variables || !Array.isArray(json.variables)) {
+      throw new Error('Invalid crosstabs JSON: missing or non-array "variables" key');
+    }
+    crosstabsData = json;
+    console.log(`[VDH] Crosstabs loaded: ${json.pairs.length} pairs, ${json.variables.length} variables.`);
+  } catch (err) {
+    crosstabsData = null;
+    crosstabsLoadError = { error: err, type: classifyLoadError(err) };
+    console.warn('[VDH] Crosstabs JSON load failed:', crosstabsLoadError.type, err);
+    console.error('[VDH] Crosstabs debug — URL:', CROSSTABS_DATA_URL, '| Error type:', crosstabsLoadError.type, '| Message:', err?.message || String(err));
+  }
+}
+
+let crosstabsLoadError = null;
+
+/* ============================================================
+   META FILL
+   ============================================================ */
+function fillMeta() {
+  const m  = reportData.meta;
+  const el = (id) => document.getElementById(id);
+
+  const t = el('heroTitle');    if (t) t.textContent = m.title;
+  const s = el('metaSite');     if (s) { s.textContent = m.site.replace('https://', ''); s.href = m.site; }
+  const n = el('metaSample');   if (n) n.textContent = m.sample;
+  const d = el('metaDates');    if (d) d.textContent = m.fieldDates;
+  const q = el('questionPrompt');
+  if (q) q.textContent = `\u201c${reportData.question.prompt}\u201d`;
+}
+
+/* ============================================================
+   RENDER — SURVEY QUESTION OPTIONS
+   ============================================================ */
+function renderQuestion() {
+  const ul = document.getElementById('questionOptions');
+  if (!ul) return;
+  const maxVal = Math.max(...reportData.questionResults.map(r => r.value));
+  ul.innerHTML = '';
+  reportData.questionResults.forEach(opt => {
+    const pct = (opt.value / maxVal * 100).toFixed(2);
+    const li  = document.createElement('li');
+    li.className = 'q-opt';
+    li.innerHTML = `
+      <div class="q-opt-left">
+        <span class="q-opt-label">${opt.label}</span>
+        <span class="q-opt-track">
+          <span class="q-opt-fill" style="width:${pct}%; background:${opt.color};"></span>
+        </span>
+      </div>
+      <span class="q-opt-value">${fmtPct(opt.value)}</span>
+    `;
+    ul.appendChild(li);
+  });
+}
+
+/* ============================================================
+   RENDER — BAR CHART ROWS
+   ============================================================ */
+function renderBarRows(containerId, rows, scaleMax) {
+  const root   = document.getElementById(containerId);
+  if (!root) return;
+  const maxVal = scaleMax ?? Math.max(...rows.map(r => r.value));
+  root.innerHTML = '';
+  rows.forEach(row => {
+    const pct = (row.value / maxVal * 100).toFixed(2);
+    const div = document.createElement('div');
+    div.className = 'bar-row';
+    div.innerHTML = `
+      <div class="bar-label">${row.label}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${pct}%; background:${row.color};"></div>
+      </div>
+      <div class="bar-value">${fmtPct(row.value)}</div>
+    `;
+    root.appendChild(div);
+  });
+}
+
+/* ============================================================
+   RENDER — ARCHETYPES
+   ============================================================ */
+function renderArchetypes() {
+  const root = document.getElementById('archetypeChart');
+  if (!root) return;
+  root.innerHTML = '';
+  reportData.archetypePC.forEach(row => {
+    const majorityPro = row.pro > row.contra;
+    const div = document.createElement('div');
+    div.className = `archetype-row ${majorityPro ? 'majority-pro' : 'majority-contra'}`;
+    div.innerHTML = `
+      <div class="archetype-label">${row.label}</div>
+      <div class="archetype-bars">
+        <div class="mini-bar">
+          <span class="mini-tag pro">Pro</span>
+          <div class="mini-meter">
+            <div class="mini-fill pro" style="width:${row.pro.toFixed(2)}%"></div>
+          </div>
+          <span class="mini-value">${fmtPct(row.pro)}</span>
+        </div>
+        <div class="mini-bar">
+          <span class="mini-tag contra">Contra</span>
+          <div class="mini-meter">
+            <div class="mini-fill contra" style="width:${row.contra.toFixed(2)}%"></div>
+          </div>
+          <span class="mini-value">${fmtPct(row.contra)}</span>
+        </div>
+      </div>
+    `;
+    root.appendChild(div);
+  });
+}
+
+/* ============================================================
+   RENDER — STATES
+   ============================================================ */
+function renderStates() {
+  const root = document.getElementById('stateChart');
+  if (!root) return;
+  root.innerHTML = '';
+
+  const maxVal     = Math.max(...stateMilitary.map(d => d.value));
+  const tierConfig = {
+    'Top 10':    { cls: 'top', label: 'Top 10',    color: '#c46525' },
+    'Middle':    { cls: 'mid', label: 'Middle',    color: '#8da3b6' },
+    'Bottom 10': { cls: 'bot', label: 'Bottom 10', color: '#1f5f89' }
+  };
+
+  let currentTier = null;
+  let groupEl     = null;
+
+  stateMilitary.forEach(row => {
+    if (row.tier !== currentTier) {
+      currentTier = row.tier;
+      const tc  = tierConfig[row.tier];
+      const div = document.createElement('div');
+      div.className = 'tier-divider';
+      div.innerHTML = `
+        <span class="tier-badge ${tc.cls}">${tc.label}</span>
+        <span class="tier-rule"></span>
+      `;
+      root.appendChild(div);
+
+      groupEl = document.createElement('div');
+      groupEl.className = 'state-rows-group';
+      root.appendChild(groupEl);
+    }
+
+    const pct   = (row.value / maxVal * 100).toFixed(2);
+    const color = tierConfig[row.tier].color;
+    const line  = document.createElement('div');
+    line.className = 'state-row';
+    line.innerHTML = `
+      <div class="state-rank">${row.rank}</div>
+      <div class="state-name">${row.state}</div>
+      <div class="state-track">
+        <div class="state-fill" style="width:${pct}%; background:${color};"></div>
+      </div>
+      <div class="state-value">${fmtPct(row.value)}</div>
+    `;
+    groupEl.appendChild(line);
+  });
+}
+
+/* ============================================================
+   RENDER — TAKEAWAYS
+   ============================================================ */
+function renderTakeaways() {
+  const nonMil = reportData.topline
+    .filter(d => d.label === 'Diplomacy & sanctions' || d.label === 'Less involved role')
+    .reduce((acc, d) => acc + d.value, 0);
+  const mil    = reportData.topline.find(d => d.label === 'Military force').value;
+
+  const r = reportData.partyMilitary.find(d => d.label === 'Republicans').value;
+  const d = reportData.partyMilitary.find(d => d.label === 'Democrats').value;
+
+  const male   = reportData.genderMilitary.find(g => g.label === 'Male').value;
+  const female = reportData.genderMilitary.find(g => g.label === 'Female').value;
+
+  const partyGap  = (r - d).toFixed(1);
+  const genderGap = (male - female).toFixed(1);
+
+  const takeaways = [
+    `${fmtPct(nonMil)} of Americans favor diplomacy, sanctions, or a less involved role. ${fmtPct(mil)} support military force if necessary.`,
+    `Partisanship matters, but the gap is narrower than many would expect for a foreign-policy question like this. Republicans back military force at ${fmtPct(r)}, Democrats at ${fmtPct(d)}\u2014a ${partyGap}-point divide. Gender is the other notable split: ${fmtPct(male)} of men vs.\u00a0${fmtPct(female)} of women support military action, an ${genderGap}-point gap that makes it one of the clearest demographic divides after party.`,
+    `Beyond party and gender, most demographic breakdowns\u2014age, geography, urbanicity\u2014show only modest differences. The crosstabs explorer above reveals where the real variation hides: in combinations of demographics, not individual ones.`
+  ];
+
+  const wrap = document.getElementById('takeaways');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  takeaways.forEach((text, i) => {
+    const div = document.createElement('div');
+    div.className = 'takeaway-item';
+    div.innerHTML = `
+      <span class="takeaway-num" aria-hidden="true">${i + 1}</span>
+      <span class="takeaway-text">${text}</span>
+    `;
+    wrap.appendChild(div);
+  });
+}
+
+/* ============================================================
+   CROSSTABS EXPLORER
+   ============================================================ */
+let xtIndex = null;   // precomputed lookup: "pair_id::metric" -> cell[]
+let xtVarMap = null;   // id -> variable metadata
+let xtPairSet = null;  // Set of pair_ids
+
+function buildCrosstabIndex(data) {
+  xtVarMap  = {};
+  xtPairSet = new Set();
+  xtIndex   = {};
+
+  for (const v of data.variables) {
+    xtVarMap[v.id] = v;
+  }
+
+  for (const p of data.pairs) {
+    xtPairSet.add(p.pair_id);
+    for (const m of p.available_metrics) {
+      const key = p.pair_id + '::' + m;
+      xtIndex[key] = p.cells.filter(c => c.metric === m);
+    }
+  }
+}
+
+function getCanonicalPairId(varA, varB) {
+  return [varA, varB].sort().join('|');
+}
+
+function initCrosstabs() {
+  const display = document.getElementById('xtDisplay');
+  const section = document.getElementById('crosstabSection');
+
+  if (!crosstabsData || !crosstabsData.pairs || crosstabsData.pairs.length === 0) {
+    if (display) {
+      const errType = crosstabsLoadError?.type || 'unknown';
+      let msg = '';
+      if (errType === 'file-protocol') {
+        msg = '<strong>Crosstabs explorer requires HTTP.</strong><br>'
+            + 'This page was opened via <code>file://</code>, which blocks JSON loading.<br>'
+            + 'To enable the interactive explorer, serve this folder over HTTP:<br><br>'
+            + '<code style="background:var(--surface-alt);padding:0.3rem 0.6rem;border-radius:4px;font-size:0.82rem;">'
+            + 'cd &lt;repo_root&gt; && python3 -m http.server 8000'
+            + '</code><br><br>'
+            + 'Then open <code>http://localhost:8000/iran_policy/standalone_website/</code>';
+      } else if (errType === '404') {
+        msg = '<strong>Crosstabs data file not found.</strong><br>'
+            + 'Expected: <code>data/iran_policy_crosstabs.json</code><br>'
+            + 'Generate it with: <code>Rscript --vanilla iran_policy/R/build_crosstabs_data.R</code>';
+      } else if (errType === 'parse') {
+        msg = '<strong>Crosstabs JSON failed to parse.</strong><br>'
+            + 'The file <code>data/iran_policy_crosstabs.json</code> exists but contains invalid JSON.<br>'
+            + 'Regenerate with: <code>Rscript --vanilla iran_policy/R/build_crosstabs_data.R</code>';
+      } else if (errType === 'cors' || errType === 'network') {
+        msg = '<strong>Could not fetch crosstabs data.</strong><br>'
+            + 'A network or CORS error prevented loading <code>data/iran_policy_crosstabs.json</code>.<br>'
+            + 'Ensure the file exists and the page is served over HTTP.';
+      } else {
+        msg = '<strong>Crosstabs data could not be loaded.</strong><br>'
+            + 'Expected: <code>data/iran_policy_crosstabs.json</code><br>'
+            + 'Check the browser console for details.';
+      }
+      display.innerHTML = '<div class="xt-empty-state">' + msg + '</div>';
+    }
+    return;
+  }
+
+  buildCrosstabIndex(crosstabsData);
+
+  const rowSel    = document.getElementById('xtRowVar');
+  const colSel    = document.getElementById('xtColVar');
+  const metricSel = document.getElementById('xtMetric');
+  const swapBtn   = document.getElementById('xtSwapBtn');
+
+  if (!rowSel || !colSel || !metricSel) return;
+
+  // Populate variable selectors
+  const varIds = Object.keys(xtVarMap);
+  for (const vid of varIds) {
+    const v = xtVarMap[vid];
+    rowSel.appendChild(new Option(v.label, v.id));
+    colSel.appendChild(new Option(v.label, v.id));
+  }
+
+  // Populate metric selector
+  for (const m of crosstabsData.metrics) {
+    metricSel.appendChild(new Option(m.label, m.id));
+  }
+
+  // Set defaults
+  const defaults = crosstabsData.defaults || {};
+  rowSel.value    = defaults.row_var || varIds[0];
+  colSel.value    = defaults.col_var || varIds[1] || varIds[0];
+  metricSel.value = defaults.metric  || crosstabsData.metrics[0]?.id;
+
+  // If row and col are same, pick different
+  if (rowSel.value === colSel.value && varIds.length > 1) {
+    colSel.value = varIds.find(v => v !== rowSel.value) || varIds[1];
+  }
+
+  const update = () => renderCrosstab(rowSel.value, colSel.value, metricSel.value);
+
+  rowSel.addEventListener('change', () => {
+    if (rowSel.value === colSel.value) {
+      // Auto-swap
+      colSel.value = varIds.find(v => v !== rowSel.value) || '';
+    }
+    update();
+  });
+
+  colSel.addEventListener('change', () => {
+    if (colSel.value === rowSel.value) {
+      rowSel.value = varIds.find(v => v !== colSel.value) || '';
+    }
+    update();
+  });
+
+  metricSel.addEventListener('change', update);
+
+  swapBtn.addEventListener('click', () => {
+    const tmp = rowSel.value;
+    rowSel.value = colSel.value;
+    colSel.value = tmp;
+    update();
+  });
+
+  update();
+}
+
+function renderCrosstab(rowVar, colVar, metric) {
+  const display = document.getElementById('xtDisplay');
+  if (!display) return;
+
+  if (rowVar === colVar) {
+    display.innerHTML = '<div class="xt-empty-state">Please select two different variables.</div>';
+    return;
+  }
+
+  const pairId = getCanonicalPairId(rowVar, colVar);
+  if (!xtPairSet.has(pairId)) {
+    display.innerHTML = '<div class="xt-empty-state">This variable combination is not available in the data.</div>';
+    return;
+  }
+
+  const key = pairId + '::' + metric;
+  const cells = xtIndex[key];
+  if (!cells || cells.length === 0) {
+    display.innerHTML = '<div class="xt-empty-state">No data available for this metric and variable combination.</div>';
+    return;
+  }
+
+  const rowMeta = xtVarMap[rowVar];
+  const colMeta = xtVarMap[colVar];
+  if (!rowMeta || !colMeta) return;
+
+  // Determine if we need to transpose (row/col might not match canonical a/b)
+  const sortedVars = [rowVar, colVar].sort();
+  const isTransposed = (rowVar !== sortedVars[0]);
+
+  // Get ordered levels
+  const rowLevels = [...rowMeta.levels].sort((a, b) => a.order - b.order);
+  const colLevels = [...colMeta.levels].sort((a, b) => a.order - b.order);
+
+  // Build value lookup: rowLevel -> colLevel -> value
+  const valMap = {};
+  let globalMin = Infinity;
+  let globalMax = -Infinity;
+
+  for (const cell of cells) {
+    const rKey = isTransposed ? cell.b_level : cell.a_level;
+    const cKey = isTransposed ? cell.a_level : cell.b_level;
+    if (!valMap[rKey]) valMap[rKey] = {};
+    valMap[rKey][cKey] = cell.value;
+    if (cell.value < globalMin) globalMin = cell.value;
+    if (cell.value > globalMax) globalMax = cell.value;
+  }
+
+  const range = globalMax - globalMin || 1;
+
+  // Build table HTML
+  let html = '<div class="xt-table-wrap"><table class="xt-table"><thead><tr>';
+  html += `<th>${rowMeta.label} \\ ${colMeta.label}</th>`;
+  for (const cl of colLevels) {
+    html += `<th>${cl.label}</th>`;
+  }
+  html += '</tr></thead><tbody>';
+
+  for (const rl of rowLevels) {
+    html += '<tr>';
+    html += `<td>${rl.label}</td>`;
+    for (const cl of colLevels) {
+      const val = valMap[rl.id]?.[cl.id];
+      if (val != null) {
+        const t = (val - globalMin) / range; // 0..1
+        const bg = heatColor(t);
+        html += `<td class="xt-cell" style="background:${bg}">${fmtPct(val)}</td>`;
+      } else {
+        html += '<td class="xt-cell">\u2014</td>';
+      }
+    }
+    html += '</tr>';
+  }
+
+  html += '</tbody></table></div>';
+  display.innerHTML = html;
+}
+
+function heatColor(t) {
+  // t: 0 (low) to 1 (high)
+  // Interpolate from cool blue to warm orange via neutral mid
+  if (t <= 0.5) {
+    const s = t / 0.5; // 0..1 within low half
+    const a = 0.18 * (1 - s);
+    return `rgba(31, 95, 137, ${a.toFixed(3)})`;
+  } else {
+    const s = (t - 0.5) / 0.5; // 0..1 within high half
+    const a = 0.22 * s;
+    return `rgba(196, 101, 37, ${a.toFixed(3)})`;
+  }
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  els.forEach(el => obs.observe(el));
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+async function init() {
+  initTheme();
+
+  await loadData();
+
+  fillMeta();
+  renderQuestion();
+  renderBarRows('partyChart',  reportData.partyMilitary,  45);
+  renderBarRows('raceChart',   reportData.raceMilitary,   35);
+  renderBarRows('genderChart', reportData.genderMilitary, 35);
+  renderBarRows('rusChart',    reportData.rusMilitary,    35);
+  renderArchetypes();
+  renderStates();
+  renderTakeaways();
+  initCrosstabs();
+  initReveal();
+}
+
+document.readyState === 'loading'
+  ? document.addEventListener('DOMContentLoaded', init)
+  : init();
+    </script>
+
+  </body>
+</html>
