@@ -3,6 +3,15 @@
 A complete visual redesign of the `report_js` interactive report. Content, data values,
 and chart logic are preserved exactly; all changes are design/presentation improvements.
 
+## Data Build Portability Fix (2026-03-03)
+- Reworked standalone data builders to resolve outcome columns via stable logical keys
+  (military, diplomacy, less_involved, unsure, pro, contra) instead of exact display-label matches.
+- Added schema diagnostics that show required logical fields, available columns (preview + count),
+  and mapping decisions when input columns cannot be resolved.
+- Removed path assumptions tied to specific checkout locations by using portable path resolution
+  for `--input`/`--output` and generic absolute-path sanitization in output payloads.
+- Added lightweight verification script: `R/verify_standalone_data_build.R`.
+
 ---
 
 ## Design System Changes
@@ -127,6 +136,7 @@ Then open: `http://localhost:8001/`
 ```bash
 Rscript --vanilla iran_policy/R/build_standalone_website_data.R
 Rscript --vanilla iran_policy/R/build_crosstabs_data.R
+Rscript --vanilla iran_policy/R/verify_standalone_data_build.R
 ```
 
 ### Portability and public-safety note
