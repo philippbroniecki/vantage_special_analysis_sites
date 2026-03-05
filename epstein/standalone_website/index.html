@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>U.S. Views on Epstein Disclosure and Responsibility | Vantage Data House</title>
+    <script>
+      (function initThemeBeforePaint() {
+        var key = 'vdh_ice2_theme';
+        var theme = 'light';
+        try {
+          var saved = localStorage.getItem(key);
+          if (saved === 'dark' || saved === 'light') theme = saved;
+        } catch (err) {}
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <style>
 /* ============================================================
    DESIGN TOKENS
@@ -6541,23 +6552,23 @@ function qById(questionId) {
 /* ============================================================
    THEME
    ============================================================ */
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  safeSet('vdh_ice2_theme', theme);
+function applyTheme(theme, persist = true) {
+  const resolved = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', resolved);
+  if (persist) safeSet('vdh_ice2_theme', resolved);
   const icon = document.getElementById('toggleIcon');
   const label = document.getElementById('toggleLabel');
-  if (icon) icon.textContent = theme === 'dark' ? '\u263D' : '\u2600';
-  if (label) label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+  if (icon) icon.textContent = resolved === 'dark' ? '\u263D' : '\u2600';
+  if (label) label.textContent = resolved === 'dark' ? 'Dark' : 'Light';
 }
 
 function initTheme() {
   const saved = safeGet('vdh_ice2_theme');
-  const sysDark = typeof matchMedia === 'function' &&
-    matchMedia('(prefers-color-scheme: dark)').matches;
-  applyTheme(saved ?? (sysDark ? 'dark' : 'light'));
+  const initial = saved === 'dark' || saved === 'light' ? saved : 'light';
+  applyTheme(initial, false);
   document.getElementById('themeToggle')?.addEventListener('click', () => {
     const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    applyTheme(next);
+    applyTheme(next, true);
   });
 }
 
