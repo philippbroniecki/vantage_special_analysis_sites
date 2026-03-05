@@ -27,17 +27,17 @@
       --radius:    14px;
     }
     [data-theme="light"] {
-      --bg:        #f4f6fa;
+      --bg:        #eef0f5;
       --bg-card:   #ffffff;
-      --border:    rgba(0,0,0,.08);
-      --border-hover: rgba(0,0,0,.18);
+      --border:    rgba(0,0,0,.12);
+      --border-hover: rgba(46,145,154,.45);
       --text:      #1a2332;
       --text-sub:  #5e6e82;
       --accent:    #2e919a;
       --accent-bg: rgba(46,145,154,.08);
       --accent-border: rgba(46,145,154,.30);
       --tag-text:  #1f7a82;
-      --shadow:    0 2px 12px rgba(0,0,0,.06);
+      --shadow:    0 4px 18px rgba(0,0,0,.09);
     }
 
     /* ── Base ── */
@@ -149,6 +149,9 @@
       transition: border-color .2s, box-shadow .2s, transform .15s;
       cursor: pointer;
     }
+    [data-theme="light"] a.card {
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+    }
     a.card:hover {
       border-color: var(--accent-border);
       box-shadow: var(--shadow);
@@ -223,7 +226,7 @@
     <p class="intro">
       Current-events special questions — interactive reports with full crosstabs.
       Access is restricted to Vantage email addresses. External access available on
-      request at <a href="mailto:philipp@vantagedatahouse.com">philipp@vantagedatahouse.com</a>.
+      request at <a href="/cdn-cgi/l/email-protection#12627a7b7e7b62625264737c66737577767366737a7d6761773c717d7f"><span class="__cf_email__" data-cfemail="4f3f272623263f3f0f392e213b2e282a2b2e3b2e27203a3c2a612c2022">[email&#160;protected]</span></a>.
     </p>
 
     <!-- Special Questions -->
@@ -286,16 +289,8 @@
 
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function toggleTheme() {
       const body = document.body;
       const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', next);
-      localStorage.setItem('vantage-theme', next);
-    }
-    // Restore saved preference
-    const saved = localStorage.getItem('vantage-theme');
-    if (saved) document.body.setAttribute('data-theme', saved);
-  </script>
-</body>
-</html>
+      body.setAttribut
