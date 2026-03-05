@@ -1,0 +1,4060 @@
+{
+  "meta": {
+    "source": "Vantage Data House",
+    "title": "U.S. Views on Epstein Disclosure and Responsibility",
+    "subtitle": null,
+    "site": "https://www.vantagedatahouse.com",
+    "sample": "N = 1,602 respondents",
+    "fieldDates": "February 25-27, 2026",
+    "methodLabel": "Poststratified ML estimates"
+  },
+  "questions": [
+    {
+      "id": "enforcement",
+      "title": "Epstein disclosure views",
+      "prompt": "Thinking about the public debate around Jeffrey Epstein, which statement comes closest to your view?",
+      "options": [
+        {
+          "id": "full_accounting",
+          "label": "The public has received a full and honest accounting of what happened",
+          "value": 13.8,
+          "color": "#c46525"
+        },
+        {
+          "id": "details_withheld",
+          "label": "Some important information has come out, but significant details are still being withheld",
+          "value": 31.6,
+          "color": "#1a6b73"
+        },
+        {
+          "id": "deliberate_coverup",
+          "label": "The most important facts are being deliberately covered up by powerful people",
+          "value": 43,
+          "color": "#5a7d9a"
+        },
+        {
+          "id": "not_followed",
+          "label": "I haven't followed this closely enough to say",
+          "value": 11.7,
+          "color": "#a8b5c4"
+        }
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Perceived partisan responsibility",
+      "prompt": "If information has been withheld, which political side do you think is more responsible?",
+      "options": [
+        {
+          "id": "mostly_democrats",
+          "label": "Mostly Democrats",
+          "value": 19.2,
+          "color": "#1a6b73"
+        },
+        {
+          "id": "mostly_republicans",
+          "label": "Mostly Republicans",
+          "value": 30.5,
+          "color": "#c46525"
+        },
+        {
+          "id": "both_equally",
+          "label": "Both parties equally",
+          "value": 35.3,
+          "color": "#8a6f52"
+        },
+        {
+          "id": "unsure",
+          "label": "Unsure",
+          "value": 15,
+          "color": "#a8b5c4"
+        }
+      ]
+    }
+  ],
+  "demographic_controls": {
+    "default_demographic": "party",
+    "default_mode": "mostly_democrats_norm",
+    "options": [
+      {
+        "id": "party",
+        "label": "Party"
+      },
+      {
+        "id": "gender",
+        "label": "Gender"
+      },
+      {
+        "id": "age",
+        "label": "Age"
+      },
+      {
+        "id": "race",
+        "label": "Race"
+      },
+      {
+        "id": "education",
+        "label": "Education"
+      },
+      {
+        "id": "rus_code",
+        "label": "Rural/Urban/Suburban"
+      },
+      {
+        "id": "income",
+        "label": "Income"
+      },
+      {
+        "id": "religion",
+        "label": "Religion"
+      }
+    ]
+  },
+  "demographics": [
+    {
+      "id": "party",
+      "label": "Party",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "R",
+              "level_label": "Republicans",
+              "values": {
+                "full_accounting": 16.2,
+                "details_withheld": 34.1,
+                "deliberate_coverup": 36.6,
+                "not_followed": 13.1
+              }
+            },
+            {
+              "level_id": "O",
+              "level_label": "Independents / Other",
+              "values": {
+                "full_accounting": 13.3,
+                "details_withheld": 32.5,
+                "deliberate_coverup": 42.5,
+                "not_followed": 11.8
+              }
+            },
+            {
+              "level_id": "D",
+              "level_label": "Democrats",
+              "values": {
+                "full_accounting": 11.7,
+                "details_withheld": 28.3,
+                "deliberate_coverup": 49.7,
+                "not_followed": 10.3
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "R",
+              "level_label": "Republicans",
+              "values": {
+                "mostly_democrats": 22.8,
+                "mostly_republicans": 26.8,
+                "both_equally": 35.1,
+                "unsure": 15.4
+              }
+            },
+            {
+              "level_id": "O",
+              "level_label": "Independents / Other",
+              "values": {
+                "mostly_democrats": 14.3,
+                "mostly_republicans": 21.5,
+                "both_equally": 45.7,
+                "unsure": 18.5
+              }
+            },
+            {
+              "level_id": "D",
+              "level_label": "Democrats",
+              "values": {
+                "mostly_democrats": 18.9,
+                "mostly_republicans": 40.2,
+                "both_equally": 28.7,
+                "unsure": 12.3
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gender",
+      "label": "Gender",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "Male",
+              "level_label": "Male",
+              "values": {
+                "full_accounting": 16.1,
+                "details_withheld": 31.2,
+                "deliberate_coverup": 42.5,
+                "not_followed": 10.3
+              }
+            },
+            {
+              "level_id": "Female",
+              "level_label": "Female",
+              "values": {
+                "full_accounting": 11.8,
+                "details_withheld": 31.8,
+                "deliberate_coverup": 43.4,
+                "not_followed": 13
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "Male",
+              "level_label": "Male",
+              "values": {
+                "mostly_democrats": 19.4,
+                "mostly_republicans": 31.2,
+                "both_equally": 35.7,
+                "unsure": 13.7
+              }
+            },
+            {
+              "level_id": "Female",
+              "level_label": "Female",
+              "values": {
+                "mostly_democrats": 19.1,
+                "mostly_republicans": 29.9,
+                "both_equally": 34.9,
+                "unsure": 16.1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "age",
+      "label": "Age",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "Gen Z",
+              "level_label": "Gen Z",
+              "values": {
+                "full_accounting": 13.6,
+                "details_withheld": 31.3,
+                "deliberate_coverup": 43.8,
+                "not_followed": 11.3
+              }
+            },
+            {
+              "level_id": "Millennials",
+              "level_label": "Millennials",
+              "values": {
+                "full_accounting": 14.7,
+                "details_withheld": 31.1,
+                "deliberate_coverup": 42.9,
+                "not_followed": 11.2
+              }
+            },
+            {
+              "level_id": "Gen X",
+              "level_label": "Gen X",
+              "values": {
+                "full_accounting": 14.3,
+                "details_withheld": 32.1,
+                "deliberate_coverup": 41,
+                "not_followed": 12.5
+              }
+            },
+            {
+              "level_id": "Baby Boomers",
+              "level_label": "Baby Boomers",
+              "values": {
+                "full_accounting": 12.9,
+                "details_withheld": 31.5,
+                "deliberate_coverup": 44,
+                "not_followed": 11.6
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "Gen Z",
+              "level_label": "Gen Z",
+              "values": {
+                "mostly_democrats": 18.4,
+                "mostly_republicans": 31.9,
+                "both_equally": 35.1,
+                "unsure": 14.6
+              }
+            },
+            {
+              "level_id": "Millennials",
+              "level_label": "Millennials",
+              "values": {
+                "mostly_democrats": 18,
+                "mostly_republicans": 32.3,
+                "both_equally": 35.6,
+                "unsure": 14.2
+              }
+            },
+            {
+              "level_id": "Gen X",
+              "level_label": "Gen X",
+              "values": {
+                "mostly_democrats": 18.3,
+                "mostly_republicans": 31.4,
+                "both_equally": 34,
+                "unsure": 16.2
+              }
+            },
+            {
+              "level_id": "Baby Boomers",
+              "level_label": "Baby Boomers",
+              "values": {
+                "mostly_democrats": 21,
+                "mostly_republicans": 28.2,
+                "both_equally": 36,
+                "unsure": 14.8
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "race",
+      "label": "Race",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "White",
+              "level_label": "White",
+              "values": {
+                "full_accounting": 14.1,
+                "details_withheld": 32.2,
+                "deliberate_coverup": 41.7,
+                "not_followed": 12
+              }
+            },
+            {
+              "level_id": "Black",
+              "level_label": "Black",
+              "values": {
+                "full_accounting": 12.4,
+                "details_withheld": 28.6,
+                "deliberate_coverup": 47.9,
+                "not_followed": 11.1
+              }
+            },
+            {
+              "level_id": "Hispanic",
+              "level_label": "Hispanic",
+              "values": {
+                "full_accounting": 13.1,
+                "details_withheld": 30,
+                "deliberate_coverup": 45.9,
+                "not_followed": 11.1
+              }
+            },
+            {
+              "level_id": "Other",
+              "level_label": "Other",
+              "values": {
+                "full_accounting": 13.5,
+                "details_withheld": 31.7,
+                "deliberate_coverup": 44.2,
+                "not_followed": 10.6
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "White",
+              "level_label": "White",
+              "values": {
+                "mostly_democrats": 19.2,
+                "mostly_republicans": 29.6,
+                "both_equally": 35.9,
+                "unsure": 15.4
+              }
+            },
+            {
+              "level_id": "Black",
+              "level_label": "Black",
+              "values": {
+                "mostly_democrats": 20,
+                "mostly_republicans": 33.1,
+                "both_equally": 32.4,
+                "unsure": 14.5
+              }
+            },
+            {
+              "level_id": "Hispanic",
+              "level_label": "Hispanic",
+              "values": {
+                "mostly_democrats": 19.7,
+                "mostly_republicans": 33.8,
+                "both_equally": 33.6,
+                "unsure": 12.8
+              }
+            },
+            {
+              "level_id": "Other",
+              "level_label": "Other",
+              "values": {
+                "mostly_democrats": 18,
+                "mostly_republicans": 31.1,
+                "both_equally": 36.1,
+                "unsure": 14.8
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "No college",
+              "level_label": "No college",
+              "values": {
+                "full_accounting": 13.5,
+                "details_withheld": 31.1,
+                "deliberate_coverup": 42.8,
+                "not_followed": 12.6
+              }
+            },
+            {
+              "level_id": "College completed",
+              "level_label": "College completed",
+              "values": {
+                "full_accounting": 13.9,
+                "details_withheld": 31.9,
+                "deliberate_coverup": 43.2,
+                "not_followed": 11
+              }
+            },
+            {
+              "level_id": "Graduate/professional degree",
+              "level_label": "Graduate/professional degree",
+              "values": {
+                "full_accounting": 13.9,
+                "details_withheld": 31.6,
+                "deliberate_coverup": 42.4,
+                "not_followed": 12.2
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "No college",
+              "level_label": "No college",
+              "values": {
+                "mostly_democrats": 19.3,
+                "mostly_republicans": 29.8,
+                "both_equally": 35.2,
+                "unsure": 15.7
+              }
+            },
+            {
+              "level_id": "College completed",
+              "level_label": "College completed",
+              "values": {
+                "mostly_democrats": 19.1,
+                "mostly_republicans": 31,
+                "both_equally": 35.4,
+                "unsure": 14.4
+              }
+            },
+            {
+              "level_id": "Graduate/professional degree",
+              "level_label": "Graduate/professional degree",
+              "values": {
+                "mostly_democrats": 19.6,
+                "mostly_republicans": 30.1,
+                "both_equally": 35.1,
+                "unsure": 15.2
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "rus_code",
+      "label": "Rural/Urban/Suburban",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "Rural",
+              "level_label": "Rural",
+              "values": {
+                "full_accounting": 14.2,
+                "details_withheld": 31.7,
+                "deliberate_coverup": 41,
+                "not_followed": 13
+              }
+            },
+            {
+              "level_id": "Suburban",
+              "level_label": "Suburban",
+              "values": {
+                "full_accounting": 14,
+                "details_withheld": 31.9,
+                "deliberate_coverup": 42.4,
+                "not_followed": 11.7
+              }
+            },
+            {
+              "level_id": "Urban",
+              "level_label": "Urban",
+              "values": {
+                "full_accounting": 13.2,
+                "details_withheld": 31,
+                "deliberate_coverup": 45.3,
+                "not_followed": 10.6
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "Rural",
+              "level_label": "Rural",
+              "values": {
+                "mostly_democrats": 19.6,
+                "mostly_republicans": 28.2,
+                "both_equally": 36,
+                "unsure": 16.2
+              }
+            },
+            {
+              "level_id": "Suburban",
+              "level_label": "Suburban",
+              "values": {
+                "mostly_democrats": 19.7,
+                "mostly_republicans": 30.1,
+                "both_equally": 34.9,
+                "unsure": 15.3
+              }
+            },
+            {
+              "level_id": "Urban",
+              "level_label": "Urban",
+              "values": {
+                "mostly_democrats": 18.4,
+                "mostly_republicans": 33,
+                "both_equally": 35.1,
+                "unsure": 13.5
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "income",
+      "label": "Income",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "Poor (less than 35k)",
+              "level_label": "< $35k",
+              "values": {
+                "full_accounting": 13,
+                "details_withheld": 31.1,
+                "deliberate_coverup": 41.8,
+                "not_followed": 14.1
+              }
+            },
+            {
+              "level_id": "Below median (35k to less than 75k)",
+              "level_label": "$35k-$75k",
+              "values": {
+                "full_accounting": 12.7,
+                "details_withheld": 30.5,
+                "deliberate_coverup": 44.8,
+                "not_followed": 12
+              }
+            },
+            {
+              "level_id": "Above median (75k to less than 125k)",
+              "level_label": "$75k-$125k",
+              "values": {
+                "full_accounting": 13.1,
+                "details_withheld": 31.8,
+                "deliberate_coverup": 42,
+                "not_followed": 13
+              }
+            },
+            {
+              "level_id": "Rich (more than 125k)",
+              "level_label": "> $125k",
+              "values": {
+                "full_accounting": 14.8,
+                "details_withheld": 32.1,
+                "deliberate_coverup": 42.6,
+                "not_followed": 10.6
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "Poor (less than 35k)",
+              "level_label": "< $35k",
+              "values": {
+                "mostly_democrats": 20.2,
+                "mostly_republicans": 30,
+                "both_equally": 34.6,
+                "unsure": 15.3
+              }
+            },
+            {
+              "level_id": "Below median (35k to less than 75k)",
+              "level_label": "$35k-$75k",
+              "values": {
+                "mostly_democrats": 17.8,
+                "mostly_republicans": 30.2,
+                "both_equally": 35.1,
+                "unsure": 16.9
+              }
+            },
+            {
+              "level_id": "Above median (75k to less than 125k)",
+              "level_label": "$75k-$125k",
+              "values": {
+                "mostly_democrats": 19.9,
+                "mostly_republicans": 29.9,
+                "both_equally": 35.3,
+                "unsure": 14.8
+              }
+            },
+            {
+              "level_id": "Rich (more than 125k)",
+              "level_label": "> $125k",
+              "values": {
+                "mostly_democrats": 19.6,
+                "mostly_republicans": 31,
+                "both_equally": 35.5,
+                "unsure": 14
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "religion",
+      "label": "Religion",
+      "cards": {
+        "enforcement": {
+          "question_id": "enforcement",
+          "question_label": "Epstein disclosure views",
+          "metrics": [
+            {
+              "id": "full_accounting",
+              "label": "The public has received a full and honest accounting of what happened",
+              "color": "#c46525"
+            },
+            {
+              "id": "details_withheld",
+              "label": "Some important information has come out, but significant details are still being withheld",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "deliberate_coverup",
+              "label": "The most important facts are being deliberately covered up by powerful people",
+              "color": "#5a7d9a"
+            },
+            {
+              "id": "not_followed",
+              "label": "I haven't followed this closely enough to say",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "full_accounting",
+          "rows": [
+            {
+              "level_id": "Protestant",
+              "level_label": "Protestant",
+              "values": {
+                "full_accounting": 14,
+                "details_withheld": 32.1,
+                "deliberate_coverup": 41.9,
+                "not_followed": 12
+              }
+            },
+            {
+              "level_id": "Catholic",
+              "level_label": "Catholic",
+              "values": {
+                "full_accounting": 14,
+                "details_withheld": 32,
+                "deliberate_coverup": 42.6,
+                "not_followed": 11.4
+              }
+            },
+            {
+              "level_id": "Other religion",
+              "level_label": "Other religion",
+              "values": {
+                "full_accounting": 14.6,
+                "details_withheld": 32.2,
+                "deliberate_coverup": 42.2,
+                "not_followed": 11
+              }
+            },
+            {
+              "level_id": "Not religious",
+              "level_label": "Not religious",
+              "values": {
+                "full_accounting": 13,
+                "details_withheld": 30.2,
+                "deliberate_coverup": 45.2,
+                "not_followed": 11.6
+              }
+            }
+          ]
+        },
+        "investigations": {
+          "question_id": "investigations",
+          "question_label": "Perceived partisan responsibility",
+          "metrics": [
+            {
+              "id": "mostly_democrats",
+              "label": "Mostly Democrats",
+              "color": "#1a6b73"
+            },
+            {
+              "id": "mostly_republicans",
+              "label": "Mostly Republicans",
+              "color": "#c46525"
+            },
+            {
+              "id": "both_equally",
+              "label": "Both parties equally",
+              "color": "#8a6f52"
+            },
+            {
+              "id": "unsure",
+              "label": "Unsure",
+              "color": "#a8b5c4"
+            }
+          ],
+          "default_metric": "mostly_democrats",
+          "rows": [
+            {
+              "level_id": "Protestant",
+              "level_label": "Protestant",
+              "values": {
+                "mostly_democrats": 20.1,
+                "mostly_republicans": 29.4,
+                "both_equally": 35,
+                "unsure": 15.6
+              }
+            },
+            {
+              "level_id": "Catholic",
+              "level_label": "Catholic",
+              "values": {
+                "mostly_democrats": 21.3,
+                "mostly_republicans": 30.1,
+                "both_equally": 35,
+                "unsure": 13.6
+              }
+            },
+            {
+              "level_id": "Other religion",
+              "level_label": "Other religion",
+              "values": {
+                "mostly_democrats": 20.6,
+                "mostly_republicans": 32.9,
+                "both_equally": 32.6,
+                "unsure": 13.9
+              }
+            },
+            {
+              "level_id": "Not religious",
+              "level_label": "Not religious",
+              "values": {
+                "mostly_democrats": 16,
+                "mostly_republicans": 31.9,
+                "both_equally": 36.8,
+                "unsure": 15.3
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "archetypes": {
+    "default_question": "enforcement",
+    "questions": [
+      {
+        "id": "enforcement",
+        "label": "Epstein disclosure views",
+        "default_metric": "full_accounting",
+        "metrics": [
+          {
+            "id": "full_accounting",
+            "label": "The public has received a full and honest accounting of what happened",
+            "color": "#c46525"
+          },
+          {
+            "id": "details_withheld",
+            "label": "Some important information has come out, but significant details are still being withheld",
+            "color": "#1a6b73"
+          },
+          {
+            "id": "deliberate_coverup",
+            "label": "The most important facts are being deliberately covered up by powerful people",
+            "color": "#5a7d9a"
+          },
+          {
+            "id": "not_followed",
+            "label": "I haven't followed this closely enough to say",
+            "color": "#a8b5c4"
+          }
+        ],
+        "series": {
+          "full_accounting": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 16.1
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 15.6
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 14.7
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 14.6
+            },
+            {
+              "label": "White Working-Class",
+              "value": 13.9
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 13.4
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 12.3
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 12.3
+            }
+          ],
+          "details_withheld": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 34.2
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 33.1
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 32.7
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 32.2
+            },
+            {
+              "label": "White Working-Class",
+              "value": 31.8
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 29.4
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 28.8
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 28.6
+            }
+          ],
+          "deliberate_coverup": [
+            {
+              "label": "Gen Z Progressives",
+              "value": 48.8
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 46.3
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 45.3
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 42.2
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 42.1
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 41.9
+            },
+            {
+              "label": "White Working-Class",
+              "value": 41.3
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 36.3
+            }
+          ],
+          "not_followed": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 13.3
+            },
+            {
+              "label": "White Working-Class",
+              "value": 13
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 12.7
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 11.7
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 10.5
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 10.2
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 10.2
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 10.1
+            }
+          ]
+        }
+      },
+      {
+        "id": "investigations",
+        "label": "Perceived partisan responsibility",
+        "default_metric": "mostly_democrats",
+        "metrics": [
+          {
+            "id": "mostly_democrats",
+            "label": "Mostly Democrats",
+            "color": "#1a6b73"
+          },
+          {
+            "id": "mostly_republicans",
+            "label": "Mostly Republicans",
+            "color": "#c46525"
+          },
+          {
+            "id": "both_equally",
+            "label": "Both parties equally",
+            "color": "#8a6f52"
+          },
+          {
+            "id": "unsure",
+            "label": "Unsure",
+            "color": "#a8b5c4"
+          }
+        ],
+        "series": {
+          "mostly_democrats": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 23.5
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 21.1
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 20
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 19.5
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 19.5
+            },
+            {
+              "label": "White Working-Class",
+              "value": 19.1
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 14.7
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 14.6
+            }
+          ],
+          "mostly_republicans": [
+            {
+              "label": "Gen Z Progressives",
+              "value": 40.6
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 33.7
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 32.2
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 29.1
+            },
+            {
+              "label": "White Working-Class",
+              "value": 28.7
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 24.8
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 23.4
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 21.8
+            }
+          ],
+          "both_equally": [
+            {
+              "label": "Disaffected Young Men",
+              "value": 46.8
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 45
+            },
+            {
+              "label": "White Working-Class",
+              "value": 35.9
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 35.5
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 35.1
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 34.1
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 33.1
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 28.1
+            }
+          ],
+          "unsure": [
+            {
+              "label": "Swing Moderates",
+              "value": 18.7
+            },
+            {
+              "label": "White Working-Class",
+              "value": 16.4
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 16.3
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 16.2
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 15.1
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 13.6
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 12.3
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 11.8
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "state_ranking": {
+    "default_question": "enforcement",
+    "questions": [
+      {
+        "id": "enforcement",
+        "label": "Epstein disclosure views",
+        "default_metric": "full_accounting",
+        "metrics": [
+          {
+            "id": "full_accounting",
+            "label": "The public has received a full and honest accounting of what happened",
+            "color": "#c46525"
+          },
+          {
+            "id": "details_withheld",
+            "label": "Some important information has come out, but significant details are still being withheld",
+            "color": "#1a6b73"
+          },
+          {
+            "id": "deliberate_coverup",
+            "label": "The most important facts are being deliberately covered up by powerful people",
+            "color": "#5a7d9a"
+          },
+          {
+            "id": "not_followed",
+            "label": "I haven't followed this closely enough to say",
+            "color": "#a8b5c4"
+          }
+        ],
+        "series": {
+          "full_accounting": [
+            {
+              "state": "Connecticut",
+              "value": 18.2,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "North Carolina",
+              "value": 16,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Florida",
+              "value": 16,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New York",
+              "value": 15.9,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "South Carolina",
+              "value": 15.7,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Jersey",
+              "value": 15.4,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 15.4,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 15.2,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Delaware",
+              "value": 14.9,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Maryland",
+              "value": 14.6,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Maine",
+              "value": 14.6,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 14.5,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alabama",
+              "value": 14.5,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Massachusetts",
+              "value": 14.1,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 14.1,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Vermont",
+              "value": 13.9,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wyoming",
+              "value": 13.8,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "Utah",
+              "value": 13.7,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 13.6,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 13.6,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "Georgia",
+              "value": 13.6,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Texas",
+              "value": 13.6,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Louisiana",
+              "value": 13.5,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arkansas",
+              "value": 13.4,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Idaho",
+              "value": 13.4,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 13.3,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 13.1,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 13.1,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 13.1,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "West Virginia",
+              "value": 13.1,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Minnesota",
+              "value": 12.9,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 12.9,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Mississippi",
+              "value": 12.9,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 12.8,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Michigan",
+              "value": 12.8,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 12.8,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Indiana",
+              "value": 12.7,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 12.6,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 12.5,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nevada",
+              "value": 12.4,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 12.4,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Colorado",
+              "value": 12.3,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "California",
+              "value": 12.2,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Kentucky",
+              "value": 12.2,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Kansas",
+              "value": 12.2,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Illinois",
+              "value": 12.2,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Arizona",
+              "value": 12.2,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Oregon",
+              "value": 12.1,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Washington",
+              "value": 12.1,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Hawaii",
+              "value": 11.5,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New Mexico",
+              "value": 11.4,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ],
+          "details_withheld": [
+            {
+              "state": "New Hampshire",
+              "value": 34.2,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Ohio",
+              "value": 34.1,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Massachusetts",
+              "value": 34,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 33.9,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Indiana",
+              "value": 33.8,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 33.7,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 33.6,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Wyoming",
+              "value": 33.5,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Jersey",
+              "value": 33.5,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New York",
+              "value": 33.3,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Idaho",
+              "value": 33.2,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kansas",
+              "value": 33.2,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 33.1,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Utah",
+              "value": 33.1,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "West Virginia",
+              "value": 32.9,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maine",
+              "value": 32.9,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kentucky",
+              "value": 32.9,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "Delaware",
+              "value": 32.8,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 32.8,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 32.8,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 32.7,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 32.7,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 32.7,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arizona",
+              "value": 32.6,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Vermont",
+              "value": 32.5,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Illinois",
+              "value": 32.5,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 32.4,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Connecticut",
+              "value": 32.4,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "Minnesota",
+              "value": 32.4,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 32.4,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Michigan",
+              "value": 32.3,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Colorado",
+              "value": 32.2,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 31.9,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Carolina",
+              "value": 31.9,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oregon",
+              "value": 31.7,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nevada",
+              "value": 31.5,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 31.4,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 31.4,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Washington",
+              "value": 31.2,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "California",
+              "value": 31.2,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Carolina",
+              "value": 31.1,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Hawaii",
+              "value": 31,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Georgia",
+              "value": 29.8,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 29.5,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Florida",
+              "value": 29.3,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Alabama",
+              "value": 28.8,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Arkansas",
+              "value": 28.7,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New Mexico",
+              "value": 28.2,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Texas",
+              "value": 27.1,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Mississippi",
+              "value": 27,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Louisiana",
+              "value": 26.4,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ],
+          "deliberate_coverup": [
+            {
+              "state": "Hawaii",
+              "value": 47.8,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "California",
+              "value": 46.6,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Texas",
+              "value": 46.2,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Washington",
+              "value": 45.4,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Louisiana",
+              "value": 45.2,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Illinois",
+              "value": 44.8,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Oregon",
+              "value": 44.7,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Mexico",
+              "value": 44.6,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Michigan",
+              "value": 44.4,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Mississippi",
+              "value": 44.3,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 44.2,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nevada",
+              "value": 43.9,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Georgia",
+              "value": 43.7,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Colorado",
+              "value": 43.6,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "Minnesota",
+              "value": 43.5,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arkansas",
+              "value": 43.5,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arizona",
+              "value": 43.1,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alabama",
+              "value": 42.9,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 42.9,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 42.8,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "Indiana",
+              "value": 42.7,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 42.5,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 42.3,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 42.2,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Delaware",
+              "value": 42.2,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 42.2,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "Florida",
+              "value": 42.1,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 42.1,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "Massachusetts",
+              "value": 41.9,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kentucky",
+              "value": 41.7,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 41.7,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Vermont",
+              "value": 41.7,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 41.5,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 41.5,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 41.5,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 41.4,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 41.3,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 41.2,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Jersey",
+              "value": 41.2,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kansas",
+              "value": 40.7,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "New York",
+              "value": 40.6,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 40.4,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "South Carolina",
+              "value": 40.3,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Maine",
+              "value": 40.2,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Utah",
+              "value": 39.9,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "North Carolina",
+              "value": 39.9,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Connecticut",
+              "value": 39.8,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 39.8,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Idaho",
+              "value": 38.9,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "West Virginia",
+              "value": 38.7,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Wyoming",
+              "value": 38.1,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ],
+          "not_followed": [
+            {
+              "state": "Mississippi",
+              "value": 15.8,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Mexico",
+              "value": 15.7,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "West Virginia",
+              "value": 15.3,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Louisiana",
+              "value": 14.9,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 14.9,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Wyoming",
+              "value": 14.6,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Idaho",
+              "value": 14.5,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Arkansas",
+              "value": 14.4,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Montana",
+              "value": 14,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Alabama",
+              "value": 13.8,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Kansas",
+              "value": 13.8,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 13.8,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 13.4,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Utah",
+              "value": 13.4,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "Texas",
+              "value": 13.2,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kentucky",
+              "value": 13.1,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Georgia",
+              "value": 12.9,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Carolina",
+              "value": 12.9,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 12.9,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 12.9,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 12.8,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Florida",
+              "value": 12.6,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 12.6,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maine",
+              "value": 12.4,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nevada",
+              "value": 12.2,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Carolina",
+              "value": 12.2,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arizona",
+              "value": 12.1,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 12.1,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "Vermont",
+              "value": 11.9,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "Colorado",
+              "value": 11.9,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 11.5,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oregon",
+              "value": 11.4,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 11.2,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "Washington",
+              "value": 11.2,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Minnesota",
+              "value": 11.2,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "Indiana",
+              "value": 10.7,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 10.7,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 10.6,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Illinois",
+              "value": 10.6,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 10.5,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 10.5,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Michigan",
+              "value": 10.5,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New York",
+              "value": 10.2,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Delaware",
+              "value": 10.1,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Maryland",
+              "value": 10,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Massachusetts",
+              "value": 10,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "California",
+              "value": 9.9,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New Jersey",
+              "value": 9.9,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Hawaii",
+              "value": 9.6,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Connecticut",
+              "value": 9.6,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 9.4,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ]
+        }
+      },
+      {
+        "id": "investigations",
+        "label": "Perceived partisan responsibility",
+        "default_metric": "mostly_democrats",
+        "metrics": [
+          {
+            "id": "mostly_democrats",
+            "label": "Mostly Democrats",
+            "color": "#1a6b73"
+          },
+          {
+            "id": "mostly_republicans",
+            "label": "Mostly Republicans",
+            "color": "#c46525"
+          },
+          {
+            "id": "both_equally",
+            "label": "Both parties equally",
+            "color": "#8a6f52"
+          },
+          {
+            "id": "unsure",
+            "label": "Unsure",
+            "color": "#a8b5c4"
+          }
+        ],
+        "series": {
+          "mostly_democrats": [
+            {
+              "state": "Arizona",
+              "value": 25.5,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Mexico",
+              "value": 24.4,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "South Carolina",
+              "value": 23.3,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Louisiana",
+              "value": 22.4,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "North Carolina",
+              "value": 22.2,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Florida",
+              "value": 22.1,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Texas",
+              "value": 21.6,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "California",
+              "value": 21.5,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Mississippi",
+              "value": 21.4,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 21.4,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Wyoming",
+              "value": 21,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 20.6,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Georgia",
+              "value": 20.6,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arkansas",
+              "value": 20.4,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 20.3,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alabama",
+              "value": 20.1,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 20,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 19.6,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 19.5,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 19.3,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maine",
+              "value": 19.1,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 19,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Idaho",
+              "value": 18.9,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oregon",
+              "value": 18.9,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Vermont",
+              "value": 18.9,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nevada",
+              "value": 18.7,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 18.6,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 18.6,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 18.5,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "New York",
+              "value": 18.4,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 18.3,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kansas",
+              "value": 18.2,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 18.2,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Jersey",
+              "value": 18,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Delaware",
+              "value": 17.9,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 17.7,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Minnesota",
+              "value": 17.6,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "Hawaii",
+              "value": 17.5,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Utah",
+              "value": 17.4,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 17,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kentucky",
+              "value": 16.9,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 16.8,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Washington",
+              "value": 16.7,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Michigan",
+              "value": 16.6,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Colorado",
+              "value": 16,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Connecticut",
+              "value": 15.8,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Indiana",
+              "value": 15.1,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "West Virginia",
+              "value": 15,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Illinois",
+              "value": 14.1,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Massachusetts",
+              "value": 13.7,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 12.7,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ],
+          "mostly_republicans": [
+            {
+              "state": "Washington",
+              "value": 42.4,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Vermont",
+              "value": 35.6,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Delaware",
+              "value": 34.9,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Maryland",
+              "value": 34.2,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Minnesota",
+              "value": 33.6,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "California",
+              "value": 33.6,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Texas",
+              "value": 33.6,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Alaska",
+              "value": 33.3,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Oregon",
+              "value": 33,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Kentucky",
+              "value": 32.4,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Maine",
+              "value": 32.2,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 32.1,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Michigan",
+              "value": 31.7,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 31.2,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 31.1,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Illinois",
+              "value": 31,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 30.6,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 30.4,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 30.3,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Florida",
+              "value": 30.2,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "New York",
+              "value": 30.2,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 29.9,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Hawaii",
+              "value": 29.8,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 29.4,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 29.3,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 29.3,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 29.3,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Colorado",
+              "value": 28.9,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Jersey",
+              "value": 28.9,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "Louisiana",
+              "value": 28.9,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 28.8,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Indiana",
+              "value": 28.3,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 28.3,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "West Virginia",
+              "value": 28.1,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 28.1,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kansas",
+              "value": 28.1,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alabama",
+              "value": 27.8,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Carolina",
+              "value": 27.7,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arkansas",
+              "value": 27.5,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Connecticut",
+              "value": 27.3,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Carolina",
+              "value": 27.2,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Idaho",
+              "value": 27,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Iowa",
+              "value": 26.5,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Wyoming",
+              "value": 26.3,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Utah",
+              "value": 26.3,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New Mexico",
+              "value": 26.1,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Georgia",
+              "value": 26.1,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Nevada",
+              "value": 26,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Arizona",
+              "value": 25.1,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Mississippi",
+              "value": 24.4,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Massachusetts",
+              "value": 24.2,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ],
+          "both_equally": [
+            {
+              "state": "Massachusetts",
+              "value": 44.3,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Connecticut",
+              "value": 43.8,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Nevada",
+              "value": 42.6,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Utah",
+              "value": 42.4,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 41.9,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 41.7,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "West Virginia",
+              "value": 40.4,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Illinois",
+              "value": 40.3,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Colorado",
+              "value": 39.8,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Jersey",
+              "value": 39.5,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Idaho",
+              "value": 39.4,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Indiana",
+              "value": 38.7,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 38.4,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 37.9,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "New York",
+              "value": 37.9,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wyoming",
+              "value": 37.8,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 37.4,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 37.1,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "Mississippi",
+              "value": 36.9,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Michigan",
+              "value": 36.7,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 36.1,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Georgia",
+              "value": 36,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kansas",
+              "value": 35.7,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 35.6,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 35.4,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Hawaii",
+              "value": 35.4,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "Minnesota",
+              "value": 35.4,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 35.2,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 35.1,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arizona",
+              "value": 35,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arkansas",
+              "value": 34.9,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Carolina",
+              "value": 34.9,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 34.7,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 34.2,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alabama",
+              "value": 33.8,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "Delaware",
+              "value": 33.8,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "California",
+              "value": 33.7,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 33.6,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oregon",
+              "value": 33.5,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kentucky",
+              "value": 33.4,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 32.9,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 32.4,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New Mexico",
+              "value": 32.2,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "South Carolina",
+              "value": 32.1,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 32,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Louisiana",
+              "value": 31.1,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Maine",
+              "value": 31,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Texas",
+              "value": 30.6,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Florida",
+              "value": 30.2,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Vermont",
+              "value": 29.4,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Washington",
+              "value": 28.6,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ],
+          "unsure": [
+            {
+              "state": "Alabama",
+              "value": 18.2,
+              "rank": 1,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Kansas",
+              "value": 18,
+              "rank": 2,
+              "tier": "Top 10"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 17.9,
+              "rank": 3,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Massachusetts",
+              "value": 17.9,
+              "rank": 4,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Indiana",
+              "value": 17.8,
+              "rank": 5,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Tennessee",
+              "value": 17.7,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Maine",
+              "value": 17.7,
+              "rank": 7,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Louisiana",
+              "value": 17.6,
+              "rank": 8,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Florida",
+              "value": 17.4,
+              "rank": 9,
+              "tier": "Top 10"
+            },
+            {
+              "state": "South Carolina",
+              "value": 17.4,
+              "rank": 10,
+              "tier": "Top 10"
+            },
+            {
+              "state": "Kentucky",
+              "value": 17.3,
+              "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Hawaii",
+              "value": 17.3,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Mexico",
+              "value": 17.2,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Georgia",
+              "value": 17.2,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arkansas",
+              "value": 17.2,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Mississippi",
+              "value": 17.2,
+              "rank": 16,
+              "tier": "Middle"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 17.1,
+              "rank": 17,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 16.6,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "West Virginia",
+              "value": 16.5,
+              "rank": 19,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 16.3,
+              "rank": 20,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 16.2,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Vermont",
+              "value": 16.2,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 15.4,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Colorado",
+              "value": 15.3,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 15.3,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Carolina",
+              "value": 15.2,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "North Dakota",
+              "value": 15.2,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Virginia",
+              "value": 15.2,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "Michigan",
+              "value": 15,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wyoming",
+              "value": 14.9,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 14.9,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 14.8,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Idaho",
+              "value": 14.7,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "Illinois",
+              "value": 14.6,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oregon",
+              "value": 14.6,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 14.5,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 14.5,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arizona",
+              "value": 14.4,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Texas",
+              "value": 14.3,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 14.2,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "Utah",
+              "value": 13.9,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "New York",
+              "value": 13.6,
+              "rank": 42,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "New Jersey",
+              "value": 13.5,
+              "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Minnesota",
+              "value": 13.4,
+              "rank": 44,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Delaware",
+              "value": 13.3,
+              "rank": 45,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Connecticut",
+              "value": 13.1,
+              "rank": 46,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Nevada",
+              "value": 12.8,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 12.6,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Washington",
+              "value": 12.3,
+              "rank": 49,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 12,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "California",
+              "value": 11.2,
+              "rank": 51,
+              "tier": "Bottom 10"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "content": {
+    "key_takeaways": [
+      "Most respondents did not think the public has received a full accounting of the Epstein case.",
+      "A large share said important details are still being withheld.",
+      "Perceived responsibility was split across partisan and nonpartisan explanations.",
+      "Partisanship remained the strongest demographic separator in both questions.",
+      "Rural-urban and age differences were present but smaller than partisan gaps."
+    ],
+    "methodology_note": "We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).",
+    "component_order": [
+      "hero_title",
+      "key_takeaways",
+      "methodology_note",
+      "topline_questions",
+      "demographic_breakdown",
+      "crosstabs_explorer",
+      "archetype_breakdown",
+      "state_ranking"
+    ]
+  },
+  "template": {
+    "site_slug": "epstein",
+    "path": "site_config.json"
+  },
+  "dataSource": {
+    "input_files": {
+      "enforcement": "epstein_files_xgboost_2026-02-27_vdh.rds",
+      "investigations": "epstein_partisanship_xgboost_2026-02-27_vdh.rds"
+    },
+    "generated_at_utc": "2026-03-05 15:52:55 UTC"
+  }
+}

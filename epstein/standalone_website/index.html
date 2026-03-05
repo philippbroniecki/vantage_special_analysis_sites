@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>U.S. Opinion on ICE Enforcement and Investigations | Vantage Data House</title>
+    <title>U.S. Views on Epstein Disclosure and Responsibility | Vantage Data House</title>
     <style>
 /* ============================================================
    DESIGN TOKENS
@@ -1287,7 +1287,7 @@ body {
             <span class="eyebrow-pip" aria-hidden="true"></span>
             Vantage Data House
           </p>
-          <h1 id="heroTitle">Americans' Views on ICE</h1>
+          <h1 id="heroTitle">U.S. Views on Epstein Disclosure and Responsibility</h1>
           <p id="heroSubtitle" hidden></p>
           <div class="hero-meta" aria-label="Survey metadata">
             <span class="meta-pill">
@@ -1323,7 +1323,7 @@ body {
         <div class="section-head">
           <p class="section-eyebrow">Survey Questions</p>
           <h2 id="h-questions">Topline Results</h2>
-          <p>Two ICE questions with full response distributions</p>
+          <p>Two Epstein questions with full response distributions</p>
         </div>
         <div id="questionCards" class="question-grid" role="region" aria-label="Topline question cards"></div>
       </section>
@@ -1339,7 +1339,7 @@ body {
           <article>
             <div class="section-head">
               <p class="section-eyebrow">Question 1</p>
-              <h3 id="h-demo-enf">ICE enforcement</h3>
+              <h3 id="h-demo-enf">Question 1</h3>
             </div>
             <div class="xt-controls">
               <div class="xt-control-group">
@@ -1356,7 +1356,7 @@ body {
           <article>
             <div class="section-head">
               <p class="section-eyebrow">Question 2</p>
-              <h3 id="h-demo-inv">ICE investigations</h3>
+              <h3 id="h-demo-inv">Question 2</h3>
             </div>
             <div class="xt-controls">
               <div class="xt-control-group">
@@ -1384,7 +1384,7 @@ body {
           <article>
             <div class="section-head">
               <p class="section-eyebrow">Question 1</p>
-              <h3 id="h-crosstabs-enf">ICE enforcement</h3>
+              <h3 id="h-crosstabs-enf">Question 1</h3>
               <p>Cross-tabulated estimates by two demographic variables</p>
             </div>
             <div class="xt-controls">
@@ -1408,7 +1408,7 @@ body {
           <article>
             <div class="section-head">
               <p class="section-eyebrow">Question 2</p>
-              <h3 id="h-crosstabs-inv">ICE investigations</h3>
+              <h3 id="h-crosstabs-inv">Question 2</h3>
               <p>Cross-tabulated estimates by two demographic variables</p>
             </div>
             <div class="xt-controls">
@@ -1472,7 +1472,7 @@ body {
     {
       "meta": {
         "source": "Vantage Data House",
-        "title": "Americans' Views on ICE",
+        "title": "U.S. Views on Epstein Disclosure and Responsibility",
         "site": "https://www.vantagedatahouse.com",
         "sample": "N = 1,602 respondents",
         "fieldDates": "February 25-27, 2026"
@@ -6338,11 +6338,11 @@ function loadEmbeddedFallback() {
   try {
     return JSON.parse(node.textContent);
   } catch (err) {
-    console.warn('[VDH ICE] Embedded fallback JSON failed to parse.', err);
+    console.warn('[VDH Epstein] Embedded fallback JSON failed to parse.', err);
     return {
       meta: {
         source: 'Vantage Data House',
-        title: 'U.S. Views on ICE Enforcement and Investigations',
+        title: 'U.S. Views on Epstein Disclosure and Responsibility Enforcement and Investigations',
         site: 'https://www.vantagedatahouse.com',
         sample: 'Modeled poststratified estimates',
         fieldDates: 'Model snapshot: Not provided'
@@ -6567,7 +6567,7 @@ function initTheme() {
 const isFileProtocol = location.protocol === 'file:';
 
 function getRuntimeBaseHref() {
-  const marker = '/ice/standalone_website/';
+  const marker = '/epstein/standalone_website/';
   const { origin, pathname, protocol, href } = window.location;
   if (protocol === 'file:') {
     const dir = href.endsWith('/')
@@ -6585,8 +6585,8 @@ function getRuntimeBaseHref() {
 }
 
 const DATA_BASE_HREF = getRuntimeBaseHref();
-const REPORT_DATA_URL = new URL('data/ice_data.json', DATA_BASE_HREF).toString();
-const CROSSTABS_DATA_URL = new URL('data/ice_crosstabs.json', DATA_BASE_HREF).toString();
+const REPORT_DATA_URL = new URL('data/epstein_data.json', DATA_BASE_HREF).toString();
+const CROSSTABS_DATA_URL = new URL('data/epstein_crosstabs.json', DATA_BASE_HREF).toString();
 
 async function loadJSON(url) {
   const resp = await fetch(url);
@@ -6620,15 +6620,15 @@ async function loadData() {
   try {
     const json = await loadJSON(REPORT_DATA_URL);
     if (!isValidReportPayload(json)) {
-      throw new Error('Invalid report JSON schema for ice_data.json');
+      throw new Error('Invalid report JSON schema for epstein_data.json');
     }
     reportData = json;
     dataSource = 'json';
-    console.log('[VDH ICE] Report data loaded from JSON.');
+    console.log('[VDH Epstein] Report data loaded from JSON.');
   } catch (err) {
     reportData = FALLBACK_REPORT;
     dataSource = 'fallback';
-    console.warn('[VDH ICE] Report JSON fetch failed, using embedded fallback.', err);
+    console.warn('[VDH Epstein] Report JSON fetch failed, using embedded fallback.', err);
     if (banner) {
       banner.className = 'data-banner warn';
       banner.textContent = isFileProtocol
@@ -6644,11 +6644,11 @@ async function loadData() {
       throw new Error('Invalid crosstabs JSON: missing "questions" array');
     }
     crosstabsData = json;
-    console.log('[VDH ICE] Crosstabs JSON loaded.');
+    console.log('[VDH Epstein] Crosstabs JSON loaded.');
   } catch (err) {
     crosstabsData = null;
     crosstabsLoadError = { error: err, type: classifyLoadError(err) };
-    console.warn('[VDH ICE] Crosstabs JSON load failed:', crosstabsLoadError.type, err);
+    console.warn('[VDH Epstein] Crosstabs JSON load failed:', crosstabsLoadError.type, err);
   }
 }
 
@@ -7023,6 +7023,7 @@ function renderArchetypeChart(question, metricId) {
       labelWrap.appendChild(infoIcon);
     }
     item.appendChild(labelWrap);
+
     const bars = document.createElement('div');
     bars.className = 'archetype-bars';
     bars.innerHTML = `
@@ -7415,19 +7416,19 @@ function crosstabsFailureMessage() {
     return '<strong>Crosstabs explorer requires HTTP.</strong><br>'
       + 'This page was opened via <code>file://</code>, which blocks JSON loading.<br>'
       + 'Serve over HTTP: <code>python3 -m http.server 8000</code><br>'
-      + 'Then open <code>http://localhost:8000/ice/standalone_website/</code>.';
+      + 'Then open <code>http://localhost:8000/epstein/standalone_website/</code>.';
   }
   if (errType === '404') {
     return '<strong>Crosstabs data file not found.</strong><br>'
-      + 'Expected: <code>data/ice_crosstabs.json</code><br>'
-      + 'Generate it with <code>Rscript --vanilla ice/R/build_crosstabs_data.R</code>.';
+      + 'Expected: <code>data/epstein_crosstabs.json</code><br>'
+      + 'Generate it with <code>Rscript --vanilla epstein/R/build_crosstabs_data.R</code>.';
   }
   if (errType === 'parse') {
     return '<strong>Crosstabs JSON failed to parse.</strong><br>'
       + 'Regenerate with <code>Rscript --vanilla ice/R/build_crosstabs_data.R</code>.';
   }
   return '<strong>Crosstabs data could not be loaded.</strong><br>'
-    + 'Check <code>data/ice_crosstabs.json</code> and browser console logs.';
+    + 'Check <code>data/epstein_crosstabs.json</code> and browser console logs.';
 }
 
 function initCrosstabs() {

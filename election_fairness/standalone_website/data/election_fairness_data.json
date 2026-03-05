@@ -1,67 +1,67 @@
 {
   "meta": {
     "source": "Vantage Data House",
-    "title": "How Americans Wanted the U.S. to Handle Iran-On the Eve of the Attack",
+    "title": "U.S. Views on Election Fairness",
     "subtitle": null,
     "site": "https://www.vantagedatahouse.com",
-    "sample": "N = 1,776 respondents",
+    "sample": "N = 1,602 respondents",
     "fieldDates": "February 25-27, 2026",
     "methodLabel": "Poststratified ML estimates"
   },
   "question": {
-    "id": "iran_policy",
+    "id": "election_fairness",
     "title": "Survey Question",
-    "prompt": "Thinking about the current situation with Iran, which comes closest to your view on U.S. policy?"
+    "prompt": "Thinking about upcoming U.S. elections, which statement comes closest to your view?"
   },
   "questionResults": [
     {
       "id": "military_force",
-      "label": "The U.S. should use military force if necessary",
-      "value": 25.8,
-      "color": "#c46525"
-    },
-    {
-      "id": "diplomacy",
-      "label": "The U.S. should use diplomacy and sanctions",
-      "value": 31.8,
+      "label": "I'm confident the elections will take place and be conducted fairly",
+      "value": 35.9,
       "color": "#1a6b73"
     },
     {
+      "id": "diplomacy",
+      "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+      "value": 40.9,
+      "color": "#c46525"
+    },
+    {
       "id": "less_involved",
-      "label": "The U.S. should take a less involved role in the situation with Iran",
-      "value": 27.1,
+      "label": "I have serious doubts about whether the elections will take place as scheduled",
+      "value": 14.7,
       "color": "#5a7d9a"
     },
     {
       "id": "unsure",
       "label": "Unsure",
-      "value": 15.3,
+      "value": 8.5,
       "color": "#a8b5c4"
     }
   ],
   "topline": [
     {
       "id": "diplomacy",
-      "label": "The U.S. should use diplomacy and sanctions",
-      "value": 31.8,
-      "color": "#1a6b73"
+      "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+      "value": 40.9,
+      "color": "#c46525"
     },
     {
       "id": "less_involved",
-      "label": "The U.S. should take a less involved role in the situation with Iran",
-      "value": 27.1,
+      "label": "I have serious doubts about whether the elections will take place as scheduled",
+      "value": 14.7,
       "color": "#5a7d9a"
     },
     {
       "id": "military_force",
-      "label": "The U.S. should use military force if necessary",
-      "value": 25.8,
-      "color": "#c46525"
+      "label": "I'm confident the elections will take place and be conducted fairly",
+      "value": 35.9,
+      "color": "#1a6b73"
     },
     {
       "id": "unsure",
       "label": "Unsure",
-      "value": 15.3,
+      "value": 8.5,
       "color": "#a8b5c4"
     }
   ],
@@ -108,28 +108,23 @@
       "id": "party",
       "label": "Party",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -144,33 +139,30 @@
               "level_id": "R",
               "level_label": "Republicans",
               "values": {
-                "military_force": 37.1,
-                "diplomacy_plus_less_involved_norm": 57.4,
-                "diplomacy": 28,
-                "less_involved": 21.9,
-                "unsure": 12.9
+                "military_force": 39.4,
+                "diplomacy": 40,
+                "less_involved": 13.1,
+                "unsure": 7.5
               }
             },
             {
               "level_id": "O",
               "level_label": "Independents / Other",
               "values": {
-                "military_force": 23.7,
-                "diplomacy_plus_less_involved_norm": 71.4,
-                "diplomacy": 28.6,
-                "less_involved": 30.6,
-                "unsure": 17.1
+                "military_force": 31.8,
+                "diplomacy": 41.4,
+                "less_involved": 15.8,
+                "unsure": 11.1
               }
             },
             {
               "level_id": "D",
               "level_label": "Democrats",
               "values": {
-                "military_force": 15.7,
-                "diplomacy_plus_less_involved_norm": 81.1,
-                "diplomacy": 37.7,
-                "less_involved": 30,
-                "unsure": 16.6
+                "military_force": 35,
+                "diplomacy": 41.5,
+                "less_involved": 15.6,
+                "unsure": 7.8
               }
             }
           ]
@@ -181,28 +173,23 @@
       "id": "gender",
       "label": "Gender",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -217,22 +204,20 @@
               "level_id": "Male",
               "level_label": "Male",
               "values": {
-                "military_force": 30.2,
-                "diplomacy_plus_less_involved_norm": 66.1,
-                "diplomacy": 33.2,
-                "less_involved": 25.7,
-                "unsure": 10.9
+                "military_force": 39.8,
+                "diplomacy": 37.9,
+                "less_involved": 14.5,
+                "unsure": 7.7
               }
             },
             {
               "level_id": "Female",
               "level_label": "Female",
               "values": {
-                "military_force": 22,
-                "diplomacy_plus_less_involved_norm": 72.8,
-                "diplomacy": 30.6,
-                "less_involved": 28.3,
-                "unsure": 19.2
+                "military_force": 32.5,
+                "diplomacy": 43.5,
+                "less_involved": 14.9,
+                "unsure": 9.2
               }
             }
           ]
@@ -243,28 +228,23 @@
       "id": "age",
       "label": "Age",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -279,44 +259,40 @@
               "level_id": "Gen Z",
               "level_label": "Gen Z",
               "values": {
-                "military_force": 24.3,
-                "diplomacy_plus_less_involved_norm": 71.1,
-                "diplomacy": 30.2,
-                "less_involved": 29.6,
-                "unsure": 16
+                "military_force": 32,
+                "diplomacy": 40.9,
+                "less_involved": 17.9,
+                "unsure": 9.2
               }
             },
             {
               "level_id": "Millennials",
               "level_label": "Millennials",
               "values": {
-                "military_force": 26.2,
-                "diplomacy_plus_less_involved_norm": 69.1,
-                "diplomacy": 29.9,
-                "less_involved": 28.6,
-                "unsure": 15.3
+                "military_force": 31.4,
+                "diplomacy": 41.3,
+                "less_involved": 18.1,
+                "unsure": 9.2
               }
             },
             {
               "level_id": "Gen X",
               "level_label": "Gen X",
               "values": {
-                "military_force": 25,
-                "diplomacy_plus_less_involved_norm": 69.6,
-                "diplomacy": 29.4,
-                "less_involved": 27.8,
-                "unsure": 17.8
+                "military_force": 33.3,
+                "diplomacy": 40.7,
+                "less_involved": 16.4,
+                "unsure": 9.6
               }
             },
             {
               "level_id": "Baby Boomers",
               "level_label": "Baby Boomers",
               "values": {
-                "military_force": 26.8,
-                "diplomacy_plus_less_involved_norm": 69.1,
-                "diplomacy": 35.2,
-                "less_involved": 24.6,
-                "unsure": 13.4
+                "military_force": 42,
+                "diplomacy": 40.7,
+                "less_involved": 10.2,
+                "unsure": 7.1
               }
             }
           ]
@@ -327,28 +303,23 @@
       "id": "race",
       "label": "Race",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -363,44 +334,40 @@
               "level_id": "White",
               "level_label": "White",
               "values": {
-                "military_force": 27.9,
-                "diplomacy_plus_less_involved_norm": 67.3,
-                "diplomacy": 31.5,
-                "less_involved": 25.9,
-                "unsure": 14.7
+                "military_force": 36.9,
+                "diplomacy": 40.4,
+                "less_involved": 14.2,
+                "unsure": 8.6
               }
             },
             {
               "level_id": "Black",
               "level_label": "Black",
               "values": {
-                "military_force": 15.5,
-                "diplomacy_plus_less_involved_norm": 80.6,
-                "diplomacy": 30.6,
-                "less_involved": 33.7,
-                "unsure": 20.1
+                "military_force": 31.1,
+                "diplomacy": 42.9,
+                "less_involved": 17.3,
+                "unsure": 8.6
               }
             },
             {
               "level_id": "Hispanic",
               "level_label": "Hispanic",
               "values": {
-                "military_force": 22.4,
-                "diplomacy_plus_less_involved_norm": 73.6,
-                "diplomacy": 34.5,
-                "less_involved": 27.9,
-                "unsure": 15.2
+                "military_force": 34,
+                "diplomacy": 42.3,
+                "less_involved": 15.5,
+                "unsure": 8.2
               }
             },
             {
               "level_id": "Other",
               "level_label": "Other",
               "values": {
-                "military_force": 23.9,
-                "diplomacy_plus_less_involved_norm": 71.9,
-                "diplomacy": 32.1,
-                "less_involved": 29,
-                "unsure": 15
+                "military_force": 35.7,
+                "diplomacy": 41,
+                "less_involved": 14.8,
+                "unsure": 8.5
               }
             }
           ]
@@ -411,28 +378,23 @@
       "id": "education",
       "label": "Education",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -447,33 +409,30 @@
               "level_id": "No college",
               "level_label": "No college",
               "values": {
-                "military_force": 25.7,
-                "diplomacy_plus_less_involved_norm": 68.9,
-                "diplomacy": 30.2,
-                "less_involved": 26.7,
-                "unsure": 17.4
+                "military_force": 32.9,
+                "diplomacy": 42.2,
+                "less_involved": 15,
+                "unsure": 9.9
               }
             },
             {
               "level_id": "College completed",
               "level_label": "College completed",
               "values": {
-                "military_force": 25.8,
-                "diplomacy_plus_less_involved_norm": 70.2,
-                "diplomacy": 33.3,
-                "less_involved": 27.5,
-                "unsure": 13.5
+                "military_force": 36.5,
+                "diplomacy": 41.3,
+                "less_involved": 14.8,
+                "unsure": 7.5
               }
             },
             {
               "level_id": "Graduate/professional degree",
               "level_label": "Graduate/professional degree",
               "values": {
-                "military_force": 26.4,
-                "diplomacy_plus_less_involved_norm": 68.2,
-                "diplomacy": 30.2,
-                "less_involved": 26.4,
-                "unsure": 17
+                "military_force": 41.6,
+                "diplomacy": 36.1,
+                "less_involved": 13.5,
+                "unsure": 8.9
               }
             }
           ]
@@ -484,28 +443,23 @@
       "id": "rus_code",
       "label": "Rural/Urban/Suburban",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -520,33 +474,30 @@
               "level_id": "Rural",
               "level_label": "Rural",
               "values": {
-                "military_force": 28.2,
-                "diplomacy_plus_less_involved_norm": 66.8,
-                "diplomacy": 31.5,
-                "less_involved": 25.1,
-                "unsure": 15.2
+                "military_force": 37.5,
+                "diplomacy": 39.7,
+                "less_involved": 14,
+                "unsure": 8.8
               }
             },
             {
               "level_id": "Suburban",
               "level_label": "Suburban",
               "values": {
-                "military_force": 28,
-                "diplomacy_plus_less_involved_norm": 66.9,
-                "diplomacy": 30.6,
-                "less_involved": 25.9,
-                "unsure": 15.5
+                "military_force": 36.3,
+                "diplomacy": 40.8,
+                "less_involved": 14.1,
+                "unsure": 8.7
               }
             },
             {
               "level_id": "Urban",
               "level_label": "Urban",
               "values": {
-                "military_force": 21.2,
-                "diplomacy_plus_less_involved_norm": 75,
-                "diplomacy": 33.5,
-                "less_involved": 30.1,
-                "unsure": 15.2
+                "military_force": 34,
+                "diplomacy": 42.1,
+                "less_involved": 15.9,
+                "unsure": 8
               }
             }
           ]
@@ -557,28 +508,23 @@
       "id": "income",
       "label": "Income",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -593,44 +539,40 @@
               "level_id": "Poor (less than 35k)",
               "level_label": "< $35k",
               "values": {
-                "military_force": 25,
-                "diplomacy_plus_less_involved_norm": 70,
-                "diplomacy": 31.1,
-                "less_involved": 27.2,
-                "unsure": 16.7
+                "military_force": 33.7,
+                "diplomacy": 42.5,
+                "less_involved": 14.8,
+                "unsure": 9
               }
             },
             {
               "level_id": "Below median (35k to less than 75k)",
               "level_label": "$35k-$75k",
               "values": {
-                "military_force": 24.7,
-                "diplomacy_plus_less_involved_norm": 71,
-                "diplomacy": 33.4,
-                "less_involved": 27,
-                "unsure": 14.9
+                "military_force": 35,
+                "diplomacy": 42.2,
+                "less_involved": 14.6,
+                "unsure": 8.2
               }
             },
             {
               "level_id": "Above median (75k to less than 125k)",
               "level_label": "$75k-$125k",
               "values": {
-                "military_force": 26.8,
-                "diplomacy_plus_less_involved_norm": 68.4,
-                "diplomacy": 31.2,
-                "less_involved": 26.7,
-                "unsure": 15.3
+                "military_force": 35.7,
+                "diplomacy": 41.7,
+                "less_involved": 14.2,
+                "unsure": 8.4
               }
             },
             {
               "level_id": "Rich (more than 125k)",
               "level_label": "> $125k",
               "values": {
-                "military_force": 26.1,
-                "diplomacy_plus_less_involved_norm": 69.1,
-                "diplomacy": 31.3,
-                "less_involved": 27.2,
-                "unsure": 15.4
+                "military_force": 36.8,
+                "diplomacy": 39.6,
+                "less_involved": 14.9,
+                "unsure": 8.6
               }
             }
           ]
@@ -641,28 +583,23 @@
       "id": "religion",
       "label": "Religion",
       "cards": {
-        "iran_policy": {
-          "question_id": "iran_policy",
+        "election_fairness": {
+          "question_id": "election_fairness",
           "question_label": "Survey Question",
           "metrics": [
             {
               "id": "military_force",
-              "label": "The U.S. should use military force if necessary",
-              "color": "#c46525"
-            },
-            {
-              "id": "diplomacy_plus_less_involved_norm",
-              "label": "The U.S. should use diplomacy and sanctions + The U.S. should take a less involved role in the situation with Iran",
+              "label": "I'm confident the elections will take place and be conducted fairly",
               "color": "#1a6b73"
             },
             {
               "id": "diplomacy",
-              "label": "The U.S. should use diplomacy and sanctions",
-              "color": "#1a6b73"
+              "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+              "color": "#c46525"
             },
             {
               "id": "less_involved",
-              "label": "The U.S. should take a less involved role in the situation with Iran",
+              "label": "I have serious doubts about whether the elections will take place as scheduled",
               "color": "#5a7d9a"
             },
             {
@@ -677,44 +614,40 @@
               "level_id": "Protestant",
               "level_label": "Protestant",
               "values": {
-                "military_force": 27.6,
-                "diplomacy_plus_less_involved_norm": 67.8,
-                "diplomacy": 32.4,
-                "less_involved": 25.5,
-                "unsure": 14.5
+                "military_force": 36.7,
+                "diplomacy": 41,
+                "less_involved": 14.1,
+                "unsure": 8.3
               }
             },
             {
               "level_id": "Catholic",
               "level_label": "Catholic",
               "values": {
-                "military_force": 26.6,
-                "diplomacy_plus_less_involved_norm": 68.9,
-                "diplomacy": 32.5,
-                "less_involved": 26.5,
-                "unsure": 14.5
+                "military_force": 37,
+                "diplomacy": 39.7,
+                "less_involved": 14.9,
+                "unsure": 8.4
               }
             },
             {
               "level_id": "Other religion",
               "level_label": "Other religion",
               "values": {
-                "military_force": 27.4,
-                "diplomacy_plus_less_involved_norm": 68.1,
-                "diplomacy": 31,
-                "less_involved": 27.6,
-                "unsure": 14
+                "military_force": 35.2,
+                "diplomacy": 39.4,
+                "less_involved": 16.7,
+                "unsure": 8.7
               }
             },
             {
               "level_id": "Not religious",
               "level_label": "Not religious",
               "values": {
-                "military_force": 22.1,
-                "diplomacy_plus_less_involved_norm": 73.2,
-                "diplomacy": 30.5,
-                "less_involved": 29.9,
-                "unsure": 17.5
+                "military_force": 34.1,
+                "diplomacy": 41.9,
+                "less_involved": 15.1,
+                "unsure": 8.9
               }
             }
           ]
@@ -725,111 +658,111 @@
   "partyMilitary": [
     {
       "label": "Republicans",
-      "value": 37.1,
+      "value": 39.4,
       "color": "#b03030"
     },
     {
       "label": "Independents / Other",
-      "value": 23.7,
+      "value": 31.8,
       "color": "#3a6080"
     },
     {
       "label": "Democrats",
-      "value": 15.7,
+      "value": 35,
       "color": "#2870a1"
     }
   ],
   "raceMilitary": [
     {
       "label": "White",
-      "value": 27.9,
+      "value": 36.9,
       "color": "#5a7d9a"
     },
     {
       "label": "Hispanic",
-      "value": 22.4,
+      "value": 34,
       "color": "#c46525"
     },
     {
       "label": "Other",
-      "value": 23.9,
+      "value": 35.7,
       "color": "#3a6080"
     },
     {
       "label": "Black",
-      "value": 15.5,
+      "value": 31.1,
       "color": "#1a6b73"
     }
   ],
   "genderMilitary": [
     {
       "label": "Male",
-      "value": 30.2,
+      "value": 39.8,
       "color": "#2e5e82"
     },
     {
       "label": "Female",
-      "value": 22,
+      "value": 32.5,
       "color": "#6a8fa8"
     }
   ],
   "rusMilitary": [
     {
       "label": "Rural",
-      "value": 28.2,
+      "value": 37.5,
       "color": "#c46525"
     },
     {
       "label": "Suburban",
-      "value": 28,
+      "value": 36.3,
       "color": "#5a7d9a"
     },
     {
       "label": "Urban",
-      "value": 21.2,
+      "value": 34,
       "color": "#1a6b73"
     }
   ],
   "archetypePC": [
     {
       "label": "Evangelical Republicans",
-      "pro": 43.5,
-      "contra": 56.5
-    },
-    {
-      "label": "White Working-Class",
-      "pro": 33.5,
-      "contra": 66.5
-    },
-    {
-      "label": "Disaffected Young Men",
-      "pro": 32.8,
-      "contra": 67.2
-    },
-    {
-      "label": "Swing Moderates",
-      "pro": 30.6,
-      "contra": 69.4
-    },
-    {
-      "label": "Soccer Moms",
-      "pro": 30.4,
-      "contra": 69.6
+      "pro": 39.7,
+      "contra": 40.2
     },
     {
       "label": "Hispanic Working-Class Men",
-      "pro": 29.6,
-      "contra": 70.4
+      "pro": 36,
+      "contra": 39.7
+    },
+    {
+      "label": "Soccer Moms",
+      "pro": 35.2,
+      "contra": 42.2
+    },
+    {
+      "label": "White Working-Class",
+      "pro": 33.7,
+      "contra": 41.8
+    },
+    {
+      "label": "Disaffected Young Men",
+      "pro": 33.4,
+      "contra": 38.5
+    },
+    {
+      "label": "Swing Moderates",
+      "pro": 32.3,
+      "contra": 41
     },
     {
       "label": "Black Gen Z Men",
-      "pro": 21.9,
-      "contra": 78.1
+      "pro": 31.7,
+      "contra": 39.8
     },
     {
       "label": "Gen Z Progressives",
-      "pro": 19.4,
-      "contra": 80.6
+      "pro": 31.6,
+      "contra": 41.5
     }
   ],
   "archetypes": {
@@ -837,17 +770,17 @@
     "metrics": [
       {
         "id": "military_force",
-        "label": "The U.S. should use military force if necessary",
-        "color": "#c46525"
-      },
-      {
-        "id": "diplomacy",
-        "label": "The U.S. should use diplomacy and sanctions",
+        "label": "I'm confident the elections will take place and be conducted fairly",
         "color": "#1a6b73"
       },
       {
+        "id": "diplomacy",
+        "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+        "color": "#c46525"
+      },
+      {
         "id": "less_involved",
-        "label": "The U.S. should take a less involved role in the situation with Iran",
+        "label": "I have serious doubts about whether the elections will take place as scheduled",
         "color": "#5a7d9a"
       },
       {
@@ -860,445 +793,445 @@
       "military_force": [
         {
           "label": "Evangelical Republicans",
-          "value": 38.3
-        },
-        {
-          "label": "Disaffected Young Men",
-          "value": 28.8
-        },
-        {
-          "label": "White Working-Class",
-          "value": 28.3
+          "value": 39.7
         },
         {
           "label": "Hispanic Working-Class Men",
-          "value": 26
-        },
-        {
-          "label": "Swing Moderates",
-          "value": 25.5
+          "value": 36
         },
         {
           "label": "Soccer Moms",
-          "value": 25.2
+          "value": 35.2
         },
         {
-          "label": "Black Gen Z Men",
-          "value": 18.6
+          "label": "White Working-Class",
+          "value": 33.7
         },
         {
-          "label": "Gen Z Progressives",
-          "value": 16.2
-        }
-      ],
-      "diplomacy": [
-        {
-          "label": "Gen Z Progressives",
-          "value": 35.4
+          "label": "Disaffected Young Men",
+          "value": 33.4
         },
         {
-          "label": "Hispanic Working-Class Men",
-          "value": 34.9
+          "label": "Swing Moderates",
+          "value": 32.3
         },
         {
           "label": "Black Gen Z Men",
           "value": 31.7
         },
         {
+          "label": "Gen Z Progressives",
+          "value": 31.6
+        }
+      ],
+      "diplomacy": [
+        {
           "label": "Soccer Moms",
-          "value": 30.2
+          "value": 42.2
         },
         {
           "label": "White Working-Class",
-          "value": 29.8
+          "value": 41.8
         },
         {
-          "label": "Evangelical Republicans",
-          "value": 28.6
-        },
-        {
-          "label": "Disaffected Young Men",
-          "value": 28.5
+          "label": "Gen Z Progressives",
+          "value": 41.5
         },
         {
           "label": "Swing Moderates",
-          "value": 27.5
+          "value": 41
+        },
+        {
+          "label": "Evangelical Republicans",
+          "value": 40.2
+        },
+        {
+          "label": "Black Gen Z Men",
+          "value": 39.8
+        },
+        {
+          "label": "Hispanic Working-Class Men",
+          "value": 39.7
+        },
+        {
+          "label": "Disaffected Young Men",
+          "value": 38.5
         }
       ],
       "less_involved": [
         {
           "label": "Black Gen Z Men",
-          "value": 34.6
+          "value": 20.3
         },
         {
           "label": "Gen Z Progressives",
-          "value": 31.4
+          "value": 18.7
         },
         {
           "label": "Disaffected Young Men",
-          "value": 30.6
-        },
-        {
-          "label": "Swing Moderates",
-          "value": 29.7
-        },
-        {
-          "label": "Soccer Moms",
-          "value": 27
+          "value": 17.8
         },
         {
           "label": "Hispanic Working-Class Men",
-          "value": 26.6
+          "value": 15.7
+        },
+        {
+          "label": "Swing Moderates",
+          "value": 15.3
         },
         {
           "label": "White Working-Class",
-          "value": 25.3
+          "value": 14.5
+        },
+        {
+          "label": "Soccer Moms",
+          "value": 13.8
         },
         {
           "label": "Evangelical Republicans",
-          "value": 20.8
+          "value": 12.6
         }
       ],
       "unsure": [
         {
-          "label": "Soccer Moms",
-          "value": 17.6
-        },
-        {
           "label": "Swing Moderates",
-          "value": 17.3
-        },
-        {
-          "label": "Gen Z Progressives",
-          "value": 17
-        },
-        {
-          "label": "White Working-Class",
-          "value": 16.6
-        },
-        {
-          "label": "Black Gen Z Men",
-          "value": 15.2
-        },
-        {
-          "label": "Hispanic Working-Class Men",
-          "value": 12.4
-        },
-        {
-          "label": "Evangelical Republicans",
-          "value": 12.3
+          "value": 11.5
         },
         {
           "label": "Disaffected Young Men",
-          "value": 12.2
+          "value": 10.3
+        },
+        {
+          "label": "White Working-Class",
+          "value": 10
+        },
+        {
+          "label": "Hispanic Working-Class Men",
+          "value": 8.7
+        },
+        {
+          "label": "Soccer Moms",
+          "value": 8.7
+        },
+        {
+          "label": "Black Gen Z Men",
+          "value": 8.2
+        },
+        {
+          "label": "Gen Z Progressives",
+          "value": 8.2
+        },
+        {
+          "label": "Evangelical Republicans",
+          "value": 7.4
         }
       ]
     }
   },
   "stateMilitary": [
     {
-      "state": "South Dakota",
-      "value": 31.5,
+      "state": "Montana",
+      "value": 49.1,
       "rank": 1,
       "tier": "Top 10"
     },
     {
-      "state": "Wisconsin",
-      "value": 31.4,
+      "state": "Wyoming",
+      "value": 48.7,
       "rank": 2,
       "tier": "Top 10"
     },
     {
-      "state": "Wyoming",
-      "value": 30.4,
+      "state": "Idaho",
+      "value": 46.5,
       "rank": 3,
       "tier": "Top 10"
     },
     {
-      "state": "Oklahoma",
-      "value": 30.2,
+      "state": "North Dakota",
+      "value": 45.8,
       "rank": 4,
       "tier": "Top 10"
     },
     {
-      "state": "Florida",
-      "value": 30.2,
+      "state": "South Dakota",
+      "value": 45.7,
       "rank": 5,
       "tier": "Top 10"
     },
     {
-      "state": "Alabama",
-      "value": 30.1,
+      "state": "Wisconsin",
+      "value": 44.3,
       "rank": 6,
       "tier": "Top 10"
     },
     {
-      "state": "South Carolina",
-      "value": 29.9,
+      "state": "Nebraska",
+      "value": 44.2,
       "rank": 7,
       "tier": "Top 10"
     },
     {
-      "state": "Tennessee",
-      "value": 29.4,
+      "state": "Vermont",
+      "value": 43.5,
       "rank": 8,
       "tier": "Top 10"
     },
     {
-      "state": "North Dakota",
-      "value": 28.8,
+      "state": "Maine",
+      "value": 42.3,
       "rank": 9,
       "tier": "Top 10"
     },
     {
-      "state": "Idaho",
-      "value": 28.1,
+      "state": "New Mexico",
+      "value": 42.2,
       "rank": 10,
       "tier": "Top 10"
     },
     {
-      "state": "Missouri",
-      "value": 28,
+      "state": "Utah",
+      "value": 42.2,
       "rank": 11,
       "tier": "Middle"
     },
     {
-      "state": "Arkansas",
-      "value": 28,
+      "state": "Iowa",
+      "value": 42,
       "rank": 12,
       "tier": "Middle"
     },
     {
-      "state": "Utah",
-      "value": 27.4,
+      "state": "Minnesota",
+      "value": 41.7,
       "rank": 13,
       "tier": "Middle"
     },
     {
-      "state": "Kansas",
-      "value": 27.4,
+      "state": "Alaska",
+      "value": 41.1,
       "rank": 14,
       "tier": "Middle"
     },
     {
-      "state": "Alaska",
-      "value": 27.1,
+      "state": "New Hampshire",
+      "value": 40.8,
       "rank": 15,
       "tier": "Middle"
     },
     {
-      "state": "Michigan",
-      "value": 27.1,
+      "state": "Pennsylvania",
+      "value": 40.1,
       "rank": 16,
       "tier": "Middle"
     },
     {
-      "state": "Minnesota",
-      "value": 27,
+      "state": "Colorado",
+      "value": 38.3,
       "rank": 17,
       "tier": "Middle"
     },
     {
-      "state": "Arizona",
-      "value": 27,
+      "state": "Washington",
+      "value": 38.2,
       "rank": 18,
       "tier": "Middle"
     },
     {
-      "state": "Pennsylvania",
-      "value": 27,
+      "state": "South Carolina",
+      "value": 37.7,
       "rank": 19,
       "tier": "Middle"
     },
     {
-      "state": "North Carolina",
-      "value": 26.9,
+      "state": "Connecticut",
+      "value": 37.5,
       "rank": 20,
       "tier": "Middle"
     },
     {
-      "state": "Kentucky",
-      "value": 26.8,
+      "state": "Michigan",
+      "value": 37.4,
       "rank": 21,
       "tier": "Middle"
     },
     {
-      "state": "Maine",
-      "value": 26.7,
+      "state": "Oregon",
+      "value": 37.2,
       "rank": 22,
       "tier": "Middle"
     },
     {
-      "state": "Indiana",
-      "value": 26.7,
+      "state": "Illinois",
+      "value": 37,
       "rank": 23,
       "tier": "Middle"
     },
     {
-      "state": "Montana",
-      "value": 26.4,
+      "state": "Massachusetts",
+      "value": 36.5,
       "rank": 24,
       "tier": "Middle"
     },
     {
-      "state": "Nebraska",
-      "value": 26.2,
+      "state": "Rhode Island",
+      "value": 36.5,
       "rank": 25,
       "tier": "Middle"
     },
     {
-      "state": "New Jersey",
-      "value": 26,
+      "state": "Oklahoma",
+      "value": 36.4,
       "rank": 26,
       "tier": "Middle"
     },
     {
-      "state": "Ohio",
-      "value": 25.9,
+      "state": "New Jersey",
+      "value": 36.3,
       "rank": 27,
       "tier": "Middle"
     },
     {
-      "state": "Texas",
-      "value": 25.9,
+      "state": "North Carolina",
+      "value": 35.7,
       "rank": 28,
       "tier": "Middle"
     },
     {
-      "state": "Iowa",
-      "value": 25.1,
+      "state": "Ohio",
+      "value": 35.5,
       "rank": 29,
       "tier": "Middle"
     },
     {
-      "state": "Georgia",
-      "value": 25,
+      "state": "California",
+      "value": 35.3,
       "rank": 30,
       "tier": "Middle"
     },
     {
-      "state": "Nevada",
-      "value": 24.8,
+      "state": "Florida",
+      "value": 35.1,
       "rank": 31,
       "tier": "Middle"
     },
     {
-      "state": "Rhode Island",
-      "value": 24.7,
+      "state": "Hawaii",
+      "value": 34.7,
       "rank": 32,
       "tier": "Middle"
     },
     {
-      "state": "New Hampshire",
-      "value": 24.4,
+      "state": "Arkansas",
+      "value": 34.5,
       "rank": 33,
       "tier": "Middle"
     },
     {
-      "state": "California",
-      "value": 24.3,
+      "state": "New York",
+      "value": 34.2,
       "rank": 34,
       "tier": "Middle"
     },
     {
-      "state": "Louisiana",
-      "value": 24,
+      "state": "Tennessee",
+      "value": 34.1,
       "rank": 35,
       "tier": "Middle"
     },
     {
-      "state": "Delaware",
-      "value": 23.8,
+      "state": "Texas",
+      "value": 33.7,
       "rank": 36,
       "tier": "Middle"
     },
     {
-      "state": "West Virginia",
-      "value": 23.6,
+      "state": "Delaware",
+      "value": 33.5,
       "rank": 37,
       "tier": "Middle"
     },
     {
-      "state": "Hawaii",
-      "value": 23.6,
+      "state": "Kansas",
+      "value": 33.5,
       "rank": 38,
       "tier": "Middle"
     },
     {
-      "state": "Connecticut",
-      "value": 23.5,
+      "state": "Indiana",
+      "value": 33.5,
       "rank": 39,
       "tier": "Middle"
     },
     {
-      "state": "New York",
-      "value": 23.5,
+      "state": "Arizona",
+      "value": 33.3,
       "rank": 40,
       "tier": "Middle"
     },
     {
-      "state": "New Mexico",
-      "value": 23.4,
+      "state": "Alabama",
+      "value": 33,
       "rank": 41,
       "tier": "Middle"
     },
     {
-      "state": "Washington",
-      "value": 23.1,
+      "state": "Virginia",
+      "value": 32.3,
       "rank": 42,
       "tier": "Bottom 10"
     },
     {
-      "state": "Mississippi",
-      "value": 23.1,
+      "state": "Nevada",
+      "value": 32,
       "rank": 43,
       "tier": "Bottom 10"
     },
     {
-      "state": "Illinois",
-      "value": 22.4,
+      "state": "Maryland",
+      "value": 31.6,
       "rank": 44,
       "tier": "Bottom 10"
     },
     {
-      "state": "Colorado",
-      "value": 22.3,
+      "state": "West Virginia",
+      "value": 31.6,
       "rank": 45,
       "tier": "Bottom 10"
     },
     {
-      "state": "Oregon",
-      "value": 22.3,
+      "state": "Mississippi",
+      "value": 31.4,
       "rank": 46,
       "tier": "Bottom 10"
     },
     {
-      "state": "Massachusetts",
-      "value": 22.1,
+      "state": "Missouri",
+      "value": 31.1,
       "rank": 47,
       "tier": "Bottom 10"
     },
     {
-      "state": "Virginia",
-      "value": 22,
+      "state": "Georgia",
+      "value": 31,
       "rank": 48,
       "tier": "Bottom 10"
     },
     {
-      "state": "Vermont",
-      "value": 21.8,
+      "state": "Kentucky",
+      "value": 30.9,
       "rank": 49,
       "tier": "Bottom 10"
     },
     {
-      "state": "Maryland",
-      "value": 21.4,
+      "state": "Louisiana",
+      "value": 30.8,
       "rank": 50,
       "tier": "Bottom 10"
     },
     {
       "state": "District of Columbia",
-      "value": 12.9,
+      "value": 28.9,
       "rank": 51,
       "tier": "Bottom 10"
     }
@@ -1308,17 +1241,17 @@
     "metrics": [
       {
         "id": "military_force",
-        "label": "The U.S. should use military force if necessary",
-        "color": "#c46525"
-      },
-      {
-        "id": "diplomacy",
-        "label": "The U.S. should use diplomacy and sanctions",
+        "label": "I'm confident the elections will take place and be conducted fairly",
         "color": "#1a6b73"
       },
       {
+        "id": "diplomacy",
+        "label": "I believe the elections will take place but have concerns about whether they'll be fair",
+        "color": "#c46525"
+      },
+      {
         "id": "less_involved",
-        "label": "The U.S. should take a less involved role in the situation with Iran",
+        "label": "I have serious doubts about whether the elections will take place as scheduled",
         "color": "#5a7d9a"
       },
       {
@@ -1330,1232 +1263,1232 @@
     "series": {
       "military_force": [
         {
-          "state": "South Dakota",
-          "value": 31.5,
+          "state": "Montana",
+          "value": 49.1,
           "rank": 1,
           "tier": "Top 10"
         },
         {
-          "state": "Wisconsin",
-          "value": 31.4,
+          "state": "Wyoming",
+          "value": 48.7,
           "rank": 2,
           "tier": "Top 10"
         },
         {
-          "state": "Wyoming",
-          "value": 30.4,
+          "state": "Idaho",
+          "value": 46.5,
           "rank": 3,
           "tier": "Top 10"
         },
         {
-          "state": "Oklahoma",
-          "value": 30.2,
+          "state": "North Dakota",
+          "value": 45.8,
           "rank": 4,
           "tier": "Top 10"
         },
         {
-          "state": "Florida",
-          "value": 30.2,
+          "state": "South Dakota",
+          "value": 45.7,
           "rank": 5,
           "tier": "Top 10"
         },
         {
-          "state": "Alabama",
-          "value": 30.1,
+          "state": "Wisconsin",
+          "value": 44.3,
           "rank": 6,
           "tier": "Top 10"
         },
         {
-          "state": "South Carolina",
-          "value": 29.9,
+          "state": "Nebraska",
+          "value": 44.2,
           "rank": 7,
           "tier": "Top 10"
         },
         {
-          "state": "Tennessee",
-          "value": 29.4,
+          "state": "Vermont",
+          "value": 43.5,
           "rank": 8,
           "tier": "Top 10"
         },
         {
-          "state": "North Dakota",
-          "value": 28.8,
+          "state": "Maine",
+          "value": 42.3,
           "rank": 9,
           "tier": "Top 10"
         },
         {
-          "state": "Idaho",
-          "value": 28.1,
+          "state": "New Mexico",
+          "value": 42.2,
           "rank": 10,
           "tier": "Top 10"
         },
         {
-          "state": "Missouri",
-          "value": 28,
+          "state": "Utah",
+          "value": 42.2,
           "rank": 11,
           "tier": "Middle"
         },
         {
-          "state": "Arkansas",
-          "value": 28,
+          "state": "Iowa",
+          "value": 42,
           "rank": 12,
           "tier": "Middle"
         },
         {
-          "state": "Utah",
-          "value": 27.4,
+          "state": "Minnesota",
+          "value": 41.7,
           "rank": 13,
           "tier": "Middle"
         },
         {
-          "state": "Kansas",
-          "value": 27.4,
+          "state": "Alaska",
+          "value": 41.1,
           "rank": 14,
           "tier": "Middle"
         },
         {
-          "state": "Alaska",
-          "value": 27.1,
+          "state": "New Hampshire",
+          "value": 40.8,
           "rank": 15,
           "tier": "Middle"
         },
         {
-          "state": "Michigan",
-          "value": 27.1,
+          "state": "Pennsylvania",
+          "value": 40.1,
           "rank": 16,
           "tier": "Middle"
         },
         {
-          "state": "Minnesota",
-          "value": 27,
+          "state": "Colorado",
+          "value": 38.3,
           "rank": 17,
           "tier": "Middle"
         },
         {
-          "state": "Arizona",
-          "value": 27,
+          "state": "Washington",
+          "value": 38.2,
           "rank": 18,
           "tier": "Middle"
         },
         {
-          "state": "Pennsylvania",
-          "value": 27,
+          "state": "South Carolina",
+          "value": 37.7,
           "rank": 19,
           "tier": "Middle"
         },
         {
-          "state": "North Carolina",
-          "value": 26.9,
+          "state": "Connecticut",
+          "value": 37.5,
           "rank": 20,
           "tier": "Middle"
         },
         {
-          "state": "Kentucky",
-          "value": 26.8,
+          "state": "Michigan",
+          "value": 37.4,
           "rank": 21,
           "tier": "Middle"
         },
         {
-          "state": "Maine",
-          "value": 26.7,
+          "state": "Oregon",
+          "value": 37.2,
           "rank": 22,
           "tier": "Middle"
         },
         {
-          "state": "Indiana",
-          "value": 26.7,
+          "state": "Illinois",
+          "value": 37,
           "rank": 23,
           "tier": "Middle"
         },
         {
-          "state": "Montana",
-          "value": 26.4,
+          "state": "Massachusetts",
+          "value": 36.5,
           "rank": 24,
           "tier": "Middle"
         },
         {
-          "state": "Nebraska",
-          "value": 26.2,
+          "state": "Rhode Island",
+          "value": 36.5,
           "rank": 25,
           "tier": "Middle"
         },
         {
-          "state": "New Jersey",
-          "value": 26,
+          "state": "Oklahoma",
+          "value": 36.4,
           "rank": 26,
           "tier": "Middle"
         },
         {
-          "state": "Ohio",
-          "value": 25.9,
+          "state": "New Jersey",
+          "value": 36.3,
           "rank": 27,
           "tier": "Middle"
         },
         {
-          "state": "Texas",
-          "value": 25.9,
+          "state": "North Carolina",
+          "value": 35.7,
           "rank": 28,
           "tier": "Middle"
         },
         {
-          "state": "Iowa",
-          "value": 25.1,
+          "state": "Ohio",
+          "value": 35.5,
           "rank": 29,
           "tier": "Middle"
         },
         {
-          "state": "Georgia",
-          "value": 25,
+          "state": "California",
+          "value": 35.3,
           "rank": 30,
           "tier": "Middle"
         },
         {
-          "state": "Nevada",
-          "value": 24.8,
+          "state": "Florida",
+          "value": 35.1,
           "rank": 31,
           "tier": "Middle"
         },
         {
-          "state": "Rhode Island",
-          "value": 24.7,
+          "state": "Hawaii",
+          "value": 34.7,
           "rank": 32,
           "tier": "Middle"
         },
         {
-          "state": "New Hampshire",
-          "value": 24.4,
+          "state": "Arkansas",
+          "value": 34.5,
           "rank": 33,
           "tier": "Middle"
         },
         {
-          "state": "California",
-          "value": 24.3,
+          "state": "New York",
+          "value": 34.2,
           "rank": 34,
           "tier": "Middle"
         },
         {
-          "state": "Louisiana",
-          "value": 24,
+          "state": "Tennessee",
+          "value": 34.1,
           "rank": 35,
           "tier": "Middle"
         },
         {
-          "state": "Delaware",
-          "value": 23.8,
+          "state": "Texas",
+          "value": 33.7,
           "rank": 36,
           "tier": "Middle"
         },
         {
-          "state": "West Virginia",
-          "value": 23.6,
+          "state": "Delaware",
+          "value": 33.5,
           "rank": 37,
           "tier": "Middle"
         },
         {
-          "state": "Hawaii",
-          "value": 23.6,
+          "state": "Kansas",
+          "value": 33.5,
           "rank": 38,
           "tier": "Middle"
         },
         {
-          "state": "Connecticut",
-          "value": 23.5,
+          "state": "Indiana",
+          "value": 33.5,
           "rank": 39,
           "tier": "Middle"
         },
         {
-          "state": "New York",
-          "value": 23.5,
+          "state": "Arizona",
+          "value": 33.3,
           "rank": 40,
           "tier": "Middle"
         },
         {
-          "state": "New Mexico",
-          "value": 23.4,
+          "state": "Alabama",
+          "value": 33,
           "rank": 41,
           "tier": "Middle"
         },
         {
-          "state": "Washington",
-          "value": 23.1,
+          "state": "Virginia",
+          "value": 32.3,
           "rank": 42,
           "tier": "Bottom 10"
         },
         {
-          "state": "Mississippi",
-          "value": 23.1,
+          "state": "Nevada",
+          "value": 32,
           "rank": 43,
           "tier": "Bottom 10"
         },
         {
-          "state": "Illinois",
-          "value": 22.4,
+          "state": "Maryland",
+          "value": 31.6,
           "rank": 44,
           "tier": "Bottom 10"
         },
         {
-          "state": "Colorado",
-          "value": 22.3,
+          "state": "West Virginia",
+          "value": 31.6,
           "rank": 45,
           "tier": "Bottom 10"
         },
         {
-          "state": "Oregon",
-          "value": 22.3,
+          "state": "Mississippi",
+          "value": 31.4,
           "rank": 46,
           "tier": "Bottom 10"
         },
         {
-          "state": "Massachusetts",
-          "value": 22.1,
+          "state": "Missouri",
+          "value": 31.1,
           "rank": 47,
           "tier": "Bottom 10"
         },
         {
-          "state": "Virginia",
-          "value": 22,
+          "state": "Georgia",
+          "value": 31,
           "rank": 48,
           "tier": "Bottom 10"
         },
         {
-          "state": "Vermont",
-          "value": 21.8,
+          "state": "Kentucky",
+          "value": 30.9,
           "rank": 49,
           "tier": "Bottom 10"
         },
         {
-          "state": "Maryland",
-          "value": 21.4,
+          "state": "Louisiana",
+          "value": 30.8,
           "rank": 50,
           "tier": "Bottom 10"
         },
         {
           "state": "District of Columbia",
-          "value": 12.9,
+          "value": 28.9,
           "rank": 51,
           "tier": "Bottom 10"
         }
       ],
       "diplomacy": [
         {
-          "state": "New Hampshire",
-          "value": 39.2,
+          "state": "District of Columbia",
+          "value": 48.8,
           "rank": 1,
           "tier": "Top 10"
         },
         {
-          "state": "Vermont",
-          "value": 38.6,
+          "state": "Missouri",
+          "value": 45.8,
           "rank": 2,
           "tier": "Top 10"
         },
         {
-          "state": "New Mexico",
-          "value": 38.3,
+          "state": "Maryland",
+          "value": 45.7,
           "rank": 3,
           "tier": "Top 10"
         },
         {
-          "state": "Oregon",
-          "value": 37,
+          "state": "Texas",
+          "value": 45.6,
           "rank": 4,
           "tier": "Top 10"
         },
         {
-          "state": "Maine",
-          "value": 36.7,
+          "state": "Louisiana",
+          "value": 45.6,
           "rank": 5,
           "tier": "Top 10"
         },
         {
-          "state": "North Dakota",
-          "value": 36.6,
+          "state": "Kentucky",
+          "value": 44.8,
           "rank": 6,
           "tier": "Top 10"
         },
         {
-          "state": "Arizona",
-          "value": 36.5,
+          "state": "Arkansas",
+          "value": 44.2,
           "rank": 7,
           "tier": "Top 10"
         },
         {
-          "state": "Minnesota",
-          "value": 36.2,
+          "state": "Mississippi",
+          "value": 44.2,
           "rank": 8,
           "tier": "Top 10"
         },
         {
-          "state": "West Virginia",
-          "value": 35.8,
+          "state": "Alabama",
+          "value": 43.5,
           "rank": 9,
           "tier": "Top 10"
         },
         {
-          "state": "Washington",
-          "value": 35.4,
+          "state": "Florida",
+          "value": 43.2,
           "rank": 10,
           "tier": "Top 10"
         },
         {
-          "state": "Iowa",
-          "value": 35.2,
+          "state": "Georgia",
+          "value": 42.9,
           "rank": 11,
           "tier": "Middle"
         },
         {
-          "state": "Hawaii",
-          "value": 35.1,
+          "state": "Arizona",
+          "value": 42.8,
           "rank": 12,
           "tier": "Middle"
         },
         {
-          "state": "California",
-          "value": 35,
+          "state": "New York",
+          "value": 42.7,
           "rank": 13,
           "tier": "Middle"
         },
         {
-          "state": "Montana",
-          "value": 34.5,
+          "state": "Rhode Island",
+          "value": 42.7,
           "rank": 14,
           "tier": "Middle"
         },
         {
-          "state": "New York",
-          "value": 34.2,
+          "state": "Virginia",
+          "value": 42.6,
           "rank": 15,
           "tier": "Middle"
         },
         {
-          "state": "South Dakota",
-          "value": 34.1,
+          "state": "Tennessee",
+          "value": 42.5,
           "rank": 16,
           "tier": "Middle"
         },
         {
-          "state": "Pennsylvania",
-          "value": 33.7,
+          "state": "West Virginia",
+          "value": 42.5,
           "rank": 17,
           "tier": "Middle"
         },
         {
-          "state": "Idaho",
-          "value": 33.7,
+          "state": "Oklahoma",
+          "value": 42.3,
           "rank": 18,
           "tier": "Middle"
         },
         {
-          "state": "Alaska",
-          "value": 33.7,
+          "state": "Indiana",
+          "value": 42.2,
           "rank": 19,
           "tier": "Middle"
         },
         {
-          "state": "Michigan",
-          "value": 33.7,
+          "state": "Kansas",
+          "value": 42.1,
           "rank": 20,
           "tier": "Middle"
         },
         {
-          "state": "Massachusetts",
-          "value": 33.6,
+          "state": "Delaware",
+          "value": 42.1,
           "rank": 21,
           "tier": "Middle"
         },
         {
-          "state": "Ohio",
-          "value": 33.1,
+          "state": "Nevada",
+          "value": 42.1,
           "rank": 22,
           "tier": "Middle"
         },
         {
-          "state": "District of Columbia",
-          "value": 33,
+          "state": "Ohio",
+          "value": 40.7,
           "rank": 23,
           "tier": "Middle"
         },
         {
-          "state": "Wyoming",
-          "value": 32.7,
+          "state": "Illinois",
+          "value": 40.3,
           "rank": 24,
           "tier": "Middle"
         },
         {
-          "state": "Connecticut",
-          "value": 32.7,
+          "state": "California",
+          "value": 40.1,
           "rank": 25,
           "tier": "Middle"
         },
         {
-          "state": "Texas",
-          "value": 32.5,
+          "state": "New Jersey",
+          "value": 39.8,
           "rank": 26,
           "tier": "Middle"
         },
         {
-          "state": "Illinois",
-          "value": 32,
+          "state": "North Carolina",
+          "value": 39.6,
           "rank": 27,
           "tier": "Middle"
         },
         {
-          "state": "Delaware",
-          "value": 31.8,
+          "state": "Massachusetts",
+          "value": 39.4,
           "rank": 28,
           "tier": "Middle"
         },
         {
-          "state": "Virginia",
-          "value": 31.5,
+          "state": "Hawaii",
+          "value": 39.2,
           "rank": 29,
           "tier": "Middle"
         },
         {
-          "state": "Colorado",
-          "value": 31.4,
+          "state": "Michigan",
+          "value": 39.2,
           "rank": 30,
           "tier": "Middle"
         },
         {
-          "state": "Wisconsin",
-          "value": 31.3,
+          "state": "Pennsylvania",
+          "value": 38.8,
           "rank": 31,
           "tier": "Middle"
         },
         {
-          "state": "Indiana",
-          "value": 30.9,
+          "state": "Washington",
+          "value": 38.8,
           "rank": 32,
           "tier": "Middle"
         },
         {
-          "state": "Nebraska",
-          "value": 30.7,
+          "state": "South Carolina",
+          "value": 38.7,
           "rank": 33,
           "tier": "Middle"
         },
         {
-          "state": "Kentucky",
-          "value": 30.4,
+          "state": "Oregon",
+          "value": 38.7,
           "rank": 34,
           "tier": "Middle"
         },
         {
-          "state": "Utah",
-          "value": 30.3,
+          "state": "New Hampshire",
+          "value": 37.9,
           "rank": 35,
           "tier": "Middle"
         },
         {
-          "state": "New Jersey",
-          "value": 30.1,
+          "state": "Connecticut",
+          "value": 37.7,
           "rank": 36,
           "tier": "Middle"
         },
         {
-          "state": "Kansas",
-          "value": 30,
+          "state": "Colorado",
+          "value": 37.2,
           "rank": 37,
           "tier": "Middle"
         },
         {
-          "state": "Nevada",
-          "value": 29.3,
+          "state": "Minnesota",
+          "value": 37,
           "rank": 38,
           "tier": "Middle"
         },
         {
-          "state": "Maryland",
-          "value": 29.1,
+          "state": "Iowa",
+          "value": 36.3,
           "rank": 39,
           "tier": "Middle"
         },
         {
-          "state": "Mississippi",
-          "value": 28.9,
+          "state": "Alaska",
+          "value": 35.4,
           "rank": 40,
           "tier": "Middle"
         },
         {
-          "state": "Rhode Island",
-          "value": 28.8,
+          "state": "Wisconsin",
+          "value": 35.2,
           "rank": 41,
           "tier": "Middle"
         },
         {
-          "state": "South Carolina",
-          "value": 28.7,
+          "state": "Maine",
+          "value": 34.9,
           "rank": 42,
           "tier": "Bottom 10"
         },
         {
-          "state": "Missouri",
-          "value": 28.7,
+          "state": "Nebraska",
+          "value": 34.3,
           "rank": 43,
           "tier": "Bottom 10"
         },
         {
-          "state": "Oklahoma",
-          "value": 28.7,
+          "state": "South Dakota",
+          "value": 34,
           "rank": 44,
           "tier": "Bottom 10"
         },
         {
-          "state": "North Carolina",
-          "value": 28.7,
+          "state": "Vermont",
+          "value": 34,
           "rank": 45,
           "tier": "Bottom 10"
         },
         {
-          "state": "Tennessee",
-          "value": 27.5,
+          "state": "North Dakota",
+          "value": 32.8,
           "rank": 46,
           "tier": "Bottom 10"
         },
         {
-          "state": "Louisiana",
-          "value": 27.2,
+          "state": "New Mexico",
+          "value": 32.7,
           "rank": 47,
           "tier": "Bottom 10"
         },
         {
-          "state": "Florida",
-          "value": 27,
+          "state": "Utah",
+          "value": 32.1,
           "rank": 48,
           "tier": "Bottom 10"
         },
         {
-          "state": "Arkansas",
-          "value": 26.6,
+          "state": "Wyoming",
+          "value": 30.2,
           "rank": 49,
           "tier": "Bottom 10"
         },
         {
-          "state": "Georgia",
-          "value": 26.4,
+          "state": "Idaho",
+          "value": 29.8,
           "rank": 50,
           "tier": "Bottom 10"
         },
         {
-          "state": "Alabama",
-          "value": 25.2,
+          "state": "Montana",
+          "value": 29.6,
           "rank": 51,
           "tier": "Bottom 10"
         }
       ],
       "less_involved": [
         {
-          "state": "District of Columbia",
-          "value": 34.9,
+          "state": "Hawaii",
+          "value": 18.8,
           "rank": 1,
           "tier": "Top 10"
         },
         {
-          "state": "Colorado",
-          "value": 33.5,
+          "state": "California",
+          "value": 17.8,
           "rank": 2,
           "tier": "Top 10"
         },
         {
-          "state": "Maryland",
-          "value": 32.3,
+          "state": "Nevada",
+          "value": 17.6,
           "rank": 3,
           "tier": "Top 10"
         },
         {
-          "state": "Nevada",
-          "value": 32.2,
+          "state": "Utah",
+          "value": 17.2,
           "rank": 4,
           "tier": "Top 10"
         },
         {
-          "state": "Illinois",
-          "value": 31.7,
+          "state": "Oregon",
+          "value": 16.8,
           "rank": 5,
           "tier": "Top 10"
         },
         {
-          "state": "Nebraska",
-          "value": 30.7,
+          "state": "New Mexico",
+          "value": 16.7,
           "rank": 6,
           "tier": "Top 10"
         },
         {
-          "state": "Indiana",
-          "value": 30,
+          "state": "Arizona",
+          "value": 16.6,
           "rank": 7,
           "tier": "Top 10"
         },
         {
-          "state": "Ohio",
-          "value": 29.4,
+          "state": "Georgia",
+          "value": 16.2,
           "rank": 8,
           "tier": "Top 10"
         },
         {
-          "state": "Utah",
-          "value": 29.3,
+          "state": "Washington",
+          "value": 16.2,
           "rank": 9,
           "tier": "Top 10"
         },
         {
-          "state": "Arkansas",
-          "value": 29,
+          "state": "Colorado",
+          "value": 16.1,
           "rank": 10,
           "tier": "Top 10"
         },
         {
-          "state": "California",
-          "value": 28.9,
+          "state": "Mississippi",
+          "value": 15.9,
           "rank": 11,
           "tier": "Middle"
         },
         {
-          "state": "Rhode Island",
-          "value": 28.8,
+          "state": "Idaho",
+          "value": 15.9,
           "rank": 12,
           "tier": "Middle"
         },
         {
-          "state": "Kansas",
-          "value": 28.7,
+          "state": "Virginia",
+          "value": 15.8,
           "rank": 13,
           "tier": "Middle"
         },
         {
-          "state": "Mississippi",
-          "value": 28.5,
+          "state": "Indiana",
+          "value": 15.8,
           "rank": 14,
           "tier": "Middle"
         },
         {
-          "state": "Missouri",
-          "value": 28.4,
+          "state": "Alaska",
+          "value": 15.7,
           "rank": 15,
           "tier": "Middle"
         },
         {
-          "state": "Virginia",
-          "value": 28.4,
+          "state": "Kansas",
+          "value": 15.6,
           "rank": 16,
           "tier": "Middle"
         },
         {
-          "state": "Georgia",
-          "value": 28.3,
+          "state": "West Virginia",
+          "value": 15.6,
           "rank": 17,
           "tier": "Middle"
         },
         {
-          "state": "New Jersey",
-          "value": 28,
+          "state": "Delaware",
+          "value": 15.6,
           "rank": 18,
           "tier": "Middle"
         },
         {
           "state": "Kentucky",
-          "value": 27.9,
+          "value": 15.5,
           "rank": 19,
           "tier": "Middle"
         },
         {
-          "state": "Louisiana",
-          "value": 27.7,
+          "state": "Alabama",
+          "value": 15.4,
           "rank": 20,
           "tier": "Middle"
         },
         {
-          "state": "Washington",
-          "value": 27.6,
+          "state": "North Carolina",
+          "value": 15.1,
           "rank": 21,
           "tier": "Middle"
         },
         {
-          "state": "Connecticut",
-          "value": 27.5,
+          "state": "Louisiana",
+          "value": 15.1,
           "rank": 22,
           "tier": "Middle"
         },
         {
-          "state": "Tennessee",
-          "value": 27.5,
+          "state": "Missouri",
+          "value": 15,
           "rank": 23,
           "tier": "Middle"
         },
         {
-          "state": "West Virginia",
-          "value": 27.4,
+          "state": "Illinois",
+          "value": 14.8,
           "rank": 24,
           "tier": "Middle"
         },
         {
-          "state": "Oregon",
-          "value": 27.3,
+          "state": "South Carolina",
+          "value": 14.5,
           "rank": 25,
           "tier": "Middle"
         },
         {
-          "state": "Iowa",
-          "value": 27,
+          "state": "Ohio",
+          "value": 14.5,
           "rank": 26,
           "tier": "Middle"
         },
         {
-          "state": "Delaware",
-          "value": 26.9,
+          "state": "Michigan",
+          "value": 14.3,
           "rank": 27,
           "tier": "Middle"
         },
         {
-          "state": "Oklahoma",
-          "value": 26.9,
+          "state": "Tennessee",
+          "value": 14.1,
           "rank": 28,
           "tier": "Middle"
         },
         {
-          "state": "Alabama",
-          "value": 26.8,
+          "state": "New Jersey",
+          "value": 14,
           "rank": 29,
           "tier": "Middle"
         },
         {
-          "state": "Alaska",
-          "value": 26.2,
+          "state": "Vermont",
+          "value": 13.9,
           "rank": 30,
           "tier": "Middle"
         },
         {
-          "state": "Hawaii",
-          "value": 26.2,
+          "state": "Maryland",
+          "value": 13.9,
           "rank": 31,
           "tier": "Middle"
         },
         {
-          "state": "Florida",
-          "value": 26,
+          "state": "Massachusetts",
+          "value": 13.7,
           "rank": 32,
           "tier": "Middle"
         },
         {
-          "state": "North Carolina",
-          "value": 26,
+          "state": "Minnesota",
+          "value": 13.7,
           "rank": 33,
           "tier": "Middle"
         },
         {
-          "state": "Texas",
-          "value": 25.9,
+          "state": "Connecticut",
+          "value": 13.6,
           "rank": 34,
           "tier": "Middle"
         },
         {
-          "state": "Massachusetts",
-          "value": 25.8,
+          "state": "New York",
+          "value": 13.6,
           "rank": 35,
           "tier": "Middle"
         },
         {
-          "state": "Pennsylvania",
-          "value": 25.8,
+          "state": "District of Columbia",
+          "value": 13.6,
           "rank": 36,
           "tier": "Middle"
         },
         {
-          "state": "New York",
-          "value": 25.5,
+          "state": "Texas",
+          "value": 13.5,
           "rank": 37,
           "tier": "Middle"
         },
         {
-          "state": "Idaho",
-          "value": 24.4,
+          "state": "North Dakota",
+          "value": 13.3,
           "rank": 38,
           "tier": "Middle"
         },
         {
-          "state": "Montana",
-          "value": 24.4,
+          "state": "Wyoming",
+          "value": 13.3,
           "rank": 39,
           "tier": "Middle"
         },
         {
-          "state": "Michigan",
-          "value": 24.1,
+          "state": "Montana",
+          "value": 13.2,
           "rank": 40,
           "tier": "Middle"
         },
         {
-          "state": "Wyoming",
-          "value": 23.5,
+          "state": "Iowa",
+          "value": 13.2,
           "rank": 41,
           "tier": "Middle"
         },
         {
-          "state": "Arizona",
-          "value": 23.4,
+          "state": "Maine",
+          "value": 13.1,
           "rank": 42,
           "tier": "Bottom 10"
         },
         {
-          "state": "New Mexico",
-          "value": 23,
+          "state": "Arkansas",
+          "value": 13.1,
           "rank": 43,
           "tier": "Bottom 10"
         },
         {
-          "state": "South Carolina",
-          "value": 22.5,
+          "state": "Nebraska",
+          "value": 13.1,
           "rank": 44,
           "tier": "Bottom 10"
         },
         {
-          "state": "Wisconsin",
-          "value": 21.9,
+          "state": "Oklahoma",
+          "value": 13,
           "rank": 45,
           "tier": "Bottom 10"
         },
         {
-          "state": "Minnesota",
-          "value": 21.8,
+          "state": "Florida",
+          "value": 12.7,
           "rank": 46,
           "tier": "Bottom 10"
         },
         {
-          "state": "Vermont",
-          "value": 21,
+          "state": "New Hampshire",
+          "value": 12.3,
           "rank": 47,
           "tier": "Bottom 10"
         },
         {
-          "state": "North Dakota",
-          "value": 21,
+          "state": "Pennsylvania",
+          "value": 12.3,
           "rank": 48,
           "tier": "Bottom 10"
         },
         {
           "state": "South Dakota",
-          "value": 20.5,
+          "value": 12.3,
           "rank": 49,
           "tier": "Bottom 10"
         },
         {
-          "state": "New Hampshire",
-          "value": 19.7,
+          "state": "Wisconsin",
+          "value": 12.2,
           "rank": 50,
           "tier": "Bottom 10"
         },
         {
-          "state": "Maine",
-          "value": 19.4,
+          "state": "Rhode Island",
+          "value": 11.1,
           "rank": 51,
           "tier": "Bottom 10"
         }
       ],
       "unsure": [
         {
-          "state": "Louisiana",
-          "value": 21,
+          "state": "Connecticut",
+          "value": 11.1,
           "rank": 1,
           "tier": "Top 10"
         },
         {
-          "state": "Georgia",
-          "value": 20.4,
+          "state": "West Virginia",
+          "value": 10.4,
           "rank": 2,
           "tier": "Top 10"
         },
         {
-          "state": "Mississippi",
-          "value": 19.5,
+          "state": "Massachusetts",
+          "value": 10.3,
           "rank": 3,
           "tier": "Top 10"
         },
         {
-          "state": "District of Columbia",
-          "value": 19.2,
+          "state": "New Jersey",
+          "value": 9.9,
           "rank": 4,
           "tier": "Top 10"
         },
         {
-          "state": "South Carolina",
-          "value": 18.9,
+          "state": "Georgia",
+          "value": 9.9,
           "rank": 5,
           "tier": "Top 10"
         },
         {
-          "state": "Massachusetts",
-          "value": 18.6,
+          "state": "Rhode Island",
+          "value": 9.8,
           "rank": 6,
           "tier": "Top 10"
         },
         {
-          "state": "Vermont",
-          "value": 18.6,
+          "state": "Maine",
+          "value": 9.6,
           "rank": 7,
           "tier": "Top 10"
         },
         {
           "state": "North Carolina",
-          "value": 18.5,
+          "value": 9.6,
           "rank": 8,
           "tier": "Top 10"
         },
         {
-          "state": "Virginia",
-          "value": 18.1,
+          "state": "New York",
+          "value": 9.4,
           "rank": 9,
           "tier": "Top 10"
         },
         {
-          "state": "Alabama",
-          "value": 17.8,
+          "state": "Ohio",
+          "value": 9.4,
           "rank": 10,
           "tier": "Top 10"
         },
         {
-          "state": "Rhode Island",
-          "value": 17.7,
+          "state": "Tennessee",
+          "value": 9.3,
           "rank": 11,
           "tier": "Middle"
         },
         {
-          "state": "Delaware",
-          "value": 17.5,
+          "state": "Virginia",
+          "value": 9.3,
           "rank": 12,
           "tier": "Middle"
         },
         {
-          "state": "Maryland",
-          "value": 17.3,
+          "state": "South Carolina",
+          "value": 9.1,
           "rank": 13,
           "tier": "Middle"
         },
         {
-          "state": "Maine",
-          "value": 17.2,
+          "state": "Michigan",
+          "value": 9.1,
           "rank": 14,
           "tier": "Middle"
         },
         {
-          "state": "Florida",
-          "value": 16.9,
+          "state": "New Hampshire",
+          "value": 9,
           "rank": 15,
           "tier": "Middle"
         },
         {
-          "state": "New York",
-          "value": 16.8,
+          "state": "Florida",
+          "value": 9,
           "rank": 16,
           "tier": "Middle"
         },
         {
-          "state": "New Hampshire",
-          "value": 16.7,
+          "state": "Kentucky",
+          "value": 8.9,
           "rank": 17,
           "tier": "Middle"
         },
         {
-          "state": "Arkansas",
-          "value": 16.4,
+          "state": "Delaware",
+          "value": 8.8,
           "rank": 18,
           "tier": "Middle"
         },
         {
-          "state": "Connecticut",
-          "value": 16.3,
+          "state": "Maryland",
+          "value": 8.8,
           "rank": 19,
           "tier": "Middle"
         },
         {
-          "state": "New Jersey",
-          "value": 15.9,
+          "state": "Pennsylvania",
+          "value": 8.8,
           "rank": 20,
           "tier": "Middle"
         },
         {
-          "state": "Texas",
-          "value": 15.7,
+          "state": "Kansas",
+          "value": 8.7,
           "rank": 21,
           "tier": "Middle"
         },
         {
-          "state": "Tennessee",
-          "value": 15.6,
+          "state": "District of Columbia",
+          "value": 8.7,
           "rank": 22,
           "tier": "Middle"
         },
         {
-          "state": "Wisconsin",
-          "value": 15.5,
+          "state": "Vermont",
+          "value": 8.7,
           "rank": 23,
           "tier": "Middle"
         },
         {
-          "state": "New Mexico",
-          "value": 15.3,
+          "state": "Utah",
+          "value": 8.6,
           "rank": 24,
           "tier": "Middle"
         },
         {
-          "state": "Hawaii",
-          "value": 15.1,
+          "state": "Indiana",
+          "value": 8.6,
           "rank": 25,
           "tier": "Middle"
         },
         {
-          "state": "Michigan",
-          "value": 15.1,
+          "state": "Mississippi",
+          "value": 8.5,
           "rank": 26,
           "tier": "Middle"
         },
         {
-          "state": "Minnesota",
-          "value": 15,
+          "state": "Iowa",
+          "value": 8.5,
           "rank": 27,
           "tier": "Middle"
         },
         {
-          "state": "Kentucky",
-          "value": 14.9,
+          "state": "Louisiana",
+          "value": 8.5,
           "rank": 28,
           "tier": "Middle"
         },
         {
-          "state": "Missouri",
-          "value": 14.9,
+          "state": "Colorado",
+          "value": 8.5,
           "rank": 29,
           "tier": "Middle"
         },
         {
-          "state": "Montana",
-          "value": 14.7,
+          "state": "New Mexico",
+          "value": 8.4,
           "rank": 30,
           "tier": "Middle"
         },
         {
-          "state": "Oklahoma",
-          "value": 14.3,
+          "state": "Nebraska",
+          "value": 8.4,
           "rank": 31,
           "tier": "Middle"
         },
         {
-          "state": "Kansas",
-          "value": 14,
+          "state": "Nevada",
+          "value": 8.3,
           "rank": 32,
           "tier": "Middle"
         },
         {
-          "state": "South Dakota",
-          "value": 13.9,
+          "state": "Wisconsin",
+          "value": 8.3,
           "rank": 33,
           "tier": "Middle"
         },
         {
-          "state": "Washington",
-          "value": 13.9,
+          "state": "Oklahoma",
+          "value": 8.2,
           "rank": 34,
           "tier": "Middle"
         },
         {
-          "state": "Idaho",
-          "value": 13.8,
+          "state": "Arkansas",
+          "value": 8.2,
           "rank": 35,
           "tier": "Middle"
         },
         {
-          "state": "Illinois",
-          "value": 13.8,
+          "state": "North Dakota",
+          "value": 8.1,
           "rank": 36,
           "tier": "Middle"
         },
         {
-          "state": "Nevada",
-          "value": 13.7,
+          "state": "Alabama",
+          "value": 8.1,
           "rank": 37,
           "tier": "Middle"
         },
         {
-          "state": "North Dakota",
-          "value": 13.6,
+          "state": "Montana",
+          "value": 8.1,
           "rank": 38,
           "tier": "Middle"
         },
         {
-          "state": "Pennsylvania",
-          "value": 13.6,
+          "state": "Missouri",
+          "value": 8.1,
           "rank": 39,
           "tier": "Middle"
         },
         {
-          "state": "Oregon",
-          "value": 13.5,
+          "state": "South Dakota",
+          "value": 8,
           "rank": 40,
           "tier": "Middle"
         },
         {
-          "state": "Wyoming",
-          "value": 13.3,
+          "state": "Illinois",
+          "value": 7.9,
           "rank": 41,
           "tier": "Middle"
         },
         {
-          "state": "Arizona",
-          "value": 13.2,
+          "state": "Wyoming",
+          "value": 7.9,
           "rank": 42,
           "tier": "Bottom 10"
         },
         {
-          "state": "West Virginia",
-          "value": 13.1,
+          "state": "Idaho",
+          "value": 7.8,
           "rank": 43,
           "tier": "Bottom 10"
         },
         {
-          "state": "Utah",
-          "value": 13.1,
+          "state": "Alaska",
+          "value": 7.8,
           "rank": 44,
           "tier": "Bottom 10"
         },
         {
-          "state": "Alaska",
-          "value": 13,
+          "state": "Minnesota",
+          "value": 7.6,
           "rank": 45,
           "tier": "Bottom 10"
         },
         {
-          "state": "Colorado",
-          "value": 12.8,
+          "state": "Hawaii",
+          "value": 7.3,
           "rank": 46,
           "tier": "Bottom 10"
         },
         {
-          "state": "Iowa",
-          "value": 12.7,
+          "state": "Oregon",
+          "value": 7.3,
           "rank": 47,
           "tier": "Bottom 10"
         },
         {
-          "state": "Indiana",
-          "value": 12.5,
+          "state": "Texas",
+          "value": 7.2,
           "rank": 48,
           "tier": "Bottom 10"
         },
         {
-          "state": "Nebraska",
-          "value": 12.3,
+          "state": "Arizona",
+          "value": 7.2,
           "rank": 49,
           "tier": "Bottom 10"
         },
         {
-          "state": "California",
-          "value": 11.8,
+          "state": "Washington",
+          "value": 6.8,
           "rank": 50,
           "tier": "Bottom 10"
         },
         {
-          "state": "Ohio",
-          "value": 11.6,
+          "state": "California",
+          "value": 6.8,
           "rank": 51,
           "tier": "Bottom 10"
         }
@@ -2564,14 +2497,11 @@
   },
   "content": {
     "key_takeaways": [
-      "58.9% of Americans opposed using military force.",
-      "The partisan divide is 14.8 pp, but even among Republicans only 32.5% supported military action.",
-      "Men were more supportive of military action than women. The gender divide was 8.3 pp overall and 11.5 among Republicans.",
-      "Rural voters were 7 percentage points more supportive of strikes than urban voters.",
-      "Age differences are modest overall, though Baby Boomer Democrats were 3 pp more opposed to strikes than Gen Z Democrats.",
-      "Education, income, and religion had little independent effect once other demographic and partisan differences are accounted for.",
-      "African Americans were 12.4 pp less supportive of strikes than White Americans and 6.9 pp less than Hispanics.",
-      "Disaffected Young Men and the White Working-Class, where 10-10.7 pp less in favor of military intervention than Evangelical Republicans."
+      "Most Americans expected elections to take place, but confidence in fairness varied.",
+      "A substantial share reported concerns about fair administration even when expecting elections to proceed.",
+      "Serious doubts were concentrated in specific partisan and geographic groups.",
+      "Within-party demographic comparisons reduced some large headline gaps.",
+      "State-level variation suggests localized confidence challenges."
     ],
     "methodology_note": "We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).",
     "component_order": [
@@ -2586,11 +2516,11 @@
     ]
   },
   "template": {
-    "site_slug": "iran_policy",
+    "site_slug": "election_fairness",
     "path": "site_config.json"
   },
   "dataSource": {
     "input_file": "xgboost_2026-02-27_vdh.rds",
-    "generated_at_utc": "2026-03-05 15:52:45 UTC"
+    "generated_at_utc": "2026-03-05 15:53:04 UTC"
   }
 }

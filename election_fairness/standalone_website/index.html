@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>U.S. Opinion on Iran Policy | Vantage Data House</title>
+    <title>U.S. Views on Election Fairness | Vantage Data House</title>
     <style>
 /* ============================================================
    DESIGN TOKENS
@@ -1125,7 +1125,7 @@ body {
             <span class="eyebrow-pip" aria-hidden="true"></span>
             Vantage Data House
           </p>
-          <h1 id="heroTitle">How Americans Wanted the U.S. to Handle Iran&mdash;On the Eve of the Attack</h1>
+          <h1 id="heroTitle">U.S. Views on Election Fairness</h1>
           <p id="heroSubtitle" hidden></p>
           <div class="hero-meta" aria-label="Survey metadata">
             <span class="meta-pill">
@@ -1255,14 +1255,14 @@ body {
 const FALLBACK_REPORT = {
   meta: {
     source:     'Vantage Data House',
-    title:      'How Americans Wanted the U.S. to Handle Iran\u2014On the Eve of the Attack',
+    title:      'U.S. Views on Election Fairness',
     site:       'https://www.vantagedatahouse.com',
     sample:     'N\u00a0=\u00a01,602\u00a0respondents',
     fieldDates: 'February\u00a025\u201327,\u00a02026',
     methodLabel: 'Poststratified ML estimates'
   },
   question: {
-    prompt: 'Thinking about the current situation with Iran, which comes closest to your view on U.S.\u00a0policy?'
+    prompt: 'Thinking about upcoming U.S. elections, which statement comes closest to your view?'
   },
   questionResults: [
     { label: 'The U.S. should use military force if necessary',                      value: 25.6, color: '#c46525' },
@@ -1311,8 +1311,8 @@ const FALLBACK_REPORT = {
       id: 'party',
       label: 'Party',
       cards: {
-        iran_policy: {
-          question_id: 'iran_policy',
+        election_fairness: {
+          question_id: 'election_fairness',
           question_label: 'Survey Question',
           metrics: [
             { id: 'military_force', label: 'The U.S. should use military force if necessary', color: '#c46525' },
@@ -1334,8 +1334,8 @@ const FALLBACK_REPORT = {
       id: 'race',
       label: 'Race',
       cards: {
-        iran_policy: {
-          question_id: 'iran_policy',
+        election_fairness: {
+          question_id: 'election_fairness',
           question_label: 'Survey Question',
           metrics: [
             { id: 'military_force', label: 'The U.S. should use military force if necessary', color: '#c46525' },
@@ -1358,8 +1358,8 @@ const FALLBACK_REPORT = {
       id: 'gender',
       label: 'Gender',
       cards: {
-        iran_policy: {
-          question_id: 'iran_policy',
+        election_fairness: {
+          question_id: 'election_fairness',
           question_label: 'Survey Question',
           metrics: [
             { id: 'military_force', label: 'The U.S. should use military force if necessary', color: '#c46525' },
@@ -1380,8 +1380,8 @@ const FALLBACK_REPORT = {
       id: 'rus_code',
       label: 'Rural/Urban/Suburban',
       cards: {
-        iran_policy: {
-          question_id: 'iran_policy',
+        election_fairness: {
+          question_id: 'election_fairness',
           question_label: 'Survey Question',
           metrics: [
             { id: 'military_force', label: 'The U.S. should use military force if necessary', color: '#c46525' },
@@ -1659,7 +1659,7 @@ function initTheme() {
    DATA LOADING — fetch JSON with embedded fallback
    ============================================================
    Strategy:
-   - Try to fetch iran_policy_data.json (works over HTTP).
+   - Try to fetch election_fairness_data.json (works over HTTP).
    - If fetch fails (file://, CORS, network error), use FALLBACK_REPORT.
    - Crosstabs JSON is loaded separately; if unavailable, the
      crosstabs section shows a graceful empty state.
@@ -1668,7 +1668,7 @@ const isFileProtocol = location.protocol === 'file:';
 
 function getRuntimeBaseHref() {
   // Keep fetch paths portable for both repo-root serving and standalone root deployment.
-  const marker = '/iran_policy/standalone_website/';
+  const marker = '/election_fairness/standalone_website/';
   const { origin, pathname } = window.location;
   if (pathname.includes(marker)) {
     return new URL(marker, origin).toString();
@@ -1680,8 +1680,8 @@ function getRuntimeBaseHref() {
 }
 
 const DATA_BASE_HREF = getRuntimeBaseHref();
-const REPORT_DATA_URL = new URL('data/iran_policy_data.json', DATA_BASE_HREF).toString();
-const CROSSTABS_DATA_URL = new URL('data/iran_policy_crosstabs.json', DATA_BASE_HREF).toString();
+const REPORT_DATA_URL = new URL('data/election_fairness_data.json', DATA_BASE_HREF).toString();
+const CROSSTABS_DATA_URL = new URL('data/election_fairness_crosstabs.json', DATA_BASE_HREF).toString();
 
 async function loadJSON(url) {
   const resp = await fetch(url);
@@ -1842,7 +1842,7 @@ function normalizeCard(rawCard, fallbackQuestionId) {
   if (!rawCard || typeof rawCard !== 'object') return null;
 
   const questionIdRaw = firstValue(rawCard, ['question_id', 'questionId', 'id', 'key']);
-  const questionId = String(questionIdRaw || fallbackQuestionId || 'iran_policy');
+  const questionId = String(questionIdRaw || fallbackQuestionId || 'election_fairness');
   const questionLabel = firstValue(rawCard, ['question_label', 'questionLabel', 'label', 'title']) || 'Survey Question';
 
   const metricsSource = firstValue(rawCard, ['metrics', 'outcomes', 'options', 'responses', 'categories', 'modes']);
@@ -1899,7 +1899,7 @@ function normalizeCards(rawCards, fallbackQuestionId) {
     Object.entries(rawCards).forEach(([cardKey, rawCard]) => {
       const card = normalizeCard(rawCard, cardKey || fallbackQuestionId);
       if (!card) return;
-      out[card.question_id || cardKey || fallbackQuestionId || 'iran_policy'] = card;
+      out[card.question_id || cardKey || fallbackQuestionId || 'election_fairness'] = card;
     });
   }
   return out;
@@ -1930,7 +1930,7 @@ function normalizeDemographics(rawPayload, fallbackQuestionId) {
     if (Object.keys(cards).length === 0) {
       const card = normalizeCard(rawDim, fallbackQuestionId);
       if (card) {
-        cards = { [card.question_id || fallbackQuestionId || 'iran_policy']: card };
+        cards = { [card.question_id || fallbackQuestionId || 'election_fairness']: card };
       }
     }
     if (Object.keys(cards).length === 0) return;
@@ -2022,28 +2022,16 @@ function selectDefaultMetric(card, rawPayload, controls) {
   const metrics = asArrayLoose(card?.metrics);
   if (metrics.length === 0) return null;
 
-  const militaryMatch = matchMetric(metrics, [
-    'military_force',
-    'military force',
-    'use_military_force',
-    'use military force',
-    'the u s should use military force if necessary'
-  ]);
-  if (militaryMatch) return militaryMatch.id;
-
-  const orderedMatch = matchMetric(metrics, orderedOutcomeCandidates(rawPayload));
-  if (orderedMatch) {
-    console.warn('[VDH Iran] Military-force outcome not found; falling back to first declared outcome:', orderedMatch.id);
-    return orderedMatch.id;
+  const preferredMatch = matchMetric(metrics, orderedOutcomeCandidates(rawPayload));
+  if (preferredMatch) {
+    return preferredMatch.id;
   }
 
   const explicitMatch = matchMetric(metrics, [controls?.default_mode, card?.default_metric]);
   if (explicitMatch) {
-    console.warn('[VDH Iran] Falling back to explicit default metric:', explicitMatch.id);
     return explicitMatch.id;
   }
 
-  console.warn('[VDH Iran] Falling back to first available metric:', metrics[0].id);
   return metrics[0].id;
 }
 
@@ -2077,11 +2065,11 @@ function normalizeDemographicExplorer(rawPayload, questionId) {
   };
 }
 
-function buildIranReportData(rawPayload, fallbackPayload) {
+function buildElectionReportData(rawPayload, fallbackPayload) {
   const questionId = firstValue(rawPayload?.question || {}, ['id']) ||
     firstValue(asArrayLoose(rawPayload?.questions)[0] || {}, ['id']) ||
     firstValue(fallbackPayload?.question || {}, ['id']) ||
-    'iran_policy';
+    'election_fairness';
 
   const explorer = normalizeDemographicExplorer(rawPayload, questionId);
   const fallbackExplorer = normalizeDemographicExplorer(fallbackPayload, questionId);
@@ -2099,7 +2087,7 @@ function buildIranReportData(rawPayload, fallbackPayload) {
     questionResults: rawPayload?.questionResults || fallbackPayload.questionResults,
     topline:         rawPayload?.topline         || fallbackPayload.topline,
     demographic_controls: controls,
-    demographics: demographics,
+    demographics,
     partyMilitary:   rawPayload?.partyMilitary   || fallbackPayload.partyMilitary,
     raceMilitary:    rawPayload?.raceMilitary    || fallbackPayload.raceMilitary,
     genderMilitary:  rawPayload?.genderMilitary  || fallbackPayload.genderMilitary,
@@ -2118,12 +2106,12 @@ async function loadData() {
   // Attempt to load report data JSON
   try {
     const json = await loadJSON(REPORT_DATA_URL);
-    reportData = buildIranReportData(json, FALLBACK_REPORT);
+    reportData = buildElectionReportData(json, FALLBACK_REPORT);
     stateMilitary = reportData.stateMilitary || FALLBACK_REPORT.stateMilitary;
     dataSource = 'json';
     console.log('[VDH] Report data loaded from JSON.');
   } catch (err) {
-    reportData    = buildIranReportData(FALLBACK_REPORT, FALLBACK_REPORT);
+    reportData    = buildElectionReportData(FALLBACK_REPORT, FALLBACK_REPORT);
     stateMilitary = reportData.stateMilitary || FALLBACK_REPORT.stateMilitary;
     dataSource    = 'fallback';
     console.warn('[VDH] Report JSON fetch failed, using embedded fallback.', err);
@@ -2302,31 +2290,6 @@ function renderBarsForMetric(container, rows, metric) {
   });
 }
 
-function getDemographicQuestionId() {
-  return reportData?.question?.id ||
-    reportData?.demographic_controls?.default_question ||
-    'iran_policy';
-}
-
-function getDemographicCard(dim, questionId) {
-  if (!dim?.cards || typeof dim.cards !== 'object') return null;
-  if (questionId && dim.cards[questionId]) return dim.cards[questionId];
-  const byQuestionId = Object.values(dim.cards).find((card) => card?.question_id === questionId);
-  return byQuestionId || Object.values(dim.cards)[0] || null;
-}
-
-function populateModeOptions(modeSel, cardData, preferredMetricId) {
-  const metrics = toArray(cardData?.metrics);
-  modeSel.innerHTML = '';
-  metrics.forEach((metric) => {
-    modeSel.appendChild(new Option(metric.label, metric.id));
-  });
-  if (metrics.length === 0) return null;
-  const selected = metrics.find((metric) => metric.id === preferredMetricId) || metrics[0];
-  modeSel.value = selected.id;
-  return selected.id;
-}
-
 function initDemographics() {
   const demoSel = document.getElementById('demoMainDemographic');
   const modeSel = document.getElementById('demoMainMode');
@@ -2340,32 +2303,37 @@ function initDemographics() {
   }
 
   const controls = reportData?.demographic_controls || {};
-  const allOptions = toArray(controls.options).filter((opt) => dims.some((dim) => dim.id === opt.id));
-  const demoOptions = allOptions.length > 0
-    ? allOptions
-    : dims.map((dim) => ({ id: dim.id, label: dim.label }));
-  const defaultDemographic = demoOptions.some((opt) => opt.id === controls.default_demographic)
-    ? controls.default_demographic
-    : demoOptions[0]?.id || dims[0]?.id;
-  const questionId = getDemographicQuestionId();
-  let preferredMetricId = controls.default_mode || null;
+  const demoOptions = toArray(controls.options);
+  const defaultDemographic = selectDefaultDemographic(dims, controls);
 
   demoSel.innerHTML = '';
-  demoOptions.forEach((opt) => {
+  const mergedOptions = demoOptions.length > 0 ? demoOptions : dims.map((d) => ({ id: d.id, label: d.label }));
+  mergedOptions.forEach((opt) => {
     demoSel.appendChild(new Option(opt.label, opt.id));
   });
-  demoSel.value = defaultDemographic;
+  const defaultExists = mergedOptions.some((opt) => opt.id === defaultDemographic);
+  demoSel.value = defaultExists ? defaultDemographic : (mergedOptions[0]?.id || dims[0]?.id || '');
 
-  const render = (refreshMode = false) => {
+  const firstDim = dims.find((d) => d.id === demoSel.value) || dims[0];
+  const firstCard = firstDim?.cards?.election_fairness;
+  const metrics = toArray(firstCard?.metrics);
+  const requestedMode = firstCard?.default_metric || controls.default_mode;
+  const defaultMode = metrics.some((metric) => metric.id === requestedMode)
+    ? requestedMode
+    : metrics[0]?.id;
+
+  modeSel.innerHTML = '';
+  metrics.forEach((m) => {
+    modeSel.appendChild(new Option(m.label, m.id));
+  });
+  modeSel.value = defaultMode;
+
+  const render = () => {
     const dim = dims.find((d) => d.id === demoSel.value) || dims[0];
-    const cardData = getDemographicCard(dim, questionId);
+    const cardData = dim?.cards?.election_fairness;
     if (!cardData) {
       display.innerHTML = '<div class="xt-empty-state">No data for this demographic.</div>';
       return;
-    }
-    const cardMetrics = toArray(cardData.metrics);
-    if (refreshMode || !cardMetrics.some((metric) => metric.id === modeSel.value)) {
-      preferredMetricId = populateModeOptions(modeSel, cardData, preferredMetricId || cardData.default_metric);
     }
     const metricId = modeSel.value;
     const metric = toArray(cardData.metrics).find((m) => m.id === metricId) || cardData.metrics?.[0];
@@ -2386,12 +2354,9 @@ function initDemographics() {
     renderBarsForMetric(rowsWrap, toArray(cardData.rows), metric);
   };
 
-  demoSel.addEventListener('change', () => render(true));
-  modeSel.addEventListener('change', () => {
-    preferredMetricId = modeSel.value;
-    render(false);
-  });
-  render(true);
+  demoSel.addEventListener('change', render);
+  modeSel.addEventListener('change', render);
+  render();
 }
 
 /* ============================================================
@@ -2765,22 +2730,22 @@ function initCrosstabs() {
             + '<code style="background:var(--surface-alt);padding:0.3rem 0.6rem;border-radius:4px;font-size:0.82rem;">'
             + 'cd &lt;repo_root&gt; && python3 -m http.server 8000'
             + '</code><br><br>'
-            + 'Then open <code>http://localhost:8000/iran_policy/standalone_website/</code>';
+            + 'Then open <code>http://localhost:8000/election_fairness/standalone_website/</code>';
       } else if (errType === '404') {
         msg = '<strong>Crosstabs data file not found.</strong><br>'
-            + 'Expected: <code>data/iran_policy_crosstabs.json</code><br>'
-            + 'Generate it with: <code>Rscript --vanilla iran_policy/R/build_crosstabs_data.R</code>';
+            + 'Expected: <code>data/election_fairness_crosstabs.json</code><br>'
+            + 'Generate it with: <code>Rscript --vanilla election_fairness/R/build_crosstabs_data.R</code>';
       } else if (errType === 'parse') {
         msg = '<strong>Crosstabs JSON failed to parse.</strong><br>'
-            + 'The file <code>data/iran_policy_crosstabs.json</code> exists but contains invalid JSON.<br>'
-            + 'Regenerate with: <code>Rscript --vanilla iran_policy/R/build_crosstabs_data.R</code>';
+            + 'The file <code>data/election_fairness_crosstabs.json</code> exists but contains invalid JSON.<br>'
+            + 'Regenerate with: <code>Rscript --vanilla election_fairness/R/build_crosstabs_data.R</code>';
       } else if (errType === 'cors' || errType === 'network') {
         msg = '<strong>Could not fetch crosstabs data.</strong><br>'
-            + 'A network or CORS error prevented loading <code>data/iran_policy_crosstabs.json</code>.<br>'
+            + 'A network or CORS error prevented loading <code>data/election_fairness_crosstabs.json</code>.<br>'
             + 'Ensure the file exists and the page is served over HTTP.';
       } else {
         msg = '<strong>Crosstabs data could not be loaded.</strong><br>'
-            + 'Expected: <code>data/iran_policy_crosstabs.json</code><br>'
+            + 'Expected: <code>data/election_fairness_crosstabs.json</code><br>'
             + 'Check the browser console for details.';
       }
       display.innerHTML = '<div class="xt-empty-state">' + msg + '</div>';

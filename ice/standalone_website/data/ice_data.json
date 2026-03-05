@@ -1,10 +1,12 @@
 {
   "meta": {
     "source": "Vantage Data House",
-    "title": "Americans Views on ICE",
+    "title": "U.S. Views on ICE Enforcement and Investigations",
+    "subtitle": null,
     "site": "https://www.vantagedatahouse.com",
     "sample": "N = 1,602 respondents",
-    "fieldDates": "February 25-27, 2026"
+    "fieldDates": "February 25-27, 2026",
+    "methodLabel": "Poststratified ML estimates"
   },
   "questions": [
     {
@@ -15,25 +17,25 @@
         {
           "id": "strict_enforced",
           "label": "Immigration laws should be strictly enforced, even if that means more deportations and detentions",
-          "value": 27.4,
+          "value": 27.6,
           "color": "#c46525"
         },
         {
           "id": "limits_oversight",
           "label": "Immigration laws should be enforced, but with clearer limits and oversight to prevent abuse",
-          "value": 37.7,
+          "value": 37.8,
           "color": "#1a6b73"
         },
         {
           "id": "scaled_back",
           "label": "Current immigration enforcement does more harm than good and should be scaled back",
-          "value": 28.9,
+          "value": 28.8,
           "color": "#5a7d9a"
         },
         {
           "id": "unsure",
           "label": "Unsure",
-          "value": 6,
+          "value": 5.8,
           "color": "#a8b5c4"
         }
       ]
@@ -46,31 +48,31 @@
         {
           "id": "very_confident",
           "label": "Very confident",
-          "value": 21.8,
+          "value": 22.1,
           "color": "#1a6b73"
         },
         {
           "id": "somewhat_confident",
           "label": "Somewhat confident",
-          "value": 23.6,
+          "value": 23.4,
           "color": "#2f7f8a"
         },
         {
           "id": "not_very_confident",
           "label": "Not very confident",
-          "value": 17.4,
+          "value": 17.6,
           "color": "#8a6f52"
         },
         {
           "id": "not_confident_at_all",
           "label": "Not confident at all",
-          "value": 31.8,
+          "value": 31.3,
           "color": "#c46525"
         },
         {
           "id": "unsure_not_familiar",
           "label": "Unsure or not familiar with this event",
-          "value": 5.4,
+          "value": 5.6,
           "color": "#a8b5c4"
         }
       ]
@@ -78,6 +80,7 @@
   ],
   "demographic_controls": {
     "default_demographic": "party",
+    "default_mode": "confident_norm",
     "options": [
       {
         "id": "party",
@@ -149,19 +152,19 @@
               "level_id": "R",
               "level_label": "Republicans",
               "values": {
-                "strict_enforced": 46.7,
-                "limits_oversight": 31.4,
-                "scaled_back": 16.8,
-                "unsure": 5
+                "strict_enforced": 45.9,
+                "limits_oversight": 31.8,
+                "scaled_back": 17.5,
+                "unsure": 4.8
               }
             },
             {
               "level_id": "O",
               "level_label": "Independents / Other",
               "values": {
-                "strict_enforced": 20.7,
-                "limits_oversight": 44,
-                "scaled_back": 28.5,
+                "strict_enforced": 22.2,
+                "limits_oversight": 43.5,
+                "scaled_back": 27.5,
                 "unsure": 6.8
               }
             },
@@ -169,10 +172,10 @@
               "level_id": "D",
               "level_label": "Democrats",
               "values": {
-                "strict_enforced": 12.2,
-                "limits_oversight": 40.1,
+                "strict_enforced": 12.6,
+                "limits_oversight": 40,
                 "scaled_back": 41.3,
-                "unsure": 6.3
+                "unsure": 6.1
               }
             }
           ]
@@ -223,39 +226,39 @@
               "level_id": "R",
               "level_label": "Republicans",
               "values": {
-                "confident_norm": 72.4,
-                "not_confident_norm": 27.6,
-                "very_confident": 36.4,
-                "somewhat_confident": 31.9,
-                "not_very_confident": 13.9,
-                "not_confident_at_all": 12.2,
-                "unsure_not_familiar": 5.6
+                "confident_norm": 73.1,
+                "not_confident_norm": 26.9,
+                "very_confident": 36.5,
+                "somewhat_confident": 32.6,
+                "not_very_confident": 14.1,
+                "not_confident_at_all": 11.3,
+                "unsure_not_familiar": 5.5
               }
             },
             {
               "level_id": "O",
               "level_label": "Independents / Other",
               "values": {
-                "confident_norm": 37.7,
-                "not_confident_norm": 62.3,
-                "very_confident": 12.9,
-                "somewhat_confident": 22.7,
-                "not_very_confident": 21.4,
-                "not_confident_at_all": 37.4,
-                "unsure_not_familiar": 5.7
+                "confident_norm": 38.2,
+                "not_confident_norm": 61.8,
+                "very_confident": 13.5,
+                "somewhat_confident": 22.3,
+                "not_very_confident": 22,
+                "not_confident_at_all": 36,
+                "unsure_not_familiar": 6.1
               }
             },
             {
               "level_id": "D",
               "level_label": "Democrats",
               "values": {
-                "confident_norm": 30.1,
-                "not_confident_norm": 69.9,
-                "very_confident": 12.8,
-                "somewhat_confident": 15.8,
-                "not_very_confident": 18.2,
-                "not_confident_at_all": 48.1,
-                "unsure_not_familiar": 5.1
+                "confident_norm": 29.3,
+                "not_confident_norm": 70.7,
+                "very_confident": 13.1,
+                "somewhat_confident": 14.6,
+                "not_very_confident": 18.3,
+                "not_confident_at_all": 48.6,
+                "unsure_not_familiar": 5.3
               }
             }
           ]
@@ -298,19 +301,19 @@
               "level_label": "Male",
               "values": {
                 "strict_enforced": 29,
-                "limits_oversight": 36.9,
+                "limits_oversight": 37,
                 "scaled_back": 28.3,
-                "unsure": 5.8
+                "unsure": 5.7
               }
             },
             {
               "level_id": "Female",
               "level_label": "Female",
               "values": {
-                "strict_enforced": 26.1,
-                "limits_oversight": 38.5,
+                "strict_enforced": 26.4,
+                "limits_oversight": 38.4,
                 "scaled_back": 29.3,
-                "unsure": 6.1
+                "unsure": 5.9
               }
             }
           ]
@@ -363,23 +366,23 @@
               "values": {
                 "confident_norm": 52,
                 "not_confident_norm": 48,
-                "very_confident": 25.3,
-                "somewhat_confident": 24,
-                "not_very_confident": 16.3,
-                "not_confident_at_all": 29.3,
-                "unsure_not_familiar": 5.1
+                "very_confident": 25.6,
+                "somewhat_confident": 23.6,
+                "not_very_confident": 16.7,
+                "not_confident_at_all": 28.7,
+                "unsure_not_familiar": 5.4
               }
             },
             {
               "level_id": "Female",
               "level_label": "Female",
               "values": {
-                "confident_norm": 44.5,
-                "not_confident_norm": 55.5,
-                "very_confident": 18.7,
-                "somewhat_confident": 23.3,
-                "not_very_confident": 18.3,
-                "not_confident_at_all": 34,
+                "confident_norm": 44.8,
+                "not_confident_norm": 55.2,
+                "very_confident": 19.1,
+                "somewhat_confident": 23.2,
+                "not_very_confident": 18.4,
+                "not_confident_at_all": 33.6,
                 "unsure_not_familiar": 5.7
               }
             }
@@ -422,40 +425,40 @@
               "level_id": "Gen Z",
               "level_label": "Gen Z",
               "values": {
-                "strict_enforced": 21.7,
-                "limits_oversight": 39.7,
-                "scaled_back": 32.3,
-                "unsure": 6.3
+                "strict_enforced": 22.6,
+                "limits_oversight": 39.3,
+                "scaled_back": 32,
+                "unsure": 6.1
               }
             },
             {
               "level_id": "Millennials",
               "level_label": "Millennials",
               "values": {
-                "strict_enforced": 22.6,
-                "limits_oversight": 39.4,
-                "scaled_back": 31.7,
-                "unsure": 6.3
+                "strict_enforced": 23.4,
+                "limits_oversight": 39,
+                "scaled_back": 31.5,
+                "unsure": 6.1
               }
             },
             {
               "level_id": "Gen X",
               "level_label": "Gen X",
               "values": {
-                "strict_enforced": 24.9,
-                "limits_oversight": 38.9,
-                "scaled_back": 30,
-                "unsure": 6.2
+                "strict_enforced": 25.9,
+                "limits_oversight": 38.4,
+                "scaled_back": 29.8,
+                "unsure": 5.9
               }
             },
             {
               "level_id": "Baby Boomers",
               "level_label": "Baby Boomers",
               "values": {
-                "strict_enforced": 34.3,
-                "limits_oversight": 35.2,
-                "scaled_back": 25,
-                "unsure": 5.5
+                "strict_enforced": 33.3,
+                "limits_oversight": 35.9,
+                "scaled_back": 25.4,
+                "unsure": 5.4
               }
             }
           ]
@@ -508,11 +511,11 @@
               "values": {
                 "confident_norm": 46.1,
                 "not_confident_norm": 53.9,
-                "very_confident": 19.4,
-                "somewhat_confident": 24.2,
-                "not_very_confident": 18.5,
-                "not_confident_at_all": 32.5,
-                "unsure_not_familiar": 5.5
+                "very_confident": 19.5,
+                "somewhat_confident": 24,
+                "not_very_confident": 18.8,
+                "not_confident_at_all": 32.1,
+                "unsure_not_familiar": 5.6
               }
             },
             {
@@ -521,24 +524,24 @@
               "values": {
                 "confident_norm": 50.7,
                 "not_confident_norm": 49.3,
-                "very_confident": 21,
-                "somewhat_confident": 26.9,
-                "not_very_confident": 18.8,
-                "not_confident_at_all": 27.8,
-                "unsure_not_familiar": 5.4
+                "very_confident": 21.4,
+                "somewhat_confident": 26.5,
+                "not_very_confident": 18.9,
+                "not_confident_at_all": 27.7,
+                "unsure_not_familiar": 5.6
               }
             },
             {
               "level_id": "Gen X",
               "level_label": "Gen X",
               "values": {
-                "confident_norm": 47.8,
-                "not_confident_norm": 52.2,
-                "very_confident": 20.8,
-                "somewhat_confident": 24.1,
-                "not_very_confident": 17.4,
-                "not_confident_at_all": 31.7,
-                "unsure_not_familiar": 6
+                "confident_norm": 48.2,
+                "not_confident_norm": 51.8,
+                "very_confident": 21.7,
+                "somewhat_confident": 23.3,
+                "not_very_confident": 17.5,
+                "not_confident_at_all": 30.8,
+                "unsure_not_familiar": 6.8
               }
             },
             {
@@ -547,11 +550,11 @@
               "values": {
                 "confident_norm": 47.2,
                 "not_confident_norm": 52.8,
-                "very_confident": 23.9,
-                "somewhat_confident": 20.9,
-                "not_very_confident": 16,
-                "not_confident_at_all": 34.2,
-                "unsure_not_familiar": 5
+                "very_confident": 23.8,
+                "somewhat_confident": 21.2,
+                "not_very_confident": 16.5,
+                "not_confident_at_all": 33.8,
+                "unsure_not_familiar": 4.7
               }
             }
           ]
@@ -593,39 +596,39 @@
               "level_id": "White",
               "level_label": "White",
               "values": {
-                "strict_enforced": 30.5,
-                "limits_oversight": 36.9,
-                "scaled_back": 26.8,
-                "unsure": 5.8
+                "strict_enforced": 30.6,
+                "limits_oversight": 37,
+                "scaled_back": 26.7,
+                "unsure": 5.7
               }
             },
             {
               "level_id": "Black",
               "level_label": "Black",
               "values": {
-                "strict_enforced": 13.5,
+                "strict_enforced": 13.6,
                 "limits_oversight": 40.1,
-                "scaled_back": 39.6,
-                "unsure": 6.7
+                "scaled_back": 39.8,
+                "unsure": 6.4
               }
             },
             {
               "level_id": "Hispanic",
               "level_label": "Hispanic",
               "values": {
-                "strict_enforced": 22.1,
-                "limits_oversight": 39.7,
-                "scaled_back": 32,
-                "unsure": 6.2
+                "strict_enforced": 22.3,
+                "limits_oversight": 39.5,
+                "scaled_back": 32.2,
+                "unsure": 6
               }
             },
             {
               "level_id": "Other",
               "level_label": "Other",
               "values": {
-                "strict_enforced": 23.5,
-                "limits_oversight": 40.5,
-                "scaled_back": 29.9,
+                "strict_enforced": 24.3,
+                "limits_oversight": 39.4,
+                "scaled_back": 30.3,
                 "unsure": 6
               }
             }
@@ -677,52 +680,52 @@
               "level_id": "White",
               "level_label": "White",
               "values": {
-                "confident_norm": 51.2,
-                "not_confident_norm": 48.8,
-                "very_confident": 23.7,
-                "somewhat_confident": 24.8,
-                "not_very_confident": 17.1,
-                "not_confident_at_all": 29,
-                "unsure_not_familiar": 5.5
+                "confident_norm": 51.6,
+                "not_confident_norm": 48.4,
+                "very_confident": 24.1,
+                "somewhat_confident": 24.5,
+                "not_very_confident": 17.3,
+                "not_confident_at_all": 28.4,
+                "unsure_not_familiar": 5.6
               }
             },
             {
               "level_id": "Black",
               "level_label": "Black",
               "values": {
-                "confident_norm": 32.8,
-                "not_confident_norm": 67.2,
-                "very_confident": 12.3,
+                "confident_norm": 33,
+                "not_confident_norm": 67,
+                "very_confident": 12.4,
                 "somewhat_confident": 18.8,
-                "not_very_confident": 18.8,
-                "not_confident_at_all": 45,
-                "unsure_not_familiar": 5.1
+                "not_very_confident": 18.5,
+                "not_confident_at_all": 44.9,
+                "unsure_not_familiar": 5.4
               }
             },
             {
               "level_id": "Hispanic",
               "level_label": "Hispanic",
               "values": {
-                "confident_norm": 42.8,
-                "not_confident_norm": 57.2,
+                "confident_norm": 42.2,
+                "not_confident_norm": 57.8,
                 "very_confident": 19.2,
-                "somewhat_confident": 21.4,
-                "not_very_confident": 17.3,
-                "not_confident_at_all": 36.9,
-                "unsure_not_familiar": 5.2
+                "somewhat_confident": 20.6,
+                "not_very_confident": 17.6,
+                "not_confident_at_all": 37.1,
+                "unsure_not_familiar": 5.4
               }
             },
             {
               "level_id": "Other",
               "level_label": "Other",
               "values": {
-                "confident_norm": 44.3,
-                "not_confident_norm": 55.7,
-                "very_confident": 19.6,
-                "somewhat_confident": 22.3,
-                "not_very_confident": 18.3,
-                "not_confident_at_all": 34.5,
-                "unsure_not_familiar": 5.3
+                "confident_norm": 43.4,
+                "not_confident_norm": 56.6,
+                "very_confident": 19.1,
+                "somewhat_confident": 21.8,
+                "not_very_confident": 20,
+                "not_confident_at_all": 33.4,
+                "unsure_not_familiar": 5.7
               }
             }
           ]
@@ -764,30 +767,30 @@
               "level_id": "No college",
               "level_label": "No college",
               "values": {
-                "strict_enforced": 26.7,
-                "limits_oversight": 37.3,
-                "scaled_back": 29.2,
-                "unsure": 6.8
+                "strict_enforced": 26.8,
+                "limits_oversight": 37.5,
+                "scaled_back": 29.1,
+                "unsure": 6.6
               }
             },
             {
               "level_id": "College completed",
               "level_label": "College completed",
               "values": {
-                "strict_enforced": 27.9,
-                "limits_oversight": 38.2,
+                "strict_enforced": 28.2,
+                "limits_oversight": 38,
                 "scaled_back": 28.7,
-                "unsure": 5.2
+                "unsure": 5.1
               }
             },
             {
               "level_id": "Graduate/professional degree",
               "level_label": "Graduate/professional degree",
               "values": {
-                "strict_enforced": 27.5,
-                "limits_oversight": 37.3,
-                "scaled_back": 28.5,
-                "unsure": 6.7
+                "strict_enforced": 27.6,
+                "limits_oversight": 37.4,
+                "scaled_back": 28.6,
+                "unsure": 6.5
               }
             }
           ]
@@ -838,39 +841,39 @@
               "level_id": "No college",
               "level_label": "No college",
               "values": {
-                "confident_norm": 45.6,
-                "not_confident_norm": 54.4,
-                "very_confident": 20.8,
-                "somewhat_confident": 21.9,
-                "not_very_confident": 18.8,
-                "not_confident_at_all": 32.2,
-                "unsure_not_familiar": 6.3
+                "confident_norm": 46.3,
+                "not_confident_norm": 53.7,
+                "very_confident": 21,
+                "somewhat_confident": 22.3,
+                "not_very_confident": 18.4,
+                "not_confident_at_all": 31.8,
+                "unsure_not_familiar": 6.5
               }
             },
             {
               "level_id": "College completed",
               "level_label": "College completed",
               "values": {
-                "confident_norm": 49.9,
-                "not_confident_norm": 50.1,
-                "very_confident": 22.5,
-                "somewhat_confident": 25.1,
-                "not_very_confident": 16,
-                "not_confident_at_all": 31.8,
-                "unsure_not_familiar": 4.6
+                "confident_norm": 49.5,
+                "not_confident_norm": 50.5,
+                "very_confident": 23,
+                "somewhat_confident": 24.2,
+                "not_very_confident": 16.9,
+                "not_confident_at_all": 31.2,
+                "unsure_not_familiar": 4.7
               }
             },
             {
               "level_id": "Graduate/professional degree",
               "level_label": "Graduate/professional degree",
               "values": {
-                "confident_norm": 47.1,
-                "not_confident_norm": 52.9,
-                "very_confident": 21.5,
-                "somewhat_confident": 22.6,
-                "not_very_confident": 18.9,
-                "not_confident_at_all": 30.7,
-                "unsure_not_familiar": 6.3
+                "confident_norm": 47.8,
+                "not_confident_norm": 52.2,
+                "very_confident": 21.7,
+                "somewhat_confident": 23,
+                "not_very_confident": 18.5,
+                "not_confident_at_all": 30.4,
+                "unsure_not_familiar": 6.6
               }
             }
           ]
@@ -913,29 +916,29 @@
               "level_label": "Rural",
               "values": {
                 "strict_enforced": 31.6,
-                "limits_oversight": 36.6,
+                "limits_oversight": 36.7,
                 "scaled_back": 26,
-                "unsure": 5.8
+                "unsure": 5.6
               }
             },
             {
               "level_id": "Suburban",
               "level_label": "Suburban",
               "values": {
-                "strict_enforced": 28.2,
+                "strict_enforced": 28.4,
                 "limits_oversight": 37.5,
                 "scaled_back": 28.3,
-                "unsure": 6
+                "unsure": 5.8
               }
             },
             {
               "level_id": "Urban",
               "level_label": "Urban",
               "values": {
-                "strict_enforced": 22.8,
-                "limits_oversight": 39.1,
-                "scaled_back": 32,
-                "unsure": 6.1
+                "strict_enforced": 23.2,
+                "limits_oversight": 39,
+                "scaled_back": 31.9,
+                "unsure": 6
               }
             }
           ]
@@ -986,12 +989,12 @@
               "level_id": "Rural",
               "level_label": "Rural",
               "values": {
-                "confident_norm": 51.9,
-                "not_confident_norm": 48.1,
-                "very_confident": 24.2,
+                "confident_norm": 52.5,
+                "not_confident_norm": 47.5,
+                "very_confident": 24.8,
                 "somewhat_confident": 24.7,
-                "not_very_confident": 16.9,
-                "not_confident_at_all": 28.5,
+                "not_very_confident": 17.2,
+                "not_confident_at_all": 27.5,
                 "unsure_not_familiar": 5.7
               }
             },
@@ -1001,24 +1004,24 @@
               "values": {
                 "confident_norm": 49.3,
                 "not_confident_norm": 50.7,
-                "very_confident": 22.2,
-                "somewhat_confident": 24.3,
-                "not_very_confident": 17.1,
-                "not_confident_at_all": 30.8,
-                "unsure_not_familiar": 5.5
+                "very_confident": 22.4,
+                "somewhat_confident": 24.2,
+                "not_very_confident": 17.2,
+                "not_confident_at_all": 30.6,
+                "unsure_not_familiar": 5.6
               }
             },
             {
               "level_id": "Urban",
               "level_label": "Urban",
               "values": {
-                "confident_norm": 43.2,
-                "not_confident_norm": 56.8,
-                "very_confident": 19.2,
-                "somewhat_confident": 21.8,
-                "not_very_confident": 18.1,
-                "not_confident_at_all": 35.9,
-                "unsure_not_familiar": 5.1
+                "confident_norm": 43,
+                "not_confident_norm": 57,
+                "very_confident": 19.4,
+                "somewhat_confident": 21.2,
+                "not_very_confident": 18.5,
+                "not_confident_at_all": 35.5,
+                "unsure_not_familiar": 5.4
               }
             }
           ]
@@ -1060,40 +1063,40 @@
               "level_id": "Poor (less than 35k)",
               "level_label": "< $35k",
               "values": {
-                "strict_enforced": 27.1,
-                "limits_oversight": 37,
-                "scaled_back": 29.8,
-                "unsure": 6.1
+                "strict_enforced": 27.3,
+                "limits_oversight": 37.3,
+                "scaled_back": 29.2,
+                "unsure": 6.3
               }
             },
             {
               "level_id": "Below median (35k to less than 75k)",
               "level_label": "$35k-$75k",
               "values": {
-                "strict_enforced": 27.7,
-                "limits_oversight": 37,
-                "scaled_back": 29.5,
-                "unsure": 5.8
+                "strict_enforced": 28,
+                "limits_oversight": 37.3,
+                "scaled_back": 29.1,
+                "unsure": 5.7
               }
             },
             {
               "level_id": "Above median (75k to less than 125k)",
               "level_label": "$75k-$125k",
               "values": {
-                "strict_enforced": 27.4,
-                "limits_oversight": 37.2,
-                "scaled_back": 29.7,
-                "unsure": 5.7
+                "strict_enforced": 27.8,
+                "limits_oversight": 37.6,
+                "scaled_back": 29.2,
+                "unsure": 5.4
               }
             },
             {
               "level_id": "Rich (more than 125k)",
               "level_label": "> $125k",
               "values": {
-                "strict_enforced": 27.3,
-                "limits_oversight": 38.5,
-                "scaled_back": 28,
-                "unsure": 6.2
+                "strict_enforced": 27.4,
+                "limits_oversight": 38.2,
+                "scaled_back": 28.5,
+                "unsure": 5.9
               }
             }
           ]
@@ -1144,52 +1147,52 @@
               "level_id": "Poor (less than 35k)",
               "level_label": "< $35k",
               "values": {
-                "confident_norm": 46,
-                "not_confident_norm": 54,
+                "confident_norm": 45.6,
+                "not_confident_norm": 54.4,
                 "very_confident": 21.6,
-                "somewhat_confident": 21.9,
-                "not_very_confident": 19,
-                "not_confident_at_all": 32.1,
-                "unsure_not_familiar": 5.4
+                "somewhat_confident": 21.4,
+                "not_very_confident": 19.6,
+                "not_confident_at_all": 31.7,
+                "unsure_not_familiar": 5.6
               }
             },
             {
               "level_id": "Below median (35k to less than 75k)",
               "level_label": "$35k-$75k",
               "values": {
-                "confident_norm": 45.9,
-                "not_confident_norm": 54.1,
-                "very_confident": 21.5,
+                "confident_norm": 46.1,
+                "not_confident_norm": 53.9,
+                "very_confident": 21.6,
                 "somewhat_confident": 22,
-                "not_very_confident": 17.5,
-                "not_confident_at_all": 33.6,
-                "unsure_not_familiar": 5.4
+                "not_very_confident": 17.9,
+                "not_confident_at_all": 33,
+                "unsure_not_familiar": 5.5
               }
             },
             {
               "level_id": "Above median (75k to less than 125k)",
               "level_label": "$75k-$125k",
               "values": {
-                "confident_norm": 48.9,
-                "not_confident_norm": 51.1,
-                "very_confident": 22.4,
-                "somewhat_confident": 23.8,
-                "not_very_confident": 15.1,
-                "not_confident_at_all": 33.1,
-                "unsure_not_familiar": 5.6
+                "confident_norm": 48.1,
+                "not_confident_norm": 51.9,
+                "very_confident": 22.6,
+                "somewhat_confident": 22.7,
+                "not_very_confident": 16.4,
+                "not_confident_at_all": 32.5,
+                "unsure_not_familiar": 5.8
               }
             },
             {
               "level_id": "Rich (more than 125k)",
               "level_label": "> $125k",
               "values": {
-                "confident_norm": 49.1,
-                "not_confident_norm": 50.9,
-                "very_confident": 21.8,
+                "confident_norm": 49.7,
+                "not_confident_norm": 50.3,
+                "very_confident": 22.2,
                 "somewhat_confident": 24.7,
-                "not_very_confident": 18,
-                "not_confident_at_all": 30.2,
-                "unsure_not_familiar": 5.3
+                "not_very_confident": 17.7,
+                "not_confident_at_all": 29.9,
+                "unsure_not_familiar": 5.5
               }
             }
           ]
@@ -1232,39 +1235,39 @@
               "level_label": "Protestant",
               "values": {
                 "strict_enforced": 29.3,
-                "limits_oversight": 36.8,
-                "scaled_back": 28.1,
-                "unsure": 5.9
+                "limits_oversight": 37,
+                "scaled_back": 27.9,
+                "unsure": 5.7
               }
             },
             {
               "level_id": "Catholic",
               "level_label": "Catholic",
               "values": {
-                "strict_enforced": 26.7,
+                "strict_enforced": 26.9,
                 "limits_oversight": 38.3,
                 "scaled_back": 29,
-                "unsure": 6
+                "unsure": 5.8
               }
             },
             {
               "level_id": "Other religion",
               "level_label": "Other religion",
               "values": {
-                "strict_enforced": 26,
-                "limits_oversight": 39.4,
-                "scaled_back": 28.5,
-                "unsure": 6.1
+                "strict_enforced": 26.2,
+                "limits_oversight": 39.1,
+                "scaled_back": 28.7,
+                "unsure": 5.9
               }
             },
             {
               "level_id": "Not religious",
               "level_label": "Not religious",
               "values": {
-                "strict_enforced": 25.4,
-                "limits_oversight": 38.5,
-                "scaled_back": 30.1,
-                "unsure": 6.1
+                "strict_enforced": 25.7,
+                "limits_oversight": 38.2,
+                "scaled_back": 30.2,
+                "unsure": 5.9
               }
             }
           ]
@@ -1315,52 +1318,52 @@
               "level_id": "Protestant",
               "level_label": "Protestant",
               "values": {
-                "confident_norm": 51.8,
-                "not_confident_norm": 48.2,
-                "very_confident": 24.7,
-                "somewhat_confident": 24.2,
-                "not_very_confident": 17.8,
-                "not_confident_at_all": 27.8,
-                "unsure_not_familiar": 5.4
+                "confident_norm": 52,
+                "not_confident_norm": 48,
+                "very_confident": 24.9,
+                "somewhat_confident": 24.3,
+                "not_very_confident": 17.9,
+                "not_confident_at_all": 27.5,
+                "unsure_not_familiar": 5.5
               }
             },
             {
               "level_id": "Catholic",
               "level_label": "Catholic",
               "values": {
-                "confident_norm": 51,
-                "not_confident_norm": 49,
-                "very_confident": 23.2,
-                "somewhat_confident": 25.1,
-                "not_very_confident": 17.2,
-                "not_confident_at_all": 29.1,
-                "unsure_not_familiar": 5.5
+                "confident_norm": 50.6,
+                "not_confident_norm": 49.4,
+                "very_confident": 23.7,
+                "somewhat_confident": 24.1,
+                "not_very_confident": 17.6,
+                "not_confident_at_all": 29,
+                "unsure_not_familiar": 5.6
               }
             },
             {
               "level_id": "Other religion",
               "level_label": "Other religion",
               "values": {
-                "confident_norm": 53.2,
-                "not_confident_norm": 46.8,
-                "very_confident": 26.3,
-                "somewhat_confident": 24.1,
-                "not_very_confident": 17.1,
-                "not_confident_at_all": 27.2,
-                "unsure_not_familiar": 5.4
+                "confident_norm": 52.4,
+                "not_confident_norm": 47.6,
+                "very_confident": 26.5,
+                "somewhat_confident": 23,
+                "not_very_confident": 17.6,
+                "not_confident_at_all": 27.3,
+                "unsure_not_familiar": 5.5
               }
             },
             {
               "level_id": "Not religious",
               "level_label": "Not religious",
               "values": {
-                "confident_norm": 38.5,
-                "not_confident_norm": 61.5,
-                "very_confident": 14.9,
-                "somewhat_confident": 21.5,
-                "not_very_confident": 16.8,
-                "not_confident_at_all": 41.4,
-                "unsure_not_familiar": 5.4
+                "confident_norm": 39,
+                "not_confident_norm": 61,
+                "very_confident": 15.4,
+                "somewhat_confident": 21.4,
+                "not_very_confident": 17.3,
+                "not_confident_at_all": 40.3,
+                "unsure_not_familiar": 5.7
               }
             }
           ]
@@ -1368,6 +1371,458 @@
       }
     }
   ],
+  "archetypes": {
+    "default_question": "enforcement",
+    "questions": [
+      {
+        "id": "enforcement",
+        "label": "ICE enforcement",
+        "default_metric": "strict_enforced",
+        "metrics": [
+          {
+            "id": "strict_enforced",
+            "label": "Immigration laws should be strictly enforced, even if that means more deportations and detentions",
+            "color": "#c46525"
+          },
+          {
+            "id": "limits_oversight",
+            "label": "Immigration laws should be enforced, but with clearer limits and oversight to prevent abuse",
+            "color": "#1a6b73"
+          },
+          {
+            "id": "scaled_back",
+            "label": "Current immigration enforcement does more harm than good and should be scaled back",
+            "color": "#5a7d9a"
+          },
+          {
+            "id": "unsure",
+            "label": "Unsure",
+            "color": "#a8b5c4"
+          }
+        ],
+        "series": {
+          "strict_enforced": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 46.3
+            },
+            {
+              "label": "White Working-Class",
+              "value": 30.4
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 30.1
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 23.1
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 22.9
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 22.6
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 13.2
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 12.5
+            }
+          ],
+          "limits_oversight": [
+            {
+              "label": "Swing Moderates",
+              "value": 43.4
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 42
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 40.1
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 39.8
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 38.6
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 37.7
+            },
+            {
+              "label": "White Working-Class",
+              "value": 36.7
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 31.5
+            }
+          ],
+          "scaled_back": [
+            {
+              "label": "Gen Z Progressives",
+              "value": 41.6
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 40.2
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 31.7
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 28.5
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 27.3
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 26.8
+            },
+            {
+              "label": "White Working-Class",
+              "value": 26.5
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 17.3
+            }
+          ],
+          "unsure": [
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 6.7
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 6.7
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 6.6
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 6.5
+            },
+            {
+              "label": "White Working-Class",
+              "value": 6.4
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 6.2
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 5.4
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 4.8
+            }
+          ]
+        }
+      },
+      {
+        "id": "investigations",
+        "label": "ICE investigations",
+        "default_metric": "confident_norm",
+        "metrics": [
+          {
+            "id": "confident_norm",
+            "label": "Confident (normalized)",
+            "color": "#1a6b73"
+          },
+          {
+            "id": "not_confident_norm",
+            "label": "Not confident (normalized)",
+            "color": "#c46525"
+          },
+          {
+            "id": "very_confident",
+            "label": "Very confident",
+            "color": "#1a6b73"
+          },
+          {
+            "id": "somewhat_confident",
+            "label": "Somewhat confident",
+            "color": "#2f7f8a"
+          },
+          {
+            "id": "not_very_confident",
+            "label": "Not very confident",
+            "color": "#8a6f52"
+          },
+          {
+            "id": "not_confident_at_all",
+            "label": "Not confident at all",
+            "color": "#c46525"
+          },
+          {
+            "id": "unsure_not_familiar",
+            "label": "Unsure or not familiar with this event",
+            "color": "#a8b5c4"
+          }
+        ],
+        "series": {
+          "confident_norm": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 74.7
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 50.4
+            },
+            {
+              "label": "White Working-Class",
+              "value": 50.2
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 44.5
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 43.7
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 43.6
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 39.1
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 35.2
+            }
+          ],
+          "not_confident_norm": [
+            {
+              "label": "Gen Z Progressives",
+              "value": 64.8
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 60.9
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 56.4
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 56.3
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 55.5
+            },
+            {
+              "label": "White Working-Class",
+              "value": 49.8
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 49.6
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 25.3
+            }
+          ],
+          "very_confident": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 38.5
+            },
+            {
+              "label": "White Working-Class",
+              "value": 23.3
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 21.3
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 21.2
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 15.9
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 14.2
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 13.8
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 13.8
+            }
+          ],
+          "somewhat_confident": [
+            {
+              "label": "Evangelical Republicans",
+              "value": 32.3
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 27.3
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 26.5
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 25.2
+            },
+            {
+              "label": "White Working-Class",
+              "value": 23.6
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 22.9
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 20.5
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 19.1
+            }
+          ],
+          "not_very_confident": [
+            {
+              "label": "Swing Moderates",
+              "value": 22
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 21.6
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 19.6
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 19.5
+            },
+            {
+              "label": "White Working-Class",
+              "value": 18.1
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 17.5
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 17.5
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 14
+            }
+          ],
+          "not_confident_at_all": [
+            {
+              "label": "Gen Z Progressives",
+              "value": 41.5
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 35.2
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 34.5
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 33.7
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 31.4
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 29.4
+            },
+            {
+              "label": "White Working-Class",
+              "value": 28.4
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 9.9
+            }
+          ],
+          "unsure_not_familiar": [
+            {
+              "label": "White Working-Class",
+              "value": 6.6
+            },
+            {
+              "label": "Hispanic Working-Class Men",
+              "value": 6.3
+            },
+            {
+              "label": "Swing Moderates",
+              "value": 6.1
+            },
+            {
+              "label": "Disaffected Young Men",
+              "value": 5.9
+            },
+            {
+              "label": "Black Gen Z Men",
+              "value": 5.7
+            },
+            {
+              "label": "Gen Z Progressives",
+              "value": 5.7
+            },
+            {
+              "label": "Evangelical Republicans",
+              "value": 5.3
+            },
+            {
+              "label": "Soccer Moms",
+              "value": 5.3
+            }
+          ]
+        }
+      }
+    ]
+  },
   "state_ranking": {
     "default_question": "enforcement",
     "questions": [
@@ -1401,67 +1856,67 @@
           "strict_enforced": [
             {
               "state": "Wyoming",
-              "value": 39.5,
+              "value": 39.1,
               "rank": 1,
               "tier": "Top 10"
             },
             {
-              "state": "Idaho",
-              "value": 36,
+              "state": "Utah",
+              "value": 35.2,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Alabama",
-              "value": 34.9,
+              "state": "Idaho",
+              "value": 35.2,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "Utah",
-              "value": 34.7,
+              "state": "Alabama",
+              "value": 34.4,
               "rank": 4,
               "tier": "Top 10"
             },
             {
-              "state": "South Carolina",
-              "value": 33.8,
+              "state": "Oklahoma",
+              "value": 33.9,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "Oklahoma",
-              "value": 33.6,
+              "state": "Missouri",
+              "value": 33.5,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "Missouri",
-              "value": 32.9,
+              "state": "Nebraska",
+              "value": 33.2,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Nebraska",
-              "value": 32.5,
+              "state": "South Carolina",
+              "value": 33.2,
               "rank": 8,
               "tier": "Top 10"
             },
             {
               "state": "Kansas",
-              "value": 32.1,
+              "value": 32.9,
               "rank": 9,
               "tier": "Top 10"
             },
             {
               "state": "West Virginia",
-              "value": 31.9,
+              "value": 32.4,
               "rank": 10,
               "tier": "Top 10"
             },
             {
               "state": "Tennessee",
-              "value": 31.5,
+              "value": 31.7,
               "rank": 11,
               "tier": "Middle"
             },
@@ -1472,194 +1927,194 @@
               "tier": "Middle"
             },
             {
-              "state": "Florida",
-              "value": 31.4,
+              "state": "Arkansas",
+              "value": 31.2,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "Montana",
-              "value": 31.4,
+              "state": "Kentucky",
+              "value": 31,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Arkansas",
-              "value": 30.9,
+              "state": "Montana",
+              "value": 30.8,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "Kentucky",
-              "value": 30.6,
+              "state": "Indiana",
+              "value": 30.8,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 30.5,
+              "state": "Florida",
+              "value": 30.6,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 30.2,
+              "state": "North Dakota",
+              "value": 30.1,
               "rank": 18,
               "tier": "Middle"
             },
             {
               "state": "Pennsylvania",
-              "value": 29.7,
+              "value": 29.9,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Ohio",
-              "value": 29.4,
+              "state": "Arizona",
+              "value": 29.8,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "Arizona",
-              "value": 29.3,
+              "state": "Ohio",
+              "value": 29.7,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "Alaska",
-              "value": 28.9,
+              "state": "Iowa",
+              "value": 29.4,
               "rank": 22,
               "tier": "Middle"
             },
             {
-              "state": "North Carolina",
-              "value": 28.9,
+              "state": "Wisconsin",
+              "value": 29.1,
               "rank": 23,
               "tier": "Middle"
             },
             {
-              "state": "Wisconsin",
-              "value": 28.7,
+              "state": "North Carolina",
+              "value": 28.8,
               "rank": 24,
               "tier": "Middle"
             },
             {
               "state": "Texas",
-              "value": 28.6,
+              "value": 28.5,
               "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "Iowa",
+              "state": "Alaska",
               "value": 28.3,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Louisiana",
-              "value": 27.7,
+              "state": "Nevada",
+              "value": 27.9,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Mississippi",
+              "state": "Georgia",
               "value": 27.6,
               "rank": 28,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 27.4,
+              "state": "New Mexico",
+              "value": 27.6,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "Nevada",
-              "value": 27.3,
+              "state": "Louisiana",
+              "value": 27.5,
               "rank": 30,
               "tier": "Middle"
             },
             {
-              "state": "New Mexico",
-              "value": 27,
+              "state": "Mississippi",
+              "value": 27.4,
               "rank": 31,
               "tier": "Middle"
             },
             {
               "state": "Virginia",
-              "value": 26.7,
+              "value": 26.9,
               "rank": 32,
               "tier": "Middle"
             },
             {
-              "state": "Delaware",
-              "value": 26.1,
+              "state": "Colorado",
+              "value": 26.9,
               "rank": 33,
               "tier": "Middle"
             },
             {
-              "state": "Colorado",
-              "value": 25.6,
+              "state": "Delaware",
+              "value": 26.7,
               "rank": 34,
               "tier": "Middle"
             },
             {
               "state": "Minnesota",
-              "value": 25.3,
+              "value": 25.5,
               "rank": 35,
               "tier": "Middle"
             },
             {
               "state": "New Hampshire",
-              "value": 25.2,
+              "value": 25.4,
               "rank": 36,
               "tier": "Middle"
             },
             {
               "state": "New Jersey",
-              "value": 24.6,
+              "value": 25.3,
               "rank": 37,
               "tier": "Middle"
             },
             {
-              "state": "Maryland",
-              "value": 24.3,
+              "state": "Illinois",
+              "value": 24.9,
               "rank": 38,
               "tier": "Middle"
             },
             {
-              "state": "California",
-              "value": 24.3,
+              "state": "Maryland",
+              "value": 24.8,
               "rank": 39,
               "tier": "Middle"
             },
             {
-              "state": "Illinois",
-              "value": 24.1,
+              "state": "California",
+              "value": 24.4,
               "rank": 40,
               "tier": "Middle"
             },
             {
               "state": "Michigan",
-              "value": 24,
+              "value": 24.2,
               "rank": 41,
               "tier": "Middle"
             },
             {
               "state": "New York",
-              "value": 23.9,
+              "value": 24,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
               "state": "Maine",
-              "value": 23.6,
+              "value": 23.8,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
               "state": "Connecticut",
-              "value": 23,
+              "value": 23.5,
               "rank": 44,
               "tier": "Bottom 10"
             },
@@ -1670,346 +2125,346 @@
               "tier": "Bottom 10"
             },
             {
-              "state": "Washington",
-              "value": 20.8,
+              "state": "Rhode Island",
+              "value": 21.5,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
               "state": "Vermont",
-              "value": 20.7,
+              "value": 20.8,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
-              "state": "Hawaii",
-              "value": 20.6,
+              "state": "Washington",
+              "value": 20.7,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
-              "state": "Rhode Island",
+              "state": "Hawaii",
               "value": 20.3,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
               "state": "Massachusetts",
-              "value": 18.8,
+              "value": 19.9,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "District of Columbia",
-              "value": 17,
+              "value": 17.2,
               "rank": 51,
               "tier": "Bottom 10"
             }
           ],
           "limits_oversight": [
             {
-              "state": "Rhode Island",
-              "value": 45.3,
+              "state": "Massachusetts",
+              "value": 44.4,
               "rank": 1,
               "tier": "Top 10"
             },
             {
-              "state": "Massachusetts",
-              "value": 44.8,
+              "state": "Rhode Island",
+              "value": 43.9,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Connecticut",
-              "value": 44.6,
+              "state": "Vermont",
+              "value": 42.7,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "Vermont",
-              "value": 43.1,
+              "state": "Connecticut",
+              "value": 42.5,
               "rank": 4,
               "tier": "Top 10"
             },
             {
-              "state": "New Jersey",
-              "value": 43,
+              "state": "New Hampshire",
+              "value": 41.5,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "Hawaii",
-              "value": 42.3,
+              "state": "New Jersey",
+              "value": 41.4,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "New Hampshire",
-              "value": 42.2,
+              "state": "Hawaii",
+              "value": 41.3,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Colorado",
-              "value": 41.4,
+              "state": "Maine",
+              "value": 41.2,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Maine",
-              "value": 41.4,
+              "state": "Colorado",
+              "value": 40.4,
               "rank": 9,
               "tier": "Top 10"
             },
             {
               "state": "New York",
-              "value": 40.5,
+              "value": 40.2,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "New Mexico",
-              "value": 39.9,
-              "rank": 11,
-              "tier": "Middle"
-            },
-            {
               "state": "California",
-              "value": 39.3,
-              "rank": 12,
-              "tier": "Middle"
-            },
-            {
-              "state": "Utah",
-              "value": 39.2,
-              "rank": 13,
-              "tier": "Middle"
-            },
-            {
-              "state": "Mississippi",
-              "value": 38.9,
-              "rank": 14,
-              "tier": "Middle"
-            },
-            {
-              "state": "Illinois",
-              "value": 38.5,
-              "rank": 15,
+              "value": 38.8,
+              "rank": 11,
               "tier": "Middle"
             },
             {
               "state": "Louisiana",
               "value": 38.5,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Mississippi",
+              "value": 38.5,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Mexico",
+              "value": 38.3,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 38.3,
+              "rank": 15,
+              "tier": "Middle"
+            },
+            {
+              "state": "Illinois",
+              "value": 38.2,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "Arizona",
-              "value": 38.5,
+              "state": "Utah",
+              "value": 38,
               "rank": 17,
               "tier": "Middle"
             },
             {
               "state": "Nevada",
-              "value": 38.4,
+              "value": 38,
               "rank": 18,
               "tier": "Middle"
             },
             {
-              "state": "Arkansas",
-              "value": 38.1,
+              "state": "District of Columbia",
+              "value": 37.9,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Iowa",
-              "value": 38,
+              "state": "Arkansas",
+              "value": 37.8,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "Texas",
-              "value": 38,
+              "state": "Delaware",
+              "value": 37.8,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "Kansas",
-              "value": 38,
+              "state": "Texas",
+              "value": 37.7,
               "rank": 22,
               "tier": "Middle"
             },
             {
-              "state": "Montana",
-              "value": 37.8,
+              "state": "Maryland",
+              "value": 37.6,
               "rank": 23,
               "tier": "Middle"
             },
             {
-              "state": "Delaware",
-              "value": 37.7,
+              "state": "Iowa",
+              "value": 37.5,
               "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Maryland",
-              "value": 37.4,
+              "state": "Georgia",
+              "value": 37.5,
               "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "North Carolina",
-              "value": 37.2,
+              "state": "Arizona",
+              "value": 37.5,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Tennessee",
-              "value": 37.2,
+              "state": "North Carolina",
+              "value": 37.4,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 37.1,
+              "state": "Tennessee",
+              "value": 37.3,
               "rank": 28,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 37,
+              "state": "Kansas",
+              "value": 37.1,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "Nebraska",
+              "state": "Idaho",
               "value": 37,
               "rank": 30,
               "tier": "Middle"
             },
             {
-              "state": "Ohio",
-              "value": 36.9,
+              "state": "Wisconsin",
+              "value": 37,
               "rank": 31,
               "tier": "Middle"
             },
             {
-              "state": "Idaho",
-              "value": 36.8,
+              "state": "Florida",
+              "value": 36.9,
               "rank": 32,
               "tier": "Middle"
             },
             {
-              "state": "Virginia",
-              "value": 36.5,
+              "state": "Indiana",
+              "value": 36.9,
               "rank": 33,
               "tier": "Middle"
             },
             {
-              "state": "Oklahoma",
-              "value": 36.4,
+              "state": "Ohio",
+              "value": 36.8,
               "rank": 34,
               "tier": "Middle"
             },
             {
-              "state": "Missouri",
-              "value": 36.4,
+              "state": "Virginia",
+              "value": 36.7,
               "rank": 35,
               "tier": "Middle"
             },
             {
-              "state": "Florida",
+              "state": "Oregon",
               "value": 36.4,
               "rank": 36,
               "tier": "Middle"
             },
             {
-              "state": "District of Columbia",
+              "state": "Nebraska",
               "value": 36.3,
               "rank": 37,
               "tier": "Middle"
             },
             {
               "state": "West Virginia",
-              "value": 36,
+              "value": 36.2,
               "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oklahoma",
+              "value": 36.2,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 36,
+              "rank": 40,
               "tier": "Middle"
             },
             {
               "state": "Kentucky",
               "value": 35.9,
-              "rank": 39,
-              "tier": "Middle"
-            },
-            {
-              "state": "Pennsylvania",
-              "value": 35.9,
-              "rank": 40,
-              "tier": "Middle"
-            },
-            {
-              "state": "Wyoming",
-              "value": 35.8,
               "rank": 41,
               "tier": "Middle"
             },
             {
-              "state": "Wisconsin",
-              "value": 35.7,
+              "state": "Missouri",
+              "value": 35.8,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "South Dakota",
-              "value": 35.4,
+              "state": "Pennsylvania",
+              "value": 35.8,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
-              "state": "Oregon",
-              "value": 34.9,
+              "state": "Michigan",
+              "value": 35.7,
               "rank": 44,
               "tier": "Bottom 10"
             },
             {
-              "state": "Alabama",
-              "value": 34.6,
+              "state": "Alaska",
+              "value": 35.5,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
-              "state": "Alaska",
-              "value": 34.5,
+              "state": "North Dakota",
+              "value": 35.5,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
-              "state": "South Carolina",
-              "value": 34.3,
+              "state": "Wyoming",
+              "value": 35.4,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
-              "state": "North Dakota",
-              "value": 34.2,
+              "state": "Minnesota",
+              "value": 35.4,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
-              "state": "Minnesota",
-              "value": 34,
+              "state": "Alabama",
+              "value": 35.3,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
-              "state": "Michigan",
-              "value": 33.8,
+              "state": "South Carolina",
+              "value": 35.2,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "Washington",
-              "value": 32.9,
+              "value": 34.6,
               "rank": 51,
               "tier": "Bottom 10"
             }
@@ -2017,307 +2472,307 @@
           "scaled_back": [
             {
               "state": "Washington",
-              "value": 41.2,
+              "value": 39.4,
               "rank": 1,
               "tier": "Top 10"
             },
             {
               "state": "District of Columbia",
-              "value": 39.7,
+              "value": 38.1,
               "rank": 2,
               "tier": "Top 10"
             },
             {
               "state": "Oregon",
-              "value": 38,
+              "value": 36.3,
               "rank": 3,
               "tier": "Top 10"
             },
             {
               "state": "Michigan",
-              "value": 36.5,
+              "value": 34.3,
               "rank": 4,
               "tier": "Top 10"
             },
             {
               "state": "Minnesota",
-              "value": 35.5,
+              "value": 33.7,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "Maryland",
-              "value": 31.9,
+              "state": "Hawaii",
+              "value": 32.3,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "Alaska",
-              "value": 31.3,
+              "state": "Maryland",
+              "value": 31.5,
               "rank": 7,
               "tier": "Top 10"
             },
             {
               "state": "Illinois",
-              "value": 31,
+              "value": 30.9,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Hawaii",
+              "state": "California",
               "value": 30.9,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "Virginia",
-              "value": 30.6,
+              "state": "Vermont",
+              "value": 30.8,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "Vermont",
-              "value": 30.5,
+              "state": "Alaska",
+              "value": 30.8,
               "rank": 11,
               "tier": "Middle"
             },
             {
-              "state": "California",
+              "state": "Virginia",
               "value": 30.5,
               "rank": 12,
               "tier": "Middle"
             },
             {
-              "state": "Massachusetts",
-              "value": 30.4,
+              "state": "New York",
+              "value": 30,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 30.2,
+              "state": "Massachusetts",
+              "value": 29.6,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Wisconsin",
-              "value": 29.9,
+              "state": "Delaware",
+              "value": 29.5,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "Delaware",
-              "value": 29.9,
+              "state": "Maine",
+              "value": 29.5,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "New York",
-              "value": 29.8,
+              "state": "North Dakota",
+              "value": 29.2,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "Maine",
-              "value": 29.4,
+              "state": "Georgia",
+              "value": 28.9,
               "rank": 18,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 29.2,
+              "state": "Pennsylvania",
+              "value": 28.6,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Pennsylvania",
-              "value": 28.4,
-              "rank": 20,
-              "tier": "Middle"
-            },
-            {
               "state": "Rhode Island",
-              "value": 28.3,
-              "rank": 21,
+              "value": 28.6,
+              "rank": 20,
               "tier": "Middle"
             },
             {
               "state": "Nevada",
               "value": 28.3,
-              "rank": 22,
-              "tier": "Middle"
-            },
-            {
-              "state": "South Dakota",
-              "value": 28,
-              "rank": 23,
-              "tier": "Middle"
-            },
-            {
-              "state": "Iowa",
-              "value": 27.7,
-              "rank": 24,
-              "tier": "Middle"
-            },
-            {
-              "state": "Ohio",
-              "value": 27.6,
-              "rank": 25,
+              "rank": 21,
               "tier": "Middle"
             },
             {
               "state": "Texas",
-              "value": 27.6,
+              "value": 28.2,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Mexico",
+              "value": 28.2,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Wisconsin",
+              "value": 28.2,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Connecticut",
+              "value": 28.1,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Mississippi",
+              "value": 28,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Kentucky",
-              "value": 27.6,
+              "state": "Louisiana",
+              "value": 27.9,
               "rank": 27,
               "tier": "Middle"
             },
             {
               "state": "North Carolina",
-              "value": 27.5,
+              "value": 27.8,
               "rank": 28,
               "tier": "Middle"
             },
             {
-              "state": "Louisiana",
-              "value": 27.5,
+              "state": "Ohio",
+              "value": 27.6,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "Mississippi",
-              "value": 27.1,
+              "state": "New Jersey",
+              "value": 27.6,
               "rank": 30,
               "tier": "Middle"
             },
             {
               "state": "New Hampshire",
-              "value": 27,
+              "value": 27.6,
               "rank": 31,
               "tier": "Middle"
             },
             {
-              "state": "New Mexico",
-              "value": 26.9,
+              "state": "Kentucky",
+              "value": 27.4,
               "rank": 32,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 26.7,
+              "state": "Iowa",
+              "value": 27.3,
               "rank": 33,
               "tier": "Middle"
             },
             {
-              "state": "Colorado",
-              "value": 26.6,
+              "state": "South Dakota",
+              "value": 27.2,
               "rank": 34,
               "tier": "Middle"
             },
             {
-              "state": "New Jersey",
-              "value": 26.5,
+              "state": "Arizona",
+              "value": 26.9,
               "rank": 35,
               "tier": "Middle"
             },
             {
-              "state": "Connecticut",
-              "value": 26.3,
+              "state": "Florida",
+              "value": 26.7,
               "rank": 36,
               "tier": "Middle"
             },
             {
-              "state": "Arizona",
-              "value": 26.2,
+              "state": "Colorado",
+              "value": 26.5,
               "rank": 37,
               "tier": "Middle"
             },
             {
-              "state": "Florida",
-              "value": 26.2,
+              "state": "Indiana",
+              "value": 26.4,
               "rank": 38,
               "tier": "Middle"
             },
             {
-              "state": "West Virginia",
+              "state": "South Carolina",
               "value": 26,
               "rank": 39,
               "tier": "Middle"
             },
             {
-              "state": "South Carolina",
-              "value": 25.9,
+              "state": "West Virginia",
+              "value": 25.6,
               "rank": 40,
-              "tier": "Middle"
-            },
-            {
-              "state": "Tennessee",
-              "value": 25.3,
-              "rank": 41,
               "tier": "Middle"
             },
             {
               "state": "Montana",
               "value": 25.2,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 25.2,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "Arkansas",
-              "value": 25,
+              "state": "Missouri",
+              "value": 25.1,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
-              "state": "Missouri",
-              "value": 24.9,
+              "state": "Arkansas",
+              "value": 25.1,
               "rank": 44,
               "tier": "Bottom 10"
             },
             {
-              "state": "Alabama",
-              "value": 24.7,
+              "state": "Nebraska",
+              "value": 24.9,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
-              "state": "Nebraska",
-              "value": 24.6,
+              "state": "Alabama",
+              "value": 24.8,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
               "state": "Oklahoma",
-              "value": 24.2,
+              "value": 24.4,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
               "state": "Kansas",
-              "value": 24.1,
+              "value": 24.3,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
               "state": "Idaho",
-              "value": 21.7,
+              "value": 22.3,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
               "state": "Utah",
-              "value": 20.3,
+              "value": 21,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "Wyoming",
-              "value": 19.4,
+              "value": 20.4,
               "rank": 51,
               "tier": "Bottom 10"
             }
@@ -2325,283 +2780,283 @@
           "unsure": [
             {
               "state": "District of Columbia",
-              "value": 7.1,
+              "value": 6.7,
               "rank": 1,
               "tier": "Top 10"
             },
             {
               "state": "Colorado",
-              "value": 6.5,
+              "value": 6.3,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Maryland",
-              "value": 6.4,
+              "state": "Mississippi",
+              "value": 6.2,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "Mississippi",
-              "value": 6.4,
+              "state": "Massachusetts",
+              "value": 6.1,
               "rank": 4,
               "tier": "Top 10"
             },
             {
-              "state": "Delaware",
-              "value": 6.4,
+              "state": "Maryland",
+              "value": 6.1,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "North Carolina",
-              "value": 6.4,
+              "state": "Illinois",
+              "value": 6.1,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "Illinois",
-              "value": 6.3,
+              "state": "Hawaii",
+              "value": 6.1,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Georgia",
-              "value": 6.3,
+              "state": "Louisiana",
+              "value": 6.1,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Louisiana",
-              "value": 6.3,
+              "state": "Rhode Island",
+              "value": 6,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "New Mexico",
-              "value": 6.2,
+              "state": "North Carolina",
+              "value": 6,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "Hawaii",
-              "value": 6.2,
+              "state": "Georgia",
+              "value": 6,
               "rank": 11,
               "tier": "Middle"
             },
             {
-              "state": "Virginia",
-              "value": 6.2,
+              "state": "Delaware",
+              "value": 6,
               "rank": 12,
               "tier": "Middle"
             },
             {
-              "state": "Ohio",
-              "value": 6.2,
+              "state": "New Mexico",
+              "value": 5.9,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 6.1,
+              "state": "Ohio",
+              "value": 5.9,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Rhode Island",
-              "value": 6.1,
+              "state": "California",
+              "value": 5.9,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "Connecticut",
-              "value": 6,
+              "state": "Nevada",
+              "value": 5.9,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "Pennsylvania",
-              "value": 6,
+              "state": "Connecticut",
+              "value": 5.9,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "Tennessee",
-              "value": 6,
+              "state": "Indiana",
+              "value": 5.9,
               "rank": 18,
               "tier": "Middle"
             },
             {
-              "state": "Massachusetts",
-              "value": 6,
+              "state": "Virginia",
+              "value": 5.8,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Florida",
-              "value": 6,
+              "state": "Tennessee",
+              "value": 5.8,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "California",
-              "value": 6,
+              "state": "Iowa",
+              "value": 5.8,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "Arizona",
-              "value": 6,
-              "rank": 22,
-              "tier": "Middle"
-            },
-            {
-              "state": "Iowa",
-              "value": 6,
-              "rank": 23,
-              "tier": "Middle"
-            },
-            {
-              "state": "West Virginia",
-              "value": 6,
-              "rank": 24,
-              "tier": "Middle"
-            },
-            {
-              "state": "Nevada",
-              "value": 6,
-              "rank": 25,
-              "tier": "Middle"
-            },
-            {
               "state": "Arkansas",
-              "value": 6,
-              "rank": 26,
-              "tier": "Middle"
-            },
-            {
-              "state": "South Carolina",
-              "value": 6,
-              "rank": 27,
-              "tier": "Middle"
-            },
-            {
-              "state": "New Jersey",
-              "value": 5.9,
-              "rank": 28,
-              "tier": "Middle"
-            },
-            {
-              "state": "Kansas",
-              "value": 5.9,
-              "rank": 29,
-              "tier": "Middle"
-            },
-            {
-              "state": "Nebraska",
-              "value": 5.9,
-              "rank": 30,
-              "tier": "Middle"
-            },
-            {
-              "state": "Kentucky",
-              "value": 5.9,
-              "rank": 31,
-              "tier": "Middle"
-            },
-            {
-              "state": "Texas",
               "value": 5.8,
-              "rank": 32,
-              "tier": "Middle"
-            },
-            {
-              "state": "New York",
-              "value": 5.8,
-              "rank": 33,
-              "tier": "Middle"
-            },
-            {
-              "state": "Utah",
-              "value": 5.8,
-              "rank": 34,
+              "rank": 22,
               "tier": "Middle"
             },
             {
               "state": "Michigan",
               "value": 5.8,
-              "rank": 35,
+              "rank": 23,
               "tier": "Middle"
             },
             {
-              "state": "Alabama",
+              "state": "New York",
               "value": 5.8,
-              "rank": 36,
+              "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Missouri",
+              "state": "Wisconsin",
               "value": 5.8,
-              "rank": 37,
+              "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "Oklahoma",
+              "state": "Arizona",
+              "value": 5.8,
+              "rank": 26,
+              "tier": "Middle"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 5.8,
+              "rank": 27,
+              "tier": "Middle"
+            },
+            {
+              "state": "Florida",
+              "value": 5.8,
+              "rank": 28,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Jersey",
               "value": 5.7,
-              "rank": 38,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "West Virginia",
+              "value": 5.7,
+              "rank": 30,
               "tier": "Middle"
             },
             {
               "state": "Vermont",
               "value": 5.7,
-              "rank": 39,
-              "tier": "Middle"
-            },
-            {
-              "state": "Wisconsin",
-              "value": 5.7,
-              "rank": 40,
+              "rank": 31,
               "tier": "Middle"
             },
             {
               "state": "Montana",
+              "value": 5.7,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kansas",
+              "value": 5.7,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "Utah",
+              "value": 5.7,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nebraska",
+              "value": 5.7,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Carolina",
               "value": 5.6,
-              "rank": 41,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kentucky",
+              "value": 5.6,
+              "rank": 37,
               "tier": "Middle"
             },
             {
               "state": "New Hampshire",
               "value": 5.6,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Texas",
+              "value": 5.6,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oregon",
+              "value": 5.6,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maine",
+              "value": 5.6,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 5.6,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "Maine",
-              "value": 5.5,
+              "state": "Oklahoma",
+              "value": 5.6,
               "rank": 43,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Alabama",
+              "value": 5.6,
+              "rank": 44,
               "tier": "Bottom 10"
             },
             {
               "state": "Idaho",
               "value": 5.5,
-              "rank": 44,
-              "tier": "Bottom 10"
-            },
-            {
-              "state": "Oregon",
-              "value": 5.4,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
               "state": "Alaska",
-              "value": 5.3,
+              "value": 5.4,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
-              "state": "Wyoming",
-              "value": 5.3,
+              "state": "Minnesota",
+              "value": 5.4,
               "rank": 47,
               "tier": "Bottom 10"
             },
@@ -2612,20 +3067,20 @@
               "tier": "Bottom 10"
             },
             {
-              "state": "Minnesota",
-              "value": 5.2,
+              "state": "Washington",
+              "value": 5.3,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
               "state": "North Dakota",
-              "value": 5.1,
+              "value": 5.2,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
-              "state": "Washington",
-              "value": 5.1,
+              "state": "Wyoming",
+              "value": 5.2,
               "rank": 51,
               "tier": "Bottom 10"
             }
@@ -2677,307 +3132,307 @@
           "confident_norm": [
             {
               "state": "Alabama",
-              "value": 60.4,
+              "value": 60.6,
               "rank": 1,
               "tier": "Top 10"
             },
             {
               "state": "South Carolina",
-              "value": 59.9,
+              "value": 59.7,
               "rank": 2,
               "tier": "Top 10"
             },
             {
               "state": "Oklahoma",
-              "value": 57,
+              "value": 56.4,
               "rank": 3,
               "tier": "Top 10"
             },
             {
               "state": "Wyoming",
-              "value": 56.5,
+              "value": 56.1,
               "rank": 4,
               "tier": "Top 10"
             },
             {
               "state": "Florida",
-              "value": 56.5,
+              "value": 55.7,
               "rank": 5,
               "tier": "Top 10"
             },
             {
               "state": "Utah",
-              "value": 54.4,
+              "value": 53.1,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "North Carolina",
-              "value": 52.6,
+              "state": "Louisiana",
+              "value": 52.5,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Arizona",
-              "value": 52.6,
+              "state": "Idaho",
+              "value": 52.5,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Texas",
-              "value": 52.5,
+              "state": "Missouri",
+              "value": 52.2,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "Missouri",
-              "value": 52.3,
+              "state": "North Carolina",
+              "value": 52.1,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "Louisiana",
-              "value": 51.8,
+              "state": "Texas",
+              "value": 51.6,
               "rank": 11,
               "tier": "Middle"
             },
             {
-              "state": "Idaho",
-              "value": 51.6,
+              "state": "Arizona",
+              "value": 51.4,
               "rank": 12,
               "tier": "Middle"
             },
             {
               "state": "Tennessee",
-              "value": 51.1,
+              "value": 51.4,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "Arkansas",
-              "value": 51,
+              "state": "South Dakota",
+              "value": 51.2,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Kansas",
-              "value": 50.4,
+              "state": "Nebraska",
+              "value": 50.9,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "Nebraska",
-              "value": 50.4,
+              "state": "Arkansas",
+              "value": 50.9,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 50.3,
+              "state": "Kansas",
+              "value": 50,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "Kentucky",
+              "state": "Georgia",
               "value": 50,
               "rank": 18,
               "tier": "Middle"
             },
             {
-              "state": "South Dakota",
-              "value": 49.3,
+              "state": "Alaska",
+              "value": 49.6,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Pennsylvania",
-              "value": 48.4,
+              "state": "Kentucky",
+              "value": 49.6,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "Alaska",
-              "value": 48.1,
+              "state": "Pennsylvania",
+              "value": 48.9,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "West Virginia",
-              "value": 48,
+              "state": "North Dakota",
+              "value": 48.9,
               "rank": 22,
               "tier": "Middle"
             },
             {
               "state": "Mississippi",
-              "value": 47.6,
+              "value": 47.9,
               "rank": 23,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 47,
+              "state": "Ohio",
+              "value": 47.6,
               "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Virginia",
-              "value": 47,
+              "state": "Minnesota",
+              "value": 47.4,
               "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "Ohio",
-              "value": 46.1,
+              "state": "Indiana",
+              "value": 47.4,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Nevada",
-              "value": 46,
+              "state": "West Virginia",
+              "value": 47.2,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 45.9,
+              "state": "Wisconsin",
+              "value": 47.1,
               "rank": 28,
               "tier": "Middle"
             },
             {
-              "state": "Minnesota",
-              "value": 45.6,
+              "state": "Virginia",
+              "value": 46.9,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "New York",
-              "value": 45.4,
+              "state": "Nevada",
+              "value": 45.7,
               "rank": 30,
               "tier": "Middle"
             },
             {
-              "state": "California",
-              "value": 45.4,
+              "state": "Maryland",
+              "value": 45.6,
               "rank": 31,
               "tier": "Middle"
             },
             {
-              "state": "Maryland",
-              "value": 45.2,
+              "state": "Montana",
+              "value": 45.4,
               "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 45.4,
+              "rank": 33,
               "tier": "Middle"
             },
             {
               "state": "New Jersey",
               "value": 45.2,
-              "rank": 33,
-              "tier": "Middle"
-            },
-            {
-              "state": "Montana",
-              "value": 44.9,
               "rank": 34,
               "tier": "Middle"
             },
             {
-              "state": "Wisconsin",
-              "value": 44.9,
+              "state": "New York",
+              "value": 45.2,
               "rank": 35,
               "tier": "Middle"
             },
             {
-              "state": "New Mexico",
-              "value": 44.8,
+              "state": "California",
+              "value": 45,
               "rank": 36,
               "tier": "Middle"
             },
             {
-              "state": "Iowa",
-              "value": 44.3,
+              "state": "Delaware",
+              "value": 44.7,
               "rank": 37,
               "tier": "Middle"
             },
             {
-              "state": "Connecticut",
+              "state": "New Hampshire",
               "value": 44.2,
               "rank": 38,
               "tier": "Middle"
             },
             {
-              "state": "Delaware",
-              "value": 44,
+              "state": "Colorado",
+              "value": 44.1,
               "rank": 39,
               "tier": "Middle"
             },
             {
-              "state": "New Hampshire",
-              "value": 43.7,
+              "state": "Michigan",
+              "value": 43.6,
               "rank": 40,
               "tier": "Middle"
             },
             {
-              "state": "Colorado",
-              "value": 42.2,
+              "state": "Connecticut",
+              "value": 43.4,
               "rank": 41,
               "tier": "Middle"
             },
             {
-              "state": "Michigan",
-              "value": 42.2,
+              "state": "New Mexico",
+              "value": 43.1,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "Maine",
-              "value": 41.5,
+              "state": "Illinois",
+              "value": 42.5,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
-              "state": "Illinois",
-              "value": 41.2,
+              "state": "Maine",
+              "value": 41.1,
               "rank": 44,
               "tier": "Bottom 10"
             },
             {
-              "state": "Massachusetts",
-              "value": 40.5,
+              "state": "Washington",
+              "value": 41,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
-              "state": "Washington",
-              "value": 40.3,
+              "state": "Oregon",
+              "value": 40.9,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
               "state": "Rhode Island",
-              "value": 40.3,
+              "value": 38.2,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
-              "state": "Oregon",
-              "value": 38.5,
+              "state": "Massachusetts",
+              "value": 37.9,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
-              "state": "Hawaii",
-              "value": 37.9,
+              "state": "Vermont",
+              "value": 36.2,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
-              "state": "Vermont",
-              "value": 36.9,
+              "state": "Hawaii",
+              "value": 36.2,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "District of Columbia",
-              "value": 34.3,
+              "value": 35.7,
               "rank": 51,
               "tier": "Bottom 10"
             }
@@ -2985,307 +3440,307 @@
           "not_confident_norm": [
             {
               "state": "District of Columbia",
-              "value": 65.7,
+              "value": 64.3,
               "rank": 1,
               "tier": "Top 10"
             },
             {
-              "state": "Vermont",
-              "value": 63.1,
+              "state": "Hawaii",
+              "value": 63.8,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Hawaii",
-              "value": 62.1,
+              "state": "Vermont",
+              "value": 63.8,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "Oregon",
-              "value": 61.5,
+              "state": "Massachusetts",
+              "value": 62.1,
               "rank": 4,
               "tier": "Top 10"
             },
             {
               "state": "Rhode Island",
-              "value": 59.7,
+              "value": 61.8,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "Washington",
-              "value": 59.7,
+              "state": "Oregon",
+              "value": 59.1,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "Massachusetts",
-              "value": 59.5,
+              "state": "Washington",
+              "value": 59,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Illinois",
-              "value": 58.8,
+              "state": "Maine",
+              "value": 58.9,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Maine",
-              "value": 58.5,
+              "state": "Illinois",
+              "value": 57.5,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "Michigan",
-              "value": 57.8,
+              "state": "New Mexico",
+              "value": 56.9,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "Colorado",
-              "value": 57.8,
+              "state": "Connecticut",
+              "value": 56.6,
               "rank": 11,
               "tier": "Middle"
             },
             {
-              "state": "New Hampshire",
-              "value": 56.3,
+              "state": "Michigan",
+              "value": 56.4,
               "rank": 12,
               "tier": "Middle"
             },
             {
-              "state": "Delaware",
-              "value": 56,
+              "state": "Colorado",
+              "value": 55.9,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "Connecticut",
+              "state": "New Hampshire",
               "value": 55.8,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Iowa",
-              "value": 55.7,
+              "state": "Delaware",
+              "value": 55.3,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "New Mexico",
-              "value": 55.2,
+              "state": "California",
+              "value": 55,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "Wisconsin",
-              "value": 55.1,
+              "state": "New York",
+              "value": 54.8,
               "rank": 17,
-              "tier": "Middle"
-            },
-            {
-              "state": "Montana",
-              "value": 55.1,
-              "rank": 18,
               "tier": "Middle"
             },
             {
               "state": "New Jersey",
               "value": 54.8,
+              "rank": 18,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 54.6,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Maryland",
-              "value": 54.8,
+              "state": "Montana",
+              "value": 54.6,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "California",
-              "value": 54.6,
+              "state": "Maryland",
+              "value": 54.4,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "New York",
-              "value": 54.6,
+              "state": "Nevada",
+              "value": 54.3,
               "rank": 22,
               "tier": "Middle"
             },
             {
-              "state": "Minnesota",
-              "value": 54.4,
+              "state": "Virginia",
+              "value": 53.1,
               "rank": 23,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 54.1,
+              "state": "Wisconsin",
+              "value": 52.9,
               "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Nevada",
-              "value": 54,
+              "state": "West Virginia",
+              "value": 52.8,
               "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "Ohio",
-              "value": 53.9,
+              "state": "Indiana",
+              "value": 52.6,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Virginia",
-              "value": 53,
+              "state": "Minnesota",
+              "value": 52.6,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 53,
+              "state": "Ohio",
+              "value": 52.4,
               "rank": 28,
               "tier": "Middle"
             },
             {
               "state": "Mississippi",
-              "value": 52.4,
+              "value": 52.1,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "West Virginia",
-              "value": 52,
+              "state": "North Dakota",
+              "value": 51.1,
               "rank": 30,
               "tier": "Middle"
             },
             {
-              "state": "Alaska",
-              "value": 51.9,
+              "state": "Pennsylvania",
+              "value": 51.1,
               "rank": 31,
               "tier": "Middle"
             },
             {
-              "state": "Pennsylvania",
-              "value": 51.6,
+              "state": "Kentucky",
+              "value": 50.4,
               "rank": 32,
               "tier": "Middle"
             },
             {
-              "state": "South Dakota",
-              "value": 50.7,
+              "state": "Alaska",
+              "value": 50.4,
               "rank": 33,
               "tier": "Middle"
             },
             {
-              "state": "Kentucky",
+              "state": "Georgia",
               "value": 50,
               "rank": 34,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 49.7,
+              "state": "Kansas",
+              "value": 50,
               "rank": 35,
               "tier": "Middle"
             },
             {
-              "state": "Nebraska",
-              "value": 49.6,
+              "state": "Arkansas",
+              "value": 49.1,
               "rank": 36,
               "tier": "Middle"
             },
             {
-              "state": "Kansas",
-              "value": 49.6,
+              "state": "Nebraska",
+              "value": 49.1,
               "rank": 37,
               "tier": "Middle"
             },
             {
-              "state": "Arkansas",
-              "value": 49,
+              "state": "South Dakota",
+              "value": 48.8,
               "rank": 38,
               "tier": "Middle"
             },
             {
               "state": "Tennessee",
-              "value": 48.9,
+              "value": 48.6,
               "rank": 39,
               "tier": "Middle"
             },
             {
-              "state": "Idaho",
-              "value": 48.4,
+              "state": "Arizona",
+              "value": 48.6,
               "rank": 40,
               "tier": "Middle"
             },
             {
-              "state": "Louisiana",
-              "value": 48.2,
+              "state": "Texas",
+              "value": 48.4,
               "rank": 41,
               "tier": "Middle"
             },
             {
-              "state": "Missouri",
-              "value": 47.7,
+              "state": "North Carolina",
+              "value": 47.9,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "Texas",
-              "value": 47.5,
+              "state": "Missouri",
+              "value": 47.8,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
-              "state": "Arizona",
-              "value": 47.4,
+              "state": "Idaho",
+              "value": 47.5,
               "rank": 44,
               "tier": "Bottom 10"
             },
             {
-              "state": "North Carolina",
-              "value": 47.4,
+              "state": "Louisiana",
+              "value": 47.5,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
               "state": "Utah",
-              "value": 45.6,
+              "value": 46.9,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
               "state": "Florida",
-              "value": 43.5,
+              "value": 44.3,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
               "state": "Wyoming",
-              "value": 43.5,
+              "value": 43.9,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
               "state": "Oklahoma",
-              "value": 43,
+              "value": 43.6,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
               "state": "South Carolina",
-              "value": 40.1,
+              "value": 40.3,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "Alabama",
-              "value": 39.6,
+              "value": 39.4,
               "rank": 51,
               "tier": "Bottom 10"
             }
@@ -3293,615 +3748,615 @@
           "very_confident": [
             {
               "state": "Alabama",
-              "value": 29.5,
+              "value": 29.4,
               "rank": 1,
               "tier": "Top 10"
             },
             {
-              "state": "South Carolina",
-              "value": 29.3,
+              "state": "Oklahoma",
+              "value": 28.8,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Oklahoma",
-              "value": 28.9,
+              "state": "South Carolina",
+              "value": 28.4,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "Utah",
-              "value": 26.6,
+              "state": "Wyoming",
+              "value": 27.6,
               "rank": 4,
               "tier": "Top 10"
             },
             {
-              "state": "Wyoming",
-              "value": 26.2,
+              "state": "Utah",
+              "value": 26.9,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "Florida",
-              "value": 26,
+              "state": "Tennessee",
+              "value": 26.1,
               "rank": 6,
               "tier": "Top 10"
             },
             {
               "state": "Arizona",
-              "value": 25.9,
+              "value": 25.6,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Tennessee",
-              "value": 25.8,
+              "state": "Kentucky",
+              "value": 25.3,
               "rank": 8,
               "tier": "Top 10"
             },
             {
               "state": "Arkansas",
-              "value": 25.8,
+              "value": 25.3,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "Texas",
-              "value": 24.8,
+              "state": "Florida",
+              "value": 25.2,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "Kentucky",
-              "value": 24.7,
+              "state": "Idaho",
+              "value": 25.2,
               "rank": 11,
               "tier": "Middle"
             },
             {
               "state": "North Carolina",
-              "value": 24.7,
+              "value": 24.6,
               "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "South Dakota",
+              "value": 24.3,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Texas",
+              "value": 24.3,
+              "rank": 14,
               "tier": "Middle"
             },
             {
               "state": "Missouri",
               "value": 24.2,
-              "rank": 13,
-              "tier": "Middle"
-            },
-            {
-              "state": "Georgia",
-              "value": 24,
-              "rank": 14,
-              "tier": "Middle"
-            },
-            {
-              "state": "Idaho",
-              "value": 23.7,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "Kansas",
-              "value": 23.2,
+              "state": "North Dakota",
+              "value": 23.7,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "California",
-              "value": 23.1,
+              "state": "Alaska",
+              "value": 23.4,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "Louisiana",
-              "value": 23,
+              "state": "Georgia",
+              "value": 23.3,
               "rank": 18,
               "tier": "Middle"
             },
             {
-              "state": "South Dakota",
-              "value": 22.4,
+              "state": "Nebraska",
+              "value": 23.1,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Nebraska",
-              "value": 22.1,
+              "state": "Kansas",
+              "value": 23,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "Ohio",
-              "value": 21.9,
+              "state": "Pennsylvania",
+              "value": 22.7,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "West Virginia",
-              "value": 21.9,
+              "state": "Louisiana",
+              "value": 22.6,
               "rank": 22,
               "tier": "Middle"
             },
             {
-              "state": "Alaska",
-              "value": 21.9,
+              "state": "Ohio",
+              "value": 22.3,
               "rank": 23,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 21.9,
+              "state": "California",
+              "value": 22.2,
               "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Pennsylvania",
-              "value": 21.5,
+              "state": "Wisconsin",
+              "value": 21.9,
               "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "New Mexico",
-              "value": 21.4,
+              "state": "West Virginia",
+              "value": 21.8,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Nevada",
-              "value": 21,
+              "state": "Minnesota",
+              "value": 21.5,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Mississippi",
-              "value": 20.8,
+              "state": "Indiana",
+              "value": 21.5,
               "rank": 28,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 20.6,
+              "state": "Montana",
+              "value": 21.1,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "Montana",
-              "value": 20,
+              "state": "Nevada",
+              "value": 20.8,
               "rank": 30,
               "tier": "Middle"
             },
             {
-              "state": "Minnesota",
-              "value": 19.9,
+              "state": "Connecticut",
+              "value": 20.7,
               "rank": 31,
               "tier": "Middle"
             },
             {
-              "state": "Connecticut",
-              "value": 19.7,
+              "state": "New York",
+              "value": 20.6,
               "rank": 32,
               "tier": "Middle"
             },
             {
-              "state": "New York",
-              "value": 19.4,
+              "state": "Michigan",
+              "value": 20.4,
               "rank": 33,
               "tier": "Middle"
             },
             {
-              "state": "Wisconsin",
-              "value": 19.4,
+              "state": "New Mexico",
+              "value": 20.3,
               "rank": 34,
               "tier": "Middle"
             },
             {
-              "state": "Michigan",
-              "value": 19.3,
+              "state": "Mississippi",
+              "value": 20.1,
               "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Jersey",
+              "value": 19.9,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 19.9,
+              "rank": 37,
+              "tier": "Middle"
+            },
+            {
+              "state": "Iowa",
+              "value": 19.7,
+              "rank": 38,
               "tier": "Middle"
             },
             {
               "state": "Virginia",
               "value": 19.2,
-              "rank": 36,
-              "tier": "Middle"
-            },
-            {
-              "state": "Iowa",
-              "value": 19,
-              "rank": 37,
-              "tier": "Middle"
-            },
-            {
-              "state": "New Jersey",
-              "value": 18.8,
-              "rank": 38,
-              "tier": "Middle"
-            },
-            {
-              "state": "Delaware",
-              "value": 18,
               "rank": 39,
               "tier": "Middle"
             },
             {
               "state": "Maine",
-              "value": 17.4,
+              "value": 18.9,
               "rank": 40,
               "tier": "Middle"
             },
             {
               "state": "Maryland",
-              "value": 17.4,
+              "value": 17.8,
               "rank": 41,
               "tier": "Middle"
             },
             {
-              "state": "New Hampshire",
-              "value": 16.8,
+              "state": "Delaware",
+              "value": 17.7,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "Hawaii",
-              "value": 16.7,
+              "state": "Illinois",
+              "value": 17.4,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
-              "state": "Colorado",
-              "value": 16.2,
+              "state": "Washington",
+              "value": 17.4,
               "rank": 44,
               "tier": "Bottom 10"
             },
             {
-              "state": "Illinois",
-              "value": 16.1,
+              "state": "Oregon",
+              "value": 17.4,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
-              "state": "Washington",
-              "value": 16.1,
+              "state": "Colorado",
+              "value": 17.3,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
-              "state": "Oregon",
-              "value": 15.8,
+              "state": "Vermont",
+              "value": 16,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
-              "state": "Vermont",
-              "value": 14.4,
+              "state": "Hawaii",
+              "value": 14.9,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
               "state": "Massachusetts",
-              "value": 13.9,
+              "value": 14.5,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
               "state": "Rhode Island",
-              "value": 13.8,
+              "value": 14.4,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "District of Columbia",
-              "value": 12.1,
+              "value": 13.3,
               "rank": 51,
               "tier": "Bottom 10"
             }
           ],
           "somewhat_confident": [
             {
-              "state": "Alabama",
-              "value": 27.9,
+              "state": "South Carolina",
+              "value": 28.3,
               "rank": 1,
               "tier": "Top 10"
             },
             {
-              "state": "South Carolina",
-              "value": 27.6,
+              "state": "Alabama",
+              "value": 28.2,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Florida",
+              "state": "Louisiana",
               "value": 27.5,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "Wyoming",
-              "value": 26.9,
+              "state": "Florida",
+              "value": 27.3,
               "rank": 4,
               "tier": "Top 10"
             },
             {
-              "state": "Louisiana",
-              "value": 26.5,
+              "state": "Mississippi",
+              "value": 25.7,
               "rank": 5,
               "tier": "Top 10"
             },
             {
               "state": "Maryland",
-              "value": 25.7,
+              "value": 25.6,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "Nebraska",
-              "value": 25.5,
+              "state": "Missouri",
+              "value": 25.4,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Missouri",
+              "state": "Nebraska",
               "value": 25.3,
               "rank": 8,
               "tier": "Top 10"
             },
             {
               "state": "Virginia",
-              "value": 25.2,
+              "value": 25.1,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "North Carolina",
-              "value": 25.2,
+              "state": "Wyoming",
+              "value": 25,
               "rank": 10,
               "tier": "Top 10"
             },
             {
               "state": "Texas",
-              "value": 25.2,
+              "value": 24.9,
               "rank": 11,
               "tier": "Middle"
             },
             {
               "state": "Oklahoma",
-              "value": 25.1,
+              "value": 24.9,
               "rank": 12,
               "tier": "Middle"
             },
             {
-              "state": "Idaho",
-              "value": 24.9,
+              "state": "Delaware",
+              "value": 24.8,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "Mississippi",
-              "value": 24.7,
+              "state": "North Carolina",
+              "value": 24.8,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Utah",
+              "state": "Kansas",
               "value": 24.6,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "Kansas",
-              "value": 24.5,
+              "state": "Colorado",
+              "value": 24.6,
               "rank": 16,
               "tier": "Middle"
             },
             {
               "state": "South Dakota",
-              "value": 24.1,
+              "value": 24,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "Arizona",
-              "value": 24.1,
+              "state": "Idaho",
+              "value": 24,
               "rank": 18,
               "tier": "Middle"
             },
             {
-              "state": "Pennsylvania",
-              "value": 24,
+              "state": "Georgia",
+              "value": 23.9,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "New Hampshire",
-              "value": 24,
+              "state": "Iowa",
+              "value": 23.5,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "Colorado",
-              "value": 23.9,
+              "state": "Arizona",
+              "value": 23.4,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "Delaware",
-              "value": 23.9,
+              "state": "Arkansas",
+              "value": 23.3,
               "rank": 22,
               "tier": "Middle"
             },
             {
-              "state": "Massachusetts",
-              "value": 23.9,
+              "state": "Indiana",
+              "value": 23.3,
               "rank": 23,
-              "tier": "Middle"
-            },
-            {
-              "state": "Rhode Island",
-              "value": 23.9,
-              "rank": 24,
-              "tier": "Middle"
-            },
-            {
-              "state": "New Jersey",
-              "value": 23.8,
-              "rank": 25,
-              "tier": "Middle"
-            },
-            {
-              "state": "Georgia",
-              "value": 23.6,
-              "rank": 26,
-              "tier": "Middle"
-            },
-            {
-              "state": "New York",
-              "value": 23.6,
-              "rank": 27,
-              "tier": "Middle"
-            },
-            {
-              "state": "Alaska",
-              "value": 23.4,
-              "rank": 28,
               "tier": "Middle"
             },
             {
               "state": "Minnesota",
               "value": 23.3,
-              "rank": 29,
+              "rank": 24,
+              "tier": "Middle"
+            },
+            {
+              "state": "Pennsylvania",
+              "value": 23.3,
+              "rank": 25,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 23.1,
+              "rank": 26,
               "tier": "Middle"
             },
             {
               "state": "Illinois",
               "value": 23.1,
-              "rank": 30,
+              "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Iowa",
-              "value": 23,
-              "rank": 31,
-              "tier": "Middle"
-            },
-            {
-              "state": "West Virginia",
-              "value": 23,
-              "rank": 32,
-              "tier": "Middle"
-            },
-            {
-              "state": "Wisconsin",
+              "state": "Utah",
               "value": 22.9,
-              "rank": 33,
-              "tier": "Middle"
-            },
-            {
-              "state": "Arkansas",
-              "value": 22.8,
-              "rank": 34,
-              "tier": "Middle"
-            },
-            {
-              "state": "Indiana",
-              "value": 22.7,
-              "rank": 35,
+              "rank": 28,
               "tier": "Middle"
             },
             {
               "state": "North Dakota",
-              "value": 22.6,
-              "rank": 36,
+              "value": 22.5,
+              "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "Nevada",
-              "value": 22.4,
-              "rank": 37,
+              "state": "New Jersey",
+              "value": 22.5,
+              "rank": 30,
               "tier": "Middle"
             },
             {
-              "state": "Montana",
+              "state": "Wisconsin",
+              "value": 22.5,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
               "value": 22.4,
-              "rank": 38,
+              "rank": 32,
               "tier": "Middle"
             },
             {
               "state": "Tennessee",
-              "value": 22.1,
-              "rank": 39,
+              "value": 22.4,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "West Virginia",
+              "value": 22.3,
+              "rank": 34,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nevada",
+              "value": 22.2,
+              "rank": 35,
+              "tier": "Middle"
+            },
+            {
+              "state": "New York",
+              "value": 21.8,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Montana",
+              "value": 21.6,
+              "rank": 37,
               "tier": "Middle"
             },
             {
               "state": "Kentucky",
-              "value": 22.1,
-              "rank": 40,
+              "value": 21.3,
+              "rank": 38,
               "tier": "Middle"
             },
             {
               "state": "Washington",
-              "value": 22.1,
+              "value": 21.3,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Rhode Island",
+              "value": 21.2,
+              "rank": 40,
+              "tier": "Middle"
+            },
+            {
+              "state": "Oregon",
+              "value": 21.1,
               "rank": 41,
               "tier": "Middle"
             },
             {
-              "state": "Connecticut",
-              "value": 21.7,
+              "state": "New Hampshire",
+              "value": 21,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "Ohio",
-              "value": 21.4,
-              "rank": 43,
-              "tier": "Bottom 10"
-            },
-            {
-              "state": "Maine",
-              "value": 21.4,
-              "rank": 44,
-              "tier": "Bottom 10"
-            },
-            {
               "state": "New Mexico",
-              "value": 21.1,
-              "rank": 45,
+              "value": 20.7,
+              "rank": 43,
               "tier": "Bottom 10"
             },
             {
               "state": "District of Columbia",
               "value": 20.6,
-              "rank": 46,
-              "tier": "Bottom 10"
-            },
-            {
-              "state": "Oregon",
-              "value": 20.6,
-              "rank": 47,
+              "rank": 44,
               "tier": "Bottom 10"
             },
             {
               "state": "Michigan",
-              "value": 20.4,
-              "rank": 48,
+              "value": 20.5,
+              "rank": 45,
               "tier": "Bottom 10"
             },
             {
-              "state": "Vermont",
-              "value": 20.3,
-              "rank": 49,
+              "state": "Massachusetts",
+              "value": 20.5,
+              "rank": 46,
               "tier": "Bottom 10"
             },
             {
               "state": "California",
-              "value": 19.8,
-              "rank": 50,
+              "value": 20.2,
+              "rank": 47,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Connecticut",
+              "value": 19.6,
+              "rank": 48,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Maine",
+              "value": 19.4,
+              "rank": 49,
               "tier": "Bottom 10"
             },
             {
               "state": "Hawaii",
-              "value": 18.9,
+              "value": 18.8,
+              "rank": 50,
+              "tier": "Bottom 10"
+            },
+            {
+              "state": "Vermont",
+              "value": 17.8,
               "rank": 51,
               "tier": "Bottom 10"
             }
@@ -3909,55 +4364,55 @@
           "not_very_confident": [
             {
               "state": "Rhode Island",
-              "value": 26,
+              "value": 27.7,
               "rank": 1,
               "tier": "Top 10"
             },
             {
               "state": "Massachusetts",
-              "value": 25,
+              "value": 26.7,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Delaware",
-              "value": 24.5,
+              "state": "West Virginia",
+              "value": 24.9,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "West Virginia",
-              "value": 24.1,
+              "state": "Delaware",
+              "value": 24.7,
               "rank": 4,
-              "tier": "Top 10"
-            },
-            {
-              "state": "District of Columbia",
-              "value": 23.9,
-              "rank": 5,
               "tier": "Top 10"
             },
             {
               "state": "New Jersey",
               "value": 22.5,
-              "rank": 6,
+              "rank": 5,
               "tier": "Top 10"
             },
             {
               "state": "New Hampshire",
               "value": 22.1,
+              "rank": 6,
+              "tier": "Top 10"
+            },
+            {
+              "state": "District of Columbia",
+              "value": 21.9,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Maryland",
-              "value": 20.8,
+              "state": "Utah",
+              "value": 21,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Ohio",
-              "value": 20.5,
+              "state": "Wyoming",
+              "value": 20.9,
               "rank": 9,
               "tier": "Top 10"
             },
@@ -3968,242 +4423,242 @@
               "tier": "Top 10"
             },
             {
-              "state": "Connecticut",
-              "value": 19.8,
+              "state": "Kansas",
+              "value": 20,
               "rank": 11,
+              "tier": "Middle"
+            },
+            {
+              "state": "Connecticut",
+              "value": 19.9,
+              "rank": 12,
+              "tier": "Middle"
+            },
+            {
+              "state": "Idaho",
+              "value": 19.9,
+              "rank": 13,
+              "tier": "Middle"
+            },
+            {
+              "state": "Nevada",
+              "value": 19.8,
+              "rank": 14,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 19.8,
+              "rank": 15,
               "tier": "Middle"
             },
             {
               "state": "Pennsylvania",
               "value": 19.8,
-              "rank": 12,
-              "tier": "Middle"
-            },
-            {
-              "state": "Vermont",
-              "value": 19.2,
-              "rank": 13,
-              "tier": "Middle"
-            },
-            {
-              "state": "Utah",
-              "value": 19.1,
-              "rank": 14,
-              "tier": "Middle"
-            },
-            {
-              "state": "Nevada",
-              "value": 18.9,
-              "rank": 15,
-              "tier": "Middle"
-            },
-            {
-              "state": "Colorado",
-              "value": 18.8,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "Idaho",
-              "value": 18.7,
+              "state": "Nebraska",
+              "value": 19.6,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "New York",
-              "value": 18.7,
+              "state": "Ohio",
+              "value": 19.6,
               "rank": 18,
               "tier": "Middle"
             },
             {
               "state": "Montana",
-              "value": 18.4,
+              "value": 19.1,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Kansas",
-              "value": 18.4,
+              "state": "Vermont",
+              "value": 18.9,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "Wyoming",
-              "value": 18.4,
+              "state": "North Carolina",
+              "value": 18.8,
               "rank": 21,
               "tier": "Middle"
             },
             {
-              "state": "Nebraska",
-              "value": 18.3,
+              "state": "Missouri",
+              "value": 18.6,
               "rank": 22,
               "tier": "Middle"
             },
             {
-              "state": "Iowa",
-              "value": 18.2,
+              "state": "Washington",
+              "value": 18.5,
               "rank": 23,
               "tier": "Middle"
             },
             {
-              "state": "Kentucky",
-              "value": 17.9,
+              "state": "New York",
+              "value": 18.4,
               "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Maine",
-              "value": 17.8,
+              "state": "Colorado",
+              "value": 18.3,
               "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "North Carolina",
-              "value": 17.8,
+              "state": "Kentucky",
+              "value": 18.2,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Missouri",
-              "value": 17.8,
+              "state": "Hawaii",
+              "value": 18.2,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Hawaii",
-              "value": 17.7,
+              "state": "Maine",
+              "value": 18.1,
               "rank": 28,
               "tier": "Middle"
             },
             {
-              "state": "Washington",
-              "value": 17.6,
+              "state": "California",
+              "value": 17.7,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "California",
-              "value": 17.4,
+              "state": "Iowa",
+              "value": 17.7,
               "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 17.6,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "Arizona",
+              "value": 17.5,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Illinois",
+              "value": 17.4,
+              "rank": 33,
               "tier": "Middle"
             },
             {
               "state": "Virginia",
               "value": 17.3,
-              "rank": 31,
-              "tier": "Middle"
-            },
-            {
-              "state": "Oregon",
-              "value": 17.2,
-              "rank": 32,
-              "tier": "Middle"
-            },
-            {
-              "state": "Alaska",
-              "value": 17,
-              "rank": 33,
-              "tier": "Middle"
-            },
-            {
-              "state": "Illinois",
-              "value": 16.9,
               "rank": 34,
               "tier": "Middle"
             },
             {
               "state": "New Mexico",
-              "value": 16.5,
+              "value": 17.2,
               "rank": 35,
               "tier": "Middle"
             },
             {
-              "state": "Michigan",
-              "value": 16.2,
+              "state": "Oregon",
+              "value": 16.6,
               "rank": 36,
               "tier": "Middle"
             },
             {
-              "state": "Arizona",
-              "value": 16.1,
+              "state": "Tennessee",
+              "value": 16.6,
               "rank": 37,
               "tier": "Middle"
             },
             {
-              "state": "Tennessee",
-              "value": 16,
+              "state": "Michigan",
+              "value": 16.1,
               "rank": 38,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 15.6,
+              "state": "Arkansas",
+              "value": 15.7,
               "rank": 39,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 15.1,
+              "state": "Oklahoma",
+              "value": 15.5,
               "rank": 40,
               "tier": "Middle"
             },
             {
-              "state": "Arkansas",
-              "value": 15.1,
+              "state": "Georgia",
+              "value": 15.4,
               "rank": 41,
               "tier": "Middle"
             },
             {
-              "state": "Florida",
-              "value": 14.7,
+              "state": "South Dakota",
+              "value": 15.1,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "South Dakota",
-              "value": 14.5,
+              "state": "Florida",
+              "value": 14.8,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
-              "state": "Minnesota",
-              "value": 14.4,
+              "state": "North Dakota",
+              "value": 14.8,
               "rank": 44,
               "tier": "Bottom 10"
             },
             {
-              "state": "Wisconsin",
+              "state": "South Carolina",
               "value": 14.3,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
-              "state": "South Carolina",
+              "state": "Minnesota",
               "value": 14.2,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
-              "state": "Oklahoma",
-              "value": 13.8,
+              "state": "Wisconsin",
+              "value": 14.2,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
-              "state": "Louisiana",
-              "value": 13.7,
+              "state": "Texas",
+              "value": 14.1,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
-              "state": "Mississippi",
-              "value": 13.3,
+              "state": "Louisiana",
+              "value": 13.6,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
-              "state": "Texas",
-              "value": 13.2,
+              "state": "Mississippi",
+              "value": 13.5,
               "rank": 50,
               "tier": "Bottom 10"
             },
@@ -4216,290 +4671,290 @@
           ],
           "not_confident_at_all": [
             {
-              "state": "Oregon",
-              "value": 41,
+              "state": "Hawaii",
+              "value": 41.2,
               "rank": 1,
               "tier": "Top 10"
             },
             {
-              "state": "Hawaii",
-              "value": 40.8,
+              "state": "Vermont",
+              "value": 40.7,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Vermont",
-              "value": 40.1,
+              "state": "District of Columbia",
+              "value": 39.1,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "Illinois",
-              "value": 39,
+              "state": "Oregon",
+              "value": 39.1,
               "rank": 4,
               "tier": "Top 10"
             },
             {
-              "state": "Washington",
-              "value": 38.9,
+              "state": "Illinois",
+              "value": 37.2,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "District of Columbia",
-              "value": 38.9,
+              "state": "Washington",
+              "value": 37.1,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "Michigan",
-              "value": 38.2,
+              "state": "New Mexico",
+              "value": 36.8,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Wisconsin",
-              "value": 37.7,
+              "state": "Michigan",
+              "value": 36.8,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Minnesota",
-              "value": 37.1,
+              "state": "Maine",
+              "value": 36.7,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "Maine",
-              "value": 36.9,
+              "state": "Mississippi",
+              "value": 36.3,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "Mississippi",
-              "value": 36.9,
+              "state": "Wisconsin",
+              "value": 35.6,
               "rank": 11,
               "tier": "Middle"
             },
             {
-              "state": "Colorado",
-              "value": 36,
+              "state": "Minnesota",
+              "value": 35.5,
               "rank": 12,
               "tier": "Middle"
             },
             {
-              "state": "New Mexico",
-              "value": 35.9,
+              "state": "Colorado",
+              "value": 34.8,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 35,
+              "state": "Iowa",
+              "value": 34.2,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Iowa",
-              "value": 34.7,
+              "state": "California",
+              "value": 34.2,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "California",
-              "value": 34.3,
+              "state": "North Dakota",
+              "value": 33.5,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "Montana",
-              "value": 33.6,
-              "rank": 17,
-              "tier": "Middle"
-            },
-            {
-              "state": "South Dakota",
-              "value": 33.4,
-              "rank": 18,
-              "tier": "Middle"
-            },
-            {
               "state": "New York",
-              "value": 33,
-              "rank": 19,
+              "value": 33.1,
+              "rank": 17,
               "tier": "Middle"
             },
             {
               "state": "Virginia",
               "value": 32.8,
-              "rank": 20,
-              "tier": "Middle"
-            },
-            {
-              "state": "Louisiana",
-              "value": 32.4,
-              "rank": 21,
+              "rank": 18,
               "tier": "Middle"
             },
             {
               "state": "Connecticut",
-              "value": 32.4,
-              "rank": 22,
+              "value": 32.6,
+              "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Nevada",
-              "value": 32.1,
-              "rank": 23,
+              "state": "Montana",
+              "value": 32.2,
+              "rank": 20,
               "tier": "Middle"
             },
             {
               "state": "Texas",
-              "value": 32.1,
+              "value": 32,
+              "rank": 21,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 31.9,
+              "rank": 22,
+              "tier": "Middle"
+            },
+            {
+              "state": "Georgia",
+              "value": 31.9,
+              "rank": 23,
+              "tier": "Middle"
+            },
+            {
+              "state": "Louisiana",
+              "value": 31.7,
               "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Alaska",
-              "value": 31.9,
+              "state": "Nevada",
+              "value": 31.3,
               "rank": 25,
               "tier": "Middle"
             },
             {
               "state": "Arkansas",
-              "value": 31.6,
+              "value": 31.2,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 31.4,
+              "state": "South Dakota",
+              "value": 30.9,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Maryland",
-              "value": 31.3,
-              "rank": 28,
-              "tier": "Middle"
-            },
-            {
               "state": "Massachusetts",
-              "value": 30.7,
-              "rank": 29,
-              "tier": "Middle"
-            },
-            {
-              "state": "Indiana",
-              "value": 30.7,
-              "rank": 30,
-              "tier": "Middle"
-            },
-            {
-              "state": "New Hampshire",
-              "value": 30.4,
-              "rank": 31,
-              "tier": "Middle"
-            },
-            {
-              "state": "Ohio",
-              "value": 30.1,
-              "rank": 32,
-              "tier": "Middle"
-            },
-            {
-              "state": "Tennessee",
-              "value": 29.9,
-              "rank": 33,
+              "value": 30.8,
+              "rank": 28,
               "tier": "Middle"
             },
             {
               "state": "Rhode Island",
               "value": 29.9,
+              "rank": 29,
+              "tier": "Middle"
+            },
+            {
+              "state": "Ohio",
+              "value": 29.6,
+              "rank": 30,
+              "tier": "Middle"
+            },
+            {
+              "state": "Alaska",
+              "value": 29.6,
+              "rank": 31,
+              "tier": "Middle"
+            },
+            {
+              "state": "New Hampshire",
+              "value": 29.5,
+              "rank": 32,
+              "tier": "Middle"
+            },
+            {
+              "state": "Indiana",
+              "value": 29.4,
+              "rank": 33,
+              "tier": "Middle"
+            },
+            {
+              "state": "Tennessee",
+              "value": 29.2,
               "rank": 34,
               "tier": "Middle"
             },
             {
-              "state": "New Jersey",
+              "state": "Kentucky",
               "value": 29.1,
               "rank": 35,
               "tier": "Middle"
             },
             {
-              "state": "Arizona",
+              "state": "New Jersey",
               "value": 29,
               "rank": 36,
               "tier": "Middle"
             },
             {
-              "state": "Kentucky",
+              "state": "Arizona",
               "value": 28.9,
               "rank": 37,
               "tier": "Middle"
             },
             {
-              "state": "Delaware",
-              "value": 28.7,
+              "state": "Pennsylvania",
+              "value": 28.3,
               "rank": 38,
               "tier": "Middle"
             },
             {
-              "state": "Pennsylvania",
-              "value": 28.6,
+              "state": "Delaware",
+              "value": 27.9,
               "rank": 39,
               "tier": "Middle"
             },
             {
               "state": "Kansas",
-              "value": 28.6,
+              "value": 27.5,
               "rank": 40,
               "tier": "Middle"
             },
             {
-              "state": "Nebraska",
-              "value": 28.6,
+              "state": "Florida",
+              "value": 27,
               "rank": 41,
               "tier": "Middle"
             },
             {
-              "state": "Missouri",
-              "value": 27.4,
+              "state": "Nebraska",
+              "value": 26.9,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "North Carolina",
-              "value": 27.2,
+              "state": "Missouri",
+              "value": 26.8,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
-              "state": "Oklahoma",
-              "value": 26.9,
+              "state": "North Carolina",
+              "value": 26.6,
               "rank": 44,
               "tier": "Bottom 10"
             },
             {
-              "state": "Idaho",
-              "value": 26.8,
+              "state": "Oklahoma",
+              "value": 26,
               "rank": 45,
               "tier": "Bottom 10"
             },
             {
-              "state": "Florida",
-              "value": 26.6,
+              "state": "Alabama",
+              "value": 24.7,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
-              "state": "Alabama",
-              "value": 25,
+              "state": "Idaho",
+              "value": 24.6,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
               "state": "West Virginia",
-              "value": 24.5,
+              "value": 24.4,
               "rank": 48,
               "tier": "Bottom 10"
             },
@@ -4511,279 +4966,279 @@
             },
             {
               "state": "Utah",
-              "value": 23.9,
+              "value": 23,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "Wyoming",
-              "value": 22.6,
+              "value": 20.3,
               "rank": 51,
               "tier": "Bottom 10"
             }
           ],
           "unsure_not_familiar": [
             {
-              "state": "New Hampshire",
-              "value": 6.7,
+              "state": "Massachusetts",
+              "value": 7.5,
               "rank": 1,
               "tier": "Top 10"
             },
             {
-              "state": "Rhode Island",
-              "value": 6.5,
+              "state": "New Hampshire",
+              "value": 7.4,
               "rank": 2,
               "tier": "Top 10"
             },
             {
-              "state": "Massachusetts",
-              "value": 6.4,
+              "state": "Connecticut",
+              "value": 7.2,
               "rank": 3,
               "tier": "Top 10"
             },
             {
-              "state": "West Virginia",
-              "value": 6.4,
+              "state": "Hawaii",
+              "value": 6.9,
               "rank": 4,
               "tier": "Top 10"
             },
             {
-              "state": "Maine",
-              "value": 6.4,
+              "state": "Rhode Island",
+              "value": 6.8,
               "rank": 5,
               "tier": "Top 10"
             },
             {
-              "state": "Connecticut",
-              "value": 6.4,
+              "state": "Maine",
+              "value": 6.8,
               "rank": 6,
               "tier": "Top 10"
             },
             {
-              "state": "Kentucky",
-              "value": 6.3,
+              "state": "West Virginia",
+              "value": 6.6,
               "rank": 7,
               "tier": "Top 10"
             },
             {
-              "state": "Tennessee",
-              "value": 6.1,
+              "state": "Vermont",
+              "value": 6.5,
               "rank": 8,
               "tier": "Top 10"
             },
             {
-              "state": "Pennsylvania",
-              "value": 6.1,
+              "state": "Alaska",
+              "value": 6.4,
               "rank": 9,
               "tier": "Top 10"
             },
             {
-              "state": "Ohio",
-              "value": 6,
+              "state": "Idaho",
+              "value": 6.4,
               "rank": 10,
               "tier": "Top 10"
             },
             {
-              "state": "Idaho",
-              "value": 6,
+              "state": "Wyoming",
+              "value": 6.2,
               "rank": 11,
               "tier": "Middle"
             },
             {
-              "state": "Wyoming",
-              "value": 6,
+              "state": "Michigan",
+              "value": 6.1,
               "rank": 12,
               "tier": "Middle"
             },
             {
-              "state": "Michigan",
-              "value": 6,
+              "state": "New Jersey",
+              "value": 6.1,
               "rank": 13,
               "tier": "Middle"
             },
             {
-              "state": "Vermont",
-              "value": 6,
+              "state": "Utah",
+              "value": 6.1,
               "rank": 14,
               "tier": "Middle"
             },
             {
-              "state": "Utah",
-              "value": 5.9,
+              "state": "New York",
+              "value": 6.1,
               "rank": 15,
               "tier": "Middle"
             },
             {
-              "state": "Hawaii",
-              "value": 5.9,
+              "state": "Kentucky",
+              "value": 6.1,
               "rank": 16,
               "tier": "Middle"
             },
             {
-              "state": "Alaska",
-              "value": 5.8,
+              "state": "Ohio",
+              "value": 6.1,
               "rank": 17,
               "tier": "Middle"
             },
             {
-              "state": "Indiana",
-              "value": 5.7,
+              "state": "Montana",
+              "value": 6,
               "rank": 18,
               "tier": "Middle"
             },
             {
-              "state": "New Jersey",
-              "value": 5.7,
+              "state": "Pennsylvania",
+              "value": 5.9,
               "rank": 19,
               "tier": "Middle"
             },
             {
-              "state": "Wisconsin",
-              "value": 5.7,
+              "state": "Oregon",
+              "value": 5.9,
               "rank": 20,
               "tier": "Middle"
             },
             {
-              "state": "Montana",
-              "value": 5.7,
+              "state": "Wisconsin",
+              "value": 5.9,
               "rank": 21,
               "tier": "Middle"
             },
             {
               "state": "Nevada",
-              "value": 5.6,
+              "value": 5.8,
               "rank": 22,
               "tier": "Middle"
             },
             {
-              "state": "South Dakota",
-              "value": 5.6,
+              "state": "Tennessee",
+              "value": 5.8,
               "rank": 23,
               "tier": "Middle"
             },
             {
               "state": "California",
-              "value": 5.5,
+              "value": 5.7,
               "rank": 24,
               "tier": "Middle"
             },
             {
-              "state": "Oregon",
-              "value": 5.4,
+              "state": "South Dakota",
+              "value": 5.7,
               "rank": 25,
               "tier": "Middle"
             },
             {
-              "state": "New York",
-              "value": 5.4,
+              "state": "Washington",
+              "value": 5.7,
               "rank": 26,
               "tier": "Middle"
             },
             {
-              "state": "North Dakota",
-              "value": 5.4,
+              "state": "Florida",
+              "value": 5.6,
               "rank": 27,
               "tier": "Middle"
             },
             {
-              "state": "Georgia",
-              "value": 5.4,
+              "state": "Virginia",
+              "value": 5.6,
               "rank": 28,
               "tier": "Middle"
             },
             {
-              "state": "Virginia",
-              "value": 5.4,
+              "state": "Indiana",
+              "value": 5.5,
               "rank": 29,
               "tier": "Middle"
             },
             {
-              "state": "Nebraska",
-              "value": 5.4,
+              "state": "Georgia",
+              "value": 5.5,
               "rank": 30,
               "tier": "Middle"
             },
             {
-              "state": "Minnesota",
-              "value": 5.3,
+              "state": "North Dakota",
+              "value": 5.5,
               "rank": 31,
               "tier": "Middle"
             },
             {
-              "state": "Washington",
-              "value": 5.3,
+              "state": "Minnesota",
+              "value": 5.5,
               "rank": 32,
               "tier": "Middle"
             },
             {
-              "state": "Kansas",
-              "value": 5.3,
+              "state": "North Carolina",
+              "value": 5.2,
               "rank": 33,
               "tier": "Middle"
             },
             {
-              "state": "Missouri",
-              "value": 5.3,
+              "state": "Nebraska",
+              "value": 5.1,
               "rank": 34,
               "tier": "Middle"
             },
             {
-              "state": "Florida",
-              "value": 5.3,
+              "state": "District of Columbia",
+              "value": 5,
               "rank": 35,
-              "tier": "Middle"
-            },
-            {
-              "state": "Oklahoma",
-              "value": 5.2,
-              "rank": 36,
-              "tier": "Middle"
-            },
-            {
-              "state": "Iowa",
-              "value": 5.1,
-              "rank": 37,
-              "tier": "Middle"
-            },
-            {
-              "state": "Colorado",
-              "value": 5.1,
-              "rank": 38,
-              "tier": "Middle"
-            },
-            {
-              "state": "North Carolina",
-              "value": 5.1,
-              "rank": 39,
               "tier": "Middle"
             },
             {
               "state": "New Mexico",
               "value": 5,
-              "rank": 40,
+              "rank": 36,
+              "tier": "Middle"
+            },
+            {
+              "state": "Colorado",
+              "value": 5,
+              "rank": 37,
               "tier": "Middle"
             },
             {
               "state": "South Carolina",
               "value": 5,
-              "rank": 41,
+              "rank": 38,
+              "tier": "Middle"
+            },
+            {
+              "state": "Missouri",
+              "value": 5,
+              "rank": 39,
+              "tier": "Middle"
+            },
+            {
+              "state": "Kansas",
+              "value": 4.9,
+              "rank": 40,
               "tier": "Middle"
             },
             {
               "state": "Alabama",
               "value": 4.9,
+              "rank": 41,
+              "tier": "Middle"
+            },
+            {
+              "state": "Maryland",
+              "value": 4.9,
               "rank": 42,
               "tier": "Bottom 10"
             },
             {
-              "state": "Arizona",
+              "state": "Iowa",
               "value": 4.9,
               "rank": 43,
               "tier": "Bottom 10"
             },
             {
               "state": "Illinois",
-              "value": 4.8,
+              "value": 4.9,
               "rank": 44,
               "tier": "Bottom 10"
             },
@@ -4794,38 +5249,38 @@
               "tier": "Bottom 10"
             },
             {
-              "state": "Maryland",
+              "state": "Oklahoma",
               "value": 4.8,
               "rank": 46,
               "tier": "Bottom 10"
             },
             {
-              "state": "Arkansas",
+              "state": "Texas",
               "value": 4.7,
               "rank": 47,
               "tier": "Bottom 10"
             },
             {
-              "state": "Texas",
-              "value": 4.7,
+              "state": "Arizona",
+              "value": 4.6,
               "rank": 48,
               "tier": "Bottom 10"
             },
             {
-              "state": "District of Columbia",
-              "value": 4.5,
+              "state": "Louisiana",
+              "value": 4.6,
               "rank": 49,
               "tier": "Bottom 10"
             },
             {
-              "state": "Louisiana",
-              "value": 4.4,
+              "state": "Arkansas",
+              "value": 4.5,
               "rank": 50,
               "tier": "Bottom 10"
             },
             {
               "state": "Mississippi",
-              "value": 4.3,
+              "value": 4.4,
               "rank": 51,
               "tier": "Bottom 10"
             }
@@ -4834,11 +5289,36 @@
       }
     ]
   },
+  "content": {
+    "key_takeaways": [
+      "Views on ICE were sharply polarized: Republicans exceeded Democrats on support for strict enforcement and confidence in investigations.",
+      "Republicans reported the highest support for strict enforcement and the highest confidence in investigation fairness.",
+      "Boomers drove the strongest Republican support for strict enforcement compared with younger Republican cohorts.",
+      "Overall, White respondents showed higher support for strict enforcement than Black respondents, while within-party racial gaps were smaller.",
+      "Hispanic respondents were less supportive of strict enforcement than White respondents overall, but the within-Republican gap was smaller.",
+      "Differences by gender, education, rural-urban residence, income, and religion were comparatively modest."
+    ],
+    "methodology_note": "We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).",
+    "component_order": [
+      "hero_title",
+      "key_takeaways",
+      "methodology_note",
+      "topline_questions",
+      "demographic_breakdown",
+      "crosstabs_explorer",
+      "archetype_breakdown",
+      "state_ranking"
+    ]
+  },
+  "template": {
+    "site_slug": "ice",
+    "path": "site_config.json"
+  },
   "dataSource": {
     "input_files": {
       "enforcement": "ice_enforcement_xgboost_2026-02-27_vdh.rds",
       "investigations": "ice_investigations_xgboost_2026-02-27_vdh.rds"
     },
-    "generated_at_utc": "2026-03-04 13:39:34 UTC"
+    "generated_at_utc": "2026-03-05 15:52:49 UTC"
   }
 }
