@@ -544,7 +544,7 @@ body {
 }
 
 .q-opt-track {
-  height: 8px;
+  height: 9px;
   background: var(--track);
   border-radius: var(--r-full);
   overflow: hidden;
@@ -594,7 +594,7 @@ body {
 }
 
 .bar-track {
-  height: 10px;
+  height: 11px;
   background: var(--track);
   border-radius: var(--r-full);
   overflow: hidden;
@@ -742,7 +742,7 @@ body {
 .mini-tag.contra { color: var(--cool); }
 
 .mini-meter {
-  height: 7px;
+  height: 8px;
   border-radius: var(--r-full);
   background: var(--track);
   overflow: hidden;
@@ -833,7 +833,7 @@ body {
 }
 
 .state-track {
-  height: 8px;
+  height: 9px;
   background: var(--track);
   border-radius: var(--r-full);
   overflow: hidden;
@@ -1338,6 +1338,32 @@ body {
   .xt-select { min-width: 0; width: 100%; font-size: 0.78rem; }
   .state-metric-control { flex-direction: column; align-items: stretch; }
   .state-metric-control .xt-select { min-width: 0; width: 100%; }
+}
+
+/* ---- phone-safe: 480px ------------------------------------------------- */
+@media (max-width: 480px) {
+  /* tighter outer / card padding */
+  .layout { padding: 0.75rem 0.6rem 2.5rem; }
+  .card   { padding: 0.9rem 0.8rem; }
+  .hero   { padding: 1.2rem 1rem 1.2rem; }
+
+  /* crosstabs table: smaller font + padding so fewer columns trigger scroll */
+  .xt-table           { font-size: 0.72rem; }
+  .xt-table th        { font-size: 0.64rem; letter-spacing: 0.04em; }
+  .xt-table th,
+  .xt-table td        { padding: 0.35rem 0.4rem; }
+  .xt-table td:first-child { white-space: normal; min-width: 56px; }
+
+  /* bar rows: tighter label column */
+  .bar-row {
+    grid-template-columns: minmax(70px, 7rem) minmax(0, 1fr) 38px;
+    gap: 0.35rem;
+  }
+  .bar-label { font-size: 0.76rem; }
+  .bar-value { font-size: 0.76rem; }
+
+  /* archetype rows: tighter inner padding */
+  .archetype-row { padding: 0.55rem 0.65rem; }
 }
 
 @media (max-width: 460px) {
@@ -13845,7 +13871,7 @@ body {
       "enforcement": "epstein_files_xgboost_2026-02-27_vdh.rds",
       "investigations": "epstein_partisanship_xgboost_2026-02-27_vdh.rds"
     },
-    "generated_at_utc": "2026-03-09 08:36:30 UTC"
+    "generated_at_utc": "2026-03-09 09:30:03 UTC"
   }
 }
 </script>
@@ -13955,8 +13981,9 @@ function updateModeLabelElements() {
 function getNonOpinionIds(questionId = null) {
   const cfg = getResponseUniverseConfig();
   if (!cfg || !Array.isArray(cfg.questions)) return [];
+  const questionKey = (question) => question?.id || question?.question_id || null;
   const sourceQuestions = questionId
-    ? cfg.questions.filter((q) => q?.id === questionId)
+    ? cfg.questions.filter((q) => questionKey(q) === questionId)
     : cfg.questions;
   const ids = [];
   sourceQuestions.forEach((q) => {
@@ -13982,8 +14009,70 @@ function getUniverseScopedMetrics(metrics, questionId = null) {
   return allMetrics.filter((metric) => !excludedIds.has(metric.id));
 }
 
-function populateMetricOptions(metricSel, metrics, preferredMetricId, labelFormatter = null) {
-  const availableMetrics = toArray(metrics).filter((metric) => metric && metric.id);
+function getRedundantCombinedAliasMap(questionId = null) {
+  const cfg = getResponseUniverseConfig();
+  const questions = Array.isArray(cfg?.questions) ? cfg.questions : [];
+  const questionKey = (question) => question?.id || question?.question_id || null;
+  const scopedQuestion = questionId
+    ? questions.find((question) => questionKey(question) === questionId)
+    : null;
+  const sourceQuestion = scopedQuestion || (!questionId && questions.length === 1 ? questions[0] : null);
+  if (!sourceQuestion || !Array.isArray(sourceQuestion.combined_definitions)) {
+    return new Map();
+  }
+  const aliasMap = new Map();
+  sourceQuestion.combined_definitions.forEach((definition) => {
+    const aliasId = typeof definition?.id === 'string' ? definition.id : '';
+    const componentIds = toArray(definition?.component_outcome_ids).filter(Boolean);
+    if (!aliasId || componentIds.length !== 1) return;
+    const componentId = componentIds[0];
+    if (!componentId || componentId === aliasId) return;
+    aliasMap.set(aliasId, componentId);
+  });
+  return aliasMap;
+}
+
+function resolveCanonicalMetricId(metricId, questionId = null) {
+  if (!metricId) return null;
+  const aliasMap = getRedundantCombinedAliasMap(questionId);
+  let resolvedId = metricId;
+  const seen = new Set([resolvedId]);
+  while (aliasMap.has(resolvedId)) {
+    const nextId = aliasMap.get(resolvedId);
+    if (!nextId || seen.has(nextId)) break;
+    resolvedId = nextId;
+    seen.add(resolvedId);
+  }
+  return resolvedId;
+}
+
+function getCanonicalUniverseScopedMetrics(metrics, questionId = null) {
+  const scopedMetrics = getUniverseScopedMetrics(metrics, questionId);
+  const aliasMap = getRedundantCombinedAliasMap(questionId);
+  if (aliasMap.size === 0) return scopedMetrics;
+
+  const scopedById = new Map();
+  scopedMetrics.forEach((metric) => {
+    if (metric && metric.id) scopedById.set(metric.id, metric);
+  });
+
+  const canonicalMetrics = [];
+  const seenCanonicalIds = new Set();
+  scopedMetrics.forEach((metric) => {
+    if (!metric || !metric.id) return;
+    const canonicalId = resolveCanonicalMetricId(metric.id, questionId);
+    const canonicalMetric = scopedById.get(canonicalId) || metric;
+    if (!canonicalMetric?.id || seenCanonicalIds.has(canonicalMetric.id)) return;
+    seenCanonicalIds.add(canonicalMetric.id);
+    canonicalMetrics.push(canonicalMetric);
+  });
+  return canonicalMetrics;
+}
+
+function populateMetricOptions(
+    metricSel, metrics, preferredMetricId, labelFormatter = null, questionId = null
+) {
+  const availableMetrics = getCanonicalUniverseScopedMetrics(metrics, questionId);
   const formatLabel = typeof labelFormatter === 'function'
     ? labelFormatter
     : ((metric) => metric.label || metric.id);
@@ -13995,7 +14084,8 @@ function populateMetricOptions(metricSel, metrics, preferredMetricId, labelForma
     metricSel.value = '';
     return null;
   }
-  const selected = availableMetrics.find((metric) => metric.id === preferredMetricId) || availableMetrics[0];
+  const canonicalPreferredId = resolveCanonicalMetricId(preferredMetricId, questionId);
+  const selected = availableMetrics.find((metric) => metric.id === canonicalPreferredId) || availableMetrics[0];
   metricSel.value = selected.id;
   return selected.id;
 }
@@ -14657,13 +14747,14 @@ function initDemoExplorer(prefix, questionKey) {
 
   const firstDim = dims.find((d) => d.id === defaultDemographic) || dims[0];
   const card = firstDim?.cards?.[questionKey];
-  const metrics = getUniverseScopedMetrics(card?.metrics, questionKey);
+  const metrics = getCanonicalUniverseScopedMetrics(card?.metrics, questionKey);
   let preferredMetricId = card?.default_metric || metrics[0]?.id || null;
   preferredMetricId = populateMetricOptions(
     modeSel,
-    metrics,
+    card?.metrics,
     preferredMetricId,
-    (metric) => normalizeDisplayLabel(metric.label)
+    (metric) => normalizeDisplayLabel(metric.label),
+    questionKey
   );
 
   const render = () => {
@@ -14673,13 +14764,14 @@ function initDemoExplorer(prefix, questionKey) {
       display.innerHTML = '<div class="xt-empty-state">No data for this demographic.</div>';
       return;
     }
-    const cardMetrics = getUniverseScopedMetrics(cardData?.metrics, questionKey);
+    const cardMetrics = getCanonicalUniverseScopedMetrics(cardData?.metrics, questionKey);
     const preferredMode = modeSel.value || preferredMetricId || cardData.default_metric;
     preferredMetricId = populateMetricOptions(
       modeSel,
-      cardMetrics,
+      cardData?.metrics,
       preferredMode,
-      (metricOption) => normalizeDisplayLabel(metricOption.label)
+      (metricOption) => normalizeDisplayLabel(metricOption.label),
+      questionKey
     );
     const metric = cardMetrics.find((m) => m.id === preferredMetricId) || cardMetrics[0];
     if (!metric) {
@@ -14762,14 +14854,19 @@ function renderArchetypeChart(question, metricId) {
     return;
   }
 
-  const metrics = getUniverseScopedMetrics(question.metrics, question.id || null);
-  const preferredMetricId = metricId || activeArchetypeMetric || question.default_metric || metrics[0]?.id;
+  const questionId = question.id || null;
+  const metrics = getCanonicalUniverseScopedMetrics(question.metrics, questionId);
+  const preferredMetricId = resolveCanonicalMetricId(
+    metricId || activeArchetypeMetric || question.default_metric || metrics[0]?.id,
+    questionId
+  );
   if (metricSel) {
     activeArchetypeMetric = populateMetricOptions(
       metricSel,
-      metrics,
+      question.metrics,
       preferredMetricId,
-      (metricOption) => normalizeDisplayLabel(metricOption.label)
+      (metricOption) => normalizeDisplayLabel(metricOption.label),
+      questionId
     );
   } else {
     activeArchetypeMetric = preferredMetricId;
@@ -14959,14 +15056,19 @@ function renderStateChart(question, metricId) {
   const metricSel = document.getElementById('stateMetricSelect');
   if (!root || !question) return;
 
-  const metrics = getUniverseScopedMetrics(question.metrics, question.id || null);
-  const preferredMetricId = metricId || activeStateMetric || question.default_metric || metrics[0]?.id;
+  const questionId = question.id || null;
+  const metrics = getCanonicalUniverseScopedMetrics(question.metrics, questionId);
+  const preferredMetricId = resolveCanonicalMetricId(
+    metricId || activeStateMetric || question.default_metric || metrics[0]?.id,
+    questionId
+  );
   if (metricSel) {
     activeStateMetric = populateMetricOptions(
       metricSel,
-      metrics,
+      question.metrics,
       preferredMetricId,
-      (metricOption) => normalizeDisplayLabel(metricOption.label)
+      (metricOption) => normalizeDisplayLabel(metricOption.label),
+      questionId
     );
   } else {
     activeStateMetric = preferredMetricId;
@@ -15247,9 +15349,10 @@ function initSingleCrosstab(prefix, questionPayload) {
   const questionId = questionPayload?.id || null;
   const syncMetricSelection = (preferredMetricId = null) => populateMetricOptions(
     metricSel,
-    getUniverseScopedMetrics(questionPayload.metrics, questionId),
+    questionPayload.metrics,
     preferredMetricId || metricSel.value || defaults.metric || questionPayload.metrics?.[0]?.id,
-    (metricOption) => normalizeDisplayLabel(metricOption.label)
+    (metricOption) => normalizeDisplayLabel(metricOption.label),
+    questionId
   );
 
   if (rowSel.value === colSel.value && varIds.length > 1) {
