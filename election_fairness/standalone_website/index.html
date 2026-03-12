@@ -1220,6 +1220,51 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   FEEDBACK CALLOUT
+   ============================================================ */
+.feedback-callout {
+  max-width: 760px;
+  margin: 2.5rem auto 2rem;
+  padding: 2.5rem 2rem;
+  background: var(--accent-tint2);
+  border: 2px solid var(--accent);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+.feedback-callout h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.6rem;
+}
+.feedback-callout p {
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  line-height: 1.55;
+  margin: 0 0 1.4rem;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.feedback-cta {
+  display: inline-block;
+  padding: 0.65rem 1.8rem;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--r-full);
+  text-decoration: none;
+  transition: background 0.15s var(--ease-out);
+}
+.feedback-cta:hover {
+  background: var(--accent-hover);
+}
+@media (max-width: 480px) {
+  .feedback-callout { padding: 1.5rem 1.2rem; margin: 1.5rem 0.6rem 1.5rem; }
+}
     </style>
   </head>
 
@@ -1391,6 +1436,13 @@ body {
 
     </main>
 
+    <!-- FEEDBACK CALLOUT -->
+    <section class="feedback-callout" id="feedbackCallout" hidden>
+      <h2 id="feedbackHeading">Share Your Feedback</h2>
+      <p id="feedbackBody">Have questions about this analysis or suggestions for future topics? We&#x2019;d love to hear from you.</p>
+      <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
+    </section>
+
     <script>
 /* ============================================================
    EMBEDDED FALLBACK DATA
@@ -1404,7 +1456,7 @@ const FALLBACK_REPORT =
   {
   "meta": {
     "source": "Vantage Data House",
-    "title": "U.S. Views on Election Fairness",
+    "title": "Which Americans Are Most Concerned About Election Fairness?",
     "subtitle": null,
     "site": "https://www.vantagedatahouse.com",
     "sample": "N = 1,776 respondents",
@@ -7571,7 +7623,14 @@ const FALLBACK_REPORT =
       "crosstabs_explorer",
       "archetype_breakdown",
       "state_ranking"
-    ]
+    ],
+    "feedback_callout": {
+      "enabled": true,
+      "heading": "Share Your Feedback",
+      "body": "Have questions about this analysis or suggestions for future topics? We’d love to hear from you.",
+      "cta_label": "Get in Touch",
+      "cta_url": "mailto:philipp@vantagedatahouse.com"
+    }
   },
   "template": {
     "site_slug": "election_fairness",
@@ -7579,7 +7638,7 @@ const FALLBACK_REPORT =
   },
   "dataSource": {
     "input_file": "xgboost_2026-02-27_vdh.rds",
-    "generated_at_utc": "2026-03-09 09:30:07 UTC"
+    "generated_at_utc": "2026-03-12 10:39:24 UTC"
   }
 }
 ;
@@ -9164,6 +9223,28 @@ function renderStates() {
 }
 
 /* ============================================================
+   RENDER — FEEDBACK CALLOUT
+   ============================================================ */
+function renderFeedbackCallout() {
+  const section = document.getElementById('feedbackCallout');
+  if (!section) return;
+  const cfg = getContentConfig().feedback_callout;
+  if (!cfg || cfg.enabled === false) return;
+
+  const heading = document.getElementById('feedbackHeading');
+  const body = document.getElementById('feedbackBody');
+  const cta = document.getElementById('feedbackCta');
+
+  if (heading && cfg.heading) heading.textContent = cfg.heading;
+  if (body && cfg.body) body.textContent = cfg.body;
+  if (cta) {
+    if (cfg.cta_label) cta.textContent = cfg.cta_label;
+    if (cfg.cta_url) cta.href = cfg.cta_url;
+  }
+  section.removeAttribute('hidden');
+}
+
+/* ============================================================
    RENDER — TAKEAWAYS
    ============================================================ */
 function renderTakeaways() {
@@ -9464,6 +9545,7 @@ async function init() {
   renderMethodology();
   initCrosstabs();
   applyComponentOrder();
+  renderFeedbackCallout();
   initReveal();
 }
 
