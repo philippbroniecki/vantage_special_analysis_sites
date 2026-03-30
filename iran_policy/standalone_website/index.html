@@ -1682,6 +1682,8 @@ body {
       <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
     </section>
 
+    <script src="lib/html-to-image.min.js"></script>
+    <script src="lib/png-export-helper.js"></script>
     <script>
 /* ============================================================
    EMBEDDED FALLBACK DATA
@@ -16782,7 +16784,7 @@ const FALLBACK_REPORT =
     "input_file": "xgboost_2026-03-26_vdh.rds",
     "prior_input_file": "xgboost_2026-02-27_vdh.rds",
     "wave_selection": "dated_filename",
-    "generated_at_utc": "2026-03-30 10:32:26 UTC"
+    "generated_at_utc": "2026-03-30 15:48:57 UTC"
   }
 }
 ;
@@ -18935,6 +18937,14 @@ async function init() {
   initCrosstabs();
   applyComponentOrder();
   renderFeedbackCallout();
+  if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
+    window.VDH_PNG_EXPORT.init({
+      siteSlug: 'iran_policy',
+      getResponseUniverse: function getResponseUniverse() {
+        return typeof activeResponseUniverse === 'string' ? activeResponseUniverse : null;
+      }
+    });
+  }
   initReveal();
 }
 
