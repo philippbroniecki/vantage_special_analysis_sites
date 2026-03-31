@@ -1,0 +1,287 @@
+{
+  "meta": {
+    "source_files": {
+      "primary_ballot_governor": "xgboost_2026-03-30_georgia_primary_ballot_governor.rds",
+      "second_choice_governor": "xgboost_2026-03-30_georgia_second_choice_governor.rds",
+      "viability_governor": "xgboost_2026-03-30_georgia_viability_governor.rds",
+      "runoff_governor": "xgboost_2026-03-30_georgia_runoff_governor.rds"
+    },
+    "codebook_file": "survey_codebook_2026-03-30.json",
+    "generated_at_utc": "2026-03-31 13:48:58 UTC",
+    "note": "Georgia geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all Georgians said"
+      },
+      {
+        "id": "with_view",
+        "label": "What Georgians with a view said"
+      }
+    ],
+    "explainer": "In \"What Americans with a view said,\" we remove unsure/no-opinion responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "primary_ballot_governor",
+        "opinion_ids": [
+          "keisha_bottoms",
+          "olu_brown",
+          "geoff_duncan",
+          "amanda_duffy",
+          "jason_esteves",
+          "derrick_jackson",
+          "mike_thurmond"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "second_choice_governor",
+        "opinion_ids": [
+          "keisha_bottoms",
+          "olu_brown",
+          "geoff_duncan",
+          "amanda_duffy",
+          "jason_esteves",
+          "derrick_jackson",
+          "mike_thurmond"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "viability_governor",
+        "opinion_ids": [
+          "keisha_bottoms",
+          "olu_brown",
+          "geoff_duncan",
+          "amanda_duffy",
+          "jason_esteves",
+          "derrick_jackson",
+          "mike_thurmond"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "runoff_governor",
+        "opinion_ids": [
+          "keisha_bottoms",
+          "mike_thurmond"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": []
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "atlanta_burbs"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Georgia",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Georgia"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "atlanta_burbs",
+        "units": [
+          {
+            "id": "atlanta_burbs",
+            "label": "Atlanta Burbs"
+          },
+          {
+            "id": "atlanta_metro",
+            "label": "Atlanta Metro"
+          },
+          {
+            "id": "central_savannah",
+            "label": "Central Savannah"
+          },
+          {
+            "id": "georgia_coast",
+            "label": "Georgia Coast"
+          },
+          {
+            "id": "georgia_mountains",
+            "label": "Georgia Mountains"
+          },
+          {
+            "id": "heart_of_georgia",
+            "label": "Heart of Georgia"
+          },
+          {
+            "id": "middle_georgia",
+            "label": "Middle Georgia"
+          },
+          {
+            "id": "northeast_georgia",
+            "label": "Northeast Georgia"
+          },
+          {
+            "id": "northwest_georgia",
+            "label": "Northwest Georgia"
+          },
+          {
+            "id": "river_valley",
+            "label": "River Valley"
+          },
+          {
+            "id": "southern_georgia",
+            "label": "Southern Georgia"
+          },
+          {
+            "id": "southwest_georgia",
+            "label": "Southwest Georgia"
+          },
+          {
+            "id": "three_rivers",
+            "label": "Three Rivers"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "primary_ballot_governor",
+      "label": "Primary Ballot for Governor",
+      "default_metric": "mike_thurmond"
+    },
+    {
+      "id": "second_choice_governor",
+      "label": "Second Choice for Governor",
+      "default_metric": "mike_thurmond"
+    },
+    {
+      "id": "viability_governor",
+      "label": "Viability for Governor",
+      "default_metric": "mike_thurmond"
+    },
+    {
+      "id": "runoff_governor",
+      "label": "Runoff for Governor",
+      "default_metric": "mike_thurmond"
+    }
+  ],
+  "shards_by_question": {
+    "primary_ballot_governor": {
+      "state": {
+        "state wide": "crosstabs/primary_ballot_governor/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/primary_ballot_governor/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/primary_ballot_governor/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/primary_ballot_governor/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/primary_ballot_governor/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/primary_ballot_governor/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/primary_ballot_governor/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/primary_ballot_governor/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/primary_ballot_governor/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/primary_ballot_governor/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/primary_ballot_governor/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/primary_ballot_governor/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/primary_ballot_governor/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/primary_ballot_governor/cultural_region/three_rivers.json"
+      }
+    },
+    "second_choice_governor": {
+      "state": {
+        "state wide": "crosstabs/second_choice_governor/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/second_choice_governor/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/second_choice_governor/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/second_choice_governor/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/second_choice_governor/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/second_choice_governor/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/second_choice_governor/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/second_choice_governor/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/second_choice_governor/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/second_choice_governor/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/second_choice_governor/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/second_choice_governor/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/second_choice_governor/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/second_choice_governor/cultural_region/three_rivers.json"
+      }
+    },
+    "viability_governor": {
+      "state": {
+        "state wide": "crosstabs/viability_governor/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/viability_governor/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/viability_governor/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/viability_governor/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/viability_governor/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/viability_governor/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/viability_governor/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/viability_governor/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/viability_governor/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/viability_governor/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/viability_governor/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/viability_governor/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/viability_governor/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/viability_governor/cultural_region/three_rivers.json"
+      }
+    },
+    "runoff_governor": {
+      "state": {
+        "state wide": "crosstabs/runoff_governor/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/runoff_governor/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/runoff_governor/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/runoff_governor/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/runoff_governor/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/runoff_governor/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/runoff_governor/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/runoff_governor/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/runoff_governor/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/runoff_governor/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/runoff_governor/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/runoff_governor/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/runoff_governor/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/runoff_governor/cultural_region/three_rivers.json"
+      }
+    }
+  }
+}
