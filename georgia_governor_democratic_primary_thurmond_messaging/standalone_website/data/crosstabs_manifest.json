@@ -1,0 +1,364 @@
+{
+  "meta": {
+    "source_files": {
+      "msg_test_thurmond_msg_turnaround": "xgboost_2026-03-30_georgia_thurmond_msg_turnaround.rds",
+      "msg_test_thurmond_msg_biography": "xgboost_2026-03-30_georgia_thurmond_msg_biography.rds",
+      "msg_test_thurmond_msg_coalition": "xgboost_2026-03-30_georgia_thurmond_msg_coalition.rds",
+      "msg_test_thurmond_msg_ai_economy": "xgboost_2026-03-30_georgia_thurmond_msg_ai_economy.rds",
+      "msg_test_thurmond_msg_small_business": "xgboost_2026-03-30_georgia_thurmond_msg_small_business.rds",
+      "reask_thurmond_support": "xgboost_2026-03-30_georgia_reask_thurmond_support.rds"
+    },
+    "codebook_file": "survey_codebook_2026-03-30.json",
+    "generated_at_utc": "2026-03-31 20:41:07 UTC",
+    "note": "Georgia geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In “What respondents with a view said”, we remove undecided responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "msg_test_thurmond_msg_turnaround",
+        "opinion_ids": [
+          "much_more_likely",
+          "somewhat_more_likely",
+          "no_difference",
+          "somewhat_less_likely",
+          "much_less_likely"
+        ],
+        "non_opinion_ids": [
+          "unsure"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "msg_test_thurmond_msg_biography",
+        "opinion_ids": [
+          "much_more_likely",
+          "somewhat_more_likely",
+          "no_difference",
+          "somewhat_less_likely",
+          "much_less_likely"
+        ],
+        "non_opinion_ids": [
+          "unsure"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "msg_test_thurmond_msg_coalition",
+        "opinion_ids": [
+          "much_more_likely",
+          "somewhat_more_likely",
+          "no_difference",
+          "somewhat_less_likely",
+          "much_less_likely"
+        ],
+        "non_opinion_ids": [
+          "unsure"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "msg_test_thurmond_msg_ai_economy",
+        "opinion_ids": [
+          "much_more_likely",
+          "somewhat_more_likely",
+          "no_difference",
+          "somewhat_less_likely",
+          "much_less_likely"
+        ],
+        "non_opinion_ids": [
+          "unsure"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "msg_test_thurmond_msg_small_business",
+        "opinion_ids": [
+          "much_more_likely",
+          "somewhat_more_likely",
+          "no_difference",
+          "somewhat_less_likely",
+          "much_less_likely"
+        ],
+        "non_opinion_ids": [
+          "unsure"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "reask_thurmond_support",
+        "opinion_ids": [
+          "much_more_likely",
+          "somewhat_more_likely",
+          "no_difference",
+          "somewhat_less_likely",
+          "much_less_likely"
+        ],
+        "non_opinion_ids": [
+          "unsure"
+        ],
+        "combined_definitions": []
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "atlanta_burbs"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Georgia",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Georgia"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "atlanta_burbs",
+        "units": [
+          {
+            "id": "atlanta_burbs",
+            "label": "Atlanta Burbs"
+          },
+          {
+            "id": "atlanta_metro",
+            "label": "Atlanta Metro"
+          },
+          {
+            "id": "central_savannah",
+            "label": "Central Savannah"
+          },
+          {
+            "id": "georgia_coast",
+            "label": "Georgia Coast"
+          },
+          {
+            "id": "georgia_mountains",
+            "label": "Georgia Mountains"
+          },
+          {
+            "id": "heart_of_georgia",
+            "label": "Heart of Georgia"
+          },
+          {
+            "id": "middle_georgia",
+            "label": "Middle Georgia"
+          },
+          {
+            "id": "northeast_georgia",
+            "label": "Northeast Georgia"
+          },
+          {
+            "id": "northwest_georgia",
+            "label": "Northwest Georgia"
+          },
+          {
+            "id": "river_valley",
+            "label": "River Valley"
+          },
+          {
+            "id": "southern_georgia",
+            "label": "Southern Georgia"
+          },
+          {
+            "id": "southwest_georgia",
+            "label": "Southwest Georgia"
+          },
+          {
+            "id": "three_rivers",
+            "label": "Three Rivers"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "msg_test_thurmond_msg_turnaround",
+      "label": "Message Test: Turnaround Leader",
+      "default_metric": "much_more_likely"
+    },
+    {
+      "id": "msg_test_thurmond_msg_biography",
+      "label": "Message Test: Biography",
+      "default_metric": "much_more_likely"
+    },
+    {
+      "id": "msg_test_thurmond_msg_coalition",
+      "label": "Message Test: Coalition Builder",
+      "default_metric": "much_more_likely"
+    },
+    {
+      "id": "msg_test_thurmond_msg_ai_economy",
+      "label": "Message Test: AI and Economy",
+      "default_metric": "much_more_likely"
+    },
+    {
+      "id": "msg_test_thurmond_msg_small_business",
+      "label": "Message Test: Small Business",
+      "default_metric": "much_more_likely"
+    },
+    {
+      "id": "reask_thurmond_support",
+      "label": "Re-Ask: Thurmond Support",
+      "default_metric": "much_more_likely"
+    }
+  ],
+  "shards_by_question": {
+    "msg_test_thurmond_msg_turnaround": {
+      "state": {
+        "state wide": "crosstabs/msg_test_thurmond_msg_turnaround/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/msg_test_thurmond_msg_turnaround/cultural_region/three_rivers.json"
+      }
+    },
+    "msg_test_thurmond_msg_biography": {
+      "state": {
+        "state wide": "crosstabs/msg_test_thurmond_msg_biography/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/msg_test_thurmond_msg_biography/cultural_region/three_rivers.json"
+      }
+    },
+    "msg_test_thurmond_msg_coalition": {
+      "state": {
+        "state wide": "crosstabs/msg_test_thurmond_msg_coalition/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/msg_test_thurmond_msg_coalition/cultural_region/three_rivers.json"
+      }
+    },
+    "msg_test_thurmond_msg_ai_economy": {
+      "state": {
+        "state wide": "crosstabs/msg_test_thurmond_msg_ai_economy/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/msg_test_thurmond_msg_ai_economy/cultural_region/three_rivers.json"
+      }
+    },
+    "msg_test_thurmond_msg_small_business": {
+      "state": {
+        "state wide": "crosstabs/msg_test_thurmond_msg_small_business/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/msg_test_thurmond_msg_small_business/cultural_region/three_rivers.json"
+      }
+    },
+    "reask_thurmond_support": {
+      "state": {
+        "state wide": "crosstabs/reask_thurmond_support/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/reask_thurmond_support/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/reask_thurmond_support/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/reask_thurmond_support/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/reask_thurmond_support/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/reask_thurmond_support/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/reask_thurmond_support/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/reask_thurmond_support/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/reask_thurmond_support/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/reask_thurmond_support/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/reask_thurmond_support/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/reask_thurmond_support/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/reask_thurmond_support/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/reask_thurmond_support/cultural_region/three_rivers.json"
+      }
+    }
+  }
+}
