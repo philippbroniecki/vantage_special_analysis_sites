@@ -250,6 +250,16 @@ body {
 .back-nav {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+}
+
+.sibling-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .back-btn {
@@ -277,6 +287,31 @@ body {
 }
 
 .back-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface-alt);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 150ms ease;
+}
+
+.site-nav-link:hover {
   color: var(--accent);
   border-color: var(--accent);
   transform: translateY(-1px);
@@ -1475,8 +1510,9 @@ body {
       <!-- DATA LOADING BANNER (shown if JSON fetch failed) -->
       <div id="dataBanner" class="data-banner"></div>
 
-      <div class="back-nav">
-        <a class="back-btn" href="https://vantage.philippbroniecki.com">Back</a>
+      <div class="back-nav" id="siteNavRow">
+        <a class="back-btn" id="backToPortalLink" href="https://vantage.philippbroniecki.com">Back</a>
+        <div class="sibling-nav" id="siblingNavLinks" hidden></div>
       </div>
 
       <!-- HERO -->
@@ -1652,7 +1688,32 @@ body {
     "site": "https://www.vantagedatahouse.com",
     "sample": "N = 1,009 respondents",
     "fieldDates": "March 28-30, 2026",
-    "methodLabel": "Poststratified ML estimates"
+    "methodLabel": "Poststratified ML estimates",
+    "group_navigation": {
+      "group_id": "georgia_democratic_gubernatorial_primary_2026",
+      "group_label": "Georgia Democratic Gubernatorial Primary 2026",
+      "back": {
+        "label": "Back",
+        "href": "https://vantage.philippbroniecki.com"
+      },
+      "siblings": [
+        {
+          "site_slug": "georgia_governor_demogratic_primary_2026",
+          "label": "Test Ballot: 4 Questions",
+          "href": "../../georgia_governor_demogratic_primary_2026/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_top_issue",
+          "label": "Top Issue in Gubernatorial Election",
+          "href": "../../georgia_governor_democratic_primary_top_issue/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_thurmond_messaging",
+          "label": "Mike Thurmond Messaging",
+          "href": "../../georgia_governor_democratic_primary_thurmond_messaging/standalone_website/"
+        }
+      ]
+    }
   },
   "questions": [
     {
@@ -26824,7 +26885,7 @@ body {
       "policy_casino_gambling": "xgboost_2026-03-30_Georgia_2026-03-30.rds"
     },
     "codebook_file": "survey_codebook_2026-03-30.json",
-    "generated_at_utc": "2026-03-31 18:48:26 UTC",
+    "generated_at_utc": "2026-03-31 21:11:56 UTC",
     "crosstabs": {
       "manifest_file": "crosstabs_manifest.json",
       "manifest_path": "data/crosstabs_manifest.json",
@@ -27937,6 +27998,52 @@ function assertHeaderMetaPillSync(meta) {
   };
   check('metaSample', meta?.sample, 'sample');
   check('metaDates', meta?.fieldDates, 'field dates');
+}
+
+function normalizeSiteNavLinks(items) {
+  return toArray(items)
+    .map((item) => {
+      const label = String(item?.label || '').trim();
+      const href = String(item?.href || '').trim();
+      const siteSlug = String(item?.site_slug || item?.siteSlug || '').trim();
+      if (!label || !href) return null;
+      return { label, href, site_slug: siteSlug };
+    })
+    .filter(Boolean);
+}
+
+function renderSiteNavigation() {
+  const backLink = document.getElementById('backToPortalLink');
+  const siblingWrap = document.getElementById('siblingNavLinks');
+  if (!backLink || !siblingWrap) return;
+
+  const navCfg = reportData?.meta?.group_navigation || {};
+  const backCfg = navCfg?.back || {};
+  const backHref = String(backCfg?.href || backLink.getAttribute('href') || '').trim();
+  const backLabel = String(backCfg?.label || backLink.textContent || 'Back').trim();
+  if (backHref) backLink.href = backHref;
+  backLink.textContent = backLabel || 'Back';
+
+  const currentSlug = String(reportData?.template?.site_slug || '').trim();
+  const siblings = normalizeSiteNavLinks(navCfg?.siblings).filter((entry) => {
+    if (!entry?.site_slug || !currentSlug) return true;
+    return entry.site_slug !== currentSlug;
+  });
+
+  siblingWrap.innerHTML = '';
+  if (siblings.length === 0) {
+    siblingWrap.hidden = true;
+    return;
+  }
+
+  siblings.forEach((entry) => {
+    const link = document.createElement('a');
+    link.className = 'site-nav-link';
+    link.href = entry.href;
+    link.textContent = entry.label;
+    siblingWrap.appendChild(link);
+  });
+  siblingWrap.hidden = false;
 }
 
 function fillMeta() {
@@ -29071,6 +29178,7 @@ async function init() {
   initResponseUniverseToggle();
   initResponseGeographyControl();
   fillMeta();
+  renderSiteNavigation();
   renderTakeaways();
   renderMethodology();
   renderQuestionCards();
