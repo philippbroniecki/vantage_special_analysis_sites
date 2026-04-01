@@ -17,6 +17,9 @@
       --bg-card:   rgba(255,255,255,.05);
       --border:    rgba(255,255,255,.08);
       --border-hover: rgba(255,255,255,.18);
+      --section-bg: rgba(255,255,255,.025);
+      --section-border: rgba(255,255,255,.12);
+      --section-rule: rgba(255,255,255,.14);
       --text:      #e4eaf6;
       --text-sub:  #9babc4;
       --accent:    #48b4be;
@@ -31,6 +34,9 @@
       --bg-card:   #ffffff;
       --border:    rgba(0,0,0,.12);
       --border-hover: rgba(46,145,154,.45);
+      --section-bg: rgba(255,255,255,.72);
+      --section-border: rgba(0,0,0,.09);
+      --section-rule: rgba(0,0,0,.12);
       --text:      #1a2332;
       --text-sub:  #5e6e82;
       --accent:    #2e919a;
@@ -100,14 +106,14 @@
     }
     [data-theme="light"] .theme-toggle .knob { transform: translateX(18px); }
     .theme-toggle svg { width: 11px; height: 11px; fill: #fff; }
-http://localhost:8000/georgia_governor_democratic_primary_state_direction/standalone_website/
+
     /* ── Intro ── */
     .intro {
       color: var(--text-sub);
       font-size: 15px;
       line-height: 1.65;
       max-width: 620px;
-      margin-bottom: 36px;
+      margin-bottom: 64px;
     }
     .intro a {
       color: var(--accent);
@@ -118,14 +124,39 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
     .intro a:hover { border-color: var(--accent); }
 
     /* ── Sections ── */
-    .section { margin-bottom: 32px; }
+    .sections {
+      display: grid;
+      gap: 30px;
+      margin-bottom: 24px;
+    }
+    .section {
+      padding: 22px;
+      border: 1px solid var(--section-border);
+      border-radius: calc(var(--radius) + 2px);
+      background: var(--section-bg);
+    }
+    .section-head {
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--section-rule);
+    }
     .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .1em;
+      font-weight: 700;
+      letter-spacing: .09em;
       text-transform: uppercase;
-      color: var(--text-sub);
-      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .section-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-bg);
     }
 
     /* ── Grid ── */
@@ -206,6 +237,11 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
     @media (max-width: 520px) {
       h1 { font-size: 24px; }
       .wrap { padding: 32px 16px 60px; }
+      .intro { margin-bottom: 52px; }
+      .sections { gap: 22px; }
+      .section { padding: 16px 14px; }
+      .section-head { margin-bottom: 14px; padding-bottom: 10px; }
+      .section-label { font-size: 11px; letter-spacing: .08em; }
     }
   </style>
 </head>
@@ -229,9 +265,12 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
       request at <a href="mailto:philipp@vantagedatahouse.com">philipp@vantagedatahouse.com</a>.
     </p>
 
+    <div class="sections">
     <!-- Georgia Democratic Gubernatorial Primary 2026 -->
-    <div class="section">
-      <div class="section-label">Georgia Democratic Gubernatorial Primary 2026</div>
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-label">Georgia Democratic Gubernatorial Primary 2026</h2>
+      </div>
       <div class="grid">
 
         <a class="card" href="https://georgia-gov-primary.vantage.philippbroniecki.com/">
@@ -253,7 +292,7 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
             <div class="card-meta">March 28-30</div>
           </div>
           <div class="card-footer">
-            <span class="tag">special-question</span>
+            <span class="tag">special question</span>
             <span class="arrow">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </span>
@@ -299,12 +338,27 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
           </div>
         </a>
 
-        </div>
-    </div>
+        <a class="card" href="https://georgia-primary-favorability.vantage.philippbroniecki.com/">
+          <div>
+            <div class="card-title">Favorability: Trump, Bottoms, Thurmond, Esteves, and Duncan</div>
+            <div class="card-meta">March 28-30</div>
+          </div>
+          <div class="card-footer">
+            <span class="tag">favorability</span>
+            <span class="arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
 
-    <!-- Special Questions -->
-    <div class="section">
-      <div class="section-label">Special Questions</div>
+        </div>
+    </section>
+
+    <!-- National Survey -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-label">National Survey</h2>
+      </div>
       <div class="grid">
 
         <a class="card" href="https://iran-policy.vantage.philippbroniecki.com/">
@@ -313,7 +367,7 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
             <div class="card-meta">2 Surveys: March 20-26 and February 25-27</div>
           </div>
           <div class="card-footer">
-            <span class="tag">special-question</span>
+            <span class="tag">special question</span>
             <span class="arrow">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </span>
@@ -326,7 +380,7 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
             <div class="card-meta">2 Surveys: March 20-26 and February 25-27</div>
           </div>
           <div class="card-footer">
-            <span class="tag">special-question</span>
+            <span class="tag">special question</span>
             <span class="arrow">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </span>
@@ -339,7 +393,7 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
             <div class="card-meta">February 25-27 Survey</div>
           </div>
           <div class="card-footer">
-            <span class="tag">special-question</span>
+            <span class="tag">special question</span>
             <span class="arrow">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </span>
@@ -352,7 +406,7 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
             <div class="card-meta">February 25-27 Survey</div>
           </div>
           <div class="card-footer">
-            <span class="tag">special-question</span>
+            <span class="tag">special question</span>
             <span class="arrow">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
             </span>
@@ -361,11 +415,13 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
 
 
         </div>
-    </div>
+    </section>
 
     <!-- Other -->
-    <div class="section">
-      <div class="section-label">Other</div>
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-label">Other</h2>
+      </div>
       <div class="grid">
         <a class="card" href="https://www.vantagedatahouse.com/">
           <div>
@@ -380,6 +436,7 @@ http://localhost:8000/georgia_governor_democratic_primary_state_direction/standa
           </div>
         </a>
       </div>
+    </section>
     </div>
 
     <!-- Footer -->

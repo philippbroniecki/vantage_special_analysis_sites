@@ -1,0 +1,319 @@
+{
+  "meta": {
+    "source_files": {
+      "favorability_trump": "xgboost_2026-03-30_Georgia_2026-03-30.rds",
+      "favorability_bottoms": "xgboost_2026-03-30_Georgia_2026-03-30.rds",
+      "favorability_thurmond": "xgboost_2026-03-30_Georgia_2026-03-30.rds",
+      "favorability_esteves": "xgboost_2026-03-30_Georgia_2026-03-30.rds",
+      "favorability_duncan": "xgboost_2026-03-30_Georgia_2026-03-30.rds"
+    },
+    "codebook_file": null,
+    "generated_at_utc": "2026-04-01 16:46:28 UTC",
+    "note": "Georgia geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove \"Never heard of / Can't rate\" responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "favorability_trump",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of_cant_rate"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "favorability_bottoms",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of_cant_rate"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "favorability_thurmond",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of_cant_rate"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "favorability_esteves",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of_cant_rate"
+        ],
+        "combined_definitions": []
+      },
+      {
+        "question_id": "favorability_duncan",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of_cant_rate"
+        ],
+        "combined_definitions": []
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "atlanta_burbs"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Georgia",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Georgia"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "atlanta_burbs",
+        "units": [
+          {
+            "id": "atlanta_burbs",
+            "label": "Atlanta Burbs"
+          },
+          {
+            "id": "atlanta_metro",
+            "label": "Atlanta Metro"
+          },
+          {
+            "id": "central_savannah",
+            "label": "Central Savannah"
+          },
+          {
+            "id": "georgia_coast",
+            "label": "Georgia Coast"
+          },
+          {
+            "id": "georgia_mountains",
+            "label": "Georgia Mountains"
+          },
+          {
+            "id": "heart_of_georgia",
+            "label": "Heart of Georgia"
+          },
+          {
+            "id": "middle_georgia",
+            "label": "Middle Georgia"
+          },
+          {
+            "id": "northeast_georgia",
+            "label": "Northeast Georgia"
+          },
+          {
+            "id": "northwest_georgia",
+            "label": "Northwest Georgia"
+          },
+          {
+            "id": "river_valley",
+            "label": "River Valley"
+          },
+          {
+            "id": "southern_georgia",
+            "label": "Southern Georgia"
+          },
+          {
+            "id": "southwest_georgia",
+            "label": "Southwest Georgia"
+          },
+          {
+            "id": "three_rivers",
+            "label": "Three Rivers"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "favorability_trump",
+      "label": "Donald Trump",
+      "default_metric": "very_favorable"
+    },
+    {
+      "id": "favorability_bottoms",
+      "label": "Keisha Lance Bottoms",
+      "default_metric": "very_favorable"
+    },
+    {
+      "id": "favorability_thurmond",
+      "label": "Mike Thurmond",
+      "default_metric": "very_favorable"
+    },
+    {
+      "id": "favorability_esteves",
+      "label": "Jason Esteves",
+      "default_metric": "very_favorable"
+    },
+    {
+      "id": "favorability_duncan",
+      "label": "Geoff Duncan",
+      "default_metric": "very_favorable"
+    }
+  ],
+  "shards_by_question": {
+    "favorability_trump": {
+      "state": {
+        "state wide": "crosstabs/favorability_trump/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/favorability_trump/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/favorability_trump/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/favorability_trump/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/favorability_trump/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/favorability_trump/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/favorability_trump/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/favorability_trump/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/favorability_trump/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/favorability_trump/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/favorability_trump/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/favorability_trump/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/favorability_trump/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/favorability_trump/cultural_region/three_rivers.json"
+      }
+    },
+    "favorability_bottoms": {
+      "state": {
+        "state wide": "crosstabs/favorability_bottoms/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/favorability_bottoms/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/favorability_bottoms/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/favorability_bottoms/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/favorability_bottoms/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/favorability_bottoms/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/favorability_bottoms/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/favorability_bottoms/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/favorability_bottoms/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/favorability_bottoms/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/favorability_bottoms/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/favorability_bottoms/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/favorability_bottoms/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/favorability_bottoms/cultural_region/three_rivers.json"
+      }
+    },
+    "favorability_thurmond": {
+      "state": {
+        "state wide": "crosstabs/favorability_thurmond/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/favorability_thurmond/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/favorability_thurmond/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/favorability_thurmond/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/favorability_thurmond/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/favorability_thurmond/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/favorability_thurmond/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/favorability_thurmond/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/favorability_thurmond/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/favorability_thurmond/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/favorability_thurmond/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/favorability_thurmond/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/favorability_thurmond/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/favorability_thurmond/cultural_region/three_rivers.json"
+      }
+    },
+    "favorability_esteves": {
+      "state": {
+        "state wide": "crosstabs/favorability_esteves/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/favorability_esteves/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/favorability_esteves/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/favorability_esteves/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/favorability_esteves/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/favorability_esteves/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/favorability_esteves/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/favorability_esteves/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/favorability_esteves/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/favorability_esteves/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/favorability_esteves/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/favorability_esteves/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/favorability_esteves/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/favorability_esteves/cultural_region/three_rivers.json"
+      }
+    },
+    "favorability_duncan": {
+      "state": {
+        "state wide": "crosstabs/favorability_duncan/state/state_wide.json"
+      },
+      "cultural_region": {
+        "atlanta_burbs": "crosstabs/favorability_duncan/cultural_region/atlanta_burbs.json",
+        "atlanta_metro": "crosstabs/favorability_duncan/cultural_region/atlanta_metro.json",
+        "central_savannah": "crosstabs/favorability_duncan/cultural_region/central_savannah.json",
+        "georgia_coast": "crosstabs/favorability_duncan/cultural_region/georgia_coast.json",
+        "georgia_mountains": "crosstabs/favorability_duncan/cultural_region/georgia_mountains.json",
+        "heart_of_georgia": "crosstabs/favorability_duncan/cultural_region/heart_of_georgia.json",
+        "middle_georgia": "crosstabs/favorability_duncan/cultural_region/middle_georgia.json",
+        "northeast_georgia": "crosstabs/favorability_duncan/cultural_region/northeast_georgia.json",
+        "northwest_georgia": "crosstabs/favorability_duncan/cultural_region/northwest_georgia.json",
+        "river_valley": "crosstabs/favorability_duncan/cultural_region/river_valley.json",
+        "southern_georgia": "crosstabs/favorability_duncan/cultural_region/southern_georgia.json",
+        "southwest_georgia": "crosstabs/favorability_duncan/cultural_region/southwest_georgia.json",
+        "three_rivers": "crosstabs/favorability_duncan/cultural_region/three_rivers.json"
+      }
+    }
+  }
+}
