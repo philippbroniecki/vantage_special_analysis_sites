@@ -4,15 +4,171 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>U.S. Opinion on Iran Policy | Vantage Data House</title>
-    <script>
-      (function initThemeBeforePaint() {
-        var key = 'vdh_iran2_theme';
-        var theme = 'light';
-        try {
-          var saved = localStorage.getItem(key);
-          if (saved === 'dark' || saved === 'light') theme = saved;
-        } catch (err) {}
-        document.documentElement.setAttribute('data-theme', theme);
+        <script>
+      (function bootstrapVDHTheme() {
+        const THEME_PARAM_KEY = 'theme';
+        const THEME_COOKIE_KEY = 'vdh_theme';
+        const THEME_STORAGE_KEY = 'vdh_theme';
+        const LEGACY_STORAGE_KEYS = [
+          'vantage-theme',
+          'vdh_iran2_theme',
+          'vdh_ice2_theme',
+          'vdh_trump_theme',
+          'vdh_georgia_primary_theme',
+          'vdh_georgia_favorability_theme',
+          'vdh_georgia_thurmond_messaging_theme',
+          'vdh_georgia_state_direction_theme',
+          'vdh_georgia_top_issue_theme',
+          'vdh_georgia_agree_theme',
+          'vdh_georgia_casino_gambling_theme'
+        ];
+
+        function normalizeTheme(value) {
+          return value === 'dark' || value === 'light' ? value : null;
+        }
+
+        function readThemeFromQuery() {
+          try {
+            const params = new URLSearchParams(window.location.search || '');
+            return normalizeTheme(params.get(THEME_PARAM_KEY));
+          } catch (err) {
+            return null;
+          }
+        }
+
+        function readThemeFromCookie() {
+          try {
+            const entries = String(document.cookie || '').split(';');
+            for (const entry of entries) {
+              const trimmed = entry.trim();
+              if (!trimmed) continue;
+              const idx = trimmed.indexOf('=');
+              if (idx <= 0) continue;
+              const key = trimmed.slice(0, idx).trim();
+              if (key !== THEME_COOKIE_KEY) continue;
+              const value = decodeURIComponent(trimmed.slice(idx + 1));
+              const normalized = normalizeTheme(value);
+              if (normalized) return normalized;
+            }
+          } catch (err) {}
+          return null;
+        }
+
+        function readThemeFromStorage() {
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try {
+              const normalized = normalizeTheme(window.localStorage.getItem(key));
+              if (normalized) return normalized;
+            } catch (err) {
+              // localStorage can be unavailable in restricted contexts.
+            }
+          }
+          return null;
+        }
+
+        function readThemeFromSystem() {
+          try {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              return 'dark';
+            }
+            if (window.matchMedia) return 'light';
+          } catch (err) {}
+          return null;
+        }
+
+        function resolveInitialTheme() {
+          const fromQuery = readThemeFromQuery();
+          if (fromQuery) return { theme: fromQuery, source: 'param' };
+
+          const fromCookie = readThemeFromCookie();
+          if (fromCookie) return { theme: fromCookie, source: 'cookie' };
+
+          const fromStorage = readThemeFromStorage();
+          if (fromStorage) return { theme: fromStorage, source: 'storage' };
+
+          const fromSystem = readThemeFromSystem();
+          if (fromSystem) return { theme: fromSystem, source: 'system' };
+
+          return { theme: 'light', source: 'fallback' };
+        }
+
+        function isPhilippDomain(hostname) {
+          const host = String(hostname || '').toLowerCase();
+          return host === 'philippbroniecki.com' || host.endsWith('.philippbroniecki.com');
+        }
+
+        function getSharedCookieDomain() {
+          return isPhilippDomain(window.location.hostname) ? '.philippbroniecki.com' : '';
+        }
+
+        function persistTheme(theme) {
+          const normalized = normalizeTheme(theme);
+          if (!normalized) return;
+
+          const securePart = window.location.protocol === 'https:' ? '; Secure' : '';
+          const baseCookie = `${THEME_COOKIE_KEY}=${encodeURIComponent(normalized)}; Path=/; Max-Age=31536000; SameSite=Lax${securePart}`;
+          const sharedDomain = getSharedCookieDomain();
+
+          try {
+            if (sharedDomain) {
+              document.cookie = `${baseCookie}; Domain=${sharedDomain}`;
+            }
+            document.cookie = baseCookie;
+          } catch (err) {}
+
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try { window.localStorage.setItem(key, normalized); } catch (err) {}
+          }
+        }
+
+        function shouldPropagateThemeToURL(url, rawHref) {
+          const raw = String(rawHref || '').trim();
+          if (!raw || raw.startsWith('#') || /^mailto:/i.test(raw) || /^tel:/i.test(raw) || /^javascript:/i.test(raw)) {
+            return false;
+          }
+
+          const protocol = String((url && url.protocol) || '').toLowerCase();
+          if (protocol === 'file:') return true;
+          if (protocol !== 'http:' && protocol !== 'https:') return false;
+
+          const host = String((url && url.hostname) || '').toLowerCase();
+          if (host === 'localhost' || host === '127.0.0.1' || host === '[::1]') return true;
+          return isPhilippDomain(host);
+        }
+
+        function withThemeParam(rawHref, theme) {
+          const normalizedTheme = normalizeTheme(theme);
+          if (!normalizedTheme) return rawHref;
+
+          try {
+            const url = new URL(rawHref, window.location.href);
+            if (!shouldPropagateThemeToURL(url, rawHref)) return rawHref;
+            url.searchParams.set(THEME_PARAM_KEY, normalizedTheme);
+            return url.toString();
+          } catch (err) {
+            return rawHref;
+          }
+        }
+
+        function getActiveTheme() {
+          return normalizeTheme(document.documentElement.getAttribute('data-theme')) || 'light';
+        }
+
+        window.VDHTheme = {
+          normalizeTheme,
+          resolveInitialTheme,
+          persistTheme,
+          withThemeParam,
+          getActiveTheme,
+          shouldPropagateThemeToURL,
+          themeParamKey: THEME_PARAM_KEY
+        };
+
+        const initialTheme = resolveInitialTheme();
+        document.documentElement.setAttribute('data-theme', initialTheme.theme);
+        window.__VDH_THEME_BOOT__ = initialTheme;
       })();
     </script>
     <style>
@@ -16784,7 +16940,7 @@ const FALLBACK_REPORT =
     "input_file": "xgboost_2026-03-26_vdh.rds",
     "prior_input_file": "xgboost_2026-02-27_vdh.rds",
     "wave_selection": "dated_filename",
-    "generated_at_utc": "2026-03-30 15:48:57 UTC"
+    "generated_at_utc": "2026-04-02 11:49:10 UTC"
   }
 }
 ;
@@ -17010,24 +17166,97 @@ function bindArchetypeTooltipListeners() {
 /* ============================================================
    THEME
    ============================================================ */
+let themeLinkObserver = null;
+
+function refreshThemeAwareLinks(root) {
+  const helper = window.VDHTheme;
+  if (!helper || typeof helper.withThemeParam !== 'function') return;
+
+  const activeTheme = typeof helper.getActiveTheme === 'function'
+    ? helper.getActiveTheme()
+    : 'light';
+
+  const scope = root && typeof root.querySelectorAll === 'function' ? root : document;
+  const links = [];
+
+  if (scope === document) {
+    links.push(...document.querySelectorAll('a[href]'));
+  } else {
+    if (scope.matches && scope.matches('a[href]')) links.push(scope);
+    links.push(...scope.querySelectorAll('a[href]'));
+  }
+
+  links.forEach((link) => {
+    const rawHref = link.getAttribute('href');
+    if (!rawHref) return;
+    const themedHref = helper.withThemeParam(rawHref, activeTheme);
+    if (themedHref && themedHref !== rawHref) {
+      link.setAttribute('href', themedHref);
+    }
+  });
+}
+
+function ensureThemeLinkObserver() {
+  if (themeLinkObserver || typeof MutationObserver === 'undefined') return;
+  themeLinkObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (!node || node.nodeType !== 1) return;
+        refreshThemeAwareLinks(node);
+      });
+    });
+  });
+  themeLinkObserver.observe(document.documentElement, { childList: true, subtree: true });
+}
+
 function applyTheme(theme, persist = true) {
-  const resolved = theme === 'dark' ? 'dark' : 'light';
+  const helper = window.VDHTheme;
+  const resolved = helper && typeof helper.normalizeTheme === 'function'
+    ? (helper.normalizeTheme(theme) || 'light')
+    : (theme === 'dark' ? 'dark' : 'light');
+
   document.documentElement.setAttribute('data-theme', resolved);
-  if (persist) safeSet('vdh_iran2_theme', resolved);
-  const icon  = document.getElementById('toggleIcon');
+  if (persist && helper && typeof helper.persistTheme === 'function') {
+    helper.persistTheme(resolved);
+  }
+
+  const icon = document.getElementById('toggleIcon');
   const label = document.getElementById('toggleLabel');
-  if (icon)  icon.textContent  = resolved === 'dark' ? '\u263D' : '\u2600';
-  if (label) label.textContent = resolved === 'dark' ? 'Dark'   : 'Light';
+  if (icon) icon.textContent = resolved === 'dark' ? '\u263D' : '\u2600';
+  if (label) label.textContent = resolved === 'dark' ? 'Dark' : 'Light';
+
+  refreshThemeAwareLinks();
 }
 
 function initTheme() {
-  const saved = safeGet('vdh_iran2_theme');
-  const initial = saved === 'dark' || saved === 'light' ? saved : 'light';
-  applyTheme(initial, false);
-  document.getElementById('themeToggle')?.addEventListener('click', () => {
-    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    applyTheme(next, true);
-  });
+  const helper = window.VDHTheme || {};
+  const boot = window.__VDH_THEME_BOOT__ || {};
+  const bootTheme = typeof helper.normalizeTheme === 'function'
+    ? helper.normalizeTheme(boot.theme)
+    : null;
+
+  const resolved = bootTheme
+    ? { theme: bootTheme, source: boot.source || null }
+    : (typeof helper.resolveInitialTheme === 'function'
+      ? helper.resolveInitialTheme()
+      : { theme: 'light', source: 'fallback' });
+
+  applyTheme(resolved.theme, false);
+
+  if (resolved.source === 'param' && typeof helper.persistTheme === 'function') {
+    helper.persistTheme(resolved.theme);
+  }
+
+  ensureThemeLinkObserver();
+  refreshThemeAwareLinks();
+
+  const toggle = document.getElementById('themeToggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next, true);
+    });
+  }
 }
 
 /* ============================================================
