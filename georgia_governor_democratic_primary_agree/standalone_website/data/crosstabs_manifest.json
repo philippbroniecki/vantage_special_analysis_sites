@@ -6,7 +6,7 @@
       "agree_private_schools": "xgboost_2026-03-30_Georgia_2026-03-30.rds"
     },
     "codebook_file": "survey_codebook_2026-03-30.json",
-    "generated_at_utc": "2026-04-02 11:55:22 UTC",
+    "generated_at_utc": "2026-04-02 13:35:18 UTC",
     "note": "Georgia geography-aware weighted poststratified crosstabs; shares in percent.",
     "delivery": {
       "scheme": "manifest_plus_shards",
@@ -42,7 +42,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_agree",
+            "positive_component_outcome_ids": [
+              "strongly_agree",
+              "somewhat_agree"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_disagree",
+              "strongly_disagree"
+            ]
+          }
+        ]
       },
       {
         "question_id": "agree_sales_tax",
@@ -55,7 +68,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_agree",
+            "positive_component_outcome_ids": [
+              "strongly_agree",
+              "somewhat_agree"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_disagree",
+              "strongly_disagree"
+            ]
+          }
+        ]
       },
       {
         "question_id": "agree_private_schools",
@@ -68,7 +94,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_agree",
+            "positive_component_outcome_ids": [
+              "strongly_agree",
+              "somewhat_agree"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_disagree",
+              "strongly_disagree"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -163,17 +202,17 @@
     {
       "id": "agree_metro_spending",
       "label": "Metro Area Spending",
-      "default_metric": "strongly_agree"
+      "default_metric": "net_agree"
     },
     {
       "id": "agree_sales_tax",
       "label": "Sales Tax",
-      "default_metric": "strongly_agree"
+      "default_metric": "net_agree"
     },
     {
       "id": "agree_private_schools",
       "label": "Private Schools Funding",
-      "default_metric": "strongly_agree"
+      "default_metric": "net_agree"
     }
   ],
   "shards_by_question": {

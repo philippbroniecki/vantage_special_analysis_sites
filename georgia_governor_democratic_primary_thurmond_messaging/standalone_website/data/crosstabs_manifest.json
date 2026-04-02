@@ -9,7 +9,7 @@
       "reask_thurmond_support": "xgboost_2026-03-30_georgia_reask_thurmond_support.rds"
     },
     "codebook_file": "survey_codebook_2026-03-30.json",
-    "generated_at_utc": "2026-04-02 11:52:53 UTC",
+    "generated_at_utc": "2026-04-02 13:32:17 UTC",
     "note": "Georgia geography-aware weighted poststratified crosstabs; shares in percent.",
     "delivery": {
       "scheme": "manifest_plus_shards",
@@ -46,7 +46,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_likely_support",
+            "positive_component_outcome_ids": [
+              "much_more_likely",
+              "somewhat_more_likely"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_less_likely",
+              "much_less_likely"
+            ]
+          }
+        ]
       },
       {
         "question_id": "msg_test_thurmond_msg_biography",
@@ -60,7 +73,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_likely_support",
+            "positive_component_outcome_ids": [
+              "much_more_likely",
+              "somewhat_more_likely"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_less_likely",
+              "much_less_likely"
+            ]
+          }
+        ]
       },
       {
         "question_id": "msg_test_thurmond_msg_coalition",
@@ -74,7 +100,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_likely_support",
+            "positive_component_outcome_ids": [
+              "much_more_likely",
+              "somewhat_more_likely"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_less_likely",
+              "much_less_likely"
+            ]
+          }
+        ]
       },
       {
         "question_id": "msg_test_thurmond_msg_ai_economy",
@@ -88,7 +127,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_likely_support",
+            "positive_component_outcome_ids": [
+              "much_more_likely",
+              "somewhat_more_likely"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_less_likely",
+              "much_less_likely"
+            ]
+          }
+        ]
       },
       {
         "question_id": "msg_test_thurmond_msg_small_business",
@@ -102,7 +154,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_likely_support",
+            "positive_component_outcome_ids": [
+              "much_more_likely",
+              "somewhat_more_likely"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_less_likely",
+              "much_less_likely"
+            ]
+          }
+        ]
       },
       {
         "question_id": "reask_thurmond_support",
@@ -116,7 +181,20 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_likely_support",
+            "positive_component_outcome_ids": [
+              "much_more_likely",
+              "somewhat_more_likely"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_less_likely",
+              "much_less_likely"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -211,32 +289,32 @@
     {
       "id": "msg_test_thurmond_msg_turnaround",
       "label": "Message Test: Turnaround Leader",
-      "default_metric": "much_more_likely"
+      "default_metric": "net_likely_support"
     },
     {
       "id": "msg_test_thurmond_msg_biography",
       "label": "Message Test: Biography",
-      "default_metric": "much_more_likely"
+      "default_metric": "net_likely_support"
     },
     {
       "id": "msg_test_thurmond_msg_coalition",
       "label": "Message Test: Coalition Builder",
-      "default_metric": "much_more_likely"
+      "default_metric": "net_likely_support"
     },
     {
       "id": "msg_test_thurmond_msg_ai_economy",
       "label": "Message Test: AI and Economy",
-      "default_metric": "much_more_likely"
+      "default_metric": "net_likely_support"
     },
     {
       "id": "msg_test_thurmond_msg_small_business",
       "label": "Message Test: Small Business",
-      "default_metric": "much_more_likely"
+      "default_metric": "net_likely_support"
     },
     {
       "id": "reask_thurmond_support",
       "label": "Re-Ask: Thurmond Support",
-      "default_metric": "much_more_likely"
+      "default_metric": "net_likely_support"
     }
   ],
   "shards_by_question": {

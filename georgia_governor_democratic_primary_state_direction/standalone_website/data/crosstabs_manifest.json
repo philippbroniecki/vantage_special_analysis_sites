@@ -4,7 +4,7 @@
       "state_direction": "xgboost_2026-03-30_Georgia_2026-03-30.rds"
     },
     "codebook_file": "survey_codebook_2026-03-30.json",
-    "generated_at_utc": "2026-04-02 11:54:26 UTC",
+    "generated_at_utc": "2026-04-02 13:34:50 UTC",
     "note": "Georgia geography-aware weighted poststratified crosstabs; shares in percent.",
     "delivery": {
       "scheme": "manifest_plus_shards",
@@ -38,7 +38,18 @@
         "non_opinion_ids": [
           "unsure"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_direction",
+            "positive_component_outcome_ids": [
+              "headed_right_direction"
+            ],
+            "negative_component_outcome_ids": [
+              "headed_wrong_direction"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -133,7 +144,7 @@
     {
       "id": "state_direction",
       "label": "State Direction",
-      "default_metric": "headed_right_direction"
+      "default_metric": "net_state_direction"
     }
   ],
   "shards_by_question": {

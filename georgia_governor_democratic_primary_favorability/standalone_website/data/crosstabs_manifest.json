@@ -8,7 +8,7 @@
       "favorability_duncan": "xgboost_2026-03-30_Georgia_2026-03-30.rds"
     },
     "codebook_file": null,
-    "generated_at_utc": "2026-04-02 11:50:05 UTC",
+    "generated_at_utc": "2026-04-02 13:29:53 UTC",
     "note": "Georgia geography-aware weighted poststratified crosstabs; shares in percent.",
     "delivery": {
       "scheme": "manifest_plus_shards",
@@ -44,7 +44,20 @@
         "non_opinion_ids": [
           "never_heard_of_cant_rate"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
       },
       {
         "question_id": "favorability_bottoms",
@@ -57,7 +70,20 @@
         "non_opinion_ids": [
           "never_heard_of_cant_rate"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
       },
       {
         "question_id": "favorability_thurmond",
@@ -70,7 +96,20 @@
         "non_opinion_ids": [
           "never_heard_of_cant_rate"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
       },
       {
         "question_id": "favorability_esteves",
@@ -83,7 +122,20 @@
         "non_opinion_ids": [
           "never_heard_of_cant_rate"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
       },
       {
         "question_id": "favorability_duncan",
@@ -96,7 +148,20 @@
         "non_opinion_ids": [
           "never_heard_of_cant_rate"
         ],
-        "combined_definitions": []
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
       }
     ]
   },
@@ -191,27 +256,27 @@
     {
       "id": "favorability_trump",
       "label": "Donald Trump",
-      "default_metric": "very_favorable"
+      "default_metric": "net_favorability"
     },
     {
       "id": "favorability_bottoms",
       "label": "Keisha Lance Bottoms",
-      "default_metric": "very_favorable"
+      "default_metric": "net_favorability"
     },
     {
       "id": "favorability_thurmond",
       "label": "Mike Thurmond",
-      "default_metric": "very_favorable"
+      "default_metric": "net_favorability"
     },
     {
       "id": "favorability_esteves",
       "label": "Jason Esteves",
-      "default_metric": "very_favorable"
+      "default_metric": "net_favorability"
     },
     {
       "id": "favorability_duncan",
       "label": "Geoff Duncan",
-      "default_metric": "very_favorable"
+      "default_metric": "net_favorability"
     }
   ],
   "shards_by_question": {
