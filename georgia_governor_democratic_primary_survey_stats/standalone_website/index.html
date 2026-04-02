@@ -211,6 +211,8 @@
   --r-md: 16px;
   --r-lg: 20px;
   --r-full: 9999px;
+  --ga-bar-thickness: 24px;
+  --ga-bar-thickness-mobile: 18px;
 }
 
 :root[data-theme='dark'] {
@@ -949,7 +951,7 @@ body {
 }
 
 .bar-track {
-  height: 11px;
+  height: var(--ga-bar-thickness);
   background: var(--track);
   border-radius: var(--r-full);
   overflow: hidden;
@@ -1037,6 +1039,10 @@ body {
   }
   .bar-label { font-size: 0.74rem; }
   .bar-value  { font-size: 0.74rem; }
+
+  .bar-track {
+    height: var(--ga-bar-thickness-mobile);
+  }
   .dist-group { padding: 0.8rem 0.9rem; }
 }
     </style>
@@ -1097,7 +1103,7 @@ body {
         <ul class="analysis-list" id="analysisList" hidden></ul>
       </section>
 
-      <section class="card" id="componentRespondentGeography">
+      <section class="card" id="componentRespondentGeography" data-component-id="respondent_geography">
         <div class="section-head">
           <p class="section-eyebrow">2</p>
           <h2>Respondent Geography</h2>
@@ -1141,7 +1147,7 @@ body {
         <div class="tt-pct" id="mapTooltipPct"></div>
       </div>
 
-      <section class="card" id="componentSurveyScreens">
+      <section class="card" id="componentSurveyScreens" data-component-id="survey_screens">
         <div class="section-head">
           <p class="section-eyebrow">3</p>
           <h2>Survey Screens</h2>
@@ -1155,7 +1161,7 @@ body {
         <div id="screensTable" hidden></div>
       </section>
 
-      <section class="card" id="componentDemographics">
+      <section class="card" id="componentDemographics" data-component-id="demographic_breakdown">
         <div class="section-head">
           <p class="section-eyebrow">4</p>
           <h2>Demographics</h2>
@@ -1176,6 +1182,8 @@ body {
       </section>
     </main>
 
+    <script src="lib/html-to-image.min.js"></script>
+    <script src="lib/png-export-helper.js"></script>
     <script>
 const FALLBACK_REPORT = {
   "meta": {
@@ -2470,6 +2478,11 @@ function initThemeControls() {
   await loadReportData();
   renderAll();
   await loadAndRenderSvgMap();
+  if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
+    window.VDH_PNG_EXPORT.init({
+      siteSlug: 'georgia_governor_democratic_primary_survey_stats'
+    });
+  }
 })();
     </script>
   </body>

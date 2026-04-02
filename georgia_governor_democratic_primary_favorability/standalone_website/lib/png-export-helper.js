@@ -7,7 +7,12 @@
     { componentId: 'demographic_breakdown', label: 'demographic' },
     { componentId: 'crosstabs_explorer', label: 'crosstab' },
     { componentId: 'archetype_breakdown', label: 'archetypes' },
-    { componentId: 'state_ranking', label: 'state-ranking' }
+    { componentId: 'state_ranking', label: 'state-ranking' },
+    { componentId: 'favorability_ranking', label: 'favorability-ranking' },
+    { componentId: 'favorability_scatter', label: 'favorability-scatter' },
+    { componentId: 'favorability_calculator', label: 'favorability-calculator' },
+    { componentId: 'respondent_geography', label: 'respondent-geography' },
+    { componentId: 'survey_screens', label: 'survey-screens' }
   ];
 
   function slugify(value) {
@@ -42,6 +47,7 @@
       + '.vdh-export-frame .vdh-export-clone-root{margin:0;max-width:none !important;}'
       + '.is-exporting .export-hide{visibility:hidden !important;}'
       + '.is-exporting .archetype-tooltip,.is-exporting #archetypeTooltip,.is-exporting .chart-tooltip{display:none !important;}'
+      + '.is-exporting .map-tooltip,.is-exporting #mapTooltip{display:none !important;}'
       + '.is-exporting .reveal{opacity:1 !important;transform:none !important;}';
     document.head.appendChild(style);
   }
@@ -151,6 +157,33 @@
     }
   }
 
+  function syncSvgPresentationState(sourceRoot, cloneRoot) {
+    var sourceRegions = sourceRoot.querySelectorAll('.cr-region');
+    var cloneRegions = cloneRoot.querySelectorAll('.cr-region');
+    var length = Math.min(sourceRegions.length, cloneRegions.length);
+
+    for (var i = 0; i < length; i += 1) {
+      var src = sourceRegions[i];
+      var dst = cloneRegions[i];
+      if (!src || !dst) continue;
+
+      var computed = global.getComputedStyle(src);
+      if (!computed) continue;
+
+      if (computed.fill && computed.fill !== 'none') {
+        dst.setAttribute('fill', computed.fill);
+        dst.style.fill = computed.fill;
+      }
+      if (computed.stroke && computed.stroke !== 'none') {
+        dst.setAttribute('stroke', computed.stroke);
+        dst.style.stroke = computed.stroke;
+      }
+      if (computed.strokeWidth) {
+        dst.style.strokeWidth = computed.strokeWidth;
+      }
+    }
+  }
+
   function buildExportClone(root) {
     var rect = root.getBoundingClientRect();
     var sandbox = document.createElement('div');
@@ -165,6 +198,7 @@
     clone.style.maxWidth = 'none';
 
     syncFormState(root, clone);
+    syncSvgPresentationState(root, clone);
 
     frame.appendChild(clone);
     sandbox.appendChild(frame);

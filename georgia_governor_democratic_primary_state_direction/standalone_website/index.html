@@ -231,6 +231,8 @@
   --r-md:   16px;
   --r-lg:   20px;
   --r-full: 9999px;
+  --ga-bar-thickness: 24px;
+  --ga-bar-thickness-mobile: 18px;
 
   /* Easing */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -750,7 +752,7 @@ body {
 }
 
 .q-opt-track {
-  height: 9px;
+  height: var(--ga-bar-thickness);
   background: var(--track);
   border-radius: var(--r-full);
   overflow: hidden;
@@ -800,7 +802,7 @@ body {
 }
 
 .bar-track {
-  height: 14px;
+  height: var(--ga-bar-thickness);
   background: var(--track);
   border-radius: var(--r-full);
   overflow: hidden;
@@ -821,7 +823,7 @@ body {
 }
 
 .bar-row-net .bar-track {
-  height: 24px;
+  height: var(--ga-bar-thickness);
   background: transparent;
   border-radius: var(--r-sm);
 }
@@ -1096,7 +1098,7 @@ body {
 .mini-tag.contra { color: var(--cool); }
 
 .mini-meter {
-  height: 10px;
+  height: var(--ga-bar-thickness);
   border-radius: var(--r-full);
   background: var(--track);
   overflow: hidden;
@@ -1123,16 +1125,13 @@ body {
   position: relative;
   display: flex;
   align-items: stretch;
-  height: 48px;
+  height: var(--ga-bar-thickness);
   border: 1px solid var(--line);
   border-radius: var(--r-full);
   background: var(--surface);
   overflow: hidden;
 }
 
-.archetype-bars .mini-meter-net {
-  height: 40px;
-}
 
 .mini-value-net.is-positive { color: var(--accent); }
 .mini-value-net.is-negative { color: var(--warm); }
@@ -1206,7 +1205,7 @@ body {
 }
 
 .state-track {
-  height: 9px;
+  height: var(--ga-bar-thickness);
   background: var(--track);
   border-radius: var(--r-full);
   overflow: hidden;
@@ -1745,6 +1744,15 @@ body {
   }
   .bar-label { font-size: 0.76rem; }
   .bar-value { font-size: 0.76rem; }
+
+  .q-opt-track,
+  .bar-track,
+  .bar-row-net .bar-track,
+  .mini-meter,
+  .mini-meter-net,
+  .state-track {
+    height: var(--ga-bar-thickness-mobile);
+  }
 
   /* archetype rows: tighter inner padding */
   .archetype-row { padding: 0.55rem 0.65rem; }
@@ -34123,7 +34131,7 @@ body {
       "state_direction": "xgboost_2026-03-30_Georgia_2026-03-30.rds"
     },
     "codebook_file": "survey_codebook_2026-03-30.json",
-    "generated_at_utc": "2026-04-02 14:27:55 UTC",
+    "generated_at_utc": "2026-04-02 16:32:15 UTC",
     "crosstabs": {
       "manifest_file": "crosstabs_manifest.json",
       "manifest_path": "data/crosstabs_manifest.json",
