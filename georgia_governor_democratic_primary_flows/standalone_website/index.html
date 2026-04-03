@@ -739,24 +739,61 @@ body {
 }
 
 /*
-  Candidate color dot — visual legend swatch that mirrors CANDIDATE_DEST_COLORS.
-  Background is always set via inline style by getCandidateDestColor(); it must
-  not be overridden by pill-state rules (.active, :hover) so the dot remains a
-  consistent legend indicator across all button states.
+  Candidate selector accessibility contract:
+  active state must not rely on color alone. We combine candidate-tinted fill,
+  stronger border/ring, heavier text, and a larger active marker.
 */
 .cand-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   flex-shrink: 0;
   display: inline-block;
-  /* background set exclusively via inline style — never override here */
+  background: color-mix(in srgb, var(--muted-faint) 62%, var(--surface) 38%);
+  border: 1px solid color-mix(in srgb, var(--line) 72%, var(--muted-faint) 28%);
+  transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease, box-shadow 160ms ease;
 }
 
-/* Active / hover states must not touch the dot's background */
-.segmented button:hover .cand-dot,
-.segmented button.active .cand-dot {
-  /* intentionally empty — dot color preserved from inline style */
+#candidateSegmented button.candidate-pill {
+  position: relative;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-weight: 600;
+  box-shadow: none;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 170ms ease, transform 120ms ease;
+}
+
+#candidateSegmented button.candidate-pill:hover {
+  color: var(--ink);
+  border-color: var(--line);
+  background: color-mix(in srgb, var(--surface) 90%, var(--candidate-color, var(--accent)) 10%);
+}
+
+#candidateSegmented button.candidate-pill.active {
+  color: var(--ink);
+  font-weight: 800;
+  background: color-mix(in srgb, var(--candidate-color, var(--accent)) 18%, var(--surface) 82%);
+  border-color: color-mix(in srgb, var(--candidate-color, var(--accent)) 65%, var(--line) 35%);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--candidate-color, var(--accent)) 34%, transparent),
+    0 1px 4px rgba(10,25,55,0.10);
+}
+
+#candidateSegmented button.candidate-pill .cand-dot {
+  background: color-mix(in srgb, var(--muted-faint) 62%, var(--surface) 38%);
+  border-color: color-mix(in srgb, var(--line) 72%, var(--muted-faint) 28%);
+}
+
+#candidateSegmented button.candidate-pill.active .cand-dot {
+  background: var(--candidate-color, var(--accent));
+  border-color: color-mix(in srgb, var(--candidate-color, var(--accent)) 72%, #000 28%);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--candidate-color, var(--accent)) 24%, transparent);
+  transform: scale(1.22);
+}
+
+#candidateSegmented button.candidate-pill:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--candidate-color, var(--accent)) 55%, var(--accent) 45%);
+  outline-offset: 1px;
 }
 
 .direction-help {
@@ -881,6 +918,13 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   color: var(--muted);
+  margin-bottom: 0.38rem;
+}
+
+.flow-dest-summary-note {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.33;
   margin-bottom: 0.5rem;
 }
 
@@ -892,13 +936,15 @@ body {
 
 .flow-dest-row {
   display: grid;
-  grid-template-columns: 130px 1fr 44px;
+  grid-template-columns: minmax(112px, 144px) minmax(0, 1fr) minmax(132px, 188px);
+  grid-template-areas: "name bar metric";
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.44rem;
   font-size: 0.82rem;
 }
 
 .flow-dest-name {
+  grid-area: name;
   display: flex;
   align-items: center;
   gap: 0.36rem;
@@ -917,6 +963,7 @@ body {
 }
 
 .flow-dest-bar-wrap {
+  grid-area: bar;
   height: var(--ga-bar-thickness);
   background: var(--track);
   border-radius: 3px;
@@ -929,12 +976,26 @@ body {
   transition: width 300ms var(--ease-out);
 }
 
-.flow-dest-pct {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--ink);
+.flow-dest-metric {
+  grid-area: metric;
+  display: flex;
+  flex-direction: column;
+  gap: 0.02rem;
+  line-height: 1.2;
   text-align: right;
-  white-space: nowrap;
+  white-space: normal;
+}
+
+.flow-dest-within {
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.flow-dest-overall {
+  color: var(--muted);
+  font-size: 0.67rem;
+  font-weight: 500;
 }
 
 /* ============================================================
@@ -1042,7 +1103,19 @@ body {
   #heroTitle { font-size: 1.35rem; }
   .meta-pill { font-size: 0.7rem; }
   .flow-chart { min-width: 600px; }
-  .flow-dest-row { grid-template-columns: 100px 1fr 40px; font-size: 0.78rem; }
+  .flow-dest-row {
+    grid-template-columns: minmax(96px, 114px) minmax(0, 1fr);
+    grid-template-areas:
+      "name metric"
+      "bar bar";
+    align-items: start;
+    row-gap: 0.3rem;
+    font-size: 0.78rem;
+  }
+  .flow-dest-summary-note { font-size: 0.73rem; }
+  .flow-dest-metric { align-items: flex-end; }
+  .flow-dest-within { font-size: 0.7rem; }
+  .flow-dest-overall { font-size: 0.66rem; }
   .flow-dest-bar-wrap { height: var(--ga-bar-thickness-mobile); }
   .segmented button { font-size: 0.72rem; padding: 0.45rem 0.4rem; }
 }
@@ -3903,7 +3976,7 @@ body {
     "ballot_dv": [
       "primary_ballot_governor"
     ],
-    "generated_at_utc": "2026-04-03 14:04:27 UTC"
+    "generated_at_utc": "2026-04-03 14:42:27 UTC"
   }
 }
 </script>
@@ -3962,6 +4035,11 @@ function asNumber(value, fallback = NaN) {
 function pct(value, digits = 1) {
   if (!Number.isFinite(value)) return '--';
   return `${value.toFixed(digits)}%`;
+}
+
+function pts(value, digits = 1) {
+  if (!Number.isFinite(value)) return '--';
+  return value.toFixed(digits);
 }
 
 function normalizeText(value, fallback = '') {
@@ -4244,10 +4322,11 @@ function renderCandidateNavigation() {
     const color = getCandidateDestColor(id);
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = id === activeCandidateId ? 'active' : '';
+    btn.className = id === activeCandidateId ? 'candidate-pill active' : 'candidate-pill';
+    btn.style.setProperty('--candidate-color', color);
     btn.setAttribute('role', 'tab');
     btn.setAttribute('aria-selected', id === activeCandidateId ? 'true' : 'false');
-    btn.innerHTML = `<span class="cand-dot" style="background:${color}" aria-hidden="true"></span>${normalizeText(item && item.label, id)}`;
+    btn.innerHTML = `<span class="cand-dot" aria-hidden="true"></span>${normalizeText(item && item.label, id)}`;
     btn.addEventListener('click', () => setActiveCandidate(id));
     candidateWrap.appendChild(btn);
   });
@@ -4545,43 +4624,37 @@ function allocateNodeLayout(nodes, totalsById, startY, availableHeight, gap) {
   return out;
 }
 
-function buildTooltipHtml(link, directionId, srcGroupLabel, srcGroupTotal) {
+function buildTooltipHtml(link, directionId, srcGroupLabel, candidateName) {
   // Plain-English tooltip depending on direction
   if (directionId === 'reverse') {
     // "Among Keisha Bottoms voters, X% are Very Favorable toward her"
-    const candidateName = link.fromLabel;
+    const ballotChoiceLabel = link.fromLabel;
     const favLabel = link.toLabel;
     const reverseConditionalPct = link.reverseConditionalPct;
+    const overallPts = asNumber(link.jointPct, NaN);
     return `
-      <strong>${candidateName} → ${favLabel}</strong>
-      <p class="tip-main">${pct(reverseConditionalPct, 1)} of ${candidateName} voters have ${favLabel} views toward this candidate</p>
-      <p class="tip-secondary">Shared by both groups: ${pct(link.jointPct, 1)} of likely Democratic primary voters</p>
+      <strong>${ballotChoiceLabel} → ${favLabel}</strong>
+      <p class="tip-main">${pct(reverseConditionalPct, 1)} of ${ballotChoiceLabel} voters have ${favLabel} views toward this candidate</p>
+      <p class="tip-secondary">Equivalent to ${pts(overallPts, 1)} pts of likely Democratic primary voters</p>
     `;
   }
 
-  // Forward mode — combined link: "X% of [Favorable/Unfavorable] Bottoms voters choose Keisha Bottoms"
-  const srcLabel = srcGroupLabel || link.fromLabel;
+  // Forward mode — combined link: "X% of favorable/unfavorable [Candidate] voters choose <destination>"
+  const srcLabel = normalizeText(srcGroupLabel || link.fromLabel);
+  const srcLabelLower = srcLabel.toLowerCase();
+  const candidateLabel = normalizeText(candidateName);
+  const sourceVoterLabel = candidateLabel
+    ? `${srcLabelLower} ${candidateLabel} voters`
+    : `${srcLabelLower} voters`;
   const combinedConditionalPct = link.combinedConditionalPct != null
     ? link.combinedConditionalPct
     : link.conditionalPct;
-
-  let compStr = '';
-  if (link.components && srcGroupTotal > 0) {
-    const parts = Object.values(link.components)
-      .filter((c) => c.jointShare > 0.0001)
-      .map((c) => {
-        const share = srcGroupTotal > 0 ? (c.joint_share / srcGroupTotal) * 100 : 0;
-        return `${pct(share, 0)} ${c.source_bucket_label}`;
-      })
-      .join(', ');
-    if (parts) compStr = `<p class="tip-secondary">Composed of: ${parts}</p>`;
-  }
+  const overallPts = asNumber(link.combinedJointPct != null ? link.combinedJointPct : link.jointPct, NaN);
 
   return `
     <strong>${srcLabel} → ${link.toLabel}</strong>
-    <p class="tip-main">${pct(combinedConditionalPct, 1)} of ${srcLabel} voters currently choose ${link.toLabel}</p>
-    ${compStr}
-    <p class="tip-secondary">Share of likely primary voters: ${pct(link.combinedJointPct != null ? link.combinedJointPct : link.jointPct, 1)}</p>
+    <p class="tip-main">${pct(combinedConditionalPct, 1)} of ${sourceVoterLabel} currently choose ${link.toLabel}</p>
+    <p class="tip-secondary">Equivalent to ${pts(overallPts, 1)} pts of likely Democratic primary voters</p>
   `;
 }
 
@@ -4693,7 +4766,7 @@ function renderFlowChart(chartEl, tooltipEl, captionEl, summaryEl, candidate, ca
       path.setAttribute('stroke-width', thickness.toFixed(2));
       path.setAttribute('stroke', color);
 
-      const tipHtml = buildTooltipHtml(lk, 'forward', d.srcGroupLabel, d.srcGroupTotal);
+      const tipHtml = buildTooltipHtml(lk, 'forward', d.srcGroupLabel, candidate ? candidate.label : '');
       path.addEventListener('mousemove', (ev) => { path.classList.add('is-hovered'); showTooltip(tooltipEl, ev, tipHtml); });
       path.addEventListener('mouseleave', () => { path.classList.remove('is-hovered'); hideTooltip(tooltipEl); });
       svg.appendChild(path);
@@ -4944,12 +5017,26 @@ function renderDestSummary(container, data, directionId, srcGroupLabel, candidat
 
   const sorted = data.links.slice().sort((a, b) => b.combinedConditionalPct - a.combinedConditionalPct);
   const maxPct = sorted[0] ? sorted[0].combinedConditionalPct : 1;
+  const srcLabel = normalizeText(srcGroupLabel).toLowerCase();
+  const srcGroupPts = asNumber(data && data.sourceNode && data.sourceNode.totalPct, NaN);
 
   const title = document.createElement('p');
   title.className = 'flow-dest-summary-title';
   const nameStr = candidateName ? ` ${candidateName}` : '';
   title.textContent = `Where ${srcGroupLabel}${nameStr} voters go on the ballot`;
   container.appendChild(title);
+
+  const note = document.createElement('p');
+  note.className = 'flow-dest-summary-note';
+  if (Number.isFinite(srcGroupPts)) {
+    note.textContent =
+      `${pct(srcGroupPts, 1)} of likely Democratic primary voters are in this ${srcLabel} bloc. `
+      + `Bars sum to 100% within that bloc; pts overall translate each row to the full primary universe.`;
+  } else {
+    note.textContent =
+      `Bars sum to 100% within this ${srcLabel} bloc; pts overall translate each row to likely Democratic primary voters.`;
+  }
+  container.appendChild(note);
 
   const rows = document.createElement('div');
   rows.className = 'flow-dest-rows';
@@ -4958,6 +5045,9 @@ function renderDestSummary(container, data, directionId, srcGroupLabel, candidat
     const color = getCandidateDestColor(lk.toId);
     const cpct = lk.combinedConditionalPct;
     const barW = maxPct > 0 ? (cpct / maxPct) * 100 : 0;
+    const overallPts = asNumber(lk.combinedJointPct != null ? lk.combinedJointPct : lk.jointPct, NaN);
+    const withinLabel = `${pct(cpct, 1)} of ${srcLabel} voters`;
+    const pointsLabel = `${pts(overallPts, 1)} pts overall`;
 
     const row = document.createElement('div');
     row.className = 'flow-dest-row';
@@ -4969,7 +5059,10 @@ function renderDestSummary(container, data, directionId, srcGroupLabel, candidat
       <div class="flow-dest-bar-wrap">
         <div class="flow-dest-bar" style="width:${barW.toFixed(1)}%;background:${color}"></div>
       </div>
-      <span class="flow-dest-pct">${pct(cpct, 1)}</span>
+      <span class="flow-dest-metric">
+        <span class="flow-dest-within">${withinLabel}</span>
+        <span class="flow-dest-overall">${pointsLabel}</span>
+      </span>
     `;
     rows.appendChild(row);
   });
