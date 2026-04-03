@@ -1,0 +1,2762 @@
+{
+  "meta": {
+    "source": "Vantage Data House",
+    "title": "Georgia Democratic Primary: Voter Flows",
+    "subtitle": "How modeled favorability maps to the gubernatorial test ballot",
+    "site": "https://www.vantagedatahouse.com",
+    "sample": "N = 1,009 respondents",
+    "fieldDates": "March 28-30, 2026",
+    "methodLabel": "Calibrated bridge flows from modeled marginals",
+    "group_navigation": {
+      "group_id": "georgia_democratic_gubernatorial_primary_2026",
+      "group_label": "Georgia Democratic Gubernatorial Primary 2026",
+      "back": {
+        "label": "Back",
+        "href": "https://vantage.philippbroniecki.com"
+      },
+      "siblings": [
+        {
+          "site_slug": "georgia_governor_democratic_primary_favorability",
+          "label": "Favorability",
+          "href": "https://georgia-primary-favorability.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-primary-favorability.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_favorability/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_demogratic_primary_2026",
+          "label": "Test Ballots",
+          "href": "https://georgia-gov-primary.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-gov-primary.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_demogratic_primary_2026/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_thurmond_messaging",
+          "label": "Messaging",
+          "href": "https://thurmond-messaging.vantage.philippbroniecki.com/",
+          "canonical_href": "https://thurmond-messaging.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_thurmond_messaging/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_state_direction",
+          "label": "State Direction",
+          "href": "https://georgia-state-direction.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-state-direction.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_state_direction/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_top_issue",
+          "label": "Top Issue",
+          "href": "https://georgia-gov-top-issue.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-gov-top-issue.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_top_issue/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_agree",
+          "label": "Agree",
+          "href": "https://georgia-gov-agree.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-gov-agree.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_agree/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_casino_gambling",
+          "label": "Casino Gambling",
+          "href": "https://georgia-casino-policy.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-casino-policy.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_casino_gambling/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_survey_stats",
+          "label": "Survey Health",
+          "href": "https://georgia-survey-health.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-survey-health.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_survey_stats/standalone_website/"
+        }
+      ]
+    }
+  },
+  "template": {
+    "site_slug": "georgia_governor_democratic_primary_flows",
+    "path": "georgia_governor_democratic_primary_flows/site_config.json",
+    "component_order": [
+      "hero_title",
+      "key_takeaways",
+      "methodology_note",
+      "candidate_navigation",
+      "candidate_flows",
+      "feedback_callout"
+    ],
+    "section_headers": {
+      "key_takeaways": "Key Findings",
+      "candidate_navigation": "Candidate Navigation",
+      "candidate_flows": "Voter Flows"
+    },
+    "feedback_callout": {
+      "enabled": true,
+      "heading": "Share Your Feedback",
+      "body": "Have questions about these voter-flow bridges or ideas for additional diagnostics? We would love to hear from you.",
+      "cta_label": "Get in Touch",
+      "cta_url": "mailto:philipp@vantagedatahouse.com"
+    }
+  },
+  "key_takeaways": [
+    "This report links modeled favorability buckets to modeled Georgia Democratic gubernatorial test-ballot destinations for each available candidate bridge artifact.",
+    "Each candidate section has two flow cards: one for positive sentiment (Very/Somewhat Favorable) and one for negative sentiment (Very/Somewhat Unfavorable).",
+    "Use the direction toggle to switch between forward interpretation (favorability to ballot) and reverse interpretation (ballot to favorability composition).",
+    "These are calibrated bridge flows constrained to match modeled marginals; they are not raw survey cross-tabs."
+  ],
+  "methodology_note": "Bridge flows are estimated by calibrating a joint distribution between modeled favorability and modeled gubernatorial test-ballot outcomes from the same survey wave. We start from a survey-based weighted seed table, apply light smoothing where needed, and then use iterative proportional fitting (IPF) so the recovered totals match the modeled marginals exactly. This lets us show both how large each flow is overall and where each favorability group currently goes on the ballot. These bridge flows are calibrated synthetic estimates that reconcile modeled marginals, not just raw respondent-level cross-tabs.",
+  "flow_controls": {
+    "default_candidate_id": "bottoms",
+    "candidate_navigation": [
+      {
+        "id": "bottoms",
+        "label": "Keisha Bottoms"
+      },
+      {
+        "id": "thurmond",
+        "label": "Mike Thurmond"
+      },
+      {
+        "id": "esteves",
+        "label": "Jason Esteves"
+      },
+      {
+        "id": "duncan",
+        "label": "Geoff Duncan"
+      }
+    ],
+    "direction_modes": [
+      {
+        "id": "forward",
+        "label": "Favorability → Test Ballot",
+        "interpretation": "Among people in this favorability bucket, where do they currently go on the ballot?"
+      },
+      {
+        "id": "reverse",
+        "label": "Test Ballot → Favorability",
+        "interpretation": "Among people in this ballot bucket, what is their favorability composition toward this candidate?"
+      }
+    ],
+    "cards": {
+      "positive": {
+        "id": "positive",
+        "label": "Positive Flows",
+        "subtitle": "Very and Somewhat Favorable",
+        "source_bucket_ids": [
+          "very_favorable",
+          "somewhat_favorable"
+        ],
+        "bucket_order": [
+          "very_favorable",
+          "somewhat_favorable"
+        ],
+        "bucket_palette": {
+          "very_favorable": "#1a6b73",
+          "somewhat_favorable": "#2f7f8a"
+        }
+      },
+      "negative": {
+        "id": "negative",
+        "label": "Negative Flows",
+        "subtitle": "Very and Somewhat Unfavorable",
+        "source_bucket_ids": [
+          "very_unfavorable",
+          "somewhat_unfavorable"
+        ],
+        "bucket_order": [
+          "very_unfavorable",
+          "somewhat_unfavorable"
+        ],
+        "bucket_palette": {
+          "very_unfavorable": "#c46525",
+          "somewhat_unfavorable": "#c97f5f"
+        }
+      }
+    }
+  },
+  "candidates": [
+    {
+      "id": "bottoms",
+      "label": "Keisha Bottoms",
+      "favorability_dv": "favorability_bottoms",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.212515375109058,
+          "marginal_pct": 21.2515375109058,
+          "marginal_sd_share": 0.0158014121140396,
+          "marginal_sd_pct": 1.58014121140396
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.408164869563756,
+          "marginal_pct": 40.8164869563756,
+          "marginal_sd_share": 0.0307088014500408,
+          "marginal_sd_pct": 3.07088014500408
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.130123053176328,
+          "marginal_pct": 13.0123053176328,
+          "marginal_sd_share": 0.00408891665526674,
+          "marginal_sd_pct": 0.408891665526674
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0456451670889496,
+          "marginal_pct": 4.56451670889496,
+          "marginal_sd_share": 0.00241924712583952,
+          "marginal_sd_pct": 0.241924712583952
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.203551535061908,
+          "marginal_pct": 20.3551535061908,
+          "marginal_sd_share": 0.0448405437568327,
+          "marginal_sd_pct": 4.48405437568327
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.358906181153895,
+          "marginal_pct": 35.8906181153895,
+          "marginal_sd_share": 0.0349627580910885,
+          "marginal_sd_pct": 3.49627580910885
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0201672010602498,
+          "marginal_pct": 2.01672010602498,
+          "marginal_sd_share": 0.0006335553772842,
+          "marginal_sd_pct": 0.06335553772842
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862257433268629,
+          "marginal_pct": 8.62257433268629,
+          "marginal_sd_share": 0.0180570427647859,
+          "marginal_sd_pct": 1.80570427647859
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0461696929515211,
+          "marginal_pct": 4.61696929515211,
+          "marginal_sd_share": 0.00350795472990186,
+          "marginal_sd_pct": 0.350795472990186
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463037686438734,
+          "marginal_pct": 4.63037686438734,
+          "marginal_sd_share": 0.00962571821897401,
+          "marginal_sd_pct": 0.962571821897401
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491473940760564,
+          "marginal_pct": 4.91473940760564,
+          "marginal_sd_share": 0.00557070165707203,
+          "marginal_sd_pct": 0.557070165707203
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.078288800505797,
+          "marginal_pct": 7.8288800505797,
+          "marginal_sd_share": 0.00946362489219262,
+          "marginal_sd_pct": 0.946362489219261
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.314791218281745,
+          "marginal_pct": 31.4791218281745,
+          "marginal_sd_share": 0.0181728135180382,
+          "marginal_sd_pct": 1.81728135180382
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.13106888960807,
+          "joint_pct": 13.106888960807,
+          "forward_conditional_share": 0.616750150622318,
+          "forward_conditional_pct": 61.6750150622318,
+          "reverse_conditional_share": 0.365189836482278,
+          "reverse_conditional_pct": 36.5189836482278
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.188435429799078,
+          "joint_pct": 18.8435429799078,
+          "forward_conditional_share": 0.461664988465265,
+          "forward_conditional_pct": 46.1664988465265,
+          "reverse_conditional_share": 0.525026983913322,
+          "reverse_conditional_pct": 52.5026983913322
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.000389387481582454,
+          "joint_pct": 0.0389387481582454,
+          "forward_conditional_share": 0.00299245577226657,
+          "forward_conditional_pct": 0.299245577226657,
+          "reverse_conditional_share": 0.00108492832397191,
+          "reverse_conditional_pct": 0.108492832397191
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.000135563941892735,
+          "joint_pct": 0.0135563941892735,
+          "forward_conditional_share": 0.00296995170657518,
+          "forward_conditional_pct": 0.296995170657518,
+          "reverse_conditional_share": 0.000377714146512865,
+          "reverse_conditional_pct": 0.0377714146512865
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.038876910323272,
+          "joint_pct": 3.8876910323272,
+          "forward_conditional_share": 0.190992960634996,
+          "forward_conditional_pct": 19.0992960634996,
+          "reverse_conditional_share": 0.108320537133915,
+          "reverse_conditional_pct": 10.8320537133915
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.000354179837999221,
+          "joint_pct": 0.0354179837999221,
+          "forward_conditional_share": 0.00166660806455752,
+          "forward_conditional_pct": 0.166660806455752,
+          "reverse_conditional_share": 0.0175621712175678,
+          "reverse_conditional_pct": 1.75621712175678
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0141660477144683,
+          "joint_pct": 1.41660477144683,
+          "forward_conditional_share": 0.0347066804882274,
+          "forward_conditional_pct": 3.47066804882274,
+          "reverse_conditional_share": 0.702430033406574,
+          "reverse_conditional_pct": 70.2430033406574
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.00229312823220762,
+          "joint_pct": 0.229312823220762,
+          "forward_conditional_share": 0.0176227668828231,
+          "forward_conditional_pct": 1.76227668828231,
+          "reverse_conditional_share": 0.113705824886501,
+          "reverse_conditional_pct": 11.3705824886501
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 1.09714983434437e-11,
+          "joint_pct": 1.09714983434437e-09,
+          "forward_conditional_share": 2.40364950840541e-10,
+          "forward_conditional_pct": 2.40364950840541e-08,
+          "reverse_conditional_share": 5.44026824082636e-10,
+          "reverse_conditional_pct": 5.44026824082636e-08
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.00335384526460309,
+          "joint_pct": 0.335384526460309,
+          "forward_conditional_share": 0.0164766395084324,
+          "forward_conditional_pct": 1.64766395084324,
+          "reverse_conditional_share": 0.16630196994533,
+          "reverse_conditional_pct": 16.630196994533
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00678070048442356,
+          "joint_pct": 0.678070048442356,
+          "forward_conditional_share": 0.0319068701779524,
+          "forward_conditional_pct": 3.19068701779524,
+          "reverse_conditional_share": 0.0786389333718981,
+          "reverse_conditional_pct": 7.86389333718981
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0394334935767992,
+          "joint_pct": 3.94334935767992,
+          "forward_conditional_share": 0.0966116795375983,
+          "forward_conditional_pct": 9.66116795375983,
+          "reverse_conditional_share": 0.457328543139553,
+          "reverse_conditional_pct": 45.7328543139553
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0298813444605943,
+          "joint_pct": 2.98813444605943,
+          "forward_conditional_share": 0.229639127972984,
+          "forward_conditional_pct": 22.9639127972984,
+          "reverse_conditional_share": 0.346547832557623,
+          "reverse_conditional_pct": 34.6547832557623
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00502961021386892,
+          "joint_pct": 0.502961021386891,
+          "forward_conditional_share": 0.110189326376385,
+          "forward_conditional_pct": 11.0189326376385,
+          "reverse_conditional_share": 0.0583307260663763,
+          "reverse_conditional_pct": 5.83307260663763
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00510059459117695,
+          "joint_pct": 0.510059459117695,
+          "forward_conditional_share": 0.0250580011082975,
+          "forward_conditional_pct": 2.50580011082975,
+          "reverse_conditional_share": 0.0591539648645499,
+          "reverse_conditional_pct": 5.91539648645499
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0139187868930501,
+          "joint_pct": 1.39187868930501,
+          "forward_conditional_share": 0.0654954347933994,
+          "forward_conditional_pct": 6.54954347933994,
+          "reverse_conditional_share": 0.301470207039606,
+          "reverse_conditional_pct": 30.1470207039606
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0104417208369537,
+          "joint_pct": 1.04417208369537,
+          "forward_conditional_share": 0.0255821155017916,
+          "forward_conditional_pct": 2.55821155017916,
+          "reverse_conditional_share": 0.226159633504986,
+          "reverse_conditional_pct": 22.6159633504986
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0211787603733652,
+          "joint_pct": 2.11787603733652,
+          "forward_conditional_share": 0.162759479249738,
+          "forward_conditional_pct": 16.2759479249738,
+          "reverse_conditional_share": 0.458715642653357,
+          "reverse_conditional_pct": 45.8715642653357
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.000228440239965246,
+          "joint_pct": 0.0228440239965246,
+          "forward_conditional_share": 0.00500469720091242,
+          "forward_conditional_pct": 0.500469720091242,
+          "reverse_conditional_share": 0.00494783970526101,
+          "reverse_conditional_pct": 0.494783970526101
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.000401984608186848,
+          "joint_pct": 0.0401984608186848,
+          "forward_conditional_share": 0.0019748542208959,
+          "forward_conditional_pct": 0.19748542208959,
+          "reverse_conditional_share": 0.00870667709679027,
+          "reverse_conditional_pct": 0.870667709679027
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.00585184732058537,
+          "joint_pct": 0.585184732058537,
+          "forward_conditional_share": 0.0275361127051741,
+          "forward_conditional_pct": 2.75361127051741,
+          "reverse_conditional_share": 0.126379504130484,
+          "reverse_conditional_pct": 12.6379504130484
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.025808669518207,
+          "joint_pct": 2.5808669518207,
+          "forward_conditional_share": 0.063230991794544,
+          "forward_conditional_pct": 6.3230991794544,
+          "reverse_conditional_share": 0.557377299387959,
+          "reverse_conditional_pct": 55.7377299387959
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0104193605381482,
+          "joint_pct": 1.04193605381482,
+          "forward_conditional_share": 0.0800731329599916,
+          "forward_conditional_pct": 8.00731329599916,
+          "reverse_conditional_share": 0.225021868485144,
+          "reverse_conditional_pct": 22.5021868485144
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.000154671995971612,
+          "joint_pct": 0.0154671995971612,
+          "forward_conditional_share": 0.00338857333286129,
+          "forward_conditional_pct": 0.338857333286129,
+          "reverse_conditional_share": 0.00334037596726109,
+          "reverse_conditional_pct": 0.334037596726109
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.00406921927096121,
+          "joint_pct": 0.406921927096121,
+          "forward_conditional_share": 0.0199911008763633,
+          "forward_conditional_pct": 1.99911008763633,
+          "reverse_conditional_share": 0.0878809520291525,
+          "reverse_conditional_pct": 8.78809520291525
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00404080734292174,
+          "joint_pct": 0.404080734292174,
+          "forward_conditional_share": 0.0190141882244901,
+          "forward_conditional_pct": 1.90141882244901,
+          "reverse_conditional_share": 0.0822181403284276,
+          "reverse_conditional_pct": 8.22181403284276
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0101491130000167,
+          "joint_pct": 1.01491130000167,
+          "forward_conditional_share": 0.0248652291189685,
+          "forward_conditional_pct": 2.48652291189685,
+          "reverse_conditional_share": 0.206503583573745,
+          "reverse_conditional_pct": 20.6503583573745
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0205409413905541,
+          "joint_pct": 2.05409413905541,
+          "forward_conditional_share": 0.157857819111571,
+          "forward_conditional_pct": 15.7857819111571,
+          "reverse_conditional_share": 0.417945687186724,
+          "reverse_conditional_pct": 41.7945687186724
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00340192476668106,
+          "joint_pct": 0.340192476668106,
+          "forward_conditional_share": 0.0745297910740838,
+          "forward_conditional_pct": 7.45297910740838,
+          "reverse_conditional_share": 0.0692188229027265,
+          "reverse_conditional_pct": 6.92188229027265
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0110146075758828,
+          "joint_pct": 1.10146075758828,
+          "forward_conditional_share": 0.0541121322054035,
+          "forward_conditional_pct": 5.41121322054035,
+          "reverse_conditional_share": 0.224113766008377,
+          "reverse_conditional_pct": 22.4113766008377
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0125722812725947,
+          "joint_pct": 1.25722812725947,
+          "forward_conditional_share": 0.0591593961902423,
+          "forward_conditional_pct": 5.91593961902423,
+          "reverse_conditional_share": 0.160588502970661,
+          "reverse_conditional_pct": 16.0588502970661
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0443336697691454,
+          "joint_pct": 4.43336697691454,
+          "forward_conditional_share": 0.108617064022508,
+          "forward_conditional_pct": 10.8617064022508,
+          "reverse_conditional_share": 0.566283676371598,
+          "reverse_conditional_pct": 56.6283676371598
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0210539962179332,
+          "joint_pct": 2.10539962179332,
+          "forward_conditional_share": 0.161800662557488,
+          "forward_conditional_pct": 16.1800662557488,
+          "reverse_conditional_share": 0.268927306101391,
+          "reverse_conditional_pct": 26.8927306101391
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.000235108530598375,
+          "joint_pct": 0.0235108530598375,
+          "forward_conditional_share": 0.00515078694180732,
+          "forward_conditional_pct": 0.515078694180732,
+          "reverse_conditional_share": 0.0030030927677959,
+          "reverse_conditional_pct": 0.30030927677959
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 9.37447155253345e-05,
+          "joint_pct": 0.00937447155253345,
+          "forward_conditional_share": 0.000460545362612093,
+          "forward_conditional_pct": 0.0460545362612093,
+          "reverse_conditional_share": 0.00119742178855318,
+          "reverse_conditional_pct": 0.119742178855318
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.037927882349713,
+          "joint_pct": 3.7927882349713,
+          "forward_conditional_share": 0.178471239223276,
+          "forward_conditional_pct": 17.8471239223276,
+          "reverse_conditional_share": 0.120485833616129,
+          "reverse_conditional_pct": 12.0485833616129
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0753967253496471,
+          "joint_pct": 7.53967253496471,
+          "forward_conditional_share": 0.184721251072466,
+          "forward_conditional_pct": 18.4721251072466,
+          "reverse_conditional_share": 0.239513432938798,
+          "reverse_conditional_pct": 23.9513432938798
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0243661344821412,
+          "joint_pct": 2.43661344821412,
+          "forward_conditional_share": 0.187254555494658,
+          "forward_conditional_pct": 18.7254555494658,
+          "reverse_conditional_share": 0.077404111255521,
+          "reverse_conditional_pct": 7.7404111255521
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0364598473887669,
+          "joint_pct": 3.64598473887669,
+          "forward_conditional_share": 0.798766873121901,
+          "forward_conditional_pct": 79.8766873121901,
+          "reverse_conditional_share": 0.115822314192179,
+          "reverse_conditional_pct": 11.5822314192179
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.140640628711476,
+          "joint_pct": 14.0640628711476,
+          "forward_conditional_share": 0.690933766078954,
+          "forward_conditional_pct": 69.0933766078954,
+          "reverse_conditional_share": 0.446774307997373,
+          "reverse_conditional_pct": 44.6774307997373
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.620680244672814,
+          "shown_pct": 62.0680244672814,
+          "omitted_share": 0.379319755327186,
+          "omitted_pct": 37.9319755327186
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.175768220265278,
+          "shown_pct": 17.5768220265278,
+          "omitted_share": 0.824231779734722,
+          "omitted_pct": 82.4231779734722
+        }
+      },
+      "summary": {
+        "positive_pct": 62.0680244672814,
+        "negative_pct": 17.5768220265278,
+        "cant_rate_pct": 20.3551535061908
+      }
+    },
+    {
+      "id": "thurmond",
+      "label": "Mike Thurmond",
+      "favorability_dv": "favorability_thurmond",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.0826031320191787,
+          "marginal_pct": 8.26031320191787,
+          "marginal_sd_share": 0.0068275790629087,
+          "marginal_sd_pct": 0.68275790629087
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.29020296194832,
+          "marginal_pct": 29.020296194832,
+          "marginal_sd_share": 0.00235479001731846,
+          "marginal_sd_pct": 0.235479001731846
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.141188752593152,
+          "marginal_pct": 14.1188752593152,
+          "marginal_sd_share": 0.00254233162518983,
+          "marginal_sd_pct": 0.254233162518983
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0757429118623296,
+          "marginal_pct": 7.57429118623296,
+          "marginal_sd_share": 0.0257329000467131,
+          "marginal_sd_pct": 2.57329000467131
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.410262241577019,
+          "marginal_pct": 41.0262241577019,
+          "marginal_sd_share": 0.0187177790051652,
+          "marginal_sd_pct": 1.87177790051652
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.358906181153895,
+          "marginal_pct": 35.8906181153895,
+          "marginal_sd_share": 0.0349627580910885,
+          "marginal_sd_pct": 3.49627580910885
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0201672010602498,
+          "marginal_pct": 2.01672010602498,
+          "marginal_sd_share": 0.0006335553772842,
+          "marginal_sd_pct": 0.06335553772842
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862257433268629,
+          "marginal_pct": 8.62257433268629,
+          "marginal_sd_share": 0.0180570427647859,
+          "marginal_sd_pct": 1.80570427647859
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0461696929515211,
+          "marginal_pct": 4.61696929515211,
+          "marginal_sd_share": 0.00350795472990186,
+          "marginal_sd_pct": 0.350795472990186
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463037686438734,
+          "marginal_pct": 4.63037686438734,
+          "marginal_sd_share": 0.00962571821897401,
+          "marginal_sd_pct": 0.962571821897401
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491473940760564,
+          "marginal_pct": 4.91473940760564,
+          "marginal_sd_share": 0.00557070165707203,
+          "marginal_sd_pct": 0.557070165707203
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.078288800505797,
+          "marginal_pct": 7.8288800505797,
+          "marginal_sd_share": 0.00946362489219262,
+          "marginal_sd_pct": 0.946362489219261
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.314791218281745,
+          "marginal_pct": 31.4791218281745,
+          "marginal_sd_share": 0.0181728135180382,
+          "marginal_sd_pct": 1.81728135180382
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0107544514983146,
+          "joint_pct": 1.07544514983146,
+          "forward_conditional_share": 0.130194233988824,
+          "forward_conditional_pct": 13.0194233988824,
+          "reverse_conditional_share": 0.0299645201532577,
+          "reverse_conditional_pct": 2.99645201532577
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.123764433897006,
+          "joint_pct": 12.3764433897006,
+          "forward_conditional_share": 0.426475433145463,
+          "forward_conditional_pct": 42.6475433145463,
+          "reverse_conditional_share": 0.344837844528338,
+          "reverse_conditional_pct": 34.4837844528338
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.068190670188901,
+          "joint_pct": 6.8190670188901,
+          "forward_conditional_share": 0.482975229517031,
+          "forward_conditional_pct": 48.2975229517031,
+          "reverse_conditional_share": 0.189995808848056,
+          "reverse_conditional_pct": 18.9995808848056
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0240877885412089,
+          "joint_pct": 2.40877885412089,
+          "forward_conditional_share": 0.318020365852726,
+          "forward_conditional_pct": 31.8020365852726,
+          "reverse_conditional_share": 0.0671144432892347,
+          "reverse_conditional_pct": 6.71144432892347
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.132108837028464,
+          "joint_pct": 13.2108837028464,
+          "forward_conditional_share": 0.322010713246842,
+          "forward_conditional_pct": 32.2010713246842,
+          "reverse_conditional_share": 0.368087383181114,
+          "reverse_conditional_pct": 36.8087383181114
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 2.36627391859625e-12,
+          "joint_pct": 2.36627391859625e-10,
+          "forward_conditional_share": 2.86462977946993e-11,
+          "forward_conditional_pct": 2.86462977946993e-09,
+          "reverse_conditional_share": 1.17332787605329e-10,
+          "reverse_conditional_pct": 1.17332787605329e-08
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.00106437057924404,
+          "joint_pct": 0.106437057924404,
+          "forward_conditional_share": 0.00366767648441019,
+          "forward_conditional_pct": 0.366767648441019,
+          "reverse_conditional_share": 0.0527773078705478,
+          "reverse_conditional_pct": 5.27773078705478
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.000321444214123278,
+          "joint_pct": 0.0321444214123278,
+          "forward_conditional_share": 0.00227669844955389,
+          "forward_conditional_pct": 0.227669844955389,
+          "reverse_conditional_share": 0.0159389601543099,
+          "reverse_conditional_pct": 1.59389601543099
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.00495698817312993,
+          "joint_pct": 0.495698817312993,
+          "forward_conditional_share": 0.065444911626051,
+          "forward_conditional_pct": 6.5444911626051,
+          "reverse_conditional_share": 0.245794553161882,
+          "reverse_conditional_pct": 24.5794553161882
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0138243980913862,
+          "joint_pct": 1.38243980913862,
+          "forward_conditional_share": 0.0336964913910825,
+          "forward_conditional_pct": 3.36964913910825,
+          "reverse_conditional_share": 0.685489178695927,
+          "reverse_conditional_pct": 68.5489178695927
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00129479978187631,
+          "joint_pct": 0.129479978187631,
+          "forward_conditional_share": 0.0156749477922421,
+          "forward_conditional_pct": 1.56749477922421,
+          "reverse_conditional_share": 0.0150163945466727,
+          "reverse_conditional_pct": 1.50163945466727
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0193532822541697,
+          "joint_pct": 1.93532822541697,
+          "forward_conditional_share": 0.0666887826514195,
+          "forward_conditional_pct": 6.66887826514195,
+          "reverse_conditional_share": 0.224449004525315,
+          "reverse_conditional_pct": 22.4449004525315
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.014605186738797,
+          "joint_pct": 1.4605186738797,
+          "forward_conditional_share": 0.103444406658108,
+          "forward_conditional_pct": 10.3444406658108,
+          "reverse_conditional_share": 0.169383135190055,
+          "reverse_conditional_pct": 16.9383135190056
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0153663920579303,
+          "joint_pct": 1.53663920579303,
+          "forward_conditional_share": 0.2028756444677,
+          "forward_conditional_pct": 20.28756444677,
+          "reverse_conditional_share": 0.178211186880462,
+          "reverse_conditional_pct": 17.8211186880462
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0356060824940896,
+          "joint_pct": 3.56060824940896,
+          "forward_conditional_share": 0.0867885924798303,
+          "forward_conditional_pct": 8.67885924798303,
+          "reverse_conditional_share": 0.412940278857495,
+          "reverse_conditional_pct": 41.2940278857495
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0141495529490796,
+          "joint_pct": 1.41495529490796,
+          "forward_conditional_share": 0.171295598643819,
+          "forward_conditional_pct": 17.1295598643819,
+          "reverse_conditional_share": 0.306468422130008,
+          "reverse_conditional_pct": 30.6468422130008
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0183872843796005,
+          "joint_pct": 1.83872843796005,
+          "forward_conditional_share": 0.0633600851492169,
+          "forward_conditional_pct": 6.33600851492169,
+          "reverse_conditional_share": 0.398254421984298,
+          "reverse_conditional_pct": 39.8254421984298
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.00519315383252948,
+          "joint_pct": 0.519315383252948,
+          "forward_conditional_share": 0.0367816397350999,
+          "forward_conditional_pct": 3.67816397350999,
+          "reverse_conditional_share": 0.112479713434143,
+          "reverse_conditional_pct": 11.2479713434143
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.00788644944535772,
+          "joint_pct": 0.788644944535772,
+          "forward_conditional_share": 0.104121286750794,
+          "forward_conditional_pct": 10.4121286750794,
+          "reverse_conditional_share": 0.170814422648178,
+          "reverse_conditional_pct": 17.0814422648178
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.000553252344953746,
+          "joint_pct": 0.0553252344953746,
+          "forward_conditional_share": 0.00134853342298108,
+          "forward_conditional_pct": 0.134853342298108,
+          "reverse_conditional_share": 0.0119830198033734,
+          "reverse_conditional_pct": 1.19830198033734
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.00245201878016498,
+          "joint_pct": 0.245201878016498,
+          "forward_conditional_share": 0.0296843318192303,
+          "forward_conditional_pct": 2.96843318192303,
+          "reverse_conditional_share": 0.0529550585617272,
+          "reverse_conditional_pct": 5.29550585617272
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0100135779635836,
+          "joint_pct": 1.00135779635836,
+          "forward_conditional_share": 0.0345054299113834,
+          "forward_conditional_pct": 3.45054299113834,
+          "reverse_conditional_share": 0.216258379325428,
+          "reverse_conditional_pct": 21.6258379325428
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.00472228294660098,
+          "joint_pct": 0.472228294660098,
+          "forward_conditional_share": 0.0334465944338261,
+          "forward_conditional_pct": 3.34465944338261,
+          "reverse_conditional_share": 0.101984851015486,
+          "reverse_conditional_pct": 10.1984851015486
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.01026363640561,
+          "joint_pct": 1.026363640561,
+          "forward_conditional_share": 0.135506229602912,
+          "forward_conditional_pct": 13.5506229602912,
+          "reverse_conditional_share": 0.221658770035514,
+          "reverse_conditional_pct": 22.1658770035514
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0188522525479138,
+          "joint_pct": 1.88522525479138,
+          "forward_conditional_share": 0.0459517124350686,
+          "forward_conditional_pct": 4.59517124350686,
+          "reverse_conditional_share": 0.407142941061844,
+          "reverse_conditional_pct": 40.7142941061844
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0025359332584211,
+          "joint_pct": 0.25359332584211,
+          "forward_conditional_share": 0.0307002070797063,
+          "forward_conditional_pct": 3.07002070797063,
+          "reverse_conditional_share": 0.0515985294051746,
+          "reverse_conditional_pct": 5.15985294051746
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0199377580335565,
+          "joint_pct": 1.99377580335565,
+          "forward_conditional_share": 0.0687028068207898,
+          "forward_conditional_pct": 6.87028068207898,
+          "reverse_conditional_share": 0.405672740302415,
+          "reverse_conditional_pct": 40.5672740302415
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.014188590289704,
+          "joint_pct": 1.4188590289704,
+          "forward_conditional_share": 0.100493771841654,
+          "forward_conditional_pct": 10.0493771841654,
+          "reverse_conditional_share": 0.288694661363874,
+          "reverse_conditional_pct": 28.8694661363874
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00385184939822407,
+          "joint_pct": 0.385184939822407,
+          "forward_conditional_share": 0.0508542555800494,
+          "forward_conditional_pct": 5.08542555800494,
+          "reverse_conditional_share": 0.0783734208219314,
+          "reverse_conditional_pct": 7.83734208219314
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0086332630961508,
+          "joint_pct": 0.86332630961508,
+          "forward_conditional_share": 0.0210432796909732,
+          "forward_conditional_pct": 2.10432796909732,
+          "reverse_conditional_share": 0.175660648106605,
+          "reverse_conditional_pct": 17.5660648106605
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0310507207043169,
+          "joint_pct": 3.10507207043169,
+          "forward_conditional_share": 0.375902462113756,
+          "forward_conditional_pct": 37.5902462113756,
+          "reverse_conditional_share": 0.396617658001002,
+          "reverse_conditional_pct": 39.6617658001002
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0411030856357594,
+          "joint_pct": 4.11030856357594,
+          "forward_conditional_share": 0.141635651682559,
+          "forward_conditional_pct": 14.1635651682559,
+          "reverse_conditional_share": 0.525018717494795,
+          "reverse_conditional_pct": 52.5018717494795
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.000684291751561161,
+          "joint_pct": 0.0684291751561161,
+          "forward_conditional_share": 0.00484664492739735,
+          "forward_conditional_pct": 0.484664492739735,
+          "reverse_conditional_share": 0.00874060845408523,
+          "reverse_conditional_pct": 0.874060845408523
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 3.46013132132431e-15,
+          "joint_pct": 3.46013132132431e-13,
+          "forward_conditional_share": 4.56825759169841e-14,
+          "forward_conditional_pct": 4.56825759169841e-12,
+          "reverse_conditional_share": 4.419701539645e-14,
+          "reverse_conditional_pct": 4.419701539645e-12
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.00545070241415611,
+          "joint_pct": 0.545070241415611,
+          "forward_conditional_share": 0.01328589829082,
+          "forward_conditional_pct": 1.328589829082,
+          "reverse_conditional_share": 0.0696230160500735,
+          "reverse_conditional_pct": 6.96230160500735
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0203656550440949,
+          "joint_pct": 2.03656550440949,
+          "forward_conditional_share": 0.246548218527192,
+          "forward_conditional_pct": 24.6548218527192,
+          "reverse_conditional_share": 0.0646957534433735,
+          "reverse_conditional_pct": 6.46957534433735
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.056579169204922,
+          "joint_pct": 5.6579169204922,
+          "forward_conditional_share": 0.194964134153109,
+          "forward_conditional_pct": 19.4964134153109,
+          "reverse_conditional_share": 0.179735538728664,
+          "reverse_conditional_pct": 17.9735538728664
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0332831326310646,
+          "joint_pct": 3.32831326310646,
+          "forward_conditional_share": 0.235735014438245,
+          "forward_conditional_pct": 23.5735014438245,
+          "reverse_conditional_share": 0.105730816802124,
+          "reverse_conditional_pct": 10.5730816802124
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.00932980784092104,
+          "joint_pct": 0.932980784092104,
+          "forward_conditional_share": 0.123177306120458,
+          "forward_conditional_pct": 12.3177306120458,
+          "reverse_conditional_share": 0.0296380816842567,
+          "reverse_conditional_pct": 2.96380816842567
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.195233453560742,
+          "joint_pct": 19.5233453560742,
+          "forward_conditional_share": 0.475874779044444,
+          "forward_conditional_pct": 47.5874779044444,
+          "reverse_conditional_share": 0.620199809341581,
+          "reverse_conditional_pct": 62.0199809341581
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.372806093967499,
+          "shown_pct": 37.2806093967499,
+          "omitted_share": 0.627193906032501,
+          "omitted_pct": 62.7193906032501
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.216931664455482,
+          "shown_pct": 21.6931664455482,
+          "omitted_share": 0.783068335544518,
+          "omitted_pct": 78.3068335544518
+        }
+      },
+      "summary": {
+        "positive_pct": 37.2806093967499,
+        "negative_pct": 21.6931664455482,
+        "cant_rate_pct": 41.0262241577019
+      }
+    },
+    {
+      "id": "esteves",
+      "label": "Jason Esteves",
+      "favorability_dv": "favorability_esteves",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.0816412559293597,
+          "marginal_pct": 8.16412559293597,
+          "marginal_sd_share": 0.019037515396043,
+          "marginal_sd_pct": 1.9037515396043
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.221705991745867,
+          "marginal_pct": 22.1705991745867,
+          "marginal_sd_share": 0.0198232301368852,
+          "marginal_sd_pct": 1.98232301368852
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.107231646353679,
+          "marginal_pct": 10.7231646353679,
+          "marginal_sd_share": 0.0417778392876891,
+          "marginal_sd_pct": 4.17778392876891
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0456644235874247,
+          "marginal_pct": 4.56644235874247,
+          "marginal_sd_share": 0.00160182120030892,
+          "marginal_sd_pct": 0.160182120030892
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.543756682383669,
+          "marginal_pct": 54.3756682383669,
+          "marginal_sd_share": 0.00451891432139832,
+          "marginal_sd_pct": 0.451891432139832
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.358906181153895,
+          "marginal_pct": 35.8906181153895,
+          "marginal_sd_share": 0.0349627580910885,
+          "marginal_sd_pct": 3.49627580910885
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0201672010602498,
+          "marginal_pct": 2.01672010602498,
+          "marginal_sd_share": 0.0006335553772842,
+          "marginal_sd_pct": 0.06335553772842
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862257433268629,
+          "marginal_pct": 8.62257433268629,
+          "marginal_sd_share": 0.0180570427647859,
+          "marginal_sd_pct": 1.80570427647859
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0461696929515211,
+          "marginal_pct": 4.61696929515211,
+          "marginal_sd_share": 0.00350795472990186,
+          "marginal_sd_pct": 0.350795472990186
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463037686438734,
+          "marginal_pct": 4.63037686438734,
+          "marginal_sd_share": 0.00962571821897401,
+          "marginal_sd_pct": 0.962571821897401
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491473940760564,
+          "marginal_pct": 4.91473940760564,
+          "marginal_sd_share": 0.00557070165707203,
+          "marginal_sd_pct": 0.557070165707203
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.078288800505797,
+          "marginal_pct": 7.8288800505797,
+          "marginal_sd_share": 0.00946362489219262,
+          "marginal_sd_pct": 0.946362489219261
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.314791218281745,
+          "marginal_pct": 31.4791218281745,
+          "marginal_sd_share": 0.0181728135180382,
+          "marginal_sd_pct": 1.81728135180382
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0156016818189497,
+          "joint_pct": 1.56016818189497,
+          "forward_conditional_share": 0.191100463134094,
+          "forward_conditional_pct": 19.1100463134094,
+          "reverse_conditional_share": 0.0434700839333271,
+          "reverse_conditional_pct": 4.34700839333271
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0582932103096653,
+          "joint_pct": 5.82932103096653,
+          "forward_conditional_share": 0.262930243114424,
+          "forward_conditional_pct": 26.2930243114424,
+          "reverse_conditional_share": 0.162419075988747,
+          "reverse_conditional_pct": 16.2419075988747
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0510372263908018,
+          "joint_pct": 5.10372263908018,
+          "forward_conditional_share": 0.475953024375541,
+          "forward_conditional_pct": 47.5953024375541,
+          "reverse_conditional_share": 0.142202138248819,
+          "reverse_conditional_pct": 14.2202138248819
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0233763233535143,
+          "joint_pct": 2.33763233535143,
+          "forward_conditional_share": 0.511915436943165,
+          "forward_conditional_pct": 51.1915436943165,
+          "reverse_conditional_share": 0.0651321280629904,
+          "reverse_conditional_pct": 6.51321280629904
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.210597739280964,
+          "joint_pct": 21.0597739280964,
+          "forward_conditional_share": 0.38730142746525,
+          "forward_conditional_pct": 38.730142746525,
+          "reverse_conditional_share": 0.586776573766117,
+          "reverse_conditional_pct": 58.6776573766117
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.000774937586998764,
+          "joint_pct": 0.0774937586998764,
+          "forward_conditional_share": 0.00949198512660414,
+          "forward_conditional_pct": 0.949198512660414,
+          "reverse_conditional_share": 0.0384256389711011,
+          "reverse_conditional_pct": 3.84256389711011
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.000486460610352602,
+          "joint_pct": 0.0486460610352602,
+          "forward_conditional_share": 0.00219416988472829,
+          "forward_conditional_pct": 0.219416988472829,
+          "reverse_conditional_share": 0.0241213745476774,
+          "reverse_conditional_pct": 2.41213745476774
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.000331968692370722,
+          "joint_pct": 0.0331968692370722,
+          "forward_conditional_share": 0.00309580896739942,
+          "forward_conditional_pct": 0.309580896739942,
+          "reverse_conditional_share": 0.0164608212800061,
+          "reverse_conditional_pct": 1.64608212800061
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 7.69691827540416e-12,
+          "joint_pct": 7.69691827540416e-10,
+          "forward_conditional_share": 1.68553934786199e-10,
+          "forward_conditional_pct": 1.68553934786199e-08,
+          "reverse_conditional_share": 3.8165525560089e-10,
+          "reverse_conditional_pct": 3.8165525560089e-08
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0185738341628308,
+          "joint_pct": 1.85738341628308,
+          "forward_conditional_share": 0.0341583556847679,
+          "forward_conditional_pct": 3.41583556847679,
+          "reverse_conditional_share": 0.92099216481956,
+          "reverse_conditional_pct": 92.099216481956
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0152446144956641,
+          "joint_pct": 1.52446144956641,
+          "forward_conditional_share": 0.186726849337724,
+          "forward_conditional_pct": 18.6726849337724,
+          "reverse_conditional_share": 0.176798875921256,
+          "reverse_conditional_pct": 17.6798875921256
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0242810258785505,
+          "joint_pct": 2.42810258785505,
+          "forward_conditional_share": 0.109519033235614,
+          "forward_conditional_pct": 10.9519033235614,
+          "reverse_conditional_share": 0.281598336433081,
+          "reverse_conditional_pct": 28.1598336433081
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00217114145993066,
+          "joint_pct": 0.217114145993066,
+          "forward_conditional_share": 0.0202472081121431,
+          "forward_conditional_pct": 2.02472081121431,
+          "reverse_conditional_share": 0.0251797360760387,
+          "reverse_conditional_pct": 2.51797360760387
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0023370202848977,
+          "joint_pct": 0.23370202848977,
+          "forward_conditional_share": 0.0511781404712897,
+          "forward_conditional_pct": 5.11781404712897,
+          "reverse_conditional_share": 0.0271035098652448,
+          "reverse_conditional_pct": 2.71035098652448
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.04219194120782,
+          "joint_pct": 4.219194120782,
+          "forward_conditional_share": 0.0775934210552833,
+          "forward_conditional_pct": 7.75934210552833,
+          "reverse_conditional_share": 0.489319541704379,
+          "reverse_conditional_pct": 48.9319541704379
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0215940416959057,
+          "joint_pct": 2.15940416959057,
+          "forward_conditional_share": 0.264499136497728,
+          "forward_conditional_pct": 26.4499136497728,
+          "reverse_conditional_share": 0.467710316344961,
+          "reverse_conditional_pct": 46.7710316344961
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0164934176668134,
+          "joint_pct": 1.64934176668134,
+          "forward_conditional_share": 0.0743931976620602,
+          "forward_conditional_pct": 7.43931976620602,
+          "reverse_conditional_share": 0.357234727207992,
+          "reverse_conditional_pct": 35.7234727207992
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.00549084272944849,
+          "joint_pct": 0.549084272944849,
+          "forward_conditional_share": 0.0512054315695034,
+          "forward_conditional_pct": 5.12054315695034,
+          "reverse_conditional_share": 0.118927425729557,
+          "reverse_conditional_pct": 11.8927425729557
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.00189609080882687,
+          "joint_pct": 0.189609080882687,
+          "forward_conditional_share": 0.0415222762025409,
+          "forward_conditional_pct": 4.15222762025409,
+          "reverse_conditional_share": 0.0410678669840365,
+          "reverse_conditional_pct": 4.10678669840365
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.000695300050526665,
+          "joint_pct": 0.0695300050526665,
+          "forward_conditional_share": 0.00127869702212886,
+          "forward_conditional_pct": 0.127869702212886,
+          "reverse_conditional_share": 0.0150596637334526,
+          "reverse_conditional_pct": 1.50596637334526
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0137051535597137,
+          "joint_pct": 1.37051535597137,
+          "forward_conditional_share": 0.167870440057563,
+          "forward_conditional_pct": 16.7870440057563,
+          "reverse_conditional_share": 0.295983544344335,
+          "reverse_conditional_pct": 29.5983544344335
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0236009257239389,
+          "joint_pct": 2.36009257239389,
+          "forward_conditional_share": 0.106451456445037,
+          "forward_conditional_pct": 10.6451456445037,
+          "reverse_conditional_share": 0.509697729043523,
+          "reverse_conditional_pct": 50.9697729043523
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.000616617127422233,
+          "joint_pct": 0.0616617127422233,
+          "forward_conditional_share": 0.00575032789656576,
+          "forward_conditional_pct": 0.575032789656576,
+          "reverse_conditional_share": 0.013316780587876,
+          "reverse_conditional_pct": 1.3316780587876
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 1.9513802361373e-12,
+          "joint_pct": 1.9513802361373e-10,
+          "forward_conditional_share": 4.27330530604723e-11,
+          "forward_conditional_pct": 4.27330530604723e-09,
+          "reverse_conditional_share": 4.21430111044643e-11,
+          "reverse_conditional_pct": 4.21430111044643e-09
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.00838107223084709,
+          "joint_pct": 0.838107223084709,
+          "forward_conditional_share": 0.015413276751114,
+          "forward_conditional_pct": 1.5413276751114,
+          "reverse_conditional_share": 0.181001945982123,
+          "reverse_conditional_pct": 18.1001945982123
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00609518185024093,
+          "joint_pct": 0.609518185024093,
+          "forward_conditional_share": 0.0746581098104958,
+          "forward_conditional_pct": 7.46581098104958,
+          "reverse_conditional_share": 0.124018413688598,
+          "reverse_conditional_pct": 12.4018413688598
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0292605240806188,
+          "joint_pct": 2.92605240806188,
+          "forward_conditional_share": 0.131978950366659,
+          "forward_conditional_pct": 13.1978950366659,
+          "reverse_conditional_share": 0.595362676510124,
+          "reverse_conditional_pct": 59.5362676510124
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00394180217917075,
+          "joint_pct": 0.394180217917075,
+          "forward_conditional_share": 0.0367596909420716,
+          "forward_conditional_pct": 3.67596909420716,
+          "reverse_conditional_share": 0.0802036863454194,
+          "reverse_conditional_pct": 8.02036863454194
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.000617255934702633,
+          "joint_pct": 0.0617255934702633,
+          "forward_conditional_share": 0.0135172172604105,
+          "forward_conditional_pct": 1.35172172604105,
+          "reverse_conditional_share": 0.0125592810423971,
+          "reverse_conditional_pct": 1.25592810423971
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00923263003132333,
+          "joint_pct": 0.923263003132333,
+          "forward_conditional_share": 0.0169793408162824,
+          "forward_conditional_pct": 1.69793408162824,
+          "reverse_conditional_share": 0.187855942413461,
+          "reverse_conditional_pct": 18.7855942413461
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.003989395968296,
+          "joint_pct": 0.3989395968296,
+          "forward_conditional_share": 0.0488649509721878,
+          "forward_conditional_pct": 4.88649509721878,
+          "reverse_conditional_share": 0.0509574286810103,
+          "reverse_conditional_pct": 5.09574286810103
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0169643730261506,
+          "joint_pct": 1.69643730261506,
+          "forward_conditional_share": 0.0765174314530756,
+          "forward_conditional_pct": 7.65174314530756,
+          "reverse_conditional_share": 0.216689653137481,
+          "reverse_conditional_pct": 21.6689653137481
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0101436654786066,
+          "joint_pct": 1.01436654786066,
+          "forward_conditional_share": 0.0945958196440445,
+          "forward_conditional_pct": 9.45958196440445,
+          "reverse_conditional_share": 0.12956726138441,
+          "reverse_conditional_pct": 12.956726138441
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.00323440679793705,
+          "joint_pct": 0.323440679793705,
+          "forward_conditional_share": 0.0708299052925691,
+          "forward_conditional_pct": 7.08299052925691,
+          "reverse_conditional_share": 0.0413137866085655,
+          "reverse_conditional_pct": 4.13137866085655
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0439569592348068,
+          "joint_pct": 4.39569592348068,
+          "forward_conditional_share": 0.0808393913286958,
+          "forward_conditional_pct": 8.08393913286958,
+          "reverse_conditional_share": 0.561471870188533,
+          "reverse_conditional_pct": 56.1471870188533
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.00463624895379291,
+          "joint_pct": 0.463624895379291,
+          "forward_conditional_share": 0.0567880650660793,
+          "forward_conditional_pct": 5.67880650660793,
+          "reverse_conditional_share": 0.0147280123603809,
+          "reverse_conditional_pct": 1.47280123603809
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0523260544499761,
+          "joint_pct": 5.23260544499761,
+          "forward_conditional_share": 0.236015517839298,
+          "forward_conditional_pct": 23.6015517839298,
+          "reverse_conditional_share": 0.166224632108839,
+          "reverse_conditional_pct": 16.6224632108839
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0334983822958907,
+          "joint_pct": 3.34983822958907,
+          "forward_conditional_share": 0.312392688492388,
+          "forward_conditional_pct": 31.2392688492388,
+          "reverse_conditional_share": 0.106414602283819,
+          "reverse_conditional_pct": 10.6414602283819
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0142033263978771,
+          "joint_pct": 1.42033263978771,
+          "forward_conditional_share": 0.311037023618282,
+          "forward_conditional_pct": 31.1037023618282,
+          "reverse_conditional_share": 0.0451198304558953,
+          "reverse_conditional_pct": 4.51198304558953
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.210127206184208,
+          "joint_pct": 21.0127206184208,
+          "forward_conditional_share": 0.386436089875847,
+          "forward_conditional_pct": 38.6436089875847,
+          "reverse_conditional_share": 0.667512922791066,
+          "reverse_conditional_pct": 66.7512922791066
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.303347247675227,
+          "shown_pct": 30.3347247675227,
+          "omitted_share": 0.696652752324773,
+          "omitted_pct": 69.6652752324773
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.152896069941103,
+          "shown_pct": 15.2896069941104,
+          "omitted_share": 0.847103930058897,
+          "omitted_pct": 84.7103930058897
+        }
+      },
+      "summary": {
+        "positive_pct": 30.3347247675227,
+        "negative_pct": 15.2896069941104,
+        "cant_rate_pct": 54.3756682383669
+      }
+    },
+    {
+      "id": "duncan",
+      "label": "Geoff Duncan",
+      "favorability_dv": "favorability_duncan",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.0942412159796023,
+          "marginal_pct": 9.42412159796023,
+          "marginal_sd_share": 0.00138307682040649,
+          "marginal_sd_pct": 0.138307682040649
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.24621823434932,
+          "marginal_pct": 24.6218234349321,
+          "marginal_sd_share": 0.00616993880204636,
+          "marginal_sd_pct": 0.616993880204637
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.166053477425979,
+          "marginal_pct": 16.6053477425979,
+          "marginal_sd_share": 0.0194707568312717,
+          "marginal_sd_pct": 1.94707568312717
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0867105623049812,
+          "marginal_pct": 8.67105623049812,
+          "marginal_sd_share": 0.0388191538816234,
+          "marginal_sd_pct": 3.88191538816234
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.406776509940117,
+          "marginal_pct": 40.6776509940117,
+          "marginal_sd_share": 0.0145615372653639,
+          "marginal_sd_pct": 1.45615372653639
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.358906181153895,
+          "marginal_pct": 35.8906181153895,
+          "marginal_sd_share": 0.0349627580910885,
+          "marginal_sd_pct": 3.49627580910885
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0201672010602498,
+          "marginal_pct": 2.01672010602498,
+          "marginal_sd_share": 0.0006335553772842,
+          "marginal_sd_pct": 0.06335553772842
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862257433268629,
+          "marginal_pct": 8.62257433268629,
+          "marginal_sd_share": 0.0180570427647859,
+          "marginal_sd_pct": 1.80570427647859
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0461696929515211,
+          "marginal_pct": 4.61696929515211,
+          "marginal_sd_share": 0.00350795472990186,
+          "marginal_sd_pct": 0.350795472990186
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463037686438734,
+          "marginal_pct": 4.63037686438734,
+          "marginal_sd_share": 0.00962571821897401,
+          "marginal_sd_pct": 0.962571821897401
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491473940760564,
+          "marginal_pct": 4.91473940760564,
+          "marginal_sd_share": 0.00557070165707203,
+          "marginal_sd_pct": 0.557070165707203
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.078288800505797,
+          "marginal_pct": 7.8288800505797,
+          "marginal_sd_share": 0.00946362489219262,
+          "marginal_sd_pct": 0.946362489219261
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.314791218281745,
+          "marginal_pct": 31.4791218281745,
+          "marginal_sd_share": 0.0181728135180382,
+          "marginal_sd_pct": 1.81728135180382
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0103878042557651,
+          "joint_pct": 1.03878042557651,
+          "forward_conditional_share": 0.110225702711789,
+          "forward_conditional_pct": 11.0225702711789,
+          "reverse_conditional_share": 0.0289429516715705,
+          "reverse_conditional_pct": 2.89429516715705
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0843365142652539,
+          "joint_pct": 8.43365142652539,
+          "forward_conditional_share": 0.342527491873742,
+          "forward_conditional_pct": 34.2527491873742,
+          "reverse_conditional_share": 0.234982061312261,
+          "reverse_conditional_pct": 23.4982061312261
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0553193715929098,
+          "joint_pct": 5.53193715929098,
+          "forward_conditional_share": 0.333141903743445,
+          "forward_conditional_pct": 33.3141903743445,
+          "reverse_conditional_share": 0.154133237313039,
+          "reverse_conditional_pct": 15.4133237313039
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0443086888913673,
+          "joint_pct": 4.43086888913673,
+          "forward_conditional_share": 0.510995289541813,
+          "forward_conditional_pct": 51.0995289541813,
+          "reverse_conditional_share": 0.123454794645535,
+          "reverse_conditional_pct": 12.3454794645535
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.164553802148599,
+          "joint_pct": 16.4553802148599,
+          "forward_conditional_share": 0.404531230608235,
+          "forward_conditional_pct": 40.4531230608235,
+          "reverse_conditional_share": 0.458486955057595,
+          "reverse_conditional_pct": 45.8486955057595
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 5.9738517833195e-12,
+          "joint_pct": 5.9738517833195e-10,
+          "forward_conditional_share": 6.33889505904984e-11,
+          "forward_conditional_pct": 6.33889505904984e-09,
+          "reverse_conditional_share": 2.96216205980817e-10,
+          "reverse_conditional_pct": 2.96216205980817e-08
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.011912817739947,
+          "joint_pct": 1.1912817739947,
+          "forward_conditional_share": 0.0483831661429502,
+          "forward_conditional_pct": 4.83831661429502,
+          "reverse_conditional_share": 0.590702582096411,
+          "reverse_conditional_pct": 59.0702582096411
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.00312437202161456,
+          "joint_pct": 0.312437202161456,
+          "forward_conditional_share": 0.0188154567434898,
+          "forward_conditional_pct": 1.88154567434898,
+          "reverse_conditional_share": 0.154923432968237,
+          "reverse_conditional_pct": 15.4923432968237
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.00122149066288665,
+          "joint_pct": 0.122149066288665,
+          "forward_conditional_share": 0.0140869881409646,
+          "forward_conditional_pct": 1.40869881409646,
+          "reverse_conditional_share": 0.060568179949088,
+          "reverse_conditional_pct": 6.0568179949088
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.00390852062982769,
+          "joint_pct": 0.390852062982769,
+          "forward_conditional_share": 0.00960852097974653,
+          "forward_conditional_pct": 0.960852097974653,
+          "reverse_conditional_share": 0.193805804690048,
+          "reverse_conditional_pct": 19.3805804690048
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0600829746230841,
+          "joint_pct": 6.00829746230841,
+          "forward_conditional_share": 0.637544560504064,
+          "forward_conditional_pct": 63.7544560504064,
+          "reverse_conditional_share": 0.696810167183166,
+          "reverse_conditional_pct": 69.6810167183166
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0180630752931337,
+          "joint_pct": 1.80630752931337,
+          "forward_conditional_share": 0.0733620535492383,
+          "forward_conditional_pct": 7.33620535492383,
+          "reverse_conditional_share": 0.209485875055441,
+          "reverse_conditional_pct": 20.9485875055441
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00212550146181058,
+          "joint_pct": 0.212550146181058,
+          "forward_conditional_share": 0.0128001020801149,
+          "forward_conditional_pct": 1.28001020801149,
+          "reverse_conditional_share": 0.0246504278165892,
+          "reverse_conditional_pct": 2.46504278165892
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00268905045430173,
+          "joint_pct": 0.268905045430173,
+          "forward_conditional_share": 0.0310117981341618,
+          "forward_conditional_pct": 3.10117981341618,
+          "reverse_conditional_share": 0.0311861672691893,
+          "reverse_conditional_pct": 3.11861672691893
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.00326514149453277,
+          "joint_pct": 0.326514149453277,
+          "forward_conditional_share": 0.00802686835337036,
+          "forward_conditional_pct": 0.802686835337036,
+          "reverse_conditional_share": 0.0378673626756146,
+          "reverse_conditional_pct": 3.78673626756146
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.00421257579366868,
+          "joint_pct": 0.421257579366868,
+          "forward_conditional_share": 0.0446999303848165,
+          "forward_conditional_pct": 4.46999303848165,
+          "reverse_conditional_share": 0.091241148129184,
+          "reverse_conditional_pct": 9.1241148129184
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.024977857041052,
+          "joint_pct": 2.4977857041052,
+          "forward_conditional_share": 0.10144600828229,
+          "forward_conditional_pct": 10.144600828229,
+          "reverse_conditional_share": 0.541001151280757,
+          "reverse_conditional_pct": 54.1001151280757
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0145219288352271,
+          "joint_pct": 1.45219288352271,
+          "forward_conditional_share": 0.0874533256414369,
+          "forward_conditional_pct": 8.74533256414369,
+          "reverse_conditional_share": 0.314533797105286,
+          "reverse_conditional_pct": 31.4533797105286
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.00229663090001166,
+          "joint_pct": 0.229663090001165,
+          "forward_conditional_share": 0.0264861723757928,
+          "forward_conditional_pct": 2.64861723757928,
+          "reverse_conditional_share": 0.0497432569547983,
+          "reverse_conditional_pct": 4.97432569547983
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.000160700381561703,
+          "joint_pct": 0.0160700381561703,
+          "forward_conditional_share": 0.000395058164949988,
+          "forward_conditional_pct": 0.0395058164949988,
+          "reverse_conditional_share": 0.00348064652997457,
+          "reverse_conditional_pct": 0.348064652997457
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.00281893176575845,
+          "joint_pct": 0.281893176575845,
+          "forward_conditional_share": 0.0299118781146519,
+          "forward_conditional_pct": 2.99118781146519,
+          "reverse_conditional_share": 0.0608791000887879,
+          "reverse_conditional_pct": 6.08791000887879
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.00992149504192502,
+          "joint_pct": 0.992149504192502,
+          "forward_conditional_share": 0.0402955332213493,
+          "forward_conditional_pct": 4.02955332213493,
+          "reverse_conditional_share": 0.214269709194346,
+          "reverse_conditional_pct": 21.4269709194346
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0155846616399004,
+          "joint_pct": 1.55846616399004,
+          "forward_conditional_share": 0.0938532687269232,
+          "forward_conditional_pct": 9.38532687269232,
+          "reverse_conditional_share": 0.336574367407619,
+          "reverse_conditional_pct": 33.6574367407619
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 1.68389011359782e-12,
+          "joint_pct": 1.68389011359782e-10,
+          "forward_conditional_share": 1.94196654806041e-11,
+          "forward_conditional_pct": 1.94196654806041e-09,
+          "reverse_conditional_share": 3.63661568575287e-11,
+          "reverse_conditional_pct": 3.63661568575287e-09
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0179786801946056,
+          "joint_pct": 1.79786801946056,
+          "forward_conditional_share": 0.0441979311864696,
+          "forward_conditional_pct": 4.41979311864696,
+          "reverse_conditional_share": 0.38827682327288,
+          "reverse_conditional_pct": 38.8276823272881
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0118870660924464,
+          "joint_pct": 1.18870660924464,
+          "forward_conditional_share": 0.126134472787567,
+          "forward_conditional_pct": 12.6134472787567,
+          "reverse_conditional_share": 0.241865643457127,
+          "reverse_conditional_pct": 24.1865643457127
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0101535637508155,
+          "joint_pct": 1.01535637508155,
+          "forward_conditional_share": 0.0412380658063294,
+          "forward_conditional_pct": 4.12380658063294,
+          "reverse_conditional_share": 0.206594142816661,
+          "reverse_conditional_pct": 20.6594142816661
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0169660815963267,
+          "joint_pct": 1.69660815963267,
+          "forward_conditional_share": 0.102172395660245,
+          "forward_conditional_pct": 10.2172395660245,
+          "reverse_conditional_share": 0.345208162411854,
+          "reverse_conditional_pct": 34.5208162411854
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00261070773917745,
+          "joint_pct": 0.261070773917745,
+          "forward_conditional_share": 0.0301083013392876,
+          "forward_conditional_pct": 3.01083013392876,
+          "reverse_conditional_share": 0.0531199626807748,
+          "reverse_conditional_pct": 5.31199626807748
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.00752997489729042,
+          "joint_pct": 0.752997489729042,
+          "forward_conditional_share": 0.0185113316853004,
+          "forward_conditional_pct": 1.85113316853004,
+          "reverse_conditional_share": 0.153212088633584,
+          "reverse_conditional_pct": 15.3212088633584
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.00108402233641636,
+          "joint_pct": 0.108402233641636,
+          "forward_conditional_share": 0.0115026352869958,
+          "forward_conditional_pct": 1.15026352869958,
+          "reverse_conditional_share": 0.0138464547855232,
+          "reverse_conditional_pct": 1.38464547855232
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0246175244352304,
+          "joint_pct": 2.46175244352304,
+          "forward_conditional_share": 0.0999825398808784,
+          "forward_conditional_pct": 9.99825398808784,
+          "reverse_conditional_share": 0.314445032701805,
+          "reverse_conditional_pct": 31.4445032701805
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0278257038711607,
+          "joint_pct": 2.78257038711607,
+          "forward_conditional_share": 0.167570738671007,
+          "forward_conditional_pct": 16.7570738671007,
+          "reverse_conditional_share": 0.355423811469692,
+          "reverse_conditional_pct": 35.5423811469692
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.00135981795275061,
+          "joint_pct": 0.135981795275061,
+          "forward_conditional_share": 0.015682264266351,
+          "forward_conditional_pct": 1.5682264266351,
+          "reverse_conditional_share": 0.0173692526129573,
+          "reverse_conditional_pct": 1.73692526129573
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0234017319102389,
+          "joint_pct": 2.34017319102389,
+          "forward_conditional_share": 0.0575297032606036,
+          "forward_conditional_pct": 5.75297032606036,
+          "reverse_conditional_share": 0.298915448430023,
+          "reverse_conditional_pct": 29.8915448430023
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.00376784110702999,
+          "joint_pct": 0.376784110702999,
+          "forward_conditional_share": 0.0399808201524639,
+          "forward_conditional_pct": 3.99808201524639,
+          "reverse_conditional_share": 0.0119693336033844,
+          "reverse_conditional_pct": 1.19693336033844
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.062235386781959,
+          "joint_pct": 6.2235386781959,
+          "forward_conditional_share": 0.252765141243207,
+          "forward_conditional_pct": 25.2765141243207,
+          "reverse_conditional_share": 0.197703694282402,
+          "reverse_conditional_pct": 19.7703694282402
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0305858564069688,
+          "joint_pct": 3.05858564069688,
+          "forward_conditional_share": 0.184192808732976,
+          "forward_conditional_pct": 18.4192808732976,
+          "reverse_conditional_share": 0.0971623559701523,
+          "reverse_conditional_pct": 9.71623559701523
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0322241757027407,
+          "joint_pct": 3.22241757027407,
+          "forward_conditional_share": 0.371629186181504,
+          "forward_conditional_pct": 37.1629186181504,
+          "reverse_conditional_share": 0.102366819121045,
+          "reverse_conditional_pct": 10.2366819121045
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.185977958283046,
+          "joint_pct": 18.5977958283046,
+          "forward_conditional_share": 0.457199355760303,
+          "forward_conditional_pct": 45.7199355760303,
+          "reverse_conditional_share": 0.590797797023016,
+          "reverse_conditional_pct": 59.0797797023016
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.340459450328923,
+          "shown_pct": 34.0459450328923,
+          "omitted_share": 0.659540549671077,
+          "omitted_pct": 65.9540549671077
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.25276403973096,
+          "shown_pct": 25.276403973096,
+          "omitted_share": 0.74723596026904,
+          "omitted_pct": 74.723596026904
+        }
+      },
+      "summary": {
+        "positive_pct": 34.0459450328923,
+        "negative_pct": 25.276403973096,
+        "cant_rate_pct": 40.6776509940117
+      }
+    }
+  ],
+  "content": {
+    "key_takeaways": [
+      "This report links modeled favorability buckets to modeled Georgia Democratic gubernatorial test-ballot destinations for each available candidate bridge artifact.",
+      "Each candidate section has two flow cards: one for positive sentiment (Very/Somewhat Favorable) and one for negative sentiment (Very/Somewhat Unfavorable).",
+      "Use the direction toggle to switch between forward interpretation (favorability to ballot) and reverse interpretation (ballot to favorability composition).",
+      "These are calibrated bridge flows constrained to match modeled marginals; they are not raw survey cross-tabs."
+    ],
+    "methodology_note": "Bridge flows are estimated by calibrating a joint distribution between modeled favorability and modeled gubernatorial test-ballot outcomes from the same survey wave. We start from a survey-based weighted seed table, apply light smoothing where needed, and then use iterative proportional fitting (IPF) so the recovered totals match the modeled marginals exactly. This lets us show both how large each flow is overall and where each favorability group currently goes on the ballot. These bridge flows are calibrated synthetic estimates that reconcile modeled marginals, not just raw respondent-level cross-tabs.",
+    "component_order": [
+      "hero_title",
+      "key_takeaways",
+      "methodology_note",
+      "candidate_navigation",
+      "candidate_flows",
+      "feedback_callout"
+    ],
+    "feedback_callout": {
+      "enabled": true,
+      "heading": "Share Your Feedback",
+      "body": "Have questions about these voter-flow bridges or ideas for additional diagnostics? We would love to hear from you.",
+      "cta_label": "Get in Touch",
+      "cta_url": "mailto:philipp@vantagedatahouse.com"
+    },
+    "section_headers": {
+      "key_takeaways": "Key Findings",
+      "candidate_navigation": "Candidate Navigation",
+      "candidate_flows": "Voter Flows"
+    }
+  },
+  "dataSource": {
+    "input_files": {
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/bottoms/bridge_Georgia_2026-03-30__state_13__fav_bottoms__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/bottoms/bridge_Georgia_2026-03-30__state_13__fav_bottoms__to__primary_ballot_governor.rds",
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/duncan/bridge_Georgia_2026-03-30__state_13__fav_duncan__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/duncan/bridge_Georgia_2026-03-30__state_13__fav_duncan__to__primary_ballot_governor.rds",
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/esteves/bridge_Georgia_2026-03-30__state_13__fav_esteves__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/esteves/bridge_Georgia_2026-03-30__state_13__fav_esteves__to__primary_ballot_governor.rds",
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/thurmond/bridge_Georgia_2026-03-30__state_13__fav_thurmond__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/thurmond/bridge_Georgia_2026-03-30__state_13__fav_thurmond__to__primary_ballot_governor.rds"
+    },
+    "bridge_schema_versions": [
+      "ga_fav_ballot_bridge_v1"
+    ],
+    "survey_ids": [
+      "Georgia_2026-03-30"
+    ],
+    "ballot_dv": [
+      "primary_ballot_governor"
+    ],
+    "generated_at_utc": "2026-04-03 14:04:27 UTC"
+  }
+}

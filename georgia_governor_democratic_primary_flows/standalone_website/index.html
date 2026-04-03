@@ -1,0 +1,5086 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Georgia Democratic Primary: Voter Flows | Vantage Data House</title>
+    <script>
+      (function bootstrapVDHTheme() {
+        const THEME_PARAM_KEY = 'theme';
+        const THEME_COOKIE_KEY = 'vdh_theme';
+        const THEME_STORAGE_KEY = 'vdh_theme';
+        const LEGACY_STORAGE_KEYS = [
+          'vantage-theme',
+          'vdh_iran2_theme',
+          'vdh_ice2_theme',
+          'vdh_trump_theme',
+          'vdh_georgia_primary_theme',
+          'vdh_georgia_favorability_theme',
+          'vdh_georgia_flows_theme',
+          'vdh_georgia_thurmond_messaging_theme',
+          'vdh_georgia_state_direction_theme',
+          'vdh_georgia_top_issue_theme',
+          'vdh_georgia_agree_theme',
+          'vdh_georgia_casino_gambling_theme',
+          'vdh_georgia_survey_stats_theme'
+        ];
+
+        function normalizeTheme(value) {
+          return value === 'dark' || value === 'light' ? value : null;
+        }
+
+        function readThemeFromQuery() {
+          try {
+            const params = new URLSearchParams(window.location.search || '');
+            return normalizeTheme(params.get(THEME_PARAM_KEY));
+          } catch (err) {
+            return null;
+          }
+        }
+
+        function readThemeFromCookie() {
+          try {
+            const entries = String(document.cookie || '').split(';');
+            for (const entry of entries) {
+              const trimmed = entry.trim();
+              if (!trimmed) continue;
+              const idx = trimmed.indexOf('=');
+              if (idx <= 0) continue;
+              const key = trimmed.slice(0, idx).trim();
+              if (key !== THEME_COOKIE_KEY) continue;
+              const value = decodeURIComponent(trimmed.slice(idx + 1));
+              const normalized = normalizeTheme(value);
+              if (normalized) return normalized;
+            }
+          } catch (err) {}
+          return null;
+        }
+
+        function readThemeFromStorage() {
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try {
+              const normalized = normalizeTheme(window.localStorage.getItem(key));
+              if (normalized) return normalized;
+            } catch (err) {}
+          }
+          return null;
+        }
+
+        function readThemeFromSystem() {
+          try {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              return 'dark';
+            }
+            if (window.matchMedia) return 'light';
+          } catch (err) {}
+          return null;
+        }
+
+        function resolveInitialTheme() {
+          const fromQuery = readThemeFromQuery();
+          if (fromQuery) return { theme: fromQuery, source: 'param' };
+
+          const fromCookie = readThemeFromCookie();
+          if (fromCookie) return { theme: fromCookie, source: 'cookie' };
+
+          const fromStorage = readThemeFromStorage();
+          if (fromStorage) return { theme: fromStorage, source: 'storage' };
+
+          const fromSystem = readThemeFromSystem();
+          if (fromSystem) return { theme: fromSystem, source: 'system' };
+
+          return { theme: 'light', source: 'fallback' };
+        }
+
+        function isPhilippDomain(hostname) {
+          const host = String(hostname || '').toLowerCase();
+          return host === 'philippbroniecki.com' || host.endsWith('.philippbroniecki.com');
+        }
+
+        function getSharedCookieDomain() {
+          return isPhilippDomain(window.location.hostname) ? '.philippbroniecki.com' : '';
+        }
+
+        function persistTheme(theme) {
+          const normalized = normalizeTheme(theme);
+          if (!normalized) return;
+
+          const securePart = window.location.protocol === 'https:' ? '; Secure' : '';
+          const baseCookie = `${THEME_COOKIE_KEY}=${encodeURIComponent(normalized)}; Path=/; Max-Age=31536000; SameSite=Lax${securePart}`;
+          const sharedDomain = getSharedCookieDomain();
+
+          try {
+            if (sharedDomain) {
+              document.cookie = `${baseCookie}; Domain=${sharedDomain}`;
+            }
+            document.cookie = baseCookie;
+          } catch (err) {}
+
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try { window.localStorage.setItem(key, normalized); } catch (err) {}
+          }
+        }
+
+        function shouldPropagateThemeToURL(url, rawHref) {
+          const raw = String(rawHref || '').trim();
+          if (!raw || raw.startsWith('#') || /^mailto:/i.test(raw) || /^tel:/i.test(raw) || /^javascript:/i.test(raw)) {
+            return false;
+          }
+
+          const protocol = String((url && url.protocol) || '').toLowerCase();
+          if (protocol === 'file:') return true;
+          if (protocol !== 'http:' && protocol !== 'https:') return false;
+
+          const host = String((url && url.hostname) || '').toLowerCase();
+          if (host === 'localhost' || host === '127.0.0.1' || host === '[::1]') return true;
+          return isPhilippDomain(host);
+        }
+
+        function withThemeParam(rawHref, theme) {
+          const normalizedTheme = normalizeTheme(theme);
+          if (!normalizedTheme) return rawHref;
+
+          try {
+            const url = new URL(rawHref, window.location.href);
+            if (!shouldPropagateThemeToURL(url, rawHref)) return rawHref;
+            url.searchParams.set(THEME_PARAM_KEY, normalizedTheme);
+            return url.toString();
+          } catch (err) {
+            return rawHref;
+          }
+        }
+
+        function getActiveTheme() {
+          return normalizeTheme(document.documentElement.getAttribute('data-theme')) || 'light';
+        }
+
+        window.VDHTheme = {
+          normalizeTheme,
+          resolveInitialTheme,
+          persistTheme,
+          withThemeParam,
+          getActiveTheme,
+          shouldPropagateThemeToURL,
+          themeParamKey: THEME_PARAM_KEY
+        };
+
+        const initialTheme = resolveInitialTheme();
+        document.documentElement.setAttribute('data-theme', initialTheme.theme);
+        window.__VDH_THEME_BOOT__ = initialTheme;
+      })();
+    </script>
+    <style>
+/* ============================================================
+   DESIGN TOKENS — Georgia family (matches favorability/primary sites)
+   ============================================================ */
+:root {
+  --bg:           #edf2f8;
+  --bg-deep:      #d6e3f0;
+  --surface:      #ffffff;
+  --surface-alt:  #f3f7fc;
+  --surface-hi:   #fafcff;
+  --ink:          #0d1d2e;
+  --ink-soft:     #364d63;
+  --muted:        #5c7289;
+  --muted-faint:  #8aa2b5;
+  --line:         #ccd8e5;
+  --line-soft:    #dce7f0;
+  --accent:       #1a6b73;
+  --accent-hover: #145d64;
+  --accent-tint:  rgba(26, 107, 115, 0.09);
+  --accent-tint2: rgba(26, 107, 115, 0.16);
+  --warm:         #c46525;
+  --warm-tint:    rgba(196, 101, 37, 0.09);
+  --cool:         #1f5f89;
+  --track:        rgba(135, 162, 188, 0.25);
+  --hero-from:    #0c2240;
+  --hero-to:      #1c4a80;
+  --topbar-bg:    rgba(237, 242, 248, 0.86);
+  --shadow-card:  0 1px 2px rgba(10, 25, 55, 0.04),
+                  0 4px 14px rgba(10, 25, 55, 0.055),
+                  0 0 0 1px rgba(10, 25, 55, 0.028);
+  --shadow-raise: 0 2px 5px rgba(10, 25, 55, 0.06),
+                  0 10px 28px rgba(10, 25, 55, 0.09),
+                  0 0 0 1px rgba(10, 25, 55, 0.04);
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   20px;
+  --r-full: 9999px;
+  --ga-bar-thickness: 24px;
+  --ga-bar-thickness-mobile: 18px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme='dark'] {
+  --bg:           #0c1520;
+  --bg-deep:      #07101a;
+  --surface:      #111c2b;
+  --surface-alt:  #172338;
+  --surface-hi:   #1c2c42;
+  --ink:          #e3ecf8;
+  --ink-soft:     #b0cbdf;
+  --muted:        #728ea8;
+  --muted-faint:  #4d6880;
+  --line:         #1e3049;
+  --line-soft:    #172640;
+  --accent:       #48b4be;
+  --accent-hover: #60c6d0;
+  --accent-tint:  rgba(72, 180, 190, 0.10);
+  --accent-tint2: rgba(72, 180, 190, 0.18);
+  --warm:         #e09058;
+  --warm-tint:    rgba(224, 144, 88, 0.11);
+  --cool:         #5aaad5;
+  --track:        rgba(85, 115, 150, 0.22);
+  --hero-from:    #162e52;
+  --hero-to:      #0c1f3a;
+  --topbar-bg:    rgba(11, 20, 31, 0.90);
+  --shadow-card:  0 1px 2px rgba(0,0,0,0.28),
+                  0 4px 16px rgba(0,0,0,0.26),
+                  0 0 0 1px rgba(255,255,255,0.038);
+  --shadow-raise: 0 2px 5px rgba(0,0,0,0.38),
+                  0 10px 32px rgba(0,0,0,0.42),
+                  0 0 0 1px rgba(255,255,255,0.055);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { color-scheme: light dark; overflow-x: hidden; scroll-behavior: smooth; }
+body { overflow-x: hidden; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 14% 7%, rgba(26,107,115,0.14) 0%, transparent 46%),
+    radial-gradient(ellipse at 86% 0%,  rgba(196,101,37,0.10) 0%, transparent 38%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+/* ============================================================
+   TOPBAR — Georgia family
+   ============================================================ */
+.topbar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.topbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.6rem;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  flex-shrink: 0;
+  transition: background-color 280ms ease;
+  box-shadow: 0 0 0 2px var(--accent-tint2);
+}
+
+.brand-text {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 280ms ease;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.88rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-card);
+  transition: background-color 200ms ease, border-color 200ms ease,
+              color 200ms ease, box-shadow 180ms ease, transform 150ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-raise);
+}
+
+.theme-toggle:active { transform: translateY(0); }
+
+.toggle-icon { font-size: 0.9rem; line-height: 1; }
+
+/* ============================================================
+   LAYOUT — Georgia family grid
+   ============================================================ */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.4rem 1.6rem 4rem;
+  display: grid;
+  gap: 1.35rem;
+}
+
+/* ============================================================
+   BACK NAV & SIBLING LINKS — Georgia family
+   ============================================================ */
+.back-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+}
+
+.sibling-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 200ms ease, border-color 200ms ease,
+              color 200ms ease, transform 150ms ease;
+}
+
+.back-btn::before { content: '\2190'; line-height: 1; }
+
+.back-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface-alt);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 200ms ease, border-color 200ms ease,
+              color 200ms ease, transform 150ms ease;
+}
+
+.site-nav-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   CARD BASE — Georgia family
+   ============================================================ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem 1.7rem;
+  max-width: 100%;
+  transition: background-color 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   DATA BANNER
+   ============================================================ */
+.data-banner {
+  display: none;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--warm) 34%, var(--line));
+  background: color-mix(in srgb, var(--warm) 14%, var(--surface));
+  color: color-mix(in srgb, var(--warm) 72%, var(--ink));
+  font-size: 0.84rem;
+  padding: 0.62rem 0.8rem;
+}
+
+.data-banner.show { display: block; }
+
+/* ============================================================
+   UNIVERSE NOTE
+   ============================================================ */
+.universe-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-tint2);
+  border-radius: var(--r-sm);
+  padding: 0.7rem 1rem;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+.universe-note .universe-note-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  margin-top: 0.05em;
+  opacity: 0.75;
+}
+.universe-note strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ============================================================
+   HERO — Georgia family
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 2.1rem 2.2rem 1.85rem;
+  background: linear-gradient(145deg, var(--hero-from), var(--hero-to));
+  border-radius: var(--r-lg);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  color: #f7fbff;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.47rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(180, 215, 235, 0.85);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.eyebrow-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7ee4ec;
+  flex-shrink: 0;
+}
+
+#heroTitle {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.5vw + 0.8rem, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+#heroSubtitle {
+  margin: 0.6rem 0 0;
+  max-width: 72ch;
+  color: rgba(210, 235, 252, 0.88);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.hero-meta {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(180, 215, 240, 0.28);
+  border-radius: var(--r-full);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.74rem;
+  color: rgba(220, 240, 255, 0.92);
+  background: rgba(9, 26, 50, 0.34);
+  backdrop-filter: blur(4px);
+}
+
+.meta-pill a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   SECTION / CARD INNER LAYOUT — Georgia family
+   ============================================================ */
+.section {
+  /* .card provides padding; .section is just a semantic wrapper */
+}
+
+.section-head {
+  margin-bottom: 1rem;
+}
+
+.section-eyebrow {
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.28rem;
+}
+
+.section-head h2 {
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 0.22rem;
+}
+
+.section-head p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ============================================================
+   KEY TAKEAWAYS
+   ============================================================ */
+.takeaways-grid {
+  display: grid;
+  gap: 0.52rem;
+}
+
+.takeaway-item {
+  display: grid;
+  grid-template-columns: 1.4rem minmax(0, 1fr);
+  gap: 0.52rem;
+  align-items: flex-start;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-sm);
+  background: var(--surface-alt);
+  padding: 0.64rem 0.7rem;
+}
+
+.takeaway-num {
+  width: 1.28rem;
+  height: 1.28rem;
+  border-radius: 50%;
+  background: var(--accent-tint2);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.73rem;
+  font-weight: 800;
+}
+
+.takeaway-text {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.methodology-details {
+  border-radius: var(--r-sm);
+  background: var(--surface-alt);
+  border: 1px solid var(--line-soft);
+  padding: 0.14rem 0.74rem 0.72rem;
+}
+
+.methodology-details summary {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.89rem;
+  padding: 0.54rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.methodology-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.methodology-details summary::after {
+  content: '+';
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+.methodology-details[open] summary::after {
+  content: '-';
+}
+
+.methodology-details-body {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   CANDIDATE NAVIGATION CONTROLS
+   ============================================================ */
+.controls-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.segmented-control-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.segmented {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  gap: 0.18rem;
+  padding: 0.18rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-alt);
+}
+
+.segmented button {
+  flex: 1 1 auto;
+  border: 0;
+  border-radius: calc(var(--r-md) - 2px);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.55rem 0.6rem;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.segmented button:hover { color: var(--accent); }
+
+.segmented button.active {
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: 0 1px 4px rgba(10,25,55,0.08);
+}
+
+/*
+  Candidate color dot — visual legend swatch that mirrors CANDIDATE_DEST_COLORS.
+  Background is always set via inline style by getCandidateDestColor(); it must
+  not be overridden by pill-state rules (.active, :hover) so the dot remains a
+  consistent legend indicator across all button states.
+*/
+.cand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+  /* background set exclusively via inline style — never override here */
+}
+
+/* Active / hover states must not touch the dot's background */
+.segmented button:hover .cand-dot,
+.segmented button.active .cand-dot {
+  /* intentionally empty — dot color preserved from inline style */
+}
+
+.direction-help {
+  margin-top: 0.6rem;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  font-style: italic;
+}
+
+/* ============================================================
+   CANDIDATE SECTION & FLOW CARDS — full-width stacked
+   ============================================================ */
+.candidate-section[hidden] { display: none; }
+
+.flow-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* full-width, stacked vertically */
+  gap: 1.2rem;
+}
+
+/* Each flow card = a standalone card-within-card */
+.flow-card {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-md);
+  padding: 1.2rem 1.3rem;
+  background: var(--surface-alt);
+  min-width: 0;
+}
+
+.flow-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.flow-card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 0.18rem;
+}
+
+.flow-card-subtitle {
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  margin: 0;
+}
+
+/* ============================================================
+   SANKEY CHART AREA
+   ============================================================ */
+.flow-chart-shell {
+  position: relative;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.flow-chart {
+  min-width: 760px;
+  padding: 0.4rem 0.3rem 0.2rem;
+}
+
+.flow-axis-caption {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.73rem;
+}
+
+/* SVG text elements */
+.flow-node-label {
+  font-size: 12.5px;
+  fill: var(--ink);
+  font-weight: 700;
+}
+
+.flow-node-sublabel {
+  font-size: 10.5px;
+  fill: var(--muted);
+  font-weight: 500;
+}
+
+.flow-node-value {
+  font-size: 11px;
+  fill: var(--muted);
+  font-weight: 500;
+}
+
+/* Sankey link paths */
+.flow-link {
+  fill: none;
+  opacity: 0.6;
+  transition: opacity 0.14s ease;
+}
+
+.flow-link:hover,
+.flow-link.is-hovered { opacity: 0.95; }
+
+/* Source node bar rects */
+.flow-node-rect {
+  stroke: rgba(0,0,0,0.08);
+  stroke-width: 0.5;
+}
+
+/* ============================================================
+   DESTINATION SUMMARY TABLE
+   ============================================================ */
+.flow-dest-summary {
+  margin-top: 0.9rem;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 0.75rem;
+}
+
+.flow-dest-summary-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.flow-dest-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.flow-dest-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 44px;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.flow-dest-name {
+  display: flex;
+  align-items: center;
+  gap: 0.36rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flow-dest-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.flow-dest-bar-wrap {
+  height: var(--ga-bar-thickness);
+  background: var(--track);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.flow-dest-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 300ms var(--ease-out);
+}
+
+.flow-dest-pct {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   TOOLTIP
+   ============================================================ */
+.chart-tooltip {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  min-width: 210px;
+  max-width: 320px;
+  background: color-mix(in srgb, var(--surface) 96%, #000 4%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-raise);
+  padding: 0.6rem 0.7rem;
+  color: var(--ink);
+  font-size: 0.77rem;
+  line-height: 1.4;
+  display: none;
+}
+
+.chart-tooltip strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.chart-tooltip .tip-main {
+  color: var(--ink);
+  margin-bottom: 0.22rem;
+  font-size: 0.8rem;
+}
+
+.chart-tooltip .tip-secondary {
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.chart-tooltip .tip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-top: 0.16rem;
+}
+
+.chart-tooltip .tip-label { color: var(--ink-soft); }
+.chart-tooltip .tip-value { color: var(--ink); font-weight: 700; }
+
+/* ============================================================
+   FEEDBACK CALLOUT
+   ============================================================ */
+.feedback-callout {
+  padding: 1.6rem 1.5rem;
+  background: var(--accent-tint2);
+  border: 2px solid var(--accent);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+
+.feedback-callout h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.feedback-callout p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.feedback-cta {
+  margin-top: 0.9rem;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.84rem;
+  padding: 0.56rem 1.3rem;
+  transition: background 150ms ease;
+}
+
+.feedback-cta:hover { background: var(--accent-hover); }
+
+/* ============================================================
+   RESPONSIVE — phone-safe: 480px
+   ============================================================ */
+@media (max-width: 760px) {
+  .layout { padding: 1rem 1rem 3rem; gap: 1rem; }
+  .hero { padding: 1.5rem 1.4rem 1.3rem; }
+  .controls-grid { grid-template-columns: 1fr; gap: 0.7rem; }
+  .card { padding: 1.1rem 1.2rem; }
+  .flow-card { padding: 0.9rem 1rem; }
+}
+
+@media (max-width: 480px) {
+  /* phone-safe: 480px */
+  html, body { overflow-x: hidden; }
+  .topbar { padding-left: 1rem; padding-right: 1rem; }
+  .hero { padding: 1.2rem 1rem 1rem; border-radius: var(--r-md); }
+  #heroTitle { font-size: 1.35rem; }
+  .meta-pill { font-size: 0.7rem; }
+  .flow-chart { min-width: 600px; }
+  .flow-dest-row { grid-template-columns: 100px 1fr 40px; font-size: 0.78rem; }
+  .flow-dest-bar-wrap { height: var(--ga-bar-thickness-mobile); }
+  .segmented button { font-size: 0.72rem; padding: 0.45rem 0.4rem; }
+}
+    </style>
+  </head>
+  <body>
+    <div class="topbar-wrap">
+      <nav class="topbar" aria-label="Site navigation">
+        <a class="brand" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">Vantage Data House</span>
+        </a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+          <span class="toggle-icon" id="toggleIcon" aria-hidden="true">&#9728;</span>
+          <span id="toggleLabel">Light</span>
+        </button>
+      </nav>
+    </div>
+
+    <main class="layout">
+      <div id="dataBanner" class="data-banner"></div>
+
+      <div class="back-nav" id="siteNavRow">
+        <a class="back-btn" id="backToPortalLink" href="https://vantage.philippbroniecki.com">Back</a>
+        <div class="sibling-nav" id="siblingNavLinks" hidden></div>
+      </div>
+
+      <section class="hero card reveal" id="componentHero" data-component-id="hero_title">
+        <div class="hero-inner">
+          <p class="eyebrow">
+            <span class="eyebrow-pip" aria-hidden="true"></span>
+            Georgia Democratic Primary 2026
+          </p>
+          <h1 id="heroTitle">Georgia Democratic Primary: Voter Flows</h1>
+          <p id="heroSubtitle" hidden></p>
+          <div class="hero-meta" aria-label="Survey metadata">
+            <span class="meta-pill">
+              <a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a>
+            </span>
+            <span class="meta-pill" id="metaSample">N = 1,009 respondents</span>
+            <span class="meta-pill" id="metaDates">March 28-30, 2026</span>
+            <span class="meta-pill" id="metaMethod">Calibrated bridge flows</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="universe-note" role="note" aria-label="Survey universe">
+        <span class="universe-note-icon" aria-hidden="true">ℹ</span>
+        <span><strong>Georgia Democratic primary universe:</strong> Likely Democratic primary voters — Democrats and Independents. Republicans are excluded from this survey.</span>
+      </div>
+
+      <section class="card reveal" id="componentTakeaways" data-component-id="key_takeaways" aria-labelledby="h-findings">
+        <div class="section-head">
+          <p class="section-eyebrow">Overview</p>
+          <h2 id="h-findings">Key Findings</h2>
+        </div>
+        <div id="takeaways" class="takeaways-grid"></div>
+      </section>
+
+      <section class="card reveal" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
+        <details class="methodology-details">
+          <summary id="h-methodology-note">Note on Methodology</summary>
+          <p class="methodology-details-body" id="methodologyBody"></p>
+        </details>
+      </section>
+
+      <section class="card reveal" id="componentCandidateNavigation" data-component-id="candidate_navigation" aria-labelledby="h-candidate-nav">
+        <div class="section-head">
+          <p class="section-eyebrow">Navigation</p>
+          <h2 id="h-candidate-nav">Select Candidate &amp; Direction</h2>
+          <p id="directionHelp"></p>
+        </div>
+        <div class="controls-grid">
+          <div>
+            <p class="segmented-control-title">Candidate</p>
+            <div class="segmented" id="candidateSegmented" role="tablist" aria-label="Select candidate"></div>
+          </div>
+          <div>
+            <p class="segmented-control-title">Direction</p>
+            <div class="segmented" id="directionSegmented" role="tablist" aria-label="Select flow direction"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card reveal" id="componentCandidateFlows" data-component-id="candidate_flows" aria-labelledby="h-candidate-flows">
+        <div class="section-head">
+          <p class="section-eyebrow">Flow Analysis</p>
+          <h2 id="h-candidate-flows">Voter Flows by Candidate</h2>
+          <p>Calibrated bridge flows linking favorability and gubernatorial test-ballot outcomes.</p>
+        </div>
+        <div id="candidateSections"></div>
+      </section>
+
+      <section class="feedback-callout card reveal" id="feedbackCallout" data-component-id="feedback_callout" hidden>
+        <h2 id="feedbackHeading">Share Your Feedback</h2>
+        <p id="feedbackBody"></p>
+        <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com">Get in Touch</a>
+      </section>
+    </main>
+
+    <script id="embeddedReportData" type="application/json">
+{
+  "meta": {
+    "source": "Vantage Data House",
+    "title": "Georgia Democratic Primary: Voter Flows",
+    "subtitle": "How modeled favorability maps to the gubernatorial test ballot",
+    "site": "https://www.vantagedatahouse.com",
+    "sample": "N = 1,009 respondents",
+    "fieldDates": "March 28-30, 2026",
+    "methodLabel": "Calibrated bridge flows from modeled marginals",
+    "group_navigation": {
+      "group_id": "georgia_democratic_gubernatorial_primary_2026",
+      "group_label": "Georgia Democratic Gubernatorial Primary 2026",
+      "back": {
+        "label": "Back",
+        "href": "https://vantage.philippbroniecki.com"
+      },
+      "siblings": [
+        {
+          "site_slug": "georgia_governor_democratic_primary_favorability",
+          "label": "Favorability",
+          "href": "https://georgia-primary-favorability.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-primary-favorability.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_favorability/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_demogratic_primary_2026",
+          "label": "Test Ballots",
+          "href": "https://georgia-gov-primary.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-gov-primary.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_demogratic_primary_2026/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_thurmond_messaging",
+          "label": "Messaging",
+          "href": "https://thurmond-messaging.vantage.philippbroniecki.com/",
+          "canonical_href": "https://thurmond-messaging.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_thurmond_messaging/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_state_direction",
+          "label": "State Direction",
+          "href": "https://georgia-state-direction.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-state-direction.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_state_direction/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_top_issue",
+          "label": "Top Issue",
+          "href": "https://georgia-gov-top-issue.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-gov-top-issue.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_top_issue/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_agree",
+          "label": "Agree",
+          "href": "https://georgia-gov-agree.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-gov-agree.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_agree/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_casino_gambling",
+          "label": "Casino Gambling",
+          "href": "https://georgia-casino-policy.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-casino-policy.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_casino_gambling/standalone_website/"
+        },
+        {
+          "site_slug": "georgia_governor_democratic_primary_survey_stats",
+          "label": "Survey Health",
+          "href": "https://georgia-survey-health.vantage.philippbroniecki.com/",
+          "canonical_href": "https://georgia-survey-health.vantage.philippbroniecki.com/",
+          "local_href": "../../georgia_governor_democratic_primary_survey_stats/standalone_website/"
+        }
+      ]
+    }
+  },
+  "template": {
+    "site_slug": "georgia_governor_democratic_primary_flows",
+    "path": "georgia_governor_democratic_primary_flows/site_config.json",
+    "component_order": [
+      "hero_title",
+      "key_takeaways",
+      "methodology_note",
+      "candidate_navigation",
+      "candidate_flows",
+      "feedback_callout"
+    ],
+    "section_headers": {
+      "key_takeaways": "Key Findings",
+      "candidate_navigation": "Candidate Navigation",
+      "candidate_flows": "Voter Flows"
+    },
+    "feedback_callout": {
+      "enabled": true,
+      "heading": "Share Your Feedback",
+      "body": "Have questions about these voter-flow bridges or ideas for additional diagnostics? We would love to hear from you.",
+      "cta_label": "Get in Touch",
+      "cta_url": "mailto:philipp@vantagedatahouse.com"
+    }
+  },
+  "key_takeaways": [
+    "This report links modeled favorability buckets to modeled Georgia Democratic gubernatorial test-ballot destinations for each available candidate bridge artifact.",
+    "Each candidate section has two flow cards: one for positive sentiment (Very/Somewhat Favorable) and one for negative sentiment (Very/Somewhat Unfavorable).",
+    "Use the direction toggle to switch between forward interpretation (favorability to ballot) and reverse interpretation (ballot to favorability composition).",
+    "These are calibrated bridge flows constrained to match modeled marginals; they are not raw survey cross-tabs."
+  ],
+  "methodology_note": "Bridge flows are estimated by calibrating a joint distribution between modeled favorability and modeled gubernatorial test-ballot outcomes from the same survey wave. We start from a survey-based weighted seed table, apply light smoothing where needed, and then use iterative proportional fitting (IPF) so the recovered totals match the modeled marginals exactly. This lets us show both how large each flow is overall and where each favorability group currently goes on the ballot. These bridge flows are calibrated synthetic estimates that reconcile modeled marginals, not just raw respondent-level cross-tabs.",
+  "flow_controls": {
+    "default_candidate_id": "bottoms",
+    "candidate_navigation": [
+      {
+        "id": "bottoms",
+        "label": "Keisha Bottoms"
+      },
+      {
+        "id": "thurmond",
+        "label": "Mike Thurmond"
+      },
+      {
+        "id": "esteves",
+        "label": "Jason Esteves"
+      },
+      {
+        "id": "duncan",
+        "label": "Geoff Duncan"
+      }
+    ],
+    "direction_modes": [
+      {
+        "id": "forward",
+        "label": "Favorability → Test Ballot",
+        "interpretation": "Among people in this favorability bucket, where do they currently go on the ballot?"
+      },
+      {
+        "id": "reverse",
+        "label": "Test Ballot → Favorability",
+        "interpretation": "Among people in this ballot bucket, what is their favorability composition toward this candidate?"
+      }
+    ],
+    "cards": {
+      "positive": {
+        "id": "positive",
+        "label": "Positive Flows",
+        "subtitle": "Very and Somewhat Favorable",
+        "source_bucket_ids": [
+          "very_favorable",
+          "somewhat_favorable"
+        ],
+        "bucket_order": [
+          "very_favorable",
+          "somewhat_favorable"
+        ],
+        "bucket_palette": {
+          "very_favorable": "#1a6b73",
+          "somewhat_favorable": "#2f7f8a"
+        }
+      },
+      "negative": {
+        "id": "negative",
+        "label": "Negative Flows",
+        "subtitle": "Very and Somewhat Unfavorable",
+        "source_bucket_ids": [
+          "very_unfavorable",
+          "somewhat_unfavorable"
+        ],
+        "bucket_order": [
+          "very_unfavorable",
+          "somewhat_unfavorable"
+        ],
+        "bucket_palette": {
+          "very_unfavorable": "#c46525",
+          "somewhat_unfavorable": "#c97f5f"
+        }
+      }
+    }
+  },
+  "candidates": [
+    {
+      "id": "bottoms",
+      "label": "Keisha Bottoms",
+      "favorability_dv": "favorability_bottoms",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.2125,
+          "marginal_pct": 21.2515,
+          "marginal_sd_share": 0.0158,
+          "marginal_sd_pct": 1.5801
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.4082,
+          "marginal_pct": 40.8165,
+          "marginal_sd_share": 0.0307,
+          "marginal_sd_pct": 3.0709
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.1301,
+          "marginal_pct": 13.0123,
+          "marginal_sd_share": 0.0041,
+          "marginal_sd_pct": 0.4089
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0456,
+          "marginal_pct": 4.5645,
+          "marginal_sd_share": 0.0024,
+          "marginal_sd_pct": 0.2419
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.2036,
+          "marginal_pct": 20.3552,
+          "marginal_sd_share": 0.0448,
+          "marginal_sd_pct": 4.4841
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.3589,
+          "marginal_pct": 35.8906,
+          "marginal_sd_share": 0.035,
+          "marginal_sd_pct": 3.4963
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0202,
+          "marginal_pct": 2.0167,
+          "marginal_sd_share": 0.0006,
+          "marginal_sd_pct": 0.0634
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862,
+          "marginal_pct": 8.6226,
+          "marginal_sd_share": 0.0181,
+          "marginal_sd_pct": 1.8057
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0462,
+          "marginal_pct": 4.617,
+          "marginal_sd_share": 0.0035,
+          "marginal_sd_pct": 0.3508
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463,
+          "marginal_pct": 4.6304,
+          "marginal_sd_share": 0.0096,
+          "marginal_sd_pct": 0.9626
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491,
+          "marginal_pct": 4.9147,
+          "marginal_sd_share": 0.0056,
+          "marginal_sd_pct": 0.5571
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.0783,
+          "marginal_pct": 7.8289,
+          "marginal_sd_share": 0.0095,
+          "marginal_sd_pct": 0.9464
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.3148,
+          "marginal_pct": 31.4791,
+          "marginal_sd_share": 0.0182,
+          "marginal_sd_pct": 1.8173
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.1311,
+          "joint_pct": 13.1069,
+          "forward_conditional_share": 0.6168,
+          "forward_conditional_pct": 61.675,
+          "reverse_conditional_share": 0.3652,
+          "reverse_conditional_pct": 36.519
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.1884,
+          "joint_pct": 18.8435,
+          "forward_conditional_share": 0.4617,
+          "forward_conditional_pct": 46.1665,
+          "reverse_conditional_share": 0.525,
+          "reverse_conditional_pct": 52.5027
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0004,
+          "joint_pct": 0.0389,
+          "forward_conditional_share": 0.003,
+          "forward_conditional_pct": 0.2992,
+          "reverse_conditional_share": 0.0011,
+          "reverse_conditional_pct": 0.1085
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0001,
+          "joint_pct": 0.0136,
+          "forward_conditional_share": 0.003,
+          "forward_conditional_pct": 0.297,
+          "reverse_conditional_share": 0.0004,
+          "reverse_conditional_pct": 0.0378
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0389,
+          "joint_pct": 3.8877,
+          "forward_conditional_share": 0.191,
+          "forward_conditional_pct": 19.0993,
+          "reverse_conditional_share": 0.1083,
+          "reverse_conditional_pct": 10.8321
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0004,
+          "joint_pct": 0.0354,
+          "forward_conditional_share": 0.0017,
+          "forward_conditional_pct": 0.1667,
+          "reverse_conditional_share": 0.0176,
+          "reverse_conditional_pct": 1.7562
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0142,
+          "joint_pct": 1.4166,
+          "forward_conditional_share": 0.0347,
+          "forward_conditional_pct": 3.4707,
+          "reverse_conditional_share": 0.7024,
+          "reverse_conditional_pct": 70.243
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0023,
+          "joint_pct": 0.2293,
+          "forward_conditional_share": 0.0176,
+          "forward_conditional_pct": 1.7623,
+          "reverse_conditional_share": 0.1137,
+          "reverse_conditional_pct": 11.3706
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 1.0971e-11,
+          "joint_pct": 1.0971e-09,
+          "forward_conditional_share": 2.4036e-10,
+          "forward_conditional_pct": 2.4036e-08,
+          "reverse_conditional_share": 5.4403e-10,
+          "reverse_conditional_pct": 5.4403e-08
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0034,
+          "joint_pct": 0.3354,
+          "forward_conditional_share": 0.0165,
+          "forward_conditional_pct": 1.6477,
+          "reverse_conditional_share": 0.1663,
+          "reverse_conditional_pct": 16.6302
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0068,
+          "joint_pct": 0.6781,
+          "forward_conditional_share": 0.0319,
+          "forward_conditional_pct": 3.1907,
+          "reverse_conditional_share": 0.0786,
+          "reverse_conditional_pct": 7.8639
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0394,
+          "joint_pct": 3.9433,
+          "forward_conditional_share": 0.0966,
+          "forward_conditional_pct": 9.6612,
+          "reverse_conditional_share": 0.4573,
+          "reverse_conditional_pct": 45.7329
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0299,
+          "joint_pct": 2.9881,
+          "forward_conditional_share": 0.2296,
+          "forward_conditional_pct": 22.9639,
+          "reverse_conditional_share": 0.3465,
+          "reverse_conditional_pct": 34.6548
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.005,
+          "joint_pct": 0.503,
+          "forward_conditional_share": 0.1102,
+          "forward_conditional_pct": 11.0189,
+          "reverse_conditional_share": 0.0583,
+          "reverse_conditional_pct": 5.8331
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0051,
+          "joint_pct": 0.5101,
+          "forward_conditional_share": 0.0251,
+          "forward_conditional_pct": 2.5058,
+          "reverse_conditional_share": 0.0592,
+          "reverse_conditional_pct": 5.9154
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0139,
+          "joint_pct": 1.3919,
+          "forward_conditional_share": 0.0655,
+          "forward_conditional_pct": 6.5495,
+          "reverse_conditional_share": 0.3015,
+          "reverse_conditional_pct": 30.147
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0104,
+          "joint_pct": 1.0442,
+          "forward_conditional_share": 0.0256,
+          "forward_conditional_pct": 2.5582,
+          "reverse_conditional_share": 0.2262,
+          "reverse_conditional_pct": 22.616
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0212,
+          "joint_pct": 2.1179,
+          "forward_conditional_share": 0.1628,
+          "forward_conditional_pct": 16.2759,
+          "reverse_conditional_share": 0.4587,
+          "reverse_conditional_pct": 45.8716
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0002,
+          "joint_pct": 0.0228,
+          "forward_conditional_share": 0.005,
+          "forward_conditional_pct": 0.5005,
+          "reverse_conditional_share": 0.0049,
+          "reverse_conditional_pct": 0.4948
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0004,
+          "joint_pct": 0.0402,
+          "forward_conditional_share": 0.002,
+          "forward_conditional_pct": 0.1975,
+          "reverse_conditional_share": 0.0087,
+          "reverse_conditional_pct": 0.8707
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0059,
+          "joint_pct": 0.5852,
+          "forward_conditional_share": 0.0275,
+          "forward_conditional_pct": 2.7536,
+          "reverse_conditional_share": 0.1264,
+          "reverse_conditional_pct": 12.638
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0258,
+          "joint_pct": 2.5809,
+          "forward_conditional_share": 0.0632,
+          "forward_conditional_pct": 6.3231,
+          "reverse_conditional_share": 0.5574,
+          "reverse_conditional_pct": 55.7377
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0104,
+          "joint_pct": 1.0419,
+          "forward_conditional_share": 0.0801,
+          "forward_conditional_pct": 8.0073,
+          "reverse_conditional_share": 0.225,
+          "reverse_conditional_pct": 22.5022
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0002,
+          "joint_pct": 0.0155,
+          "forward_conditional_share": 0.0034,
+          "forward_conditional_pct": 0.3389,
+          "reverse_conditional_share": 0.0033,
+          "reverse_conditional_pct": 0.334
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0041,
+          "joint_pct": 0.4069,
+          "forward_conditional_share": 0.02,
+          "forward_conditional_pct": 1.9991,
+          "reverse_conditional_share": 0.0879,
+          "reverse_conditional_pct": 8.7881
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.004,
+          "joint_pct": 0.4041,
+          "forward_conditional_share": 0.019,
+          "forward_conditional_pct": 1.9014,
+          "reverse_conditional_share": 0.0822,
+          "reverse_conditional_pct": 8.2218
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0101,
+          "joint_pct": 1.0149,
+          "forward_conditional_share": 0.0249,
+          "forward_conditional_pct": 2.4865,
+          "reverse_conditional_share": 0.2065,
+          "reverse_conditional_pct": 20.6504
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0205,
+          "joint_pct": 2.0541,
+          "forward_conditional_share": 0.1579,
+          "forward_conditional_pct": 15.7858,
+          "reverse_conditional_share": 0.4179,
+          "reverse_conditional_pct": 41.7946
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0034,
+          "joint_pct": 0.3402,
+          "forward_conditional_share": 0.0745,
+          "forward_conditional_pct": 7.453,
+          "reverse_conditional_share": 0.0692,
+          "reverse_conditional_pct": 6.9219
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.011,
+          "joint_pct": 1.1015,
+          "forward_conditional_share": 0.0541,
+          "forward_conditional_pct": 5.4112,
+          "reverse_conditional_share": 0.2241,
+          "reverse_conditional_pct": 22.4114
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0126,
+          "joint_pct": 1.2572,
+          "forward_conditional_share": 0.0592,
+          "forward_conditional_pct": 5.9159,
+          "reverse_conditional_share": 0.1606,
+          "reverse_conditional_pct": 16.0589
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0443,
+          "joint_pct": 4.4334,
+          "forward_conditional_share": 0.1086,
+          "forward_conditional_pct": 10.8617,
+          "reverse_conditional_share": 0.5663,
+          "reverse_conditional_pct": 56.6284
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0211,
+          "joint_pct": 2.1054,
+          "forward_conditional_share": 0.1618,
+          "forward_conditional_pct": 16.1801,
+          "reverse_conditional_share": 0.2689,
+          "reverse_conditional_pct": 26.8927
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0002,
+          "joint_pct": 0.0235,
+          "forward_conditional_share": 0.0052,
+          "forward_conditional_pct": 0.5151,
+          "reverse_conditional_share": 0.003,
+          "reverse_conditional_pct": 0.3003
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0001,
+          "joint_pct": 0.0094,
+          "forward_conditional_share": 0.0005,
+          "forward_conditional_pct": 0.0461,
+          "reverse_conditional_share": 0.0012,
+          "reverse_conditional_pct": 0.1197
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0379,
+          "joint_pct": 3.7928,
+          "forward_conditional_share": 0.1785,
+          "forward_conditional_pct": 17.8471,
+          "reverse_conditional_share": 0.1205,
+          "reverse_conditional_pct": 12.0486
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0754,
+          "joint_pct": 7.5397,
+          "forward_conditional_share": 0.1847,
+          "forward_conditional_pct": 18.4721,
+          "reverse_conditional_share": 0.2395,
+          "reverse_conditional_pct": 23.9513
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0244,
+          "joint_pct": 2.4366,
+          "forward_conditional_share": 0.1873,
+          "forward_conditional_pct": 18.7255,
+          "reverse_conditional_share": 0.0774,
+          "reverse_conditional_pct": 7.7404
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0365,
+          "joint_pct": 3.646,
+          "forward_conditional_share": 0.7988,
+          "forward_conditional_pct": 79.8767,
+          "reverse_conditional_share": 0.1158,
+          "reverse_conditional_pct": 11.5822
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.1406,
+          "joint_pct": 14.0641,
+          "forward_conditional_share": 0.6909,
+          "forward_conditional_pct": 69.0934,
+          "reverse_conditional_share": 0.4468,
+          "reverse_conditional_pct": 44.6774
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.6207,
+          "shown_pct": 62.068,
+          "omitted_share": 0.3793,
+          "omitted_pct": 37.932
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.1758,
+          "shown_pct": 17.5768,
+          "omitted_share": 0.8242,
+          "omitted_pct": 82.4232
+        }
+      },
+      "summary": {
+        "positive_pct": 62.068,
+        "negative_pct": 17.5768,
+        "cant_rate_pct": 20.3552
+      }
+    },
+    {
+      "id": "thurmond",
+      "label": "Mike Thurmond",
+      "favorability_dv": "favorability_thurmond",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.0826,
+          "marginal_pct": 8.2603,
+          "marginal_sd_share": 0.0068,
+          "marginal_sd_pct": 0.6828
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.2902,
+          "marginal_pct": 29.0203,
+          "marginal_sd_share": 0.0024,
+          "marginal_sd_pct": 0.2355
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.1412,
+          "marginal_pct": 14.1189,
+          "marginal_sd_share": 0.0025,
+          "marginal_sd_pct": 0.2542
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0757,
+          "marginal_pct": 7.5743,
+          "marginal_sd_share": 0.0257,
+          "marginal_sd_pct": 2.5733
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.4103,
+          "marginal_pct": 41.0262,
+          "marginal_sd_share": 0.0187,
+          "marginal_sd_pct": 1.8718
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.3589,
+          "marginal_pct": 35.8906,
+          "marginal_sd_share": 0.035,
+          "marginal_sd_pct": 3.4963
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0202,
+          "marginal_pct": 2.0167,
+          "marginal_sd_share": 0.0006,
+          "marginal_sd_pct": 0.0634
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862,
+          "marginal_pct": 8.6226,
+          "marginal_sd_share": 0.0181,
+          "marginal_sd_pct": 1.8057
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0462,
+          "marginal_pct": 4.617,
+          "marginal_sd_share": 0.0035,
+          "marginal_sd_pct": 0.3508
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463,
+          "marginal_pct": 4.6304,
+          "marginal_sd_share": 0.0096,
+          "marginal_sd_pct": 0.9626
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491,
+          "marginal_pct": 4.9147,
+          "marginal_sd_share": 0.0056,
+          "marginal_sd_pct": 0.5571
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.0783,
+          "marginal_pct": 7.8289,
+          "marginal_sd_share": 0.0095,
+          "marginal_sd_pct": 0.9464
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.3148,
+          "marginal_pct": 31.4791,
+          "marginal_sd_share": 0.0182,
+          "marginal_sd_pct": 1.8173
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0108,
+          "joint_pct": 1.0754,
+          "forward_conditional_share": 0.1302,
+          "forward_conditional_pct": 13.0194,
+          "reverse_conditional_share": 0.03,
+          "reverse_conditional_pct": 2.9965
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.1238,
+          "joint_pct": 12.3764,
+          "forward_conditional_share": 0.4265,
+          "forward_conditional_pct": 42.6475,
+          "reverse_conditional_share": 0.3448,
+          "reverse_conditional_pct": 34.4838
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0682,
+          "joint_pct": 6.8191,
+          "forward_conditional_share": 0.483,
+          "forward_conditional_pct": 48.2975,
+          "reverse_conditional_share": 0.19,
+          "reverse_conditional_pct": 18.9996
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0241,
+          "joint_pct": 2.4088,
+          "forward_conditional_share": 0.318,
+          "forward_conditional_pct": 31.802,
+          "reverse_conditional_share": 0.0671,
+          "reverse_conditional_pct": 6.7114
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.1321,
+          "joint_pct": 13.2109,
+          "forward_conditional_share": 0.322,
+          "forward_conditional_pct": 32.2011,
+          "reverse_conditional_share": 0.3681,
+          "reverse_conditional_pct": 36.8087
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 2.3663e-12,
+          "joint_pct": 2.3663e-10,
+          "forward_conditional_share": 2.8646e-11,
+          "forward_conditional_pct": 2.8646e-09,
+          "reverse_conditional_share": 1.1733e-10,
+          "reverse_conditional_pct": 1.1733e-08
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0011,
+          "joint_pct": 0.1064,
+          "forward_conditional_share": 0.0037,
+          "forward_conditional_pct": 0.3668,
+          "reverse_conditional_share": 0.0528,
+          "reverse_conditional_pct": 5.2777
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0003,
+          "joint_pct": 0.0321,
+          "forward_conditional_share": 0.0023,
+          "forward_conditional_pct": 0.2277,
+          "reverse_conditional_share": 0.0159,
+          "reverse_conditional_pct": 1.5939
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.005,
+          "joint_pct": 0.4957,
+          "forward_conditional_share": 0.0654,
+          "forward_conditional_pct": 6.5445,
+          "reverse_conditional_share": 0.2458,
+          "reverse_conditional_pct": 24.5795
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0138,
+          "joint_pct": 1.3824,
+          "forward_conditional_share": 0.0337,
+          "forward_conditional_pct": 3.3696,
+          "reverse_conditional_share": 0.6855,
+          "reverse_conditional_pct": 68.5489
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0013,
+          "joint_pct": 0.1295,
+          "forward_conditional_share": 0.0157,
+          "forward_conditional_pct": 1.5675,
+          "reverse_conditional_share": 0.015,
+          "reverse_conditional_pct": 1.5016
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0194,
+          "joint_pct": 1.9353,
+          "forward_conditional_share": 0.0667,
+          "forward_conditional_pct": 6.6689,
+          "reverse_conditional_share": 0.2244,
+          "reverse_conditional_pct": 22.4449
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0146,
+          "joint_pct": 1.4605,
+          "forward_conditional_share": 0.1034,
+          "forward_conditional_pct": 10.3444,
+          "reverse_conditional_share": 0.1694,
+          "reverse_conditional_pct": 16.9383
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0154,
+          "joint_pct": 1.5366,
+          "forward_conditional_share": 0.2029,
+          "forward_conditional_pct": 20.2876,
+          "reverse_conditional_share": 0.1782,
+          "reverse_conditional_pct": 17.8211
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0356,
+          "joint_pct": 3.5606,
+          "forward_conditional_share": 0.0868,
+          "forward_conditional_pct": 8.6789,
+          "reverse_conditional_share": 0.4129,
+          "reverse_conditional_pct": 41.294
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0141,
+          "joint_pct": 1.415,
+          "forward_conditional_share": 0.1713,
+          "forward_conditional_pct": 17.1296,
+          "reverse_conditional_share": 0.3065,
+          "reverse_conditional_pct": 30.6468
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0184,
+          "joint_pct": 1.8387,
+          "forward_conditional_share": 0.0634,
+          "forward_conditional_pct": 6.336,
+          "reverse_conditional_share": 0.3983,
+          "reverse_conditional_pct": 39.8254
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0052,
+          "joint_pct": 0.5193,
+          "forward_conditional_share": 0.0368,
+          "forward_conditional_pct": 3.6782,
+          "reverse_conditional_share": 0.1125,
+          "reverse_conditional_pct": 11.248
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0079,
+          "joint_pct": 0.7886,
+          "forward_conditional_share": 0.1041,
+          "forward_conditional_pct": 10.4121,
+          "reverse_conditional_share": 0.1708,
+          "reverse_conditional_pct": 17.0814
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0006,
+          "joint_pct": 0.0553,
+          "forward_conditional_share": 0.0013,
+          "forward_conditional_pct": 0.1349,
+          "reverse_conditional_share": 0.012,
+          "reverse_conditional_pct": 1.1983
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0025,
+          "joint_pct": 0.2452,
+          "forward_conditional_share": 0.0297,
+          "forward_conditional_pct": 2.9684,
+          "reverse_conditional_share": 0.053,
+          "reverse_conditional_pct": 5.2955
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.01,
+          "joint_pct": 1.0014,
+          "forward_conditional_share": 0.0345,
+          "forward_conditional_pct": 3.4505,
+          "reverse_conditional_share": 0.2163,
+          "reverse_conditional_pct": 21.6258
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0047,
+          "joint_pct": 0.4722,
+          "forward_conditional_share": 0.0334,
+          "forward_conditional_pct": 3.3447,
+          "reverse_conditional_share": 0.102,
+          "reverse_conditional_pct": 10.1985
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0103,
+          "joint_pct": 1.0264,
+          "forward_conditional_share": 0.1355,
+          "forward_conditional_pct": 13.5506,
+          "reverse_conditional_share": 0.2217,
+          "reverse_conditional_pct": 22.1659
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0189,
+          "joint_pct": 1.8852,
+          "forward_conditional_share": 0.046,
+          "forward_conditional_pct": 4.5952,
+          "reverse_conditional_share": 0.4071,
+          "reverse_conditional_pct": 40.7143
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0025,
+          "joint_pct": 0.2536,
+          "forward_conditional_share": 0.0307,
+          "forward_conditional_pct": 3.07,
+          "reverse_conditional_share": 0.0516,
+          "reverse_conditional_pct": 5.1599
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0199,
+          "joint_pct": 1.9938,
+          "forward_conditional_share": 0.0687,
+          "forward_conditional_pct": 6.8703,
+          "reverse_conditional_share": 0.4057,
+          "reverse_conditional_pct": 40.5673
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0142,
+          "joint_pct": 1.4189,
+          "forward_conditional_share": 0.1005,
+          "forward_conditional_pct": 10.0494,
+          "reverse_conditional_share": 0.2887,
+          "reverse_conditional_pct": 28.8695
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0039,
+          "joint_pct": 0.3852,
+          "forward_conditional_share": 0.0509,
+          "forward_conditional_pct": 5.0854,
+          "reverse_conditional_share": 0.0784,
+          "reverse_conditional_pct": 7.8373
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0086,
+          "joint_pct": 0.8633,
+          "forward_conditional_share": 0.021,
+          "forward_conditional_pct": 2.1043,
+          "reverse_conditional_share": 0.1757,
+          "reverse_conditional_pct": 17.5661
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0311,
+          "joint_pct": 3.1051,
+          "forward_conditional_share": 0.3759,
+          "forward_conditional_pct": 37.5902,
+          "reverse_conditional_share": 0.3966,
+          "reverse_conditional_pct": 39.6618
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0411,
+          "joint_pct": 4.1103,
+          "forward_conditional_share": 0.1416,
+          "forward_conditional_pct": 14.1636,
+          "reverse_conditional_share": 0.525,
+          "reverse_conditional_pct": 52.5019
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0007,
+          "joint_pct": 0.0684,
+          "forward_conditional_share": 0.0048,
+          "forward_conditional_pct": 0.4847,
+          "reverse_conditional_share": 0.0087,
+          "reverse_conditional_pct": 0.8741
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 3.4601e-15,
+          "joint_pct": 3.4601e-13,
+          "forward_conditional_share": 4.5683e-14,
+          "forward_conditional_pct": 4.5683e-12,
+          "reverse_conditional_share": 4.4197e-14,
+          "reverse_conditional_pct": 4.4197e-12
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0055,
+          "joint_pct": 0.5451,
+          "forward_conditional_share": 0.0133,
+          "forward_conditional_pct": 1.3286,
+          "reverse_conditional_share": 0.0696,
+          "reverse_conditional_pct": 6.9623
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0204,
+          "joint_pct": 2.0366,
+          "forward_conditional_share": 0.2465,
+          "forward_conditional_pct": 24.6548,
+          "reverse_conditional_share": 0.0647,
+          "reverse_conditional_pct": 6.4696
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0566,
+          "joint_pct": 5.6579,
+          "forward_conditional_share": 0.195,
+          "forward_conditional_pct": 19.4964,
+          "reverse_conditional_share": 0.1797,
+          "reverse_conditional_pct": 17.9736
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0333,
+          "joint_pct": 3.3283,
+          "forward_conditional_share": 0.2357,
+          "forward_conditional_pct": 23.5735,
+          "reverse_conditional_share": 0.1057,
+          "reverse_conditional_pct": 10.5731
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0093,
+          "joint_pct": 0.933,
+          "forward_conditional_share": 0.1232,
+          "forward_conditional_pct": 12.3177,
+          "reverse_conditional_share": 0.0296,
+          "reverse_conditional_pct": 2.9638
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.1952,
+          "joint_pct": 19.5233,
+          "forward_conditional_share": 0.4759,
+          "forward_conditional_pct": 47.5875,
+          "reverse_conditional_share": 0.6202,
+          "reverse_conditional_pct": 62.02
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.3728,
+          "shown_pct": 37.2806,
+          "omitted_share": 0.6272,
+          "omitted_pct": 62.7194
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.2169,
+          "shown_pct": 21.6932,
+          "omitted_share": 0.7831,
+          "omitted_pct": 78.3068
+        }
+      },
+      "summary": {
+        "positive_pct": 37.2806,
+        "negative_pct": 21.6932,
+        "cant_rate_pct": 41.0262
+      }
+    },
+    {
+      "id": "esteves",
+      "label": "Jason Esteves",
+      "favorability_dv": "favorability_esteves",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.0816,
+          "marginal_pct": 8.1641,
+          "marginal_sd_share": 0.019,
+          "marginal_sd_pct": 1.9038
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.2217,
+          "marginal_pct": 22.1706,
+          "marginal_sd_share": 0.0198,
+          "marginal_sd_pct": 1.9823
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.1072,
+          "marginal_pct": 10.7232,
+          "marginal_sd_share": 0.0418,
+          "marginal_sd_pct": 4.1778
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0457,
+          "marginal_pct": 4.5664,
+          "marginal_sd_share": 0.0016,
+          "marginal_sd_pct": 0.1602
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.5438,
+          "marginal_pct": 54.3757,
+          "marginal_sd_share": 0.0045,
+          "marginal_sd_pct": 0.4519
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.3589,
+          "marginal_pct": 35.8906,
+          "marginal_sd_share": 0.035,
+          "marginal_sd_pct": 3.4963
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0202,
+          "marginal_pct": 2.0167,
+          "marginal_sd_share": 0.0006,
+          "marginal_sd_pct": 0.0634
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862,
+          "marginal_pct": 8.6226,
+          "marginal_sd_share": 0.0181,
+          "marginal_sd_pct": 1.8057
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0462,
+          "marginal_pct": 4.617,
+          "marginal_sd_share": 0.0035,
+          "marginal_sd_pct": 0.3508
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463,
+          "marginal_pct": 4.6304,
+          "marginal_sd_share": 0.0096,
+          "marginal_sd_pct": 0.9626
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491,
+          "marginal_pct": 4.9147,
+          "marginal_sd_share": 0.0056,
+          "marginal_sd_pct": 0.5571
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.0783,
+          "marginal_pct": 7.8289,
+          "marginal_sd_share": 0.0095,
+          "marginal_sd_pct": 0.9464
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.3148,
+          "marginal_pct": 31.4791,
+          "marginal_sd_share": 0.0182,
+          "marginal_sd_pct": 1.8173
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0156,
+          "joint_pct": 1.5602,
+          "forward_conditional_share": 0.1911,
+          "forward_conditional_pct": 19.11,
+          "reverse_conditional_share": 0.0435,
+          "reverse_conditional_pct": 4.347
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0583,
+          "joint_pct": 5.8293,
+          "forward_conditional_share": 0.2629,
+          "forward_conditional_pct": 26.293,
+          "reverse_conditional_share": 0.1624,
+          "reverse_conditional_pct": 16.2419
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.051,
+          "joint_pct": 5.1037,
+          "forward_conditional_share": 0.476,
+          "forward_conditional_pct": 47.5953,
+          "reverse_conditional_share": 0.1422,
+          "reverse_conditional_pct": 14.2202
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0234,
+          "joint_pct": 2.3376,
+          "forward_conditional_share": 0.5119,
+          "forward_conditional_pct": 51.1915,
+          "reverse_conditional_share": 0.0651,
+          "reverse_conditional_pct": 6.5132
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.2106,
+          "joint_pct": 21.0598,
+          "forward_conditional_share": 0.3873,
+          "forward_conditional_pct": 38.7301,
+          "reverse_conditional_share": 0.5868,
+          "reverse_conditional_pct": 58.6777
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0008,
+          "joint_pct": 0.0775,
+          "forward_conditional_share": 0.0095,
+          "forward_conditional_pct": 0.9492,
+          "reverse_conditional_share": 0.0384,
+          "reverse_conditional_pct": 3.8426
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0005,
+          "joint_pct": 0.0486,
+          "forward_conditional_share": 0.0022,
+          "forward_conditional_pct": 0.2194,
+          "reverse_conditional_share": 0.0241,
+          "reverse_conditional_pct": 2.4121
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0003,
+          "joint_pct": 0.0332,
+          "forward_conditional_share": 0.0031,
+          "forward_conditional_pct": 0.3096,
+          "reverse_conditional_share": 0.0165,
+          "reverse_conditional_pct": 1.6461
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 7.6969e-12,
+          "joint_pct": 7.6969e-10,
+          "forward_conditional_share": 1.6855e-10,
+          "forward_conditional_pct": 1.6855e-08,
+          "reverse_conditional_share": 3.8166e-10,
+          "reverse_conditional_pct": 3.8166e-08
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0186,
+          "joint_pct": 1.8574,
+          "forward_conditional_share": 0.0342,
+          "forward_conditional_pct": 3.4158,
+          "reverse_conditional_share": 0.921,
+          "reverse_conditional_pct": 92.0992
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0152,
+          "joint_pct": 1.5245,
+          "forward_conditional_share": 0.1867,
+          "forward_conditional_pct": 18.6727,
+          "reverse_conditional_share": 0.1768,
+          "reverse_conditional_pct": 17.6799
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0243,
+          "joint_pct": 2.4281,
+          "forward_conditional_share": 0.1095,
+          "forward_conditional_pct": 10.9519,
+          "reverse_conditional_share": 0.2816,
+          "reverse_conditional_pct": 28.1598
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0022,
+          "joint_pct": 0.2171,
+          "forward_conditional_share": 0.0202,
+          "forward_conditional_pct": 2.0247,
+          "reverse_conditional_share": 0.0252,
+          "reverse_conditional_pct": 2.518
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0023,
+          "joint_pct": 0.2337,
+          "forward_conditional_share": 0.0512,
+          "forward_conditional_pct": 5.1178,
+          "reverse_conditional_share": 0.0271,
+          "reverse_conditional_pct": 2.7104
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0422,
+          "joint_pct": 4.2192,
+          "forward_conditional_share": 0.0776,
+          "forward_conditional_pct": 7.7593,
+          "reverse_conditional_share": 0.4893,
+          "reverse_conditional_pct": 48.932
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0216,
+          "joint_pct": 2.1594,
+          "forward_conditional_share": 0.2645,
+          "forward_conditional_pct": 26.4499,
+          "reverse_conditional_share": 0.4677,
+          "reverse_conditional_pct": 46.771
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0165,
+          "joint_pct": 1.6493,
+          "forward_conditional_share": 0.0744,
+          "forward_conditional_pct": 7.4393,
+          "reverse_conditional_share": 0.3572,
+          "reverse_conditional_pct": 35.7235
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0055,
+          "joint_pct": 0.5491,
+          "forward_conditional_share": 0.0512,
+          "forward_conditional_pct": 5.1205,
+          "reverse_conditional_share": 0.1189,
+          "reverse_conditional_pct": 11.8927
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0019,
+          "joint_pct": 0.1896,
+          "forward_conditional_share": 0.0415,
+          "forward_conditional_pct": 4.1522,
+          "reverse_conditional_share": 0.0411,
+          "reverse_conditional_pct": 4.1068
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0007,
+          "joint_pct": 0.0695,
+          "forward_conditional_share": 0.0013,
+          "forward_conditional_pct": 0.1279,
+          "reverse_conditional_share": 0.0151,
+          "reverse_conditional_pct": 1.506
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0137,
+          "joint_pct": 1.3705,
+          "forward_conditional_share": 0.1679,
+          "forward_conditional_pct": 16.787,
+          "reverse_conditional_share": 0.296,
+          "reverse_conditional_pct": 29.5984
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0236,
+          "joint_pct": 2.3601,
+          "forward_conditional_share": 0.1065,
+          "forward_conditional_pct": 10.6451,
+          "reverse_conditional_share": 0.5097,
+          "reverse_conditional_pct": 50.9698
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0006,
+          "joint_pct": 0.0617,
+          "forward_conditional_share": 0.0058,
+          "forward_conditional_pct": 0.575,
+          "reverse_conditional_share": 0.0133,
+          "reverse_conditional_pct": 1.3317
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 1.9514e-12,
+          "joint_pct": 1.9514e-10,
+          "forward_conditional_share": 4.2733e-11,
+          "forward_conditional_pct": 4.2733e-09,
+          "reverse_conditional_share": 4.2143e-11,
+          "reverse_conditional_pct": 4.2143e-09
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0084,
+          "joint_pct": 0.8381,
+          "forward_conditional_share": 0.0154,
+          "forward_conditional_pct": 1.5413,
+          "reverse_conditional_share": 0.181,
+          "reverse_conditional_pct": 18.1002
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0061,
+          "joint_pct": 0.6095,
+          "forward_conditional_share": 0.0747,
+          "forward_conditional_pct": 7.4658,
+          "reverse_conditional_share": 0.124,
+          "reverse_conditional_pct": 12.4018
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0293,
+          "joint_pct": 2.9261,
+          "forward_conditional_share": 0.132,
+          "forward_conditional_pct": 13.1979,
+          "reverse_conditional_share": 0.5954,
+          "reverse_conditional_pct": 59.5363
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0039,
+          "joint_pct": 0.3942,
+          "forward_conditional_share": 0.0368,
+          "forward_conditional_pct": 3.676,
+          "reverse_conditional_share": 0.0802,
+          "reverse_conditional_pct": 8.0204
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0006,
+          "joint_pct": 0.0617,
+          "forward_conditional_share": 0.0135,
+          "forward_conditional_pct": 1.3517,
+          "reverse_conditional_share": 0.0126,
+          "reverse_conditional_pct": 1.2559
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0092,
+          "joint_pct": 0.9233,
+          "forward_conditional_share": 0.017,
+          "forward_conditional_pct": 1.6979,
+          "reverse_conditional_share": 0.1879,
+          "reverse_conditional_pct": 18.7856
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.004,
+          "joint_pct": 0.3989,
+          "forward_conditional_share": 0.0489,
+          "forward_conditional_pct": 4.8865,
+          "reverse_conditional_share": 0.051,
+          "reverse_conditional_pct": 5.0957
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.017,
+          "joint_pct": 1.6964,
+          "forward_conditional_share": 0.0765,
+          "forward_conditional_pct": 7.6517,
+          "reverse_conditional_share": 0.2167,
+          "reverse_conditional_pct": 21.669
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0101,
+          "joint_pct": 1.0144,
+          "forward_conditional_share": 0.0946,
+          "forward_conditional_pct": 9.4596,
+          "reverse_conditional_share": 0.1296,
+          "reverse_conditional_pct": 12.9567
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0032,
+          "joint_pct": 0.3234,
+          "forward_conditional_share": 0.0708,
+          "forward_conditional_pct": 7.083,
+          "reverse_conditional_share": 0.0413,
+          "reverse_conditional_pct": 4.1314
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.044,
+          "joint_pct": 4.3957,
+          "forward_conditional_share": 0.0808,
+          "forward_conditional_pct": 8.0839,
+          "reverse_conditional_share": 0.5615,
+          "reverse_conditional_pct": 56.1472
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0046,
+          "joint_pct": 0.4636,
+          "forward_conditional_share": 0.0568,
+          "forward_conditional_pct": 5.6788,
+          "reverse_conditional_share": 0.0147,
+          "reverse_conditional_pct": 1.4728
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0523,
+          "joint_pct": 5.2326,
+          "forward_conditional_share": 0.236,
+          "forward_conditional_pct": 23.6016,
+          "reverse_conditional_share": 0.1662,
+          "reverse_conditional_pct": 16.6225
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0335,
+          "joint_pct": 3.3498,
+          "forward_conditional_share": 0.3124,
+          "forward_conditional_pct": 31.2393,
+          "reverse_conditional_share": 0.1064,
+          "reverse_conditional_pct": 10.6415
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0142,
+          "joint_pct": 1.4203,
+          "forward_conditional_share": 0.311,
+          "forward_conditional_pct": 31.1037,
+          "reverse_conditional_share": 0.0451,
+          "reverse_conditional_pct": 4.512
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.2101,
+          "joint_pct": 21.0127,
+          "forward_conditional_share": 0.3864,
+          "forward_conditional_pct": 38.6436,
+          "reverse_conditional_share": 0.6675,
+          "reverse_conditional_pct": 66.7513
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.3033,
+          "shown_pct": 30.3347,
+          "omitted_share": 0.6967,
+          "omitted_pct": 69.6653
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.1529,
+          "shown_pct": 15.2896,
+          "omitted_share": 0.8471,
+          "omitted_pct": 84.7104
+        }
+      },
+      "summary": {
+        "positive_pct": 30.3347,
+        "negative_pct": 15.2896,
+        "cant_rate_pct": 54.3757
+      }
+    },
+    {
+      "id": "duncan",
+      "label": "Geoff Duncan",
+      "favorability_dv": "favorability_duncan",
+      "ballot_dv": "primary_ballot_governor",
+      "survey_id": "Georgia_2026-03-30",
+      "survey_date": "2026-03-30",
+      "state_fips": "13",
+      "state_name": "Georgia",
+      "bridge_schema_version": "ga_fav_ballot_bridge_v1",
+      "favorability_buckets": [
+        {
+          "id": "very_favorable",
+          "label": "Very Favorable",
+          "marginal_share": 0.0942,
+          "marginal_pct": 9.4241,
+          "marginal_sd_share": 0.0014,
+          "marginal_sd_pct": 0.1383
+        },
+        {
+          "id": "somewhat_favorable",
+          "label": "Somewhat Favorable",
+          "marginal_share": 0.2462,
+          "marginal_pct": 24.6218,
+          "marginal_sd_share": 0.0062,
+          "marginal_sd_pct": 0.617
+        },
+        {
+          "id": "somewhat_unfavorable",
+          "label": "Somewhat Unfavorable",
+          "marginal_share": 0.1661,
+          "marginal_pct": 16.6053,
+          "marginal_sd_share": 0.0195,
+          "marginal_sd_pct": 1.9471
+        },
+        {
+          "id": "very_unfavorable",
+          "label": "Very Unfavorable",
+          "marginal_share": 0.0867,
+          "marginal_pct": 8.6711,
+          "marginal_sd_share": 0.0388,
+          "marginal_sd_pct": 3.8819
+        },
+        {
+          "id": "never_heard_of_cant_rate",
+          "label": "Never heard of / Can't rate",
+          "marginal_share": 0.4068,
+          "marginal_pct": 40.6777,
+          "marginal_sd_share": 0.0146,
+          "marginal_sd_pct": 1.4562
+        }
+      ],
+      "ballot_buckets": [
+        {
+          "id": "keisha_bottoms",
+          "label": "Keisha Bottoms",
+          "marginal_share": 0.3589,
+          "marginal_pct": 35.8906,
+          "marginal_sd_share": 0.035,
+          "marginal_sd_pct": 3.4963
+        },
+        {
+          "id": "olu_brown",
+          "label": "Olu Brown",
+          "marginal_share": 0.0202,
+          "marginal_pct": 2.0167,
+          "marginal_sd_share": 0.0006,
+          "marginal_sd_pct": 0.0634
+        },
+        {
+          "id": "geoff_duncan",
+          "label": "Geoff Duncan",
+          "marginal_share": 0.0862,
+          "marginal_pct": 8.6226,
+          "marginal_sd_share": 0.0181,
+          "marginal_sd_pct": 1.8057
+        },
+        {
+          "id": "amanda_duffy",
+          "label": "Amanda Duffy",
+          "marginal_share": 0.0462,
+          "marginal_pct": 4.617,
+          "marginal_sd_share": 0.0035,
+          "marginal_sd_pct": 0.3508
+        },
+        {
+          "id": "jason_esteves",
+          "label": "Jason Esteves",
+          "marginal_share": 0.0463,
+          "marginal_pct": 4.6304,
+          "marginal_sd_share": 0.0096,
+          "marginal_sd_pct": 0.9626
+        },
+        {
+          "id": "derrick_jackson",
+          "label": "Derrick Jackson",
+          "marginal_share": 0.0491,
+          "marginal_pct": 4.9147,
+          "marginal_sd_share": 0.0056,
+          "marginal_sd_pct": 0.5571
+        },
+        {
+          "id": "mike_thurmond",
+          "label": "Mike Thurmond",
+          "marginal_share": 0.0783,
+          "marginal_pct": 7.8289,
+          "marginal_sd_share": 0.0095,
+          "marginal_sd_pct": 0.9464
+        },
+        {
+          "id": "undecided",
+          "label": "Undecided",
+          "marginal_share": 0.3148,
+          "marginal_pct": 31.4791,
+          "marginal_sd_share": 0.0182,
+          "marginal_sd_pct": 1.8173
+        }
+      ],
+      "links": [
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0104,
+          "joint_pct": 1.0388,
+          "forward_conditional_share": 0.1102,
+          "forward_conditional_pct": 11.0226,
+          "reverse_conditional_share": 0.0289,
+          "reverse_conditional_pct": 2.8943
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0843,
+          "joint_pct": 8.4337,
+          "forward_conditional_share": 0.3425,
+          "forward_conditional_pct": 34.2527,
+          "reverse_conditional_share": 0.235,
+          "reverse_conditional_pct": 23.4982
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0553,
+          "joint_pct": 5.5319,
+          "forward_conditional_share": 0.3331,
+          "forward_conditional_pct": 33.3142,
+          "reverse_conditional_share": 0.1541,
+          "reverse_conditional_pct": 15.4133
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.0443,
+          "joint_pct": 4.4309,
+          "forward_conditional_share": 0.511,
+          "forward_conditional_pct": 51.0995,
+          "reverse_conditional_share": 0.1235,
+          "reverse_conditional_pct": 12.3455
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "keisha_bottoms",
+          "target_bucket_label": "Keisha Bottoms",
+          "joint_share": 0.1646,
+          "joint_pct": 16.4554,
+          "forward_conditional_share": 0.4045,
+          "forward_conditional_pct": 40.4531,
+          "reverse_conditional_share": 0.4585,
+          "reverse_conditional_pct": 45.8487
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 5.9739e-12,
+          "joint_pct": 5.9739e-10,
+          "forward_conditional_share": 6.3389e-11,
+          "forward_conditional_pct": 6.3389e-09,
+          "reverse_conditional_share": 2.9622e-10,
+          "reverse_conditional_pct": 2.9622e-08
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0119,
+          "joint_pct": 1.1913,
+          "forward_conditional_share": 0.0484,
+          "forward_conditional_pct": 4.8383,
+          "reverse_conditional_share": 0.5907,
+          "reverse_conditional_pct": 59.0703
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0031,
+          "joint_pct": 0.3124,
+          "forward_conditional_share": 0.0188,
+          "forward_conditional_pct": 1.8815,
+          "reverse_conditional_share": 0.1549,
+          "reverse_conditional_pct": 15.4923
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0012,
+          "joint_pct": 0.1221,
+          "forward_conditional_share": 0.0141,
+          "forward_conditional_pct": 1.4087,
+          "reverse_conditional_share": 0.0606,
+          "reverse_conditional_pct": 6.0568
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "olu_brown",
+          "target_bucket_label": "Olu Brown",
+          "joint_share": 0.0039,
+          "joint_pct": 0.3909,
+          "forward_conditional_share": 0.0096,
+          "forward_conditional_pct": 0.9609,
+          "reverse_conditional_share": 0.1938,
+          "reverse_conditional_pct": 19.3806
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0601,
+          "joint_pct": 6.0083,
+          "forward_conditional_share": 0.6375,
+          "forward_conditional_pct": 63.7545,
+          "reverse_conditional_share": 0.6968,
+          "reverse_conditional_pct": 69.681
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0181,
+          "joint_pct": 1.8063,
+          "forward_conditional_share": 0.0734,
+          "forward_conditional_pct": 7.3362,
+          "reverse_conditional_share": 0.2095,
+          "reverse_conditional_pct": 20.9486
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0021,
+          "joint_pct": 0.2126,
+          "forward_conditional_share": 0.0128,
+          "forward_conditional_pct": 1.28,
+          "reverse_conditional_share": 0.0247,
+          "reverse_conditional_pct": 2.465
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0027,
+          "joint_pct": 0.2689,
+          "forward_conditional_share": 0.031,
+          "forward_conditional_pct": 3.1012,
+          "reverse_conditional_share": 0.0312,
+          "reverse_conditional_pct": 3.1186
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "geoff_duncan",
+          "target_bucket_label": "Geoff Duncan",
+          "joint_share": 0.0033,
+          "joint_pct": 0.3265,
+          "forward_conditional_share": 0.008,
+          "forward_conditional_pct": 0.8027,
+          "reverse_conditional_share": 0.0379,
+          "reverse_conditional_pct": 3.7867
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0042,
+          "joint_pct": 0.4213,
+          "forward_conditional_share": 0.0447,
+          "forward_conditional_pct": 4.47,
+          "reverse_conditional_share": 0.0912,
+          "reverse_conditional_pct": 9.1241
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.025,
+          "joint_pct": 2.4978,
+          "forward_conditional_share": 0.1014,
+          "forward_conditional_pct": 10.1446,
+          "reverse_conditional_share": 0.541,
+          "reverse_conditional_pct": 54.1001
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0145,
+          "joint_pct": 1.4522,
+          "forward_conditional_share": 0.0875,
+          "forward_conditional_pct": 8.7453,
+          "reverse_conditional_share": 0.3145,
+          "reverse_conditional_pct": 31.4534
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0023,
+          "joint_pct": 0.2297,
+          "forward_conditional_share": 0.0265,
+          "forward_conditional_pct": 2.6486,
+          "reverse_conditional_share": 0.0497,
+          "reverse_conditional_pct": 4.9743
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "amanda_duffy",
+          "target_bucket_label": "Amanda Duffy",
+          "joint_share": 0.0002,
+          "joint_pct": 0.0161,
+          "forward_conditional_share": 0.0004,
+          "forward_conditional_pct": 0.0395,
+          "reverse_conditional_share": 0.0035,
+          "reverse_conditional_pct": 0.3481
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0028,
+          "joint_pct": 0.2819,
+          "forward_conditional_share": 0.0299,
+          "forward_conditional_pct": 2.9912,
+          "reverse_conditional_share": 0.0609,
+          "reverse_conditional_pct": 6.0879
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0099,
+          "joint_pct": 0.9921,
+          "forward_conditional_share": 0.0403,
+          "forward_conditional_pct": 4.0296,
+          "reverse_conditional_share": 0.2143,
+          "reverse_conditional_pct": 21.427
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.0156,
+          "joint_pct": 1.5585,
+          "forward_conditional_share": 0.0939,
+          "forward_conditional_pct": 9.3853,
+          "reverse_conditional_share": 0.3366,
+          "reverse_conditional_pct": 33.6574
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 1.6839e-12,
+          "joint_pct": 1.6839e-10,
+          "forward_conditional_share": 1.942e-11,
+          "forward_conditional_pct": 1.942e-09,
+          "reverse_conditional_share": 3.6366e-11,
+          "reverse_conditional_pct": 3.6366e-09
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "jason_esteves",
+          "target_bucket_label": "Jason Esteves",
+          "joint_share": 0.018,
+          "joint_pct": 1.7979,
+          "forward_conditional_share": 0.0442,
+          "forward_conditional_pct": 4.4198,
+          "reverse_conditional_share": 0.3883,
+          "reverse_conditional_pct": 38.8277
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0119,
+          "joint_pct": 1.1887,
+          "forward_conditional_share": 0.1261,
+          "forward_conditional_pct": 12.6134,
+          "reverse_conditional_share": 0.2419,
+          "reverse_conditional_pct": 24.1866
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0102,
+          "joint_pct": 1.0154,
+          "forward_conditional_share": 0.0412,
+          "forward_conditional_pct": 4.1238,
+          "reverse_conditional_share": 0.2066,
+          "reverse_conditional_pct": 20.6594
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.017,
+          "joint_pct": 1.6966,
+          "forward_conditional_share": 0.1022,
+          "forward_conditional_pct": 10.2172,
+          "reverse_conditional_share": 0.3452,
+          "reverse_conditional_pct": 34.5208
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0026,
+          "joint_pct": 0.2611,
+          "forward_conditional_share": 0.0301,
+          "forward_conditional_pct": 3.0108,
+          "reverse_conditional_share": 0.0531,
+          "reverse_conditional_pct": 5.312
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "derrick_jackson",
+          "target_bucket_label": "Derrick Jackson",
+          "joint_share": 0.0075,
+          "joint_pct": 0.753,
+          "forward_conditional_share": 0.0185,
+          "forward_conditional_pct": 1.8511,
+          "reverse_conditional_share": 0.1532,
+          "reverse_conditional_pct": 15.3212
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0011,
+          "joint_pct": 0.1084,
+          "forward_conditional_share": 0.0115,
+          "forward_conditional_pct": 1.1503,
+          "reverse_conditional_share": 0.0138,
+          "reverse_conditional_pct": 1.3846
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0246,
+          "joint_pct": 2.4618,
+          "forward_conditional_share": 0.1,
+          "forward_conditional_pct": 9.9983,
+          "reverse_conditional_share": 0.3144,
+          "reverse_conditional_pct": 31.4445
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0278,
+          "joint_pct": 2.7826,
+          "forward_conditional_share": 0.1676,
+          "forward_conditional_pct": 16.7571,
+          "reverse_conditional_share": 0.3554,
+          "reverse_conditional_pct": 35.5424
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0014,
+          "joint_pct": 0.136,
+          "forward_conditional_share": 0.0157,
+          "forward_conditional_pct": 1.5682,
+          "reverse_conditional_share": 0.0174,
+          "reverse_conditional_pct": 1.7369
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "mike_thurmond",
+          "target_bucket_label": "Mike Thurmond",
+          "joint_share": 0.0234,
+          "joint_pct": 2.3402,
+          "forward_conditional_share": 0.0575,
+          "forward_conditional_pct": 5.753,
+          "reverse_conditional_share": 0.2989,
+          "reverse_conditional_pct": 29.8915
+        },
+        {
+          "source_bucket_id": "very_favorable",
+          "source_bucket_label": "Very Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0038,
+          "joint_pct": 0.3768,
+          "forward_conditional_share": 0.04,
+          "forward_conditional_pct": 3.9981,
+          "reverse_conditional_share": 0.012,
+          "reverse_conditional_pct": 1.1969
+        },
+        {
+          "source_bucket_id": "somewhat_favorable",
+          "source_bucket_label": "Somewhat Favorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0622,
+          "joint_pct": 6.2235,
+          "forward_conditional_share": 0.2528,
+          "forward_conditional_pct": 25.2765,
+          "reverse_conditional_share": 0.1977,
+          "reverse_conditional_pct": 19.7704
+        },
+        {
+          "source_bucket_id": "somewhat_unfavorable",
+          "source_bucket_label": "Somewhat Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0306,
+          "joint_pct": 3.0586,
+          "forward_conditional_share": 0.1842,
+          "forward_conditional_pct": 18.4193,
+          "reverse_conditional_share": 0.0972,
+          "reverse_conditional_pct": 9.7162
+        },
+        {
+          "source_bucket_id": "very_unfavorable",
+          "source_bucket_label": "Very Unfavorable",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.0322,
+          "joint_pct": 3.2224,
+          "forward_conditional_share": 0.3716,
+          "forward_conditional_pct": 37.1629,
+          "reverse_conditional_share": 0.1024,
+          "reverse_conditional_pct": 10.2367
+        },
+        {
+          "source_bucket_id": "never_heard_of_cant_rate",
+          "source_bucket_label": "Never heard of / Can't rate",
+          "target_bucket_id": "undecided",
+          "target_bucket_label": "Undecided",
+          "joint_share": 0.186,
+          "joint_pct": 18.5978,
+          "forward_conditional_share": 0.4572,
+          "forward_conditional_pct": 45.7199,
+          "reverse_conditional_share": 0.5908,
+          "reverse_conditional_pct": 59.0798
+        }
+      ],
+      "cards": {
+        "positive": {
+          "id": "positive",
+          "label": "Positive Flows",
+          "subtitle": "Very and Somewhat Favorable",
+          "source_bucket_ids": [
+            "very_favorable",
+            "somewhat_favorable"
+          ],
+          "shown_share": 0.3405,
+          "shown_pct": 34.0459,
+          "omitted_share": 0.6595,
+          "omitted_pct": 65.9541
+        },
+        "negative": {
+          "id": "negative",
+          "label": "Negative Flows",
+          "subtitle": "Very and Somewhat Unfavorable",
+          "source_bucket_ids": [
+            "very_unfavorable",
+            "somewhat_unfavorable"
+          ],
+          "shown_share": 0.2528,
+          "shown_pct": 25.2764,
+          "omitted_share": 0.7472,
+          "omitted_pct": 74.7236
+        }
+      },
+      "summary": {
+        "positive_pct": 34.0459,
+        "negative_pct": 25.2764,
+        "cant_rate_pct": 40.6777
+      }
+    }
+  ],
+  "content": {
+    "key_takeaways": [
+      "This report links modeled favorability buckets to modeled Georgia Democratic gubernatorial test-ballot destinations for each available candidate bridge artifact.",
+      "Each candidate section has two flow cards: one for positive sentiment (Very/Somewhat Favorable) and one for negative sentiment (Very/Somewhat Unfavorable).",
+      "Use the direction toggle to switch between forward interpretation (favorability to ballot) and reverse interpretation (ballot to favorability composition).",
+      "These are calibrated bridge flows constrained to match modeled marginals; they are not raw survey cross-tabs."
+    ],
+    "methodology_note": "Bridge flows are estimated by calibrating a joint distribution between modeled favorability and modeled gubernatorial test-ballot outcomes from the same survey wave. We start from a survey-based weighted seed table, apply light smoothing where needed, and then use iterative proportional fitting (IPF) so the recovered totals match the modeled marginals exactly. This lets us show both how large each flow is overall and where each favorability group currently goes on the ballot. These bridge flows are calibrated synthetic estimates that reconcile modeled marginals, not just raw respondent-level cross-tabs.",
+    "component_order": [
+      "hero_title",
+      "key_takeaways",
+      "methodology_note",
+      "candidate_navigation",
+      "candidate_flows",
+      "feedback_callout"
+    ],
+    "feedback_callout": {
+      "enabled": true,
+      "heading": "Share Your Feedback",
+      "body": "Have questions about these voter-flow bridges or ideas for additional diagnostics? We would love to hear from you.",
+      "cta_label": "Get in Touch",
+      "cta_url": "mailto:philipp@vantagedatahouse.com"
+    },
+    "section_headers": {
+      "key_takeaways": "Key Findings",
+      "candidate_navigation": "Candidate Navigation",
+      "candidate_flows": "Voter Flows"
+    }
+  },
+  "dataSource": {
+    "input_files": {
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/bottoms/bridge_Georgia_2026-03-30__state_13__fav_bottoms__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/bottoms/bridge_Georgia_2026-03-30__state_13__fav_bottoms__to__primary_ballot_governor.rds",
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/duncan/bridge_Georgia_2026-03-30__state_13__fav_duncan__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/duncan/bridge_Georgia_2026-03-30__state_13__fav_duncan__to__primary_ballot_governor.rds",
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/esteves/bridge_Georgia_2026-03-30__state_13__fav_esteves__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/esteves/bridge_Georgia_2026-03-30__state_13__fav_esteves__to__primary_ballot_governor.rds",
+      "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/georgia_governor_democratic_primary_flows/data_in/thurmond/bridge_Georgia_2026-03-30__state_13__fav_thurmond__to__primary_ballot_governor.rds": "georgia_governor_democratic_primary_flows/data_in/thurmond/bridge_Georgia_2026-03-30__state_13__fav_thurmond__to__primary_ballot_governor.rds"
+    },
+    "bridge_schema_versions": [
+      "ga_fav_ballot_bridge_v1"
+    ],
+    "survey_ids": [
+      "Georgia_2026-03-30"
+    ],
+    "ballot_dv": [
+      "primary_ballot_governor"
+    ],
+    "generated_at_utc": "2026-04-03 14:04:27 UTC"
+  }
+}
+</script>
+
+    <script src="lib/html-to-image.min.js"></script>
+    <script src="lib/png-export-helper.js"></script>
+    <script>
+'use strict';
+
+let reportData = null;
+let activeCandidateId = null;
+let activeDirection = 'forward';
+
+/* ----------------------------------------------------------------
+   CANDIDATE DESTINATION COLORS
+   Categorical palette with wide hue separation so each candidate
+   is clearly distinguishable at a glance.
+   ---------------------------------------------------------------- */
+const CANDIDATE_DEST_COLORS = {
+  keisha_bottoms:  '#1a6b73',  // deep teal
+  olu_brown:       '#7352b8',  // purple
+  geoff_duncan:    '#3d7d50',  // forest green
+  amanda_duffy:    '#c44f6b',  // rose / coral
+  jason_esteves:   '#2d4e99',  // navy blue
+  derrick_jackson: '#c99020',  // amber / gold
+  mike_thurmond:   '#c46525',  // warm orange (brand)
+  undecided:       '#8a9ab0'   // neutral gray
+};
+
+/* Favorability source-bucket palette (matches georgia favorability site) */
+const FAV_BUCKET_COLORS = {
+  very_favorable:      '#1a6b73',
+  somewhat_favorable:  '#2f7f8a',
+  somewhat_unfavorable:'#c97f5f',
+  very_unfavorable:    '#c46525',
+  never_heard_of_cant_rate: '#a8b5c4'
+};
+
+function getCandidateDestColor(candidateId) {
+  return CANDIDATE_DEST_COLORS[normalizeText(candidateId)] || 'var(--muted)';
+}
+
+function getFavBucketColor(bucketId) {
+  return FAV_BUCKET_COLORS[normalizeText(bucketId)] || 'var(--track)';
+}
+
+function toArray(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function asNumber(value, fallback = NaN) {
+  const num = Number(value);
+  return Number.isFinite(num) ? num : fallback;
+}
+
+function pct(value, digits = 1) {
+  if (!Number.isFinite(value)) return '--';
+  return `${value.toFixed(digits)}%`;
+}
+
+function normalizeText(value, fallback = '') {
+  const out = String(value == null ? '' : value).trim();
+  return out || fallback;
+}
+
+function slugify(value) {
+  return String(value == null ? '' : value)
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '') || 'item';
+}
+
+function getCandidateById(candidateId) {
+  return toArray(reportData && reportData.candidates).find((item) => item && item.id === candidateId) || null;
+}
+
+function getContentConfig() {
+  const cfg = reportData && reportData.content;
+  return cfg && typeof cfg === 'object' ? cfg : {};
+}
+
+function getDirectionConfig(directionId) {
+  const modes = toArray(reportData && reportData.flow_controls && reportData.flow_controls.direction_modes);
+  return modes.find((mode) => mode && mode.id === directionId) || modes[0] || null;
+}
+
+function getCardConfig(cardId) {
+  const cards = reportData && reportData.flow_controls && reportData.flow_controls.cards;
+  if (!cards || typeof cards !== 'object') return null;
+  return cards[cardId] || null;
+}
+
+function isLocalPreviewHost() {
+  if (location.protocol === 'file:') return true;
+  const host = String(location.hostname || '').toLowerCase();
+  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+}
+
+function parseEmbeddedData() {
+  const node = document.getElementById('embeddedReportData');
+  if (!node) return null;
+  try {
+    const text = String(node.textContent || '').trim();
+    if (!text) return null;
+    return JSON.parse(text);
+  } catch (err) {
+    console.warn('[flows] Failed to parse embedded fallback JSON.', err);
+    return null;
+  }
+}
+
+function showDataBanner(message) {
+  const banner = document.getElementById('dataBanner');
+  if (!banner) return;
+  banner.textContent = message;
+  banner.classList.add('show');
+}
+
+async function loadData() {
+  const embedded = parseEmbeddedData();
+  try {
+    const response = await fetch('data/georgia_flows_data.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    reportData = await response.json();
+  } catch (err) {
+    if (embedded && typeof embedded === 'object') {
+      reportData = embedded;
+      showDataBanner('Showing embedded fallback data. Start a local HTTP server for the latest JSON payload.');
+      return;
+    }
+    throw err;
+  }
+}
+
+function initTheme() {
+  const toggle = document.getElementById('themeToggle');
+  const icon = document.getElementById('toggleIcon');
+  const label = document.getElementById('toggleLabel');
+
+  function refreshLabel(theme) {
+    if (icon) icon.textContent = theme === 'dark' ? '\u263d' : '\u2608';
+    if (label) label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+  }
+
+  const initial = document.documentElement.getAttribute('data-theme') || 'light';
+  refreshLabel(initial);
+
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const now = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = now === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      if (window.VDHTheme && typeof window.VDHTheme.persistTheme === 'function') {
+        window.VDHTheme.persistTheme(next);
+      }
+      refreshLabel(next);
+    });
+  }
+}
+
+function normalizeSiteNavLinks(items) {
+  return toArray(items)
+    .map((item) => {
+      const label = normalizeText(item && item.label);
+      const canonicalHref = normalizeText(item && (item.canonical_href || item.href));
+      const localHref = normalizeText(item && item.local_href);
+      const siteSlug = normalizeText(item && (item.site_slug || item.siteSlug));
+      if (!label || (!canonicalHref && !localHref)) return null;
+      return {
+        label,
+        href: canonicalHref || localHref,
+        canonical_href: canonicalHref,
+        local_href: localHref,
+        site_slug: siteSlug
+      };
+    })
+    .filter(Boolean);
+}
+
+function resolveThemeAwareHref(rawHref) {
+  if (!rawHref) return rawHref;
+  const theme = document.documentElement.getAttribute('data-theme') || 'light';
+  if (window.VDHTheme && typeof window.VDHTheme.withThemeParam === 'function') {
+    return window.VDHTheme.withThemeParam(rawHref, theme);
+  }
+  return rawHref;
+}
+
+function resolveSiblingHref(entry) {
+  const canonicalHref = normalizeText(entry && (entry.canonical_href || entry.href));
+  const localHref = normalizeText(entry && entry.local_href);
+  if (isLocalPreviewHost() && localHref) return localHref;
+  return canonicalHref || localHref;
+}
+
+function renderSiteNavigation() {
+  const backLink = document.getElementById('backToPortalLink');
+  const siblingWrap = document.getElementById('siblingNavLinks');
+  if (!backLink || !siblingWrap) return;
+
+  const navCfg = reportData && reportData.meta && reportData.meta.group_navigation;
+  const backCfg = navCfg && navCfg.back;
+  const backHref = normalizeText(backCfg && backCfg.href, backLink.getAttribute('href') || '');
+  const backLabel = normalizeText(backCfg && backCfg.label, backLink.textContent || 'Back');
+
+  if (backHref) backLink.href = resolveThemeAwareHref(backHref);
+  backLink.textContent = backLabel || 'Back';
+
+  const currentSlug = normalizeText(reportData && reportData.template && reportData.template.site_slug);
+  const siblings = normalizeSiteNavLinks(navCfg && navCfg.siblings).filter((entry) => {
+    if (!entry.site_slug || !currentSlug) return true;
+    return entry.site_slug !== currentSlug;
+  });
+
+  siblingWrap.innerHTML = '';
+  if (siblings.length === 0) {
+    siblingWrap.hidden = true;
+    return;
+  }
+
+  siblings.forEach((entry) => {
+    const href = resolveSiblingHref(entry);
+    if (!href) return;
+    const a = document.createElement('a');
+    a.className = 'site-nav-link';
+    a.href = resolveThemeAwareHref(href);
+    a.textContent = entry.label;
+    siblingWrap.appendChild(a);
+  });
+  siblingWrap.hidden = false;
+}
+
+function fillMeta() {
+  const meta = (reportData && reportData.meta) || {};
+  const titleEl = document.getElementById('heroTitle');
+  const subtitleEl = document.getElementById('heroSubtitle');
+  const siteEl = document.getElementById('metaSite');
+  const sampleEl = document.getElementById('metaSample');
+  const datesEl = document.getElementById('metaDates');
+  const methodEl = document.getElementById('metaMethod');
+
+  if (titleEl && meta.title) titleEl.textContent = String(meta.title);
+  if (subtitleEl) {
+    if (meta.subtitle) {
+      subtitleEl.textContent = String(meta.subtitle);
+      subtitleEl.hidden = false;
+    } else {
+      subtitleEl.textContent = '';
+      subtitleEl.hidden = true;
+    }
+  }
+
+  if (siteEl && meta.site) {
+    siteEl.href = String(meta.site);
+    siteEl.textContent = String(meta.site).replace(/^https?:\/\//, '');
+  }
+  if (sampleEl && meta.sample) sampleEl.textContent = String(meta.sample);
+  if (datesEl && meta.fieldDates) datesEl.textContent = String(meta.fieldDates);
+  if (methodEl && meta.methodLabel) methodEl.textContent = String(meta.methodLabel);
+}
+
+function renderTakeaways() {
+  const wrap = document.getElementById('takeaways');
+  if (!wrap) return;
+  const takeaways = toArray(getContentConfig().key_takeaways);
+  wrap.innerHTML = '';
+  takeaways.forEach((text, index) => {
+    const item = document.createElement('div');
+    item.className = 'takeaway-item';
+    item.innerHTML = `
+      <span class="takeaway-num" aria-hidden="true">${index + 1}</span>
+      <span class="takeaway-text"></span>
+    `;
+    const txt = item.querySelector('.takeaway-text');
+    if (txt) txt.textContent = String(text);
+    wrap.appendChild(item);
+  });
+}
+
+function renderMethodology() {
+  const body = document.getElementById('methodologyBody');
+  if (!body) return;
+  const note = getContentConfig().methodology_note || reportData.methodology_note;
+  body.textContent = String(note || '');
+}
+
+function renderFeedbackCallout() {
+  const section = document.getElementById('feedbackCallout');
+  if (!section) return;
+  const cfg = getContentConfig().feedback_callout || {};
+  if (cfg.enabled === false) {
+    section.hidden = true;
+    return;
+  }
+
+  const heading = document.getElementById('feedbackHeading');
+  const body = document.getElementById('feedbackBody');
+  const cta = document.getElementById('feedbackCta');
+
+  if (heading) heading.textContent = normalizeText(cfg.heading, 'Share Your Feedback');
+  if (body) body.textContent = normalizeText(cfg.body, 'Have questions about this analysis or suggestions for future topics? We would love to hear from you.');
+  if (cta) {
+    cta.textContent = normalizeText(cfg.cta_label, 'Get in Touch');
+    cta.href = normalizeText(cfg.cta_url, 'mailto:philipp@vantagedatahouse.com');
+  }
+
+  section.hidden = false;
+}
+
+function setActiveCandidate(candidateId) {
+  if (!getCandidateById(candidateId)) return;
+  activeCandidateId = candidateId;
+  renderCandidateNavigation();
+  renderCandidateSections();
+}
+
+function setActiveDirection(directionId) {
+  const cfg = getDirectionConfig(directionId);
+  if (!cfg) return;
+  activeDirection = cfg.id;
+  renderCandidateNavigation();
+  renderCandidateSections();
+}
+
+function renderCandidateNavigation() {
+  const candidateWrap = document.getElementById('candidateSegmented');
+  const directionWrap = document.getElementById('directionSegmented');
+  const directionHelp = document.getElementById('directionHelp');
+  if (!candidateWrap || !directionWrap) return;
+
+  // Candidate buttons with color dot
+  const candidates = toArray(reportData && reportData.flow_controls && reportData.flow_controls.candidate_navigation);
+  candidateWrap.innerHTML = '';
+  candidates.forEach((item) => {
+    const id = normalizeText(item && item.id);
+    if (!id) return;
+    const color = getCandidateDestColor(id);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = id === activeCandidateId ? 'active' : '';
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', id === activeCandidateId ? 'true' : 'false');
+    btn.innerHTML = `<span class="cand-dot" style="background:${color}" aria-hidden="true"></span>${normalizeText(item && item.label, id)}`;
+    btn.addEventListener('click', () => setActiveCandidate(id));
+    candidateWrap.appendChild(btn);
+  });
+
+  // Direction buttons
+  const modes = toArray(reportData && reportData.flow_controls && reportData.flow_controls.direction_modes);
+  directionWrap.innerHTML = '';
+  modes.forEach((mode) => {
+    const id = normalizeText(mode && mode.id);
+    if (!id) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = id === activeDirection ? 'active' : '';
+    btn.textContent = normalizeText(mode && mode.label, id);
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', id === activeDirection ? 'true' : 'false');
+    btn.addEventListener('click', () => setActiveDirection(id));
+    directionWrap.appendChild(btn);
+  });
+
+  // Direction interpretation help text
+  if (directionHelp) {
+    const activeMode = getDirectionConfig(activeDirection);
+    directionHelp.textContent = normalizeText(activeMode && activeMode.interpretation);
+  }
+}
+
+function renderCandidateSections() {
+  const wrap = document.getElementById('candidateSections');
+  if (!wrap) return;
+  const candidates = toArray(reportData && reportData.candidates);
+  wrap.innerHTML = '';
+
+  candidates.forEach((candidate) => {
+    const section = document.createElement('div');
+    section.className = 'candidate-section';
+    section.id = `candidate-section-${candidate.id}`;
+    section.hidden = candidate.id !== activeCandidateId;
+
+    const grid = document.createElement('div');
+    grid.className = 'flow-card-grid';
+    grid.id = `flow-grid-${candidate.id}`;
+
+    const positiveCard = buildFlowCardElement(candidate, 'positive');
+    const negativeCard = buildFlowCardElement(candidate, 'negative');
+    if (positiveCard) grid.appendChild(positiveCard);
+    if (negativeCard) grid.appendChild(negativeCard);
+
+    section.appendChild(grid);
+    wrap.appendChild(section);
+  });
+}
+
+function buildFlowCardElement(candidate, cardId) {
+  const cardCfg = getCardConfig(cardId);
+  if (!cardCfg) return null;
+
+  const candidateName = normalizeText(candidate && candidate.label, candidate && candidate.id);
+  const cardLabel = normalizeText(cardCfg.label, cardId);
+  const cardSubtitle = normalizeText(cardCfg.subtitle);
+
+  const root = document.createElement('article');
+  root.className = 'flow-card';
+  root.id = `flowCard-${candidate.id}-${cardId}`;
+  root.setAttribute('data-component-id', `candidate_${candidate.id}_${cardId}_flows`);
+
+  root.innerHTML = `
+    <div class="flow-card-header">
+      <div>
+        <p class="flow-card-title">${candidateName}: ${cardLabel}</p>
+        <p class="flow-card-subtitle">${cardSubtitle}</p>
+      </div>
+    </div>
+    <div class="flow-chart-shell">
+      <div class="flow-chart" id="flowChart-${candidate.id}-${cardId}"></div>
+      <div class="chart-tooltip" id="flowTooltip-${candidate.id}-${cardId}" role="tooltip" aria-hidden="true"></div>
+    </div>
+    <p class="flow-axis-caption" id="flowAxisCaption-${candidate.id}-${cardId}"></p>
+    <div class="flow-dest-summary" id="flowSummary-${candidate.id}-${cardId}"></div>
+  `;
+
+  const chartEl = root.querySelector(`#flowChart-${candidate.id}-${cardId}`);
+  const tooltipEl = root.querySelector(`#flowTooltip-${candidate.id}-${cardId}`);
+  const captionEl = root.querySelector(`#flowAxisCaption-${candidate.id}-${cardId}`);
+  const summaryEl = root.querySelector(`#flowSummary-${candidate.id}-${cardId}`);
+
+  renderFlowChart(chartEl, tooltipEl, captionEl, summaryEl, candidate, cardId, cardCfg);
+
+  return root;
+}
+
+function getBucketMap(items) {
+  const map = new Map();
+  toArray(items).forEach((item) => {
+    if (!item || !item.id) return;
+    map.set(item.id, item);
+  });
+  return map;
+}
+
+function resolveCardBucketOrder(cardCfg) {
+  const order = toArray(cardCfg && cardCfg.bucket_order).map((id) => normalizeText(id)).filter(Boolean);
+  const fallback = toArray(cardCfg && cardCfg.source_bucket_ids).map((id) => normalizeText(id)).filter(Boolean);
+  return order.length ? order : fallback;
+}
+
+/* ----------------------------------------------------------------
+   buildCombinedForwardData
+   Forward mode with a SINGLE combined source bloc (Favorable/Unfavorable).
+   All sub-bucket links are aggregated into one per destination.
+   Returns: { srcGroupLabel, srcGroupTotal, links[], rightNodes[] }
+   ---------------------------------------------------------------- */
+function buildCombinedForwardData(candidate, cardCfg) {
+  const favorBuckets = toArray(candidate && candidate.favorability_buckets);
+  const ballotBuckets = toArray(candidate && candidate.ballot_buckets);
+  const links = toArray(candidate && candidate.links);
+
+  const favorMap = getBucketMap(favorBuckets);
+  const ballotMap = getBucketMap(ballotBuckets);
+  const cardBucketIds = resolveCardBucketOrder(cardCfg);
+  const cardBucketSet = new Set(cardBucketIds);
+
+  const cardId = normalizeText(cardCfg && cardCfg.id);
+  const srcGroupLabel = cardId === 'positive' ? 'Favorable' : 'Unfavorable';
+
+  // Sum marginal share across source buckets → total source group
+  const srcGroupTotal = cardBucketIds.reduce((acc, id) => {
+    const b = favorMap.get(id);
+    return acc + (b ? asNumber(b.marginal_share, 0) : 0);
+  }, 0);
+
+  // Filter to source-bucket links, group by target
+  const scopedLinks = links.filter((lk) => cardBucketSet.has(normalizeText(lk && lk.source_bucket_id)));
+
+  const byTarget = new Map();
+  scopedLinks.forEach((lk) => {
+    const sid = normalizeText(lk.source_bucket_id);
+    const tid = normalizeText(lk.target_bucket_id);
+    const tLabel = normalizeText(lk.target_bucket_label, tid);
+    if (!byTarget.has(tid)) {
+      byTarget.set(tid, {
+        toId: tid,
+        toLabel: tLabel,
+        combinedJointShare: 0,
+        combinedJointPct: 0,
+        components: {}
+      });
+    }
+    const entry = byTarget.get(tid);
+    const js = asNumber(lk.joint_share, 0);
+    const jp = asNumber(lk.joint_pct, 0);
+    entry.combinedJointShare += js;
+    entry.combinedJointPct += jp;
+    entry.components[sid] = lk;
+  });
+
+  // For each combined link, compute conditional within source group
+  const combinedLinks = [];
+  byTarget.forEach((entry) => {
+    const combinedConditionalPct = srcGroupTotal > 0
+      ? (entry.combinedJointShare / srcGroupTotal) * 100
+      : 0;
+    if (entry.combinedJointShare < 0.0001) return; // skip negligible
+    combinedLinks.push({
+      fromId: 'src_group',
+      fromLabel: srcGroupLabel,
+      toId: entry.toId,
+      toLabel: entry.toLabel,
+      combinedJointShare: entry.combinedJointShare,
+      combinedJointPct: entry.combinedJointPct,
+      combinedConditionalPct,
+      jointShare: entry.combinedJointShare,
+      jointPct: entry.combinedJointPct,
+      components: entry.components
+    });
+  });
+
+  // Build right nodes from ballot list (ordered as in ballot_buckets)
+  const validTargets = new Set(combinedLinks.map((l) => l.toId));
+  const rightNodes = ballotBuckets
+    .filter((b) => b && validTargets.has(normalizeText(b.id)))
+    .map((b) => ({
+      id: normalizeText(b.id),
+      label: normalizeText(b.label),
+      type: 'ballot',
+      canonicalShare: asNumber(b.marginal_share, NaN),
+      canonicalPct: asNumber(b.marginal_pct, NaN)
+    }));
+
+  // Build the single combined source node
+  const sourceNode = {
+    id: 'src_group',
+    label: srcGroupLabel,
+    totalShare: srcGroupTotal,
+    totalPct: srcGroupTotal * 100,
+    subBuckets: cardBucketIds.map((id) => {
+      const b = favorMap.get(id);
+      return b ? { id: normalizeText(b.id), label: normalizeText(b.label),
+                    share: asNumber(b.marginal_share, 0), pct: asNumber(b.marginal_pct, 0) } : null;
+    }).filter(Boolean)
+  };
+
+  return {
+    srcGroupLabel,
+    srcGroupTotal,
+    sourceNode,
+    links: combinedLinks,
+    rightNodes
+  };
+}
+
+/* ----------------------------------------------------------------
+   buildReverseData  (separate sub-bucket approach for reverse mode)
+   Left = ballot candidates, Right = individual favorability buckets
+   Links colored by destination (favorability bucket)
+   ---------------------------------------------------------------- */
+function buildReverseData(candidate, cardCfg) {
+  const favorBuckets = toArray(candidate && candidate.favorability_buckets);
+  const ballotBuckets = toArray(candidate && candidate.ballot_buckets);
+  const links = toArray(candidate && candidate.links);
+
+  const favorMap = getBucketMap(favorBuckets);
+  const cardBucketIds = resolveCardBucketOrder(cardCfg);
+  const cardBucketSet = new Set(cardBucketIds);
+
+  const scopedLinks = links
+    .filter((lk) => cardBucketSet.has(normalizeText(lk && lk.source_bucket_id)))
+    .map((lk) => {
+      const sid = normalizeText(lk.source_bucket_id);
+      const tid = normalizeText(lk.target_bucket_id);
+      return {
+        fromId: tid,
+        fromLabel: normalizeText(lk.target_bucket_label, tid),
+        toId: sid,
+        toLabel: normalizeText(lk.source_bucket_label, sid),
+        jointShare: asNumber(lk.joint_share, 0),
+        jointPct: asNumber(lk.joint_pct, 0),
+        combinedJointShare: asNumber(lk.joint_share, 0),
+        combinedJointPct: asNumber(lk.joint_pct, 0),
+        reverseConditionalPct: asNumber(lk.reverse_conditional_pct, NaN),
+        combinedConditionalPct: asNumber(lk.reverse_conditional_pct, NaN),
+        components: { [sid]: lk }
+      };
+    })
+    .filter((lk) => lk.jointShare > 0.0001);
+
+  // Left nodes = ballot candidates (ordered by ballot_buckets)
+  const validLeft = new Set(scopedLinks.map((l) => l.fromId));
+  const leftNodes = ballotBuckets
+    .filter((b) => b && validLeft.has(normalizeText(b.id)))
+    .map((b) => ({
+      id: normalizeText(b.id),
+      label: normalizeText(b.label),
+      type: 'ballot',
+      canonicalShare: asNumber(b.marginal_share, NaN),
+      canonicalPct: asNumber(b.marginal_pct, NaN)
+    }));
+
+  // Right nodes = favorability sub-buckets in card order
+  const validRight = new Set(scopedLinks.map((l) => l.toId));
+  const rightNodes = cardBucketIds
+    .map((id) => favorMap.get(id))
+    .filter((b) => b && validRight.has(normalizeText(b.id)))
+    .map((b) => ({
+      id: normalizeText(b.id),
+      label: normalizeText(b.label),
+      type: 'favorability',
+      canonicalShare: asNumber(b.marginal_share, NaN),
+      canonicalPct: asNumber(b.marginal_pct, NaN)
+    }));
+
+  return { leftNodes, rightNodes, links: scopedLinks };
+}
+
+function allocateNodeLayout(nodes, totalsById, startY, availableHeight, gap) {
+  const out = new Map();
+  const totals = nodes.map((node) => Math.max(0, asNumber(totalsById.get(node.id), 0)));
+  const totalValue = totals.reduce((acc, value) => acc + value, 0);
+  const nodeCount = nodes.length;
+  const totalGap = Math.max(0, nodeCount - 1) * gap;
+  const usableHeight = Math.max(20, availableHeight - totalGap);
+
+  let cursorY = startY;
+  nodes.forEach((node, index) => {
+    const share = totals[index];
+    const h = totalValue > 0 ? (share / totalValue) * usableHeight : usableHeight / Math.max(1, nodeCount);
+    out.set(node.id, {
+      node,
+      y: cursorY,
+      height: Math.max(1.2, h)
+    });
+    cursorY += Math.max(1.2, h) + gap;
+  });
+
+  return out;
+}
+
+function buildTooltipHtml(link, directionId, srcGroupLabel, srcGroupTotal) {
+  // Plain-English tooltip depending on direction
+  if (directionId === 'reverse') {
+    // "Among Keisha Bottoms voters, X% are Very Favorable toward her"
+    const candidateName = link.fromLabel;
+    const favLabel = link.toLabel;
+    const reverseConditionalPct = link.reverseConditionalPct;
+    return `
+      <strong>${candidateName} → ${favLabel}</strong>
+      <p class="tip-main">${pct(reverseConditionalPct, 1)} of ${candidateName} voters have ${favLabel} views toward this candidate</p>
+      <p class="tip-secondary">Shared by both groups: ${pct(link.jointPct, 1)} of likely Democratic primary voters</p>
+    `;
+  }
+
+  // Forward mode — combined link: "X% of [Favorable/Unfavorable] Bottoms voters choose Keisha Bottoms"
+  const srcLabel = srcGroupLabel || link.fromLabel;
+  const combinedConditionalPct = link.combinedConditionalPct != null
+    ? link.combinedConditionalPct
+    : link.conditionalPct;
+
+  let compStr = '';
+  if (link.components && srcGroupTotal > 0) {
+    const parts = Object.values(link.components)
+      .filter((c) => c.jointShare > 0.0001)
+      .map((c) => {
+        const share = srcGroupTotal > 0 ? (c.joint_share / srcGroupTotal) * 100 : 0;
+        return `${pct(share, 0)} ${c.source_bucket_label}`;
+      })
+      .join(', ');
+    if (parts) compStr = `<p class="tip-secondary">Composed of: ${parts}</p>`;
+  }
+
+  return `
+    <strong>${srcLabel} → ${link.toLabel}</strong>
+    <p class="tip-main">${pct(combinedConditionalPct, 1)} of ${srcLabel} voters currently choose ${link.toLabel}</p>
+    ${compStr}
+    <p class="tip-secondary">Share of likely primary voters: ${pct(link.combinedJointPct != null ? link.combinedJointPct : link.jointPct, 1)}</p>
+  `;
+}
+
+function showTooltip(tooltipEl, event, html) {
+  if (!tooltipEl) return;
+  tooltipEl.innerHTML = html;
+  tooltipEl.style.display = 'block';
+  tooltipEl.setAttribute('aria-hidden', 'false');
+  moveTooltip(tooltipEl, event);
+}
+
+function moveTooltip(tooltipEl, event) {
+  if (!tooltipEl || !event) return;
+  const host = tooltipEl.parentElement || tooltipEl;
+  const hostRect = host.getBoundingClientRect();
+  const tipRect = tooltipEl.getBoundingClientRect();
+
+  const desiredLeft = event.clientX - hostRect.left + 12;
+  const desiredTop = event.clientY - hostRect.top + 12;
+
+  const clampedLeft = Math.max(6, Math.min(desiredLeft, hostRect.width - tipRect.width - 6));
+  const clampedTop = Math.max(6, Math.min(desiredTop, hostRect.height - tipRect.height - 6));
+
+  tooltipEl.style.left = `${clampedLeft}px`;
+  tooltipEl.style.top = `${clampedTop}px`;
+}
+
+function hideTooltip(tooltipEl) {
+  if (!tooltipEl) return;
+  tooltipEl.style.display = 'none';
+  tooltipEl.setAttribute('aria-hidden', 'true');
+}
+
+function renderFlowChart(chartEl, tooltipEl, captionEl, summaryEl, candidate, cardId, cardCfg) {
+  if (!chartEl) return;
+  chartEl.innerHTML = '';
+  hideTooltip(tooltipEl);
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+
+  /* ── FORWARD MODE: combined single-source Sankey ─────────────── */
+  if (activeDirection === 'forward') {
+    const d = buildCombinedForwardData(candidate, cardCfg);
+    if (!d.links.length) {
+      chartEl.textContent = 'No flow data available for this card.';
+      return;
+    }
+
+    const width  = 760;
+    const height = 420;
+    const marginTop    = 26;
+    const marginBottom = 16;
+    const marginLeft   = 140;   // room for "Favorable" label + sub-bucket labels
+    const marginRight  = 195;   // room for destination labels
+    const nodeWidth    = 20;
+    const nodeGap      = 10;    // gap between right-side destination nodes
+
+    const innerHeight = height - marginTop - marginBottom;
+    const srcX  = marginLeft;
+    const destX = width - marginRight - nodeWidth;
+    const bezCtrl = (destX - (srcX + nodeWidth)) * 0.45;
+
+    // Source node: full height = innerHeight
+    const srcY = marginTop;
+    const srcH = innerHeight;
+
+    // Right-side destination node layout by combined joint share
+    const rightTotals = new Map();
+    d.links.forEach((lk) => rightTotals.set(lk.toId, (rightTotals.get(lk.toId) || 0) + lk.combinedJointShare));
+    const rightLayout = allocateNodeLayout(d.rightNodes, rightTotals, marginTop, innerHeight, nodeGap);
+
+    // Scale links relative to source node height
+    const totalSrcShare = d.links.reduce((a, l) => a + l.combinedJointShare, 0) || 1;
+    const flowScale = srcH / totalSrcShare;
+
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', String(height));
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', `${normalizeText(candidate.label)} ${normalizeText(cardCfg.label)} flow chart`);
+    chartEl.appendChild(svg);
+
+    // Sort links to match right-node order
+    const rightIdx = new Map();
+    d.rightNodes.forEach((n, i) => rightIdx.set(n.id, i));
+    const sortedLinks = d.links.slice().sort((a, b) => (rightIdx.get(a.toId) || 0) - (rightIdx.get(b.toId) || 0));
+
+    // Draw links (bezier, colored by destination candidate)
+    let srcOffset = 0;
+    const rightOffsets = new Map();
+    sortedLinks.forEach((lk) => {
+      const rn = rightLayout.get(lk.toId);
+      if (!rn) return;
+
+      const thickness = Math.max(1.5, lk.combinedJointShare * flowScale);
+      const rOff = rightOffsets.get(lk.toId) || 0;
+
+      const y0 = srcY  + srcOffset  + thickness / 2;
+      const y1 = rn.y  + rOff       + thickness / 2;
+
+      srcOffset += thickness;
+      rightOffsets.set(lk.toId, rOff + thickness);
+
+      const color = getCandidateDestColor(lk.toId);
+      const path = document.createElementNS(svgNS, 'path');
+      path.classList.add('flow-link');
+      path.setAttribute('d', `M ${srcX + nodeWidth} ${y0} C ${srcX + nodeWidth + bezCtrl} ${y0}, ${destX - bezCtrl} ${y1}, ${destX} ${y1}`);
+      path.setAttribute('stroke-width', thickness.toFixed(2));
+      path.setAttribute('stroke', color);
+
+      const tipHtml = buildTooltipHtml(lk, 'forward', d.srcGroupLabel, d.srcGroupTotal);
+      path.addEventListener('mousemove', (ev) => { path.classList.add('is-hovered'); showTooltip(tooltipEl, ev, tipHtml); });
+      path.addEventListener('mouseleave', () => { path.classList.remove('is-hovered'); hideTooltip(tooltipEl); });
+      svg.appendChild(path);
+    });
+
+    /* Draw combined source bar with sub-bucket segments */
+    const totalSubShare = d.sourceNode.subBuckets.reduce((a, b) => a + b.share, 0) || 1;
+    let subY = srcY;
+    d.sourceNode.subBuckets.forEach((sub) => {
+      const subH = Math.max(1, (sub.share / totalSubShare) * srcH);
+      const r = document.createElementNS(svgNS, 'rect');
+      r.setAttribute('x', srcX);
+      r.setAttribute('y', subY.toFixed(1));
+      r.setAttribute('width', nodeWidth);
+      r.setAttribute('height', subH.toFixed(1));
+      r.setAttribute('rx', 2);
+      r.setAttribute('class', 'flow-node-rect');
+      r.setAttribute('fill', getFavBucketColor(sub.id));
+      svg.appendChild(r);
+      subY += subH;
+    });
+
+    /* Source node labels */
+    // Main label: "Favorable"
+    const mainLbl = document.createElementNS(svgNS, 'text');
+    mainLbl.setAttribute('class', 'flow-node-label');
+    mainLbl.setAttribute('x', srcX - 10);
+    mainLbl.setAttribute('y', srcY + srcH / 2 - 8);
+    mainLbl.setAttribute('text-anchor', 'end');
+    mainLbl.setAttribute('dominant-baseline', 'central');
+    mainLbl.textContent = d.srcGroupLabel;
+    svg.appendChild(mainLbl);
+
+    // Pct label
+    const pctLbl = document.createElementNS(svgNS, 'text');
+    pctLbl.setAttribute('class', 'flow-node-value');
+    pctLbl.setAttribute('x', srcX - 10);
+    pctLbl.setAttribute('y', srcY + srcH / 2 + 10);
+    pctLbl.setAttribute('text-anchor', 'end');
+    pctLbl.setAttribute('dominant-baseline', 'central');
+    pctLbl.textContent = pct(d.sourceNode.totalPct, 1) + ' of likely primary voters';
+    svg.appendChild(pctLbl);
+
+    // Sub-bucket labels on the left
+    let labelY = srcY;
+    d.sourceNode.subBuckets.forEach((sub) => {
+      const subH = Math.max(1, (sub.share / totalSubShare) * srcH);
+      if (subH > 12) {
+        const sl = document.createElementNS(svgNS, 'text');
+        sl.setAttribute('class', 'flow-node-sublabel');
+        sl.setAttribute('x', srcX - 10);
+        sl.setAttribute('y', labelY + subH / 2);
+        sl.setAttribute('text-anchor', 'end');
+        sl.setAttribute('dominant-baseline', 'central');
+        sl.textContent = `${sub.label} (${pct(sub.pct, 0)})`;
+        svg.appendChild(sl);
+      }
+      labelY += subH;
+    });
+
+    /* Draw destination nodes and labels */
+    d.rightNodes.forEach((node) => {
+      const rn = rightLayout.get(node.id);
+      if (!rn) return;
+      const color = getCandidateDestColor(node.id);
+
+      const rect = document.createElementNS(svgNS, 'rect');
+      rect.setAttribute('x', destX);
+      rect.setAttribute('y', rn.y.toFixed(1));
+      rect.setAttribute('width', nodeWidth);
+      rect.setAttribute('height', rn.height.toFixed(1));
+      rect.setAttribute('rx', 2);
+      rect.setAttribute('class', 'flow-node-rect');
+      rect.setAttribute('fill', color);
+      svg.appendChild(rect);
+
+      // Label: name only (no value pct — avoids crowding on right side)
+      const lbl = document.createElementNS(svgNS, 'text');
+      lbl.setAttribute('class', 'flow-node-label');
+      lbl.setAttribute('x', destX + nodeWidth + 10);
+      lbl.setAttribute('y', rn.y + rn.height / 2);
+      lbl.setAttribute('dominant-baseline', 'central');
+      lbl.setAttribute('fill', color);
+      lbl.textContent = node.label;
+      svg.appendChild(lbl);
+    });
+
+    if (captionEl) captionEl.textContent = 'Left: favorability bloc. Right: test-ballot destinations.';
+
+    // Build the combined destination summary
+    renderDestSummary(summaryEl, d, 'forward', d.srcGroupLabel, candidate ? candidate.label : '');
+    return;
+  }
+
+  /* ── REVERSE MODE: sub-bucket approach (ballot → favorability) ─ */
+  const d = buildReverseData(candidate, cardCfg);
+  if (!d.links.length) {
+    chartEl.textContent = 'No flow data available for this card.';
+    return;
+  }
+
+  const cardId2 = normalizeText(cardCfg && cardCfg.id);
+  const width  = 760;
+  const height = 420;
+  const marginTop    = 26;
+  const marginBottom = 16;
+  const marginLeft   = 185;
+  const marginRight  = 140;
+  const nodeWidth    = 20;
+  const nodeGapLeft  = 8;
+  const nodeGapRight = 0;
+
+  const innerHeight = height - marginTop - marginBottom;
+  const leftX  = marginLeft;
+  const rightX = width - marginRight - nodeWidth;
+  const bezCtrl = (rightX - (leftX + nodeWidth)) * 0.45;
+
+  // Left = ballot candidates layout
+  const leftTotals = new Map();
+  d.links.forEach((lk) => leftTotals.set(lk.fromId, (leftTotals.get(lk.fromId) || 0) + lk.jointShare));
+  const leftLayout = allocateNodeLayout(d.leftNodes, leftTotals, marginTop, innerHeight, nodeGapLeft);
+
+  // Right = favorability buckets (fixed per card bucket order)
+  const rightTotals2 = new Map();
+  d.links.forEach((lk) => rightTotals2.set(lk.toId, (rightTotals2.get(lk.toId) || 0) + lk.jointShare));
+  const rightLayout2 = allocateNodeLayout(d.rightNodes, rightTotals2, marginTop, innerHeight, nodeGapRight);
+
+  const totalShown = d.links.reduce((a, l) => a + l.jointShare, 0) || 1;
+  const flowScale = innerHeight / totalShown;
+
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+  svg.setAttribute('width', '100%');
+  svg.setAttribute('height', String(height));
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', `${normalizeText(candidate.label)} ${normalizeText(cardCfg.label)} reverse flow chart`);
+  chartEl.appendChild(svg);
+
+  const leftIdx = new Map();
+  d.leftNodes.forEach((n, i) => leftIdx.set(n.id, i));
+  const rightIdx2 = new Map();
+  d.rightNodes.forEach((n, i) => rightIdx2.set(n.id, i));
+
+  const sortedLinks2 = d.links.slice().sort((a, b) => {
+    const lc = (leftIdx.get(a.fromId) || 0) - (leftIdx.get(b.fromId) || 0);
+    return lc !== 0 ? lc : (rightIdx2.get(a.toId) || 0) - (rightIdx2.get(b.toId) || 0);
+  });
+
+  const leftOffsets2 = new Map();
+  const rightOffsets2 = new Map();
+
+  sortedLinks2.forEach((lk) => {
+    const ln = leftLayout.get(lk.fromId);
+    const rn = rightLayout2.get(lk.toId);
+    if (!ln || !rn) return;
+
+    const thickness = Math.max(1.5, lk.jointShare * flowScale);
+    const lOff = leftOffsets2.get(lk.fromId) || 0;
+    const rOff = rightOffsets2.get(lk.toId)  || 0;
+
+    const y0 = ln.y + lOff + thickness / 2;
+    const y1 = rn.y + rOff + thickness / 2;
+
+    leftOffsets2.set(lk.fromId, lOff + thickness);
+    rightOffsets2.set(lk.toId,  rOff + thickness);
+
+    // Color by destination (favorability bucket)
+    const color = getFavBucketColor(lk.toId);
+    const path = document.createElementNS(svgNS, 'path');
+    path.classList.add('flow-link');
+    path.setAttribute('d', `M ${leftX + nodeWidth} ${y0} C ${leftX + nodeWidth + bezCtrl} ${y0}, ${rightX - bezCtrl} ${y1}, ${rightX} ${y1}`);
+    path.setAttribute('stroke-width', thickness.toFixed(2));
+    path.setAttribute('stroke', color);
+
+    const tipHtml = buildTooltipHtml(lk, 'reverse');
+    path.addEventListener('mousemove', (ev) => { path.classList.add('is-hovered'); showTooltip(tooltipEl, ev, tipHtml); });
+    path.addEventListener('mouseleave', () => { path.classList.remove('is-hovered'); hideTooltip(tooltipEl); });
+    svg.appendChild(path);
+  });
+
+  // Left nodes (ballot candidates)
+  d.leftNodes.forEach((node) => {
+    const ln = leftLayout.get(node.id);
+    if (!ln) return;
+    const color = getCandidateDestColor(node.id);
+
+    const rect = document.createElementNS(svgNS, 'rect');
+    rect.setAttribute('x', leftX);
+    rect.setAttribute('y', ln.y.toFixed(1));
+    rect.setAttribute('width', nodeWidth);
+    rect.setAttribute('height', ln.height.toFixed(1));
+    rect.setAttribute('rx', 2);
+    rect.setAttribute('class', 'flow-node-rect');
+    rect.setAttribute('fill', color);
+    svg.appendChild(rect);
+
+    const lbl = document.createElementNS(svgNS, 'text');
+    lbl.setAttribute('class', 'flow-node-label');
+    lbl.setAttribute('x', leftX - 10);
+    lbl.setAttribute('y', ln.y + ln.height / 2);
+    lbl.setAttribute('text-anchor', 'end');
+    lbl.setAttribute('dominant-baseline', 'central');
+    lbl.setAttribute('fill', color);
+    lbl.textContent = node.label;
+    svg.appendChild(lbl);
+  });
+
+  // Right nodes (favorability buckets)
+  d.rightNodes.forEach((node) => {
+    const rn = rightLayout2.get(node.id);
+    if (!rn) return;
+    const color = getFavBucketColor(node.id);
+
+    const rect = document.createElementNS(svgNS, 'rect');
+    rect.setAttribute('x', rightX);
+    rect.setAttribute('y', rn.y.toFixed(1));
+    rect.setAttribute('width', nodeWidth);
+    rect.setAttribute('height', rn.height.toFixed(1));
+    rect.setAttribute('rx', 2);
+    rect.setAttribute('class', 'flow-node-rect');
+    rect.setAttribute('fill', color);
+    svg.appendChild(rect);
+
+    // Label: name only (no value pct — avoids crowding on right side)
+    const lbl = document.createElementNS(svgNS, 'text');
+    lbl.setAttribute('class', 'flow-node-label');
+    lbl.setAttribute('x', rightX + nodeWidth + 10);
+    lbl.setAttribute('y', rn.y + rn.height / 2);
+    lbl.setAttribute('dominant-baseline', 'central');
+    lbl.textContent = node.label;
+    svg.appendChild(lbl);
+  });
+
+  if (captionEl) captionEl.textContent = 'Left: test-ballot destinations. Right: favorability buckets.';
+
+  // No combined summary in reverse mode — clear it
+  if (summaryEl) summaryEl.innerHTML = '';
+}
+
+/* ----------------------------------------------------------------
+   renderDestSummary — compact ranked bar list per destination
+   ---------------------------------------------------------------- */
+function renderDestSummary(container, data, directionId, srcGroupLabel, candidateName) {
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (directionId !== 'forward' || !data || !data.links.length) return;
+
+  const sorted = data.links.slice().sort((a, b) => b.combinedConditionalPct - a.combinedConditionalPct);
+  const maxPct = sorted[0] ? sorted[0].combinedConditionalPct : 1;
+
+  const title = document.createElement('p');
+  title.className = 'flow-dest-summary-title';
+  const nameStr = candidateName ? ` ${candidateName}` : '';
+  title.textContent = `Where ${srcGroupLabel}${nameStr} voters go on the ballot`;
+  container.appendChild(title);
+
+  const rows = document.createElement('div');
+  rows.className = 'flow-dest-rows';
+
+  sorted.forEach((lk) => {
+    const color = getCandidateDestColor(lk.toId);
+    const cpct = lk.combinedConditionalPct;
+    const barW = maxPct > 0 ? (cpct / maxPct) * 100 : 0;
+
+    const row = document.createElement('div');
+    row.className = 'flow-dest-row';
+    row.innerHTML = `
+      <span class="flow-dest-name">
+        <span class="flow-dest-dot" style="background:${color}"></span>
+        ${lk.toLabel}
+      </span>
+      <div class="flow-dest-bar-wrap">
+        <div class="flow-dest-bar" style="width:${barW.toFixed(1)}%;background:${color}"></div>
+      </div>
+      <span class="flow-dest-pct">${pct(cpct, 1)}</span>
+    `;
+    rows.appendChild(row);
+  });
+
+  container.appendChild(rows);
+}
+
+function applyComponentOrder() {
+  const preferred = toArray(getContentConfig().component_order).map((id) => normalizeText(id)).filter(Boolean);
+  if (!preferred.length) return;
+
+  const root = document.querySelector('main.layout');
+  if (!root) return;
+
+  const byId = new Map();
+  toArray(Array.from(root.querySelectorAll('[data-component-id]'))).forEach((el) => {
+    const componentId = normalizeText(el.getAttribute('data-component-id'));
+    if (!componentId) return;
+    byId.set(componentId, el);
+  });
+
+  preferred.forEach((componentId) => {
+    const node = byId.get(componentId);
+    if (!node) return;
+    root.appendChild(node);
+  });
+
+  const feedback = byId.get('feedback_callout');
+  if (feedback) root.appendChild(feedback);
+}
+
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.add('visible'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  els.forEach((el) => obs.observe(el));
+}
+
+function buildExportComponents() {
+  const components = [];
+  toArray(reportData && reportData.candidates).forEach((candidate) => {
+    ['positive', 'negative'].forEach((cardId) => {
+      components.push({
+        selector: `#flowCard-${candidate.id}-${cardId}`,
+        componentId: `candidate_${candidate.id}_${cardId}_flows`,
+        label: `${candidate.id}-${cardId}-flows`,
+        tokenBuilder: function tokenBuilder() {
+          return [candidate.id, activeDirection, cardId];
+        }
+      });
+    });
+  });
+  return components;
+}
+
+function ensureStateDefaults() {
+  const controls = (reportData && reportData.flow_controls) || {};
+  const candidateIds = toArray(reportData && reportData.candidates).map((candidate) => candidate && candidate.id).filter(Boolean);
+
+  const configuredCandidate = normalizeText(controls.default_candidate_id);
+  if (configuredCandidate && candidateIds.includes(configuredCandidate)) {
+    activeCandidateId = configuredCandidate;
+  } else {
+    activeCandidateId = candidateIds[0] || null;
+  }
+
+  const modeIds = toArray(controls.direction_modes).map((mode) => mode && mode.id).filter(Boolean);
+  if (!modeIds.includes(activeDirection)) {
+    activeDirection = modeIds.includes('forward') ? 'forward' : (modeIds[0] || 'forward');
+  }
+}
+
+async function init() {
+  initTheme();
+  await loadData();
+  ensureStateDefaults();
+  fillMeta();
+  renderSiteNavigation();
+  renderTakeaways();
+  renderMethodology();
+  renderCandidateNavigation();
+  renderCandidateSections();
+  renderFeedbackCallout();
+  applyComponentOrder();
+
+  if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
+    window.VDH_PNG_EXPORT.init({
+      siteSlug: 'georgia_governor_democratic_primary_flows',
+      components: buildExportComponents(),
+      getResponseUniverse: function getResponseUniverse() {
+        return activeDirection;
+      }
+    });
+  }
+
+  initReveal();
+}
+
+document.readyState === 'loading'
+  ? document.addEventListener('DOMContentLoaded', init)
+  : init();
+    </script>
+  </body>
+</html>
