@@ -1,0 +1,574 @@
+{
+  "meta": {
+    "source_files": {
+      "favorability_trump": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_johnson": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_rfk": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_landry": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_cassidy": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_kennedy": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_fleming": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_maga_movement": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_letlow": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "favorability_spencer": "xgboost_2026-03-29_Louisiana_2026_03_29.rds"
+    },
+    "codebook_file": null,
+    "generated_at_utc": "2026-04-06 09:59:37 UTC",
+    "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove \"Never heard of\" responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "favorability_trump",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_johnson",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_rfk",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_landry",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_cassidy",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_kennedy",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_fleming",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_maga_movement",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_letlow",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "favorability_spencer",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "acadiana_lafayette"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Louisiana",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "acadiana_lafayette",
+        "units": [
+          {
+            "id": "acadiana_lafayette",
+            "label": "Acadiana Lafayette"
+          },
+          {
+            "id": "arklamiss_delta",
+            "label": "Arklamiss Delta"
+          },
+          {
+            "id": "arklatex",
+            "label": "Arklatex"
+          },
+          {
+            "id": "bayou_country",
+            "label": "Bayou Country"
+          },
+          {
+            "id": "central_louisiana",
+            "label": "Central Louisiana"
+          },
+          {
+            "id": "florida_parishes",
+            "label": "Florida Parishes"
+          },
+          {
+            "id": "greater_new_orleans",
+            "label": "Greater New Orleans"
+          },
+          {
+            "id": "southwest_louisiana",
+            "label": "Southwest Louisiana"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "favorability_trump",
+      "label": "President Donald Trump",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_johnson",
+      "label": "U.S. House Speaker Mike Johnson",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_rfk",
+      "label": "HHS Secretary Robert F. Kennedy, Jr.",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_landry",
+      "label": "Governor Jeff Landry",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_cassidy",
+      "label": "U.S. Senator Bill Cassidy",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_kennedy",
+      "label": "U.S. Senator John Kennedy",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_fleming",
+      "label": "Treasurer John Fleming",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_maga_movement",
+      "label": "MAGA Movement",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_letlow",
+      "label": "Former U.S. Representative Julia Letlow",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "favorability_spencer",
+      "label": "Mark Spencer",
+      "default_metric": "net_favorability"
+    }
+  ],
+  "shards_by_question": {
+    "favorability_trump": {
+      "state": {
+        "state wide": "crosstabs/favorability_trump/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_trump/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_trump/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_trump/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_trump/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_trump/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_trump/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_trump/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_trump/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_johnson": {
+      "state": {
+        "state wide": "crosstabs/favorability_johnson/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_johnson/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_johnson/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_johnson/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_johnson/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_johnson/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_johnson/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_johnson/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_johnson/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_rfk": {
+      "state": {
+        "state wide": "crosstabs/favorability_rfk/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_rfk/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_rfk/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_rfk/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_rfk/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_rfk/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_rfk/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_rfk/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_rfk/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_landry": {
+      "state": {
+        "state wide": "crosstabs/favorability_landry/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_landry/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_landry/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_landry/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_landry/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_landry/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_landry/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_landry/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_landry/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_cassidy": {
+      "state": {
+        "state wide": "crosstabs/favorability_cassidy/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_cassidy/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_cassidy/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_cassidy/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_cassidy/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_cassidy/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_cassidy/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_cassidy/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_cassidy/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_kennedy": {
+      "state": {
+        "state wide": "crosstabs/favorability_kennedy/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_kennedy/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_kennedy/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_kennedy/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_kennedy/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_kennedy/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_kennedy/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_kennedy/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_kennedy/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_fleming": {
+      "state": {
+        "state wide": "crosstabs/favorability_fleming/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_fleming/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_fleming/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_fleming/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_fleming/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_fleming/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_fleming/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_fleming/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_fleming/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_maga_movement": {
+      "state": {
+        "state wide": "crosstabs/favorability_maga_movement/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_maga_movement/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_maga_movement/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_maga_movement/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_maga_movement/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_maga_movement/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_maga_movement/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_maga_movement/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_maga_movement/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_letlow": {
+      "state": {
+        "state wide": "crosstabs/favorability_letlow/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_letlow/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_letlow/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_letlow/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_letlow/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_letlow/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_letlow/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_letlow/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_letlow/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "favorability_spencer": {
+      "state": {
+        "state wide": "crosstabs/favorability_spencer/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/favorability_spencer/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/favorability_spencer/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/favorability_spencer/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/favorability_spencer/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/favorability_spencer/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/favorability_spencer/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/favorability_spencer/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/favorability_spencer/cultural_region/southwest_louisiana.json"
+      }
+    }
+  }
+}

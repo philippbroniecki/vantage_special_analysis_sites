@@ -1,0 +1,680 @@
+{
+  "meta": {
+    "source_files": {
+      "q14_state_perception_sp_econ": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_jobs": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_col": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_housing": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_crime": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_education": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_healthcare": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_infrastructure": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_trust": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_environment": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_immigration": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q14_state_perception_sp_homeless": "xgboost_2026-03-29_Louisiana_2026_03_29.rds"
+    },
+    "codebook_file": "Louisiana_2026_03_29.json",
+    "generated_at_utc": "2026-04-06 10:39:02 UTC",
+    "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove \"Unsure / No opinion\" responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "q14_state_perception_sp_econ",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_jobs",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_col",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_housing",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_crime",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_education",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_healthcare",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_infrastructure",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_trust",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_environment",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_immigration",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "q14_state_perception_sp_homeless",
+        "opinion_ids": [
+          "much_better",
+          "somewhat_better",
+          "about_the_same",
+          "somewhat_worse",
+          "much_worse"
+        ],
+        "non_opinion_ids": [
+          "unsure_no_opinion"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_state_perception",
+            "positive_component_outcome_ids": [
+              "somewhat_better",
+              "much_better"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_worse",
+              "much_worse"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "acadiana_lafayette"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Louisiana",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "acadiana_lafayette",
+        "units": [
+          {
+            "id": "acadiana_lafayette",
+            "label": "Acadiana Lafayette"
+          },
+          {
+            "id": "arklamiss_delta",
+            "label": "Arklamiss Delta"
+          },
+          {
+            "id": "arklatex",
+            "label": "Arklatex"
+          },
+          {
+            "id": "bayou_country",
+            "label": "Bayou Country"
+          },
+          {
+            "id": "central_louisiana",
+            "label": "Central Louisiana"
+          },
+          {
+            "id": "florida_parishes",
+            "label": "Florida Parishes"
+          },
+          {
+            "id": "greater_new_orleans",
+            "label": "Greater New Orleans"
+          },
+          {
+            "id": "southwest_louisiana",
+            "label": "Southwest Louisiana"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q14_state_perception_sp_econ",
+      "label": "The overall economy in your state",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_jobs",
+      "label": "Jobs and wages",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_col",
+      "label": "Cost of living (e.g., food, gas, other household essentials)",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_housing",
+      "label": "Availability and affordability of housing",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_crime",
+      "label": "Crime and public safety",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_education",
+      "label": "K–12 public education and local schools",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_healthcare",
+      "label": "Access to health care and cost of insurance",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_infrastructure",
+      "label": "Roads, bridges, and public transportation",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_trust",
+      "label": "Trust in state government",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_environment",
+      "label": "Environmental quality, natural disasters, and energy policy",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_immigration",
+      "label": "The state's handling of immigration and border issues",
+      "default_metric": "net_state_perception"
+    },
+    {
+      "id": "q14_state_perception_sp_homeless",
+      "label": "The number of homeless people & families",
+      "default_metric": "net_state_perception"
+    }
+  ],
+  "shards_by_question": {
+    "q14_state_perception_sp_econ": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_econ/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_econ/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_econ/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_econ/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_econ/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_econ/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_econ/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_econ/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_econ/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_jobs": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_jobs/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_jobs/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_jobs/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_jobs/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_jobs/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_jobs/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_jobs/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_jobs/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_jobs/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_col": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_col/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_col/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_col/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_col/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_col/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_col/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_col/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_col/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_col/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_housing": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_housing/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_housing/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_housing/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_housing/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_housing/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_housing/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_housing/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_housing/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_housing/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_crime": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_crime/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_crime/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_crime/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_crime/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_crime/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_crime/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_crime/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_crime/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_crime/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_education": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_education/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_education/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_education/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_education/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_education/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_education/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_education/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_education/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_education/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_healthcare": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_healthcare/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_healthcare/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_infrastructure": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_infrastructure/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_infrastructure/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_trust": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_trust/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_trust/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_trust/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_trust/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_trust/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_trust/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_trust/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_trust/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_trust/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_environment": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_environment/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_environment/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_environment/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_environment/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_environment/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_environment/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_environment/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_environment/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_environment/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_immigration": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_immigration/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_immigration/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_immigration/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_immigration/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_immigration/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_immigration/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_immigration/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_immigration/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_immigration/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q14_state_perception_sp_homeless": {
+      "state": {
+        "state wide": "crosstabs/q14_state_perception_sp_homeless/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q14_state_perception_sp_homeless/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q14_state_perception_sp_homeless/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q14_state_perception_sp_homeless/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q14_state_perception_sp_homeless/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q14_state_perception_sp_homeless/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q14_state_perception_sp_homeless/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q14_state_perception_sp_homeless/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q14_state_perception_sp_homeless/cultural_region/southwest_louisiana.json"
+      }
+    }
+  }
+}

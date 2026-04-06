@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "source_files": {
+      "q11_self_ideo": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q12_cassidy_ideo": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q13_fleming_ideo": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q13b_letlow_ideo": "xgboost_2026-03-29_Louisiana_2026_03_29.rds"
+    },
+    "codebook_file": "Louisiana_2026_03_29.json",
+    "generated_at_utc": "2026-04-06 10:27:40 UTC",
+    "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": false,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "Ideology questions use a complete 1-7 scale with no non-opinion category.",
+    "questions": [
+      {
+        "question_id": "q11_self_ideo",
+        "opinion_ids": [
+          "very_progressive",
+          "progressive",
+          "center_left",
+          "moderate_centrist",
+          "center_right",
+          "conservative",
+          "very_conservative"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q12_cassidy_ideo",
+        "opinion_ids": [
+          "very_progressive",
+          "progressive",
+          "center_left",
+          "moderate_centrist",
+          "center_right",
+          "conservative",
+          "very_conservative"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q13_fleming_ideo",
+        "opinion_ids": [
+          "very_progressive",
+          "progressive",
+          "center_left",
+          "moderate_centrist",
+          "center_right",
+          "conservative",
+          "very_conservative"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q13b_letlow_ideo",
+        "opinion_ids": [
+          "very_progressive",
+          "progressive",
+          "center_left",
+          "moderate_centrist",
+          "center_right",
+          "conservative",
+          "very_conservative"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "acadiana_lafayette"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Louisiana",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "acadiana_lafayette",
+        "units": [
+          {
+            "id": "acadiana_lafayette",
+            "label": "Acadiana Lafayette"
+          },
+          {
+            "id": "arklamiss_delta",
+            "label": "Arklamiss Delta"
+          },
+          {
+            "id": "arklatex",
+            "label": "Arklatex"
+          },
+          {
+            "id": "bayou_country",
+            "label": "Bayou Country"
+          },
+          {
+            "id": "central_louisiana",
+            "label": "Central Louisiana"
+          },
+          {
+            "id": "florida_parishes",
+            "label": "Florida Parishes"
+          },
+          {
+            "id": "greater_new_orleans",
+            "label": "Greater New Orleans"
+          },
+          {
+            "id": "southwest_louisiana",
+            "label": "Southwest Louisiana"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q11_self_ideo",
+      "label": "Your ideological self-placement",
+      "default_metric": "moderate_centrist"
+    },
+    {
+      "id": "q12_cassidy_ideo",
+      "label": "Bill Cassidy's ideological placement",
+      "default_metric": "moderate_centrist"
+    },
+    {
+      "id": "q13_fleming_ideo",
+      "label": "John Fleming's ideological placement",
+      "default_metric": "moderate_centrist"
+    },
+    {
+      "id": "q13b_letlow_ideo",
+      "label": "Julia Letlow's ideological placement",
+      "default_metric": "moderate_centrist"
+    }
+  ],
+  "shards_by_question": {
+    "q11_self_ideo": {
+      "state": {
+        "state wide": "crosstabs/q11_self_ideo/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q11_self_ideo/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q11_self_ideo/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q11_self_ideo/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q11_self_ideo/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q11_self_ideo/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q11_self_ideo/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q11_self_ideo/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q11_self_ideo/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q12_cassidy_ideo": {
+      "state": {
+        "state wide": "crosstabs/q12_cassidy_ideo/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q12_cassidy_ideo/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q12_cassidy_ideo/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q12_cassidy_ideo/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q12_cassidy_ideo/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q12_cassidy_ideo/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q12_cassidy_ideo/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q12_cassidy_ideo/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q12_cassidy_ideo/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q13_fleming_ideo": {
+      "state": {
+        "state wide": "crosstabs/q13_fleming_ideo/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q13_fleming_ideo/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q13_fleming_ideo/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q13_fleming_ideo/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q13_fleming_ideo/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q13_fleming_ideo/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q13_fleming_ideo/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q13_fleming_ideo/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q13_fleming_ideo/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q13b_letlow_ideo": {
+      "state": {
+        "state wide": "crosstabs/q13b_letlow_ideo/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q13b_letlow_ideo/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q13b_letlow_ideo/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q13b_letlow_ideo/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q13b_letlow_ideo/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q13b_letlow_ideo/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q13b_letlow_ideo/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q13b_letlow_ideo/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q13b_letlow_ideo/cultural_region/southwest_louisiana.json"
+      }
+    }
+  }
+}

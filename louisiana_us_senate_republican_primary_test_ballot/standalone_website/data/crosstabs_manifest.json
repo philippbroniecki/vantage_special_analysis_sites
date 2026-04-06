@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "source_files": {
+      "q6_reelect": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q7_primary": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q8_runoff": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q8b_runoff_letlow_cassidy": "xgboost_2026-03-29_Louisiana_2026_03_29.rds",
+      "q8c_runoff_fleming_letlow": "xgboost_2026-03-29_Louisiana_2026_03_29.rds"
+    },
+    "codebook_file": "Louisiana_2026_03_29.json",
+    "generated_at_utc": "2026-04-06 11:09:37 UTC",
+    "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove Unsure/Undecided responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "q6_reelect",
+        "opinion_ids": [
+          "definitely_vote_to_re_elect_bill_cassidy",
+          "probably_vote_to_re_elect_bill_cassidy",
+          "probably_vote_to_replace_bill_cassidy",
+          "definitely_vote_to_replace_bill_cassidy"
+        ],
+        "non_opinion_ids": [
+          "unsure"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q7_primary",
+        "opinion_ids": [
+          "bill_cassidy",
+          "john_fleming",
+          "julia_letlow",
+          "mark_spencer",
+          "other_write_in"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q8_runoff",
+        "opinion_ids": [
+          "bill_cassidy",
+          "john_fleming"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q8b_runoff_letlow_cassidy",
+        "opinion_ids": [
+          "julia_letlow",
+          "bill_cassidy"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q8c_runoff_fleming_letlow",
+        "opinion_ids": [
+          "john_fleming",
+          "julia_letlow"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "acadiana_lafayette"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Louisiana",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "acadiana_lafayette",
+        "units": [
+          {
+            "id": "acadiana_lafayette",
+            "label": "Acadiana Lafayette"
+          },
+          {
+            "id": "arklamiss_delta",
+            "label": "Arklamiss Delta"
+          },
+          {
+            "id": "arklatex",
+            "label": "Arklatex"
+          },
+          {
+            "id": "bayou_country",
+            "label": "Bayou Country"
+          },
+          {
+            "id": "central_louisiana",
+            "label": "Central Louisiana"
+          },
+          {
+            "id": "florida_parishes",
+            "label": "Florida Parishes"
+          },
+          {
+            "id": "greater_new_orleans",
+            "label": "Greater New Orleans"
+          },
+          {
+            "id": "southwest_louisiana",
+            "label": "Southwest Louisiana"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q6_reelect",
+      "label": "Re-elect / Replace Bill Cassidy",
+      "default_metric": "definitely_vote_to_re_elect_bill_cassidy"
+    },
+    {
+      "id": "q7_primary",
+      "label": "Republican Primary Ballot",
+      "default_metric": "bill_cassidy"
+    },
+    {
+      "id": "q8_runoff",
+      "label": "Runoff: Bill Cassidy vs John Fleming",
+      "default_metric": "bill_cassidy"
+    },
+    {
+      "id": "q8b_runoff_letlow_cassidy",
+      "label": "Runoff: Julia Letlow vs Bill Cassidy",
+      "default_metric": "bill_cassidy"
+    },
+    {
+      "id": "q8c_runoff_fleming_letlow",
+      "label": "Runoff: John Fleming vs Julia Letlow",
+      "default_metric": "john_fleming"
+    }
+  ],
+  "shards_by_question": {
+    "q6_reelect": {
+      "state": {
+        "state wide": "crosstabs/q6_reelect/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q6_reelect/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q6_reelect/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q6_reelect/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q6_reelect/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q6_reelect/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q6_reelect/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q6_reelect/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q6_reelect/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q7_primary": {
+      "state": {
+        "state wide": "crosstabs/q7_primary/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q7_primary/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q7_primary/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q7_primary/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q7_primary/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q7_primary/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q7_primary/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q7_primary/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q7_primary/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q8_runoff": {
+      "state": {
+        "state wide": "crosstabs/q8_runoff/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q8_runoff/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q8_runoff/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q8_runoff/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q8_runoff/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q8_runoff/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q8_runoff/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q8_runoff/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q8_runoff/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q8b_runoff_letlow_cassidy": {
+      "state": {
+        "state wide": "crosstabs/q8b_runoff_letlow_cassidy/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q8b_runoff_letlow_cassidy/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q8c_runoff_fleming_letlow": {
+      "state": {
+        "state wide": "crosstabs/q8c_runoff_fleming_letlow/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q8c_runoff_fleming_letlow/cultural_region/southwest_louisiana.json"
+      }
+    }
+  }
+}
