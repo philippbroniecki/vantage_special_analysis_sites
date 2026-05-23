@@ -1,0 +1,433 @@
+{
+  "meta": {
+    "source_files": {
+      "fav_la_political_figures_landry_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+      "fav_la_political_figures_trump_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+      "fav_la_political_figures_cassidy_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+      "fav_la_political_figures_kennedy_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+      "fav_la_political_figures_letlow_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+      "fav_la_political_figures_la_legislature_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+      "fav_la_political_figures_fleming_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet"
+    },
+    "codebook_file": null,
+    "generated_at_utc": "2026-05-23 08:28:45 UTC",
+    "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "all_americans",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove \"Never heard of / Can't rate\" responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "fav_la_political_figures_landry_pre",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "fav_la_political_figures_trump_pre",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "fav_la_political_figures_cassidy_pre",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "fav_la_political_figures_kennedy_pre",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "fav_la_political_figures_letlow_pre",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "fav_la_political_figures_la_legislature_pre",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      },
+      {
+        "question_id": "fav_la_political_figures_fleming_pre",
+        "opinion_ids": [
+          "very_favorable",
+          "somewhat_favorable",
+          "somewhat_unfavorable",
+          "very_unfavorable"
+        ],
+        "non_opinion_ids": [
+          "never_heard_of"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": [
+          {
+            "id": "net_favorability",
+            "positive_component_outcome_ids": [
+              "very_favorable",
+              "somewhat_favorable"
+            ],
+            "negative_component_outcome_ids": [
+              "somewhat_unfavorable",
+              "very_unfavorable"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "acadiana_lafayette"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Louisiana",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "acadiana_lafayette",
+        "units": [
+          {
+            "id": "acadiana_lafayette",
+            "label": "Acadiana Lafayette"
+          },
+          {
+            "id": "arklamiss_delta",
+            "label": "Arklamiss Delta"
+          },
+          {
+            "id": "arklatex",
+            "label": "Arklatex"
+          },
+          {
+            "id": "bayou_country",
+            "label": "Bayou Country"
+          },
+          {
+            "id": "central_louisiana",
+            "label": "Central Louisiana"
+          },
+          {
+            "id": "florida_parishes",
+            "label": "Florida Parishes"
+          },
+          {
+            "id": "greater_new_orleans",
+            "label": "Greater New Orleans"
+          },
+          {
+            "id": "southwest_louisiana",
+            "label": "Southwest Louisiana"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "fav_la_political_figures_landry_pre",
+      "label": "Governor Jeff Landry",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "fav_la_political_figures_trump_pre",
+      "label": "President Donald Trump",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "fav_la_political_figures_cassidy_pre",
+      "label": "Senator Bill Cassidy",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "fav_la_political_figures_kennedy_pre",
+      "label": "Senator John Kennedy",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "fav_la_political_figures_letlow_pre",
+      "label": "Congresswoman Julia Letlow",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "fav_la_political_figures_la_legislature_pre",
+      "label": "Louisiana State Legislature",
+      "default_metric": "net_favorability"
+    },
+    {
+      "id": "fav_la_political_figures_fleming_pre",
+      "label": "Treasurer John Fleming",
+      "default_metric": "net_favorability"
+    }
+  ],
+  "shards_by_question": {
+    "fav_la_political_figures_landry_pre": {
+      "state": {
+        "state wide": "crosstabs/fav_la_political_figures_landry_pre/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "fav_la_political_figures_trump_pre": {
+      "state": {
+        "state wide": "crosstabs/fav_la_political_figures_trump_pre/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "fav_la_political_figures_cassidy_pre": {
+      "state": {
+        "state wide": "crosstabs/fav_la_political_figures_cassidy_pre/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "fav_la_political_figures_kennedy_pre": {
+      "state": {
+        "state wide": "crosstabs/fav_la_political_figures_kennedy_pre/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "fav_la_political_figures_letlow_pre": {
+      "state": {
+        "state wide": "crosstabs/fav_la_political_figures_letlow_pre/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "fav_la_political_figures_la_legislature_pre": {
+      "state": {
+        "state wide": "crosstabs/fav_la_political_figures_la_legislature_pre/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "fav_la_political_figures_fleming_pre": {
+      "state": {
+        "state wide": "crosstabs/fav_la_political_figures_fleming_pre/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/southwest_louisiana.json"
+      }
+    }
+  }
+}

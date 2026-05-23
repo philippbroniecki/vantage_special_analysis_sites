@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vantage — Louisiana Voter Opinion Study</title>
+    <script>
+      (function bootstrapVDHTheme() {
+        const THEME_PARAM_KEY = 'theme';
+        const THEME_COOKIE_KEY = 'vdh_theme';
+        const THEME_STORAGE_KEY = 'vdh_theme';
+        const LEGACY_STORAGE_KEYS = [
+          'vantage-theme',
+          'vdh_iran2_theme',
+          'vdh_ice2_theme',
+          'vdh_trump_theme',
+          'vdh_georgia_primary_theme',
+          'vdh_georgia_favorability_theme',
+          'vdh_georgia_flows_theme',
+          'vdh_georgia_thurmond_messaging_theme',
+          'vdh_georgia_state_direction_theme',
+          'vdh_georgia_top_issue_theme',
+          'vdh_georgia_agree_theme',
+          'vdh_georgia_casino_gambling_theme'
+        ];
+
+        function normalizeTheme(value) {
+          return value === 'dark' || value === 'light' ? value : null;
+        }
+
+        function readThemeFromQuery() {
+          try {
+            const params = new URLSearchParams(window.location.search || '');
+            return normalizeTheme(params.get(THEME_PARAM_KEY));
+          } catch (err) {
+            return null;
+          }
+        }
+
+        function readThemeFromCookie() {
+          try {
+            const entries = String(document.cookie || '').split(';');
+            for (const entry of entries) {
+              const trimmed = entry.trim();
+              if (!trimmed) continue;
+              const idx = trimmed.indexOf('=');
+              if (idx <= 0) continue;
+              const key = trimmed.slice(0, idx).trim();
+              if (key !== THEME_COOKIE_KEY) continue;
+              const value = decodeURIComponent(trimmed.slice(idx + 1));
+              const normalized = normalizeTheme(value);
+              if (normalized) return normalized;
+            }
+          } catch (err) {}
+          return null;
+        }
+
+        function readThemeFromStorage() {
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try {
+              const normalized = normalizeTheme(window.localStorage.getItem(key));
+              if (normalized) return normalized;
+            } catch (err) {
+              // localStorage can be unavailable in restricted contexts.
+            }
+          }
+          return null;
+        }
+
+        function readThemeFromSystem() {
+          try {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              return 'dark';
+            }
+            if (window.matchMedia) return 'light';
+          } catch (err) {}
+          return null;
+        }
+
+        function resolveInitialTheme() {
+          const fromQuery = readThemeFromQuery();
+          if (fromQuery) return { theme: fromQuery, source: 'param' };
+
+          const fromCookie = readThemeFromCookie();
+          if (fromCookie) return { theme: fromCookie, source: 'cookie' };
+
+          const fromStorage = readThemeFromStorage();
+          if (fromStorage) return { theme: fromStorage, source: 'storage' };
+
+          const fromSystem = readThemeFromSystem();
+          if (fromSystem) return { theme: fromSystem, source: 'system' };
+
+          return { theme: 'light', source: 'fallback' };
+        }
+
+        function isPhilippDomain(hostname) {
+          const host = String(hostname || '').toLowerCase();
+          return host === 'philippbroniecki.com' || host.endsWith('.philippbroniecki.com');
+        }
+
+        function getSharedCookieDomain() {
+          return isPhilippDomain(window.location.hostname) ? '.philippbroniecki.com' : '';
+        }
+
+        function persistTheme(theme) {
+          const normalized = normalizeTheme(theme);
+          if (!normalized) return;
+
+          const securePart = window.location.protocol === 'https:' ? '; Secure' : '';
+          const baseCookie = `${THEME_COOKIE_KEY}=${encodeURIComponent(normalized)}; Path=/; Max-Age=31536000; SameSite=Lax${securePart}`;
+          const sharedDomain = getSharedCookieDomain();
+
+          try {
+            if (sharedDomain) {
+              document.cookie = `${baseCookie}; Domain=${sharedDomain}`;
+            }
+            document.cookie = baseCookie;
+          } catch (err) {}
+
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try { window.localStorage.setItem(key, normalized); } catch (err) {}
+          }
+        }
+
+        function shouldPropagateThemeToURL(url, rawHref) {
+          const raw = String(rawHref || '').trim();
+          if (!raw || raw.startsWith('#') || /^mailto:/i.test(raw) || /^tel:/i.test(raw) || /^javascript:/i.test(raw)) {
+            return false;
+          }
+
+          const protocol = String((url && url.protocol) || '').toLowerCase();
+          if (protocol === 'file:') return true;
+          if (protocol !== 'http:' && protocol !== 'https:') return false;
+
+          const host = String((url && url.hostname) || '').toLowerCase();
+          if (host === 'localhost' || host === '127.0.0.1' || host === '[::1]') return true;
+          return isPhilippDomain(host);
+        }
+
+        function withThemeParam(rawHref, theme) {
+          const normalizedTheme = normalizeTheme(theme);
+          if (!normalizedTheme) return rawHref;
+
+          try {
+            const url = new URL(rawHref, window.location.href);
+            if (!shouldPropagateThemeToURL(url, rawHref)) return rawHref;
+            url.searchParams.set(THEME_PARAM_KEY, normalizedTheme);
+            return url.toString();
+          } catch (err) {
+            return rawHref;
+          }
+        }
+
+        function getActiveTheme() {
+          return normalizeTheme(document.documentElement.getAttribute('data-theme')) || 'light';
+        }
+
+        window.VDHTheme = {
+          normalizeTheme,
+          resolveInitialTheme,
+          persistTheme,
+          withThemeParam,
+          getActiveTheme,
+          shouldPropagateThemeToURL,
+          themeParamKey: THEME_PARAM_KEY
+        };
+
+        const initialTheme = resolveInitialTheme();
+        document.documentElement.setAttribute('data-theme', initialTheme.theme);
+        window.__VDH_THEME_BOOT__ = initialTheme;
+      })();
+    </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Theme variables ── */
+    :root {
+      --bg:        #0c1221;
+      --bg-card:   rgba(255,255,255,.05);
+      --border:    rgba(255,255,255,.08);
+      --border-hover: rgba(255,255,255,.18);
+      --section-bg: rgba(255,255,255,.025);
+      --section-border: rgba(255,255,255,.12);
+      --section-rule: rgba(255,255,255,.14);
+      --text:      #e4eaf6;
+      --text-sub:  #9babc4;
+      --accent:    #48b4be;
+      --accent-bg: rgba(72,180,190,.10);
+      --accent-border: rgba(72,180,190,.30);
+      --tag-text:  #b0ecf0;
+      --shadow:    0 2px 12px rgba(0,0,0,.25);
+      --radius:    14px;
+    }
+    [data-theme="light"] {
+      --bg:        #eef0f5;
+      --bg-card:   #ffffff;
+      --border:    rgba(0,0,0,.12);
+      --border-hover: rgba(46,145,154,.45);
+      --section-bg: rgba(255,255,255,.72);
+      --section-border: rgba(0,0,0,.09);
+      --section-rule: rgba(0,0,0,.12);
+      --text:      #1a2332;
+      --text-sub:  #5e6e82;
+      --accent:    #2e919a;
+      --accent-bg: rgba(46,145,154,.08);
+      --accent-border: rgba(46,145,154,.30);
+      --tag-text:  #1f7a82;
+      --shadow:    0 4px 18px rgba(0,0,0,.09);
+    }
+
+    /* ── Base ── */
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background .3s, color .3s;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      font-size: 30px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    /* ── Theme toggle ── */
+    .theme-toggle {
+      flex-shrink: 0;
+      margin-top: 4px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      width: 44px;
+      height: 26px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color .2s;
+    }
+    .theme-toggle:hover { border-color: var(--border-hover); }
+    .theme-toggle .knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform .25s cubic-bezier(.4,.0,.2,1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    [data-theme="light"] .theme-toggle .knob { transform: translateX(18px); }
+    .theme-toggle svg { width: 11px; height: 11px; fill: #fff; }
+
+    /* ── Intro ── */
+    .intro {
+      color: var(--text-sub);
+      font-size: 15px;
+      line-height: 1.65;
+      max-width: 620px;
+      margin-bottom: 64px;
+    }
+    .intro a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-border);
+      transition: border-color .2s;
+    }
+    .intro a:hover { border-color: var(--accent); }
+
+    /* ── Sections ── */
+    .sections {
+      display: grid;
+      gap: 30px;
+      margin-bottom: 24px;
+    }
+    .section {
+      padding: 22px;
+      border: 1px solid var(--section-border);
+      border-radius: calc(var(--radius) + 2px);
+      background: var(--section-bg);
+    }
+    .section-head {
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--section-rule);
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .section-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-bg);
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    /* ── Clickable card buttons ── */
+    a.card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 20px 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+      cursor: pointer;
+    }
+    [data-theme="light"] a.card {
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+    }
+    a.card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    a.card:active { transform: translateY(0); }
+
+    .card-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .card-meta {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+    .card-footer { margin-top: 14px; display: flex; align-items: center; gap: 8px; }
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .03em;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      color: var(--tag-text);
+    }
+    .arrow {
+      margin-left: auto;
+      color: var(--text-sub);
+      transition: color .2s, transform .2s;
+      display: flex;
+    }
+    a.card:hover .arrow { color: var(--accent); transform: translateX(3px); }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      h1 { font-size: 24px; }
+      .wrap { padding: 32px 16px 60px; }
+      .intro { margin-bottom: 52px; }
+      .sections { gap: 22px; }
+      .section { padding: 16px 14px; }
+      .section-head { margin-bottom: 14px; padding-bottom: 10px; }
+      .section-label { font-size: 11px; letter-spacing: .08em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Vantage Data House Insights</h1>
+      <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+        <span class="knob">
+          <svg class="icon-moon" viewBox="0 0 16 16"><path d="M6 0a6 6 0 0 0 0 12A6 6 0 1 1 6 0Z"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <!-- Intro -->
+    <p class="intro">
+      Louisiana Voter Opinion Study baseline reports. Interactive data cards across pre-treatment political figure favorability, the 2027 governor ballot, iGaming support, and survey diagnostics.
+      Access is restricted to Vantage email addresses. External access available on
+      request at <a href="mailto:philipp@vantagedatahouse.com">philipp@vantagedatahouse.com</a>.
+    </p>
+
+
+    <div class="sections">
+    <!-- Louisiana Voter Opinion Study -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-label">Louisiana Voter Opinion Study</h2>
+      </div>
+      <div class="grid">
+
+        <a class="card" href="https://favorability.la-igaming.vantage.philippbroniecki.com/" data-local-href="../favorability/standalone_website/">
+          <div>
+            <div class="card-title">Political Figure Favorability Baseline</div>
+            <div class="card-meta">15 May 2026</div>
+          </div>
+          <div class="card-footer">
+            <span class="tag">baseline favorability</span>
+            <span class="arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a class="card" href="https://test-ballot.la-igaming.vantage.philippbroniecki.com/" data-local-href="../test_ballot/standalone_website/">
+          <div>
+            <div class="card-title">Governor Ballot Baseline</div>
+            <div class="card-meta">15 May 2026</div>
+          </div>
+          <div class="card-footer">
+            <span class="tag">pre-treatment ballot</span>
+            <span class="arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a class="card" href="https://igaming-support.la-igaming.vantage.philippbroniecki.com/" data-local-href="../igaming_support/standalone_website/">
+          <div>
+            <div class="card-title">iGaming Support Baseline</div>
+            <div class="card-meta">15 May 2026</div>
+          </div>
+          <div class="card-footer">
+            <span class="tag">policy support</span>
+            <span class="arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a class="card" href="https://survey-health.la-igaming.vantage.philippbroniecki.com/" data-local-href="../survey_health/standalone_website/">
+          <div>
+            <div class="card-title">Survey Health</div>
+            <div class="card-meta">15 May 2026</div>
+          </div>
+          <div class="card-footer">
+            <span class="tag">survey health</span>
+            <span class="arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+      &copy; 2026 <a href="https://www.vantagedatahouse.com/">Vantage Data House</a>
+    </div>
+
+  </div>
+
+  <script>
+    function isLocalPortalPreview() {
+      if (window.location.protocol === 'file:') return true;
+      const host = String(window.location.hostname || '').toLowerCase();
+      return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+    }
+
+    function resolvePortalLinkTargets() {
+      const useLocal = isLocalPortalPreview();
+      document.querySelectorAll('a[data-local-href]').forEach((link) => {
+        const localHref = String(link.getAttribute('data-local-href') || '').trim();
+        const prodHref = String(link.getAttribute('data-prod-href') || link.getAttribute('href') || '').trim();
+        const targetHref = useLocal && localHref ? localHref : prodHref;
+        if (!targetHref) return;
+        link.setAttribute('href', targetHref);
+      });
+    }
+
+    function refreshPortalThemeLinks() {
+      const helper = window.VDHTheme;
+      if (!helper || typeof helper.withThemeParam !== 'function') return;
+
+      const activeTheme = typeof helper.getActiveTheme === 'function'
+        ? helper.getActiveTheme()
+        : 'light';
+
+      document.querySelectorAll('a[href]').forEach((link) => {
+        const rawHref = link.getAttribute('href');
+        if (!rawHref) return;
+        if (!link.dataset.rawHref) {
+          link.dataset.rawHref = rawHref;
+        }
+        const baseHref = link.dataset.rawHref;
+        const themedHref = helper.withThemeParam(baseHref, activeTheme);
+        if (themedHref && themedHref !== link.getAttribute('href')) {
+          link.setAttribute('href', themedHref);
+        }
+      });
+    }
+
+    function applyPortalTheme(theme, persist = true) {
+      const helper = window.VDHTheme || {};
+      const normalized = typeof helper.normalizeTheme === 'function'
+        ? (helper.normalizeTheme(theme) || 'light')
+        : (theme === 'dark' ? 'dark' : 'light');
+
+      document.documentElement.setAttribute('data-theme', normalized);
+      if (persist && typeof helper.persistTheme === 'function') {
+        helper.persistTheme(normalized);
+      }
+      refreshPortalThemeLinks();
+    }
+
+    function initPortalTheme() {
+      const helper = window.VDHTheme || {};
+      const boot = window.__VDH_THEME_BOOT__ || {};
+      const bootTheme = typeof helper.normalizeTheme === 'function'
+        ? helper.normalizeTheme(boot.theme)
+        : null;
+
+      const resolved = bootTheme
+        ? { theme: bootTheme, source: boot.source || null }
+        : (typeof helper.resolveInitialTheme === 'function'
+          ? helper.resolveInitialTheme()
+          : { theme: 'light', source: 'fallback' });
+
+      applyPortalTheme(resolved.theme, false);
+
+      if (resolved.source === 'param' && typeof helper.persistTheme === 'function') {
+        helper.persistTheme(resolved.theme);
+      }
+
+      resolvePortalLinkTargets();
+      refreshPortalThemeLinks();
+    }
+
+    function toggleTheme() {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyPortalTheme(next, true);
+    }
+
+    initPortalTheme();
+  </script>
+</body>
+</html>
