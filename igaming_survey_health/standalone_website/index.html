@@ -1102,7 +1102,7 @@ body.dark .bar-status-chip--dropped  { background: #7f1d1d; color: #fca5a5; }
       <div id="dataBanner" class="data-banner" role="status" aria-live="polite"></div>
 
       <div class="back-nav" id="siteNavRow">
-        <a class="back-btn" id="backToPortalLink" href="../../portal/">Back</a>
+        <a class="back-btn" id="backToPortalLink" href="https://igaming.vantage.philippbroniecki.com/" data-skip-theme-param="true">Portal</a>
         <div class="sibling-nav" id="siblingNavLinks" hidden></div>
       </div>
 
@@ -1234,9 +1234,9 @@ const FALLBACK_REPORT = {
       "group_id": "louisiana_igaming_baseline_2026",
       "group_label": "Louisiana Voter Opinion Study",
       "back": {
-        "label": "Back",
+        "label": "Portal",
         "href": "https://igaming.vantage.philippbroniecki.com/",
-        "local_href": "../../portal/"
+        "local_href": "https://igaming.vantage.philippbroniecki.com/"
       },
       "siblings": [
         {
@@ -1727,7 +1727,7 @@ const FALLBACK_REPORT = {
     "demographics_from": "screened CSV (survey.csv), all 1205 rows",
     "geography_from": "cr_code column in screened CSV (national cross-state cultural-region framework)",
     "out_of_state_note": "4 respondents fall outside Louisiana state boundaries in the screened file. They remain counted in the national cross-state cultural-region framework where applicable.",
-    "generated_at_utc": "2026-05-23T09:40:35Z",
+    "generated_at_utc": "2026-05-23T10:09:38Z",
     "parser": "igaming_survey_stats_csv_v1",
     "map_bin_logic": "Five-level bins: 0, 1-24, 25-49, 50-99, 100+ respondents per cultural region."
   }
@@ -1938,9 +1938,9 @@ function renderSiteNavigation() {
     backLink.getAttribute('href') ||
     ''
   ).trim();
-  const backLabel = String(backCfg?.label || backLink.textContent || 'Back').trim();
+  const backLabel = String(backCfg?.label || backLink.textContent || 'Portal').trim();
   if (backHref) backLink.href = backHref;
-  backLink.textContent = backLabel || 'Back';
+  backLink.textContent = backLabel || 'Portal';
 
   const currentSlug = String(reportData?.template?.site_slug || '').trim();
   const siblings = normalizeSiteNavLinks(navCfg?.siblings).filter((entry) => {
@@ -2490,6 +2490,7 @@ function applyThemeToLinks(root = document) {
   links.forEach((link) => {
     const rawHref = link.getAttribute('href');
     if (!rawHref) return;
+    if (String(link.getAttribute('data-skip-theme-param') || '').trim() === 'true') return;
     if (!link.dataset.rawHref) {
       link.dataset.rawHref = rawHref;
     }
