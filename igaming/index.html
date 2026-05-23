@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vantage — Louisiana Voter Opinion Study</title>
+  <link rel="icon" href="data:," />
     <script>
       (function bootstrapVDHTheme() {
         const THEME_PARAM_KEY = 'theme';
@@ -442,7 +443,7 @@
       </div>
       <div class="grid">
 
-        <a class="card" href="https://favorability.la-igaming.vantage.philippbroniecki.com/" data-local-href="../favorability/standalone_website/">
+        <a class="card" href="https://favorability.igaming.vantage.philippbroniecki.com/" data-local-href="../favorability/standalone_website/">
           <div>
             <div class="card-title">Political Figure Favorability Baseline</div>
             <div class="card-meta">15 May 2026</div>
@@ -455,7 +456,7 @@
           </div>
         </a>
 
-        <a class="card" href="https://test-ballot.la-igaming.vantage.philippbroniecki.com/" data-local-href="../test_ballot/standalone_website/">
+        <a class="card" href="https://test-ballot.igaming.vantage.philippbroniecki.com/" data-local-href="../test_ballot/standalone_website/">
           <div>
             <div class="card-title">Governor Ballot Baseline</div>
             <div class="card-meta">15 May 2026</div>
@@ -468,7 +469,7 @@
           </div>
         </a>
 
-        <a class="card" href="https://igaming-support.la-igaming.vantage.philippbroniecki.com/" data-local-href="../igaming_support/standalone_website/">
+        <a class="card" href="https://igaming-support.igaming.vantage.philippbroniecki.com/" data-local-href="../igaming_support/standalone_website/">
           <div>
             <div class="card-title">iGaming Support Baseline</div>
             <div class="card-meta">15 May 2026</div>
@@ -481,7 +482,7 @@
           </div>
         </a>
 
-        <a class="card" href="https://survey-health.la-igaming.vantage.philippbroniecki.com/" data-local-href="../survey_health/standalone_website/">
+        <a class="card" href="https://survey-health.igaming.vantage.philippbroniecki.com/" data-local-href="../survey_health/standalone_website/">
           <div>
             <div class="card-title">Survey Health</div>
             <div class="card-meta">15 May 2026</div>
@@ -518,6 +519,7 @@
         const prodHref = String(link.getAttribute('data-prod-href') || link.getAttribute('href') || '').trim();
         const targetHref = useLocal && localHref ? localHref : prodHref;
         if (!targetHref) return;
+        link.dataset.rawHref = targetHref;
         link.setAttribute('href', targetHref);
       });
     }
