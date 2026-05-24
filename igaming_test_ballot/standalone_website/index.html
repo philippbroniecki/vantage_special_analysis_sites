@@ -4908,8 +4908,11 @@ function lookupDenominator(type, key) {
     return Number.isFinite(v) ? { voters: v, label: 'approx. statewide expected 2027 voters' } : null;
   }
   if (type === 'archetype') {
-    const v = Number(d.archetypes?.[key]);
-    return Number.isFinite(v) ? { voters: v, label: `approx. expected 2027 voters in this archetype group` } : null;
+    // Archetype/profile groups are NOT mutually exclusive: sum of archetype
+    // expected_voters (1,250,970) exceeds the statewide total (872,650) by 43%.
+    // Archetypes overlap — a voter may match multiple profiles. Vote-equivalent
+    // counts derived from archetype denominators are invalid and suppressed.
+    return null;
   }
   if (type === 'demographic') {
     // key = 'dim:level', e.g. 'party:R'
@@ -5333,44 +5336,24 @@ function renderTakeaways() {
     else campGop.push(row);
   });
 
-  function campVoters(campRows) {
-    let t = 0;
-    campRows.forEach((row) => { const d = lookupDenominator('archetype', row.key || ''); if (d?.voters) t += d.voters; });
-    return t > 0 ? t : null;
-  }
-  function campWgtAvg(campRows, responseId, field) {
-    let wtSum = 0, vSum = 0;
-    campRows.forEach((row) => {
-      const d = lookupDenominator('archetype', row.key || '');
+  // Archetypes are non-mutually-exclusive profiles; use simple average of percentages only.
+  function campSimpleAvg(campRows, responseId, field) {
+    const vals = campRows.map((row) => {
       const entry = getResponseEntryById(row, responseId);
-      const v = field === 'delta'
+      return field === 'delta'
         ? resolveUniverseValue(entry?.delta_vs_2023_baseline?.all_americans, entry?.delta_vs_2023_baseline)
         : resolveUniverseValue(entry?.current?.all_americans, entry?.current);
-      const wt = d?.voters || 0;
-      if (Number.isFinite(v) && wt > 0) { wtSum += wt; vSum += wt * v; }
-    });
-    return wtSum > 0 ? vSum / wtSum : null;
-  }
-  function campDenomCtx(campRows, labelStr) {
-    const v = campVoters(campRows);
-    return v ? { voters: v, label: `approx ${Math.round(v).toLocaleString()} expected 2027 voters in ${labelStr}` } : null;
+    }).filter(Number.isFinite);
+    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
   }
 
-  const landryVoters = campVoters(campLandry);
-  const gopVoters = campVoters(campGop);
-  const demVoters = campDem.length ? campVoters(campDem) : null;
-
-  const landryLandryAvg = campWgtAvg(campLandry, 'jeff_landry', 'current');
-  const landryLandryDelta = campWgtAvg(campLandry, 'jeff_landry', 'delta');
-  const gopGopAvg = campWgtAvg(campGop, 'republican_challenger', 'current');
-  const gopGopDelta = campWgtAvg(campGop, 'republican_challenger', 'delta');
-  const demDemAvg = campWgtAvg(campDem, 'democratic_candidate', 'current');
-  const demLandryAvg = campWgtAvg(campDem, 'jeff_landry', 'current');
-  const demLandryDelta = campWgtAvg(campDem, 'jeff_landry', 'delta');
-
-  const landryDenomCtx = campDenomCtx(campLandry, 'Landry/Republican camp');
-  const gopDenomCtx = campDenomCtx(campGop, 'GOP challenger camp');
-  const demDenomCtxCamp = campDenomCtx(campDem, 'Democratic-leaning camp');
+  const landryLandryAvg = campSimpleAvg(campLandry, 'jeff_landry', 'current');
+  const landryLandryDelta = campSimpleAvg(campLandry, 'jeff_landry', 'delta');
+  const gopGopAvg = campSimpleAvg(campGop, 'republican_challenger', 'current');
+  const gopGopDelta = campSimpleAvg(campGop, 'republican_challenger', 'delta');
+  const demDemAvg = campSimpleAvg(campDem, 'democratic_candidate', 'current');
+  const demLandryAvg = campSimpleAvg(campDem, 'jeff_landry', 'current');
+  const demLandryDelta = campSimpleAvg(campDem, 'jeff_landry', 'delta');
 
   const fmtVotes = (voters, pct) => {
     if (!Number.isFinite(pct) || !voters) return '';
@@ -5413,18 +5396,18 @@ function renderTakeaways() {
       <div class="findings-grid">
         <article class="finding">
           <div class="k">Landry / Republican camp (${campLandry.length} archetypes)</div>
-          <div class="v">${Number.isFinite(landryLandryAvg) ? fmtPctValue(landryLandryAvg) : '—'}${landryVoters ? ` · ~${Math.round(landryVoters).toLocaleString()} voters` : ''}</div>
-          <div class="m">${fmtDeltaHtml(landryLandryDelta, 'jeff_landry', landryLandryAvg, null, landryDenomCtx)}</div>
+          <div class="v">${Number.isFinite(landryLandryAvg) ? fmtPctValue(landryLandryAvg) : '—'} <span class="finding-sublabel">avg across archetypes</span></div>
+          <div class="m">${fmtDeltaHtml(landryLandryDelta, 'jeff_landry', landryLandryAvg, null, null)}</div>
         </article>
         <article class="finding">
           <div class="k">Republican challenger camp (${campGop.length} archetypes)</div>
-          <div class="v">${Number.isFinite(gopGopAvg) ? fmtPctValue(gopGopAvg) : '—'}${gopVoters ? ` · ~${Math.round(gopVoters).toLocaleString()} voters` : ''}</div>
-          <div class="m">${fmtDeltaHtml(gopGopDelta, 'republican_challenger', gopGopAvg, null, gopDenomCtx)}</div>
+          <div class="v">${Number.isFinite(gopGopAvg) ? fmtPctValue(gopGopAvg) : '—'} <span class="finding-sublabel">avg across archetypes</span></div>
+          <div class="m">${fmtDeltaHtml(gopGopDelta, 'republican_challenger', gopGopAvg, null, null)}</div>
         </article>
         ${campDem.length ? `<article class="finding">
           <div class="k">Democratic-leaning camp (${campDem.length} archetypes)</div>
-          <div class="v">Dem avg ${Number.isFinite(demDemAvg) ? fmtPctValue(demDemAvg) : '—'} · Landry ${Number.isFinite(demLandryAvg) ? fmtPctValue(demLandryAvg) : '—'}${demVoters ? ` · ~${Math.round(demVoters).toLocaleString()} voters` : ''}</div>
-          <div class="m">${fmtDeltaHtml(demLandryDelta, 'jeff_landry', demLandryAvg, null, demDenomCtxCamp)} <span class="finding-sublabel">Landry in Dem camp</span></div>
+          <div class="v">Dem avg ${Number.isFinite(demDemAvg) ? fmtPctValue(demDemAvg) : '—'} · Landry ${Number.isFinite(demLandryAvg) ? fmtPctValue(demLandryAvg) : '—'} <span class="finding-sublabel">avg across archetypes</span></div>
+          <div class="m">${fmtDeltaHtml(demLandryDelta, 'jeff_landry', demLandryAvg, null, null)} <span class="finding-sublabel">Landry in Dem camp</span></div>
         </article>` : ''}
       </div>
     </section>
@@ -5753,21 +5736,16 @@ function renderArchetypeChart() {
     root.innerHTML = legendHtml;
     overviewRows.forEach((row) => {
       const displayLabel = normalizeDisplayLabel(row.label || row.key || '');
-      const archDenom = getArchDenom(row);
-      const archVoters = archDenom?.voters || null;
-
       const vals = displayMeta.map((m) =>
         resolveUniverseValue(getResponseEntryById(row, m.id)?.current?.all_americans, getResponseEntryById(row, m.id)?.current) || 0
       );
       const total = vals.reduce((a, b) => a + b, 0) || 100;
 
-      // Build hover text for the stacked bar
+      // Build hover text (no vote counts — archetype profiles overlap, denominators are not additive)
       const hoverLines = [displayLabel];
-      if (archVoters) hoverLines.push(`Expected 2027 voters: ~${Math.round(archVoters).toLocaleString()}`);
       displayMeta.forEach((m, i) => {
         const v = vals[i];
-        const voteStr = archVoters ? ` (~${Math.round(archVoters * v / 100).toLocaleString()} votes)` : '';
-        hoverLines.push(`${m.label.split(',')[0]}: ${fmtPctValue(v)}${voteStr}`);
+        hoverLines.push(`${m.label.split(',')[0]}: ${fmtPctValue(v)}`);
       });
       const landryV = vals[displayMeta.findIndex((m) => m.id === 'jeff_landry')] || 0;
       const gopV = vals[displayMeta.findIndex((m) => m.id === 'republican_challenger')] || 0;
@@ -5938,37 +5916,16 @@ function renderCoalitionCard() {
   groups.gop.sort((a, b) => (getVal(b, 'republican_challenger') || 0) - (getVal(a, 'republican_challenger') || 0));
   groups.dem.sort((a, b) => (getVal(b, 'democratic_candidate') || 0) - (getVal(a, 'democratic_candidate') || 0));
 
-  // Compute camp-level expected voters
-  function getCampVoters(groupRows) {
-    let total = 0;
-    groupRows.forEach((row) => {
-      const dc = lookupDenominator('archetype', row.key || '');
-      if (dc?.voters) total += dc.voters;
-    });
-    return total > 0 ? total : null;
-  }
-  // Compute camp-level weighted average share for a responseId
-  function getCampWgtAvg(groupRows, responseId) {
-    let wtSum = 0; let vSum = 0;
-    groupRows.forEach((row) => {
-      const dc = lookupDenominator('archetype', row.key || '');
-      const v = getVal(row, responseId);
-      const wt = dc?.voters || 0;
-      if (Number.isFinite(v) && wt > 0) { wtSum += wt; vSum += wt * v; }
-    });
-    return wtSum > 0 ? vSum / wtSum : null;
+  // Archetype profiles are non-mutually-exclusive; use simple average of percentages only.
+  function getCampSimpleAvg(groupRows, responseId) {
+    const vals = groupRows.map((row) => getVal(row, responseId)).filter(Number.isFinite);
+    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
   }
 
   function renderGroupSummary(groupRows, primaryId) {
-    const campVoters = getCampVoters(groupRows);
-    const campAvg = getCampWgtAvg(groupRows, primaryId);
-    const items = [];
-    if (campVoters) items.push(`<span class="coalition-camp-stat">~${Math.round(campVoters).toLocaleString()} expected 2027 voters in camp</span>`);
-    if (campVoters && campAvg != null) {
-      items.push(`<span class="coalition-camp-stat">Camp avg: ${fmtPctValue(campAvg)} (~${Math.round(campVoters * campAvg / 100).toLocaleString()} votes)</span>`);
-    }
-    if (!items.length) return '';
-    return `<div class="coalition-camp-summary">${items.join(' · ')}</div>`;
+    const campAvg = getCampSimpleAvg(groupRows, primaryId);
+    if (campAvg == null) return '';
+    return `<div class="coalition-camp-summary"><span class="coalition-camp-stat">Camp avg: ${fmtPctValue(campAvg)}</span></div>`;
   }
 
   function renderGroup(groupRows, groupClass, title, primaryId, primaryColor) {
