@@ -33,8 +33,8 @@
         {
           "site_slug": "igaming_support",
           "label": "iGaming Support",
-          "href": "https://igaming-support.igaming.vantage.philippbroniecki.com/",
-          "canonical_href": "https://igaming-support.igaming.vantage.philippbroniecki.com/",
+          "href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://support.igaming.vantage.philippbroniecki.com/",
           "local_href": "../../igaming_support/standalone_website/"
         },
         {
@@ -72,8 +72,10 @@
     }
   },
   "turnout_assumption": {
-    "expected_votes": 1200000,
-    "note": "The calculator starts with 1,200,000 expected votes and uses whatever turnout denominator you enter manually. Key Findings and summary tooltips use modeled poststratified denominators from weights.rds for the matching geography or subgroup."
+    "default_expected_voters": 872650.01755906199,
+    "default_registered_voters": 1533491.0045020357,
+    "default_turnout_rate": 0.569061060676,
+    "note": "Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline. Key Findings and summary tooltips use modeled poststratified denominators from weights.rds for the matching geography or subgroup."
   },
   "vote_equivalent_methodology": {
     "formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -524,7 +526,7 @@
     {
       "key": "tradwifes",
       "rank": 11,
-      "label": "Tradwifes",
+      "label": "Tradwives",
       "alternate_names": [
         "Homestead Conservatives",
         "Trad Feminists",
@@ -533,7 +535,7 @@
       "demographic_composition": "Female, Millennials or Gen Z, Republican, Protestant or Catholic, Suburban or Rural",
       "rationale": "A culturally ascendant archetype driven by social media. Embraces traditional gender roles, homemaking aesthetics, and conservative family values. Gained massive visibility in 2024 as a cultural counterpoint to progressive feminism. Media watches them because the tradwife trend was seen as a leading indicator of Trump's win among white women.",
       "tooltip": {
-        "title": "Tradwifes",
+        "title": "Tradwives",
         "subtitle": "Female, Millennials or Gen Z, Republican, Protestant or Catholic, Suburban or Rural",
         "body": "A culturally ascendant archetype driven by social media. Embraces traditional gender roles, homemaking aesthetics, and conservative family values. Gained massive visibility in 2024 as a cultural counterpoint to progressive feminism. Media watches them because the tradwife trend was seen as a leading indicator of Trump's win among white women."
       }
@@ -943,7 +945,7 @@
     }
   ],
   "key_findings": {
-    "note": "With-view effects exclude undecided/no-opinion responses before computing pre/post changes. Vote equivalents use poststratified expected-voter denominators for the selected geography or subgroup. The calculator uses the turnout value entered manually.",
+    "note": "With-view effects exclude undecided/no-opinion responses before computing pre/post changes. Vote equivalents use poststratified expected-voter denominators for the selected geography or subgroup. The calculator defaults to the current poststratified expected-turnout topline and updates when you change the turnout-rate assumption.",
     "groups": [
       {
         "id": "ballot",
@@ -994,7 +996,7 @@
           }
         ],
         "strongest_subgroup": {
-          "label": "Archetype: Tradwifes",
+          "label": "Archetype: Tradwives",
           "estimate_pp": 24.487444319907,
           "vote_equivalent": 8634,
           "vote_equivalent_label": "vote-margin equivalent",
@@ -1207,7 +1209,7 @@
           }
         ],
         "strongest_subgroup": {
-          "label": "Archetype: Tradwifes",
+          "label": "Archetype: Tradwives",
           "estimate_pp": 28.682300425717,
           "vote_equivalent": 10114,
           "vote_equivalent_label": "vote-margin equivalent",

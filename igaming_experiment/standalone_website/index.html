@@ -312,6 +312,15 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 .controls.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .controls label { display: block; font-size: 0.75rem; letter-spacing: 0.02em; color: var(--muted); margin-bottom: 0.25rem; }
 .controls select, .controls input { width: 100%; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.44rem 0.58rem; background: var(--surface); color: var(--ink); font-size: 0.83rem; }
+.controls select[multiple] { min-height: 7.8rem; }
+.control-note { margin-top: 0.34rem; font-size: 0.76rem; color: var(--ink-soft); }
+.control-button-wrap { display: flex; flex-direction: column; justify-content: flex-end; }
+.control-button-label { display: block; font-size: 0.75rem; letter-spacing: 0.02em; color: var(--muted); margin-bottom: 0.25rem; }
+.control-button { width: 100%; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.44rem 0.58rem; background: var(--surface); color: var(--ink); font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease; }
+.control-button:hover { border-color: var(--accent); color: var(--accent); }
+.rate-input-stack { display: grid; gap: 0.42rem; }
+.rate-input-inline { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.4rem; align-items: center; }
+.rate-suffix { font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .hint { margin-top: -0.22rem; margin-bottom: 0.65rem; font-size: 0.78rem; color: var(--ink-soft); }
 .hint code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 0.75rem; padding: 0.05rem 0.2rem; border-radius: 5px; background: var(--surface-alt); border: 1px solid var(--line); }
 .bar-list { display: grid; gap: 0.42rem; }
@@ -331,8 +340,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 .data-note { margin-top: 0.68rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); padding: 0.62rem 0.7rem; font-size: 0.79rem; color: var(--ink-soft); }
 .calc-result { margin-top: 0.62rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); padding: 0.68rem 0.74rem; font-size: 0.86rem; }
 .quad-explainer { margin-bottom: 0.65rem; font-size: 0.81rem; color: var(--ink-soft); }
-.quad-reset { width: 100%; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.44rem 0.58rem; background: var(--surface); color: var(--ink); font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease; margin-top: 1.32rem; }
-.quad-reset:hover { border-color: var(--accent); color: var(--accent); }
+.quad-reset { width: 100%; }
 .quad-note { margin-bottom: 0.72rem; }
 .quad-note .methodology-details-body { font-size: 0.82rem; }
 .quad-wrap { position: relative; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); min-height: 400px; overflow: hidden; cursor: grab; }
@@ -348,8 +356,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 .quad-point.pos { background: var(--pos); }
 .quad-point.neg { background: var(--neg); }
 .quad-point.neutral { background: var(--neutral); }
+.quad-point.is-highlighted { width: 13px; height: 13px; margin-left: -6px; margin-top: -6px; box-shadow: 0 0 0 2px color-mix(in srgb, var(--surface) 70%, transparent), 0 0 0 4px color-mix(in srgb, var(--accent) 26%, transparent); }
 .quad-point-connector { position: absolute; height: 1px; background: color-mix(in srgb, var(--ink-soft) 58%, transparent); transform-origin: 0 50%; pointer-events: none; }
-.quad-point-label { position: absolute; font-size: 0.67rem; color: var(--ink-soft); background: color-mix(in srgb, var(--surface) 86%, transparent); border: 1px solid var(--line); border-radius: 7px; padding: 0.12rem 0.35rem; white-space: nowrap; pointer-events: none; }
+.quad-point-label { position: absolute; font-size: 0.67rem; color: var(--ink); background: color-mix(in srgb, var(--surface) 94%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)); border-radius: 7px; padding: 0.12rem 0.35rem; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 20px rgba(18, 35, 64, 0.08); }
 .quad-label { position: absolute; font-size: 0.71rem; color: var(--muted); background: color-mix(in srgb, var(--surface) 86%, transparent); border: 1px solid var(--line); border-radius: 8px; padding: 0.18rem 0.36rem; }
 .tooltip-target { cursor: help; }
 .tooltip-target:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 78%, transparent); outline-offset: 2px; }
@@ -532,11 +541,18 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       <section class="card" id="componentCalculator" data-component-id="vote_impact_calculator">
         <h2 class="section-title">Vote Impact Calculator</h2>
         <div class="section-mode-label" id="modeLabelCalculator"></div>
-        <p class="explainer">Translate percentage-point effects into turnout-scaled vote equivalents using the turnout denominator you enter here. Key Findings and summary vote equivalents use modeled poststratified denominators instead. Net Landry position is treated as a vote-margin equivalent.</p>
-        <div class="controls n4">
+        <p class="explainer">Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline, while Key Findings and summary vote equivalents continue to use modeled poststratified denominators. Net Landry position is treated as a vote-margin equivalent.</p>
+        <div class="controls">
           <div>
-            <label for="calcVotes">Expected 2027 turnout</label>
-            <input id="calcVotes" type="number" value="1200000" min="0" step="1000" />
+            <label for="calcTurnoutRate">Expected 2027 turnout rate</label>
+            <div class="rate-input-stack">
+              <input id="calcTurnoutRate" type="range" min="0" max="100" step="0.0001" />
+              <div class="rate-input-inline">
+                <input id="calcTurnoutRateNumber" type="number" min="0" max="100" step="0.0001" />
+                <span class="rate-suffix">%</span>
+              </div>
+            </div>
+            <div class="control-note" id="calcExpectedVotes"></div>
           </div>
           <div>
             <label for="calcOutcome">Outcome</label>
@@ -549,6 +565,10 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           <div>
             <label for="calcEstimand">Effect</label>
             <select id="calcEstimand"></select>
+          </div>
+          <div class="control-button-wrap">
+            <label class="control-button-label" for="calcResetBtn">Modeled default</label>
+            <button type="button" class="control-button" id="calcResetBtn">Reset to expectation</button>
           </div>
         </div>
         <div class="calc-result" id="calcResult"></div>
@@ -584,9 +604,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         <p class="quad-explainer">Each point is a subgroup. The x-axis shows how that subgroup moves under the action-delivery scenario. The y-axis shows how it moves under the inaction/no-delivery scenario. The lower-right quadrant is usually the most politically valuable: these groups improve under action and worsen under inaction.</p>
         <details class="methodology-details quad-note">
           <summary>How to read this chart</summary>
-          <div class="methodology-details-body">Use the point tooltip for the exact subgroup movement. The chart labels only the biggest positive and negative action-vs.-inaction movers, plus the single strongest Arm A or Arm B movers when they add extra context. Zoom with the mouse wheel or trackpad, drag to pan, and use Reset view to return to the default frame.</div>
+          <div class="methodology-details-body">Use the point tooltip for the exact subgroup movement. By default the chart labels only one subgroup, preferring Tradwives when that archetype is available for the selected view and otherwise falling back to the strongest action-vs.-inaction mover. Use Highlighted subgroups to label specific points. Zoom with the mouse wheel or trackpad, drag to pan, and use Reset view to return to the default frame.</div>
         </details>
-        <div class="controls n4">
+        <div class="controls">
           <div>
             <label for="quadOutcome">Outcome</label>
             <select id="quadOutcome"></select>
@@ -600,7 +620,12 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             <select id="quadDemographic"></select>
           </div>
           <div>
-            <button type="button" class="quad-reset" id="quadResetBtn">Reset view</button>
+            <label for="quadHighlights">Highlighted subgroups</label>
+            <select id="quadHighlights" multiple size="6"></select>
+          </div>
+          <div class="control-button-wrap">
+            <label class="control-button-label" for="quadResetBtn">Chart view</label>
+            <button type="button" class="control-button quad-reset" id="quadResetBtn">Reset view</button>
           </div>
         </div>
         <div class="quad-wrap" id="quadPlot">
@@ -725,8 +750,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         {
           "site_slug": "igaming_support",
           "label": "iGaming Support",
-          "href": "https://igaming-support.igaming.vantage.philippbroniecki.com/",
-          "canonical_href": "https://igaming-support.igaming.vantage.philippbroniecki.com/",
+          "href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://support.igaming.vantage.philippbroniecki.com/",
           "local_href": "../../igaming_support/standalone_website/"
         },
         {
@@ -764,8 +789,10 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
     }
   },
   "turnout_assumption": {
-    "expected_votes": 1200000,
-    "note": "The calculator starts with 1,200,000 expected votes and uses whatever turnout denominator you enter manually. Key Findings and summary tooltips use modeled poststratified denominators from weights.rds for the matching geography or subgroup."
+    "default_expected_voters": 872650.0176,
+    "default_registered_voters": 1533491.0045,
+    "default_turnout_rate": 0.5691,
+    "note": "Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline. Key Findings and summary tooltips use modeled poststratified denominators from weights.rds for the matching geography or subgroup."
   },
   "response_universe": {
     "enabled": true,
@@ -997,6 +1024,18 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       function fmtNum(value) {
         if (!Number.isFinite(Number(value))) return "NA";
         return Number(value).toLocaleString();
+      }
+
+      function fmtPercent(value, digits = 1) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return "NA";
+        return `${(n * 100).toFixed(digits)}%`;
+      }
+
+      function clampNumber(value, min, max) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return min;
+        return Math.min(max, Math.max(min, n));
       }
 
       function deltaClass(value) {
@@ -1436,12 +1475,36 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         }
       }
 
+      function setMultiSelectOptions(selectEl, options, selectedValues = []) {
+        const selected = new Set(selectedValues || []);
+        selectEl.innerHTML = "";
+        options.forEach((opt) => {
+          const el = document.createElement("option");
+          el.value = opt.id;
+          el.textContent = opt.label || opt.id;
+          el.selected = selected.has(opt.id);
+          if (opt.title) el.title = opt.title;
+          selectEl.appendChild(el);
+        });
+      }
+
       function getOutcomeById(outcomeId) {
         return (reportData?.outcomes || []).find((outcome) => outcome.id === outcomeId) || null;
       }
 
       function getTurnoutAssumption() {
-        return Number(reportData?.turnout_assumption?.expected_votes || 1200000);
+        const cfg = reportData?.turnout_assumption || {};
+        const registeredVoters = Number(cfg.default_registered_voters);
+        const expectedVoters = Number(cfg.default_expected_voters);
+        const turnoutRate = Number(cfg.default_turnout_rate);
+        const derivedExpectedVoters = Number.isFinite(registeredVoters) && Number.isFinite(turnoutRate)
+          ? registeredVoters * turnoutRate
+          : expectedVoters;
+        return {
+          registeredVoters,
+          expectedVoters: Number.isFinite(derivedExpectedVoters) ? derivedExpectedVoters : expectedVoters,
+          turnoutRate
+        };
       }
 
       function getResponseUniverseConfig() {
@@ -1852,13 +1915,25 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       }
 
       function initCalculator() {
-        const turnout = document.getElementById("calcVotes");
+        const turnoutRange = document.getElementById("calcTurnoutRate");
+        const turnoutNumber = document.getElementById("calcTurnoutRateNumber");
+        const resetBtn = document.getElementById("calcResetBtn");
+        const expectedVotesNote = document.getElementById("calcExpectedVotes");
         const outcomeSel = document.getElementById("calcOutcome");
         const responseSel = document.getElementById("calcResponse");
         const estimandSel = document.getElementById("calcEstimand");
         const out = document.getElementById("calcResult");
+        const turnoutDefaults = getTurnoutAssumption();
+        const registeredVoters = Number(turnoutDefaults.registeredVoters);
+        const turnoutInputDecimals = 4;
+        const defaultTurnoutRatePct = Number.isFinite(turnoutDefaults.turnoutRate)
+          ? turnoutDefaults.turnoutRate * 100
+          : (Number.isFinite(turnoutDefaults.expectedVoters) && registeredVoters > 0
+            ? (turnoutDefaults.expectedVoters / registeredVoters) * 100
+            : 0);
 
-        turnout.value = String(getTurnoutAssumption());
+        turnoutRange.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
+        turnoutNumber.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
         setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "label", "ballot");
         setSelectOptions(estimandSel, reportData.estimands || [], "id", "label", "difference_in_differences");
 
@@ -1867,7 +1942,15 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           setSelectOptions(responseSel, responseOptions(outcomeSel.value, false), "id", "label", defaultResponse);
         }
 
-        function render() {
+        function syncTurnoutInputs(source = "number") {
+          const rawValue = source === "range" ? turnoutRange.value : turnoutNumber.value;
+          const nextValue = clampNumber(rawValue, 0, 100);
+          turnoutRange.value = nextValue.toFixed(turnoutInputDecimals);
+          turnoutNumber.value = nextValue.toFixed(turnoutInputDecimals);
+          return nextValue / 100;
+        }
+
+        function render(source = "number") {
           const row = findRecord({
             outcome_id: outcomeSel.value,
             response_id: responseSel.value,
@@ -1878,8 +1961,17 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           });
 
           const effect = row ? Number(row.estimate_pp) : NaN;
-          const votes = Number(turnout.value || 0);
-          const equivalent = Number.isFinite(effect) ? Math.round((effect / 100) * votes) : NaN;
+          const turnoutRate = syncTurnoutInputs(source);
+          const expectedVotes = Number.isFinite(registeredVoters)
+            ? Math.round(registeredVoters * turnoutRate)
+            : Math.round(Number(turnoutDefaults.expectedVoters) || 0);
+          const equivalent = Number.isFinite(effect) ? Math.round((effect / 100) * expectedVotes) : NaN;
+          if (expectedVotesNote) {
+            const votersText = Number.isFinite(registeredVoters)
+              ? `${fmtNum(expectedVotes)} from ${fmtNum(Math.round(registeredVoters))} registered voters`
+              : fmtNum(expectedVotes);
+            expectedVotesNote.textContent = `Expected votes: ${votersText}`;
+          }
 
           if (!Number.isFinite(effect)) {
             out.textContent = "No statewide estimate for this combination.";
@@ -1888,23 +1980,31 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 
           const estLabel = (reportData.estimands || []).find((e) => e.id === estimandSel.value)?.label || "Selected effect";
           if (responseSel.value === NET_LANDRY_ID) {
-            out.innerHTML = `At ${fmtNum(votes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} for Net Landry position is equivalent to about ${fmtNum(equivalent)} votes in Landry's margin (vote-margin equivalent).`;
+            out.innerHTML = `At ${fmtPercent(turnoutRate)} expected turnout, about ${fmtNum(expectedVotes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} for Net Landry position is equivalent to about ${fmtNum(equivalent)} votes in Landry's margin.`;
             return;
           }
           if (outcomeSel.value === "ballot" && responseSel.value === "jeff_landry_the_republican_incumbent") {
-            out.innerHTML = `At ${fmtNum(votes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} is equivalent to about ${fmtNum(equivalent)} Landry votes.`;
+            out.innerHTML = `At ${fmtPercent(turnoutRate)} expected turnout, about ${fmtNum(expectedVotes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} is equivalent to about ${fmtNum(equivalent)} Landry votes.`;
             return;
           }
-          out.innerHTML = `At ${fmtNum(votes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} is equivalent to about ${fmtNum(equivalent)} vote-equivalent change for this response.`;
+          out.innerHTML = `At ${fmtPercent(turnoutRate)} expected turnout, about ${fmtNum(expectedVotes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} is equivalent to about ${fmtNum(equivalent)} vote-equivalent change for this response.`;
         }
 
         outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
-        responseSel.addEventListener("change", render);
-        estimandSel.addEventListener("change", render);
-        turnout.addEventListener("input", render);
+        responseSel.addEventListener("change", () => render());
+        estimandSel.addEventListener("change", () => render());
+        turnoutRange.addEventListener("input", () => render("range"));
+        turnoutNumber.addEventListener("input", () => render("number"));
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            turnoutRange.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
+            turnoutNumber.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
+            render("number");
+          });
+        }
 
         syncResponses();
-        render();
+        render("number");
       }
 
       function initSubgroups() {
@@ -2004,6 +2104,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         const outcomeSel = document.getElementById("quadOutcome");
         const responseSel = document.getElementById("quadResponse");
         const demoSel = document.getElementById("quadDemographic");
+        const highlightSel = document.getElementById("quadHighlights");
         const plot = document.getElementById("quadPlot");
         const surface = document.getElementById("quadSurface");
         const resetBtn = document.getElementById("quadResetBtn");
@@ -2019,6 +2120,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         setSelectOptions(demoSel, demographics, "id", "label", "profile");
 
         const quadView = { scale: 1, panX: 0, panY: 0, dragging: false, startX: 0, startY: 0 };
+        const specialHighlightIds = new Set(["__none__", "__top_did__", "__top_abs_did__"]);
+        let highlightedSelection = [];
 
         function applyView() {
           surface.style.transform = `translate(${quadView.panX}px, ${quadView.panY}px) scale(${quadView.scale})`;
@@ -2034,6 +2137,72 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         function syncResponses() {
           const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
           setSelectOptions(responseSel, responseOptions(outcomeSel.value, true), "id", "label", preferred);
+        }
+
+        function findDefaultHighlightedValues(points) {
+          const tradwifePoint = points.find((point) => /tradwif/i.test(`${point.key} ${point.label}`));
+          if (tradwifePoint) return [tradwifePoint.key];
+          const strongestPoint = points
+            .slice()
+            .sort((a, b) => Math.abs(Number(b.did)) - Math.abs(Number(a.did)))[0];
+          return strongestPoint ? [strongestPoint.key] : [];
+        }
+
+        function normalizeHighlightSelection(points, selection, fallbackToDefault = true) {
+          const availableKeys = new Set(points.map((point) => point.key));
+          let nextSelection = (selection || []).filter((value, index, values) => {
+            if (!value || values.indexOf(value) !== index) return false;
+            return specialHighlightIds.has(value) || availableKeys.has(value);
+          });
+          if (nextSelection.includes("__none__")) nextSelection = ["__none__"];
+          if (!nextSelection.length && fallbackToDefault) {
+            nextSelection = findDefaultHighlightedValues(points);
+          }
+          return nextSelection;
+        }
+
+        function syncHighlightOptions(points) {
+          const options = [
+            { id: "__none__", label: "Clear labels", title: "Leave the chart unlabeled." },
+            { id: "__top_did__", label: "Top 3 by advantage", title: "Label the three strongest positive action-vs.-inaction movers." },
+            { id: "__top_abs_did__", label: "Top 3 by absolute advantage", title: "Label the three biggest movers by absolute action-vs.-inaction effect." }
+          ].concat(
+            points
+              .slice()
+              .sort((a, b) => String(a.label).localeCompare(String(b.label)))
+              .map((point) => ({ id: point.key, label: point.label }))
+          );
+          highlightedSelection = normalizeHighlightSelection(points, highlightedSelection, true);
+          setMultiSelectOptions(highlightSel, options, highlightedSelection);
+        }
+
+        function resolveHighlightedKeys(points) {
+          highlightedSelection = normalizeHighlightSelection(points, highlightedSelection, true);
+          if (highlightedSelection.includes("__none__")) return new Set();
+
+          const keys = new Set();
+          if (highlightedSelection.includes("__top_did__")) {
+            points
+              .slice()
+              .sort((a, b) => Number(b.did) - Number(a.did))
+              .slice(0, 3)
+              .forEach((point) => keys.add(point.key));
+          }
+          if (highlightedSelection.includes("__top_abs_did__")) {
+            points
+              .slice()
+              .sort((a, b) => Math.abs(Number(b.did)) - Math.abs(Number(a.did)))
+              .slice(0, 3)
+              .forEach((point) => keys.add(point.key));
+          }
+          highlightedSelection
+            .filter((value) => !specialHighlightIds.has(value))
+            .forEach((value) => keys.add(value));
+
+          if (!keys.size) {
+            findDefaultHighlightedValues(points).forEach((value) => keys.add(value));
+          }
+          return keys;
         }
 
         function clearDynamic() {
@@ -2128,17 +2297,15 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             };
           }).filter((p) => Number.isFinite(p.x) && Number.isFinite(p.y) && Number.isFinite(p.did));
 
-          if (!points.length) return;
+          if (!points.length) {
+            highlightedSelection = [];
+            setMultiSelectOptions(highlightSel, [], []);
+            return;
+          }
 
           const maxAbs = Math.max(1, ...points.map((p) => Math.max(Math.abs(p.x), Math.abs(p.y))));
-          const labelsToShow = new Set(
-            points.slice().sort((a, b) => b.did - a.did).slice(0, 3).map((p) => p.key)
-              .concat(points.slice().sort((a, b) => a.did - b.did).slice(0, 3).map((p) => p.key))
-          );
-          const topArmA = points.slice().sort((a, b) => Math.abs(b.x) - Math.abs(a.x))[0];
-          const topArmB = points.slice().sort((a, b) => Math.abs(b.y) - Math.abs(a.y))[0];
-          if (topArmA?.key) labelsToShow.add(topArmA.key);
-          if (topArmB?.key) labelsToShow.add(topArmB.key);
+          syncHighlightOptions(points);
+          const highlightedKeys = resolveHighlightedKeys(points);
 
           const width = plot.clientWidth;
           const height = plot.clientHeight;
@@ -2148,7 +2315,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             const xPct = 50 + (pt.x / maxAbs) * 42;
             const yPct = 50 - (pt.y / maxAbs) * 42;
             const dot = document.createElement("div");
-            dot.className = `quad-point ${deltaClass(pt.did)}`;
+            dot.className = `quad-point ${deltaClass(pt.did)}${highlightedKeys.has(pt.key) ? " is-highlighted" : ""}`;
             dot.style.left = `${xPct}%`;
             dot.style.top = `${yPct}%`;
             attachSharedTooltip(dot, () => buildDecompositionTooltipHtml({
@@ -2174,7 +2341,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 
             surface.appendChild(dot);
 
-            if (labelsToShow.has(pt.key)) {
+            if (highlightedKeys.has(pt.key)) {
               const pointX = (xPct / 100) * width;
               const pointY = (yPct / 100) * height;
               const dx = pt.x >= 0 ? 18 : -18;
@@ -2207,6 +2374,13 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
         responseSel.addEventListener("change", render);
         demoSel.addEventListener("change", render);
+        highlightSel.addEventListener("change", () => {
+          highlightedSelection = Array.from(highlightSel.selectedOptions || []).map((option) => option.value);
+          if (highlightedSelection.includes("__none__")) {
+            highlightedSelection = ["__none__"];
+          }
+          render();
+        });
 
         syncResponses();
         render();
