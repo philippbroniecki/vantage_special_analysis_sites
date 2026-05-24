@@ -862,6 +862,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   min-width: 74px;
   padding: 0.26rem 0.5rem;
   border-radius: var(--r-full);
@@ -870,6 +871,48 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   font-size: 0.73rem;
   font-weight: 700;
   white-space: nowrap;
+  cursor: default;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.delta-badge:hover {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  z-index: 10;
+}
+
+.delta-badge[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  max-width: 280px;
+  padding: 0.45rem 0.65rem;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: var(--r-sm);
+  font-size: 0.71rem;
+  font-weight: 500;
+  white-space: pre-line;
+  line-height: 1.45;
+  text-align: left;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.28);
+  z-index: 100;
+}
+
+.delta-badge[data-tooltip]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+  pointer-events: none;
+  z-index: 100;
 }
 
 .delta-badge.landry {
@@ -1465,6 +1508,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   gap: 1rem;
 }
 
+/* Topline comparison card: single question card spans full width */
+#componentTopline .question-grid {
+  grid-template-columns: 1fr;
+}
+
 .question-card {
   display: flex;
   flex-direction: column;
@@ -2004,33 +2052,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         </div>
       </section>
 
-      <section class="card card--control reveal" id="componentTurnout" aria-labelledby="h-turnout-control">
-        <div class="section-head">
-          <p class="section-eyebrow">Turnout</p>
-          <h2 id="h-turnout-control">Turnout Context</h2>
-          <p>Use the same statewide turnout-assumption UI pattern as the experiment page.</p>
-        </div>
-        <p class="explainer" id="turnoutControlNote"></p>
-        <div class="turnout-card">
-          <div class="turnout-control-grid">
-            <div class="xt-control-group">
-              <label class="xt-control-label" for="turnoutRateRange">Expected 2027 turnout rate</label>
-              <input id="turnoutRateRange" type="range" min="0" max="100" step="0.0001" />
-            </div>
-            <div class="xt-control-group">
-              <label class="xt-control-label" for="turnoutRateNumber">Turnout rate (%)</label>
-              <input class="xt-select" id="turnoutRateNumber" type="number" min="0" max="100" step="0.0001" />
-            </div>
-            <div class="xt-control-group turnout-reset-wrap">
-              <label class="xt-control-label" for="turnoutResetBtn">Reset</label>
-              <button class="xt-swap-btn turnout-reset-btn" id="turnoutResetBtn" type="button">Reset</button>
-            </div>
-          </div>
-          <p class="control-note" id="turnoutExpectedVotes"></p>
-          <p class="control-note" id="turnoutContextResult"></p>
-        </div>
-      </section>
-
       <!-- TOPLINE QUESTIONS -->
       <section class="card reveal" id="componentTopline" data-component-id="topline_questions" aria-labelledby="h-questions">
         <div class="section-mode-label" id="modeLabelTopline"></div>
@@ -2152,7 +2173,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         <div id="archetypeChart" class="archetype-grid"></div>
       </section>
 
-      <section class="card reveal" id="componentGeographyExplorer" aria-labelledby="h-geography-explorer">
+      <section class="card reveal" id="componentGeographyExplorer" data-component-id="geography_explorer" aria-labelledby="h-geography-explorer">
         <div class="section-mode-label" id="modeLabelGeographyExplorer"></div>
         <div class="section-head">
           <p class="section-eyebrow">Geography Explorer</p>
@@ -3526,7 +3547,7 @@ function applyComponentOrder() {
   if (!main) return;
   const configured = getContentConfig().component_order;
   if (!Array.isArray(configured) || configured.length === 0) return;
-  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'response_geography'];
+  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'topline_questions', 'demographic_breakdown', 'crosstabs_explorer', 'archetype_breakdown', 'geography_explorer'];
   const nodes = Array.from(main.querySelectorAll('[data-component-id]'));
   const nodeById = {};
   const availableIds = [];
@@ -3537,18 +3558,8 @@ function applyComponentOrder() {
     availableIds.push(componentId);
   });
 
-  let finalOrder = [...mandatory, ...configured.filter((id) => !mandatory.includes(id))]
+  const finalOrder = [...mandatory, ...configured.filter((id) => !mandatory.includes(id))]
     .filter((id, idx, arr) => arr.indexOf(id) === idx);
-
-  if (availableIds.includes('archetype_breakdown')) {
-    finalOrder = finalOrder.filter((id) => id !== 'archetype_breakdown');
-    const stateIdx = finalOrder.indexOf('state_ranking');
-    if (stateIdx >= 0) {
-      finalOrder.splice(stateIdx, 0, 'archetype_breakdown');
-    } else {
-      finalOrder.push('archetype_breakdown');
-    }
-  }
 
   const remainder = availableIds.filter((id) => !finalOrder.includes(id));
   [...finalOrder, ...remainder].forEach((componentId) => {
@@ -4800,18 +4811,33 @@ function fmtPctValue(value, digits = 1) {
   return `${n.toFixed(digits)}%`;
 }
 
-function fmtDeltaHtml(value, responseId = null) {
+function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineValue = null) {
   const n = Number(value);
   const cls = deltaClass(n);
+  const buildTooltip = (inner) => {
+    const lines = [inner];
+    if (currentValue != null && Number.isFinite(Number(currentValue))) {
+      lines.push(`Current: ${fmtPctValue(Number(currentValue))}`);
+    }
+    if (baselineValue != null && Number.isFinite(Number(baselineValue))) {
+      lines.push(`2023 baseline: ${fmtPctValue(Number(baselineValue))}`);
+    } else if (Number.isFinite(n) && currentValue != null && Number.isFinite(Number(currentValue))) {
+      lines.push(`2023 baseline: ${fmtPctValue(Number(currentValue) - n)}`);
+    }
+    lines.push('Delta = current modeled share minus 2023 parish-calibrated baseline.');
+    return lines.join('\n');
+  };
   if (!Number.isFinite(n)) {
-    return `<span class="delta-badge ${escapeHtml(responseId || '')}"><span class="delta neutral">NA</span></span>`;
+    return `<span class="delta-badge ${escapeHtml(responseId || '')}" data-tooltip="2023 baseline comparison not available for this subgroup/geography."><span class="delta neutral">NA</span></span>`;
   }
   if (Math.abs(n) < 0.05) {
-    return `<span class="delta-badge ${escapeHtml(responseId || '')}"><span class="delta neutral">0.0 pp</span></span>`;
+    const tt = buildTooltip('No change vs 2023 baseline (< 0.05 pp).');
+    return `<span class="delta-badge ${escapeHtml(responseId || '')}" data-tooltip="${escapeHtml(tt)}"><span class="delta neutral">0.0 pp</span></span>`;
   }
   const arrow = n > 0 ? '▲' : '▼';
   const sign = n > 0 ? '+' : '';
-  return `<span class="delta-badge ${escapeHtml(responseId || '')}" title="Change vs 2023 parish-calibrated baseline: current modeled share minus estimated 2023 baseline for this same subgroup/geography."><span class="delta ${cls}">${arrow} ${sign}${n.toFixed(1)} pp</span></span>`;
+  const tt = buildTooltip(`Delta vs 2023 baseline: ${sign}${n.toFixed(1)} pp`);
+  return `<span class="delta-badge ${escapeHtml(responseId || '')}" data-tooltip="${escapeHtml(tt)}" title="${escapeHtml(tt)}"><span class="delta ${cls}">${arrow} ${sign}${n.toFixed(1)} pp</span></span>`;
 }
 
 function getAllGeographyTypes() {
@@ -4834,7 +4860,7 @@ function getDefaultGeographySelection() {
 
 function ensureComparisonGeographyState(key) {
   const state = comparisonGeographyState[key];
-  if (state.typeId && state.unitId) return state;
+  if (state.typeId) return state;
   const fallback = getDefaultGeographySelection();
   state.typeId = fallback.typeId;
   state.unitId = fallback.unitId;
@@ -4929,13 +4955,31 @@ function getComparisonUnitIdCandidates(typeId, unitId) {
   const raw = String(unitId || '').trim();
   if (!raw) return [];
   const compact = raw.replace(/\s+/g, ' ').trim();
+  const withoutParish = typeId === 'county'
+    ? compact.replace(/\s+PARISH$/i, '').trim()
+    : compact;
   const normalized = compact
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_+|_+$/g, '');
+  const normalizedWithoutParish = withoutParish
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
   const candidates = [raw, compact, compact.toLowerCase(), normalized];
-  if (typeId === 'county' && normalized && !normalized.endsWith('_parish')) {
-    candidates.push(`${normalized}_parish`);
+  if (typeId === 'county') {
+    candidates.push(
+      withoutParish,
+      withoutParish.toUpperCase(),
+      withoutParish.toLowerCase(),
+      normalizedWithoutParish
+    );
+    if (normalized && !normalized.endsWith('_parish')) {
+      candidates.push(`${normalized}_parish`);
+    }
+    if (normalizedWithoutParish) {
+      candidates.push(`${normalizedWithoutParish}_parish`);
+    }
   }
   return Array.from(new Set(candidates.filter(Boolean)));
 }
@@ -5062,6 +5106,11 @@ function renderTakeaways() {
   const gop = getResponseEntryById(stateUnit, 'republican_challenger');
   const statewideResponses = [landry, dem, gop].filter(Boolean);
   const landryDelta = resolveUniverseValue(landry?.delta_vs_2023_baseline?.all_americans, landry?.delta_vs_2023_baseline);
+  const landryCurrent = resolveUniverseValue(landry?.current?.all_americans, landry?.current);
+  const demDelta = resolveUniverseValue(dem?.delta_vs_2023_baseline?.all_americans, dem?.delta_vs_2023_baseline);
+  const demCurrent = resolveUniverseValue(dem?.current?.all_americans, dem?.current);
+  const gopDelta = resolveUniverseValue(gop?.delta_vs_2023_baseline?.all_americans, gop?.delta_vs_2023_baseline);
+  const gopCurrent = resolveUniverseValue(gop?.current?.all_americans, gop?.current);
   const geographyRows = [];
   const countyUnits = comparison?.topline?.by_geography?.county || {};
   Object.keys(countyUnits).forEach((unitId) => {
@@ -5093,18 +5142,18 @@ function renderTakeaways() {
       <div class="findings-grid">
         <article class="finding">
           <div class="k">Landry vs. 2023 baseline</div>
-          <div class="v">${fmtPctValue(resolveUniverseValue(landry?.current?.all_americans, landry?.current))}</div>
-          <div class="m">${fmtDeltaHtml(landryDelta, 'jeff_landry')}</div>
+          <div class="v">${fmtPctValue(landryCurrent)}</div>
+          <div class="m">${fmtDeltaHtml(landryDelta, 'jeff_landry', landryCurrent)}</div>
         </article>
         <article class="finding">
           <div class="k">Democratic candidate vs. 2023 baseline</div>
-          <div class="v">${fmtPctValue(resolveUniverseValue(dem?.current?.all_americans, dem?.current))}</div>
-          <div class="m">${fmtDeltaHtml(resolveUniverseValue(dem?.delta_vs_2023_baseline?.all_americans, dem?.delta_vs_2023_baseline), 'democratic_candidate')}</div>
+          <div class="v">${fmtPctValue(demCurrent)}</div>
+          <div class="m">${fmtDeltaHtml(demDelta, 'democratic_candidate', demCurrent)}</div>
         </article>
         <article class="finding">
           <div class="k">Republican challenger vs. 2023 baseline</div>
-          <div class="v">${fmtPctValue(resolveUniverseValue(gop?.current?.all_americans, gop?.current))}</div>
-          <div class="m">${fmtDeltaHtml(resolveUniverseValue(gop?.delta_vs_2023_baseline?.all_americans, gop?.delta_vs_2023_baseline), 'republican_challenger')}</div>
+          <div class="v">${fmtPctValue(gopCurrent)}</div>
+          <div class="m">${fmtDeltaHtml(gopDelta, 'republican_challenger', gopCurrent)}</div>
         </article>
         <article class="finding">
           <div class="k">Most above baseline archetype</div>
@@ -5128,7 +5177,7 @@ function renderTakeaways() {
   `;
 
   if (note) {
-    note.textContent = `Active response universe: ${getResponseUniverseModeLabel(activeResponseUniverse) || activeResponseUniverse}. Active turnout assumption: ${fmtPctValue((activeTurnoutRate || getActiveTurnoutDefaults().turnoutRate || 0) * 100, 2)} statewide turnout.`;
+    note.textContent = `Active response universe: ${getResponseUniverseModeLabel(activeResponseUniverse) || activeResponseUniverse}.`;
   }
 }
 
@@ -5679,7 +5728,6 @@ function initGeographyExplorer() {
 
 function rerenderResponseUniverseSections() {
   renderTakeaways();
-  renderTurnoutControl();
   renderQuestionCards();
   renderDemographicExplorer();
   renderCrosstabExplorer();
@@ -5701,7 +5749,6 @@ function init() {
     initResponseGeographyControl();
     renderMethodology();
     initResponseUniverseToggle();
-    renderTurnoutControl();
     renderTakeaways();
     renderQuestionCards();
     initDemographics();
