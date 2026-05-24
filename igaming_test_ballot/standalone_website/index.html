@@ -1131,6 +1131,24 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
    ============================================================ */
 .archetype-grid { display: grid; gap: 0.65rem; }
 
+/* ============================================================
+   COALITION / BASE CARD
+   ============================================================ */
+.coalition-groups { display: grid; gap: 1.2rem; }
+.coalition-group { border: 1px solid var(--line); border-left-width: 4px; border-radius: var(--r-sm); overflow: hidden; }
+.coalition-group.landry-group { border-left-color: #cb1d1d; }
+.coalition-group.gop-group { border-left-color: #e55030; }
+.coalition-group.dem-group { border-left-color: #0015bc; }
+.coalition-group-head { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 1rem; background: var(--surface-alt); border-bottom: 1px solid var(--line); }
+.coalition-group-head .coalition-group-title { font-weight: 600; font-size: 0.93rem; flex: 1; }
+.coalition-group-head .coalition-group-count { font-size: 0.8rem; color: var(--muted); }
+.coalition-group-rows { display: grid; gap: 0; }
+.coalition-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-bottom: 1px solid var(--line); }
+.coalition-row:last-child { border-bottom: none; }
+.coalition-row-label { font-size: 0.87rem; }
+.coalition-row-value { font-size: 0.87rem; font-weight: 600; min-width: 3.5rem; text-align: right; }
+
+
 .archetype-row {
   padding: 0.78rem 0.95rem;
   background: var(--surface-alt);
@@ -2145,6 +2163,17 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         <p class="section-question-prompt" id="crosstabQuestionPrompt"></p>
         <div id="crosstabExplorers" class="crosstabs-stack"></div>
         <p class="xt-note" id="crosstabComparisonNote">Values are weighted poststratified current estimates (percent).</p>
+      </section>
+
+      <!-- COALITION / BASE CARD -->
+      <section class="card reveal" id="componentCoalition" data-component-id="coalition_base" aria-labelledby="h-coalition">
+        <div class="section-mode-label" id="modeLabelCoalition"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Coalition Analysis</p>
+          <h2 id="h-coalition">Coalition &amp; Base</h2>
+          <p>Archetypes grouped by leading candidate choice. Sorted by modeled vote share within each group.</p>
+        </div>
+        <div id="coalitionCard" class="coalition-groups"></div>
       </section>
 
       <!-- ARCHETYPES -->
@@ -3547,7 +3576,7 @@ function applyComponentOrder() {
   if (!main) return;
   const configured = getContentConfig().component_order;
   if (!Array.isArray(configured) || configured.length === 0) return;
-  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'topline_questions', 'demographic_breakdown', 'crosstabs_explorer', 'archetype_breakdown', 'geography_explorer'];
+  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'topline_questions', 'demographic_breakdown', 'crosstabs_explorer', 'coalition_base', 'archetype_breakdown', 'geography_explorer'];
   const nodes = Array.from(main.querySelectorAll('[data-component-id]'));
   const nodeById = {};
   const availableIds = [];
@@ -4811,7 +4840,7 @@ function fmtPctValue(value, digits = 1) {
   return `${n.toFixed(digits)}%`;
 }
 
-function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineValue = null) {
+function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineValue = null, denominatorVotes = null) {
   const n = Number(value);
   const cls = deltaClass(n);
   const buildTooltip = (inner) => {
@@ -4825,6 +4854,12 @@ function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineVal
       lines.push(`2023 baseline: ${fmtPctValue(Number(currentValue) - n)}`);
     }
     lines.push('Delta = current modeled share minus 2023 parish-calibrated baseline.');
+    const dv = Number(denominatorVotes);
+    if (Number.isFinite(n) && Number.isFinite(dv) && dv > 0) {
+      const voteEquiv = Math.round(dv * Math.abs(n) / 100);
+      lines.push(`Equivalent to approx ${voteEquiv.toLocaleString()} votes at modeled 2027 turnout.`);
+      lines.push(`Based on approx ${Math.round(dv).toLocaleString()} expected 2027 voters.`);
+    }
     return lines.join('\n');
   };
   if (!Number.isFinite(n)) {
@@ -5121,7 +5156,7 @@ function renderTakeaways() {
   const over = topGeo[0];
   const under = topGeo[topGeo.length - 1];
   const archetypeRows = toArray(comparison?.archetypes?.by_geography?.state?.['state wide']?.rows);
-  const topArchetype = archetypeRows
+  const archetypeSortable = archetypeRows
     .map((row) => ({ row, entry: getResponseEntryById(row, 'jeff_landry') }))
     .filter((item) => item.entry)
     .map((item) => ({
@@ -5129,7 +5164,9 @@ function renderTakeaways() {
       delta: resolveUniverseValue(item.entry?.delta_vs_2023_baseline?.all_americans, item.entry?.delta_vs_2023_baseline)
     }))
     .filter((item) => Number.isFinite(item.delta))
-    .sort((a, b) => b.delta - a.delta)[0];
+    .sort((a, b) => b.delta - a.delta);
+  const topArchetype = archetypeSortable[0];
+  const bottomArchetype = archetypeSortable[archetypeSortable.length - 1];
 
   grid.innerHTML = `
     <section class="findings-group">
@@ -5159,6 +5196,11 @@ function renderTakeaways() {
           <div class="k">Most above baseline archetype</div>
           <div class="v">${escapeHtml(topArchetype?.label || 'Unavailable')}</div>
           <div class="m">${topArchetype ? fmtDeltaHtml(topArchetype.delta, 'jeff_landry') : 'Unavailable'}</div>
+        </article>
+        <article class="finding">
+          <div class="k">Most below baseline archetype</div>
+          <div class="v">${escapeHtml(bottomArchetype?.label || 'Unavailable')}</div>
+          <div class="m">${bottomArchetype ? fmtDeltaHtml(bottomArchetype.delta, 'jeff_landry') : 'Unavailable'}</div>
         </article>
       </div>
       <div class="finding-highlights">
@@ -5193,26 +5235,57 @@ function renderQuestionCards() {
   );
   const comparisonUnit = getComparisonToplineUnit(state.typeId, state.unitId);
   const officialRaw = getOfficialStatewideBaselineMap();
-  const currentResponses = comparisonUnit
+  const useStatewideOfficial = state.typeId === 'state';
+  const currentResponsesBase = comparisonUnit
     ? toArray(comparisonUnit.responses).map((response) => ({
       id: response.id,
       label: response.label,
       color: response.color,
-      current: resolveUniverseValue(response?.current?.all_americans, response?.current)
+      current: resolveUniverseValue(response?.current?.all_americans, response?.current),
+      baseline_2023: useStatewideOfficial
+        ? null
+        : resolveUniverseValue(response?.baseline_2023?.all_americans, response?.baseline_2023)
     }))
     : getDisplayedCurrentResponses(state.typeId, state.unitId);
+
+  // Add undecided in all_americans mode (not in 2023 official results)
+  const currentResponses = currentResponsesBase.slice();
+  if (activeResponseUniverse === 'all_americans') {
+    const allOpts = getCurrentQuestionOptionsForGeography(state.typeId, state.unitId);
+    const undecidedOpt = allOpts.find((o) => o?.id === 'undecided');
+    const undecidedVal = undecidedOpt
+      ? resolveUniverseValue(undecidedOpt?.value, undecidedOpt?.values_by_universe)
+      : null;
+    if (Number.isFinite(undecidedVal) && !currentResponses.some((r) => r.id === 'undecided')) {
+      currentResponses.push({
+        id: 'undecided',
+        label: 'Undecided',
+        color: '#6b7280',
+        current: undecidedVal,
+        baseline_2023: null
+      });
+    }
+  }
+
   const responses = currentResponses.slice().sort((a, b) => {
     const valA = Number(a?.current);
     const valB = Number(b?.current);
     return valB - valA;
   });
+  // Baseline panel excludes undecided (not in official 2023 results)
+  const baselineResponses = responses.filter((r) => r.id !== 'undecided');
   const geographyLabel = getResponseGeographyUnitLabel(state.typeId, state.unitId) || comparisonUnit?.unit_label || 'Louisiana';
   const baselineUnavailable = !comparisonUnit;
 
   const renderPanelRows = (rows, sourceKey) => rows.map((response) => {
-    const value = sourceKey === 'current'
-      ? Number(response?.current)
-      : Number(officialRaw?.[response.id]);
+    let value;
+    if (sourceKey === 'current') {
+      value = Number(response?.current);
+    } else if (!useStatewideOfficial && response?.baseline_2023 != null && Number.isFinite(Number(response?.baseline_2023))) {
+      value = Number(response?.baseline_2023);
+    } else {
+      value = Number(officialRaw?.[response.id]);
+    }
     const width = Number.isFinite(value) ? Math.max(0, Math.min(100, value)).toFixed(2) : '0';
     return `
       <li class="q-opt">
@@ -5226,6 +5299,13 @@ function renderQuestionCards() {
       </li>
     `;
   }).join('');
+
+  const baselineHeading = useStatewideOfficial
+    ? '2023 official statewide baseline'
+    : '2023 calibrated baseline';
+  const baselineSubtext = useStatewideOfficial
+    ? 'Official 2023 statewide vote share • raw vote share'
+    : `${escapeHtml(geographyLabel)} • parish-calibrated 2023 vote share`;
 
   root.innerHTML = `
     <article class="question-card">
@@ -5244,13 +5324,13 @@ function renderQuestionCards() {
         <section class="topline-panel">
           <div class="topline-panel-head">
             <div>
-              <h3>2023 official statewide baseline</h3>
-              <p>Official 2023 statewide vote share • raw vote share</p>
+              <h3>${escapeHtml(baselineHeading)}</h3>
+              <p>${baselineSubtext}</p>
             </div>
           </div>
           ${baselineUnavailable
             ? `<div class="comparison-empty">Parish-calibrated comparison is not available for ${escapeHtml(geographyLabel)} in this build. District-level baseline surfaces would require parish-by-district poststrat weights upstream.</div>`
-            : `<ul class="question-opts">${renderPanelRows(responses, 'official')}</ul>`}
+            : `<ul class="question-opts">${renderPanelRows(baselineResponses, 'official')}</ul>`}
           <p class="topline-footnote" title="These are the official statewide 2023 Louisiana governor vote shares for the three displayed categories. Other and independent 2023 candidates are excluded from the displayed panel, so these three values do not sum to 100%.">Official statewide 2023 comparison values exclude other and independent candidates from the displayed panel.</p>
         </section>
       </div>
@@ -5278,7 +5358,7 @@ function renderComparisonBars(container, rows, responseId) {
         <div class="bar-fill" style="width:${width}%; background:${escapeHtml(response?.color || '#1a6b73')};"></div>
       </div>
       <div class="bar-value">${fmtPctValue(current)}</div>
-      <div>${fmtDeltaHtml(delta, responseId)}</div>
+      <div>${fmtDeltaHtml(delta, responseId, null, null, getActiveTurnoutDefaults().expectedVoters)}</div>
     `;
     container.appendChild(div);
   });
@@ -5389,11 +5469,13 @@ function renderArchetypeChart() {
   toggleRoot.innerHTML = `<button type="button" class="seg-btn active">${escapeHtml(comparison?.question_label || 'Test Ballot')}</button>`;
   const responseOptions = getComparisonResponseMeta();
   metricSel.innerHTML = '';
+  metricSel.appendChild(new Option('Overview / leading choice', '__overview__'));
   responseOptions.forEach((response) => {
     metricSel.appendChild(new Option(response?.label || response?.id || '', response?.id || ''));
   });
-  if (!responseOptions.some((response) => response?.id === comparisonArchetypeMetricId)) {
-    comparisonArchetypeMetricId = responseOptions[0]?.id || null;
+  const validMetricIds = ['__overview__', ...responseOptions.map((r) => r?.id)];
+  if (!validMetricIds.includes(comparisonArchetypeMetricId)) {
+    comparisonArchetypeMetricId = '__overview__';
   }
   metricSel.value = comparisonArchetypeMetricId || '';
   if (!metricSel.dataset.bound) {
@@ -5408,6 +5490,51 @@ function renderArchetypeChart() {
   const unitPayload = getComparisonArchetypeUnit(geography.typeId, geography.unitId);
   if (!unitPayload || !Array.isArray(unitPayload.rows) || unitPayload.rows.length === 0) {
     root.innerHTML = `<div class="comparison-empty">2023 parish-calibrated comparison is not available for this geography in the archetype card. Supported comparison geographies in this build are statewide, Cultural Region, and Parish.</div>`;
+    return;
+  }
+
+  // Overview mode: sort by Landry-alignment, show all categories as mini stacked bars
+  if (comparisonArchetypeMetricId === '__overview__') {
+    const overviewRows = unitPayload.rows.slice().sort((a, b) => {
+      const lA = resolveUniverseValue(getResponseEntryById(a, 'jeff_landry')?.current?.all_americans, getResponseEntryById(a, 'jeff_landry')?.current) || 0;
+      const gA = resolveUniverseValue(getResponseEntryById(a, 'republican_challenger')?.current?.all_americans, getResponseEntryById(a, 'republican_challenger')?.current) || 0;
+      const dA = resolveUniverseValue(getResponseEntryById(a, 'democratic_candidate')?.current?.all_americans, getResponseEntryById(a, 'democratic_candidate')?.current) || 0;
+      const lB = resolveUniverseValue(getResponseEntryById(b, 'jeff_landry')?.current?.all_americans, getResponseEntryById(b, 'jeff_landry')?.current) || 0;
+      const gB = resolveUniverseValue(getResponseEntryById(b, 'republican_challenger')?.current?.all_americans, getResponseEntryById(b, 'republican_challenger')?.current) || 0;
+      const dB = resolveUniverseValue(getResponseEntryById(b, 'democratic_candidate')?.current?.all_americans, getResponseEntryById(b, 'democratic_candidate')?.current) || 0;
+      return (lB - Math.max(gB, dB)) - (lA - Math.max(gA, dA));
+    });
+    root.innerHTML = '';
+    overviewRows.forEach((row) => {
+      const displayMeta = getComparisonResponseMeta();
+      const displayLabel = normalizeDisplayLabel(row.label || row.key || '');
+      const item = document.createElement('div');
+      item.className = 'archetype-row';
+      const labelWrap = document.createElement('div');
+      labelWrap.className = 'archetype-label';
+      const textEl = document.createElement('span');
+      textEl.className = 'archetype-label-text';
+      textEl.textContent = displayLabel;
+      labelWrap.appendChild(textEl);
+      item.appendChild(labelWrap);
+      // Build stacked bar for all responses
+      const stackBarEl = document.createElement('div');
+      stackBarEl.className = 'comparison-row';
+      const segsHtml = displayMeta.map((meta) => {
+        const val = resolveUniverseValue(getResponseEntryById(row, meta.id)?.current?.all_americans, getResponseEntryById(row, meta.id)?.current) || 0;
+        return `<div title="${escapeHtml(meta.label)}: ${fmtPctValue(val)}" style="flex:${val};background:${escapeHtml(meta.color || '#999')};height:100%;min-width:${val > 0.5 ? '2px' : '0'};"></div>`;
+      }).join('');
+      const valLabels = displayMeta.map((meta) => {
+        const val = resolveUniverseValue(getResponseEntryById(row, meta.id)?.current?.all_americans, getResponseEntryById(row, meta.id)?.current);
+        return `<span style="color:${escapeHtml(meta.color || '#333')};font-size:0.78rem;white-space:nowrap;">${escapeHtml(meta.label.split(',')[0])}: ${fmtPctValue(val)}</span>`;
+      }).join(' ');
+      stackBarEl.innerHTML = `
+        <div style="display:flex;width:100%;height:10px;border-radius:4px;overflow:hidden;gap:1px;">${segsHtml}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem 0.9rem;margin-top:0.25rem;">${valLabels}</div>
+      `;
+      item.appendChild(stackBarEl);
+      root.appendChild(item);
+    });
     return;
   }
 
@@ -5482,14 +5609,78 @@ function renderArchetypeChart() {
       <div class="comparison-response-note">Current</div>
       <div class="mini-meter"><div class="mini-fill" style="width:${width}%; background:${escapeHtml(response?.color || '#1a6b73')};"></div></div>
       <div class="bar-value">${fmtPctValue(value)}</div>
-      <div>${fmtDeltaHtml(delta, comparisonArchetypeMetricId)}</div>
+      <div>${fmtDeltaHtml(delta, comparisonArchetypeMetricId, null, null, getActiveTurnoutDefaults().expectedVoters)}</div>
     `;
     item.appendChild(rowWrap);
     root.appendChild(item);
   });
 }
 
+function renderCoalitionCard() {
+  const root = document.getElementById('coalitionCard');
+  if (!root) return;
+  const comparison = getComparison2023();
+  const rows = toArray(comparison?.archetypes?.by_geography?.state?.['state wide']?.rows);
+  if (!rows.length) {
+    root.innerHTML = '<div class="comparison-empty">Coalition data unavailable.</div>';
+    return;
+  }
+
+  function getVal(row, responseId) {
+    const entry = getResponseEntryById(row, responseId);
+    return resolveUniverseValue(entry?.current?.all_americans, entry?.current);
+  }
+
+  // Classify each archetype by leading choice
+  const groups = { landry: [], gop: [], dem: [] };
+  rows.forEach((row) => {
+    const l = getVal(row, 'jeff_landry') || 0;
+    const g = getVal(row, 'republican_challenger') || 0;
+    const d = getVal(row, 'democratic_candidate') || 0;
+    if (l >= g && l >= d) groups.landry.push(row);
+    else if (d >= g) groups.dem.push(row);
+    else groups.gop.push(row);
+  });
+
+  // Sort: Landry group by Landry share desc, GOP group by challenger share desc, Dem group by dem share desc
+  groups.landry.sort((a, b) => (getVal(b, 'jeff_landry') || 0) - (getVal(a, 'jeff_landry') || 0));
+  groups.gop.sort((a, b) => (getVal(b, 'republican_challenger') || 0) - (getVal(a, 'republican_challenger') || 0));
+  groups.dem.sort((a, b) => (getVal(b, 'democratic_candidate') || 0) - (getVal(a, 'democratic_candidate') || 0));
+
+  function renderGroup(groupRows, groupClass, title, primaryId, primaryColor) {
+    if (!groupRows.length) return '';
+    const rowsHtml = groupRows.map((row) => {
+      const pVal = getVal(row, primaryId);
+      const delta = (() => {
+        const entry = getResponseEntryById(row, primaryId);
+        return resolveUniverseValue(entry?.delta_vs_2023_baseline?.all_americans, entry?.delta_vs_2023_baseline);
+      })();
+      return `
+        <div class="coalition-row">
+          <div class="coalition-row-label">${escapeHtml(normalizeDisplayLabel(row.label || row.key || ''))}</div>
+          <div class="coalition-row-value" style="color:${escapeHtml(primaryColor)};">${fmtPctValue(pVal)}</div>
+          <div>${fmtDeltaHtml(delta, primaryId, null, null, getActiveTurnoutDefaults().expectedVoters)}</div>
+        </div>`;
+    }).join('');
+    return `
+      <div class="coalition-group ${escapeHtml(groupClass)}">
+        <div class="coalition-group-head">
+          <span class="coalition-group-title">${escapeHtml(title)}</span>
+          <span class="coalition-group-count">${groupRows.length} archetype${groupRows.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="coalition-group-rows">${rowsHtml}</div>
+      </div>`;
+  }
+
+  root.innerHTML = [
+    renderGroup(groups.landry, 'landry-group', 'Landry Base', 'jeff_landry', '#cb1d1d'),
+    renderGroup(groups.gop, 'gop-group', 'Republican Challenger Opportunity', 'republican_challenger', '#e55030'),
+    renderGroup(groups.dem, 'dem-group', 'Democratic-Leaning', 'democratic_candidate', '#0015bc')
+  ].join('');
+}
+
 function initArchetypes() {
+  renderCoalitionCard();
   renderArchetypeChart();
 }
 
@@ -5609,7 +5800,7 @@ function initGeographyExplorer() {
   const note = document.getElementById('geographyExplorerNote');
   if (!responseSel || !metricSel || !typeSel || !rowsHost || !note) return;
 
-  const responses = [...getComparisonResponseMeta(), { id: 'net_landry_position', label: 'Net Landry position', color: '#7a2030' }];
+  const responses = [...getComparisonResponseMeta()];
   responseSel.innerHTML = '';
   responses.forEach((response) => responseSel.appendChild(new Option(response.label || response.id, response.id)));
   if (!responses.some((response) => response.id === activeGeographyExplorerResponseId)) {
