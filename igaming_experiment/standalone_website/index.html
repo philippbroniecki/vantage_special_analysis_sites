@@ -408,6 +408,63 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
   .bar-row { grid-template-columns: minmax(116px, 1fr) minmax(0, 1fr) 72px; }
   .feedback-callout { padding: 1.5rem 1.2rem; }
 }
+
+/* ── Strategic Impact section ─────────────────────────── */
+.si-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.68rem; }
+.si-card { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); padding: 0.76rem 0.82rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.si-eyebrow { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.si-headline { font-size: 0.88rem; font-weight: 760; color: var(--ink); line-height: 1.28; }
+.si-big-num { font-size: 1.62rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.si-big-num.pos { color: var(--pos); }
+.si-big-num.neg { color: var(--neg); }
+.si-subtext { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.1rem; }
+.si-party-rows { display: grid; gap: 0.28rem; margin-top: 0.18rem; }
+.si-party-row { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.si-party-label { font-size: 0.79rem; color: var(--ink-soft); }
+.si-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.18rem; line-height: 1.35; }
+@media (max-width: 980px) { .si-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .si-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── Party Breakdown table ────────────────────────────── */
+.party-bk-table { width: 100%; border-collapse: collapse; }
+.party-bk-table th, .party-bk-table td { border-bottom: 1px solid var(--line); padding: 0.48rem 0.5rem; font-size: 0.84rem; text-align: left; }
+.party-bk-table th { font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.party-bk-table td.pname { font-weight: 700; color: var(--ink); }
+.party-callout { margin-top: 0.82rem; padding: 0.68rem 0.78rem; background: var(--accent-tint); border-left: 3px solid var(--accent); border-radius: 0 var(--r-sm) var(--r-sm) 0; font-size: 0.83rem; color: var(--ink-soft); }
+
+/* ── Archetype card ───────────────────────────────────── */
+.archetype-groups { display: grid; gap: 0.72rem; margin-top: 0.6rem; }
+.archetype-lean-group { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.archetype-lean-header { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.42rem 0.72rem; }
+.archetype-lean-header.lean-rep { background: color-mix(in srgb, #c54949 12%, var(--surface-alt)); color: #b33030; border-bottom: 1px solid color-mix(in srgb, #c54949 22%, var(--line)); }
+.archetype-lean-header.lean-swing { background: color-mix(in srgb, #70879c 14%, var(--surface-alt)); color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+.archetype-lean-header.lean-dem { background: color-mix(in srgb, #1a6b73 12%, var(--surface-alt)); color: var(--accent); border-bottom: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line)); }
+:root[data-theme='dark'] .archetype-lean-header.lean-rep { background: color-mix(in srgb, #f37f7f 10%, var(--surface-alt)); color: #f37f7f; }
+:root[data-theme='dark'] .archetype-lean-header.lean-dem { background: color-mix(in srgb, #48b4be 10%, var(--surface-alt)); color: var(--accent); }
+.archetype-row-item { display: grid; grid-template-columns: minmax(140px, 2fr) 1fr 1fr 72px; align-items: center; gap: 0.5rem; padding: 0.38rem 0.72rem; border-bottom: 1px solid var(--line-soft); font-size: 0.82rem; }
+.archetype-row-item:last-child { border-bottom: none; }
+.archetype-row-item.arch-col-head { background: var(--surface-alt); }
+.arch-col-head .arch-name, .arch-col-head .arch-val, .arch-col-head .arch-ve { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.arch-name { color: var(--ink-soft); }
+.arch-val { font-variant-numeric: tabular-nums; }
+.arch-ve { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.79rem; }
+@media (max-width: 700px) {
+  .archetype-row-item { grid-template-columns: minmax(100px, 2fr) 1fr 1fr 60px; font-size: 0.78rem; padding: 0.36rem 0.5rem; }
+}
+
+/* ── Submap disclosure (scatterplot) ──────────────────── */
+.submap-details { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.submap-summary { list-style: none; cursor: pointer; font-size: 0.86rem; font-weight: 700; padding: 0.72rem 0.86rem; color: var(--ink-soft); border-bottom: 1px solid transparent; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.submap-summary::-webkit-details-marker { display: none; }
+.submap-summary::after { content: '+'; display: inline-flex; align-items: center; justify-content: center; width: 1.3rem; height: 1.3rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--accent); font-size: 0.96rem; line-height: 1; flex: 0 0 auto; }
+.submap-details[open] .submap-summary { border-bottom-color: var(--line); }
+.submap-details[open] .submap-summary::after { content: '\2212'; }
+.submap-details-body { padding: 0.9rem 0; }
+
+/* Partisan-lean point colors on scatterplot */
+.quad-point.lean-rep-pt { background: var(--neg) !important; }
+.quad-point.lean-dem-pt { background: var(--pos) !important; }
+.quad-point.lean-swing-pt { background: var(--neutral) !important; }
     </style>
   </head>
   <body>
@@ -451,6 +508,19 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           <p class="response-universe-explainer" id="responseUniverseExplainer"></p>
           <p class="response-universe-note" id="responseUniverseStatusNote"></p>
         </div>
+      </section>
+
+
+      <section class="card" id="componentStrategicImpact" data-component-id="strategic_impact" data-universe-scope="analytic">
+        <h2 class="section-title">Strategic Impact in Numbers</h2>
+        <div class="section-mode-label" id="modeLabelStrategicImpact"></div>
+        <div class="si-grid" id="siGrid"></div>
+      </section>
+
+      <section class="card" id="componentPartyBreakdown" data-component-id="party_breakdown" data-universe-scope="analytic">
+        <h2 class="section-title">Effect by Party: Ballot vs. Favorability</h2>
+        <div class="section-mode-label" id="modeLabelPartyBreakdown"></div>
+        <div id="partyBreakdownContent"></div>
       </section>
 
       <section class="card" id="componentKeyFindings" data-component-id="key_findings">
@@ -539,7 +609,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       </section>
 
       <section class="card" id="componentCalculator" data-component-id="vote_impact_calculator">
-        <h2 class="section-title">Vote Impact Calculator</h2>
+        <h2 class="section-title">Customize Vote Impact Estimate</h2>
         <div class="section-mode-label" id="modeLabelCalculator"></div>
         <p class="explainer">Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline, while Key Findings and summary vote equivalents continue to use modeled poststratified denominators. Net Landry position is treated as a vote-margin equivalent.</p>
         <div class="controls">
@@ -574,8 +644,25 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         <div class="calc-result" id="calcResult"></div>
       </section>
 
+      <section class="card" id="componentArchetypeCard" data-component-id="archetype_card" data-universe-scope="analytic">
+        <h2 class="section-title">Where the Vote Movement Is: Archetypes</h2>
+        <div class="section-mode-label" id="modeLabelArchetypeCard"></div>
+        <p class="explainer">Archetypes grouped by partisan lean, sorted by vote-equivalent contribution. Shows signing effect, action-vs.-inaction advantage, and estimated vote equivalent.</p>
+        <div class="controls n3" style="max-width:600px;">
+          <div>
+            <label for="archOutcome">Outcome</label>
+            <select id="archOutcome"></select>
+          </div>
+          <div>
+            <label for="archEstimand">Sort metric</label>
+            <select id="archEstimand"></select>
+          </div>
+        </div>
+        <div id="archetypeGroups" class="archetype-groups"></div>
+      </section>
+
       <section class="card" id="componentSubgroups" data-component-id="subgroup_explorer">
-        <h2 class="section-title">Subgroup Effects Explorer</h2>
+        <h2 class="section-title">Explore Effects by Group</h2>
         <div class="section-mode-label" id="modeLabelSubgroups"></div>
         <div class="controls n4">
           <div>
@@ -599,8 +686,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       </section>
 
       <section class="card" id="componentQuadrant" data-component-id="risk_opportunity_quadrant">
-        <h2 class="section-title">Risk / Opportunity Quadrant</h2>
+        <h2 class="section-title">Action vs. Inaction: Full Subgroup Map</h2>
         <div class="section-mode-label" id="modeLabelQuadrant"></div>
+        <details class="submap-details" id="submapDisclosure">
+          <summary class="submap-summary">Show full subgroup map</summary>
+          <div class="submap-details-body">
         <p class="quad-explainer">Each point is a subgroup. The x-axis shows how that subgroup moves under the action-delivery scenario. The y-axis shows how it moves under the inaction/no-delivery scenario. The lower-right quadrant is usually the most politically valuable: these groups improve under action and worsen under inaction.</p>
         <details class="methodology-details quad-note">
           <summary>How to read this chart</summary>
@@ -637,9 +727,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             <div class="quad-label" style="left:10px; bottom:8px;">Broad political risk</div>
             <div class="quad-label" style="right:10px; bottom:8px;">Action upside + inaction danger</div>
           </div>
-          <div class="quad-axis-caption x">Action / delivery effect</div>
-          <div class="quad-axis-caption y">Inaction / no-delivery effect</div>
+          <div class="quad-axis-caption x">Effect of signing compact</div>
+          <div class="quad-axis-caption y">Effect of inaction / no delivery</div>
         </div>
+          </div><!-- /.submap-details-body -->
+        </details><!-- /.submap-details -->
       </section>
 
       <section class="card" id="componentGeography" data-component-id="geography_explorer">
@@ -1544,6 +1636,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 
       function updateModeLabelElements() {
         const ids = [
+          "modeLabelStrategicImpact",
+          "modeLabelPartyBreakdown",
+          "modeLabelArchetypeCard",
           "modeLabelKeyFindings",
           "modeLabelSummary",
           "modeLabelMainEffects",
@@ -1575,6 +1670,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           btn.setAttribute("aria-pressed", pressed ? "true" : "false");
         });
         if (!rerender) return;
+        renderStrategicImpact();
+        renderPartyBreakdownCard();
+        renderArchetypeCard();
         renderKeyFindings();
         renderSummary();
         initMainEffects();
@@ -1811,7 +1909,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             if (meta?.label) row.level_label = meta.label;
           }
           if (row.demographic === "party") {
-            const partyMap = { R: "Republicans", D: "Democrats", O: "Independents/Other", I: "Independents/Other" };
+            const partyMap = { R: "Republicans", D: "Democrats", O: "Independents", I: "Independents" };
             if (partyMap[row.level]) row.level_label = partyMap[row.level];
           }
         });
@@ -2030,7 +2128,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             .map((r) => ({ id: r.demographic, label: r.demographic_label || r.demographic })),
           (x) => x.id
         );
-        setSelectOptions(demoSel, demographics, "id", "label", "party");
+        setSelectOptions(demoSel, demographics, "id", "label", "profile");
 
         function syncResponses() {
           const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
@@ -2067,6 +2165,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
               return {
                 label: item.label,
                 value: selectedRow.estimate_pp,
+                voteEquivalent: selectedRow.vote_equivalent,
                 tooltip: item.label,
                 tooltipHtml: buildDecompositionTooltipHtml({
                   title: item.label,
@@ -2091,7 +2190,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
               };
             });
 
-          rows.sort((a, b) => Number(b.value) - Number(a.value));
+          if (demoSel.value === "profile") {
+            rows.sort((a, b) => Math.abs(Number(b.voteEquivalent)) - Math.abs(Number(a.voteEquivalent)));
+          } else {
+            rows.sort((a, b) => Number(b.value) - Number(a.value));
+          }
           drawBars(
             bars,
             rows
@@ -2147,6 +2250,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         }
 
         function findDefaultHighlightedValues(points) {
+          const evangelicalPoint = points.find((point) => /evangelical_republican/i.test(`${point.key}`));
+          if (evangelicalPoint) return [evangelicalPoint.key];
           const tradwifePoint = points.find((point) => /tradwif/i.test(`${point.key} ${point.label}`));
           if (tradwifePoint) return [tradwifePoint.key];
           const strongestPoint = points
@@ -2297,6 +2402,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
               x: Number(a.estimate_pp),
               y: Number(b?.estimate_pp),
               did: Number(d?.estimate_pp),
+              voteEquivalent: Number(d?.vote_equivalent || a?.vote_equivalent || 0),
+              partisanLean: archetypeMetaMap().get(a.level)?.partisan_lean || null,
               demographic: a.demographic_label || a.demographic,
               rowA: a,
               rowB: b,
@@ -2322,9 +2429,20 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             const xPct = 50 + (pt.x / maxAbs) * 42;
             const yPct = 50 - (pt.y / maxAbs) * 42;
             const dot = document.createElement("div");
-            dot.className = `quad-point ${deltaClass(pt.did)}${highlightedKeys.has(pt.key) ? " is-highlighted" : ""}`;
+            const maxVE = Math.max(1, ...points.map(p => Math.abs(p.voteEquivalent)));
+            const veRatio = maxVE > 0 ? Math.min(1, Math.abs(pt.voteEquivalent) / maxVE) : 0;
+            const ptSz = pt.partisanLean && pt.voteEquivalent > 0 ? Math.round(7 + veRatio * 9) : 9;
+            const ptOff = Math.round(ptSz / 2);
+            const leanClass = pt.partisanLean === "republican" ? "lean-rep-pt" : pt.partisanLean === "democratic" ? "lean-dem-pt" : pt.partisanLean === "swing" ? "lean-swing-pt" : "";
+            dot.className = `quad-point ${deltaClass(pt.did)}${highlightedKeys.has(pt.key) ? " is-highlighted" : ""}${leanClass ? " " + leanClass : ""}`;
             dot.style.left = `${xPct}%`;
             dot.style.top = `${yPct}%`;
+            if (pt.voteEquivalent > 0) {
+              dot.style.width = `${ptSz}px`;
+              dot.style.height = `${ptSz}px`;
+              dot.style.marginLeft = `-${ptOff}px`;
+              dot.style.marginTop = `-${ptOff}px`;
+            }
             attachSharedTooltip(dot, () => buildDecompositionTooltipHtml({
               title: pt.label,
               entityKind: "subgroup",
@@ -2593,6 +2711,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       function renderDataLoadError(message) {
         const idsToHide = [
           "componentResponseUniverse",
+          "componentStrategicImpact",
+          "componentPartyBreakdown",
+          "componentArchetypeCard",
           "componentKeyFindings",
           "componentMethodology",
           "componentArms",
@@ -2653,6 +2774,227 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         }
       }
 
+
+      // ── Strategic Impact in Numbers ─────────────────────────────────────────
+      function renderStrategicImpact() {
+        const grid = document.getElementById("siGrid");
+        if (!grid) return;
+
+        const parties = [
+          { key: "R", label: "Republicans" },
+          { key: "O", label: "Independents" },
+          { key: "D", label: "Democrats" }
+        ];
+
+        function getEffect(outcomeId, responseId, estimand) {
+          const result = {};
+          parties.forEach((p) => {
+            const rec = findRecord({ outcome_id: outcomeId, response_id: responseId, estimand, unit_type: "state", demographic: "party", level: p.key });
+            result[p.key] = rec ? Number(rec.estimate_pp) : NaN;
+          });
+          return result;
+        }
+
+        function partyDeltaRows(effects) {
+          return parties.map((p) => {
+            const v = effects[p.key];
+            return `<div class="si-party-row"><span class="si-party-label">${escapeHtml(p.label)}</span><span class="delta ${deltaClass(v)}">${fmtDeltaHtml(v)}</span></div>`;
+          }).join("");
+        }
+
+        const signing  = getEffect("ballot", NET_LANDRY_ID, "arm_a_effect");
+        const did      = getEffect("ballot", NET_LANDRY_ID, "difference_in_differences");
+        const fav      = getEffect("favorability", "net_favorability", "arm_a_effect");
+
+        const baselineNote = activeResponseUniverse === "with_view"
+          ? "Pre-experiment toplines (respondents with a view)."
+          : "Baseline shown for \"respondents with a view\" universe only.";
+
+        grid.innerHTML = `
+          <div class="si-card">
+            <div class="si-eyebrow">1 of 5 · Baseline ballot</div>
+            <div class="si-headline">Landry is weak right now</div>
+            <div class="si-party-rows">
+              <div class="si-party-row"><span class="si-party-label">Landry</span><span class="delta neg">37%</span></div>
+              <div class="si-party-row"><span class="si-party-label">Dem. challenger</span><span class="delta pos">43%</span></div>
+              <div class="si-party-row"><span class="si-party-label">R. challenger (among Rs)</span><span class="delta neutral">31.5%</span></div>
+            </div>
+            <p class="si-note">${escapeHtml(baselineNote)}</p>
+          </div>
+          <div class="si-card">
+            <div class="si-eyebrow">2 of 5 · iGaming Support</div>
+            <div class="si-headline">iGaming isn't the risk driver</div>
+            <div class="si-big-num pos">~68%</div>
+            <p class="si-subtext">net statewide support</p>
+            <p class="si-note">Broad, broadly nonpartisan. From baseline support survey (with a view).</p>
+          </div>
+          <div class="si-card">
+            <div class="si-eyebrow">3 of 5 · Signing Effect</div>
+            <div class="si-headline">Compact signing: ~net zero overall</div>
+            <div class="si-party-rows">${partyDeltaRows(signing)}</div>
+            <p class="si-note">Net Landry ballot effect if Landry signs the iGaming compact.</p>
+          </div>
+          <div class="si-card">
+            <div class="si-eyebrow">4 of 5 · Action vs. Inaction</div>
+            <div class="si-headline">Doing nothing hurts more than signing</div>
+            <div class="si-party-rows">${partyDeltaRows(did)}</div>
+            <p class="si-note">Advantage of acting vs. doing nothing, assuming revenue is used as promised.</p>
+          </div>
+          <div class="si-card">
+            <div class="si-eyebrow">5 of 5 · Favorability (early warning)</div>
+            <div class="si-headline">Favorability moves before vote choice</div>
+            <div class="si-party-rows">${partyDeltaRows(fav)}</div>
+            <p class="si-note">Landry net favorability effect of signing. Favorability leads vote choice.</p>
+          </div>
+        `;
+      }
+
+      // ── Party Breakdown Card ──────────────────────────────────────────────────
+      function renderPartyBreakdownCard() {
+        const host = document.getElementById("partyBreakdownContent");
+        if (!host) return;
+
+        const parties = [
+          { key: "R", label: "Republicans" },
+          { key: "O", label: "Independents" },
+          { key: "D", label: "Democrats" }
+        ];
+
+        function getVal(outcomeId, responseId, estimand, partyKey) {
+          const rec = findRecord({ outcome_id: outcomeId, response_id: responseId, estimand, unit_type: "state", demographic: "party", level: partyKey });
+          return rec ? Number(rec.estimate_pp) : NaN;
+        }
+
+        const rows = parties.map((p) => ({
+          label: p.label,
+          signing: getVal("ballot", NET_LANDRY_ID, "arm_a_effect", p.key),
+          did:     getVal("ballot", NET_LANDRY_ID, "difference_in_differences", p.key),
+          fav:     getVal("favorability", "net_favorability", "arm_a_effect", p.key)
+        }));
+
+        host.innerHTML = `
+          <div class="table-wrap">
+            <table class="party-bk-table">
+              <thead>
+                <tr>
+                  <th>Party</th>
+                  <th>Signing effect on ballot</th>
+                  <th>Action vs. inaction advantage</th>
+                  <th>Favorability effect (signing)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows.map((r) => `
+                  <tr>
+                    <td class="pname">${escapeHtml(r.label)}</td>
+                    <td>${fmtDeltaHtml(r.signing)}</td>
+                    <td>${fmtDeltaHtml(r.did)}</td>
+                    <td>${fmtDeltaHtml(r.fav)}</td>
+                  </tr>`).join("")}
+              </tbody>
+            </table>
+          </div>
+          <div class="party-callout">
+            Republicans are the key tension: signing creates some ballot risk from the right, but acting and delivering is better than inaction for all parties — and favorability moves before the ballot.
+          </div>
+        `;
+      }
+
+      // ── Archetype Card ───────────────────────────────────────────────────────
+      function initArchetypeCard() {
+        const outcomeSel  = document.getElementById("archOutcome");
+        const estimandSel = document.getElementById("archEstimand");
+        if (!outcomeSel || !estimandSel) return;
+
+        setSelectOptions(outcomeSel,  reportData.outcomes  || [], "id", "short_label",   "ballot");
+        setSelectOptions(estimandSel, reportData.estimands || [], "id", "label",           "difference_in_differences");
+
+        renderArchetypeCard();
+        outcomeSel.addEventListener("change",  renderArchetypeCard);
+        estimandSel.addEventListener("change", renderArchetypeCard);
+      }
+
+      function renderArchetypeCard() {
+        const host        = document.getElementById("archetypeGroups");
+        if (!host) return;
+
+        const outcomeSel  = document.getElementById("archOutcome");
+        const estimandSel = document.getElementById("archEstimand");
+        const outcomeId   = outcomeSel  ? outcomeSel.value  : "ballot";
+        const sortEstimand = estimandSel ? estimandSel.value : "difference_in_differences";
+
+        const outcome         = getOutcomeById(outcomeId);
+        const defaultResponse = outcome?.default_response || NET_LANDRY_ID;
+
+        const archetypes = archetypeMetaMap();
+
+        const rowsA = filterRecords({ outcome_id: outcomeId, response_id: defaultResponse, estimand: "arm_a_effect",            unit_type: "state", demographic: "profile" }).filter((r) => r.level !== "overall");
+        const rowsB = filterRecords({ outcome_id: outcomeId, response_id: defaultResponse, estimand: "arm_b_effect",            unit_type: "state", demographic: "profile" }).filter((r) => r.level !== "overall");
+        const rowsD = filterRecords({ outcome_id: outcomeId, response_id: defaultResponse, estimand: "difference_in_differences", unit_type: "state", demographic: "profile" }).filter((r) => r.level !== "overall");
+
+        const byLevel = new Map();
+        rowsA.forEach((r) => {
+          const meta = archetypes.get(r.level) || {};
+          byLevel.set(r.level, {
+            key: r.level,
+            label: r.level_label || meta.label || r.level,
+            partisan_lean: meta.partisan_lean || "unknown",
+            partisan_lean_label: meta.partisan_lean_label || "Unknown",
+            arm_a: null, arm_b: null, did: null
+          });
+        });
+        rowsA.forEach((r) => { if (byLevel.has(r.level)) byLevel.get(r.level).arm_a = r; });
+        rowsB.forEach((r) => { if (byLevel.has(r.level)) byLevel.get(r.level).arm_b = r; });
+        rowsD.forEach((r) => { if (byLevel.has(r.level)) byLevel.get(r.level).did   = r; });
+
+        function getSortRow(item) {
+          return sortEstimand === "arm_a_effect" ? item.arm_a : sortEstimand === "arm_b_effect" ? item.arm_b : item.did;
+        }
+
+        const items = Array.from(byLevel.values());
+        items.sort((a, b) => Math.abs(Number(getSortRow(b)?.vote_equivalent) || 0) - Math.abs(Number(getSortRow(a)?.vote_equivalent) || 0));
+
+        const GROUPS = [
+          { id: "republican", label: "Republican-leaning / Landry base",         cssClass: "lean-rep"   },
+          { id: "swing",      label: "Swing / Independent / cross-pressured",     cssClass: "lean-swing" },
+          { id: "democratic", label: "Democratic-leaning",                         cssClass: "lean-dem"   }
+        ];
+
+        const colHead = `<div class="archetype-row-item arch-col-head">
+          <div class="arch-name">Archetype</div>
+          <div class="arch-val">Signing effect</div>
+          <div class="arch-val">Action advantage</div>
+          <div class="arch-ve">Vote equiv.</div>
+        </div>`;
+
+        const groupsHtml = GROUPS.map((group) => {
+          const groupItems = items.filter((item) => item.partisan_lean === group.id);
+          if (!groupItems.length) return "";
+
+          const rowsHtml = groupItems.map((item) => {
+            const armAVal = Number(item.arm_a?.estimate_pp);
+            const didVal  = Number(item.did?.estimate_pp);
+            const sortRow = getSortRow(item);
+            const ve = sortRow?.vote_equivalent;
+            const veStr = ve != null && Number.isFinite(Number(ve)) ? fmtNum(Math.round(Math.abs(Number(ve)))) : "—";
+            return `<div class="archetype-row-item" tabindex="0">
+              <div class="arch-name">${escapeHtml(item.label)}</div>
+              <div class="arch-val">${fmtDeltaHtml(armAVal)}</div>
+              <div class="arch-val">${fmtDeltaHtml(didVal)}</div>
+              <div class="arch-ve">${escapeHtml(veStr)}</div>
+            </div>`;
+          }).join("");
+
+          return `<div class="archetype-lean-group">
+            <div class="archetype-lean-header ${escapeHtml(group.cssClass)}">${escapeHtml(group.label)}</div>
+            ${colHead}
+            ${rowsHtml}
+          </div>`;
+        }).join("");
+
+        host.innerHTML = groupsHtml || '<p class="muted">No archetype data available for this selection.</p>';
+      }
+
       async function init() {
         reportData = await loadData();
         normalizeRecordLabels();
@@ -2674,6 +3016,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           return;
         }
         initResponseUniverseToggle();
+        renderStrategicImpact();
+        renderPartyBreakdownCard();
+        initArchetypeCard();
         renderKeyFindings();
         renderSummary();
         initMainEffects();

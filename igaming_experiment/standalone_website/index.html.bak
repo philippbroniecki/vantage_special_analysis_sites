@@ -1,0 +1,2702 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Impact of Online Gaming on Governor Landry's 2027 Prospects</title>
+    <link rel="icon" href="data:," />
+    <script>
+      (function bootstrapVDHTheme() {
+        const THEME_PARAM_KEY = "theme";
+        const THEME_COOKIE_KEY = "vdh_theme";
+        const THEME_STORAGE_KEY = "vdh_theme";
+        const LEGACY_STORAGE_KEYS = [
+          "vantage-theme",
+          "vdh_iran2_theme",
+          "vdh_ice2_theme",
+          "vdh_trump_theme",
+          "vdh_georgia_primary_theme",
+          "vdh_georgia_favorability_theme",
+          "vdh_georgia_flows_theme",
+          "vdh_georgia_thurmond_messaging_theme",
+          "vdh_georgia_state_direction_theme",
+          "vdh_georgia_top_issue_theme",
+          "vdh_georgia_agree_theme",
+          "vdh_georgia_casino_gambling_theme",
+          "vdh_georgia_survey_stats_theme"
+        ];
+
+        function normalizeTheme(value) {
+          return value === "dark" || value === "light" ? value : null;
+        }
+
+        function readThemeFromQuery() {
+          try {
+            const params = new URLSearchParams(window.location.search || "");
+            return normalizeTheme(params.get(THEME_PARAM_KEY));
+          } catch (err) {
+            return null;
+          }
+        }
+
+        function readThemeFromCookie() {
+          try {
+            const entries = String(document.cookie || "").split(";");
+            for (const entry of entries) {
+              const trimmed = entry.trim();
+              if (!trimmed) continue;
+              const idx = trimmed.indexOf("=");
+              if (idx <= 0) continue;
+              const key = trimmed.slice(0, idx).trim();
+              if (key !== THEME_COOKIE_KEY) continue;
+              const value = decodeURIComponent(trimmed.slice(idx + 1));
+              const normalized = normalizeTheme(value);
+              if (normalized) return normalized;
+            }
+          } catch (err) {}
+          return null;
+        }
+
+        function readThemeFromStorage() {
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try {
+              const normalized = normalizeTheme(window.localStorage.getItem(key));
+              if (normalized) return normalized;
+            } catch (err) {}
+          }
+          return null;
+        }
+
+        function readThemeFromSystem() {
+          try {
+            if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
+            if (window.matchMedia) return "light";
+          } catch (err) {}
+          return null;
+        }
+
+        function resolveInitialTheme() {
+          const fromQuery = readThemeFromQuery();
+          if (fromQuery) return { theme: fromQuery, source: "param" };
+
+          const fromCookie = readThemeFromCookie();
+          if (fromCookie) return { theme: fromCookie, source: "cookie" };
+
+          const fromStorage = readThemeFromStorage();
+          if (fromStorage) return { theme: fromStorage, source: "storage" };
+
+          const fromSystem = readThemeFromSystem();
+          if (fromSystem) return { theme: fromSystem, source: "system" };
+
+          return { theme: "light", source: "fallback" };
+        }
+
+        function isPhilippDomain(hostname) {
+          const host = String(hostname || "").toLowerCase();
+          return host === "philippbroniecki.com" || host.endsWith(".philippbroniecki.com");
+        }
+
+        function getSharedCookieDomain() {
+          return isPhilippDomain(window.location.hostname) ? ".philippbroniecki.com" : "";
+        }
+
+        function persistTheme(theme) {
+          const normalized = normalizeTheme(theme);
+          if (!normalized) return;
+
+          const securePart = window.location.protocol === "https:" ? "; Secure" : "";
+          const baseCookie = `${THEME_COOKIE_KEY}=${encodeURIComponent(normalized)}; Path=/; Max-Age=31536000; SameSite=Lax${securePart}`;
+          const sharedDomain = getSharedCookieDomain();
+
+          try {
+            if (sharedDomain) {
+              document.cookie = `${baseCookie}; Domain=${sharedDomain}`;
+            }
+            document.cookie = baseCookie;
+          } catch (err) {}
+
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try { window.localStorage.setItem(key, normalized); } catch (err) {}
+          }
+        }
+
+        function shouldPropagateThemeToURL(url, rawHref) {
+          const raw = String(rawHref || "").trim();
+          if (!raw || raw.startsWith("#") || /^mailto:/i.test(raw) || /^tel:/i.test(raw) || /^javascript:/i.test(raw)) {
+            return false;
+          }
+
+          const protocol = String((url && url.protocol) || "").toLowerCase();
+          if (protocol === "file:") return true;
+          if (protocol !== "http:" && protocol !== "https:") return false;
+
+          const host = String((url && url.hostname) || "").toLowerCase();
+          if (host === "localhost" || host === "127.0.0.1" || host === "[::1]") return true;
+          return isPhilippDomain(host);
+        }
+
+        function withThemeParam(rawHref, theme) {
+          const normalizedTheme = normalizeTheme(theme);
+          if (!normalizedTheme) return rawHref;
+
+          try {
+            const url = new URL(rawHref, window.location.href);
+            if (!shouldPropagateThemeToURL(url, rawHref)) return rawHref;
+            url.searchParams.set(THEME_PARAM_KEY, normalizedTheme);
+            return url.toString();
+          } catch (err) {
+            return rawHref;
+          }
+        }
+
+        function getActiveTheme() {
+          return normalizeTheme(document.documentElement.getAttribute("data-theme")) || "light";
+        }
+
+        window.VDHTheme = {
+          normalizeTheme,
+          resolveInitialTheme,
+          persistTheme,
+          withThemeParam,
+          getActiveTheme,
+          shouldPropagateThemeToURL,
+          themeParamKey: THEME_PARAM_KEY
+        };
+
+        const initialTheme = resolveInitialTheme();
+        document.documentElement.setAttribute("data-theme", initialTheme.theme);
+        window.__VDH_THEME_BOOT__ = initialTheme;
+      })();
+    </script>
+    <style>
+:root {
+  --bg: #edf2f8;
+  --bg-deep: #d6e3f0;
+  --surface: #ffffff;
+  --surface-alt: #f3f7fc;
+  --ink: #0d1d2e;
+  --ink-soft: #364d63;
+  --muted: #5c7289;
+  --line: #ccd8e5;
+  --line-soft: #dce7f0;
+  --accent: #1a6b73;
+  --accent-hover: #145d64;
+  --accent-tint: rgba(26, 107, 115, 0.09);
+  --accent-tint2: rgba(26, 107, 115, 0.16);
+  --pos: #1f8f57;
+  --neg: #c54949;
+  --neutral: #70879c;
+  --shadow-card: 0 1px 2px rgba(10, 25, 55, 0.04), 0 4px 14px rgba(10, 25, 55, 0.055), 0 0 0 1px rgba(10, 25, 55, 0.028);
+  --shadow-raise: 0 2px 5px rgba(10, 25, 55, 0.06), 0 10px 28px rgba(10, 25, 55, 0.09), 0 0 0 1px rgba(10, 25, 55, 0.04);
+  --hero-from: #0c2240;
+  --hero-to: #1c4a80;
+  --topbar-bg: rgba(237, 242, 248, 0.86);
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-full: 9999px;
+}
+:root[data-theme='dark'] {
+  --bg: #0c1520;
+  --bg-deep: #07101a;
+  --surface: #111c2b;
+  --surface-alt: #172338;
+  --ink: #e3ecf8;
+  --ink-soft: #b0cbdf;
+  --muted: #728ea8;
+  --line: #1e3049;
+  --line-soft: #172640;
+  --accent: #48b4be;
+  --accent-hover: #60c6d0;
+  --accent-tint: rgba(72, 180, 190, 0.10);
+  --accent-tint2: rgba(72, 180, 190, 0.18);
+  --pos: #58c97f;
+  --neg: #f37f7f;
+  --neutral: #98adc4;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-raise: 0 2px 5px rgba(0, 0, 0, 0.4), 0 10px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --hero-from: #162e52;
+  --hero-to: #0c1f3a;
+  --topbar-bg: rgba(11, 20, 31, 0.9);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: light dark; overflow-x: hidden; }
+body { overflow-x: hidden; }
+body {
+  min-height: 100vh;
+  font-family: "Inter", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse at 14% 7%, rgba(26, 107, 115, 0.14) 0%, transparent 46%), radial-gradient(ellipse at 86% 0%, rgba(37, 86, 163, 0.12) 0%, transparent 38%), linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  transition: background-color 280ms ease, color 280ms ease;
+}
+.topbar-wrap { position: sticky; top: 0; z-index: 40; background: var(--topbar-bg); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border-bottom: 1px solid var(--line-soft); }
+.topbar { max-width: 1100px; margin: 0 auto; padding: 0 1.6rem; height: 54px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; }
+.brand-mark { width: 8px; height: 8px; border-radius: var(--r-full); background: var(--accent); box-shadow: 0 0 0 2px var(--accent-tint2); }
+.brand-text { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink); }
+.theme-toggle { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.38rem 0.88rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-full); color: var(--ink-soft); font-size: 0.76rem; font-weight: 600; cursor: pointer; letter-spacing: 0.02em; box-shadow: var(--shadow-card); transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 180ms ease, transform 150ms ease; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow-raise); }
+.layout { max-width: 1100px; margin: 0 auto; padding: 1.4rem 1.6rem 4rem; display: grid; gap: 1.35rem; }
+.back-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.back-btn, .sibling-link { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: var(--r-full); background: var(--surface-alt); color: var(--ink-soft); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.45rem 0.82rem; text-decoration: none; transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease; }
+.back-btn:hover, .sibling-link:hover { border-color: var(--accent); color: var(--accent); }
+.sibling-nav { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding: 1.2rem 1.25rem; }
+.load-error-card { border-color: color-mix(in srgb, var(--neg) 32%, var(--line)); background: linear-gradient(180deg, color-mix(in srgb, var(--neg) 8%, var(--surface)) 0%, var(--surface) 100%); }
+.hero { padding: 1.35rem 1.35rem 1.3rem; background: linear-gradient(148deg, var(--hero-from) 0%, var(--hero-to) 100%); border-color: transparent; color: #eef4ff; position: relative; overflow: hidden; }
+.hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.hero::before { width: 360px; height: 360px; right: -150px; top: -190px; background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%); }
+.hero::after { width: 300px; height: 300px; left: -120px; bottom: -160px; background: radial-gradient(circle, rgba(72, 180, 190, 0.25) 0%, transparent 74%); }
+.hero-inner { position: relative; z-index: 1; }
+.hero .eyebrow { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.88; }
+.hero .eyebrow::before { content: ""; width: 18px; height: 2px; border-radius: 999px; background: rgba(255, 255, 255, 0.65); }
+.hero h1 { margin-top: 0.62rem; font-size: clamp(1.52rem, 2.4vw, 2.24rem); line-height: 1.16; letter-spacing: -0.01em; }
+.hero p { margin-top: 0.58rem; color: rgba(238, 244, 255, 0.9); max-width: 78ch; }
+.hero-meta { margin-top: 0.88rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.pill { display: inline-flex; align-items: center; border-radius: var(--r-full); border: 1px solid rgba(255, 255, 255, 0.24); background: rgba(255, 255, 255, 0.08); color: rgba(238, 244, 255, 0.95); font-size: 0.74rem; font-weight: 640; padding: 0.3rem 0.64rem; }
+.section-title { margin-bottom: 0.72rem; font-size: 1.05rem; line-height: 1.28; }
+.muted { color: var(--muted); }
+.explainer { margin-top: -0.15rem; margin-bottom: 0.72rem; font-size: 0.84rem; color: var(--ink-soft); }
+.card--control { background: var(--surface-alt); }
+.response-universe-toggle { margin: 0; }
+.response-universe-title { margin: 0 0 0.5rem; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); }
+.response-universe-segment { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 0.45rem; }
+.response-universe-btn { border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); color: var(--ink-soft); font-size: 0.78rem; font-weight: 700; line-height: 1.25; padding: 0.5rem 0.7rem; cursor: pointer; transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease, opacity 180ms ease; }
+.response-universe-btn.active { border: 2px solid var(--accent); background: var(--accent-tint); color: var(--ink); font-weight: 800; }
+.response-universe-btn:disabled { cursor: not-allowed; opacity: 0.56; }
+.response-universe-explainer, .response-universe-note { margin: 0; font-size: 0.76rem; line-height: 1.35; color: var(--muted); }
+.response-universe-note { margin-top: 0.38rem; }
+.section-mode-label { margin: 0 0 0.6rem; padding: 0.25rem 0.55rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em; color: var(--muted); background: rgba(92, 114, 137, 0.08); border-left: 2.5px solid rgba(92, 114, 137, 0.35); line-height: 1.3; }
+.card[data-universe-scope='analytic'] { transition: background-color 280ms ease, border-color 280ms ease, box-shadow 280ms ease; }
+body.all-respondents-mode .card[data-universe-scope='analytic'] { background: linear-gradient(180deg, rgba(92, 114, 137, 0.05) 0%, var(--surface) 18%); border-color: rgba(92, 114, 137, 0.28); }
+body.with-view-mode .card[data-universe-scope='analytic'] { background: linear-gradient(180deg, var(--accent-tint) 0%, var(--surface) 18%); border-color: rgba(26, 107, 115, 0.26); }
+body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { color: var(--accent); background: var(--accent-tint); border-left-color: var(--accent); }
+.finding { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); padding: 0.72rem 0.74rem; }
+.finding .k { font-size: 0.77rem; color: var(--muted); }
+.finding .v { margin-top: 0.28rem; font-size: 1.22rem; font-weight: 760; }
+.finding .m { margin-top: 0.24rem; font-size: 0.79rem; color: var(--ink-soft); }
+.findings-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.62rem; }
+.findings-stack { display: grid; gap: 0.88rem; }
+.findings-group { border: 1px solid var(--line); border-radius: var(--r-md); background: color-mix(in srgb, var(--surface-alt) 78%, transparent); padding: 0.9rem; }
+.findings-group-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.72rem; flex-wrap: wrap; }
+.findings-group-head h3 { font-size: 0.95rem; line-height: 1.3; }
+.findings-group-head p { font-size: 0.8rem; color: var(--ink-soft); max-width: 64ch; }
+.finding-highlights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.62rem; margin-top: 0.62rem; }
+.finding-highlight { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); padding: 0.64rem 0.68rem; }
+.finding-highlight .k { font-size: 0.74rem; color: var(--muted); }
+.finding-highlight .v { margin-top: 0.2rem; font-size: 0.88rem; font-weight: 700; color: var(--ink); }
+.finding-highlight .m { margin-top: 0.22rem; font-size: 0.78rem; color: var(--ink-soft); }
+.findings-turnout-note { margin-top: 0.7rem; font-size: 0.78rem; color: var(--muted); }
+.methodology-details { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); overflow: hidden; }
+.methodology-details summary { list-style: none; cursor: pointer; font-size: 0.86rem; font-weight: 700; padding: 0.72rem 0.86rem; color: var(--ink-soft); border-bottom: 1px solid transparent; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.methodology-details summary::-webkit-details-marker { display: none; }
+.methodology-details summary::after { content: '+'; display: inline-flex; align-items: center; justify-content: center; width: 1.3rem; height: 1.3rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--accent); font-size: 0.96rem; line-height: 1; flex: 0 0 auto; }
+.methodology-details[open] summary { border-bottom-color: var(--line); }
+.methodology-details[open] summary::after { content: '\2212'; }
+.methodology-details-body { font-size: 0.87rem; color: var(--ink-soft); padding: 0.78rem 0.86rem 0.9rem; }
+.arms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.68rem; }
+.arm { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); padding: 0.76rem 0.82rem; }
+.arm h3 { font-size: 0.92rem; margin-bottom: 0.44rem; }
+.arm ul { padding-left: 1.08rem; color: var(--ink-soft); font-size: 0.84rem; line-height: 1.45; }
+.table-wrap { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; min-width: 760px; }
+.table th, .table td { border-bottom: 1px solid var(--line); text-align: left; padding: 0.5rem 0.45rem; font-size: 0.84rem; }
+.table th { font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.controls { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.62rem; margin-bottom: 0.72rem; }
+.controls.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.controls.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.controls label { display: block; font-size: 0.75rem; letter-spacing: 0.02em; color: var(--muted); margin-bottom: 0.25rem; }
+.controls select, .controls input { width: 100%; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.44rem 0.58rem; background: var(--surface); color: var(--ink); font-size: 0.83rem; }
+.controls select[multiple] { min-height: 7.8rem; }
+.control-note { margin-top: 0.34rem; font-size: 0.76rem; color: var(--ink-soft); }
+.control-button-wrap { display: flex; flex-direction: column; justify-content: flex-end; }
+.control-button-label { display: block; font-size: 0.75rem; letter-spacing: 0.02em; color: var(--muted); margin-bottom: 0.25rem; }
+.control-button { width: 100%; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.44rem 0.58rem; background: var(--surface); color: var(--ink); font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease; }
+.control-button:hover { border-color: var(--accent); color: var(--accent); }
+.rate-input-stack { display: grid; gap: 0.42rem; }
+.rate-input-inline { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.4rem; align-items: center; }
+.rate-suffix { font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.hint { margin-top: -0.22rem; margin-bottom: 0.65rem; font-size: 0.78rem; color: var(--ink-soft); }
+.hint code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 0.75rem; padding: 0.05rem 0.2rem; border-radius: 5px; background: var(--surface-alt); border: 1px solid var(--line); }
+.bar-list { display: grid; gap: 0.42rem; }
+.bar-row { display: grid; grid-template-columns: minmax(170px, 280px) minmax(0, 1fr) 84px; align-items: center; gap: 0.5rem; }
+.bar-label { font-size: 0.81rem; color: var(--ink-soft); }
+.track { position: relative; height: 12px; border-radius: var(--r-full); background: color-mix(in srgb, var(--muted) 24%, transparent); overflow: hidden; }
+.zero { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.bar { position: absolute; top: 0; height: 100%; border-radius: var(--r-full); }
+.bar.pos { background: var(--pos); left: 50%; }
+.bar.neg { background: var(--neg); right: 50%; }
+.bar.neutral { background: var(--neutral); left: 50%; }
+.bar-val { font-size: 0.78rem; text-align: right; font-variant-numeric: tabular-nums; }
+.delta { font-variant-numeric: tabular-nums; font-weight: 700; }
+.delta.pos { color: var(--pos); }
+.delta.neg { color: var(--neg); }
+.delta.neutral { color: var(--neutral); }
+.data-note { margin-top: 0.68rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); padding: 0.62rem 0.7rem; font-size: 0.79rem; color: var(--ink-soft); }
+.calc-result { margin-top: 0.62rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); padding: 0.68rem 0.74rem; font-size: 0.86rem; }
+.quad-explainer { margin-bottom: 0.65rem; font-size: 0.81rem; color: var(--ink-soft); }
+.quad-reset { width: 100%; }
+.quad-note { margin-bottom: 0.72rem; }
+.quad-note .methodology-details-body { font-size: 0.82rem; }
+.quad-wrap { position: relative; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-alt); min-height: 400px; overflow: hidden; cursor: grab; }
+.quad-wrap.is-dragging { cursor: grabbing; }
+.quad-surface { position: absolute; inset: 0; transform-origin: center center; will-change: transform; }
+.quad-axis-caption { position: absolute; z-index: 2; font-size: 0.73rem; font-weight: 700; color: var(--ink-soft); background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--line); border-radius: 8px; padding: 0.18rem 0.4rem; pointer-events: none; }
+.quad-axis-caption.x { left: 50%; bottom: 10px; transform: translateX(-50%); }
+.quad-axis-caption.y { left: 12px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: left top; }
+.quad-mid-x, .quad-mid-y { position: absolute; background: var(--line); }
+.quad-mid-x { left: 50%; top: 0; bottom: 0; width: 1px; }
+.quad-mid-y { top: 50%; left: 0; right: 0; height: 1px; }
+.quad-point { position: absolute; width: 9px; height: 9px; margin-left: -4px; margin-top: -4px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.52); box-shadow: 0 0 0 1px rgba(0,0,0,0.08); cursor: pointer; }
+.quad-point.pos { background: var(--pos); }
+.quad-point.neg { background: var(--neg); }
+.quad-point.neutral { background: var(--neutral); }
+.quad-point.is-highlighted { width: 13px; height: 13px; margin-left: -6px; margin-top: -6px; box-shadow: 0 0 0 2px color-mix(in srgb, var(--surface) 70%, transparent), 0 0 0 4px color-mix(in srgb, var(--accent) 26%, transparent); }
+.quad-point-connector { position: absolute; height: 1px; background: color-mix(in srgb, var(--ink-soft) 58%, transparent); transform-origin: 0 50%; pointer-events: none; }
+.quad-point-label { position: absolute; font-size: 0.67rem; color: var(--ink); background: color-mix(in srgb, var(--surface) 94%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)); border-radius: 7px; padding: 0.12rem 0.35rem; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 20px rgba(18, 35, 64, 0.08); }
+.quad-label { position: absolute; font-size: 0.71rem; color: var(--muted); background: color-mix(in srgb, var(--surface) 86%, transparent); border: 1px solid var(--line); border-radius: 8px; padding: 0.18rem 0.36rem; }
+.tooltip-target { cursor: help; }
+.tooltip-target:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 78%, transparent); outline-offset: 2px; }
+.finding.tooltip-target,
+.finding-highlight.tooltip-target,
+.bar-row.tooltip-target,
+.summary-cell-trigger.tooltip-target,
+.quad-point.tooltip-target { transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease; }
+.finding.tooltip-target:hover,
+.finding-highlight.tooltip-target:hover,
+.finding.tooltip-target:focus-visible,
+.finding-highlight.tooltip-target:focus-visible { border-color: color-mix(in srgb, var(--accent) 38%, var(--line)); box-shadow: 0 10px 26px rgba(18, 35, 64, 0.08); }
+.bar-row.tooltip-target { padding: 0.22rem 0.24rem; margin: -0.22rem -0.24rem; border-radius: 10px; }
+.bar-row.tooltip-target:hover,
+.bar-row.tooltip-target:focus-visible { background: color-mix(in srgb, var(--accent-tint) 56%, var(--surface) 44%); }
+.summary-cell-trigger { display: inline-block; min-width: 100%; border-radius: 8px; }
+.summary-cell-trigger:hover,
+.summary-cell-trigger:focus-visible { background: color-mix(in srgb, var(--accent-tint) 48%, transparent); }
+.quad-point.tooltip-target:focus-visible { outline-offset: 3px; }
+.shared-tooltip { position: fixed; z-index: 1200; max-width: min(360px, calc(100vw - 24px)); border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--surface) 96%, white 4%); box-shadow: 0 22px 48px rgba(14, 28, 50, 0.18); padding: 0.72rem 0.78rem; font-size: 0.76rem; line-height: 1.42; color: var(--ink-soft); pointer-events: none; }
+.shared-tooltip[hidden] { display: none; }
+.shared-tooltip h4 { margin-bottom: 0.18rem; font-size: 0.84rem; color: var(--ink); }
+.shared-tooltip .tooltip-subtitle { margin-bottom: 0.45rem; font-size: 0.71rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.shared-tooltip .tooltip-line { display: grid; grid-template-columns: minmax(104px, 132px) minmax(0, 1fr); gap: 0.42rem; align-items: start; margin-top: 0.18rem; }
+.shared-tooltip .tooltip-key { font-weight: 700; color: var(--ink); }
+.shared-tooltip .tooltip-value { min-width: 0; overflow-wrap: anywhere; }
+.shared-tooltip .tooltip-divider { margin: 0.52rem 0 0.1rem; border-top: 1px solid color-mix(in srgb, var(--line) 78%, transparent); }
+.shared-tooltip .tooltip-note { margin-top: 0.46rem; color: var(--muted); }
+.shared-tooltip .delta { font-size: 0.78rem; }
+.feedback-callout { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--accent-tint2); padding: 1.7rem 1.8rem; }
+.feedback-callout h2 { margin-bottom: 0.45rem; font-size: 1.02rem; color: var(--ink); }
+.feedback-callout p { margin-bottom: 0.9rem; color: var(--ink-soft); font-size: 0.84rem; }
+.feedback-cta { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-full); border: 1px solid transparent; background: var(--accent); color: #f5fbff; text-decoration: none; font-size: 0.78rem; font-weight: 760; padding: 0.46rem 0.9rem; transition: background 0.15s ease; }
+.feedback-cta:hover { background: var(--accent-hover); }
+@media (max-width: 980px) {
+  .layout { padding: 1.1rem 1rem 3rem; gap: 1.1rem; }
+  .hero { padding: 1.2rem 1rem; }
+  .findings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .finding-highlights { grid-template-columns: minmax(0, 1fr); }
+  .controls, .controls.n4, .controls.n3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .layout { padding: 0.75rem 0.6rem 2.5rem; }
+  .arms { grid-template-columns: minmax(0, 1fr); }
+  .findings-grid { grid-template-columns: minmax(0, 1fr); }
+  .controls, .controls.n4, .controls.n3 { grid-template-columns: minmax(0, 1fr); }
+  .bar-row { grid-template-columns: minmax(116px, 1fr) minmax(0, 1fr) 72px; }
+  .feedback-callout { padding: 1.5rem 1.2rem; }
+}
+    </style>
+  </head>
+  <body>
+    <div class="topbar-wrap">
+      <nav class="topbar" aria-label="Site navigation">
+        <a class="brand" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">VDH Policy Lab</span>
+        </a>
+        <button id="themeToggle" class="theme-toggle" type="button">Theme</button>
+      </nav>
+    </div>
+
+    <main class="layout">
+      <div class="back-nav">
+        <a class="back-btn" id="backToPortalLink" href="https://igaming.vantage.philippbroniecki.com/" data-skip-theme-param="true">Portal</a>
+        <div class="sibling-nav" id="siblingNavLinks"></div>
+      </div>
+
+      <section class="hero card" id="componentHero" data-component-id="hero_title">
+        <div class="hero-inner">
+          <span class="eyebrow">Louisiana Experiment Effects</span>
+          <h1 id="heroTitle">Impact of Online Gaming on Governor Landry's 2027 Prospects</h1>
+          <p id="heroSubtitle">Testing the political effect of signing an online gaming compact and delivering voter priorities versus inaction</p>
+          <div class="hero-meta" aria-label="Survey metadata">
+            <span class="pill" id="metaSite">www.vantagedatahouse.com</span>
+            <span class="pill" id="metaSample">N = respondents</span>
+            <span class="pill" id="metaDates">Field dates</span>
+            <span class="pill" id="metaMethod">Poststratified experiment-effect estimates</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card card--control" id="componentResponseUniverse" data-component-id="response_universe_toggle">
+        <div id="responseUniverseToggle" class="response-universe-toggle">
+          <p class="response-universe-title">Response Universe</p>
+          <div class="response-universe-segment" role="group" aria-label="Select response universe">
+            <button type="button" class="response-universe-btn" data-mode-id="all_americans">What all respondents said</button>
+            <button type="button" class="response-universe-btn" data-mode-id="with_view">What respondents with a view said</button>
+          </div>
+          <p class="response-universe-explainer" id="responseUniverseExplainer"></p>
+          <p class="response-universe-note" id="responseUniverseStatusNote"></p>
+        </div>
+      </section>
+
+      <section class="card" id="componentKeyFindings" data-component-id="key_findings">
+        <h2 class="section-title">Key Findings</h2>
+        <div class="section-mode-label" id="modeLabelKeyFindings"></div>
+        <div class="findings-stack" id="findingsGrid"></div>
+        <p class="findings-turnout-note" id="findingsTurnoutNote"></p>
+      </section>
+
+      <section class="card" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
+        <details class="methodology-details">
+          <summary id="h-methodology-note">Note on Methodology</summary>
+          <p class="methodology-details-body" id="methodologyBody"></p>
+        </details>
+      </section>
+
+      <section class="card" id="componentArms" data-component-id="treatment_arms_explainer">
+        <h2 class="section-title">Treatment Arms</h2>
+        <div class="arms">
+          <article class="arm">
+            <h3>Action / delivery scenario</h3>
+            <ul>
+              <li>Signs online casino compact.</li>
+              <li>Uses revenue to deliver each respondent's top priority.</li>
+              <li>Measures upside and risk of policy action plus delivery.</li>
+            </ul>
+          </article>
+          <article class="arm">
+            <h3>Inaction / no-delivery scenario</h3>
+            <ul>
+              <li>No top-priority delivery before the 2027 election.</li>
+              <li>No compact/revenue-delivery frame.</li>
+              <li>Measures downside of inaction and non-delivery.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="card" id="componentSummary" data-component-id="political_impact_summary">
+        <h2 class="section-title">Political Impact Summary</h2>
+        <div class="section-mode-label" id="modeLabelSummary"></div>
+        <div class="explainer">For test ballot, the default metric is <strong>Net Landry position</strong>: Landry's change minus the combined change among all non-Landry ballot choices.</div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Outcome</th>
+                <th>Action / delivery scenario</th>
+                <th>Inaction / no-delivery scenario</th>
+                <th>Action vs. inaction advantage</th>
+              </tr>
+            </thead>
+            <tbody id="summaryBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" id="componentMainEffects" data-component-id="main_effects">
+        <h2 class="section-title">Main Effects</h2>
+        <div class="section-mode-label" id="modeLabelMainEffects"></div>
+        <div class="hint">Action vs. inaction advantage is difference-in-differences: <code>Action / delivery effect - Inaction / no-delivery effect</code>. Positive values mean action-delivery performs better than inaction for the selected response.</div>
+        <div class="controls">
+          <div>
+            <label for="effectsOutcome">Outcome</label>
+            <select id="effectsOutcome"></select>
+          </div>
+          <div>
+            <label for="effectsResponse">Response</label>
+            <select id="effectsResponse"></select>
+          </div>
+          <div>
+            <label for="effectsEstimand">Metric</label>
+            <select id="effectsEstimand"></select>
+          </div>
+          <div>
+            <label for="effectsUnitType">Geography</label>
+            <select id="effectsUnitType"></select>
+          </div>
+          <div>
+            <label for="effectsUnit">Unit</label>
+            <select id="effectsUnit"></select>
+          </div>
+        </div>
+        <div class="bar-list" id="effectsBars"></div>
+        <div class="data-note" id="effectsDataNote"></div>
+      </section>
+
+      <section class="card" id="componentCalculator" data-component-id="vote_impact_calculator">
+        <h2 class="section-title">Vote Impact Calculator</h2>
+        <div class="section-mode-label" id="modeLabelCalculator"></div>
+        <p class="explainer">Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline, while Key Findings and summary vote equivalents continue to use modeled poststratified denominators. Net Landry position is treated as a vote-margin equivalent.</p>
+        <div class="controls">
+          <div>
+            <label for="calcTurnoutRate">Expected 2027 turnout rate</label>
+            <div class="rate-input-stack">
+              <input id="calcTurnoutRate" type="range" min="0" max="100" step="0.0001" />
+              <div class="rate-input-inline">
+                <input id="calcTurnoutRateNumber" type="number" min="0" max="100" step="0.0001" />
+                <span class="rate-suffix">%</span>
+              </div>
+            </div>
+            <div class="control-note" id="calcExpectedVotes"></div>
+          </div>
+          <div>
+            <label for="calcOutcome">Outcome</label>
+            <select id="calcOutcome"></select>
+          </div>
+          <div>
+            <label for="calcResponse">Response</label>
+            <select id="calcResponse"></select>
+          </div>
+          <div>
+            <label for="calcEstimand">Effect</label>
+            <select id="calcEstimand"></select>
+          </div>
+          <div class="control-button-wrap">
+            <label class="control-button-label" for="calcResetBtn">Modeled default</label>
+            <button type="button" class="control-button" id="calcResetBtn">Reset to expectation</button>
+          </div>
+        </div>
+        <div class="calc-result" id="calcResult"></div>
+      </section>
+
+      <section class="card" id="componentSubgroups" data-component-id="subgroup_explorer">
+        <h2 class="section-title">Subgroup Effects Explorer</h2>
+        <div class="section-mode-label" id="modeLabelSubgroups"></div>
+        <div class="controls n4">
+          <div>
+            <label for="subOutcome">Outcome</label>
+            <select id="subOutcome"></select>
+          </div>
+          <div>
+            <label for="subResponse">Response</label>
+            <select id="subResponse"></select>
+          </div>
+          <div>
+            <label for="subEstimand">Metric</label>
+            <select id="subEstimand"></select>
+          </div>
+          <div>
+            <label for="subDemographic">Demographic</label>
+            <select id="subDemographic"></select>
+          </div>
+        </div>
+        <div class="bar-list" id="subBars"></div>
+      </section>
+
+      <section class="card" id="componentQuadrant" data-component-id="risk_opportunity_quadrant">
+        <h2 class="section-title">Risk / Opportunity Quadrant</h2>
+        <div class="section-mode-label" id="modeLabelQuadrant"></div>
+        <p class="quad-explainer">Each point is a subgroup. The x-axis shows how that subgroup moves under the action-delivery scenario. The y-axis shows how it moves under the inaction/no-delivery scenario. The lower-right quadrant is usually the most politically valuable: these groups improve under action and worsen under inaction.</p>
+        <details class="methodology-details quad-note">
+          <summary>How to read this chart</summary>
+          <div class="methodology-details-body">Use the point tooltip for the exact subgroup movement. By default the chart labels only one subgroup, preferring Tradwives when that archetype is available for the selected view and otherwise falling back to the strongest action-vs.-inaction mover. Use Highlighted subgroups to label specific points. Zoom with the mouse wheel or trackpad, drag to pan, and use Reset view to return to the default frame.</div>
+        </details>
+        <div class="controls">
+          <div>
+            <label for="quadOutcome">Outcome</label>
+            <select id="quadOutcome"></select>
+          </div>
+          <div>
+            <label for="quadResponse">Response</label>
+            <select id="quadResponse"></select>
+          </div>
+          <div>
+            <label for="quadDemographic">Demographic</label>
+            <select id="quadDemographic"></select>
+          </div>
+          <div>
+            <label for="quadHighlights">Highlighted subgroups</label>
+            <select id="quadHighlights" multiple size="6"></select>
+          </div>
+          <div class="control-button-wrap">
+            <label class="control-button-label" for="quadResetBtn">Chart view</label>
+            <button type="button" class="control-button quad-reset" id="quadResetBtn">Reset view</button>
+          </div>
+        </div>
+        <div class="quad-wrap" id="quadPlot">
+          <div class="quad-surface" id="quadSurface">
+            <div class="quad-mid-x"></div>
+            <div class="quad-mid-y"></div>
+            <div class="quad-label" style="right:10px; top:8px;">Responds well to action</div>
+            <div class="quad-label" style="left:10px; top:8px;">Compact/action risk</div>
+            <div class="quad-label" style="left:10px; bottom:8px;">Broad political risk</div>
+            <div class="quad-label" style="right:10px; bottom:8px;">Action upside + inaction danger</div>
+          </div>
+          <div class="quad-axis-caption x">Action / delivery effect</div>
+          <div class="quad-axis-caption y">Inaction / no-delivery effect</div>
+        </div>
+      </section>
+
+      <section class="card" id="componentGeography" data-component-id="geography_explorer">
+        <h2 class="section-title">Geography Effects Explorer</h2>
+        <div class="section-mode-label" id="modeLabelGeography"></div>
+        <div class="controls n4">
+          <div>
+            <label for="geoOutcome">Outcome</label>
+            <select id="geoOutcome"></select>
+          </div>
+          <div>
+            <label for="geoResponse">Response</label>
+            <select id="geoResponse"></select>
+          </div>
+          <div>
+            <label for="geoEstimand">Metric</label>
+            <select id="geoEstimand"></select>
+          </div>
+          <div>
+            <label for="geoUnitType">Geography type</label>
+            <select id="geoUnitType"></select>
+          </div>
+        </div>
+        <div class="bar-list" id="geoBars"></div>
+      </section>
+
+      <section class="card" id="componentTechnical" data-component-id="technical_appendix">
+        <h2 class="section-title">Technical Appendix</h2>
+        <div class="section-mode-label" id="modeLabelTechnical"></div>
+        <p class="explainer">Detailed modeled percentage-point effects by outcome, response, geography, demographic group, and estimand.</p>
+        <p class="explainer" id="technicalAppendixNote"></p>
+        <div class="controls n4">
+          <div>
+            <label for="techOutcome">Outcome</label>
+            <select id="techOutcome"></select>
+          </div>
+          <div>
+            <label for="techResponse">Response</label>
+            <select id="techResponse"></select>
+          </div>
+          <div>
+            <label for="techUnitType">Unit type</label>
+            <select id="techUnitType"></select>
+          </div>
+          <div>
+            <label for="techDemographic">Demographic</label>
+            <select id="techDemographic"></select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Unit / level</th>
+                <th>Action / delivery</th>
+                <th>Inaction / no-delivery</th>
+                <th>Action vs. inaction</th>
+                <th>Estimate SD</th>
+                <th>Low</th>
+                <th>High</th>
+              </tr>
+            </thead>
+            <tbody id="techBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="feedback-callout" id="feedbackCallout" hidden>
+        <h2 id="feedbackHeading">Share Your Feedback</h2>
+        <p id="feedbackBody">Have questions about this experiment-effects report or ideas for future analysis? We'd love to hear from you.</p>
+        <a id="feedbackCta" class="feedback-cta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
+      </section>
+    </main>
+
+    <script id="embeddedReportData" type="application/json">
+{
+  "meta": {
+    "source": "Vantage Data House",
+    "title": "Impact of Online Gaming on Governor Landry's 2027 Prospects",
+    "subtitle": "Testing the political effect of signing an online gaming compact and delivering voter priorities versus inaction",
+    "site": "https://www.vantagedatahouse.com",
+    "sample": "N = 1,205 respondents",
+    "fieldDates": "May 15, 2026",
+    "methodLabel": "Poststratified experiment-effect estimates",
+    "group_navigation": {
+      "group_id": "louisiana_igaming_baseline_2026",
+      "group_label": "Louisiana Voter Opinion Study",
+      "back": {
+        "label": "Portal",
+        "href": "https://igaming.vantage.philippbroniecki.com/",
+        "local_href": "https://igaming.vantage.philippbroniecki.com/"
+      },
+      "siblings": [
+        {
+          "site_slug": "igaming_favorability",
+          "label": "Favorability",
+          "href": "https://favorability.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://favorability.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../favorability/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_test_ballot",
+          "label": "Governor Ballot",
+          "href": "https://test-ballot.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://test-ballot.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../test_ballot/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_support",
+          "label": "iGaming Support",
+          "href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../igaming_support/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_attitudes",
+          "label": "Gambling Attitudes",
+          "href": "https://attitudes.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://attitudes.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../attitudes/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_survey_health",
+          "label": "Survey Health",
+          "href": "https://survey-health.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://survey-health.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../survey_health/standalone_website/"
+        }
+      ]
+    }
+  },
+  "template": {
+    "site_slug": "igaming_experiment",
+    "component_order": [
+      "hero_title",
+      "response_universe_toggle",
+      "key_findings",
+      "methodology_note",
+      "treatment_arms_explainer",
+      "political_impact_summary",
+      "main_effects",
+      "vote_impact_calculator",
+      "subgroup_explorer",
+      "risk_opportunity_quadrant",
+      "geography_explorer",
+      "technical_appendix"
+    ],
+    "feedback_callout": {
+      "enabled": true,
+      "heading": "Share Your Feedback",
+      "body": "Have questions about this experiment-effects report or ideas for future analysis? We'd love to hear from you.",
+      "cta_label": "Get in Touch",
+      "cta_url": "mailto:philipp@vantagedatahouse.com"
+    }
+  },
+  "turnout_assumption": {
+    "default_expected_voters": 872650.0176,
+    "default_registered_voters": 1533491.0045,
+    "default_turnout_rate": 0.5691,
+    "note": "Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline. Key Findings and summary tooltips use modeled poststratified denominators from weights.rds for the matching geography or subgroup."
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "with_view",
+    "with_view_available": true,
+    "note": "With-view effects exclude undecided/no-opinion responses before computing pre/post changes. Vote equivalents remain illustrative and use poststratified expected-voter denominators.",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said",
+        "enabled": true
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said",
+        "enabled": true
+      }
+    ],
+    "requirements": [
+      {
+        "outcome_id": "ballot",
+        "outcome_label": "Test ballot",
+        "available": true,
+        "required_inputs": [
+          {
+            "arm": "arm_a",
+            "role": "pre_dv",
+            "dv": "ballot_governor_2027_pre_arm_a",
+            "folder": "igaming/experiment/data_in/ballot_governor_2027_pre_arm_a",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/ballot_governor_2027_pre_arm_a/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_a",
+            "role": "post_dv",
+            "dv": "q13_scenario_q14_ballot_arm_a",
+            "folder": "igaming/experiment/data_in/q13_scenario_q14_ballot_arm_a",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/q13_scenario_q14_ballot_arm_a/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_b",
+            "role": "pre_dv",
+            "dv": "ballot_governor_2027_pre_arm_b",
+            "folder": "igaming/experiment/data_in/ballot_governor_2027_pre_arm_b",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/ballot_governor_2027_pre_arm_b/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-14_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_b",
+            "role": "post_dv",
+            "dv": "q13_scenario_q14_ballot_arm_b",
+            "folder": "igaming/experiment/data_in/q13_scenario_q14_ballot_arm_b",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/q13_scenario_q14_ballot_arm_b/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-14_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          }
+        ]
+      },
+      {
+        "outcome_id": "favorability",
+        "outcome_label": "Landry favorability",
+        "available": true,
+        "required_inputs": [
+          {
+            "arm": "arm_a",
+            "role": "pre_dv",
+            "dv": "fav_la_political_figures_landry_pre_arm_a",
+            "folder": "igaming/experiment/data_in/fav_la_political_figures_landry_pre_arm_a",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/fav_la_political_figures_landry_pre_arm_a/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_a",
+            "role": "post_dv",
+            "dv": "q15_landry_fav_post_arm_a",
+            "folder": "igaming/experiment/data_in/q15_landry_fav_post_arm_a",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/q15_landry_fav_post_arm_a/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_b",
+            "role": "pre_dv",
+            "dv": "fav_la_political_figures_landry_pre_arm_b",
+            "folder": "igaming/experiment/data_in/fav_la_political_figures_landry_pre_arm_b",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/fav_la_political_figures_landry_pre_arm_b/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-14_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_b",
+            "role": "post_dv",
+            "dv": "q15_landry_fav_post_arm_b",
+            "folder": "igaming/experiment/data_in/q15_landry_fav_post_arm_b",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/q15_landry_fav_post_arm_b/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-14_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          }
+        ]
+      },
+      {
+        "outcome_id": "support",
+        "outcome_label": "iGaming support",
+        "available": true,
+        "required_inputs": [
+          {
+            "arm": "arm_a",
+            "role": "pre_dv",
+            "dv": "policy_igaming_pre_arm_a",
+            "folder": "igaming/experiment/data_in/policy_igaming_pre_arm_a",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/policy_igaming_pre_arm_a/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_a",
+            "role": "post_dv",
+            "dv": "q16_igaming_post_arm_a",
+            "folder": "igaming/experiment/data_in/q16_igaming_post_arm_a",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/q16_igaming_post_arm_a/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-15_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_b",
+            "role": "pre_dv",
+            "dv": "policy_igaming_pre_arm_b",
+            "folder": "igaming/experiment/data_in/policy_igaming_pre_arm_b",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/policy_igaming_pre_arm_b/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-14_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          },
+          {
+            "arm": "arm_b",
+            "role": "post_dv",
+            "dv": "q16_igaming_post_arm_b",
+            "folder": "igaming/experiment/data_in/q16_igaming_post_arm_b",
+            "parquet_path": "/mnt/storage1/projects/vantage_models/vantage_special_analysis/build_section/igaming/experiment/data_in/q16_igaming_post_arm_b/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-14_IGaming_2026_05_15.parquet",
+            "available_in_workspace": true
+          }
+        ]
+      }
+    ],
+    "missing_source_snapshot_paths": []
+  },
+  "notes": {
+    "pre_post_levels_note": "With-view effects exclude undecided/no-opinion responses before computing pre/post changes. Vote equivalents remain illustrative and use poststratified expected-voter denominators.",
+    "uncertainty_note": "Uncertainty columns are shown when available from the modeled experiment outputs. Derived net rows may not have covariance-aware intervals in this prototype build."
+  },
+  "data_files": {
+    "manifest": "igaming_experiment_data.json",
+    "record_chunks": [
+      {
+        "outcome_id": "ballot",
+        "path": "data/igaming_experiment_records_ballot.json",
+        "file_name": "igaming_experiment_records_ballot.json",
+        "row_count": 5775,
+        "response_universes": [
+          "all_americans",
+          "with_view"
+        ]
+      },
+      {
+        "outcome_id": "favorability",
+        "path": "data/igaming_experiment_records_favorability.json",
+        "file_name": "igaming_experiment_records_favorability.json",
+        "row_count": 7425,
+        "response_universes": [
+          "all_americans",
+          "with_view"
+        ]
+      },
+      {
+        "outcome_id": "support",
+        "path": "data/igaming_experiment_records_support.json",
+        "file_name": "igaming_experiment_records_support.json",
+        "row_count": 7425,
+        "response_universes": [
+          "all_americans",
+          "with_view"
+        ]
+      }
+    ]
+  },
+  "records": [],
+  "summary_rows": [],
+  "key_findings": {
+    "groups": []
+  },
+  "outcomes": [],
+  "estimands": [],
+  "selectors": {
+    "geography_types": [],
+    "demographics": []
+  },
+  "archetype_metadata": [],
+  "load_error_message": "Experiment data could not be loaded. Please refresh or contact Vantage Data House."
+}
+</script>
+    <script>
+      const CULTURAL_REGION_LABELS = {
+        greater_new_orleans: "Greater New Orleans",
+        florida_parishes: "Florida Parishes",
+        southwest_louisiana: "Southwest Louisiana",
+        central_louisiana: "Central Louisiana",
+        arklatex: "Ark-La-Tex",
+        acadiana_lafayette: "Acadiana / Lafayette",
+        bayou_country: "Bayou Country",
+        arklamiss_delta: "Ark-La-Miss Delta"
+      };
+
+      const NET_LANDRY_TOOLTIP = "Landry's change minus the combined change among all non-Landry ballot choices. This is a margin-style measure, not a raw vote-share estimate.";
+      const NET_LANDRY_ID = "net_landry_position";
+      const NET_FAVORABILITY_ID = "net_favorability";
+      const NET_SUPPORT_ID = "net_support";
+      const LOW_MOVEMENT_THRESHOLD_PP = 1;
+      const EXPERIMENT_MANIFEST_PATH = "data/igaming_experiment_data.json";
+      const DEFAULT_LOAD_ERROR_MESSAGE = "Experiment data could not be loaded. Please refresh or contact Vantage Data House.";
+
+      let reportData = null;
+      let activeResponseUniverse = "all_americans";
+      let sharedTooltip = null;
+      let tooltipOwner = null;
+      let tooltipPinned = false;
+
+      function escapeHtml(value) {
+        return String(value == null ? "" : value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function fmtNum(value) {
+        if (!Number.isFinite(Number(value))) return "NA";
+        return Number(value).toLocaleString();
+      }
+
+      function fmtPercent(value, digits = 1) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return "NA";
+        return `${(n * 100).toFixed(digits)}%`;
+      }
+
+      function clampNumber(value, min, max) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return min;
+        return Math.min(max, Math.max(min, n));
+      }
+
+      function deltaClass(value) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return "neutral";
+        if (Math.abs(n) < 0.05) return "neutral";
+        return n > 0 ? "pos" : "neg";
+      }
+
+      function fmtPP(value) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return "NA";
+        if (Math.abs(n) < 0.05) return "0.0 pp";
+        const sign = n > 0 ? "+" : "";
+        return `${sign}${n.toFixed(1)} pp`;
+      }
+
+      function fmtDeltaHtml(value) {
+        const n = Number(value);
+        const cls = deltaClass(n);
+        if (!Number.isFinite(n)) return '<span class="delta neutral">NA</span>';
+        if (Math.abs(n) < 0.05) return '<span class="delta neutral">0.0 pp</span>';
+        const arrow = n > 0 ? "▲" : "▼";
+        const sign = n > 0 ? "+" : "";
+        return `<span class="delta ${cls}">${arrow} ${sign}${n.toFixed(1)} pp</span>`;
+      }
+
+      function fmtSignedCount(value) {
+        const n = Math.round(Number(value));
+        if (!Number.isFinite(n)) return "NA";
+        return n > 0 ? `+${n.toLocaleString()}` : n.toLocaleString();
+      }
+
+      function fmtEquivalentLine(value, label) {
+        if (!Number.isFinite(Number(value))) return "Equivalent count unavailable";
+        return `≈ ${fmtSignedCount(value)} ${label}`;
+      }
+
+      function fmtEquivalentValueHtml(value) {
+        if (!Number.isFinite(Number(value))) return escapeHtml("Equivalent count unavailable");
+        return `<span class="delta ${deltaClass(value)}">≈ ${escapeHtml(fmtSignedCount(value))}</span>`;
+      }
+
+      function fmtDenominatorText(value) {
+        if (!Number.isFinite(Number(value))) return "Denominator unavailable";
+        return `${fmtNum(Math.round(Number(value)))} expected voters`;
+      }
+
+      function fmtTooltipFormula(effectValue, denominatorVoters) {
+        const effect = Number(effectValue);
+        const denominator = Number(denominatorVoters);
+        if (!Number.isFinite(effect) || !Number.isFinite(denominator)) return "Unavailable";
+        return `${effect.toFixed(2)} / 100 × ${fmtNum(Math.round(denominator))}`;
+      }
+
+      function tooltipLine(label, value, isHtml = false) {
+        return `
+          <div class="tooltip-line">
+            <span class="tooltip-key">${escapeHtml(label)}</span>
+            <span class="tooltip-value">${isHtml ? value : escapeHtml(value)}</span>
+          </div>
+        `;
+      }
+
+      function tooltipDivider() {
+        return '<div class="tooltip-divider"></div>';
+      }
+
+      function outcomeLabel(outcomeId) {
+        const outcome = getOutcomeById(outcomeId);
+        return outcome?.short_label || outcome?.label || outcomeId;
+      }
+
+      function estimandLabel(estimandId) {
+        const defaultLabels = {
+          arm_a_effect: "Action / delivery effect",
+          arm_b_effect: "Inaction / no-delivery effect",
+          difference_in_differences: "Action vs. inaction advantage"
+        };
+        if (defaultLabels[estimandId]) return defaultLabels[estimandId];
+        const estimand = (reportData?.estimands || []).find((entry) => entry.id === estimandId);
+        return estimand?.label || humanizeToken(estimandId);
+      }
+
+      function responseUniverseLabelFromId(modeId) {
+        return getResponseUniverseModeLabel(modeId)
+          || (modeId === "with_view" ? "What respondents with a view said" : "What all respondents said");
+      }
+
+      function classifyImpactPattern(actionEffect, inactionEffect, didEffect) {
+        const a = Number(actionEffect);
+        const b = Number(inactionEffect);
+        const did = Number(didEffect);
+        const maxAbs = Math.max(Math.abs(a) || 0, Math.abs(b) || 0, Math.abs(did) || 0);
+        if (!Number.isFinite(a) || !Number.isFinite(b) || !Number.isFinite(did) || maxAbs < LOW_MOVEMENT_THRESHOLD_PP) {
+          return {
+            label: "Low movement",
+            sentence: "Effects are near zero for both scenarios, so this group shows limited movement."
+          };
+        }
+        if (did < 0) {
+          return {
+            label: "Action risk",
+            sentence: "Action underperforms inaction for this group, so delivery creates net political risk here."
+          };
+        }
+        if (a > 0 && did > 0) {
+          return {
+            label: "Action upside",
+            sentence: "Action moves this group in the favorable direction and outperforms inaction."
+          };
+        }
+        if (a < 0 && b < a && did > 0) {
+          return {
+            label: "Avoided loss",
+            sentence: "Action is still negative, but inaction is materially worse for this group."
+          };
+        }
+        if (a < 0 && b < 0) {
+          return {
+            label: "Broad risk",
+            sentence: "Both action and inaction move this group negatively, even though action may be less damaging."
+          };
+        }
+        return {
+          label: did > 0 ? "Action upside" : "Low movement",
+          sentence: did > 0
+            ? "Action still outperforms inaction for this group."
+            : "Effects are modest and do not strongly separate action from inaction."
+        };
+      }
+
+      function buildVoteMetadataLines(entry, effectValue) {
+        const effect = Number.isFinite(Number(effectValue)) ? effectValue : entry?.estimate_pp;
+        return [
+          tooltipLine("Effect", fmtDeltaHtml(effect), true),
+          tooltipLine(entry?.vote_equivalent_label || "Vote equivalent", fmtEquivalentValueHtml(entry?.vote_equivalent), true),
+          tooltipLine("Denominator", fmtDenominatorText(entry?.denominator_voters)),
+          tooltipLine("Scope", entry?.denominator_scope || "Unavailable"),
+          tooltipLine("Formula", fmtTooltipFormula(effect, entry?.denominator_voters)),
+          tooltipLine("Universe", responseUniverseLabelFromId(entry?.response_universe_id || "all_americans"))
+        ].join("");
+      }
+
+      function buildKeyFindingTooltipHtml(group, entry, heading, metricLabel) {
+        return `
+          <h4>${escapeHtml(heading)}</h4>
+          <div class="tooltip-subtitle">Key finding</div>
+          ${tooltipLine("Outcome", group?.title || outcomeLabel(group?.id))}
+          ${tooltipLine("Response", group?.response_label || responseLabel(group?.id, group?.response_id, false))}
+          ${tooltipLine("Metric", metricLabel || entry?.label || "Selected effect")}
+          ${tooltipDivider()}
+          ${buildVoteMetadataLines(entry, entry?.estimate_pp)}
+        `;
+      }
+
+      function buildSummaryTooltipHtml(row, estimandId) {
+        const effectKey = estimandId;
+        const voteKeyMap = {
+          arm_a_effect: "arm_a_vote_equivalent",
+          arm_b_effect: "arm_b_vote_equivalent",
+          difference_in_differences: "difference_in_differences_vote_equivalent"
+        };
+        const voteKey = voteKeyMap[estimandId] || `${estimandId}_vote_equivalent`;
+        const effectValue = row?.[effectKey];
+        const entry = {
+          estimate_pp: effectValue,
+          vote_equivalent: row?.[voteKey],
+          vote_equivalent_label: row?.vote_equivalent_label,
+          denominator_voters: row?.denominator_voters,
+          denominator_scope: row?.denominator_scope,
+          denominator_source: row?.denominator_source,
+          response_universe_id: row?.response_universe_id
+        };
+        return `
+          <h4>${escapeHtml(row?.label || "Summary effect")}</h4>
+          <div class="tooltip-subtitle">Political Impact Summary</div>
+          ${tooltipLine("Outcome", outcomeLabel(row?.outcome_id))}
+          ${tooltipLine("Response", row?.label || responseLabel(row?.outcome_id, row?.response_id, false))}
+          ${tooltipLine("Metric", estimandLabel(estimandId))}
+          ${tooltipDivider()}
+          ${buildVoteMetadataLines(entry, effectValue)}
+        `;
+      }
+
+      function buildDecompositionTooltipHtml(config) {
+        const interpretation = classifyImpactPattern(config?.actionEffect, config?.inactionEffect, config?.didEffect);
+        const subtitle = config?.entityCategory
+          ? `${config.entityCategory} ${config.entityKind}`.trim()
+          : config?.entityKind;
+        return `
+          <h4>${escapeHtml(config?.title || "Detail")}</h4>
+          <div class="tooltip-subtitle">${escapeHtml(subtitle || "Detailed view")}</div>
+          ${tooltipLine(config?.entityLabel || "Group", config?.entityType || "Unavailable")}
+          ${tooltipLine("Outcome", outcomeLabel(config?.outcomeId))}
+          ${tooltipLine("Response", responseLabel(config?.outcomeId, config?.responseId, false))}
+          ${config?.metricShown ? tooltipLine("Metric shown", config.metricShown) : ""}
+          ${config?.responseUniverseId ? tooltipLine("Response universe", responseUniverseLabelFromId(config.responseUniverseId)) : ""}
+          ${tooltipDivider()}
+          ${tooltipLine("Action / delivery", fmtDeltaHtml(config?.actionEffect), true)}
+          ${tooltipLine("Inaction / no-delivery", fmtDeltaHtml(config?.inactionEffect), true)}
+          ${tooltipLine("Action vs. inaction", fmtDeltaHtml(config?.didEffect), true)}
+          ${tooltipLine(config?.voteEquivalentLabel || "Vote equivalent", fmtEquivalentValueHtml(config?.voteEquivalent), true)}
+          ${tooltipLine("Denominator", fmtDenominatorText(config?.denominatorVoters))}
+          ${config?.denominatorScope ? tooltipLine("Scope", config.denominatorScope) : ""}
+          ${tooltipLine("Formula", fmtTooltipFormula(config?.selectedEffectValue, config?.denominatorVoters))}
+          ${tooltipDivider()}
+          ${tooltipLine("Interpretation", interpretation.label)}
+          <div class="tooltip-note">${escapeHtml(interpretation.sentence)}</div>
+        `;
+      }
+
+      function ensureSharedTooltip() {
+        if (sharedTooltip) return sharedTooltip;
+        sharedTooltip = document.createElement("div");
+        sharedTooltip.className = "shared-tooltip";
+        sharedTooltip.hidden = true;
+        sharedTooltip.setAttribute("role", "tooltip");
+        document.body.appendChild(sharedTooltip);
+
+        document.addEventListener("pointerdown", (evt) => {
+          if (!tooltipPinned) return;
+          if (tooltipOwner && tooltipOwner.contains(evt.target)) return;
+          hideSharedTooltip();
+        });
+
+        window.addEventListener("resize", () => {
+          if (!sharedTooltip || sharedTooltip.hidden || !tooltipOwner) return;
+          positionTooltipNearElement(tooltipOwner);
+        });
+
+        window.addEventListener("scroll", () => {
+          if (!sharedTooltip || sharedTooltip.hidden || !tooltipOwner) return;
+          if (tooltipPinned) {
+            positionTooltipNearElement(tooltipOwner);
+          } else {
+            hideSharedTooltip();
+          }
+        }, true);
+
+        return sharedTooltip;
+      }
+
+      function positionTooltip(left, top) {
+        const tooltip = ensureSharedTooltip();
+        const pad = 12;
+        const maxLeft = window.innerWidth - tooltip.offsetWidth - pad;
+        const maxTop = window.innerHeight - tooltip.offsetHeight - pad;
+        tooltip.style.left = `${Math.max(pad, Math.min(maxLeft, left))}px`;
+        tooltip.style.top = `${Math.max(pad, Math.min(maxTop, top))}px`;
+      }
+
+      function positionTooltipFromEvent(evt) {
+        positionTooltip(evt.clientX + 16, evt.clientY + 16);
+      }
+
+      function positionTooltipNearElement(el) {
+        const rect = el.getBoundingClientRect();
+        const left = rect.right + 16;
+        const top = rect.top + Math.min(rect.height / 2, 24);
+        positionTooltip(left, top);
+      }
+
+      function showSharedTooltip(owner, html, evt = null, pinned = false) {
+        const tooltip = ensureSharedTooltip();
+        tooltip.innerHTML = html;
+        tooltip.hidden = false;
+        tooltipOwner = owner;
+        tooltipPinned = pinned;
+        if (evt && Number.isFinite(evt.clientX) && Number.isFinite(evt.clientY)) {
+          positionTooltipFromEvent(evt);
+        } else {
+          positionTooltipNearElement(owner);
+        }
+      }
+
+      function hideSharedTooltip(owner = null) {
+        if (!sharedTooltip) return;
+        if (owner && tooltipOwner && owner !== tooltipOwner) return;
+        sharedTooltip.hidden = true;
+        tooltipOwner = null;
+        tooltipPinned = false;
+      }
+
+      function attachSharedTooltip(target, contentFactory) {
+        if (!target) return;
+        target.classList.add("tooltip-target");
+        if (!target.hasAttribute("tabindex")) target.tabIndex = 0;
+
+        target.addEventListener("mouseenter", (evt) => {
+          showSharedTooltip(target, contentFactory(), evt, false);
+        });
+        target.addEventListener("mousemove", (evt) => {
+          if (tooltipPinned && tooltipOwner === target) return;
+          if (sharedTooltip && !sharedTooltip.hidden) positionTooltipFromEvent(evt);
+        });
+        target.addEventListener("mouseleave", () => {
+          if (tooltipPinned && tooltipOwner === target) return;
+          hideSharedTooltip(target);
+        });
+        target.addEventListener("focus", () => {
+          showSharedTooltip(target, contentFactory(), null, false);
+        });
+        target.addEventListener("blur", () => {
+          if (tooltipPinned && tooltipOwner === target) return;
+          hideSharedTooltip(target);
+        });
+        target.addEventListener("click", (evt) => {
+          evt.stopPropagation();
+          if (tooltipPinned && tooltipOwner === target) {
+            hideSharedTooltip(target);
+            return;
+          }
+          showSharedTooltip(target, contentFactory(), evt, true);
+        });
+        target.addEventListener("keydown", (evt) => {
+          if (evt.key === "Enter" || evt.key === " ") {
+            evt.preventDefault();
+            if (tooltipPinned && tooltipOwner === target) {
+              hideSharedTooltip(target);
+            } else {
+              showSharedTooltip(target, contentFactory(), null, true);
+            }
+          } else if (evt.key === "Escape") {
+            hideSharedTooltip(target);
+          }
+        });
+      }
+
+      function humanizeToken(value) {
+        const raw = String(value || "").trim();
+        if (!raw) return "";
+        return raw
+          .replace(/_/g, " ")
+          .replace(/\s+/g, " ")
+          .replace(/\b\w/g, (m) => m.toUpperCase());
+      }
+
+      function regionLabelById(unitId) {
+        const key = String(unitId || "").trim();
+        return CULTURAL_REGION_LABELS[key] || humanizeToken(key);
+      }
+
+      function archetypeMetaMap() {
+        const entries = Array.isArray(reportData.archetype_metadata) ? reportData.archetype_metadata : [];
+        const out = new Map();
+        entries.forEach((entry) => out.set(entry.key, entry));
+        return out;
+      }
+
+      function responseLabel(outcomeId, responseId, short = false) {
+        const outcome = (reportData.outcomes || []).find((o) => o.id === outcomeId);
+        const response = (outcome?.responses || []).find((r) => r.id === responseId);
+        if (!response) return responseId;
+        if (short && response.short_label) return response.short_label;
+        return response.label || response.id;
+      }
+
+      function readEmbeddedFallbackData() {
+        try {
+          const embedded = document.getElementById("embeddedReportData");
+          return JSON.parse(embedded ? (embedded.textContent || "{}") : "{}");
+        } catch (err) {
+          return {};
+        }
+      }
+
+      async function fetchJson(path) {
+        const resp = await fetch(path, { cache: "no-store" });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${path}`);
+        return await resp.json();
+      }
+
+      async function loadRecordChunks(manifest) {
+        const chunkDefs = Array.isArray(manifest?.data_files?.record_chunks)
+          ? manifest.data_files.record_chunks
+          : [];
+        if (!chunkDefs.length) {
+          return Array.isArray(manifest?.records) ? manifest.records : [];
+        }
+        const chunks = await Promise.all(chunkDefs.map(async (chunk) => {
+          const chunkPath = chunk?.path;
+          if (!chunkPath) throw new Error("Missing experiment record chunk path.");
+          const payload = await fetchJson(chunkPath);
+          return Array.isArray(payload) ? payload : (Array.isArray(payload?.records) ? payload.records : []);
+        }));
+        return chunks.flat();
+      }
+
+      function withUniverseFilter(filters = {}) {
+        if (Object.prototype.hasOwnProperty.call(filters, "response_universe_id")) {
+          return filters;
+        }
+        return { ...filters, response_universe_id: activeResponseUniverse };
+      }
+
+      function findRecord(filters) {
+        const matchFilters = withUniverseFilter(filters || {});
+        return (reportData.records || []).find((row) => Object.keys(matchFilters).every((k) => row[k] === matchFilters[k]));
+      }
+
+      function filterRecords(filters = {}) {
+        const matchFilters = withUniverseFilter(filters || {});
+        return (reportData.records || []).filter((row) => Object.keys(matchFilters).every((k) => row[k] === matchFilters[k]));
+      }
+
+      function uniqueBy(items, keyFn) {
+        const seen = new Set();
+        const out = [];
+        items.forEach((item) => {
+          const key = keyFn(item);
+          if (seen.has(key)) return;
+          seen.add(key);
+          out.push(item);
+        });
+        return out;
+      }
+
+      function setSelectOptions(selectEl, options, valueKey = "id", labelKey = "label", preferredValue = null) {
+        const oldValue = selectEl.value;
+        selectEl.innerHTML = "";
+        options.forEach((opt) => {
+          const el = document.createElement("option");
+          el.value = opt[valueKey];
+          el.textContent = opt[labelKey] || opt[valueKey];
+          if (opt.title) el.title = opt.title;
+          selectEl.appendChild(el);
+        });
+
+        const values = options.map((opt) => opt[valueKey]);
+        if (preferredValue && values.includes(preferredValue)) {
+          selectEl.value = preferredValue;
+        } else if (values.includes(oldValue)) {
+          selectEl.value = oldValue;
+        } else if (values.length > 0) {
+          selectEl.value = values[0];
+        }
+      }
+
+      function setMultiSelectOptions(selectEl, options, selectedValues = []) {
+        const selected = new Set(selectedValues || []);
+        selectEl.innerHTML = "";
+        options.forEach((opt) => {
+          const el = document.createElement("option");
+          el.value = opt.id;
+          el.textContent = opt.label || opt.id;
+          el.selected = selected.has(opt.id);
+          if (opt.title) el.title = opt.title;
+          selectEl.appendChild(el);
+        });
+      }
+
+      function getOutcomeById(outcomeId) {
+        return (reportData?.outcomes || []).find((outcome) => outcome.id === outcomeId) || null;
+      }
+
+      function getTurnoutAssumption() {
+        const cfg = reportData?.turnout_assumption || {};
+        const registeredVoters = Number(cfg.default_registered_voters);
+        const expectedVoters = Number(cfg.default_expected_voters);
+        const turnoutRate = Number(cfg.default_turnout_rate);
+        const derivedExpectedVoters = Number.isFinite(registeredVoters) && Number.isFinite(turnoutRate)
+          ? registeredVoters * turnoutRate
+          : expectedVoters;
+        return {
+          registeredVoters,
+          expectedVoters: Number.isFinite(derivedExpectedVoters) ? derivedExpectedVoters : expectedVoters,
+          turnoutRate
+        };
+      }
+
+      function getResponseUniverseConfig() {
+        return reportData?.response_universe || null;
+      }
+
+      function getResponseUniverseModeLabel(modeId) {
+        const cfg = getResponseUniverseConfig();
+        const mode = (cfg?.modes || []).find((entry) => entry?.id === modeId);
+        return mode?.label || null;
+      }
+
+      function getActiveResponseUniverseLabel() {
+        return getResponseUniverseModeLabel(activeResponseUniverse)
+          || (activeResponseUniverse === "with_view"
+            ? "What respondents with a view said"
+            : "What all respondents said");
+      }
+
+      function updateResponseUniverseTheme() {
+        document.body.classList.toggle("with-view-mode", activeResponseUniverse === "with_view");
+        document.body.classList.toggle("all-respondents-mode", activeResponseUniverse !== "with_view");
+        document.querySelectorAll(".section-mode-label").forEach((el) => {
+          const card = el.closest(".card");
+          if (!card) return;
+          card.setAttribute("data-universe-scope", "analytic");
+          card.setAttribute("data-response-universe", activeResponseUniverse === "with_view" ? "with_view" : "all_americans");
+        });
+      }
+
+      function updateModeLabelElements() {
+        const ids = [
+          "modeLabelKeyFindings",
+          "modeLabelSummary",
+          "modeLabelMainEffects",
+          "modeLabelCalculator",
+          "modeLabelSubgroups",
+          "modeLabelQuadrant",
+          "modeLabelGeography",
+          "modeLabelTechnical"
+        ];
+        const text = `Response universe: ${getActiveResponseUniverseLabel()}`;
+        ids.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = text;
+        });
+      }
+
+      function setResponseUniverse(modeId, rerender = true) {
+        const cfg = getResponseUniverseConfig();
+        const modes = Array.isArray(cfg?.modes) ? cfg.modes : [];
+        const allowed = modes.filter((mode) => mode?.id && mode?.enabled !== false);
+        const allowedIds = allowed.map((mode) => mode.id);
+        activeResponseUniverse = allowedIds.includes(modeId) ? modeId : "all_americans";
+        updateResponseUniverseTheme();
+        updateModeLabelElements();
+        document.querySelectorAll("#responseUniverseToggle .response-universe-btn").forEach((btn) => {
+          const enabled = btn.disabled !== true;
+          const pressed = enabled && btn.dataset.modeId === activeResponseUniverse;
+          btn.classList.toggle("active", pressed);
+          btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+        });
+        if (!rerender) return;
+        renderKeyFindings();
+        renderSummary();
+        initMainEffects();
+        initCalculator();
+        initSubgroups();
+        initQuadrant();
+        initGeography();
+        initTechnicalTable();
+      }
+
+      function initResponseUniverseToggle() {
+        const cardWrap = document.getElementById("componentResponseUniverse");
+        const wrap = document.getElementById("responseUniverseToggle");
+        if (!wrap) return;
+        const cfg = getResponseUniverseConfig();
+        if (!cfg || cfg.enabled === false) {
+          if (cardWrap) cardWrap.hidden = true;
+          activeResponseUniverse = "all_americans";
+          updateResponseUniverseTheme();
+          updateModeLabelElements();
+          return;
+        }
+        if (cardWrap) cardWrap.hidden = false;
+        const explainer = document.getElementById("responseUniverseExplainer");
+        if (explainer) {
+          explainer.textContent = cfg.note || "Choose the denominator used for downstream modeled effects.";
+        }
+        const note = document.getElementById("responseUniverseStatusNote");
+        if (note) {
+          note.textContent = cfg.status_note || "";
+        }
+        const modeMap = new Map((cfg.modes || []).map((mode) => [mode?.id, mode]));
+        document.querySelectorAll("#responseUniverseToggle .response-universe-btn").forEach((btn) => {
+          const modeCfg = modeMap.get(btn.dataset.modeId) || {};
+          btn.textContent = modeCfg.label || btn.textContent;
+          btn.disabled = modeCfg.enabled === false;
+          btn.onclick = btn.disabled ? null : (() => setResponseUniverse(btn.dataset.modeId, true));
+        });
+        const defaultMode = cfg.with_view_available && cfg.default_mode === "with_view"
+          ? "with_view"
+          : "all_americans";
+        setResponseUniverse(defaultMode, false);
+      }
+
+      function isLocalPreview() {
+        if (window.location.protocol === "file:") return true;
+        const host = String(window.location.hostname || "").toLowerCase();
+        return host === "localhost" || host === "127.0.0.1" || host === "[::1]";
+      }
+
+      function refreshThemeAwareLinks() {
+        const helper = window.VDHTheme;
+        if (!helper || !helper.withThemeParam) return;
+        const theme = helper.getActiveTheme ? helper.getActiveTheme() : "light";
+        document.querySelectorAll("a[href]").forEach((link) => {
+          if (!link.dataset.rawHref) link.dataset.rawHref = link.getAttribute("href");
+          if (!link.dataset.rawHref) return;
+          if (link.hasAttribute("data-skip-theme-param")) return;
+          link.setAttribute("href", helper.withThemeParam(link.dataset.rawHref, theme));
+        });
+      }
+
+      function applyTheme(theme, persist = true) {
+        const helper = window.VDHTheme || {};
+        const normalized = helper.normalizeTheme ? (helper.normalizeTheme(theme) || "light") : "light";
+        document.documentElement.setAttribute("data-theme", normalized);
+        if (persist && helper.persistTheme) helper.persistTheme(normalized);
+        refreshThemeAwareLinks();
+      }
+
+      function hydrateNavigation() {
+        const nav = reportData?.meta?.group_navigation || {};
+        const backLink = document.getElementById("backToPortalLink");
+        const back = nav.back || {};
+        const useLocal = isLocalPreview();
+        const href = useLocal ? (back.local_href || back.href) : back.href;
+        if (href) {
+          backLink.dataset.rawHref = href;
+          backLink.setAttribute("href", href);
+        }
+        if (back.label) backLink.textContent = String(back.label);
+
+        const siblingHost = document.getElementById("siblingNavLinks");
+        siblingHost.innerHTML = "";
+        const siblings = Array.isArray(nav.siblings) ? nav.siblings : [];
+        siblings.forEach((item) => {
+          const a = document.createElement("a");
+          a.className = "sibling-link";
+          const target = useLocal ? (item.local_href || item.href) : item.href;
+          a.href = target || "#";
+          a.dataset.rawHref = target || "#";
+          a.textContent = item.label || item.site_slug || "Sibling";
+          siblingHost.appendChild(a);
+        });
+      }
+
+      function renderKeyFindings() {
+        const grid = document.getElementById("findingsGrid");
+        grid.innerHTML = "";
+        const findings = reportData?.key_findings || {};
+        const groups = (Array.isArray(findings?.groups) ? findings.groups : [])
+          .filter((group) => (group?.response_universe_id || "all_americans") === activeResponseUniverse);
+        groups.forEach((group) => {
+          const section = document.createElement("section");
+          section.className = "findings-group";
+          section.innerHTML = `
+            <div class="findings-group-head">
+              <div>
+                <h3>${escapeHtml(group.title || "")}</h3>
+                <p>Default response: <strong>${escapeHtml(group.response_label || "")}</strong></p>
+              </div>
+            </div>
+            <div class="findings-grid"></div>
+            <div class="finding-highlights" hidden></div>
+          `;
+
+          const cardsHost = section.querySelector(".findings-grid");
+          (group.cards || []).forEach((card) => {
+            const article = document.createElement("article");
+            article.className = "finding";
+            article.innerHTML = `
+              <div class="k">${escapeHtml(card.label || "")}</div>
+              <div class="v">${fmtDeltaHtml(card.estimate_pp)}</div>
+            `;
+            attachSharedTooltip(article, () => buildKeyFindingTooltipHtml(group, card, card.label || "Statewide effect", card.label || card.estimand));
+            cardsHost.appendChild(article);
+          });
+
+          const highlightsHost = section.querySelector(".finding-highlights");
+          const highlights = [];
+          if (group?.strongest_subgroup?.label) {
+            highlights.push({
+              header: "Strongest subgroup movement",
+              label: group.strongest_subgroup.label,
+              entry: group.strongest_subgroup
+            });
+          }
+          if (group?.strongest_region?.label) {
+            highlights.push({
+              header: "Strongest regional movement",
+              label: group.strongest_region.label,
+              entry: group.strongest_region
+            });
+          }
+          if (highlights.length > 0) {
+            highlightsHost.hidden = false;
+            highlights.forEach((highlight) => {
+              const article = document.createElement("article");
+              article.className = "finding-highlight";
+              article.innerHTML = `
+                <div class="k">${escapeHtml(highlight.header)}</div>
+                <div class="v">${escapeHtml(highlight.label)}</div>
+                <div class="m">${fmtDeltaHtml(highlight.entry.estimate_pp)}</div>
+              `;
+              attachSharedTooltip(article, () => buildKeyFindingTooltipHtml(group, highlight.entry, highlight.label, estimandLabel("difference_in_differences")));
+              highlightsHost.appendChild(article);
+            });
+          }
+
+          grid.appendChild(section);
+        });
+        const note = document.getElementById("findingsTurnoutNote");
+        if (note) note.textContent = findings?.note || "";
+      }
+
+      function renderSummary() {
+        const body = document.getElementById("summaryBody");
+        const rows = (Array.isArray(reportData.summary_rows) ? reportData.summary_rows : [])
+          .filter((row) => (row?.response_universe_id || "all_americans") === activeResponseUniverse);
+        body.innerHTML = "";
+        const summaryMetrics = [
+          { estimand: "arm_a_effect", field: "arm_a_effect" },
+          { estimand: "arm_b_effect", field: "arm_b_effect" },
+          { estimand: "difference_in_differences", field: "difference_in_differences" }
+        ];
+        rows.forEach((row) => {
+          const tr = document.createElement("tr");
+          const labelCell = document.createElement("td");
+          labelCell.textContent = row.label || "";
+          tr.appendChild(labelCell);
+
+          summaryMetrics.forEach((metric) => {
+            const td = document.createElement("td");
+            const trigger = document.createElement("span");
+            trigger.className = "summary-cell-trigger";
+            trigger.innerHTML = fmtDeltaHtml(row[metric.field]);
+            attachSharedTooltip(trigger, () => buildSummaryTooltipHtml(row, metric.estimand));
+            td.appendChild(trigger);
+            tr.appendChild(td);
+          });
+
+          body.appendChild(tr);
+        });
+      }
+
+      function drawBars(host, items) {
+        host.innerHTML = "";
+        if (!items.length) {
+          host.innerHTML = '<p class="muted">No rows available for this selection.</p>';
+          return;
+        }
+
+        const maxAbs = Math.max(1, ...items.map((it) => Math.abs(Number(it.value) || 0)));
+        items.forEach((item) => {
+          const value = Number(item.value) || 0;
+          const abs = Math.abs(value);
+          const widthPct = Math.max(1.5, Math.min(50, (abs / maxAbs) * 50));
+          const cls = deltaClass(value);
+          const row = document.createElement("div");
+          row.className = "bar-row";
+          row.innerHTML = `
+            <div class="bar-label" title="${escapeHtml(item.tooltip || item.label)}">${escapeHtml(item.label)}</div>
+            <div class="track">
+              <div class="zero"></div>
+              <div class="bar ${cls}" style="width:${widthPct}%;"></div>
+            </div>
+            <div class="bar-val">${fmtDeltaHtml(value)}</div>
+          `;
+          if (item.tooltipHtml) {
+            attachSharedTooltip(row, () => item.tooltipHtml);
+          }
+          host.appendChild(row);
+        });
+      }
+
+      function normalizeRecordLabels() {
+        const archetypes = archetypeMetaMap();
+        (reportData.records || []).forEach((row) => {
+          if (row.unit_type === "Cultural Region") {
+            row.unit_label = regionLabelById(row.unit_id);
+          }
+          if (row.demographic === "profile") {
+            const meta = archetypes.get(row.level);
+            if (meta?.label) row.level_label = meta.label;
+          }
+          if (row.demographic === "party") {
+            const partyMap = { R: "Republicans", D: "Democrats", O: "Independents/Other", I: "Independents/Other" };
+            if (partyMap[row.level]) row.level_label = partyMap[row.level];
+          }
+        });
+
+        const outcomes = reportData.outcomes || [];
+        outcomes.forEach((outcome) => {
+          if (outcome.id !== "ballot") return;
+          (outcome.responses || []).forEach((resp) => {
+            if (resp.id === NET_LANDRY_ID) {
+              resp.label = "Net Landry position";
+              resp.short_label = "Net Landry position";
+              resp.title = NET_LANDRY_TOOLTIP;
+            }
+            if (resp.id === "jeff_landry_the_republican_incumbent") resp.short_label = "Landry";
+            if (resp.id === "a_republican_challenger_from_outside_the_current_administration") resp.short_label = "Republican challenger";
+            if (resp.id === "a_democratic_candidate") resp.short_label = "Democratic candidate";
+          });
+          outcome.default_response = NET_LANDRY_ID;
+        });
+      }
+
+      function responseOptions(outcomeId, short = false) {
+        const outcome = (reportData.outcomes || []).find((o) => o.id === outcomeId);
+        return (outcome?.responses || [])
+          .filter((r) => r.id !== "combined_non_landry")
+          .map((r) => ({
+            id: r.id,
+            label: short ? (r.short_label || r.label || r.id) : (r.label || r.id),
+            title: r.id === NET_LANDRY_ID ? NET_LANDRY_TOOLTIP : (r.title || r.label || r.id)
+          }));
+      }
+
+      function initMainEffects() {
+        const outcomeSel = document.getElementById("effectsOutcome");
+        const responseSel = document.getElementById("effectsResponse");
+        const estimandSel = document.getElementById("effectsEstimand");
+        const unitTypeSel = document.getElementById("effectsUnitType");
+        const unitSel = document.getElementById("effectsUnit");
+        const bars = document.getElementById("effectsBars");
+
+        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "short_label", "ballot");
+        setSelectOptions(estimandSel, reportData.estimands || [], "id", "label", "difference_in_differences");
+
+        const geoTypes = uniqueBy(
+          filterRecords({})
+            .filter((r) => r.demographic === "overall")
+            .map((r) => ({ id: r.unit_type, label: r.unit_type_label || r.unit_type })),
+          (x) => x.id
+        );
+        setSelectOptions(unitTypeSel, geoTypes, "id", "label", "state");
+
+        function syncResponses() {
+          const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
+          setSelectOptions(responseSel, responseOptions(outcomeSel.value, true), "id", "label", preferred);
+        }
+
+        function syncUnits() {
+          const rows = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            estimand: estimandSel.value,
+            unit_type: unitTypeSel.value,
+            demographic: "overall",
+            level: "overall"
+          });
+
+          const options = [{ id: "__all__", label: "All units" }].concat(uniqueBy(
+            rows.map((r) => ({ id: r.unit_id, label: r.unit_label || r.unit_id })),
+            (x) => x.id
+          ));
+
+          const preferred = unitTypeSel.value === "state" ? "state wide" : "__all__";
+          setSelectOptions(unitSel, options, "id", "label", preferred);
+        }
+
+        function render() {
+          const rows = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            estimand: estimandSel.value,
+            unit_type: unitTypeSel.value,
+            demographic: "overall",
+            level: "overall"
+          });
+
+          const chosen = unitSel.value;
+          const filtered = chosen === "__all__" ? rows : rows.filter((r) => r.unit_id === chosen);
+          filtered.sort((a, b) => Number(b.estimate_pp) - Number(a.estimate_pp));
+
+          drawBars(
+            bars,
+            filtered.map((r) => ({ label: r.unit_label || r.unit_id, value: r.estimate_pp }))
+          );
+        }
+
+        outcomeSel.addEventListener("change", () => { syncResponses(); syncUnits(); render(); });
+        responseSel.addEventListener("change", () => { syncUnits(); render(); });
+        estimandSel.addEventListener("change", () => { syncUnits(); render(); });
+        unitTypeSel.addEventListener("change", () => { syncUnits(); render(); });
+        unitSel.addEventListener("change", render);
+
+        syncResponses();
+        syncUnits();
+        render();
+
+        const notes = [reportData?.notes?.pre_post_levels_note].filter(Boolean);
+        document.getElementById("effectsDataNote").textContent = notes.join(" ");
+      }
+
+      function initCalculator() {
+        const turnoutRange = document.getElementById("calcTurnoutRate");
+        const turnoutNumber = document.getElementById("calcTurnoutRateNumber");
+        const resetBtn = document.getElementById("calcResetBtn");
+        const expectedVotesNote = document.getElementById("calcExpectedVotes");
+        const outcomeSel = document.getElementById("calcOutcome");
+        const responseSel = document.getElementById("calcResponse");
+        const estimandSel = document.getElementById("calcEstimand");
+        const out = document.getElementById("calcResult");
+        const turnoutDefaults = getTurnoutAssumption();
+        const registeredVoters = Number(turnoutDefaults.registeredVoters);
+        const turnoutInputDecimals = 4;
+        const defaultTurnoutRatePct = Number.isFinite(turnoutDefaults.turnoutRate)
+          ? turnoutDefaults.turnoutRate * 100
+          : (Number.isFinite(turnoutDefaults.expectedVoters) && registeredVoters > 0
+            ? (turnoutDefaults.expectedVoters / registeredVoters) * 100
+            : 0);
+
+        turnoutRange.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
+        turnoutNumber.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
+        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "label", "ballot");
+        setSelectOptions(estimandSel, reportData.estimands || [], "id", "label", "difference_in_differences");
+
+        function syncResponses() {
+          const defaultResponse = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
+          setSelectOptions(responseSel, responseOptions(outcomeSel.value, false), "id", "label", defaultResponse);
+        }
+
+        function syncTurnoutInputs(source = "number") {
+          const rawValue = source === "range" ? turnoutRange.value : turnoutNumber.value;
+          const nextValue = clampNumber(rawValue, 0, 100);
+          turnoutRange.value = nextValue.toFixed(turnoutInputDecimals);
+          turnoutNumber.value = nextValue.toFixed(turnoutInputDecimals);
+          return nextValue / 100;
+        }
+
+        function render(source = "number") {
+          const row = findRecord({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            estimand: estimandSel.value,
+            unit_type: "state",
+            demographic: "overall",
+            level: "overall"
+          });
+
+          const effect = row ? Number(row.estimate_pp) : NaN;
+          const turnoutRate = syncTurnoutInputs(source);
+          const expectedVotes = Number.isFinite(registeredVoters)
+            ? Math.round(registeredVoters * turnoutRate)
+            : Math.round(Number(turnoutDefaults.expectedVoters) || 0);
+          const equivalent = Number.isFinite(effect) ? Math.round((effect / 100) * expectedVotes) : NaN;
+          if (expectedVotesNote) {
+            const votersText = Number.isFinite(registeredVoters)
+              ? `${fmtNum(expectedVotes)} from ${fmtNum(Math.round(registeredVoters))} registered voters`
+              : fmtNum(expectedVotes);
+            expectedVotesNote.textContent = `Expected votes: ${votersText}`;
+          }
+
+          if (!Number.isFinite(effect)) {
+            out.textContent = "No statewide estimate for this combination.";
+            return;
+          }
+
+          const estLabel = (reportData.estimands || []).find((e) => e.id === estimandSel.value)?.label || "Selected effect";
+          if (responseSel.value === NET_LANDRY_ID) {
+            out.innerHTML = `At ${fmtPercent(turnoutRate)} expected turnout, about ${fmtNum(expectedVotes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} for Net Landry position is equivalent to about ${fmtNum(equivalent)} votes in Landry's margin.`;
+            return;
+          }
+          if (outcomeSel.value === "ballot" && responseSel.value === "jeff_landry_the_republican_incumbent") {
+            out.innerHTML = `At ${fmtPercent(turnoutRate)} expected turnout, about ${fmtNum(expectedVotes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} is equivalent to about ${fmtNum(equivalent)} Landry votes.`;
+            return;
+          }
+          out.innerHTML = `At ${fmtPercent(turnoutRate)} expected turnout, about ${fmtNum(expectedVotes)} expected votes, ${fmtDeltaHtml(effect)} ${estLabel.toLowerCase()} is equivalent to about ${fmtNum(equivalent)} vote-equivalent change for this response.`;
+        }
+
+        outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
+        responseSel.addEventListener("change", () => render());
+        estimandSel.addEventListener("change", () => render());
+        turnoutRange.addEventListener("input", () => render("range"));
+        turnoutNumber.addEventListener("input", () => render("number"));
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            turnoutRange.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
+            turnoutNumber.value = defaultTurnoutRatePct.toFixed(turnoutInputDecimals);
+            render("number");
+          });
+        }
+
+        syncResponses();
+        render("number");
+      }
+
+      function initSubgroups() {
+        const outcomeSel = document.getElementById("subOutcome");
+        const responseSel = document.getElementById("subResponse");
+        const estimandSel = document.getElementById("subEstimand");
+        const demoSel = document.getElementById("subDemographic");
+        const bars = document.getElementById("subBars");
+
+        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "short_label", "ballot");
+        setSelectOptions(estimandSel, reportData.estimands || [], "id", "label", "difference_in_differences");
+
+        const demographics = uniqueBy(
+          filterRecords({})
+            .filter((r) => r.unit_type === "state" && r.demographic !== "overall")
+            .map((r) => ({ id: r.demographic, label: r.demographic_label || r.demographic })),
+          (x) => x.id
+        );
+        setSelectOptions(demoSel, demographics, "id", "label", "party");
+
+        function syncResponses() {
+          const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
+          setSelectOptions(responseSel, responseOptions(outcomeSel.value, true), "id", "label", preferred);
+        }
+
+        function render() {
+          const subgroupRows = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            unit_type: "state",
+            demographic: demoSel.value
+          }).filter((r) => r.level !== "overall");
+
+          const grouped = new Map();
+          subgroupRows.forEach((row) => {
+            if (!grouped.has(row.level)) {
+              grouped.set(row.level, {
+                label: row.level_label || row.level,
+                demographicType: row.demographic_label || humanizeToken(row.demographic),
+                arm_a_effect: null,
+                arm_b_effect: null,
+                difference_in_differences: null
+              });
+            }
+            grouped.get(row.level)[row.estimand] = row;
+          });
+
+          const selectedEstimand = estimandSel.value;
+          const rows = Array.from(grouped.values())
+            .filter((item) => item[selectedEstimand])
+            .map((item) => {
+              const selectedRow = item[selectedEstimand];
+              return {
+                label: item.label,
+                value: selectedRow.estimate_pp,
+                tooltip: item.label,
+                tooltipHtml: buildDecompositionTooltipHtml({
+                  title: item.label,
+                  entityKind: "subgroup",
+                  entityCategory: item.demographicType,
+                  entityLabel: "Demographic",
+                  entityType: item.demographicType,
+                  outcomeId: outcomeSel.value,
+                  responseId: responseSel.value,
+                  metricShown: estimandLabel(selectedEstimand),
+                  responseUniverseId: selectedRow.response_universe_id,
+                  actionEffect: item.arm_a_effect?.estimate_pp,
+                  inactionEffect: item.arm_b_effect?.estimate_pp,
+                  didEffect: item.difference_in_differences?.estimate_pp,
+                  voteEquivalent: selectedRow.vote_equivalent,
+                  voteEquivalentLabel: selectedRow.vote_equivalent_label,
+                  denominatorVoters: selectedRow.denominator_voters,
+                  denominatorScope: selectedRow.denominator_scope,
+                  denominatorSource: selectedRow.denominator_source,
+                  selectedEffectValue: selectedRow.estimate_pp
+                })
+              };
+            });
+
+          rows.sort((a, b) => Number(b.value) - Number(a.value));
+          drawBars(
+            bars,
+            rows
+          );
+        }
+
+        outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
+        responseSel.addEventListener("change", render);
+        estimandSel.addEventListener("change", render);
+        demoSel.addEventListener("change", render);
+
+        syncResponses();
+        render();
+      }
+
+      function initQuadrant() {
+        const outcomeSel = document.getElementById("quadOutcome");
+        const responseSel = document.getElementById("quadResponse");
+        const demoSel = document.getElementById("quadDemographic");
+        const highlightSel = document.getElementById("quadHighlights");
+        const plot = document.getElementById("quadPlot");
+        const surface = document.getElementById("quadSurface");
+        const resetBtn = document.getElementById("quadResetBtn");
+
+        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "short_label", "ballot");
+
+        const demographics = uniqueBy(
+          filterRecords({})
+            .filter((r) => r.unit_type === "state" && r.demographic !== "overall")
+            .map((r) => ({ id: r.demographic, label: r.demographic_label || r.demographic })),
+          (x) => x.id
+        );
+        setSelectOptions(demoSel, demographics, "id", "label", "profile");
+
+        const quadView = { scale: 1, panX: 0, panY: 0, dragging: false, startX: 0, startY: 0 };
+        const specialHighlightIds = new Set(["__none__", "__top_did__", "__top_abs_did__"]);
+        let highlightedSelection = [];
+
+        function applyView() {
+          surface.style.transform = `translate(${quadView.panX}px, ${quadView.panY}px) scale(${quadView.scale})`;
+        }
+
+        function resetView() {
+          quadView.scale = 1;
+          quadView.panX = 0;
+          quadView.panY = 0;
+          applyView();
+        }
+
+        function syncResponses() {
+          const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
+          setSelectOptions(responseSel, responseOptions(outcomeSel.value, true), "id", "label", preferred);
+        }
+
+        function findDefaultHighlightedValues(points) {
+          const tradwifePoint = points.find((point) => /tradwif/i.test(`${point.key} ${point.label}`));
+          if (tradwifePoint) return [tradwifePoint.key];
+          const strongestPoint = points
+            .slice()
+            .sort((a, b) => Math.abs(Number(b.did)) - Math.abs(Number(a.did)))[0];
+          return strongestPoint ? [strongestPoint.key] : [];
+        }
+
+        function normalizeHighlightSelection(points, selection, fallbackToDefault = true) {
+          const availableKeys = new Set(points.map((point) => point.key));
+          let nextSelection = (selection || []).filter((value, index, values) => {
+            if (!value || values.indexOf(value) !== index) return false;
+            return specialHighlightIds.has(value) || availableKeys.has(value);
+          });
+          if (nextSelection.includes("__none__")) nextSelection = ["__none__"];
+          if (!nextSelection.length && fallbackToDefault) {
+            nextSelection = findDefaultHighlightedValues(points);
+          }
+          return nextSelection;
+        }
+
+        function syncHighlightOptions(points) {
+          const options = [
+            { id: "__none__", label: "Clear labels", title: "Leave the chart unlabeled." },
+            { id: "__top_did__", label: "Top 3 by advantage", title: "Label the three strongest positive action-vs.-inaction movers." },
+            { id: "__top_abs_did__", label: "Top 3 by absolute advantage", title: "Label the three biggest movers by absolute action-vs.-inaction effect." }
+          ].concat(
+            points
+              .slice()
+              .sort((a, b) => String(a.label).localeCompare(String(b.label)))
+              .map((point) => ({ id: point.key, label: point.label }))
+          );
+          highlightedSelection = normalizeHighlightSelection(points, highlightedSelection, true);
+          setMultiSelectOptions(highlightSel, options, highlightedSelection);
+        }
+
+        function resolveHighlightedKeys(points) {
+          highlightedSelection = normalizeHighlightSelection(points, highlightedSelection, true);
+          if (highlightedSelection.includes("__none__")) return new Set();
+
+          const keys = new Set();
+          if (highlightedSelection.includes("__top_did__")) {
+            points
+              .slice()
+              .sort((a, b) => Number(b.did) - Number(a.did))
+              .slice(0, 3)
+              .forEach((point) => keys.add(point.key));
+          }
+          if (highlightedSelection.includes("__top_abs_did__")) {
+            points
+              .slice()
+              .sort((a, b) => Math.abs(Number(b.did)) - Math.abs(Number(a.did)))
+              .slice(0, 3)
+              .forEach((point) => keys.add(point.key));
+          }
+          highlightedSelection
+            .filter((value) => !specialHighlightIds.has(value))
+            .forEach((value) => keys.add(value));
+
+          if (!keys.size) {
+            findDefaultHighlightedValues(points).forEach((value) => keys.add(value));
+          }
+          return keys;
+        }
+
+        function clearDynamic() {
+          surface.querySelectorAll(".quad-point, .quad-point-label, .quad-point-connector").forEach((el) => el.remove());
+          if (tooltipOwner && plot.contains(tooltipOwner)) hideSharedTooltip();
+        }
+
+        plot.addEventListener("wheel", (evt) => {
+          evt.preventDefault();
+          const rect = plot.getBoundingClientRect();
+          const cursorX = evt.clientX - rect.left;
+          const cursorY = evt.clientY - rect.top;
+          const prevScale = quadView.scale;
+          const nextScale = Math.max(1, Math.min(2.8, prevScale * (evt.deltaY < 0 ? 1.12 : 0.89)));
+          if (nextScale === prevScale) return;
+          const localX = (cursorX - quadView.panX) / prevScale;
+          const localY = (cursorY - quadView.panY) / prevScale;
+          quadView.scale = nextScale;
+          quadView.panX = cursorX - localX * nextScale;
+          quadView.panY = cursorY - localY * nextScale;
+          applyView();
+        }, { passive: false });
+
+        plot.addEventListener("pointerdown", (evt) => {
+          if (evt.target.closest(".quad-point")) return;
+          quadView.dragging = true;
+          quadView.startX = evt.clientX - quadView.panX;
+          quadView.startY = evt.clientY - quadView.panY;
+          plot.classList.add("is-dragging");
+        });
+
+        window.addEventListener("pointermove", (evt) => {
+          if (!quadView.dragging) return;
+          quadView.panX = evt.clientX - quadView.startX;
+          quadView.panY = evt.clientY - quadView.startY;
+          applyView();
+        });
+
+        window.addEventListener("pointerup", () => {
+          quadView.dragging = false;
+          plot.classList.remove("is-dragging");
+        });
+
+        if (resetBtn) {
+          resetBtn.addEventListener("click", resetView);
+        }
+
+        function render() {
+          clearDynamic();
+          resetView();
+
+          const rowsA = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            estimand: "arm_a_effect",
+            unit_type: "state",
+            demographic: demoSel.value
+          }).filter((r) => r.level !== "overall");
+
+          const rowsB = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            estimand: "arm_b_effect",
+            unit_type: "state",
+            demographic: demoSel.value
+          }).filter((r) => r.level !== "overall");
+
+          const rowsD = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            estimand: "difference_in_differences",
+            unit_type: "state",
+            demographic: demoSel.value
+          }).filter((r) => r.level !== "overall");
+
+          const byB = new Map(rowsB.map((r) => [r.level, r]));
+          const byD = new Map(rowsD.map((r) => [r.level, r]));
+
+          const points = rowsA.map((a) => {
+            const b = byB.get(a.level);
+            const d = byD.get(a.level);
+            return {
+              key: a.level,
+              label: a.level_label || a.level,
+              x: Number(a.estimate_pp),
+              y: Number(b?.estimate_pp),
+              did: Number(d?.estimate_pp),
+              demographic: a.demographic_label || a.demographic,
+              rowA: a,
+              rowB: b,
+              rowD: d
+            };
+          }).filter((p) => Number.isFinite(p.x) && Number.isFinite(p.y) && Number.isFinite(p.did));
+
+          if (!points.length) {
+            highlightedSelection = [];
+            setMultiSelectOptions(highlightSel, [], []);
+            return;
+          }
+
+          const maxAbs = Math.max(1, ...points.map((p) => Math.max(Math.abs(p.x), Math.abs(p.y))));
+          syncHighlightOptions(points);
+          const highlightedKeys = resolveHighlightedKeys(points);
+
+          const width = plot.clientWidth;
+          const height = plot.clientHeight;
+          let labelIndex = 0;
+
+          points.forEach((pt) => {
+            const xPct = 50 + (pt.x / maxAbs) * 42;
+            const yPct = 50 - (pt.y / maxAbs) * 42;
+            const dot = document.createElement("div");
+            dot.className = `quad-point ${deltaClass(pt.did)}${highlightedKeys.has(pt.key) ? " is-highlighted" : ""}`;
+            dot.style.left = `${xPct}%`;
+            dot.style.top = `${yPct}%`;
+            attachSharedTooltip(dot, () => buildDecompositionTooltipHtml({
+              title: pt.label,
+              entityKind: "subgroup",
+              entityCategory: pt.demographic,
+              entityLabel: "Demographic",
+              entityType: pt.demographic,
+              outcomeId: outcomeSel.value,
+              responseId: responseSel.value,
+              metricShown: "Action vs. inaction advantage",
+              responseUniverseId: pt.rowD?.response_universe_id || pt.rowA?.response_universe_id || "all_americans",
+              actionEffect: pt.x,
+              inactionEffect: pt.y,
+              didEffect: pt.did,
+              voteEquivalent: pt.rowD?.vote_equivalent,
+              voteEquivalentLabel: pt.rowD?.vote_equivalent_label,
+              denominatorVoters: pt.rowD?.denominator_voters,
+              denominatorScope: pt.rowD?.denominator_scope,
+              denominatorSource: pt.rowD?.denominator_source,
+              selectedEffectValue: pt.did
+            }));
+
+            surface.appendChild(dot);
+
+            if (highlightedKeys.has(pt.key)) {
+              const pointX = (xPct / 100) * width;
+              const pointY = (yPct / 100) * height;
+              const dx = pt.x >= 0 ? 18 : -18;
+              const dyBase = labelIndex % 2 === 0 ? -20 : 12;
+              const dy = dyBase + (labelIndex % 3) * 4;
+              const labelX = Math.max(12, Math.min(width - 150, pointX + dx));
+              const labelY = Math.max(12, Math.min(height - 26, pointY + dy));
+
+              const connector = document.createElement("div");
+              connector.className = "quad-point-connector";
+              const deltaX = labelX - pointX;
+              const deltaY = labelY - pointY;
+              connector.style.left = `${pointX}px`;
+              connector.style.top = `${pointY}px`;
+              connector.style.width = `${Math.sqrt(deltaX * deltaX + deltaY * deltaY)}px`;
+              connector.style.transform = `rotate(${Math.atan2(deltaY, deltaX)}rad)`;
+              surface.appendChild(connector);
+
+              const lbl = document.createElement("div");
+              lbl.className = "quad-point-label";
+              lbl.textContent = pt.label;
+              lbl.style.left = `${labelX}px`;
+              lbl.style.top = `${labelY}px`;
+              surface.appendChild(lbl);
+              labelIndex += 1;
+            }
+          });
+        }
+
+        outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
+        responseSel.addEventListener("change", render);
+        demoSel.addEventListener("change", render);
+        highlightSel.addEventListener("change", () => {
+          highlightedSelection = Array.from(highlightSel.selectedOptions || []).map((option) => option.value);
+          if (highlightedSelection.includes("__none__")) {
+            highlightedSelection = ["__none__"];
+          }
+          render();
+        });
+
+        syncResponses();
+        render();
+      }
+
+      function initGeography() {
+        const outcomeSel = document.getElementById("geoOutcome");
+        const responseSel = document.getElementById("geoResponse");
+        const estimandSel = document.getElementById("geoEstimand");
+        const unitTypeSel = document.getElementById("geoUnitType");
+        const bars = document.getElementById("geoBars");
+
+        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "short_label", "ballot");
+        setSelectOptions(estimandSel, reportData.estimands || [], "id", "label", "difference_in_differences");
+
+        const geoTypes = uniqueBy(
+          filterRecords({})
+            .filter((r) => r.demographic === "overall")
+            .map((r) => ({ id: r.unit_type, label: r.unit_type_label || r.unit_type })),
+          (x) => x.id
+        );
+        setSelectOptions(unitTypeSel, geoTypes, "id", "label", "Cultural Region");
+
+        function syncResponses() {
+          const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
+          setSelectOptions(responseSel, responseOptions(outcomeSel.value, true), "id", "label", preferred);
+        }
+
+        function render() {
+          const geographyRows = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            unit_type: unitTypeSel.value,
+            demographic: "overall",
+            level: "overall"
+          }).filter((r) => !(r.unit_type === "state" && r.unit_id === "state wide"));
+
+          const grouped = new Map();
+          geographyRows.forEach((row) => {
+            if (!grouped.has(row.unit_id)) {
+              grouped.set(row.unit_id, {
+                label: row.unit_label || row.unit_id,
+                geographyType: row.unit_type_label || row.unit_type,
+                arm_a_effect: null,
+                arm_b_effect: null,
+                difference_in_differences: null
+              });
+            }
+            grouped.get(row.unit_id)[row.estimand] = row;
+          });
+
+          const selectedEstimand = estimandSel.value;
+          const rows = Array.from(grouped.values())
+            .filter((item) => item[selectedEstimand])
+            .map((item) => {
+              const selectedRow = item[selectedEstimand];
+              return {
+                label: item.label,
+                value: selectedRow.estimate_pp,
+                tooltip: item.label,
+                tooltipHtml: buildDecompositionTooltipHtml({
+                  title: item.label,
+                  entityKind: "geography",
+                  entityCategory: item.geographyType,
+                  entityLabel: "Geography",
+                  entityType: item.geographyType,
+                  outcomeId: outcomeSel.value,
+                  responseId: responseSel.value,
+                  metricShown: estimandLabel(selectedEstimand),
+                  responseUniverseId: selectedRow.response_universe_id,
+                  actionEffect: item.arm_a_effect?.estimate_pp,
+                  inactionEffect: item.arm_b_effect?.estimate_pp,
+                  didEffect: item.difference_in_differences?.estimate_pp,
+                  voteEquivalent: selectedRow.vote_equivalent,
+                  voteEquivalentLabel: selectedRow.vote_equivalent_label,
+                  denominatorVoters: selectedRow.denominator_voters,
+                  denominatorScope: selectedRow.denominator_scope,
+                  denominatorSource: selectedRow.denominator_source,
+                  selectedEffectValue: selectedRow.estimate_pp
+                })
+              };
+            });
+
+          rows.sort((a, b) => Number(b.value) - Number(a.value));
+          drawBars(
+            bars,
+            rows
+          );
+        }
+
+        outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
+        responseSel.addEventListener("change", render);
+        estimandSel.addEventListener("change", render);
+        unitTypeSel.addEventListener("change", render);
+
+        syncResponses();
+        render();
+      }
+
+      function initTechnicalTable() {
+        const outcomeSel = document.getElementById("techOutcome");
+        const responseSel = document.getElementById("techResponse");
+        const unitTypeSel = document.getElementById("techUnitType");
+        const demoSel = document.getElementById("techDemographic");
+        const body = document.getElementById("techBody");
+
+        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "short_label", "ballot");
+
+        const unitTypes = uniqueBy(
+          filterRecords({}).map((r) => ({ id: r.unit_type, label: r.unit_type_label || r.unit_type })),
+          (x) => x.id
+        );
+        setSelectOptions(unitTypeSel, unitTypes, "id", "label", "state");
+
+        const demographics = uniqueBy(
+          filterRecords({}).map((r) => ({ id: r.demographic, label: r.demographic_label || r.demographic })),
+          (x) => x.id
+        );
+        setSelectOptions(demoSel, demographics, "id", "label", "overall");
+
+        function syncResponses() {
+          const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
+          setSelectOptions(responseSel, responseOptions(outcomeSel.value, false), "id", "label", preferred);
+        }
+
+        function render() {
+          const rows = filterRecords({
+            outcome_id: outcomeSel.value,
+            response_id: responseSel.value,
+            unit_type: unitTypeSel.value,
+            demographic: demoSel.value
+          });
+
+          const grouped = new Map();
+          rows.forEach((row) => {
+            const key = `${row.unit_id}||${row.level}`;
+            if (!grouped.has(key)) {
+              grouped.set(key, {
+                unit_label: row.unit_label,
+                level_label: row.level_label,
+                arm_a_effect: null,
+                arm_b_effect: null,
+                difference_in_differences: null
+              });
+            }
+            grouped.get(key)[row.estimand] = row;
+          });
+
+          const ordered = Array.from(grouped.values()).sort((a, b) => {
+            const aName = `${a.unit_label || ""} ${a.level_label || ""}`.trim();
+            const bName = `${b.unit_label || ""} ${b.level_label || ""}`.trim();
+            return aName.localeCompare(bName);
+          });
+
+          body.innerHTML = ordered.map((row) => {
+            const unitLevel = row.level_label && row.level_label !== "Overall"
+              ? `${row.unit_label} / ${row.level_label}`
+              : row.unit_label;
+
+            return `
+              <tr>
+                <td>${escapeHtml(unitLevel || "")}</td>
+                <td>${fmtDeltaHtml(row.arm_a_effect?.estimate_pp)}</td>
+                <td>${fmtDeltaHtml(row.arm_b_effect?.estimate_pp)}</td>
+                <td>${fmtDeltaHtml(row.difference_in_differences?.estimate_pp)}</td>
+                <td>${fmtPP(row.difference_in_differences?.estimate_sd_pp)}</td>
+                <td>${fmtPP(row.difference_in_differences?.estimate_low_pp)}</td>
+                <td>${fmtPP(row.difference_in_differences?.estimate_high_pp)}</td>
+              </tr>
+            `;
+          }).join("");
+        }
+
+        outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
+        responseSel.addEventListener("change", render);
+        unitTypeSel.addEventListener("change", render);
+        demoSel.addEventListener("change", render);
+
+        syncResponses();
+        render();
+        const note = document.getElementById("technicalAppendixNote");
+        if (note) note.textContent = reportData?.notes?.uncertainty_note || "";
+      }
+
+      function applyFeedbackCard() {
+        const cfg = reportData?.template?.feedback_callout || {};
+        const enabled = cfg.enabled !== false;
+        const section = document.getElementById("feedbackCallout");
+        if (!enabled) {
+          section.hidden = true;
+          return;
+        }
+
+        document.getElementById("feedbackHeading").textContent = cfg.heading || "Share Your Feedback";
+        document.getElementById("feedbackBody").textContent = cfg.body || "";
+        const cta = document.getElementById("feedbackCta");
+        cta.textContent = cfg.cta_label || "Get in Touch";
+        cta.href = cfg.cta_url || "mailto:philipp@vantagedatahouse.com";
+        cta.dataset.rawHref = cta.href;
+        section.hidden = false;
+      }
+
+      function renderDataLoadError(message) {
+        const idsToHide = [
+          "componentResponseUniverse",
+          "componentKeyFindings",
+          "componentMethodology",
+          "componentArms",
+          "componentSummary",
+          "componentMainEffects",
+          "componentCalculator",
+          "componentSubgroups",
+          "componentQuadrant",
+          "componentGeography",
+          "componentTechnical"
+        ];
+        idsToHide.forEach((id) => {
+          const node = document.getElementById(id);
+          if (node) node.hidden = true;
+        });
+
+        let card = document.getElementById("componentDataLoadError");
+        if (!card) {
+          card = document.createElement("section");
+          card.id = "componentDataLoadError";
+          card.className = "card load-error-card";
+          const hero = document.getElementById("componentHero");
+          if (hero && hero.parentNode) {
+            hero.insertAdjacentElement("afterend", card);
+          }
+        }
+        card.hidden = false;
+        card.innerHTML = `
+          <h2 class="section-title">Data Load Error</h2>
+          <p class="muted">${escapeHtml(message || DEFAULT_LOAD_ERROR_MESSAGE)}</p>
+        `;
+      }
+
+      function applyHeroAndMeta() {
+        document.getElementById("heroTitle").textContent = reportData?.meta?.title || "Impact of Online Gaming on Governor Landry's 2027 Prospects";
+        document.getElementById("heroSubtitle").textContent = reportData?.meta?.subtitle || "";
+        document.getElementById("metaSite").textContent = (reportData?.meta?.site || "https://www.vantagedatahouse.com").replace(/^https?:\/\//, "");
+        document.getElementById("metaSample").textContent = reportData?.meta?.sample || "N = respondents";
+        document.getElementById("metaDates").textContent = reportData?.meta?.fieldDates || "Field dates";
+        document.getElementById("metaMethod").textContent = reportData?.meta?.methodLabel || "Poststratified experiment-effect estimates";
+        document.getElementById("methodologyBody").textContent = reportData?.methodology_note || "";
+      }
+
+      async function loadData() {
+        const embeddedFallback = readEmbeddedFallbackData();
+        try {
+          const manifest = await fetchJson(EXPERIMENT_MANIFEST_PATH);
+          const records = await loadRecordChunks(manifest);
+          return { ...manifest, records };
+        } catch (err) {
+          return {
+            ...embeddedFallback,
+            load_error: true,
+            load_error_message: embeddedFallback?.load_error_message || DEFAULT_LOAD_ERROR_MESSAGE,
+            load_error_detail: err?.message || String(err || ""),
+            records: Array.isArray(embeddedFallback?.records) ? embeddedFallback.records : []
+          };
+        }
+      }
+
+      async function init() {
+        reportData = await loadData();
+        normalizeRecordLabels();
+
+        applyHeroAndMeta();
+        hydrateNavigation();
+        if (reportData?.load_error) {
+          renderDataLoadError(reportData.load_error_message || DEFAULT_LOAD_ERROR_MESSAGE);
+          applyFeedbackCard();
+          const themeToggle = document.getElementById("themeToggle");
+          if (themeToggle) {
+            themeToggle.addEventListener("click", () => {
+              const now = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+              applyTheme(now === "dark" ? "light" : "dark", true);
+            });
+          }
+          const boot = window.__VDH_THEME_BOOT__ || { theme: "light" };
+          applyTheme(boot.theme || "light", false);
+          return;
+        }
+        initResponseUniverseToggle();
+        renderKeyFindings();
+        renderSummary();
+        initMainEffects();
+        initCalculator();
+        initSubgroups();
+        initQuadrant();
+        initGeography();
+        initTechnicalTable();
+        applyFeedbackCard();
+
+        const themeToggle = document.getElementById("themeToggle");
+        if (themeToggle) {
+          themeToggle.addEventListener("click", () => {
+            const now = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+            applyTheme(now === "dark" ? "light" : "dark", true);
+          });
+        }
+
+        const boot = window.__VDH_THEME_BOOT__ || { theme: "light" };
+        applyTheme(boot.theme || "light", false);
+      }
+
+      init();
+    </script>
+  </body>
+</html>
