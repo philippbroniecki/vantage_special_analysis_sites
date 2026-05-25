@@ -1,0 +1,5430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gambling Attitudes &amp; Priorities | Vantage Data House</title>
+        <script>
+      (function bootstrapVDHTheme() {
+        const THEME_PARAM_KEY = 'theme';
+        const THEME_COOKIE_KEY = 'vdh_theme';
+        const THEME_STORAGE_KEY = 'vdh_theme';
+        const LEGACY_STORAGE_KEYS = [
+          'vantage-theme',
+          'vdh_iran2_theme',
+          'vdh_ice2_theme',
+          'vdh_trump_theme',
+          'vdh_louisiana_us_senate_test_ballot_theme',
+          'vdh_louisiana_us_senate_favorability_theme',
+          'vdh_louisiana_us_senate_test_ballot_re_ask_theme',
+          'vdh_louisiana_us_senate_state_perception_theme',
+          'vdh_louisiana_us_senate_top_priority_issue_trust_theme',
+          'vdh_louisiana_us_senate_ideology_theme',
+          'vdh_louisiana_us_senate_voter_flows_theme'
+        ];
+
+        function normalizeTheme(value) {
+          return value === 'dark' || value === 'light' ? value : null;
+        }
+
+        function readThemeFromQuery() {
+          try {
+            const params = new URLSearchParams(window.location.search || '');
+            return normalizeTheme(params.get(THEME_PARAM_KEY));
+          } catch (err) {
+            return null;
+          }
+        }
+
+        function readThemeFromCookie() {
+          try {
+            const entries = String(document.cookie || '').split(';');
+            for (const entry of entries) {
+              const trimmed = entry.trim();
+              if (!trimmed) continue;
+              const idx = trimmed.indexOf('=');
+              if (idx <= 0) continue;
+              const key = trimmed.slice(0, idx).trim();
+              if (key !== THEME_COOKIE_KEY) continue;
+              const value = decodeURIComponent(trimmed.slice(idx + 1));
+              const normalized = normalizeTheme(value);
+              if (normalized) return normalized;
+            }
+          } catch (err) {}
+          return null;
+        }
+
+        function readThemeFromStorage() {
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try {
+              const normalized = normalizeTheme(window.localStorage.getItem(key));
+              if (normalized) return normalized;
+            } catch (err) {
+              // localStorage can be unavailable in restricted contexts.
+            }
+          }
+          return null;
+        }
+
+        function readThemeFromSystem() {
+          try {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              return 'dark';
+            }
+            if (window.matchMedia) return 'light';
+          } catch (err) {}
+          return null;
+        }
+
+        function resolveInitialTheme() {
+          const fromQuery = readThemeFromQuery();
+          if (fromQuery) return { theme: fromQuery, source: 'param' };
+
+          const fromCookie = readThemeFromCookie();
+          if (fromCookie) return { theme: fromCookie, source: 'cookie' };
+
+          const fromStorage = readThemeFromStorage();
+          if (fromStorage) return { theme: fromStorage, source: 'storage' };
+
+          const fromSystem = readThemeFromSystem();
+          if (fromSystem) return { theme: fromSystem, source: 'system' };
+
+          return { theme: 'light', source: 'fallback' };
+        }
+
+        function isPhilippDomain(hostname) {
+          const host = String(hostname || '').toLowerCase();
+          return host === 'philippbroniecki.com' || host.endsWith('.philippbroniecki.com');
+        }
+
+        function getSharedCookieDomain() {
+          return isPhilippDomain(window.location.hostname) ? '.philippbroniecki.com' : '';
+        }
+
+        function persistTheme(theme) {
+          const normalized = normalizeTheme(theme);
+          if (!normalized) return;
+
+          const securePart = window.location.protocol === 'https:' ? '; Secure' : '';
+          const baseCookie = `${THEME_COOKIE_KEY}=${encodeURIComponent(normalized)}; Path=/; Max-Age=31536000; SameSite=Lax${securePart}`;
+          const sharedDomain = getSharedCookieDomain();
+
+          try {
+            if (sharedDomain) {
+              document.cookie = `${baseCookie}; Domain=${sharedDomain}`;
+            }
+            document.cookie = baseCookie;
+          } catch (err) {}
+
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try { window.localStorage.setItem(key, normalized); } catch (err) {}
+          }
+        }
+
+        function shouldPropagateThemeToURL(url, rawHref) {
+          const raw = String(rawHref || '').trim();
+          if (!raw || raw.startsWith('#') || /^mailto:/i.test(raw) || /^tel:/i.test(raw) || /^javascript:/i.test(raw)) {
+            return false;
+          }
+
+          const protocol = String((url && url.protocol) || '').toLowerCase();
+          if (protocol === 'file:') return true;
+          if (protocol !== 'http:' && protocol !== 'https:') return false;
+
+          const host = String((url && url.hostname) || '').toLowerCase();
+          if (host === 'localhost' || host === '127.0.0.1' || host === '[::1]') return true;
+          return isPhilippDomain(host);
+        }
+
+        function withThemeParam(rawHref, theme) {
+          const normalizedTheme = normalizeTheme(theme);
+          if (!normalizedTheme) return rawHref;
+
+          try {
+            const url = new URL(rawHref, window.location.href);
+            if (!shouldPropagateThemeToURL(url, rawHref)) return rawHref;
+            url.searchParams.set(THEME_PARAM_KEY, normalizedTheme);
+            return url.toString();
+          } catch (err) {
+            return rawHref;
+          }
+        }
+
+        function getActiveTheme() {
+          return normalizeTheme(document.documentElement.getAttribute('data-theme')) || 'light';
+        }
+
+        window.VDHTheme = {
+          normalizeTheme,
+          resolveInitialTheme,
+          persistTheme,
+          withThemeParam,
+          getActiveTheme,
+          shouldPropagateThemeToURL,
+          themeParamKey: THEME_PARAM_KEY
+        };
+
+        const initialTheme = resolveInitialTheme();
+        document.documentElement.setAttribute('data-theme', initialTheme.theme);
+        window.__VDH_THEME_BOOT__ = initialTheme;
+      })();
+    </script>
+    <style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Backgrounds */
+  --bg:           #edf2f8;
+  --bg-deep:      #d6e3f0;
+  --surface:      #ffffff;
+  --surface-alt:  #f3f7fc;
+  --surface-hi:   #fafcff;
+
+  /* Typography */
+  --ink:          #0d1d2e;
+  --ink-soft:     #364d63;
+  --muted:        #5c7289;
+  --muted-faint:  #8aa2b5;
+
+  /* Borders */
+  --line:         #ccd8e5;
+  --line-soft:    #dce7f0;
+
+  /* Brand accent — teal */
+  --accent:       #1a6b73;
+  --accent-hover: #145d64;
+  --accent-tint:  rgba(26, 107, 115, 0.09);
+  --accent-tint2: rgba(26, 107, 115, 0.16);
+
+  /* Warm — pro-intervention orange */
+  --warm:         #c46525;
+  --warm-tint:    rgba(196, 101, 37, 0.09);
+
+  /* Cool — contra-intervention blue */
+  --cool:         #1f5f89;
+  --cool-tint:    rgba(31, 95, 137, 0.09);
+
+  /* Chart track */
+  --track:        rgba(135, 162, 188, 0.25);
+
+  /* Layered shadows */
+  --shadow-card:  0 1px 2px rgba(10, 25, 55, 0.04),
+                  0 4px 14px rgba(10, 25, 55, 0.055),
+                  0 0 0 1px rgba(10, 25, 55, 0.028);
+  --shadow-raise: 0 2px 5px rgba(10, 25, 55, 0.06),
+                  0 10px 28px rgba(10, 25, 55, 0.09),
+                  0 0 0 1px rgba(10, 25, 55, 0.04);
+
+  /* Hero gradient */
+  --hero-from:    #0c2240;
+  --hero-to:      #1c4a80;
+
+  /* Topbar backdrop */
+  --topbar-bg:    rgba(237, 242, 248, 0.86);
+
+  /* Radii */
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   20px;
+  --r-full: 9999px;
+  --ga-bar-thickness: 24px;
+  --ga-bar-thickness-mobile: 18px;
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Heatmap scale (warm to cool) */
+  --heat-high:    rgba(196, 101, 37, 0.25);
+  --heat-mid:     rgba(135, 162, 188, 0.10);
+  --heat-low:     rgba(31, 95, 137, 0.20);
+}
+
+:root[data-theme='dark'] {
+  --bg:           #0c1520;
+  --bg-deep:      #07101a;
+  --surface:      #111c2b;
+  --surface-alt:  #172338;
+  --surface-hi:   #1c2c42;
+
+  --ink:          #e3ecf8;
+  --ink-soft:     #b0cbdf;
+  --muted:        #728ea8;
+  --muted-faint:  #4d6880;
+
+  --line:         #1e3049;
+  --line-soft:    #172640;
+
+  --accent:       #48b4be;
+  --accent-hover: #60c6d0;
+  --accent-tint:  rgba(72, 180, 190, 0.10);
+  --accent-tint2: rgba(72, 180, 190, 0.18);
+
+  --warm:         #e09058;
+  --warm-tint:    rgba(224, 144, 88, 0.11);
+
+  --cool:         #5aaad5;
+  --cool-tint:    rgba(90, 170, 213, 0.10);
+
+  --track:        rgba(85, 115, 150, 0.22);
+
+  --shadow-card:  0 1px 2px rgba(0,0,0,0.28),
+                  0 4px 16px rgba(0,0,0,0.26),
+                  0 0 0 1px rgba(255,255,255,0.038);
+  --shadow-raise: 0 2px 5px rgba(0,0,0,0.38),
+                  0 10px 32px rgba(0,0,0,0.42),
+                  0 0 0 1px rgba(255,255,255,0.055);
+
+  --hero-from:    #162e52;
+  --hero-to:      #0c1f3a;
+
+  --topbar-bg:    rgba(11, 20, 31, 0.90);
+
+  --heat-high:    rgba(224, 144, 88, 0.30);
+  --heat-mid:     rgba(85, 115, 150, 0.10);
+  --heat-low:     rgba(90, 170, 213, 0.22);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { color-scheme: light dark; overflow-x: hidden; }
+body { overflow-x: hidden; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 14% 7%, rgba(26,107,115,0.14) 0%, transparent 46%),
+    radial-gradient(ellipse at 86% 0%,  rgba(196,101,37,0.10) 0%, transparent 38%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+.topbar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.topbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.6rem;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  flex-shrink: 0;
+  transition: background-color 280ms ease;
+  box-shadow: 0 0 0 2px var(--accent-tint2);
+}
+
+.brand-text {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 280ms ease;
+}
+
+/* ─── Theme Toggle ─── */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.88rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-card);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    box-shadow 180ms ease,
+    transform 150ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-raise);
+}
+
+.theme-toggle:active { transform: translateY(0); }
+
+.toggle-icon { font-size: 0.9rem; line-height: 1; }
+
+/* ============================================================
+   LAYOUT WRAPPER
+   ============================================================ */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.4rem 1.6rem 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.35rem;
+}
+
+.back-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+}
+
+.sibling-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 150ms ease;
+}
+
+.back-btn::before {
+  content: '\2190';
+  line-height: 1;
+}
+
+.back-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface-alt);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 150ms ease;
+}
+
+.site-nav-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   CARD BASE
+   ============================================================ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem 1.7rem;
+  max-width: 100%;
+  transition:
+    background-color 280ms ease,
+    border-color 280ms ease,
+    box-shadow 280ms ease;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 2.1rem 2.2rem 1.85rem;
+  background: linear-gradient(148deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  border-color: transparent;
+  color: #edf5ff;
+}
+
+/* Decorative background orbs */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: var(--r-full);
+  pointer-events: none;
+}
+.hero::before {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(72,181,192,0.18) 0%, transparent 70%);
+  top: -110px;
+  right: -80px;
+}
+.hero::after {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(196,101,37,0.14) 0%, transparent 70%);
+  bottom: -50px;
+  left: 32%;
+}
+
+.hero-inner { position: relative; z-index: 1; }
+
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(155, 200, 220, 0.95);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow-pip {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: var(--r-full);
+  background: #48b4be;
+  flex-shrink: 0;
+}
+
+.hero h1 {
+  font-size: clamp(1.55rem, 3.1vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.17;
+  color: #f4faff;
+  letter-spacing: -0.025em;
+  max-width: 660px;
+  margin-bottom: 1.1rem;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.27rem 0.7rem;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: var(--r-full);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(215, 235, 255, 0.90);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.meta-pill a { color: inherit; text-decoration: none; }
+.meta-pill a:hover { color: #fff; }
+
+/* ============================================================
+   SECTION HEADING
+   ============================================================ */
+.section-head { margin-bottom: 1.1rem; }
+
+.section-eyebrow {
+  font-size: 0.63rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+  margin-bottom: 0.28rem;
+  transition: color 280ms ease;
+}
+
+.section-head h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.18rem;
+  transition: color 280ms ease;
+}
+
+.section-head p {
+  font-size: 0.81rem;
+  color: var(--muted);
+  transition: color 280ms ease;
+}
+
+/* Response-universe standalone control card */
+.card--control {
+  background: var(--surface-alt);
+}
+
+.response-universe-toggle {
+  margin: 0;
+}
+
+.response-universe-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+.response-universe-segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-bottom: 0.45rem;
+}
+
+.response-universe-btn {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.25;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.response-universe-btn.active {
+  border: 2px solid var(--accent);
+  background: var(--accent-tint);
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.response-universe-explainer {
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.response-geography-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.55rem;
+  margin-bottom: 0.45rem;
+}
+
+.response-geography-controls .xt-control-group {
+  margin: 0;
+}
+
+#responseGeographyUnitGroup[hidden] {
+  display: none;
+}
+
+/* Per-section response-universe indication */
+.section-mode-label {
+  margin: 0 0 0.6rem;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: rgba(92, 114, 137, 0.08);
+  border-left: 2.5px solid rgba(92, 114, 137, 0.35);
+  line-height: 1.3;
+}
+
+.card[data-universe-scope='analytic'] {
+  transition: background-color 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+
+body.all-respondents-mode .card[data-universe-scope='analytic'] {
+  background: linear-gradient(180deg, rgba(92, 114, 137, 0.05) 0%, var(--surface) 18%);
+  border-color: rgba(92, 114, 137, 0.28);
+}
+
+body.with-view-mode .card[data-universe-scope='analytic'] {
+  background: linear-gradient(180deg, var(--accent-tint) 0%, var(--surface) 18%);
+  border-color: rgba(26, 107, 115, 0.26);
+}
+
+body.all-respondents-mode .card[data-universe-scope='analytic'] .section-mode-label {
+  color: var(--muted);
+  background: rgba(92, 114, 137, 0.08);
+  border-left-color: rgba(92, 114, 137, 0.35);
+}
+
+body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
+  color: var(--accent);
+  background: var(--accent-tint);
+  border-left-color: var(--accent);
+}
+
+/* ============================================================
+   SURVEY QUESTION CARD
+   ============================================================ */
+.question-label {
+  font-size: 0.63rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+  transition: color 280ms ease;
+}
+
+.question-blockquote {
+  margin-bottom: 1.15rem;
+  padding: 0.85rem 1.05rem 0.85rem 1.2rem;
+  border: 0;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-tint);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-style: italic;
+  font-size: 0.97rem;
+  line-height: 1.52;
+  color: var(--ink);
+  transition: background-color 280ms ease, border-color 280ms ease, color 280ms ease;
+}
+
+.question-opts {
+  list-style: none;
+  display: grid;
+  gap: 0.52rem;
+}
+
+.q-opt {
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.62rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-alt);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.q-opt-left {
+  display: grid;
+  gap: 0.38rem;
+  min-width: 0;
+}
+
+.q-opt-label {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  transition: color 280ms ease;
+}
+
+.q-opt-track {
+  height: var(--ga-bar-thickness);
+  background: var(--track);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.q-opt-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.q-opt-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   DEMOGRAPHIC SUMMARY GRID
+   ============================================================ */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.chart-rows { display: grid; gap: 0.62rem; }
+
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 11rem) minmax(0, 1fr) 50px;
+  align-items: center;
+  gap: 0.62rem;
+}
+
+.bar-label {
+  font-size: 0.83rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 280ms ease;
+}
+
+.bar-track {
+  height: var(--ga-bar-thickness);
+  background: var(--track);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.bar-value {
+  text-align: right;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   ARCHETYPE SECTION
+   ============================================================ */
+.archetype-grid { display: grid; gap: 0.65rem; }
+
+.archetype-row {
+  padding: 0.78rem 0.95rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-left-color: var(--line);
+  border-radius: var(--r-sm);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.archetype-row.majority-pro  { border-left-color: var(--warm); }
+.archetype-row.majority-contra { border-left-color: var(--cool); }
+
+.archetype-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.55rem;
+  transition: color 280ms ease;
+}
+
+.archetype-label-text { line-height: 1.24; }
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface-hi);
+  color: var(--muted);
+  font-size: 0.67rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transform: translateY(-0.5px);
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.info-icon:hover,
+.info-icon[aria-expanded='true'] {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.info-icon:focus-visible {
+  outline: none;
+  background: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-tint2);
+}
+
+.archetype-tooltip {
+  position: fixed;
+  z-index: 1200;
+  display: none;
+  max-width: min(320px, calc(100vw - 16px));
+  padding: 0.52rem 0.64rem;
+  border-radius: var(--r-xs);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(13, 29, 46, 0.96);
+  color: #f6fbff;
+  font-size: 0.76rem;
+  line-height: 1.38;
+  box-shadow: var(--shadow-raise);
+  user-select: text;
+  pointer-events: auto;
+}
+
+.archetype-tooltip.is-visible { display: block; }
+
+.archetype-tooltip-title {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.archetype-tooltip-subtitle {
+  font-size: 0.72rem;
+  opacity: 0.9;
+  margin-bottom: 0.24rem;
+}
+
+.archetype-tooltip-body {
+  font-size: 0.73rem;
+  opacity: 0.96;
+}
+
+:root[data-theme='dark'] .archetype-tooltip {
+  border-color: rgba(13, 29, 46, 0.18);
+  background: rgba(227, 236, 248, 0.97);
+  color: #0d1d2e;
+}
+
+.archetype-bars { display: grid; gap: 0.36rem; }
+
+.mini-bar {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 50px;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.mini-tag {
+  font-size: 0.67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted-faint);
+  transition: color 280ms ease;
+}
+
+.mini-tag.pro    { color: var(--warm); }
+.mini-tag.contra { color: var(--cool); }
+
+.mini-meter {
+  height: var(--ga-bar-thickness);
+  border-radius: var(--r-full);
+  background: var(--track);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.mini-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.mini-fill.pro    { background: var(--warm); }
+.mini-fill.contra { background: var(--cool); }
+
+.mini-value {
+  text-align: right;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   STATE CHART
+   ============================================================ */
+.state-chart { display: grid; gap: 0; }
+
+.tier-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0 0.32rem;
+  margin-top: 0.2rem;
+}
+
+.tier-divider:first-child { padding-top: 0; margin-top: 0; }
+
+.tier-badge {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 280ms ease;
+}
+
+.tier-badge.top { color: var(--warm); }
+.tier-badge.mid { color: var(--muted-faint); }
+.tier-badge.bot { color: var(--cool); }
+
+.tier-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line-soft);
+  transition: background-color 280ms ease;
+}
+
+.state-rows-group { display: grid; gap: 0; }
+
+.state-row {
+  display: grid;
+  grid-template-columns: 26px 162px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.21rem 0.25rem;
+  border-radius: var(--r-xs);
+  transition: background-color 150ms ease;
+}
+
+.state-row:hover { background: var(--surface-alt); }
+
+.state-rank {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--muted-faint);
+  text-align: right;
+  transition: color 280ms ease;
+}
+
+.state-name {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 280ms ease;
+}
+
+.state-track {
+  height: var(--ga-bar-thickness);
+  background: var(--track);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  transition: background-color 280ms ease;
+}
+
+.state-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.state-value {
+  text-align: right;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   CROSSTABS EXPLORER
+   ============================================================ */
+.xt-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: flex-end;
+  margin-bottom: 1.1rem;
+}
+
+.xt-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+
+.xt-control-label {
+  font-size: 0.63rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  transition: color 280ms ease;
+}
+
+.xt-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.42rem 2rem 0.42rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  background-color: var(--surface-alt);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235c7289'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  min-width: 140px;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.xt-select:hover { border-color: var(--accent); }
+.xt-select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+:root[data-theme='dark'] .xt-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23728ea8'/%3E%3C/svg%3E");
+}
+
+.xt-swap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 150ms ease;
+}
+
+.xt-swap-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(180deg); }
+
+.xt-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  transition: border-color 280ms ease;
+}
+
+.xt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.xt-table th,
+.xt-table td {
+  padding: 0.52rem 0.7rem;
+  text-align: center;
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color 200ms ease, border-color 280ms ease, color 280ms ease;
+}
+
+.xt-table th {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  background: var(--surface-alt);
+}
+
+.xt-table th:first-child {
+  text-align: left;
+}
+
+.xt-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.xt-table tbody tr:last-child td { border-bottom: none; }
+
+.xt-table tbody tr:hover td { background: var(--surface-hi); }
+
+.xt-cell {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.xt-empty-state {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.xt-note {
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--muted-faint);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   ICE-SPECIFIC LAYOUT
+   ============================================================ */
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.question-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-alt);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.question-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.65rem;
+  transition: color 280ms ease;
+}
+
+.question-card .question-blockquote {
+  margin-bottom: 0.7rem;
+  min-height: auto;
+  max-height: none;
+  overflow: visible;
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.question-card .question-opts {
+  min-height: 18.6rem;
+  align-content: start;
+}
+
+.demographic-controls {
+  margin-bottom: 0.8rem;
+}
+
+.section-question-prompt {
+  margin: 0 0 0.8rem;
+  font-size: 0.80rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.dim-row-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.dim-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  padding: 0.8rem 0.85rem 0.9rem;
+  transition: border-color 280ms ease, background-color 280ms ease;
+}
+
+.dim-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 0.55rem;
+  margin-bottom: 0.45rem;
+}
+
+.dim-card-title {
+  font-size: 0.90rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  transition: color 280ms ease;
+}
+
+.dim-card-subtitle {
+  margin-top: 0.1rem;
+  margin-bottom: 0.55rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.crosstabs-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.state-controls {
+  margin-top: 0.45rem;
+  margin-bottom: 1.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.archetype-controls {
+  margin-top: 0.45rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface-alt);
+  padding: 2px;
+  gap: 2px;
+  transition: border-color 280ms ease, background-color 280ms ease;
+}
+
+.seg-btn {
+  border: 0;
+  border-radius: var(--r-full);
+  padding: 0.38rem 0.76rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+
+.seg-btn:hover {
+  color: var(--accent);
+}
+
+.seg-btn.active {
+  color: #ffffff;
+  background: var(--accent);
+}
+
+.state-metric-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.state-metric-control label {
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.state-metric-control .xt-select {
+  min-width: 290px;
+}
+
+.archetype-metric-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.archetype-metric-control label {
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.archetype-metric-control .xt-select {
+  min-width: 290px;
+}
+
+/* ============================================================
+   TAKEAWAYS
+   ============================================================ */
+.takeaways-grid { display: grid; gap: 0.75rem; }
+
+.takeaway-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 0.95rem 1.05rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.takeaway-num {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: var(--r-full);
+  background: var(--accent-tint2);
+  color: var(--accent);
+  font-size: 0.71rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+.takeaway-text {
+  font-size: 0.88rem;
+  line-height: 1.58;
+  color: var(--ink-soft);
+  transition: color 280ms ease;
+}
+
+/* ============================================================
+   METHODOLOGY NOTE
+   ============================================================ */
+.methodology-details {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-alt);
+  padding: 0.9rem 1rem;
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.methodology-details summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.methodology-details summary::-webkit-details-marker { display: none; }
+
+.methodology-details summary::after {
+  content: '+';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--r-full);
+  background: var(--accent-tint2);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.methodology-details[open] summary::after { content: '-'; }
+
+.methodology-details-body {
+  margin-top: 0.75rem;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   DATA LOADING BANNER
+   ============================================================ */
+.data-banner {
+  padding: 0.6rem 1rem;
+  border-radius: var(--r-sm);
+  font-size: 0.78rem;
+  margin-bottom: 0.5rem;
+  display: none;
+}
+
+.data-banner.warn {
+  display: block;
+  background: var(--warm-tint);
+  border: 1px solid var(--warm);
+  color: var(--ink-soft);
+}
+
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 480ms var(--ease-out),
+    transform 480ms var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 880px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+  .question-grid,
+  .dim-row-grid {
+    grid-template-columns: 1fr;
+  }
+  .question-card .question-blockquote {
+    min-height: auto;
+    max-height: none;
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+  .question-card .question-opts {
+    min-height: 0;
+  }
+  .state-controls {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .archetype-controls {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar  { padding: 0 1rem; }
+  .layout  { padding: 1.1rem 1rem 3rem; gap: 1.1rem; }
+  .hero    { padding: 1.6rem 1.3rem 1.5rem; }
+  .card    { padding: 1.15rem 1.2rem; }
+
+  .q-opt {
+    grid-template-columns: 1fr;
+    gap: 0.42rem;
+  }
+  .q-opt-value { text-align: left; }
+
+  .bar-row {
+    grid-template-columns: minmax(90px, 8.5rem) minmax(0, 1fr) 44px;
+    gap: 0.48rem;
+  }
+
+  .state-row {
+    grid-template-columns: 22px 128px minmax(0, 1fr) 44px;
+    gap: 0.38rem;
+  }
+  .state-name  { font-size: 0.71rem; }
+  .state-value { font-size: 0.68rem; }
+
+  .xt-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .xt-select { min-width: 0; width: 100%; font-size: 0.78rem; }
+  .state-metric-control { flex-direction: column; align-items: stretch; }
+  .state-metric-control .xt-select { min-width: 0; width: 100%; }
+}
+
+/* ---- phone-safe: 480px ------------------------------------------------- */
+@media (max-width: 480px) {
+  /* tighter outer / card padding */
+  .layout { padding: 0.75rem 0.6rem 2.5rem; }
+  .card   { padding: 0.9rem 0.8rem; }
+  .hero   { padding: 1.2rem 1rem 1.2rem; }
+
+  /* crosstabs table: smaller font + padding so fewer columns trigger scroll */
+  .xt-table           { font-size: 0.72rem; }
+  .xt-table th        { font-size: 0.64rem; letter-spacing: 0.04em; }
+  .xt-table th,
+  .xt-table td        { padding: 0.35rem 0.4rem; }
+  .xt-table td:first-child { white-space: normal; min-width: 56px; }
+
+  /* bar rows: tighter label column */
+  .bar-row {
+    grid-template-columns: minmax(70px, 7rem) minmax(0, 1fr) 38px;
+    gap: 0.35rem;
+  }
+  .bar-label { font-size: 0.76rem; }
+  .bar-value { font-size: 0.76rem; }
+
+  .q-opt-track,
+  .bar-track,
+  .bar-row-net .bar-track,
+  .mini-meter,
+  .mini-meter-net,
+  .state-track {
+    height: var(--ga-bar-thickness-mobile);
+  }
+
+  /* archetype rows: tighter inner padding */
+  .archetype-row { padding: 0.55rem 0.65rem; }
+}
+
+@media (max-width: 460px) {
+  .state-row {
+    grid-template-columns: 19px 100px minmax(0, 1fr) 40px;
+    gap: 0.3rem;
+  }
+  .state-name  { font-size: 0.66rem; }
+  .state-rank  { font-size: 0.58rem; }
+  .state-value { font-size: 0.64rem; }
+
+  .response-universe-segment {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   FEEDBACK CALLOUT
+   ============================================================ */
+.feedback-callout {
+  max-width: 760px;
+  margin: 2.5rem auto 2rem;
+  padding: 2.5rem 2rem;
+  background: var(--accent-tint2);
+  border: 2px solid var(--accent);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+.feedback-callout h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.6rem;
+}
+.feedback-callout p {
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  line-height: 1.55;
+  margin: 0 0 1.4rem;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.feedback-cta {
+  display: inline-block;
+  padding: 0.65rem 1.8rem;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--r-full);
+  text-decoration: none;
+  transition: background 0.15s var(--ease-out);
+}
+.feedback-cta:hover {
+  background: var(--accent-hover);
+}
+@media (max-width: 480px) {
+  .feedback-callout { padding: 1.5rem 1.2rem; margin: 1.5rem 0.6rem 1.5rem; }
+}
+    
+/* ── Attitudes custom sections ────────────────────────────────────────────── */
+.att-subhead {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.6rem 0 0.6rem;
+  color: var(--text);
+}
+.att-subhead:first-child { margin-top: 0; }
+.att-bar-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 52px;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+}
+.att-bar-row--muted .att-bar-label { color: var(--text-light); font-style: italic; }
+.att-bar-label {
+  font-size: 0.82rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+.att-bar-track {
+  background: var(--border);
+  border-radius: 3px;
+  height: 14px;
+  overflow: hidden;
+}
+.att-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.35s ease;
+}
+.att-bar-value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+  white-space: nowrap;
+}
+.att-section-note {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin: 0.6rem 0 0;
+  font-style: italic;
+}
+.att-metric-note {
+  font-size: 0.85rem;
+  margin: 0 0 0.8rem;
+  color: var(--text-light);
+}
+.att-empty {
+  color: var(--text-light);
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+.att-matchup-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 0.8rem 0;
+  background: var(--surface);
+}
+.att-matchup-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem;
+  color: var(--text);
+}
+.att-matchup-winner {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-bottom: 0.6rem;
+}
+.att-derived-row {
+  margin: 0.8rem 0 0.2rem;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.att-derived-label { color: var(--text-light); }
+@media (max-width: 600px) {
+  .att-bar-row { grid-template-columns: 140px 1fr 44px; }
+}
+
+</style>
+  </head>
+
+  <body>
+
+    <!-- ─── TOPBAR ─── -->
+    <div class="topbar-wrap">
+      <nav class="topbar" aria-label="Site navigation">
+        <a class="brand" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">VDH Policy Lab</span>
+        </a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+          <span class="toggle-icon" id="toggleIcon" aria-hidden="true">&#9788;</span>
+          <span id="toggleLabel">Light</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ─── MAIN CONTENT ─── -->
+    <main class="layout">
+
+      <!-- DATA LOADING BANNER (shown if JSON fetch failed) -->
+      <div id="dataBanner" class="data-banner"></div>
+
+      <div class="back-nav" id="siteNavRow">
+        <a class="back-btn" id="backToPortalLink" href="https://igaming.vantage.philippbroniecki.com/" data-skip-theme-param="true">Portal</a>
+        <div class="sibling-nav" id="siblingNavLinks" hidden></div>
+      </div>
+
+      <!-- HERO -->
+      <section class="hero card reveal" id="componentHero" data-component-id="hero_title">
+        <div class="hero-inner">
+          <p class="eyebrow">
+            <span class="eyebrow-pip" aria-hidden="true"></span>
+            Vantage Data House
+          </p>
+          <h1 id="heroTitle">Gambling Attitudes &amp; Priorities</h1>
+          <p id="heroSubtitle">Behavior, awareness, issue priorities, and attitudes toward online casino gaming in Louisiana</p>
+          <div class="hero-meta" aria-label="Survey metadata">
+            <span class="meta-pill">
+              <a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a>
+            </span>
+            <span class="meta-pill" id="metaSample">N = 1,205 respondents</span>
+            <span class="meta-pill" id="metaDates">May 15, 2026</span>
+            <span class="meta-pill" id="metaMethod">Poststratified ML estimates</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- KEY FINDINGS -->
+      <section class="card reveal" id="componentTakeaways" data-component-id="key_takeaways" aria-labelledby="h-findings">
+        <div class="section-head">
+          <p class="section-eyebrow">Overview</p>
+          <h2 id="h-findings">Key Findings</h2>
+          <p>High-level takeaways from modeled estimates</p>
+        </div>
+        <div id="takeaways" class="takeaways-grid"></div>
+      </section>
+
+      <!-- METHODOLOGY NOTE -->
+      <section class="card reveal" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
+        <details class="methodology-details">
+          <summary id="h-methodology-note">Note on Methodology</summary>
+          <p class="methodology-details-body" id="methodologyBody">We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).</p>
+        </details>
+      </section>
+
+      <!-- RESPONSE UNIVERSE TOGGLE -->
+      <section class="card card--control reveal" id="componentResponseUniverse" data-component-id="response_universe_toggle" hidden>
+        <div id="responseUniverseToggle" class="response-universe-toggle">
+          <p class="response-universe-title">Response Universe</p>
+          <div class="response-universe-segment" role="group" aria-label="Select response universe">
+            <button type="button" class="response-universe-btn" data-mode-id="all_americans">What all respondents said</button>
+            <button type="button" class="response-universe-btn" data-mode-id="with_view">What respondents with a view said</button>
+          </div>
+          <p class="response-universe-explainer" id="responseUniverseExplainer"></p>
+        </div>
+      </section>
+
+      <!-- RESPONSE GEOGRAPHY -->
+      <section class="card card--control reveal" id="componentResponseGeography" data-component-id="response_geography" hidden>
+        <div id="responseGeographyControl" class="response-universe-toggle">
+          <p class="response-universe-title">Response Geography</p>
+          <div class="response-geography-controls">
+            <div class="xt-control-group">
+              <label class="xt-control-label" for="responseGeographyTypeSelect">Geography</label>
+              <select class="xt-select" id="responseGeographyTypeSelect"></select>
+            </div>
+            <div class="xt-control-group" id="responseGeographyUnitGroup" hidden>
+              <label class="xt-control-label" for="responseGeographyUnitSelect">Cultural Region</label>
+              <select class="xt-select" id="responseGeographyUnitSelect"></select>
+            </div>
+          </div>
+          <p class="response-universe-explainer" id="responseGeographyExplainer"></p>
+        </div>
+      </section>
+
+
+      <!-- BEHAVIOR & AWARENESS -->
+      <section class="card reveal" id="componentBehaviorAwareness" data-component-id="behavior_awareness" aria-labelledby="h-behavior-awareness">
+        <div class="section-mode-label" id="modeLabelBehaviorAwareness"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">What Voters Have Done</p>
+          <h2 id="h-behavior-awareness">Gambling Behavior &amp; Offshore Awareness</h2>
+          <p>Gambling participation, types of gambling, and awareness of offshore online casinos</p>
+        </div>
+        <div id="behaviorAwarenessContent"></div>
+      </section>
+
+      <!-- BELIEF LANDSCAPE -->
+      <section class="card reveal" id="componentBeliefLandscape" data-component-id="belief_landscape" aria-labelledby="h-belief-landscape">
+        <div class="section-mode-label" id="modeLabelBeliefLandscape"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">What Voters Believe</p>
+          <h2 id="h-belief-landscape">Belief Landscape</h2>
+          <p>Agreement and disagreement with statements about online casino legalization in Louisiana</p>
+        </div>
+        <div class="xt-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="beliefMetricSelect">Metric</label>
+            <select class="xt-select" id="beliefMetricSelect">
+              <option value="total_agree">Total agree</option>
+              <option value="net_agree">Net agree</option>
+              <option value="strongly_agree">Strongly agree</option>
+              <option value="dont_know">Don&apos;t know</option>
+            </select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="beliefGroupSelect">Statement group</label>
+            <select class="xt-select" id="beliefGroupSelect">
+              <option value="all">All statements</option>
+              <option value="pro_legalization">Pro-legalization / economic</option>
+              <option value="local_control">Local control / risk / family</option>
+              <option value="tribal_corporate">Tribal / corporate frame</option>
+            </select>
+          </div>
+        </div>
+        <div id="beliefLandscapeContent"></div>
+        <p class="xt-note">Sorted by selected metric (descending). Hover bar labels for full statement text.</p>
+      </section>
+
+      <!-- ARGUMENT TRADEOFFS -->
+      <section class="card reveal" id="componentArgumentTradeoffs" data-component-id="argument_tradeoffs" aria-labelledby="h-argument-tradeoffs">
+        <div class="section-mode-label" id="modeLabelArgumentTradeoffs"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Which Arguments Win</p>
+          <h2 id="h-argument-tradeoffs">Argument Matchups</h2>
+          <p>Head-to-head argument pairings &#8212; which framing wins statewide?</p>
+        </div>
+        <div id="argumentTradeoffsContent"></div>
+        <p class="xt-note">Sorted by winning-side margin. &ldquo;Neither / Don&apos;t know&rdquo; shown separately.</p>
+      </section>
+
+      <!-- PRIORITIES -->
+      <section class="card reveal" id="componentPriorities" data-component-id="priorities_section" aria-labelledby="h-priorities">
+        <div class="section-mode-label" id="modeLabelPriorities"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">What Revenue Use Matters</p>
+          <h2 id="h-priorities">Priorities &amp; Revenue Uses</h2>
+          <p>Top issue priorities and preferred uses of iGaming tax revenue</p>
+        </div>
+        <div id="prioritiesContent"></div>
+      </section>
+
+      <!-- PERSUADABILITY & MESSENGERS -->
+      <section class="card reveal" id="componentPersuadabilityMessengers" data-component-id="persuadability_messengers" aria-labelledby="h-persuadability">
+        <div class="section-mode-label" id="modeLabelPersuadability"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">How Movable They Are &amp; Who They Trust</p>
+          <h2 id="h-persuadability">Persuadability &amp; Trusted Messengers</h2>
+          <p>Firmness of views on iGaming and most trusted voices on this issue</p>
+        </div>
+        <div id="persuadabilityMessengersContent"></div>
+      </section>
+
+      <!-- TOPLINE QUESTIONS -->
+      <section class="card reveal" id="componentTopline" data-component-id="topline_questions" aria-labelledby="h-questions">
+        <div class="section-mode-label" id="modeLabelTopline"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Survey Questions</p>
+          <h2 id="h-questions">Topline Results</h2>
+          <p>All 28 attitude and behavior questions from the Louisiana iGaming survey</p>
+        </div>
+        <div id="questionCards" class="question-grid" role="region" aria-label="Topline question cards"></div>
+      </section>
+
+      <!-- DEMOGRAPHIC BREAKDOWN -->
+      <section class="card reveal" id="componentDemographics" data-component-id="demographic_breakdown" aria-labelledby="h-demographics">
+        <div class="section-mode-label" id="modeLabelDemographics"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Demographics</p>
+          <h2 id="h-demographics">Demographic Breakdown</h2>
+          <p>Explore one selected question by demographic group</p>
+        </div>
+        <div class="xt-controls demographic-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="demographicQuestionSelect">Question</label>
+            <select class="xt-select" id="demographicQuestionSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="demographicDimensionSelect">Demographic</label>
+            <select class="xt-select" id="demographicDimensionSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="demographicMetricSelect">Response category</label>
+            <select class="xt-select" id="demographicMetricSelect"></select>
+          </div>
+        </div>
+        <p class="section-question-prompt" id="demographicQuestionPrompt"></p>
+        <div id="demographicExplorers" class="crosstabs-stack"></div>
+      </section>
+
+      <!-- CROSSTABS EXPLORERS -->
+      <section class="card reveal" id="componentCrosstabs" data-component-id="crosstabs_explorer" aria-labelledby="h-crosstabs">
+        <div class="section-mode-label" id="modeLabelCrosstabs"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Interactive Explorer</p>
+          <h2 id="h-crosstabs">Crosstabs Explorer</h2>
+          <p>Cross-tabulated estimates for one selected question</p>
+        </div>
+        <div class="xt-controls crosstabs-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="crosstabQuestionSelect">Question</label>
+            <select class="xt-select" id="crosstabQuestionSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="crosstabRowVarSelect">Row variable</label>
+            <select class="xt-select" id="crosstabRowVarSelect"></select>
+          </div>
+          <button class="xt-swap-btn" id="crosstabSwapBtn" type="button" aria-label="Swap crosstab row and column variables" title="Swap axes">&#8646;</button>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="crosstabColVarSelect">Column variable</label>
+            <select class="xt-select" id="crosstabColVarSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="crosstabMetricSelect">Response category</label>
+            <select class="xt-select" id="crosstabMetricSelect"></select>
+          </div>
+        </div>
+        <p class="section-question-prompt" id="crosstabQuestionPrompt"></p>
+        <div id="crosstabExplorers" class="crosstabs-stack"></div>
+        <p class="xt-note">Values are weighted poststratified estimates (percent).</p>
+      </section>
+
+      <!-- ARCHETYPES -->
+      <section class="card reveal" id="componentArchetypes" data-component-id="archetype_breakdown" aria-labelledby="h-archetypes">
+        <div class="section-mode-label" id="modeLabelArchetypes"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Archetypes</p>
+          <h2 id="h-archetypes">Archetypes</h2>
+          <p>View archetype support by question and response category</p>
+        </div>
+        <div class="archetype-controls">
+          <div class="segmented" id="archetypeQuestionToggle" role="tablist" aria-label="Archetype question selector"></div>
+          <div class="archetype-metric-control">
+            <label for="archetypeMetricSelect">Response category</label>
+            <select class="xt-select" id="archetypeMetricSelect"></select>
+          </div>
+        </div>
+        <div id="archetypeChart" class="archetype-grid"></div>
+      </section>
+
+    </main>
+
+    <!-- FEEDBACK CALLOUT -->
+    <section class="feedback-callout" id="feedbackCallout" hidden>
+      <h2 id="feedbackHeading">Share Your Feedback</h2>
+      <p id="feedbackBody">Have questions about this analysis or suggestions for future topics? We&#x2019;d love to hear from you.</p>
+      <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
+    </section>
+
+    <script id="embeddedReportData" type="application/json">
+{
+  "meta": {
+    "source": "Vantage Data House",
+    "title": "Gambling Attitudes & Priorities",
+    "subtitle": "Behavior, awareness, issue priorities, and attitudes toward online casino gaming in Louisiana",
+    "site": "https://www.vantagedatahouse.com",
+    "sample": "N = 1,205 respondents",
+    "fieldDates": "May 15, 2026",
+    "methodLabel": "Poststratified ML estimates",
+    "group_navigation": {
+      "group_id": "louisiana_igaming_baseline_2026",
+      "group_label": "Louisiana Voter Opinion Study",
+      "back": {
+        "label": "Portal",
+        "href": "https://igaming.vantage.philippbroniecki.com/",
+        "local_href": "https://igaming.vantage.philippbroniecki.com/"
+      },
+      "siblings": [
+        {
+          "site_slug": "igaming_favorability",
+          "label": "Favorability",
+          "href": "https://favorability.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://favorability.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../favorability/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_test_ballot",
+          "label": "Governor Ballot",
+          "href": "https://test-ballot.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://test-ballot.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../test_ballot/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_support",
+          "label": "iGaming Support",
+          "href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../igaming_support/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_experiment",
+          "label": "Experiment Effects",
+          "href": "https://experiments.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://experiments.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../experiment/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_survey_health",
+          "label": "Survey Health",
+          "href": "https://survey-health.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://survey-health.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../survey_health/standalone_website/"
+        }
+      ]
+    }
+  },
+  "template": {
+    "site_slug": "igaming_attitudes",
+    "component_order": [],
+    "feedback_callout": []
+  },
+  "turnout_assumption": [],
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "with_view",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove Don't know / Neither responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "q8_gambling_participation",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_casino",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_riverboat_casino",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_state_lottery",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_online_casino",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_mobile_sports_betting",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_slot_machines_at_racetracks",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_video_poker_terminals",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_fantasy_sports",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_other",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q10_offshore_awareness",
+        "opinion_ids": [
+          "yes_aware",
+          "no_not_aware"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q12_promise_rank1",
+        "opinion_ids": [
+          "income_tax",
+          "property_taxes",
+          "illegal_offshore_gambling_law_enforcement",
+          "education_savings_accounts",
+          "roads_bridges",
+          "power_infrastructure"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17a",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17c",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17f",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17g",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17i",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17j",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17k",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17l",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17m",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18a_corporate_unfair",
+        "opinion_ids": [
+          "tribes_unfair_open_market",
+          "tribal_local_revenue"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18b_addiction_protection",
+        "opinion_ids": [
+          "addiction_family_risk",
+          "regulation_safeguards"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18c_freedom_protection",
+        "opinion_ids": [
+          "adult_freedom",
+          "state_protection"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18d_voter_say",
+        "opinion_ids": [
+          "voter_direct_say",
+          "limited_tribal_framework"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q20_revenue_priority",
+        "opinion_ids": [
+          "eliminate_income_tax",
+          "lower_property_taxes",
+          "power_infrastructure",
+          "education_savings",
+          "roads_bridges",
+          "law_enforcement",
+          "oppose_always"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q21_intensity",
+        "opinion_ids": [
+          "very_firm",
+          "fairly_firm",
+          "open_persuasion",
+          "no_strong_view"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q22_trusted_messengers",
+        "opinion_ids": [
+          "local_law_enforcement",
+          "faith_leaders",
+          "louisiana_tribes",
+          "business_owners",
+          "economists_universities",
+          "state_legislators",
+          "none_of_these"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      }
+    ]
+  },
+  "notes": {
+    "pre_post_levels_note": "",
+    "uncertainty_note": ""
+  },
+  "data_files": {
+    "manifest": "igaming_attitudes_data.json",
+    "report_shards": [
+      {
+        "key": "demographics",
+        "path": "data/igaming_attitudes_demographics.json",
+        "file_name": "igaming_attitudes_demographics.json",
+        "size_bytes": 2987201
+      },
+      {
+        "key": "archetypes",
+        "path": "data/igaming_attitudes_archetypes.json",
+        "file_name": "igaming_attitudes_archetypes.json",
+        "size_bytes": 21506395
+      }
+    ]
+  },
+  "records": [],
+  "summary_rows": [],
+  "key_findings": {
+    "groups": []
+  },
+  "outcomes": [],
+  "estimands": [],
+  "selectors": {
+    "geography_types": [],
+    "demographics": []
+  },
+  "archetype_metadata": [],
+  "load_error_message": "Experiment data could not be loaded. Please refresh or contact Vantage Data House."
+}
+</script>
+    <script src="lib/html-to-image.min.js"></script>
+    <script src="lib/png-export-helper.js"></script>
+    <script>
+/* ============================================================
+   EMBEDDED FALLBACK DATA
+   ============================================================ */
+function loadEmbeddedFallback() {
+  const node = document.getElementById('embeddedReportData');
+  if (!node) {
+    return {
+      meta: {
+        source: 'Vantage Data House',
+        title: 'Gambling Attitudes & Priorities',
+        site: 'https://www.vantagedatahouse.com',
+        sample: 'Modeled poststratified estimates',
+        fieldDates: 'Model snapshot: Not provided'
+      },
+      questions: [],
+      demographics: [],
+      archetypes: { default_question: null, metadata: [], questions: [] }
+    };
+  }
+  try {
+    return JSON.parse(node.textContent);
+  } catch (err) {
+    console.warn('[VDH iGaming Attitudes] Embedded fallback JSON failed to parse.', err);
+    return {
+      meta: {
+        source: 'Vantage Data House',
+        title: 'Gambling Attitudes & Priorities',
+        site: 'https://www.vantagedatahouse.com',
+        sample: 'Modeled poststratified estimates',
+        fieldDates: 'Model snapshot: Not provided'
+      },
+      questions: [],
+      demographics: [],
+      archetypes: { default_question: null, metadata: [], questions: [] }
+    };
+  }
+}
+
+const FALLBACK_REPORT = loadEmbeddedFallback();
+
+/* ============================================================
+   ATTITUDES CUSTOM SECTION: CONSTANTS & HELPERS
+   ============================================================ */
+const Q9_TYPE_LABELS = {
+  q9_gambling_types_casino:                   'Land-based casino',
+  q9_gambling_types_riverboat_casino:         'Riverboat casino',
+  q9_gambling_types_state_lottery:            'State lottery',
+  q9_gambling_types_online_casino:            'Online casino',
+  q9_gambling_types_mobile_sports_betting:    'Mobile sports betting',
+  q9_gambling_types_slot_machines_at_racetracks: 'Slot machines at racetracks',
+  q9_gambling_types_video_poker_terminals:    'Video poker terminals',
+  q9_gambling_types_fantasy_sports:           'Fantasy sports',
+  q9_gambling_types_other:                    'Other gambling'
+};
+
+const Q17_LABELS = {
+  q17a: { short: 'Benefits/jobs/revenue',        group: 'pro_legalization',  full: 'Online casino gambling would benefit Louisiana through jobs and tax revenue.' },
+  q17c: { short: 'Offshore already happening',   group: 'pro_legalization',  full: 'Offshore online casino gambling is already happening and generating revenue that leaves the state.' },
+  q17f: { short: 'Money leaving Louisiana',      group: 'pro_legalization',  full: 'Money leaving the state for offshore gambling should be kept in Louisiana.' },
+  q17g: { short: 'Parish opt-out',               group: 'local_control',     full: 'Individual parishes should be allowed to opt out of online casino gambling.' },
+  q17i: { short: 'Tribes-only unfair',           group: 'tribal_corporate',  full: 'Restricting online casino licenses only to tribal operators is unfair and limits competition.' },
+  q17j: { short: 'Tribal keeps revenue in LA',   group: 'tribal_corporate',  full: 'Keeping online casino revenue within Louisiana tribes is the best way to ensure the money stays in-state.' },
+  q17k: { short: 'Apps addictive',               group: 'local_control',     full: 'Mobile casino apps are designed to be addictive and pose a danger to Louisiana families.' },
+  q17l: { short: 'Adult freedom',                group: 'pro_legalization',  full: 'Adults should have the freedom to gamble online if they choose to.' },
+  q17m: { short: 'State protects families',      group: 'local_control',     full: 'The state has a responsibility to protect families and communities from gambling addiction.' }
+};
+
+const Q18_LABELS = {
+  q18a_corporate_unfair: {
+    title: 'Open market vs. Tribal/local revenue',
+    sides: {
+      tribes_unfair_open_market: 'Corporate fairness / open market',
+      tribal_local_revenue:      'Tribal/local revenue'
+    }
+  },
+  q18b_addiction_protection: {
+    title: 'Addiction risk vs. Regulated safeguards',
+    sides: {
+      addiction_family_risk:   'Addiction/family risk',
+      regulation_safeguards:   'Regulation/consumer safeguards'
+    }
+  },
+  q18c_freedom_protection: {
+    title: 'Adult freedom vs. State protection',
+    sides: {
+      adult_freedom:    'Adult freedom',
+      state_protection: 'State protection from addiction'
+    }
+  },
+  q18d_voter_say: {
+    title: 'Direct voter say vs. Limited tribal framework',
+    sides: {
+      voter_direct_say:       'Voters should have direct say',
+      limited_tribal_framework: 'Limited regulated tribal framework'
+    }
+  }
+};
+
+const Q12_LABELS = {
+  income_tax:                              'Eliminate state income tax',
+  property_taxes:                          'Lower property taxes',
+  illegal_offshore_gambling_law_enforcement: 'Enforce offshore gambling laws',
+  education_savings_accounts:              'Fund education savings accounts',
+  roads_bridges:                           'Fix roads and bridges',
+  power_infrastructure:                    'Improve power infrastructure'
+};
+
+const Q20_LABELS = {
+  eliminate_income_tax:   'Eliminate state income tax',
+  lower_property_taxes:   'Lower property taxes',
+  power_infrastructure:   'Improve power infrastructure',
+  education_savings:      'Fund education savings accounts',
+  roads_bridges:          'Fix roads and bridges',
+  law_enforcement:        'Increase law enforcement resources',
+  oppose_always:          'Oppose regardless of revenue use',
+  dont_know:              "Don\u2019t know"
+};
+
+const Q21_LABELS = {
+  very_firm:        'Very firm',
+  fairly_firm:      'Fairly firm, but could shift',
+  open_persuasion:  'Open to persuasion',
+  no_strong_view:   'No strong view',
+  dont_know:        "Don\u2019t know"
+};
+
+const Q22_LABELS = {
+  local_law_enforcement:     'Local sheriffs/law enforcement',
+  faith_leaders:             'Pastors/faith leaders',
+  louisiana_tribes:          'Louisiana tribes',
+  business_owners:           'Louisiana business owners',
+  economists_universities:   'Independent economists/universities',
+  state_legislators:         'State legislators from your area',
+  none_of_these:             'None of these',
+  dont_know:                 "Don\u2019t know"
+};
+
+function attGetQuestion(id) {
+  if (!Array.isArray(reportData?.questions)) return null;
+  return reportData.questions.find((q) => q.id === id) || null;
+}
+
+function attGetOptVal(opt) {
+  const u = (typeof activeResponseUniverse === 'string') ? activeResponseUniverse : 'all_americans';
+  const byU = opt?.values_by_universe;
+  if (byU && byU[u] !== undefined && byU[u] !== null) return byU[u];
+  return (typeof opt?.value === 'number') ? opt.value : 0;
+}
+
+function attFmt(val) {
+  if (typeof val !== 'number' || isNaN(val)) return '—';
+  return Math.round(val) + '%';
+}
+
+function attHorzBar(label, value, color, tooltip) {
+  const pct = Math.max(0, Math.min(100, typeof value === 'number' ? value : 0));
+  const titleAttr = tooltip ? ` title="${tooltip.replace(/"/g, '&quot;')}"` : '';
+  return `<div class="att-bar-row">
+    <div class="att-bar-label"${titleAttr}>${label}</div>
+    <div class="att-bar-track">
+      <div class="att-bar-fill" style="width:${pct.toFixed(1)}%;background:${color}"></div>
+    </div>
+    <div class="att-bar-value">${attFmt(value)}</div>
+  </div>`;
+}
+
+function attSubHead(text) {
+  return `<h3 class="att-subhead">${text}</h3>`;
+}
+
+function attNote(text) {
+  return `<p class="att-section-note">${text}</p>`;
+}
+
+function attEmptyMsg(msg) {
+  return `<p class="att-empty">${msg}</p>`;
+}
+
+/* ============================================================
+   BEHAVIOR & AWARENESS
+   ============================================================ */
+function renderBehaviorAwareness() {
+  const el = document.getElementById('behaviorAwarenessContent');
+  if (!el) return;
+  let html = '';
+
+  // Q8: Gambling participation
+  const q8 = attGetQuestion('q8_gambling_participation');
+  html += attSubHead('Past-Year Gambling Participation');
+  if (q8 && q8.options && q8.options.length) {
+    q8.options.forEach((opt) => {
+      const clr = opt.color || (opt.id === 'yes' ? '#1a6b73' : '#c46525');
+      html += attHorzBar(opt.label || opt.id, attGetOptVal(opt), clr);
+    });
+  } else {
+    html += attEmptyMsg('Participation data not available.');
+  }
+
+  // Q9: Gambling types ranked bar
+  html += attSubHead('Types of Gambling Participated In');
+  const q9Ids = [
+    'q9_gambling_types_state_lottery',
+    'q9_gambling_types_casino',
+    'q9_gambling_types_riverboat_casino',
+    'q9_gambling_types_mobile_sports_betting',
+    'q9_gambling_types_video_poker_terminals',
+    'q9_gambling_types_online_casino',
+    'q9_gambling_types_fantasy_sports',
+    'q9_gambling_types_slot_machines_at_racetracks',
+    'q9_gambling_types_other'
+  ];
+  const q9Rows = [];
+  q9Ids.forEach((qid) => {
+    const q = attGetQuestion(qid);
+    if (!q) return;
+    const yesOpt = (q.options || []).find((o) => o.id === 'yes');
+    if (!yesOpt) return;
+    q9Rows.push({ label: Q9_TYPE_LABELS[qid] || qid, value: attGetOptVal(yesOpt), color: yesOpt.color || '#1a6b73' });
+  });
+  if (q9Rows.length) {
+    q9Rows.sort((a, b) => b.value - a.value);
+    q9Rows.forEach((row) => html += attHorzBar(row.label, row.value, row.color));
+    html += attNote('These are individual yes/no indicators from a select-all-that-apply question. Values do not sum to 100%. Denominator: all modeled Louisiana voters.');
+  } else {
+    html += attEmptyMsg('Gambling type data not available.');
+  }
+
+  // Q10: Offshore awareness
+  const q10 = attGetQuestion('q10_offshore_awareness');
+  html += attSubHead('Awareness of Offshore Online Casino Gambling');
+  if (q10 && q10.options && q10.options.length) {
+    q10.options.forEach((opt) => {
+      html += attHorzBar(opt.label || opt.id, attGetOptVal(opt), opt.color || '#557c99');
+    });
+  } else {
+    html += attEmptyMsg('Offshore awareness data not available.');
+  }
+
+  el.innerHTML = html;
+}
+
+function initBehaviorAwarenessControls() {
+  // No interactive controls on behavior/awareness for now
+}
+
+/* ============================================================
+   BELIEF LANDSCAPE
+   ============================================================ */
+function renderBeliefLandscape() {
+  const el = document.getElementById('beliefLandscapeContent');
+  if (!el) return;
+
+  const metricSel = document.getElementById('beliefMetricSelect');
+  const groupSel  = document.getElementById('beliefGroupSelect');
+  const metric    = metricSel ? metricSel.value : 'total_agree';
+  const group     = groupSel  ? groupSel.value  : 'all';
+
+  const Q17_IDS = ['q17a','q17c','q17f','q17g','q17i','q17j','q17k','q17l','q17m'];
+  const rows = [];
+
+  Q17_IDS.forEach((qid) => {
+    const meta = Q17_LABELS[qid];
+    if (!meta) return;
+    if (group !== 'all' && meta.group !== group) return;
+    const q = attGetQuestion(qid);
+    if (!q || !q.options) return;
+
+    const getVal = (id) => {
+      const opt = q.options.find((o) => o.id === id);
+      return opt ? attGetOptVal(opt) : 0;
+    };
+    const sa   = getVal('strongly_agree');
+    const swa  = getVal('somewhat_agree');
+    const swd  = getVal('somewhat_disagree');
+    const sd   = getVal('strongly_disagree');
+    const dk   = getVal('dont_know');
+    const totalAgree = sa + swa;
+    const totalDisagree = swd + sd;
+    const netAgree = totalAgree - totalDisagree;
+
+    const valueMap = {
+      total_agree:   totalAgree,
+      net_agree:     netAgree,
+      strongly_agree: sa,
+      dont_know:      dk
+    };
+    const val = valueMap[metric] !== undefined ? valueMap[metric] : totalAgree;
+
+    rows.push({
+      label: meta.short,
+      full:  meta.full,
+      value: val,
+      totalAgree,
+      netAgree,
+      sa,
+      dk,
+      group: meta.group
+    });
+  });
+
+  rows.sort((a, b) => b.value - a.value);
+
+  let html = '';
+  const METRIC_COLORS = {
+    total_agree:    '#1a6b73',
+    net_agree:      '#2a8040',
+    strongly_agree: '#3b2f8f',
+    dont_know:      '#888888'
+  };
+  const barColor = METRIC_COLORS[metric] || '#1a6b73';
+
+  const metricLabel = {
+    total_agree:    'Total agree',
+    net_agree:      'Net agree (agree minus disagree)',
+    strongly_agree: 'Strongly agree',
+    dont_know:      "Don't know"
+  }[metric] || metric;
+
+  if (!rows.length) {
+    html = attEmptyMsg('Belief data not available for the selected group.');
+  } else {
+    html += `<p class="att-metric-note"><strong>Metric:</strong> ${metricLabel}</p>`;
+    rows.forEach((row) => {
+      const displayVal = metric === 'net_agree'
+        ? (row.value >= 0 ? '+' : '') + Math.round(row.value) + ' pts'
+        : attFmt(row.value);
+      html += `<div class="att-bar-row">
+        <div class="att-bar-label" title="${row.full.replace(/"/g,'&quot;')}">${row.label}</div>
+        <div class="att-bar-track">
+          <div class="att-bar-fill" style="width:${Math.min(100,Math.max(0,Math.abs(row.value))).toFixed(1)}%;background:${barColor}"></div>
+        </div>
+        <div class="att-bar-value">${displayVal}</div>
+      </div>`;
+    });
+  }
+  el.innerHTML = html;
+}
+
+function initBeliefLandscapeControls() {
+  const metricSel = document.getElementById('beliefMetricSelect');
+  const groupSel  = document.getElementById('beliefGroupSelect');
+  if (metricSel) metricSel.addEventListener('change', renderBeliefLandscape);
+  if (groupSel)  groupSel.addEventListener('change',  renderBeliefLandscape);
+}
+
+/* ============================================================
+   ARGUMENT TRADEOFFS
+   ============================================================ */
+function renderArgumentTradeoffs() {
+  const el = document.getElementById('argumentTradeoffsContent');
+  if (!el) return;
+
+  const Q18_IDS = ['q18a_corporate_unfair','q18b_addiction_protection','q18c_freedom_protection','q18d_voter_say'];
+  const matchups = [];
+
+  Q18_IDS.forEach((qid) => {
+    const meta = Q18_LABELS[qid];
+    if (!meta) return;
+    const q = attGetQuestion(qid);
+    if (!q || !q.options) return;
+    const sideIds = Object.keys(meta.sides);
+    const sideA   = q.options.find((o) => o.id === sideIds[0]);
+    const sideB   = q.options.find((o) => o.id === sideIds[1]);
+    const neither = q.options.find((o) => o.id === 'neither_dk');
+    if (!sideA || !sideB) return;
+    const valA = attGetOptVal(sideA);
+    const valB = attGetOptVal(sideB);
+    const valN = neither ? attGetOptVal(neither) : 0;
+    const margin = valA - valB;
+    matchups.push({ qid, title: meta.title, labelA: meta.sides[sideIds[0]], labelB: meta.sides[sideIds[1]], valA, valB, valN, margin, colorA: sideA.color || '#1a6b73', colorB: sideB.color || '#c46525' });
+  });
+
+  matchups.sort((a, b) => Math.abs(b.margin) - Math.abs(a.margin));
+
+  let html = '';
+  matchups.forEach((m) => {
+    const winner     = m.margin > 0 ? m.labelA : m.margin < 0 ? m.labelB : 'Tied';
+    const marginText = m.margin === 0 ? 'Tied' : '+' + Math.abs(Math.round(m.margin)) + ' pts';
+    html += `<div class="att-matchup-card">
+      <h4 class="att-matchup-title">${m.title}</h4>
+      <div class="att-matchup-winner">Winner: <strong>${winner}</strong> &nbsp;(${marginText})</div>
+      <div class="att-bar-row">
+        <div class="att-bar-label">${m.labelA}</div>
+        <div class="att-bar-track"><div class="att-bar-fill" style="width:${Math.min(100,m.valA).toFixed(1)}%;background:${m.colorA}"></div></div>
+        <div class="att-bar-value">${attFmt(m.valA)}</div>
+      </div>
+      <div class="att-bar-row">
+        <div class="att-bar-label">${m.labelB}</div>
+        <div class="att-bar-track"><div class="att-bar-fill" style="width:${Math.min(100,m.valB).toFixed(1)}%;background:${m.colorB}"></div></div>
+        <div class="att-bar-value">${attFmt(m.valB)}</div>
+      </div>
+      <div class="att-bar-row att-bar-row--muted">
+        <div class="att-bar-label">Neither / Don&apos;t know</div>
+        <div class="att-bar-track"><div class="att-bar-fill" style="width:${Math.min(100,m.valN).toFixed(1)}%;background:#aaa"></div></div>
+        <div class="att-bar-value">${attFmt(m.valN)}</div>
+      </div>
+    </div>`;
+  });
+
+  if (!html) html = attEmptyMsg('Argument tradeoff data not available.');
+  el.innerHTML = html;
+}
+
+/* ============================================================
+   PRIORITIES & REVENUE USES
+   ============================================================ */
+function renderPriorities() {
+  const el = document.getElementById('prioritiesContent');
+  if (!el) return;
+  let html = '';
+
+  // Q12: Promise / priority ranked #1
+  const q12 = attGetQuestion('q12_promise_rank1');
+  html += attSubHead('Top Issue Priority (Ranked #1)');
+  if (q12 && q12.options && q12.options.length) {
+    const rows = q12.options.map((opt) => ({
+      label: Q12_LABELS[opt.id] || opt.label || opt.id,
+      value: attGetOptVal(opt),
+      color: opt.color || '#1a6b73'
+    })).sort((a, b) => b.value - a.value);
+    rows.forEach((row) => html += attHorzBar(row.label, row.value, row.color));
+    html += attNote('Respondents ranked this as their top priority for evaluating Governor Landry\'s record.');
+  } else {
+    html += attEmptyMsg('Priority data not available.');
+  }
+
+  // Q20: Revenue use priority
+  const q20 = attGetQuestion('q20_revenue_priority');
+  html += attSubHead('Preferred Use of iGaming Tax Revenue');
+  if (q20 && q20.options && q20.options.length) {
+    const rows = q20.options.map((opt) => ({
+      label: Q20_LABELS[opt.id] || opt.label || opt.id,
+      value: attGetOptVal(opt),
+      color: opt.color || '#1a6b73'
+    })).sort((a, b) => b.value - a.value);
+    rows.forEach((row) => html += attHorzBar(row.label, row.value, row.color));
+  } else {
+    html += attEmptyMsg('Revenue priority data not available.');
+  }
+
+  el.innerHTML = html;
+}
+
+/* ============================================================
+   PERSUADABILITY & TRUSTED MESSENGERS
+   ============================================================ */
+function renderPersuadabilityMessengers() {
+  const el = document.getElementById('persuadabilityMessengersContent');
+  if (!el) return;
+  let html = '';
+
+  // Q21: View intensity
+  const q21 = attGetQuestion('q21_intensity');
+  html += attSubHead('Intensity of Views on iGaming');
+  if (q21 && q21.options && q21.options.length) {
+    const firmOpts   = ['very_firm','fairly_firm'];
+    const openOpts   = ['open_persuasion','no_strong_view'];
+    let firmTotal = 0, openTotal = 0;
+    q21.options.forEach((opt) => {
+      const v = attGetOptVal(opt);
+      html += attHorzBar(Q21_LABELS[opt.id] || opt.label || opt.id, v, opt.color || '#1a6b73');
+      if (firmOpts.includes(opt.id)) firmTotal += v;
+      if (openOpts.includes(opt.id)) openTotal += v;
+    });
+    html += `<div class="att-derived-row">
+      <span class="att-derived-label">Firm (very + fairly firm):</span>
+      <strong>${attFmt(firmTotal)}</strong>
+      &nbsp;&nbsp;
+      <span class="att-derived-label">Persuadable (open + no strong view):</span>
+      <strong>${attFmt(openTotal)}</strong>
+    </div>`;
+    html += attNote('"Fairly firm but could shift" is categorized as firm but noted as partially persuadable.');
+  } else {
+    html += attEmptyMsg('Intensity data not available.');
+  }
+
+  // Q22: Trusted messengers
+  const q22 = attGetQuestion('q22_trusted_messengers');
+  html += attSubHead('Most Trusted Voices on iGaming');
+  if (q22 && q22.options && q22.options.length) {
+    const rows = q22.options.map((opt) => ({
+      label: Q22_LABELS[opt.id] || opt.label || opt.id,
+      value: attGetOptVal(opt),
+      color: opt.color || '#1a6b73'
+    })).sort((a, b) => b.value - a.value);
+    rows.forEach((row) => html += attHorzBar(row.label, row.value, row.color));
+  } else {
+    html += attEmptyMsg('Messenger data not available.');
+  }
+
+  el.innerHTML = html;
+}
+
+
+/* ============================================================
+   GLOBALS
+   ============================================================ */
+let reportData = null;
+let crosstabsManifest = null;
+let dataSource = 'fallback';
+let crosstabsLoadError = null;
+const crosstabShardCache = new Map();
+let crosstabRenderToken = 0;
+let activeResponseUniverse = 'all_americans';
+let activeGeographyTypeId = null;
+let activeGeographyUnitId = null;
+let activeGeographyUnitByType = {};
+let activeDemographicQuestionId = null;
+let activeDemographicDimensionId = null;
+let activeDemographicMetricId = null;
+let activeCrosstabQuestionId = null;
+let activeCrosstabRowVar = null;
+let activeCrosstabColVar = null;
+let activeCrosstabMetricId = null;
+
+function toFiniteNumber(value, fallback = NaN) {
+  const num = Number(value);
+  return Number.isFinite(num) ? num : fallback;
+}
+
+function resolveUniverseValue(baseValue, valuesByUniverse) {
+  const map = (valuesByUniverse && typeof valuesByUniverse === 'object')
+    ? valuesByUniverse
+    : null;
+  const preferred = toFiniteNumber(map?.[activeResponseUniverse]);
+  if (Number.isFinite(preferred)) {
+    return preferred;
+  }
+  if (activeResponseUniverse === 'with_view') {
+    const alt = toFiniteNumber(map?.with_view);
+    if (Number.isFinite(alt)) return alt;
+  }
+  const fallbackAll = toFiniteNumber(map?.all_americans);
+  if (Number.isFinite(fallbackAll)) {
+    return fallbackAll;
+  }
+  return toFiniteNumber(baseValue, NaN);
+}
+
+function resolveMetricUniverseValue(row, metricId) {
+  return resolveUniverseValue(
+    row?.values?.[metricId],
+    row?.values_by_universe?.[metricId]
+  );
+}
+
+function getResponseUniverseConfig() {
+  return reportData?.response_universe || null;
+}
+
+function getResponseGeographyConfig() {
+  return reportData?.response_geography || null;
+}
+
+function getResponseGeographyType(typeId) {
+  const cfg = getResponseGeographyConfig();
+  const types = toArray(cfg?.types);
+  return types.find((entry) => entry?.id === typeId) || null;
+}
+
+function getActiveResponseGeographyType() {
+  return getResponseGeographyType(activeGeographyTypeId);
+}
+
+function getResponseGeographyUnitLabel(typeId, unitId) {
+  const type = getResponseGeographyType(typeId);
+  const unit = toArray(type?.units).find((entry) => entry?.id === unitId);
+  return String(unit?.label || unit?.id || '').trim();
+}
+
+function getQuestionOptionsForActiveGeography(question) {
+  const cfg = getResponseGeographyConfig();
+  if (!cfg || cfg.enabled === false) {
+    return toArray(question?.options);
+  }
+  const byGeography = question?.options_by_geography;
+  if (!byGeography || typeof byGeography !== 'object') {
+    return toArray(question?.options);
+  }
+  return toArray(byGeography?.[activeGeographyTypeId]?.[activeGeographyUnitId]);
+}
+
+function getDemographicRowsForActiveGeography(card) {
+  if (!card || typeof card !== 'object') {
+    return [];
+  }
+  const cfg = getResponseGeographyConfig();
+  if (!cfg || cfg.enabled === false) {
+    return toArray(card?.rows);
+  }
+  const byGeography = card?.rows_by_geography;
+  if (!byGeography || typeof byGeography !== 'object') {
+    return toArray(card?.rows);
+  }
+  return toArray(byGeography?.[activeGeographyTypeId]?.[activeGeographyUnitId]);
+}
+
+function getArchetypeRowsForActiveGeography(question, metricId) {
+  const cfg = getResponseGeographyConfig();
+  if (!cfg || cfg.enabled === false) {
+    return toArray(question?.series?.[metricId]);
+  }
+  const byGeography = question?.series_by_geography;
+  if (!byGeography || typeof byGeography !== 'object') {
+    return toArray(question?.series?.[metricId]);
+  }
+  return toArray(byGeography?.[activeGeographyTypeId]?.[activeGeographyUnitId]?.[metricId]);
+}
+
+function sortQuestionsByReportOrder(questions) {
+  const order = new Map(
+    toArray(reportData?.questions).map((question, index) => [question?.id, index])
+  );
+  return toArray(questions).slice().sort((a, b) => {
+    const indexA = order.has(a?.id) ? order.get(a.id) : Number.MAX_SAFE_INTEGER;
+    const indexB = order.has(b?.id) ? order.get(b.id) : Number.MAX_SAFE_INTEGER;
+    if (indexA !== indexB) return indexA - indexB;
+    return String(a?.id || '').localeCompare(String(b?.id || ''));
+  });
+}
+
+function getCrosstabShardPath(questionId, geographyTypeId, geographyUnitId) {
+  const byQuestion = crosstabsManifest?.shards_by_question;
+  if (!byQuestion || typeof byQuestion !== 'object') {
+    return null;
+  }
+  const pathValue = byQuestion?.[questionId]?.[geographyTypeId]?.[geographyUnitId];
+  if (typeof pathValue !== 'string') {
+    return null;
+  }
+  const trimmed = pathValue.trim();
+  return trimmed || null;
+}
+
+function getCrosstabAvailableQuestionIdsForActiveGeography() {
+  if (!crosstabsManifest || typeof crosstabsManifest !== 'object') {
+    return [];
+  }
+  const ids = [];
+  toArray(reportData?.questions).forEach((question) => {
+    const qid = question?.id;
+    if (!qid) return;
+    if (getCrosstabShardPath(qid, activeGeographyTypeId, activeGeographyUnitId)) {
+      ids.push(qid);
+    }
+  });
+  Object.keys(crosstabsManifest?.shards_by_question || {}).forEach((qid) => {
+    if (ids.includes(qid)) return;
+    if (getCrosstabShardPath(qid, activeGeographyTypeId, activeGeographyUnitId)) {
+      ids.push(qid);
+    }
+  });
+  return ids;
+}
+
+function getCrosstabQuestionsForActiveGeography() {
+  if (!crosstabsManifest || typeof crosstabsManifest !== 'object') {
+    return [];
+  }
+  const questionMetaById = new Map(
+    toArray(crosstabsManifest?.questions).map((question) => [question?.id, question]).filter((entry) => entry[0])
+  );
+  const items = getCrosstabAvailableQuestionIdsForActiveGeography().map((qid) => {
+    const reportQuestion = getQuestionById(qid);
+    const manifestQuestion = questionMetaById.get(qid);
+    return {
+      id: qid,
+      label: reportQuestion?.title || manifestQuestion?.label || qid
+    };
+  });
+  return sortQuestionsByReportOrder(items);
+}
+
+function normalizeCrosstabShardPayload(json, expectedQuestionId) {
+  const questionPayload = (json && typeof json === 'object' && json.question && typeof json.question === 'object')
+    ? json.question
+    : json;
+  if (!questionPayload || typeof questionPayload !== 'object') {
+    throw new Error('Invalid crosstabs shard JSON: missing question payload object');
+  }
+  if (questionPayload?.id !== expectedQuestionId) {
+    throw new Error(
+      `Crosstabs shard question id mismatch. Expected ${expectedQuestionId}, got ${String(questionPayload?.id || '')}`
+    );
+  }
+  if (!Array.isArray(questionPayload.variables) || !Array.isArray(questionPayload.metrics) || !Array.isArray(questionPayload.pairs)) {
+    throw new Error(`Invalid crosstabs shard JSON for ${expectedQuestionId}: missing variables/metrics/pairs arrays`);
+  }
+  return questionPayload;
+}
+
+async function loadCrosstabQuestionShard(questionId, geographyTypeId, geographyUnitId) {
+  const shardPath = getCrosstabShardPath(questionId, geographyTypeId, geographyUnitId);
+  if (!shardPath) {
+    throw new Error(`Missing crosstabs shard path for ${questionId} at ${geographyTypeId}/${geographyUnitId}`);
+  }
+  const cacheKey = `${questionId}::${geographyTypeId}::${geographyUnitId}`;
+  if (crosstabShardCache.has(cacheKey)) {
+    return crosstabShardCache.get(cacheKey);
+  }
+
+  const pending = (async () => {
+    const shardUrl = resolveCrosstabShardURL(shardPath);
+    const json = await loadJSON(shardUrl);
+    return normalizeCrosstabShardPayload(json, questionId);
+  })();
+  crosstabShardCache.set(cacheKey, pending);
+  try {
+    return await pending;
+  } catch (err) {
+    crosstabShardCache.delete(cacheKey);
+    throw err;
+  }
+}
+
+function updateResponseUniverseTheme() {
+  document.body.classList.toggle(
+    'with-view-mode',
+    activeResponseUniverse === 'with_view'
+  );
+  document.body.classList.toggle(
+    'all-respondents-mode',
+    activeResponseUniverse !== 'with_view'
+  );
+  document.querySelectorAll(".section-mode-label").forEach((el) => {
+    const card = el.closest(".card");
+    if (!card) return;
+    card.setAttribute("data-universe-scope", "analytic");
+    card.setAttribute("data-response-universe", activeResponseUniverse === "with_view" ? "with_view" : "all_americans");
+  });
+}
+
+function updateModeLabelElements() {
+  const ids = ['modeLabelTopline', 'modeLabelDemographics', 'modeLabelCrosstabs', 'modeLabelArchetypes', 'modeLabelStates', 'modeLabelBehaviorAwareness', 'modeLabelBeliefLandscape', 'modeLabelArgumentTradeoffs', 'modeLabelPriorities', 'modeLabelPersuadability'];
+  const activeLabel = getResponseUniverseModeLabel(activeResponseUniverse)
+    || (activeResponseUniverse === 'with_view'
+      ? 'What respondents with a view said'
+      : 'What all respondents said');
+  const text = `Response universe: ${activeLabel}`;
+  ids.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  });
+}
+
+function getResponseUniverseModeLabel(modeId) {
+  const cfg = getResponseUniverseConfig();
+  const mode = toArray(cfg?.modes).find((entry) => entry?.id === modeId);
+  return mode?.label || null;
+}
+
+function getNonOpinionIds(questionId = null) {
+  const cfg = getResponseUniverseConfig();
+  if (!cfg || !Array.isArray(cfg.questions)) return [];
+  const questionKey = (question) => question?.id || question?.question_id || null;
+  const sourceQuestions = questionId
+    ? cfg.questions.filter((q) => questionKey(q) === questionId)
+    : cfg.questions;
+  const ids = [];
+  sourceQuestions.forEach((q) => {
+    if (Array.isArray(q?.non_opinion_ids)) {
+      q.non_opinion_ids.forEach((id) => { if (id && !ids.includes(id)) ids.push(id); });
+    }
+  });
+  if (questionId && ids.length === 0) {
+    cfg.questions.forEach((q) => {
+      if (Array.isArray(q?.non_opinion_ids)) {
+        q.non_opinion_ids.forEach((id) => { if (id && !ids.includes(id)) ids.push(id); });
+      }
+    });
+  }
+  return ids;
+}
+
+function getUniverseScopedMetrics(metrics, questionId = null) {
+  const allMetrics = toArray(metrics).filter((metric) => metric && metric.id);
+  if (activeResponseUniverse !== 'with_view') return allMetrics;
+  const excludedIds = new Set(getNonOpinionIds(questionId));
+  if (excludedIds.size === 0) return allMetrics;
+  return allMetrics.filter((metric) => !excludedIds.has(metric.id));
+}
+
+function getRedundantCombinedAliasMap(questionId = null) {
+  const cfg = getResponseUniverseConfig();
+  const questions = Array.isArray(cfg?.questions) ? cfg.questions : [];
+  const questionKey = (question) => question?.id || question?.question_id || null;
+  const scopedQuestion = questionId
+    ? questions.find((question) => questionKey(question) === questionId)
+    : null;
+  const sourceQuestion = scopedQuestion || (!questionId && questions.length === 1 ? questions[0] : null);
+  if (!sourceQuestion || !Array.isArray(sourceQuestion.combined_definitions)) {
+    return new Map();
+  }
+  const aliasMap = new Map();
+  sourceQuestion.combined_definitions.forEach((definition) => {
+    const aliasId = typeof definition?.id === 'string' ? definition.id : '';
+    const componentIds = toArray(definition?.component_outcome_ids).filter(Boolean);
+    if (!aliasId || componentIds.length !== 1) return;
+    const componentId = componentIds[0];
+    if (!componentId || componentId === aliasId) return;
+    aliasMap.set(aliasId, componentId);
+  });
+  return aliasMap;
+}
+
+function resolveCanonicalMetricId(metricId, questionId = null) {
+  if (!metricId) return null;
+  const aliasMap = getRedundantCombinedAliasMap(questionId);
+  let resolvedId = metricId;
+  const seen = new Set([resolvedId]);
+  while (aliasMap.has(resolvedId)) {
+    const nextId = aliasMap.get(resolvedId);
+    if (!nextId || seen.has(nextId)) break;
+    resolvedId = nextId;
+    seen.add(resolvedId);
+  }
+  return resolvedId;
+}
+
+function getCanonicalUniverseScopedMetrics(metrics, questionId = null) {
+  const scopedMetrics = getUniverseScopedMetrics(metrics, questionId);
+  const aliasMap = getRedundantCombinedAliasMap(questionId);
+  if (aliasMap.size === 0) return scopedMetrics;
+
+  const scopedById = new Map();
+  scopedMetrics.forEach((metric) => {
+    if (metric && metric.id) scopedById.set(metric.id, metric);
+  });
+
+  const canonicalMetrics = [];
+  const seenCanonicalIds = new Set();
+  scopedMetrics.forEach((metric) => {
+    if (!metric || !metric.id) return;
+    const canonicalId = resolveCanonicalMetricId(metric.id, questionId);
+    const canonicalMetric = scopedById.get(canonicalId) || metric;
+    if (!canonicalMetric?.id || seenCanonicalIds.has(canonicalMetric.id)) return;
+    seenCanonicalIds.add(canonicalMetric.id);
+    canonicalMetrics.push(canonicalMetric);
+  });
+  return canonicalMetrics;
+}
+
+function populateMetricOptions(
+    metricSel, metrics, preferredMetricId, labelFormatter = null, questionId = null
+) {
+  const availableMetrics = getCanonicalUniverseScopedMetrics(metrics, questionId);
+  const formatLabel = typeof labelFormatter === 'function'
+    ? labelFormatter
+    : ((metric) => metric.label || metric.id);
+  metricSel.innerHTML = '';
+  availableMetrics.forEach((metric) => {
+    metricSel.appendChild(new Option(formatLabel(metric), metric.id));
+  });
+  if (availableMetrics.length === 0) {
+    metricSel.value = '';
+    return null;
+  }
+  const canonicalPreferredId = resolveCanonicalMetricId(preferredMetricId, questionId);
+  const selected = availableMetrics.find((metric) => metric.id === canonicalPreferredId) || availableMetrics[0];
+  metricSel.value = selected.id;
+  return selected.id;
+}
+
+function rerenderResponseUniverseSections() {
+  renderQuestionCards();
+  renderDemographicExplorer();
+  renderCrosstabExplorer();
+  if (activeArchetypeQuestion) {
+    renderArchetypeChart(activeArchetypeQuestion, activeArchetypeMetric);
+  }
+  if (activeStateQuestion) {
+    renderStateChart(activeStateQuestion, activeStateMetric);
+  }
+  renderBehaviorAwareness();
+  renderBeliefLandscape();
+  renderArgumentTradeoffs();
+  renderPriorities();
+  renderPersuadabilityMessengers();
+}
+
+function setResponseUniverse(modeId, rerender = true) {
+  const cfg = getResponseUniverseConfig();
+  const modes = Array.isArray(cfg?.modes) ? cfg.modes : [];
+  const allowedIds = modes.map((m) => m?.id).filter(Boolean);
+  const nextMode = allowedIds.includes(modeId) ? modeId : 'all_americans';
+  activeResponseUniverse = nextMode;
+  updateResponseUniverseTheme();
+  updateModeLabelElements();
+  document.querySelectorAll('#responseUniverseToggle .response-universe-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.modeId === nextMode);
+    btn.setAttribute('aria-pressed', btn.dataset.modeId === nextMode ? 'true' : 'false');
+  });
+  if (rerender) rerenderResponseUniverseSections();
+}
+
+function initResponseUniverseToggle() {
+  const cardWrap = document.getElementById('componentResponseUniverse');
+  const wrap = document.getElementById('responseUniverseToggle');
+  if (!wrap) return;
+  const cfg = getResponseUniverseConfig();
+  if (!cfg || cfg.enabled === false) {
+    if (cardWrap) cardWrap.hidden = true;
+    activeResponseUniverse = 'all_americans';
+    updateResponseUniverseTheme();
+    updateModeLabelElements();
+    return;
+  }
+  if (cardWrap) cardWrap.hidden = false;
+  const modeMap = {};
+  const modes = Array.isArray(cfg.modes) ? cfg.modes : [];
+  modes.forEach((mode) => {
+    if (mode && mode.id) {
+      modeMap[mode.id] = mode.label || mode.id;
+    }
+  });
+  const defaultLabels = {
+    all_americans: 'What all respondents said',
+    with_view: 'What respondents with a view said'
+  };
+  document.querySelectorAll('#responseUniverseToggle .response-universe-btn').forEach((btn) => {
+    const modeId = btn.dataset.modeId;
+    btn.textContent = modeMap[modeId] || defaultLabels[modeId] || modeId;
+    btn.onclick = () => setResponseUniverse(modeId, true);
+  });
+  const explainer = document.getElementById('responseUniverseExplainer');
+  if (explainer) {
+    explainer.textContent = cfg.explainer
+      || 'In “What respondents with a view said”, we remove undecided responses and rescale the remaining responses to sum to 100%.';
+  }
+  const hasWithView = modes.some((mode) => mode?.id === 'with_view');
+  const defaultMode = hasWithView && cfg.default_mode === 'with_view'
+    ? 'with_view'
+    : 'all_americans';
+  setResponseUniverse(defaultMode, false);
+}
+
+function updateResponseGeographyExplainer() {
+  const explainer = document.getElementById('responseGeographyExplainer');
+  if (!explainer) return;
+  const type = getActiveResponseGeographyType();
+  if (!type) {
+    explainer.textContent = '';
+    return;
+  }
+  const typeLabel = String(type?.selector_label || type?.label || type?.id || '').trim();
+  const unitLabel = getResponseGeographyUnitLabel(type?.id, activeGeographyUnitId);
+  if (type?.id === 'state') {
+    explainer.textContent = 'Showing predictions for Louisiana statewide.';
+    return;
+  }
+  if (unitLabel) {
+    explainer.textContent = `Showing predictions for ${typeLabel}: ${unitLabel}.`;
+  } else {
+    explainer.textContent = `Showing predictions for ${typeLabel}.`;
+  }
+}
+
+function syncResponseGeographyControlUI() {
+  const typeSel = document.getElementById('responseGeographyTypeSelect');
+  const unitSel = document.getElementById('responseGeographyUnitSelect');
+  const unitGroup = document.getElementById('responseGeographyUnitGroup');
+  const unitLabelEl = document.querySelector('label[for="responseGeographyUnitSelect"]');
+  if (!typeSel || !unitSel || !unitGroup || !unitLabelEl) return;
+
+  const activeType = getActiveResponseGeographyType();
+  if (!activeType) {
+    typeSel.value = '';
+    unitSel.innerHTML = '';
+    unitGroup.hidden = true;
+    updateResponseGeographyExplainer();
+    return;
+  }
+
+  typeSel.value = activeType.id;
+  const units = toArray(activeType.units);
+  unitSel.innerHTML = '';
+  units.forEach((unit) => {
+    unitSel.appendChild(new Option(unit?.label || unit?.id || '', unit?.id || ''));
+  });
+
+  const supportsUnitSelect = Boolean(activeType?.supports_unit_select) && units.length > 1;
+  unitGroup.hidden = !supportsUnitSelect;
+  unitLabelEl.textContent = activeType?.selector_label || activeType?.label || 'Geography';
+  if (supportsUnitSelect) {
+    unitSel.value = activeGeographyUnitId || '';
+  }
+  updateResponseGeographyExplainer();
+}
+
+function setResponseGeography(typeId, unitId = null, rerender = true) {
+  const cfg = getResponseGeographyConfig();
+  const types = toArray(cfg?.types);
+  if (types.length === 0) {
+    activeGeographyTypeId = null;
+    activeGeographyUnitId = null;
+    activeGeographyUnitByType = {};
+    return;
+  }
+
+  const fallbackTypeId = (cfg?.default_type_id && types.some((entry) => entry?.id === cfg.default_type_id))
+    ? cfg.default_type_id
+    : (types[0]?.id || null);
+  const resolvedType = types.find((entry) => entry?.id === typeId)
+    || types.find((entry) => entry?.id === fallbackTypeId)
+    || types[0];
+  if (!resolvedType || !resolvedType.id) {
+    return;
+  }
+
+  activeGeographyTypeId = resolvedType.id;
+  const units = toArray(resolvedType.units);
+  const defaultUnitByType = cfg?.default_unit_by_type || {};
+  const preferredUnitId = unitId
+    || activeGeographyUnitByType[activeGeographyTypeId]
+    || resolvedType?.default_unit_id
+    || defaultUnitByType?.[activeGeographyTypeId]
+    || (activeGeographyTypeId === cfg?.default_type_id ? cfg?.default_unit_id : null);
+  const resolvedUnit = units.find((entry) => entry?.id === preferredUnitId) || units[0] || null;
+  activeGeographyUnitId = resolvedUnit?.id || null;
+  if (activeGeographyUnitId) {
+    activeGeographyUnitByType[activeGeographyTypeId] = activeGeographyUnitId;
+  }
+
+  syncResponseGeographyControlUI();
+  if (rerender) {
+    rerenderResponseUniverseSections();
+  }
+}
+
+function initResponseGeographyControl() {
+  const cardWrap = document.getElementById('componentResponseGeography');
+  const typeSel = document.getElementById('responseGeographyTypeSelect');
+  const unitSel = document.getElementById('responseGeographyUnitSelect');
+  if (!cardWrap || !typeSel || !unitSel) return;
+
+  const cfg = getResponseGeographyConfig();
+  const types = toArray(cfg?.types);
+  if (!cfg || cfg.enabled === false || types.length === 0) {
+    cardWrap.hidden = true;
+    activeGeographyTypeId = null;
+    activeGeographyUnitId = null;
+    activeGeographyUnitByType = {};
+    return;
+  }
+
+  cardWrap.hidden = false;
+  typeSel.innerHTML = '';
+  types.forEach((type) => {
+    typeSel.appendChild(new Option(
+      type?.selector_label || type?.label || type?.id || '',
+      type?.id || ''
+    ));
+  });
+
+  const defaultTypeId = (cfg?.default_type_id && types.some((entry) => entry?.id === cfg.default_type_id))
+    ? cfg.default_type_id
+    : (types[0]?.id || null);
+  setResponseGeography(defaultTypeId, cfg?.default_unit_id || null, false);
+
+  typeSel.addEventListener('change', () => {
+    setResponseGeography(typeSel.value, null, true);
+  });
+  unitSel.addEventListener('change', () => {
+    setResponseGeography(activeGeographyTypeId, unitSel.value, true);
+  });
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+const fmtPct = (x) => `${Number(x || 0).toFixed(1)}%`;
+const fmtCrosstabPct = (x) => `${Number(x || 0).toFixed(2)}%`;
+
+function safeGet(key) {
+  try { return localStorage.getItem(key); } catch { return null; }
+}
+
+function safeSet(key, val) {
+  try { localStorage.setItem(key, val); } catch { /* restricted context */ }
+}
+
+function normalizeDisplayLabel(value) {
+  let text = String(value ?? '').trim();
+  if (!text) return '';
+
+  const replacements = [
+    [/\bgen\s*z\b/gi, 'Gen Z'],
+    [/\bgen\s*x\b/gi, 'Gen X'],
+    [/\bbaby\s*boomers?\b/gi, 'Baby Boomers'],
+    [/\bmillennials?\b/gi, 'Millennials'],
+    [/\brural\b/gi, 'Rural'],
+    [/\burban\b/gi, 'Urban'],
+    [/\bsuburban\b/gi, 'Suburban'],
+    [/\bno\s*college\b/gi, 'No College'],
+    [/\bpostgraduate\b/gi, 'Postgraduate'],
+    [/\bcollege\b/gi, 'College']
+  ];
+
+  replacements.forEach(([pattern, replacement]) => {
+    text = text.replace(pattern, replacement);
+  });
+  return text;
+}
+
+let archetypeTooltipEl = null;
+let activeArchetypeIcon = null;
+let pinnedArchetypeIcon = null;
+let archetypeTooltipListenersBound = false;
+let archetypeMetadataIndex = null;
+
+function normalizeArchetypeLabelKey(value) {
+  return String(value ?? '')
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[’']/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+function resetArchetypeMetadataIndex() {
+  archetypeMetadataIndex = null;
+}
+
+function normalizeArchetypeMetadataEntry(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  const label = String(entry.label || entry.key || '').trim();
+  if (!label) return null;
+  const rankRaw = Number(entry.rank);
+  const demographicComposition = String(entry.demographic_composition || entry.composition || '').trim();
+  const rationale = String(entry.rationale || '').trim();
+  return {
+    key: String(entry.key || '').trim(),
+    rank: Number.isFinite(rankRaw) ? rankRaw : null,
+    label,
+    demographic_composition: demographicComposition,
+    rationale
+  };
+}
+
+function getArchetypeMetadataIndex() {
+  if (archetypeMetadataIndex instanceof Map) return archetypeMetadataIndex;
+  const idx = new Map();
+  const entries = toArray(reportData?.archetypes?.metadata);
+  entries.forEach((entry) => {
+    const normalized = normalizeArchetypeMetadataEntry(entry);
+    if (!normalized) return;
+    [normalized.key, normalized.label].forEach((token) => {
+      const normalizedToken = normalizeArchetypeLabelKey(token);
+      if (normalizedToken) idx.set(normalizedToken, normalized);
+    });
+  });
+  archetypeMetadataIndex = idx;
+  return idx;
+}
+
+function getArchetypeMetadata(rowOrLabel) {
+  const idx = getArchetypeMetadataIndex();
+  const candidates = [];
+  if (rowOrLabel && typeof rowOrLabel === 'object') {
+    candidates.push(rowOrLabel.key, rowOrLabel.label);
+  } else {
+    candidates.push(rowOrLabel);
+  }
+  for (const candidate of candidates) {
+    const token = normalizeArchetypeLabelKey(candidate);
+    if (!token) continue;
+    const hit = idx.get(token);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+function buildArchetypeTooltipPayload(metadata, fallbackLabel) {
+  if (!metadata) return null;
+  const title = String(metadata.label || fallbackLabel || '').trim();
+  const subtitle = String(metadata.demographic_composition || '').trim();
+  const body = String(metadata.rationale || '').trim();
+  if (!subtitle && !body) return null;
+  return { title, subtitle, body };
+}
+
+function setArchetypeTooltipContent(tooltipEl, payload) {
+  tooltipEl.innerHTML = '';
+  if (!payload) return;
+  const title = String(payload.title || '').trim();
+  const subtitle = String(payload.subtitle || '').trim();
+  const body = String(payload.body || '').trim();
+  if (title) {
+    const el = document.createElement('div');
+    el.className = 'archetype-tooltip-title';
+    el.textContent = normalizeDisplayLabel(title);
+    tooltipEl.appendChild(el);
+  }
+  if (subtitle) {
+    const el = document.createElement('div');
+    el.className = 'archetype-tooltip-subtitle';
+    el.textContent = subtitle;
+    tooltipEl.appendChild(el);
+  }
+  if (body) {
+    const el = document.createElement('div');
+    el.className = 'archetype-tooltip-body';
+    el.textContent = body;
+    tooltipEl.appendChild(el);
+  }
+}
+
+function ensureArchetypeTooltip() {
+  if (archetypeTooltipEl && document.body.contains(archetypeTooltipEl)) return archetypeTooltipEl;
+  const tooltip = document.createElement('div');
+  tooltip.id = 'archetypeTooltip';
+  tooltip.className = 'archetype-tooltip';
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(tooltip);
+  archetypeTooltipEl = tooltip;
+  return tooltip;
+}
+
+function positionArchetypeTooltip(iconEl) {
+  if (!archetypeTooltipEl || !iconEl) return;
+  const iconRect = iconEl.getBoundingClientRect();
+  const tooltipRect = archetypeTooltipEl.getBoundingClientRect();
+  const margin = 8;
+  const gap = 10;
+
+  let left = iconRect.left + (iconRect.width / 2) - (tooltipRect.width / 2);
+  const maxLeft = window.innerWidth - tooltipRect.width - margin;
+  left = Math.max(margin, Math.min(left, Math.max(margin, maxLeft)));
+
+  let top = iconRect.top - tooltipRect.height - gap;
+  if (top < margin) top = iconRect.bottom + gap;
+  const maxTop = window.innerHeight - tooltipRect.height - margin;
+  top = Math.max(margin, Math.min(top, Math.max(margin, maxTop)));
+
+  archetypeTooltipEl.style.left = `${Math.round(left)}px`;
+  archetypeTooltipEl.style.top = `${Math.round(top)}px`;
+}
+
+function showArchetypeTooltip(iconEl, payload, { pinned = false } = {}) {
+  if (!iconEl || !payload) return;
+  const tooltip = ensureArchetypeTooltip();
+  if (activeArchetypeIcon && activeArchetypeIcon !== iconEl) {
+    activeArchetypeIcon.setAttribute('aria-expanded', 'false');
+    activeArchetypeIcon.removeAttribute('aria-describedby');
+  }
+  setArchetypeTooltipContent(tooltip, payload);
+  tooltip.classList.add('is-visible');
+  tooltip.setAttribute('aria-hidden', 'false');
+  activeArchetypeIcon = iconEl;
+  iconEl.setAttribute('aria-describedby', tooltip.id);
+  iconEl.setAttribute('aria-expanded', 'true');
+  if (pinned) pinnedArchetypeIcon = iconEl;
+  positionArchetypeTooltip(iconEl);
+}
+
+function hideArchetypeTooltip({ force = false } = {}) {
+  if (!force && pinnedArchetypeIcon) return;
+  if (!archetypeTooltipEl) return;
+  archetypeTooltipEl.classList.remove('is-visible');
+  archetypeTooltipEl.setAttribute('aria-hidden', 'true');
+  if (activeArchetypeIcon) {
+    activeArchetypeIcon.setAttribute('aria-expanded', 'false');
+    activeArchetypeIcon.removeAttribute('aria-describedby');
+  }
+  activeArchetypeIcon = null;
+}
+
+function bindArchetypeTooltipListeners() {
+  if (archetypeTooltipListenersBound) return;
+  archetypeTooltipListenersBound = true;
+
+  document.addEventListener('click', (event) => {
+    if (!pinnedArchetypeIcon) return;
+    const target = event.target;
+    if (pinnedArchetypeIcon.contains(target)) return;
+    if (archetypeTooltipEl && archetypeTooltipEl.contains(target)) return;
+    pinnedArchetypeIcon = null;
+    hideArchetypeTooltip({ force: true });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    pinnedArchetypeIcon = null;
+    hideArchetypeTooltip({ force: true });
+  });
+
+  window.addEventListener('resize', () => {
+    if (activeArchetypeIcon && archetypeTooltipEl?.classList.contains('is-visible')) {
+      positionArchetypeTooltip(activeArchetypeIcon);
+    }
+  });
+
+  window.addEventListener('scroll', () => {
+    if (activeArchetypeIcon && archetypeTooltipEl?.classList.contains('is-visible')) {
+      positionArchetypeTooltip(activeArchetypeIcon);
+    }
+  }, true);
+}
+
+function toArray(x) {
+  return Array.isArray(x) ? x : [];
+}
+
+function qById(questionId) {
+  return toArray(reportData?.questions).find((q) => q.id === questionId) || null;
+}
+
+function getQuestionById(questionId) {
+  return qById(questionId);
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+let themeLinkObserver = null;
+
+function refreshThemeAwareLinks(root) {
+  const helper = window.VDHTheme;
+  if (!helper || typeof helper.withThemeParam !== 'function') return;
+
+  const activeTheme = typeof helper.getActiveTheme === 'function'
+    ? helper.getActiveTheme()
+    : 'light';
+
+  const scope = root && typeof root.querySelectorAll === 'function' ? root : document;
+  const links = [];
+
+  if (scope === document) {
+    links.push(...document.querySelectorAll('a[href]'));
+  } else {
+    if (scope.matches && scope.matches('a[href]')) links.push(scope);
+    links.push(...scope.querySelectorAll('a[href]'));
+  }
+
+  links.forEach((link) => {
+    const rawHref = link.getAttribute('href');
+    if (!rawHref) return;
+    if (String(link.getAttribute('data-skip-theme-param') || '').trim() === 'true') return;
+    const themedHref = helper.withThemeParam(rawHref, activeTheme);
+    if (themedHref && themedHref !== rawHref) {
+      link.setAttribute('href', themedHref);
+    }
+  });
+}
+
+function ensureThemeLinkObserver() {
+  if (themeLinkObserver || typeof MutationObserver === 'undefined') return;
+  themeLinkObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (!node || node.nodeType !== 1) return;
+        refreshThemeAwareLinks(node);
+      });
+    });
+  });
+  themeLinkObserver.observe(document.documentElement, { childList: true, subtree: true });
+}
+
+function applyTheme(theme, persist = true) {
+  const helper = window.VDHTheme;
+  const resolved = helper && typeof helper.normalizeTheme === 'function'
+    ? (helper.normalizeTheme(theme) || 'light')
+    : (theme === 'dark' ? 'dark' : 'light');
+
+  document.documentElement.setAttribute('data-theme', resolved);
+  if (persist && helper && typeof helper.persistTheme === 'function') {
+    helper.persistTheme(resolved);
+  }
+
+  const icon = document.getElementById('toggleIcon');
+  const label = document.getElementById('toggleLabel');
+  if (icon) icon.textContent = resolved === 'dark' ? '\u263D' : '\u2600';
+  if (label) label.textContent = resolved === 'dark' ? 'Dark' : 'Light';
+
+  refreshThemeAwareLinks();
+}
+
+function initTheme() {
+  const helper = window.VDHTheme || {};
+  const boot = window.__VDH_THEME_BOOT__ || {};
+  const bootTheme = typeof helper.normalizeTheme === 'function'
+    ? helper.normalizeTheme(boot.theme)
+    : null;
+
+  const resolved = bootTheme
+    ? { theme: bootTheme, source: boot.source || null }
+    : (typeof helper.resolveInitialTheme === 'function'
+      ? helper.resolveInitialTheme()
+      : { theme: 'light', source: 'fallback' });
+
+  applyTheme(resolved.theme, false);
+
+  if (resolved.source === 'param' && typeof helper.persistTheme === 'function') {
+    helper.persistTheme(resolved.theme);
+  }
+
+  ensureThemeLinkObserver();
+  refreshThemeAwareLinks();
+
+  const toggle = document.getElementById('themeToggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next, true);
+    });
+  }
+}
+
+/* ============================================================
+   DATA LOADING
+   ============================================================ */
+const isFileProtocol = location.protocol === 'file:';
+
+function getRuntimeBaseHref() {
+  const marker = '/igaming/attitudes/standalone_website/';
+  const { origin, pathname, protocol, href } = window.location;
+  if (protocol === 'file:') {
+    const dir = href.endsWith('/')
+      ? href
+      : href.slice(0, href.lastIndexOf('/') + 1);
+    return dir;
+  }
+  if (pathname.includes(marker)) {
+    return new URL(marker, origin).toString();
+  }
+  const currentDir = pathname.endsWith('/')
+    ? pathname
+    : pathname.slice(0, pathname.lastIndexOf('/') + 1);
+  return new URL(currentDir || '/', origin).toString();
+}
+
+const DATA_BASE_HREF = getRuntimeBaseHref();
+const REPORT_DATA_URL = new URL('data/igaming_attitudes_data.json', DATA_BASE_HREF).toString();
+const DEFAULT_CROSSTABS_MANIFEST_PATH = 'data/crosstabs_manifest.json';
+
+function getConfiguredCrosstabsManifestPath() {
+  const fromReport = String(reportData?.dataSource?.crosstabs?.manifest_path || '').trim();
+  if (fromReport) return fromReport;
+  return DEFAULT_CROSSTABS_MANIFEST_PATH;
+}
+
+function resolveCrosstabsManifestURL() {
+  const path = getConfiguredCrosstabsManifestPath();
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+  return new URL(path, DATA_BASE_HREF).toString();
+}
+
+function getCrosstabsManifestURLForShardResolution() {
+  try {
+    return resolveCrosstabsManifestURL();
+  } catch (err) {
+    return new URL(DEFAULT_CROSSTABS_MANIFEST_PATH, DATA_BASE_HREF).toString();
+  }
+}
+
+function resolveCrosstabShardURL(shardPath) {
+  const normalizedPath = String(shardPath || '').trim();
+  if (!normalizedPath) {
+    throw new Error('Missing crosstabs shard path');
+  }
+  if (/^https?:\/\//i.test(normalizedPath)) {
+    return normalizedPath;
+  }
+  const hostBase = String(
+    crosstabsManifest?.meta?.delivery?.asset_host_base_url
+      || crosstabsManifest?.meta?.asset_host_base_url
+      || ''
+  ).trim();
+  if (hostBase) {
+    return new URL(normalizedPath, hostBase).toString();
+  }
+
+  if (/^(\/|data\/)/i.test(normalizedPath)) {
+    return new URL(normalizedPath, DATA_BASE_HREF).toString();
+  }
+
+  const manifestUrl = getCrosstabsManifestURLForShardResolution();
+  return new URL(normalizedPath, manifestUrl).toString();
+}
+
+async function loadJSON(url) {
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${url}`);
+  return resp.json();
+}
+
+function classifyLoadError(err) {
+  const msg = String(err?.message || err || '');
+  if (isFileProtocol) return 'file-protocol';
+  if (/networkerror|failed to fetch|load failed/i.test(msg)) return 'network';
+  if (/cors|cross-origin/i.test(msg)) return 'cors';
+  if (/http 404/i.test(msg)) return '404';
+  if (/http [45]\d\d/i.test(msg)) return 'http-error';
+  if (/json|unexpected token|syntax/i.test(msg)) return 'parse';
+  return 'unknown';
+}
+
+function isValidReportPayload(json) {
+  // demographics/archetypes are loaded via report shards, not in base payload
+  return json &&
+    Array.isArray(json.questions) &&
+    json.questions.length >= 1 &&
+    json.response_universe &&
+    Array.isArray(json.response_universe.questions) &&
+    json.response_geography &&
+    Array.isArray(json.response_geography.types);
+}
+
+function isValidCrosstabsManifest(json) {
+  return json &&
+    Array.isArray(json.questions) &&
+    json.questions.length >= 1 &&
+    json.response_geography &&
+    Array.isArray(json.response_geography.types) &&
+    json.shards_by_question &&
+    typeof json.shards_by_question === 'object';
+}
+
+function getReportShardDefs() {
+  return toArray(reportData?.data_files?.report_shards);
+}
+
+function resolveReportShardURL(shardPath) {
+  const normalizedPath = String(shardPath || '').trim();
+  if (!normalizedPath) {
+    throw new Error('Missing report shard path');
+  }
+  if (/^https?:\/\//i.test(normalizedPath)) {
+    return normalizedPath;
+  }
+  return new URL(normalizedPath, DATA_BASE_HREF).toString();
+}
+
+async function loadReportShards(baseReport) {
+  const shardDefs = toArray(baseReport?.data_files?.report_shards);
+  if (shardDefs.length === 0) {
+    return baseReport;
+  }
+  const merged = { ...baseReport };
+  const shardEntries = await Promise.all(shardDefs.map(async (shardDef) => {
+    const key = String(shardDef?.key || '').trim();
+    const path = String(shardDef?.path || shardDef?.file_name || '').trim();
+    if (!key || !path) {
+      throw new Error('Invalid report shard definition');
+    }
+    const json = await loadJSON(resolveReportShardURL(path));
+    return [key, json];
+  }));
+  shardEntries.forEach(([key, value]) => {
+    merged[key] = value;
+  });
+  return merged;
+}
+
+async function loadData() {
+  const banner = document.getElementById('dataBanner');
+
+  try {
+    const json = await loadJSON(REPORT_DATA_URL);
+    if (!isValidReportPayload(json)) {
+      throw new Error('Invalid report JSON schema for igaming_attitudes_data.json');
+    }
+    reportData = await loadReportShards(json);
+    if (!Array.isArray(reportData?.demographics) || !reportData?.archetypes) {
+      throw new Error('Incomplete attitudes report payload after loading report shards');
+    }
+    resetArchetypeMetadataIndex();
+    dataSource = 'json';
+    console.log('[VDH iGaming Attitudes] Report data loaded from JSON.');
+  } catch (err) {
+    reportData = FALLBACK_REPORT;
+    resetArchetypeMetadataIndex();
+    dataSource = 'fallback';
+    console.warn('[VDH iGaming Attitudes] Report JSON fetch failed, using embedded fallback.', err);
+    if (banner) {
+      banner.className = 'data-banner warn';
+      banner.textContent = isFileProtocol
+        ? 'Opened via file:// — report data loaded from embedded fallback. Serve over HTTP for live JSON data and interactive crosstabs.'
+        : `Report JSON could not be loaded — using embedded fallback. Check that ${REPORT_DATA_URL} is reachable.`;
+    }
+  }
+
+  crosstabShardCache.clear();
+  crosstabsLoadError = null;
+  try {
+    const manifestUrl = resolveCrosstabsManifestURL();
+    const json = await loadJSON(manifestUrl);
+    if (!isValidCrosstabsManifest(json)) {
+      throw new Error('Invalid crosstabs manifest JSON: missing required keys');
+    }
+    crosstabsManifest = json;
+    console.log('[VDH iGaming Attitudes] Crosstabs manifest loaded.');
+  } catch (err) {
+    crosstabsManifest = null;
+    crosstabsLoadError = {
+      error: err,
+      type: classifyLoadError(err),
+      scope: 'manifest',
+      manifest_path: getConfiguredCrosstabsManifestPath()
+    };
+    console.warn('[VDH iGaming Attitudes] Crosstabs manifest load failed:', crosstabsLoadError.type, err);
+  }
+}
+
+function getContentConfig() {
+  return reportData?.content || FALLBACK_REPORT?.content || {};
+}
+
+function normalizeTakeaways(items) {
+  if (Array.isArray(items) && items.length > 0) {
+    return items;
+  }
+  return [
+    '[Placeholder takeaway 1]',
+    '[Placeholder takeaway 2]',
+    '[Placeholder takeaway 3]',
+    '[Placeholder takeaway 4]',
+    '[Placeholder takeaway 5]'
+  ];
+}
+
+function formatMethodologyText(text) {
+  if (!text) return '';
+  let out = String(text).trim();
+  out = out.replace(/^\\*\\*(.*?)\\*\\*\\s*/, '$1 ');
+  return out;
+}
+
+function applyComponentOrder() {
+  const main = document.querySelector('main.layout');
+  if (!main) return;
+  const configured = getContentConfig().component_order;
+  if (!Array.isArray(configured) || configured.length === 0) return;
+  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'response_geography'];
+  const nodes = Array.from(main.querySelectorAll('[data-component-id]'));
+  const nodeById = {};
+  const availableIds = [];
+  nodes.forEach((node) => {
+    const componentId = node.dataset.componentId;
+    if (!componentId) return;
+    nodeById[componentId] = node;
+    availableIds.push(componentId);
+  });
+
+  let finalOrder = [...mandatory, ...configured.filter((id) => !mandatory.includes(id))]
+    .filter((id, idx, arr) => arr.indexOf(id) === idx);
+
+  if (availableIds.includes('archetype_breakdown')) {
+    finalOrder = finalOrder.filter((id) => id !== 'archetype_breakdown');
+    const stateIdx = finalOrder.indexOf('state_ranking');
+    if (stateIdx >= 0) {
+      finalOrder.splice(stateIdx, 0, 'archetype_breakdown');
+    } else {
+      finalOrder.push('archetype_breakdown');
+    }
+  }
+
+  const remainder = availableIds.filter((id) => !finalOrder.includes(id));
+  [...finalOrder, ...remainder].forEach((componentId) => {
+    const node = nodeById[componentId];
+    if (node) main.appendChild(node);
+  });
+}
+
+/* ============================================================
+   META
+   ============================================================ */
+function assertHeaderMetaPillSync(meta) {
+  const check = (id, expected, label) => {
+    if (expected == null) return;
+    const node = document.getElementById(id);
+    if (!node) return;
+    const observed = String(node.textContent || '').trim();
+    const wanted = String(expected).trim();
+    if (observed !== wanted) {
+      console.warn(`[header-meta] ${label} pill mismatch. observed="${observed}" expected="${wanted}"`);
+    }
+  };
+  check('metaSample', meta?.sample, 'sample');
+  check('metaDates', meta?.fieldDates, 'field dates');
+}
+
+function isLocalPreviewHost() {
+  if (location.protocol === 'file:') return true;
+  const host = String(location.hostname || '').toLowerCase();
+  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+}
+
+function normalizeSiteNavLinks(items) {
+  return toArray(items)
+    .map((item) => {
+      const label = String(item?.label || '').trim();
+      const canonicalHref = String(item?.canonical_href || item?.href || '').trim();
+      const localHref = String(item?.local_href || '').trim();
+      const siteSlug = String(item?.site_slug || item?.siteSlug || '').trim();
+      if (!label || (!canonicalHref && !localHref)) return null;
+      return {
+        label,
+        href: canonicalHref || localHref,
+        canonical_href: canonicalHref,
+        local_href: localHref,
+        site_slug: siteSlug
+      };
+    })
+    .filter(Boolean);
+}
+
+function resolveSiblingHref(entry) {
+  const canonicalHref = String(entry?.canonical_href || entry?.href || '').trim();
+  const localHref = String(entry?.local_href || '').trim();
+  if (isLocalPreviewHost() && localHref) return localHref;
+  if (canonicalHref) return canonicalHref;
+  return localHref;
+}
+
+function renderSiteNavigation() {
+  const backLink = document.getElementById('backToPortalLink');
+  const siblingWrap = document.getElementById('siblingNavLinks');
+  if (!backLink || !siblingWrap) return;
+
+  const navCfg = reportData?.meta?.group_navigation || {};
+  const backCfg = navCfg?.back || {};
+  const backHref = String(
+    (isLocalPreviewHost() ? (backCfg?.local_href || '') : '') ||
+    backCfg?.href ||
+    backLink.getAttribute('href') ||
+    ''
+  ).trim();
+  const backLabel = String(backCfg?.label || backLink.textContent || 'Portal').trim();
+  if (backHref) backLink.href = backHref;
+  backLink.textContent = backLabel || 'Portal';
+
+  const currentSlug = String(reportData?.template?.site_slug || '').trim();
+  const siblings = normalizeSiteNavLinks(navCfg?.siblings).filter((entry) => {
+    if (!entry?.site_slug || !currentSlug) return true;
+    return entry.site_slug !== currentSlug;
+  });
+
+  siblingWrap.innerHTML = '';
+  if (siblings.length === 0) {
+    siblingWrap.hidden = true;
+    return;
+  }
+
+  siblings.forEach((entry) => {
+    const resolvedHref = resolveSiblingHref(entry);
+    if (!resolvedHref) return;
+    const link = document.createElement('a');
+    link.className = 'site-nav-link';
+    link.href = resolvedHref;
+    link.textContent = entry.label;
+    siblingWrap.appendChild(link);
+  });
+  siblingWrap.hidden = false;
+}
+
+function fillMeta() {
+  const m = reportData?.meta || {};
+  const byId = (id) => document.getElementById(id);
+
+  const titleEl = byId('heroTitle');
+  if (titleEl && m.title) titleEl.textContent = m.title;
+  const subtitleEl = byId('heroSubtitle');
+  if (subtitleEl) {
+    if (m.subtitle) {
+      subtitleEl.textContent = m.subtitle;
+      subtitleEl.hidden = false;
+    } else {
+      subtitleEl.textContent = '';
+      subtitleEl.hidden = true;
+    }
+  }
+
+  const siteEl = byId('metaSite');
+  if (siteEl && m.site) {
+    siteEl.textContent = String(m.site).replace('https://', '');
+    siteEl.href = m.site;
+  }
+
+  const sampleEl = byId('metaSample');
+  if (sampleEl && m.sample) sampleEl.textContent = m.sample;
+
+  const dateEl = byId('metaDates');
+  if (dateEl && m.fieldDates) dateEl.textContent = m.fieldDates;
+
+  const methodEl = byId('metaMethod');
+  if (methodEl && m.methodLabel) methodEl.textContent = m.methodLabel;
+
+  assertHeaderMetaPillSync(m);
+}
+
+/* ============================================================
+   RENDER — FEEDBACK CALLOUT
+   ============================================================ */
+function renderFeedbackCallout() {
+  const section = document.getElementById('feedbackCallout');
+  if (!section) return;
+  const cfg = getContentConfig().feedback_callout;
+  if (!cfg || cfg.enabled === false) return;
+
+  const heading = document.getElementById('feedbackHeading');
+  const body = document.getElementById('feedbackBody');
+  const cta = document.getElementById('feedbackCta');
+
+  if (heading && cfg.heading) heading.textContent = cfg.heading;
+  if (body && cfg.body) body.textContent = cfg.body;
+  if (cta) {
+    if (cfg.cta_label) cta.textContent = cfg.cta_label;
+    if (cfg.cta_url) cta.href = cfg.cta_url;
+  }
+  section.removeAttribute('hidden');
+}
+
+function renderTakeaways() {
+  const wrap = document.getElementById('takeaways');
+  if (!wrap) return;
+  const takeaways = normalizeTakeaways(getContentConfig().key_takeaways);
+  wrap.innerHTML = '';
+  takeaways.forEach((text, i) => {
+    const div = document.createElement('div');
+    div.className = 'takeaway-item';
+    div.innerHTML = `
+      <span class="takeaway-num" aria-hidden="true">${i + 1}</span>
+      <span class="takeaway-text">${text}</span>
+    `;
+    wrap.appendChild(div);
+  });
+}
+
+function renderMethodology() {
+  const body = document.getElementById('methodologyBody');
+  if (!body) return;
+  const note = getContentConfig().methodology_note;
+  if (!note) return;
+  body.textContent = formatMethodologyText(note);
+}
+
+function resolveToplineOptionOrdering(question) {
+  const mode = String(question?.topline_option_ordering || '')
+    .trim()
+    .toLowerCase();
+  return mode === 'configured' ? 'configured' : 'value_desc';
+}
+
+/* ============================================================
+   QUESTION CARDS
+   ============================================================ */
+function renderQuestionCards() {
+  const root = document.getElementById('questionCards');
+  if (!root) return;
+
+  root.innerHTML = '';
+  const questions = toArray(reportData?.questions);
+  const isWithView = activeResponseUniverse === 'with_view';
+
+  questions.forEach((question) => {
+    const questionId = question?.id || null;
+    const nonOpinionIds = getNonOpinionIds(questionId);
+    const card = document.createElement('article');
+    card.className = 'question-card';
+
+    const geographyOptions = getQuestionOptionsForActiveGeography(question);
+    if (geographyOptions.length === 0) {
+      card.innerHTML = `
+        <h3>${question.title || question.id || 'Question'}</h3>
+        <blockquote class="question-blockquote">“${question.prompt || ''}”</blockquote>
+        <div class="xt-empty-state">No topline data available for the selected response geography.</div>
+      `;
+      root.appendChild(card);
+      return;
+    }
+
+    const scopedOptions = isWithView
+      ? geographyOptions.filter((o) => !nonOpinionIds.includes(o.id))
+      : geographyOptions;
+    const toplineOptionOrdering = resolveToplineOptionOrdering(question);
+    const opts = toplineOptionOrdering === 'configured'
+      ? scopedOptions.slice()
+      : scopedOptions.slice().sort((a, b) => {
+        const valueA = resolveUniverseValue(a?.value, a?.values_by_universe);
+        const valueB = resolveUniverseValue(b?.value, b?.values_by_universe);
+        const finiteA = Number.isFinite(valueA);
+        const finiteB = Number.isFinite(valueB);
+        if (finiteA !== finiteB) return finiteA ? -1 : 1;
+        if (finiteA && valueA !== valueB) return valueB - valueA;
+        const labelA = String(a?.label || a?.id || '').toLowerCase();
+        const labelB = String(b?.label || b?.id || '').toLowerCase();
+        return labelA.localeCompare(labelB);
+      });
+    const maxVal = Math.max(
+      1,
+      ...opts.map((o) => resolveUniverseValue(o.value, o.values_by_universe))
+        .filter((v) => Number.isFinite(v)),
+      1
+    );
+
+    const listItems = opts.map((opt) => {
+      const rawValue = resolveUniverseValue(opt.value, opt.values_by_universe);
+      const hasValue = Number.isFinite(rawValue);
+      const value = hasValue ? rawValue : 0;
+      const width = (value / maxVal * 100).toFixed(2);
+      return `
+        <li class="q-opt">
+          <div class="q-opt-left">
+            <span class="q-opt-label">${opt.label}</span>
+            <span class="q-opt-track">
+              <span class="q-opt-fill" style="width:${width}%; background:${opt.color || '#5a7d9a'};"></span>
+            </span>
+          </div>
+          <span class="q-opt-value">${hasValue ? fmtPct(value) : '—'}</span>
+        </li>
+      `;
+    }).join('');
+
+    card.innerHTML = `
+      <h3>${question.title || question.id || 'Question'}</h3>
+      <blockquote class="question-blockquote">“${question.prompt || ''}”</blockquote>
+      <ul class="question-opts">${listItems}</ul>
+    `;
+
+    root.appendChild(card);
+  });
+}
+
+/* ============================================================
+   DEMOGRAPHIC BREAKDOWN EXPLORERS
+   ============================================================ */
+function renderBarsForMetric(container, rows, metric) {
+  const metricId = metric?.id;
+  const metricColor = metric?.color || '#1a6b73';
+  const values = rows.map((row) => resolveMetricUniverseValue(row, metricId));
+  const finiteVals = values.filter((v) => Number.isFinite(v));
+  const maxVal = Math.max(1, ...finiteVals, 1);
+
+  container.innerHTML = '';
+  rows.forEach((row) => {
+    const rawValue = resolveMetricUniverseValue(row, metricId);
+    const hasValue = Number.isFinite(rawValue);
+    const value = hasValue ? rawValue : 0;
+    const pct = (value / maxVal * 100).toFixed(2);
+    const div = document.createElement('div');
+    div.className = 'bar-row';
+    div.innerHTML = `
+      <div class="bar-label">${normalizeDisplayLabel(row.level_label || row.level_id || '')}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${pct}%; background:${metricColor};"></div>
+      </div>
+      <div class="bar-value">${hasValue ? fmtPct(value) : '—'}</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function getDemographicCard(questionId, dimensionId) {
+  const dim = toArray(reportData?.demographics).find((item) => item?.id === dimensionId) || null;
+  if (!dim || !dim.cards || typeof dim.cards !== 'object') return null;
+  return dim.cards[questionId] || null;
+}
+
+function renderDemographicExplorer() {
+  const questionSel = document.getElementById('demographicQuestionSelect');
+  const dimSel = document.getElementById('demographicDimensionSelect');
+  const metricSel = document.getElementById('demographicMetricSelect');
+  const promptEl = document.getElementById('demographicQuestionPrompt');
+  const display = document.getElementById('demographicExplorers');
+  if (!questionSel || !dimSel || !metricSel || !display) return;
+
+  const questions = toArray(reportData?.questions);
+  const dims = toArray(reportData?.demographics);
+  if (questions.length === 0 || dims.length === 0) {
+    display.innerHTML = '<div class="xt-empty-state">No demographic data found.</div>';
+    if (promptEl) promptEl.textContent = '';
+    questionSel.innerHTML = '';
+    dimSel.innerHTML = '';
+    metricSel.innerHTML = '';
+    return;
+  }
+
+  questionSel.innerHTML = '';
+  questions.forEach((question) => {
+    questionSel.appendChild(
+      new Option(
+        normalizeDisplayLabel(question?.title || question?.id || 'Question'),
+        question?.id || ''
+      )
+    );
+  });
+  if (!questions.some((question) => question?.id === activeDemographicQuestionId)) {
+    activeDemographicQuestionId = questions[0]?.id || null;
+  }
+  questionSel.value = activeDemographicQuestionId || '';
+
+  const dimOptions = toArray(reportData?.demographic_controls?.options);
+  const dimChoicePool = dimOptions.length > 0
+    ? dimOptions
+    : dims.map((dim) => ({ id: dim.id, label: dim.label || dim.id }));
+
+  dimSel.innerHTML = '';
+  dimChoicePool.forEach((opt) => {
+    dimSel.appendChild(new Option(normalizeDisplayLabel(opt.label || opt.id), opt.id));
+  });
+  if (!dimChoicePool.some((opt) => opt?.id === activeDemographicDimensionId)) {
+    const defaultDemographic = reportData?.demographic_controls?.default_demographic || dimChoicePool[0]?.id;
+    activeDemographicDimensionId = defaultDemographic || dimChoicePool[0]?.id || null;
+  }
+  dimSel.value = activeDemographicDimensionId || '';
+
+  let card = getDemographicCard(activeDemographicQuestionId, activeDemographicDimensionId);
+  if (!card) {
+    const firstDimWithData = dimChoicePool.find((opt) => getDemographicCard(activeDemographicQuestionId, opt?.id));
+    if (firstDimWithData?.id) {
+      activeDemographicDimensionId = firstDimWithData.id;
+      dimSel.value = activeDemographicDimensionId;
+      card = getDemographicCard(activeDemographicQuestionId, activeDemographicDimensionId);
+    }
+  }
+
+  const questionMeta = getQuestionById(activeDemographicQuestionId);
+  if (promptEl) {
+    const promptText = String(questionMeta?.prompt || '').trim();
+    promptEl.textContent = promptText ? `“${promptText}”` : '';
+  }
+
+  if (!card) {
+    display.innerHTML = '<div class="xt-empty-state">No data for this question and demographic combination.</div>';
+    metricSel.innerHTML = '';
+    return;
+  }
+
+  const geographyRows = getDemographicRowsForActiveGeography(card);
+  if (geographyRows.length === 0) {
+    display.innerHTML = '<div class="xt-empty-state">No demographic data available for the selected response geography.</div>';
+    metricSel.innerHTML = '';
+    return;
+  }
+
+  activeDemographicMetricId = populateMetricOptions(
+    metricSel,
+    card?.metrics,
+    activeDemographicMetricId || card?.default_metric,
+    (metric) => normalizeDisplayLabel(metric.label),
+    activeDemographicQuestionId
+  );
+  const cardMetrics = getCanonicalUniverseScopedMetrics(card?.metrics, activeDemographicQuestionId);
+  const metric = cardMetrics.find((entry) => entry.id === activeDemographicMetricId) || cardMetrics[0];
+  if (!metric) {
+    display.innerHTML = '<div class="xt-empty-state">No metric data available for this response universe.</div>';
+    return;
+  }
+
+  display.innerHTML = '';
+  const sub = document.createElement('p');
+  sub.className = 'dim-card-subtitle';
+  sub.textContent = normalizeDisplayLabel(metric.label);
+  display.appendChild(sub);
+
+  const rowsWrap = document.createElement('div');
+  rowsWrap.className = 'chart-rows';
+  display.appendChild(rowsWrap);
+  renderBarsForMetric(rowsWrap, geographyRows, metric);
+}
+
+function initDemographics() {
+  const questionSel = document.getElementById('demographicQuestionSelect');
+  const dimSel = document.getElementById('demographicDimensionSelect');
+  const metricSel = document.getElementById('demographicMetricSelect');
+  if (!questionSel || !dimSel || !metricSel) return;
+
+  questionSel.addEventListener('change', () => {
+    activeDemographicQuestionId = questionSel.value;
+    activeDemographicMetricId = null;
+    renderDemographicExplorer();
+  });
+  dimSel.addEventListener('change', () => {
+    activeDemographicDimensionId = dimSel.value;
+    activeDemographicMetricId = null;
+    renderDemographicExplorer();
+  });
+  metricSel.addEventListener('change', () => {
+    activeDemographicMetricId = metricSel.value;
+    renderDemographicExplorer();
+  });
+
+  renderDemographicExplorer();
+}
+
+/* ============================================================
+   ARCHETYPES
+   ============================================================ */
+let archetypeQuestions = [];
+let activeArchetypeQuestion = null;
+let activeArchetypeMetric = null;
+
+function buildFallbackArchetypeQuestions() {
+  return toArray(reportData?.questions).map((question) => ({
+    id: question.id,
+    label: question.title || question.id || 'Question',
+    default_metric: toArray(question.options)[0]?.id || null,
+    metrics: toArray(question.options).map((opt) => ({
+      id: opt.id,
+      label: opt.label,
+      color: opt.color || '#1a6b73'
+    })),
+    series: {}
+  }));
+}
+
+function getArchetypeQuestionById(questionId) {
+  return toArray(archetypeQuestions).find((q) => q.id === questionId) || null;
+}
+
+function getArchetypeSortableValue(rawValue) {
+  if (typeof rawValue === 'number') {
+    return Number.isFinite(rawValue) ? rawValue : null;
+  }
+  if (typeof rawValue === 'string') {
+    const trimmed = rawValue.trim();
+    if (!trimmed) return null;
+    const parsed = Number(trimmed);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+}
+
+function renderArchetypeChart(question, metricId) {
+  const root = document.getElementById('archetypeChart');
+  const metricSel = document.getElementById('archetypeMetricSelect');
+  if (!root) return;
+  bindArchetypeTooltipListeners();
+  pinnedArchetypeIcon = null;
+  hideArchetypeTooltip({ force: true });
+  if (!question) {
+    root.innerHTML = '<div class="xt-empty-state">No archetype data available for this question yet.</div>';
+    return;
+  }
+
+  const questionId = question.id || null;
+  const metrics = getCanonicalUniverseScopedMetrics(question.metrics, questionId);
+  const preferredMetricId = resolveCanonicalMetricId(
+    metricId || activeArchetypeMetric || question.default_metric || metrics[0]?.id,
+    questionId
+  );
+  if (metricSel) {
+    activeArchetypeMetric = populateMetricOptions(
+      metricSel,
+      question.metrics,
+      preferredMetricId,
+      (metricOption) => normalizeDisplayLabel(metricOption.label),
+      questionId
+    );
+  } else {
+    activeArchetypeMetric = preferredMetricId;
+  }
+  const metric = metrics.find((m) => m.id === activeArchetypeMetric) || metrics[0];
+  if (!metric) {
+    root.innerHTML = '<div class="xt-empty-state">No archetype data available for this response category yet.</div>';
+    return;
+  }
+
+  const rows = getArchetypeRowsForActiveGeography(question, metric.id);
+  if (rows.length === 0) {
+    root.innerHTML = '<div class="xt-empty-state">No archetype data available for this response category yet.</div>';
+    return;
+  }
+
+  const sortedRows = rows.slice().sort((a, b) => {
+    const valueA = getArchetypeSortableValue(resolveUniverseValue(a?.value, a?.values_by_universe));
+    const valueB = getArchetypeSortableValue(resolveUniverseValue(b?.value, b?.values_by_universe));
+    const hasValueA = valueA !== null;
+    const hasValueB = valueB !== null;
+    if (hasValueA !== hasValueB) return hasValueA ? -1 : 1;
+    if (hasValueA && valueA !== valueB) return valueB - valueA;
+
+    const metaA = getArchetypeMetadata(a);
+    const metaB = getArchetypeMetadata(b);
+    const rankA = Number(a?.rank);
+    const rankB = Number(b?.rank);
+    const resolvedRankA = Number.isFinite(rankA)
+      ? rankA
+      : (Number.isFinite(Number(metaA?.rank)) ? Number(metaA.rank) : Number.POSITIVE_INFINITY);
+    const resolvedRankB = Number.isFinite(rankB)
+      ? rankB
+      : (Number.isFinite(Number(metaB?.rank)) ? Number(metaB.rank) : Number.POSITIVE_INFINITY);
+    if (resolvedRankA !== resolvedRankB) return resolvedRankA - resolvedRankB;
+    const labelA = String(a?.label || metaA?.label || a?.key || '').toLowerCase();
+    const labelB = String(b?.label || metaB?.label || b?.key || '').toLowerCase();
+    return labelA.localeCompare(labelB);
+  });
+
+  const finiteValues = sortedRows
+    .map((row) => resolveUniverseValue(row?.value, row?.values_by_universe))
+    .filter((value) => Number.isFinite(value));
+  const maxVal = Math.max(1, ...finiteValues, 1);
+
+  root.innerHTML = '';
+  sortedRows.forEach((row) => {
+    const archetypeMeta = getArchetypeMetadata(row);
+    const label = String(row?.label ?? archetypeMeta?.label ?? row?.key ?? '');
+    const displayLabel = normalizeDisplayLabel(label);
+    const value = resolveUniverseValue(row?.value, row?.values_by_universe);
+    const hasValue = Number.isFinite(value);
+    const width = hasValue ? (value / maxVal * 100).toFixed(2) : '0';
+
+    const item = document.createElement('div');
+    item.className = 'archetype-row';
+    const labelWrap = document.createElement('div');
+    labelWrap.className = 'archetype-label';
+
+    const labelInner = document.createElement('span');
+    labelInner.className = 'archetype-label-text';
+    labelInner.textContent = displayLabel;
+    labelWrap.appendChild(labelInner);
+
+    const tooltipPayload = buildArchetypeTooltipPayload(archetypeMeta, displayLabel);
+    if (tooltipPayload) {
+      const infoIcon = document.createElement('button');
+      infoIcon.type = 'button';
+      infoIcon.className = 'info-icon';
+      infoIcon.textContent = 'i';
+      infoIcon.setAttribute('aria-label', `Archetype details for ${displayLabel}`);
+      infoIcon.setAttribute('aria-expanded', 'false');
+
+      infoIcon.addEventListener('mouseenter', () => {
+        if (pinnedArchetypeIcon && pinnedArchetypeIcon !== infoIcon) return;
+        showArchetypeTooltip(infoIcon, tooltipPayload);
+      });
+      infoIcon.addEventListener('mouseleave', () => {
+        if (pinnedArchetypeIcon === infoIcon) return;
+        hideArchetypeTooltip();
+      });
+      infoIcon.addEventListener('focus', () => {
+        if (pinnedArchetypeIcon && pinnedArchetypeIcon !== infoIcon) pinnedArchetypeIcon = null;
+        showArchetypeTooltip(infoIcon, tooltipPayload);
+      });
+      infoIcon.addEventListener('blur', () => {
+        if (pinnedArchetypeIcon === infoIcon) return;
+        hideArchetypeTooltip();
+      });
+      infoIcon.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (pinnedArchetypeIcon === infoIcon) {
+          pinnedArchetypeIcon = null;
+          hideArchetypeTooltip({ force: true });
+          return;
+        }
+        pinnedArchetypeIcon = infoIcon;
+        showArchetypeTooltip(infoIcon, tooltipPayload, { pinned: true });
+      });
+
+      labelWrap.appendChild(infoIcon);
+    }
+    item.appendChild(labelWrap);
+    const bars = document.createElement('div');
+    bars.className = 'archetype-bars';
+    bars.innerHTML = `
+      <div class="mini-bar">
+        <span class="mini-tag" style="color:${metric.color || '#1a6b73'}">Value</span>
+        <div class="mini-meter">
+          <div class="mini-fill" style="width:${width}%; background:${metric.color || '#1a6b73'};"></div>
+        </div>
+        <span class="mini-value">${hasValue ? fmtPct(value) : '—'}</span>
+      </div>
+    `;
+    item.appendChild(bars);
+    root.appendChild(item);
+  });
+}
+
+function initArchetypes() {
+  const toggleRoot = document.getElementById('archetypeQuestionToggle');
+  const metricSel = document.getElementById('archetypeMetricSelect');
+  const root = document.getElementById('archetypeChart');
+  if (!toggleRoot || !metricSel || !root) return;
+
+  const sourceQuestions = toArray(reportData?.archetypes?.questions);
+  archetypeQuestions = sourceQuestions.length > 0
+    ? sourceQuestions
+    : buildFallbackArchetypeQuestions();
+
+  if (archetypeQuestions.length === 0) {
+    root.innerHTML = '<div class="xt-empty-state">No archetype data available for this question yet.</div>';
+    return;
+  }
+
+  const defaultQuestionId = reportData?.archetypes?.default_question || archetypeQuestions[0]?.id;
+  toggleRoot.style.display = archetypeQuestions.length > 1 ? '' : 'none';
+
+  const applyQuestion = (questionId, keepMetric = false) => {
+    activeArchetypeQuestion = getArchetypeQuestionById(questionId) || archetypeQuestions[0];
+    if (!activeArchetypeQuestion) return;
+    const preferredMetricId = keepMetric
+      ? activeArchetypeMetric
+      : (activeArchetypeQuestion.default_metric || activeArchetypeMetric);
+    activeArchetypeMetric = preferredMetricId || null;
+
+    Array.from(toggleRoot.querySelectorAll('.seg-btn')).forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.questionId === activeArchetypeQuestion.id);
+    });
+
+    renderArchetypeChart(activeArchetypeQuestion, preferredMetricId);
+  };
+
+  toggleRoot.innerHTML = '';
+  archetypeQuestions.forEach((question) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'seg-btn';
+    btn.dataset.questionId = question.id;
+    btn.textContent = normalizeDisplayLabel(question.label || question.id);
+    btn.addEventListener('click', () => applyQuestion(question.id, false));
+    toggleRoot.appendChild(btn);
+  });
+
+  metricSel.addEventListener('change', () => {
+    activeArchetypeMetric = metricSel.value;
+    renderArchetypeChart(activeArchetypeQuestion, activeArchetypeMetric);
+  });
+
+  applyQuestion(defaultQuestionId, false);
+}
+
+/* ============================================================
+   STATE RANKING WITH TOGGLE
+   ============================================================ */
+let activeStateQuestion = null;
+let activeStateMetric = null;
+
+function getStateQuestionById(questionId) {
+  return toArray(reportData?.state_ranking?.questions).find((q) => q.id === questionId) || null;
+}
+
+function renderStateChart(question, metricId) {
+  const root = document.getElementById('stateChart');
+  const metricSel = document.getElementById('stateMetricSelect');
+  if (!root || !question) return;
+
+  const questionId = question.id || null;
+  const metrics = getCanonicalUniverseScopedMetrics(question.metrics, questionId);
+  const preferredMetricId = resolveCanonicalMetricId(
+    metricId || activeStateMetric || question.default_metric || metrics[0]?.id,
+    questionId
+  );
+  if (metricSel) {
+    activeStateMetric = populateMetricOptions(
+      metricSel,
+      question.metrics,
+      preferredMetricId,
+      (metricOption) => normalizeDisplayLabel(metricOption.label),
+      questionId
+    );
+  } else {
+    activeStateMetric = preferredMetricId;
+  }
+  const metric = metrics.find((m) => m.id === activeStateMetric) || metrics[0];
+  if (!metric) {
+    root.innerHTML = '<div class="xt-empty-state">No state metric available.</div>';
+    return;
+  }
+
+  const rows = toArray(question.series?.[metric.id]);
+  if (rows.length === 0) {
+    root.innerHTML = '<div class="xt-empty-state">No state rows available for this metric.</div>';
+    return;
+  }
+
+  const subhead = document.getElementById('stateSubhead');
+  if (subhead) {
+    subhead.textContent = `All 51 states ranked by: ${normalizeDisplayLabel(metric.label)}`;
+  }
+
+  const rankedRows = rows
+    .map((row) => ({
+      state: row.state || '',
+      value: resolveUniverseValue(row.value, row.values_by_universe)
+    }))
+    .filter((row) => Number.isFinite(row.value) && row.state)
+    .sort((a, b) => {
+      if (b.value !== a.value) return b.value - a.value;
+      return String(a.state).localeCompare(String(b.state));
+    })
+    .map((row, idx, arr) => ({
+      ...row,
+      rank: idx + 1,
+      tier: idx < 10 ? 'Top 10' : (idx >= arr.length - 10 ? 'Bottom 10' : 'Middle')
+    }));
+  if (rankedRows.length === 0) {
+    root.innerHTML = '<div class="xt-empty-state">No state rows available for this metric.</div>';
+    return;
+  }
+  const maxVal = Math.max(1, ...rankedRows.map((d) => d.value));
+  const tierConfig = {
+    'Top 10': { cls: 'top', label: 'Top 10', color: '#c46525' },
+    'Middle': { cls: 'mid', label: 'Middle', color: '#8da3b6' },
+    'Bottom 10': { cls: 'bot', label: 'Bottom 10', color: '#1f5f89' }
+  };
+
+  root.innerHTML = '';
+  let currentTier = null;
+  let groupEl = null;
+
+  rankedRows.forEach((row) => {
+    const tierName = row.tier || 'Middle';
+    if (tierName !== currentTier) {
+      currentTier = tierName;
+      const tc = tierConfig[tierName] || tierConfig.Middle;
+
+      const divider = document.createElement('div');
+      divider.className = 'tier-divider';
+      divider.innerHTML = `
+        <span class="tier-badge ${tc.cls}">${tc.label}</span>
+        <span class="tier-rule"></span>
+      `;
+      root.appendChild(divider);
+
+      groupEl = document.createElement('div');
+      groupEl.className = 'state-rows-group';
+      root.appendChild(groupEl);
+    }
+
+    const tc = tierConfig[tierName] || tierConfig.Middle;
+    const value = Number(row.value || 0);
+    const pct = (value / maxVal * 100).toFixed(2);
+    const line = document.createElement('div');
+    line.className = 'state-row';
+    line.innerHTML = `
+      <div class="state-rank">${row.rank ?? ''}</div>
+      <div class="state-name">${row.state || ''}</div>
+      <div class="state-track">
+        <div class="state-fill" style="width:${pct}%; background:${tc.color};"></div>
+      </div>
+      <div class="state-value">${fmtPct(value)}</div>
+    `;
+    groupEl.appendChild(line);
+  });
+}
+
+function initStateRanking() {
+  const toggleRoot = document.getElementById('stateQuestionToggle');
+  const metricSel = document.getElementById('stateMetricSelect');
+  if (!toggleRoot || !metricSel) return;
+
+  const stateCfg = reportData?.state_ranking || {};
+  const questions = toArray(stateCfg.questions);
+  if (questions.length === 0) {
+    const chart = document.getElementById('stateChart');
+    if (chart) chart.innerHTML = '<div class="xt-empty-state">No state ranking data found.</div>';
+    return;
+  }
+
+  const defaultQuestionId = stateCfg.default_question || questions[0].id;
+
+  const applyQuestion = (questionId, keepMetric = false) => {
+    activeStateQuestion = getStateQuestionById(questionId) || questions[0];
+    if (!activeStateQuestion) return;
+    const preferredMetricId = keepMetric
+      ? activeStateMetric
+      : (activeStateQuestion.default_metric || activeStateMetric);
+    activeStateMetric = preferredMetricId || null;
+
+    Array.from(toggleRoot.querySelectorAll('.seg-btn')).forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.questionId === activeStateQuestion.id);
+    });
+
+    renderStateChart(activeStateQuestion, preferredMetricId);
+  };
+
+  toggleRoot.innerHTML = '';
+  questions.forEach((q) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'seg-btn';
+    btn.dataset.questionId = q.id;
+    btn.textContent = normalizeDisplayLabel(q.label || q.id);
+    btn.addEventListener('click', () => applyQuestion(q.id, false));
+    toggleRoot.appendChild(btn);
+  });
+
+  metricSel.addEventListener('change', () => {
+    activeStateMetric = metricSel.value;
+    renderStateChart(activeStateQuestion, activeStateMetric);
+  });
+
+  applyQuestion(defaultQuestionId, false);
+}
+
+/* ============================================================
+   CROSSTABS EXPLORER (PER QUESTION)
+   ============================================================ */
+function buildCrosstabIndex(questionPayload) {
+  const varMap = {};
+  const pairSet = new Set();
+  const index = {};
+
+  toArray(questionPayload.variables).forEach((v) => {
+    varMap[v.id] = v;
+  });
+
+  toArray(questionPayload.pairs).forEach((p) => {
+    pairSet.add(p.pair_id);
+    toArray(p.available_metrics).forEach((metricId) => {
+      const key = `${p.pair_id}::${metricId}`;
+      index[key] = toArray(p.cells).filter((c) => c.metric === metricId);
+    });
+  });
+
+  return { varMap, pairSet, index };
+}
+
+function getCanonicalPairId(varA, varB) {
+  return [varA, varB].sort().join('|');
+}
+
+function renderCrosstab(displayEl, idx, rowVar, colVar, metric) {
+  if (!displayEl) return;
+
+  if (rowVar === colVar) {
+    displayEl.innerHTML = '<div class="xt-empty-state">Please select two different variables.</div>';
+    return;
+  }
+
+  const pairId = getCanonicalPairId(rowVar, colVar);
+  if (!idx.pairSet.has(pairId)) {
+    displayEl.innerHTML = '<div class="xt-empty-state">This variable combination is not available in the data.</div>';
+    return;
+  }
+
+  const key = `${pairId}::${metric}`;
+  const cells = idx.index[key];
+  if (!cells || cells.length === 0) {
+    displayEl.innerHTML = '<div class="xt-empty-state">No data available for this metric and variable combination.</div>';
+    return;
+  }
+
+  const rowMeta = idx.varMap[rowVar];
+  const colMeta = idx.varMap[colVar];
+  if (!rowMeta || !colMeta) {
+    displayEl.innerHTML = '<div class="xt-empty-state">Variable metadata missing.</div>';
+    return;
+  }
+
+  const sortedVars = [rowVar, colVar].sort();
+  const transposed = rowVar !== sortedVars[0];
+
+  const rowLevels = toArray(rowMeta.levels).slice().sort((a, b) => a.order - b.order);
+  const colLevels = toArray(colMeta.levels).slice().sort((a, b) => a.order - b.order);
+
+  const valMap = {};
+  let globalMin = Infinity;
+  let globalMax = -Infinity;
+
+  cells.forEach((cell) => {
+    const rKey = transposed ? cell.b_level : cell.a_level;
+    const cKey = transposed ? cell.a_level : cell.b_level;
+    const cellValue = resolveUniverseValue(cell.value, cell.values_by_universe);
+    if (!valMap[rKey]) valMap[rKey] = {};
+    if (Number.isFinite(cellValue)) {
+      valMap[rKey][cKey] = cellValue;
+      globalMin = Math.min(globalMin, cellValue);
+      globalMax = Math.max(globalMax, cellValue);
+    } else {
+      valMap[rKey][cKey] = null;
+    }
+  });
+
+  const hasFiniteValues = Number.isFinite(globalMin) && Number.isFinite(globalMax);
+  const range = hasFiniteValues ? Math.max(1, globalMax - globalMin) : 1;
+
+  let html = '<div class="xt-table-wrap"><table class="xt-table"><thead><tr>';
+  html += `<th>${normalizeDisplayLabel(rowMeta.label)} \\ ${normalizeDisplayLabel(colMeta.label)}</th>`;
+  colLevels.forEach((cl) => {
+    html += `<th>${normalizeDisplayLabel(cl.label)}</th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  rowLevels.forEach((rl) => {
+    html += '<tr>';
+    html += `<td>${normalizeDisplayLabel(rl.label)}</td>`;
+    colLevels.forEach((cl) => {
+      const val = valMap[rl.id]?.[cl.id];
+      if (!Number.isFinite(val)) {
+        html += '<td class="xt-cell">—</td>';
+      } else {
+        if (hasFiniteValues) {
+          const t = (val - globalMin) / range;
+          html += `<td class="xt-cell" style="background:${heatColor(t)}">${fmtCrosstabPct(val)}</td>`;
+        } else {
+          html += `<td class="xt-cell">${fmtCrosstabPct(val)}</td>`;
+        }
+      }
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  displayEl.innerHTML = html;
+}
+
+function getCrosstabQuestionById(questionId) {
+  return getCrosstabQuestionsForActiveGeography()
+    .find((question) => question?.id === questionId) || null;
+}
+
+function crosstabsFailureMessage() {
+  const errType = crosstabsLoadError?.type || 'unknown';
+  const errScope = crosstabsLoadError?.scope || 'manifest';
+  const manifestPath = getConfiguredCrosstabsManifestPath();
+  if (errType === 'file-protocol') {
+    return '<strong>Crosstabs explorer requires HTTP.</strong><br>'
+      + 'This page was opened via <code>file://</code>, which blocks JSON loading.<br>'
+      + 'Serve over HTTP: <code>python3 -m http.server 8000</code><br>'
+      + 'Then open <code>http://localhost:8000/igaming/igaming_support/standalone_website/</code>.';
+  }
+  if (errType === '404') {
+    if (errScope === 'shard') {
+      const shardPath = String(crosstabsLoadError?.shard_path || '').trim();
+      const questionId = String(crosstabsLoadError?.question_id || '').trim();
+      const typeId = String(crosstabsLoadError?.geography_type_id || '').trim();
+      const unitId = String(crosstabsLoadError?.geography_unit_id || '').trim();
+      const shardDetails = shardPath
+        ? `Missing shard path: <code>${shardPath}</code><br>`
+        : '';
+      const geoDetails = (questionId && typeId && unitId)
+        ? `Question/geography: <code>${questionId}</code> @ <code>${typeId}/${unitId}</code><br>`
+        : '';
+      return '<strong>Crosstabs shard file not found.</strong><br>'
+        + shardDetails
+        + geoDetails
+        + 'Regenerate with <code>Rscript --vanilla igaming/igaming_support/R/build_crosstabs_data.R --template=igaming/igaming_support/site_config.json</code>.';
+    }
+    return '<strong>Crosstabs manifest file not found.</strong><br>'
+      + 'Expected: <code>' + manifestPath + '</code><br>'
+      + 'Generate it with <code>Rscript --vanilla igaming/igaming_support/R/build_crosstabs_data.R --template=igaming/igaming_support/site_config.json</code>.';
+  }
+  if (errType === 'parse') {
+    return '<strong>Crosstabs manifest or shard JSON failed to parse.</strong><br>'
+      + 'Regenerate with <code>Rscript --vanilla igaming/igaming_support/R/build_crosstabs_data.R --template=igaming/igaming_support/site_config.json</code>.';
+  }
+  return '<strong>Crosstabs data could not be loaded.</strong><br>'
+    + 'Check <code>' + manifestPath + '</code>, shard files, and browser console logs.';
+}
+
+function initCrosstabs() {
+  const questionSel = document.getElementById('crosstabQuestionSelect');
+  const rowSel = document.getElementById('crosstabRowVarSelect');
+  const colSel = document.getElementById('crosstabColVarSelect');
+  const metricSel = document.getElementById('crosstabMetricSelect');
+  const swapBtn = document.getElementById('crosstabSwapBtn');
+  const display = document.getElementById('crosstabExplorers');
+  if (!questionSel || !rowSel || !colSel || !metricSel || !swapBtn || !display) return;
+
+  questionSel.addEventListener('change', () => {
+    activeCrosstabQuestionId = questionSel.value;
+    activeCrosstabRowVar = null;
+    activeCrosstabColVar = null;
+    activeCrosstabMetricId = null;
+    renderCrosstabExplorer();
+  });
+  rowSel.addEventListener('change', () => {
+    activeCrosstabRowVar = rowSel.value;
+    if (activeCrosstabRowVar === activeCrosstabColVar) {
+      const allOptions = Array.from(colSel.options).map((option) => option.value);
+      activeCrosstabColVar = allOptions.find((value) => value !== activeCrosstabRowVar) || '';
+      colSel.value = activeCrosstabColVar;
+    }
+    renderCrosstabExplorer();
+  });
+  colSel.addEventListener('change', () => {
+    activeCrosstabColVar = colSel.value;
+    if (activeCrosstabColVar === activeCrosstabRowVar) {
+      const allOptions = Array.from(rowSel.options).map((option) => option.value);
+      activeCrosstabRowVar = allOptions.find((value) => value !== activeCrosstabColVar) || '';
+      rowSel.value = activeCrosstabRowVar;
+    }
+    renderCrosstabExplorer();
+  });
+  metricSel.addEventListener('change', () => {
+    activeCrosstabMetricId = metricSel.value;
+    renderCrosstabExplorer();
+  });
+  swapBtn.addEventListener('click', () => {
+    const nextRow = activeCrosstabColVar;
+    const nextCol = activeCrosstabRowVar;
+    activeCrosstabRowVar = nextRow;
+    activeCrosstabColVar = nextCol;
+    rowSel.value = activeCrosstabRowVar || '';
+    colSel.value = activeCrosstabColVar || '';
+    renderCrosstabExplorer();
+  });
+
+  renderCrosstabExplorer();
+}
+
+async function renderCrosstabExplorer() {
+  const renderToken = ++crosstabRenderToken;
+  const questionSel = document.getElementById('crosstabQuestionSelect');
+  const rowSel = document.getElementById('crosstabRowVarSelect');
+  const colSel = document.getElementById('crosstabColVarSelect');
+  const metricSel = document.getElementById('crosstabMetricSelect');
+  const promptEl = document.getElementById('crosstabQuestionPrompt');
+  const display = document.getElementById('crosstabExplorers');
+  if (!questionSel || !rowSel || !colSel || !metricSel || !display) return;
+
+  if (!crosstabsManifest || typeof crosstabsManifest !== 'object') {
+    const msg = crosstabsFailureMessage();
+    display.innerHTML = `<div class="xt-empty-state">${msg}</div>`;
+    if (promptEl) promptEl.textContent = '';
+    questionSel.innerHTML = '';
+    rowSel.innerHTML = '';
+    colSel.innerHTML = '';
+    metricSel.innerHTML = '';
+    return;
+  }
+
+  const questions = getCrosstabQuestionsForActiveGeography();
+  if (questions.length === 0) {
+    display.innerHTML = '<div class="xt-empty-state">No crosstabs data available for the selected response geography.</div>';
+    if (promptEl) promptEl.textContent = '';
+    questionSel.innerHTML = '';
+    rowSel.innerHTML = '';
+    colSel.innerHTML = '';
+    metricSel.innerHTML = '';
+    return;
+  }
+
+  questionSel.innerHTML = '';
+  questions.forEach((questionPayload, idx) => {
+    const questionMeta = getQuestionById(questionPayload?.id) || null;
+    const label = normalizeDisplayLabel(
+      questionPayload?.label || questionMeta?.title || questionPayload?.id || `Question ${idx + 1}`
+    );
+    questionSel.appendChild(new Option(label, questionPayload?.id || ''));
+  });
+
+  if (!questions.some((questionPayload) => questionPayload?.id === activeCrosstabQuestionId)) {
+    activeCrosstabQuestionId = questions[0]?.id || null;
+  }
+  questionSel.value = activeCrosstabQuestionId || '';
+
+  const questionSummary = getCrosstabQuestionById(activeCrosstabQuestionId) || questions[0];
+  if (!questionSummary) {
+    display.innerHTML = '<div class="xt-empty-state">No crosstabs question metadata found for this question.</div>';
+    return;
+  }
+  activeCrosstabQuestionId = questionSummary.id;
+  questionSel.value = activeCrosstabQuestionId;
+
+  const questionMeta = getQuestionById(activeCrosstabQuestionId);
+  if (promptEl) {
+    const promptText = String(questionMeta?.prompt || '').trim();
+    promptEl.textContent = promptText ? `“${promptText}”` : '';
+  }
+
+  const shardPath = getCrosstabShardPath(
+    activeCrosstabQuestionId,
+    activeGeographyTypeId,
+    activeGeographyUnitId
+  );
+  if (!shardPath) {
+    display.innerHTML = '<div class="xt-empty-state">No crosstabs shard path is available for this question and geography.</div>';
+    rowSel.innerHTML = '';
+    colSel.innerHTML = '';
+    metricSel.innerHTML = '';
+    return;
+  }
+
+  display.innerHTML = '<div class="xt-empty-state">Loading crosstabs…</div>';
+  let questionPayload = null;
+  try {
+    questionPayload = await loadCrosstabQuestionShard(
+      activeCrosstabQuestionId,
+      activeGeographyTypeId,
+      activeGeographyUnitId
+    );
+    crosstabsLoadError = null;
+  } catch (err) {
+    if (renderToken !== crosstabRenderToken) return;
+    crosstabsLoadError = {
+      error: err,
+      type: classifyLoadError(err),
+      scope: 'shard',
+      shard_path: shardPath,
+      question_id: activeCrosstabQuestionId,
+      geography_type_id: activeGeographyTypeId,
+      geography_unit_id: activeGeographyUnitId
+    };
+    const msg = crosstabsFailureMessage();
+    display.innerHTML = `<div class="xt-empty-state">${msg}</div>`;
+    rowSel.innerHTML = '';
+    colSel.innerHTML = '';
+    metricSel.innerHTML = '';
+    return;
+  }
+  if (renderToken !== crosstabRenderToken) return;
+
+  const idx = buildCrosstabIndex(questionPayload);
+  const varIds = Object.keys(idx.varMap);
+  if (varIds.length < 2) {
+    display.innerHTML = '<div class="xt-empty-state">Not enough variables for crosstab rendering.</div>';
+    rowSel.innerHTML = '';
+    colSel.innerHTML = '';
+    metricSel.innerHTML = '';
+    return;
+  }
+
+  rowSel.innerHTML = '';
+  colSel.innerHTML = '';
+  varIds.forEach((vid) => {
+    const variable = idx.varMap[vid];
+    rowSel.appendChild(new Option(normalizeDisplayLabel(variable.label), variable.id));
+    colSel.appendChild(new Option(normalizeDisplayLabel(variable.label), variable.id));
+  });
+
+  const defaults = questionPayload.defaults || {};
+  const defaultRow = defaults.row_var || varIds[0];
+  let rowVar = activeCrosstabRowVar;
+  if (!varIds.includes(rowVar)) {
+    rowVar = varIds.includes(defaultRow) ? defaultRow : varIds[0];
+  }
+  let colVar = activeCrosstabColVar;
+  if (!varIds.includes(colVar)) {
+    const defaultCol = defaults.col_var || varIds.find((value) => value !== rowVar) || varIds[0];
+    colVar = varIds.includes(defaultCol) ? defaultCol : varIds.find((value) => value !== rowVar) || varIds[0];
+  }
+  if (rowVar === colVar) {
+    colVar = varIds.find((value) => value !== rowVar) || varIds[0];
+  }
+  activeCrosstabRowVar = rowVar;
+  activeCrosstabColVar = colVar;
+  rowSel.value = activeCrosstabRowVar;
+  colSel.value = activeCrosstabColVar;
+
+  activeCrosstabMetricId = populateMetricOptions(
+    metricSel,
+    questionPayload.metrics,
+    activeCrosstabMetricId || defaults.metric || questionPayload.metrics?.[0]?.id,
+    (metricOption) => normalizeDisplayLabel(metricOption.label),
+    questionPayload?.id || null
+  );
+  if (!activeCrosstabMetricId) {
+    display.innerHTML = '<div class="xt-empty-state">No crosstab metrics are available for the active response universe.</div>';
+    return;
+  }
+
+  renderCrosstab(display, idx, activeCrosstabRowVar, activeCrosstabColVar, activeCrosstabMetricId);
+}
+
+function heatColor(t) {
+  if (t <= 0.5) {
+    const s = t / 0.5;
+    const a = 0.18 * (1 - s);
+    return `rgba(31, 95, 137, ${a.toFixed(3)})`;
+  }
+  const s = (t - 0.5) / 0.5;
+  const a = 0.22 * s;
+  return `rgba(196, 101, 37, ${a.toFixed(3)})`;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.add('visible'));
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  els.forEach((el) => obs.observe(el));
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+async function init() {
+  initTheme();
+  await loadData();
+  updateResponseUniverseTheme();
+  initResponseUniverseToggle();
+  initResponseGeographyControl();
+  fillMeta();
+  renderSiteNavigation();
+  renderTakeaways();
+  renderMethodology();
+  renderQuestionCards();
+  renderBehaviorAwareness();
+  renderBeliefLandscape();
+  renderArgumentTradeoffs();
+  renderPriorities();
+  renderPersuadabilityMessengers();
+  initBehaviorAwarenessControls();
+  initBeliefLandscapeControls();
+  initDemographics();
+  initCrosstabs();
+  initArchetypes();
+  applyComponentOrder();
+  renderFeedbackCallout();
+  if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
+    window.VDH_PNG_EXPORT.init({
+      siteSlug: 'igaming_attitudes',
+      getResponseUniverse: function getResponseUniverse() {
+        return typeof activeResponseUniverse === 'string' ? activeResponseUniverse : null;
+      }
+    });
+  }
+  initReveal();
+}
+
+document.readyState === 'loading'
+  ? document.addEventListener('DOMContentLoaded', init)
+  : init();
+    </script>
+
+  </body>
+</html>

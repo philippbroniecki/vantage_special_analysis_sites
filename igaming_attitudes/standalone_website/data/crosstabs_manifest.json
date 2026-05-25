@@ -1,0 +1,1040 @@
+{
+  "meta": {
+    "source_files": {
+      "q8_gambling_participation": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_casino": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_riverboat_casino": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_state_lottery": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_online_casino": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_mobile_sports_betting": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_slot_machines_at_racetracks": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_video_poker_terminals": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_fantasy_sports": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q9_gambling_types_other": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q10_offshore_awareness": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q12_promise_rank1": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17a": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17c": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17f": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17g": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17i": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17j": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17k": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17l": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q17m": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q18a_corporate_unfair": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q18b_addiction_protection": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q18c_freedom_protection": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q18d_voter_say": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q20_revenue_priority": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q21_intensity": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+      "q22_trusted_messengers": "xgboost_2026-05-22_IGaming_2026_05_15.parquet"
+    },
+    "codebook_file": "codebook.json",
+    "generated_at_utc": "2026-05-25 13:30:56 UTC",
+    "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "with_view",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove Don't know / Neither responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "q8_gambling_participation",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_casino",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_riverboat_casino",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_state_lottery",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_online_casino",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_mobile_sports_betting",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_slot_machines_at_racetracks",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_video_poker_terminals",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_fantasy_sports",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q9_gambling_types_other",
+        "opinion_ids": [
+          "yes",
+          "no"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q10_offshore_awareness",
+        "opinion_ids": [
+          "yes_aware",
+          "no_not_aware"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q12_promise_rank1",
+        "opinion_ids": [
+          "income_tax",
+          "property_taxes",
+          "illegal_offshore_gambling_law_enforcement",
+          "education_savings_accounts",
+          "roads_bridges",
+          "power_infrastructure"
+        ],
+        "non_opinion_ids": [],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17a",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17c",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17f",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17g",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17i",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17j",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17k",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17l",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q17m",
+        "opinion_ids": [
+          "strongly_agree",
+          "somewhat_agree",
+          "somewhat_disagree",
+          "strongly_disagree"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18a_corporate_unfair",
+        "opinion_ids": [
+          "tribes_unfair_open_market",
+          "tribal_local_revenue"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18b_addiction_protection",
+        "opinion_ids": [
+          "addiction_family_risk",
+          "regulation_safeguards"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18c_freedom_protection",
+        "opinion_ids": [
+          "adult_freedom",
+          "state_protection"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q18d_voter_say",
+        "opinion_ids": [
+          "voter_direct_say",
+          "limited_tribal_framework"
+        ],
+        "non_opinion_ids": [
+          "neither_dk"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q20_revenue_priority",
+        "opinion_ids": [
+          "eliminate_income_tax",
+          "lower_property_taxes",
+          "power_infrastructure",
+          "education_savings",
+          "roads_bridges",
+          "law_enforcement",
+          "oppose_always"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q21_intensity",
+        "opinion_ids": [
+          "very_firm",
+          "fairly_firm",
+          "open_persuasion",
+          "no_strong_view"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      },
+      {
+        "question_id": "q22_trusted_messengers",
+        "opinion_ids": [
+          "local_law_enforcement",
+          "faith_leaders",
+          "louisiana_tribes",
+          "business_owners",
+          "economists_universities",
+          "state_legislators",
+          "none_of_these"
+        ],
+        "non_opinion_ids": [
+          "dont_know"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "cultural_region": "acadiana_lafayette"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Louisiana",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "acadiana_lafayette",
+        "units": [
+          {
+            "id": "acadiana_lafayette",
+            "label": "Acadiana Lafayette"
+          },
+          {
+            "id": "arklamiss_delta",
+            "label": "Arklamiss Delta"
+          },
+          {
+            "id": "arklatex",
+            "label": "Arklatex"
+          },
+          {
+            "id": "bayou_country",
+            "label": "Bayou Country"
+          },
+          {
+            "id": "central_louisiana",
+            "label": "Central Louisiana"
+          },
+          {
+            "id": "florida_parishes",
+            "label": "Florida Parishes"
+          },
+          {
+            "id": "greater_new_orleans",
+            "label": "Greater New Orleans"
+          },
+          {
+            "id": "southwest_louisiana",
+            "label": "Southwest Louisiana"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q8_gambling_participation",
+      "label": "Past-Year Gambling Participation",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_casino",
+      "label": "Gambling Type: Casino (In-Person)",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_riverboat_casino",
+      "label": "Gambling Type: Riverboat Casino",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_state_lottery",
+      "label": "Gambling Type: State Lottery",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_online_casino",
+      "label": "Gambling Type: Online Casino",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_mobile_sports_betting",
+      "label": "Gambling Type: Mobile Sports Betting",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_slot_machines_at_racetracks",
+      "label": "Gambling Type: Slot Machines at Racetracks",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_video_poker_terminals",
+      "label": "Gambling Type: Video Poker Terminals",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_fantasy_sports",
+      "label": "Gambling Type: Fantasy Sports",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q9_gambling_types_other",
+      "label": "Gambling Type: Other",
+      "default_metric": "yes"
+    },
+    {
+      "id": "q10_offshore_awareness",
+      "label": "Awareness of Offshore Online Casino Gambling",
+      "default_metric": "yes_aware"
+    },
+    {
+      "id": "q12_promise_rank1",
+      "label": "Top Priority: Landry's Record",
+      "default_metric": "roads_bridges"
+    },
+    {
+      "id": "q17a",
+      "label": "Belief: Gambling Benefits Louisiana",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17c",
+      "label": "Belief: Offshore Already Happening",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17f",
+      "label": "Belief: Money Leaves the State",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17g",
+      "label": "Belief: Parish Opt-Out",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17i",
+      "label": "Belief: Tribes-Only Is Unfair",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17j",
+      "label": "Belief: Tribal Gaming Keeps Revenue in Louisiana",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17k",
+      "label": "Belief: Apps Designed to Be Addictive",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17l",
+      "label": "Belief: Adult Freedom",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q17m",
+      "label": "Belief: State Protects Families",
+      "default_metric": "strongly_agree"
+    },
+    {
+      "id": "q18a_corporate_unfair",
+      "label": "Argument Matchup: Corporate Fairness vs. Tribal Revenue",
+      "default_metric": "tribal_local_revenue"
+    },
+    {
+      "id": "q18b_addiction_protection",
+      "label": "Argument Matchup: Addiction Risk vs. Consumer Safeguards",
+      "default_metric": "regulation_safeguards"
+    },
+    {
+      "id": "q18c_freedom_protection",
+      "label": "Argument Matchup: Adult Freedom vs. State Protection",
+      "default_metric": "adult_freedom"
+    },
+    {
+      "id": "q18d_voter_say",
+      "label": "Argument Matchup: Voter Say vs. Regulated Tribal Framework",
+      "default_metric": "limited_tribal_framework"
+    },
+    {
+      "id": "q20_revenue_priority",
+      "label": "Preferred Use of iGaming Revenue",
+      "default_metric": "roads_bridges"
+    },
+    {
+      "id": "q21_intensity",
+      "label": "View Intensity / Persuadability",
+      "default_metric": "very_firm"
+    },
+    {
+      "id": "q22_trusted_messengers",
+      "label": "Trusted Messengers on iGaming",
+      "default_metric": "local_law_enforcement"
+    }
+  ],
+  "shards_by_question": {
+    "q8_gambling_participation": {
+      "state": {
+        "state wide": "crosstabs/q8_gambling_participation/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q8_gambling_participation/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q8_gambling_participation/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q8_gambling_participation/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q8_gambling_participation/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q8_gambling_participation/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q8_gambling_participation/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q8_gambling_participation/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q8_gambling_participation/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_casino": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_casino/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_casino/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_casino/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_casino/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_casino/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_casino/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_casino/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_casino/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_casino/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_riverboat_casino": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_riverboat_casino/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_riverboat_casino/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_state_lottery": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_state_lottery/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_state_lottery/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_state_lottery/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_state_lottery/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_state_lottery/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_state_lottery/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_state_lottery/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_state_lottery/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_state_lottery/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_online_casino": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_online_casino/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_online_casino/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_online_casino/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_online_casino/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_online_casino/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_online_casino/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_online_casino/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_online_casino/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_online_casino/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_mobile_sports_betting": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_mobile_sports_betting/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_mobile_sports_betting/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_slot_machines_at_racetracks": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_slot_machines_at_racetracks/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_video_poker_terminals": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_video_poker_terminals/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_video_poker_terminals/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_fantasy_sports": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_fantasy_sports/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_fantasy_sports/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q9_gambling_types_other": {
+      "state": {
+        "state wide": "crosstabs/q9_gambling_types_other/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q9_gambling_types_other/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q9_gambling_types_other/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q9_gambling_types_other/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q9_gambling_types_other/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q9_gambling_types_other/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q9_gambling_types_other/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q9_gambling_types_other/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q9_gambling_types_other/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q10_offshore_awareness": {
+      "state": {
+        "state wide": "crosstabs/q10_offshore_awareness/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q10_offshore_awareness/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q10_offshore_awareness/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q10_offshore_awareness/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q10_offshore_awareness/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q10_offshore_awareness/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q10_offshore_awareness/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q10_offshore_awareness/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q10_offshore_awareness/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q12_promise_rank1": {
+      "state": {
+        "state wide": "crosstabs/q12_promise_rank1/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q12_promise_rank1/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q12_promise_rank1/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q12_promise_rank1/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q12_promise_rank1/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q12_promise_rank1/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q12_promise_rank1/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q12_promise_rank1/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q12_promise_rank1/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17a": {
+      "state": {
+        "state wide": "crosstabs/q17a/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17a/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17a/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17a/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17a/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17a/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17a/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17a/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17a/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17c": {
+      "state": {
+        "state wide": "crosstabs/q17c/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17c/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17c/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17c/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17c/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17c/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17c/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17c/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17c/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17f": {
+      "state": {
+        "state wide": "crosstabs/q17f/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17f/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17f/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17f/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17f/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17f/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17f/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17f/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17f/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17g": {
+      "state": {
+        "state wide": "crosstabs/q17g/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17g/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17g/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17g/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17g/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17g/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17g/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17g/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17g/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17i": {
+      "state": {
+        "state wide": "crosstabs/q17i/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17i/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17i/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17i/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17i/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17i/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17i/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17i/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17i/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17j": {
+      "state": {
+        "state wide": "crosstabs/q17j/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17j/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17j/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17j/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17j/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17j/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17j/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17j/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17j/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17k": {
+      "state": {
+        "state wide": "crosstabs/q17k/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17k/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17k/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17k/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17k/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17k/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17k/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17k/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17k/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17l": {
+      "state": {
+        "state wide": "crosstabs/q17l/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17l/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17l/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17l/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17l/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17l/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17l/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17l/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17l/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q17m": {
+      "state": {
+        "state wide": "crosstabs/q17m/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q17m/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q17m/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q17m/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q17m/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q17m/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q17m/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q17m/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q17m/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q18a_corporate_unfair": {
+      "state": {
+        "state wide": "crosstabs/q18a_corporate_unfair/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q18a_corporate_unfair/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q18a_corporate_unfair/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q18a_corporate_unfair/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q18a_corporate_unfair/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q18a_corporate_unfair/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q18a_corporate_unfair/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q18a_corporate_unfair/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q18a_corporate_unfair/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q18b_addiction_protection": {
+      "state": {
+        "state wide": "crosstabs/q18b_addiction_protection/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q18b_addiction_protection/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q18b_addiction_protection/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q18b_addiction_protection/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q18b_addiction_protection/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q18b_addiction_protection/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q18b_addiction_protection/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q18b_addiction_protection/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q18b_addiction_protection/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q18c_freedom_protection": {
+      "state": {
+        "state wide": "crosstabs/q18c_freedom_protection/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q18c_freedom_protection/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q18c_freedom_protection/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q18c_freedom_protection/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q18c_freedom_protection/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q18c_freedom_protection/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q18c_freedom_protection/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q18c_freedom_protection/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q18c_freedom_protection/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q18d_voter_say": {
+      "state": {
+        "state wide": "crosstabs/q18d_voter_say/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q18d_voter_say/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q18d_voter_say/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q18d_voter_say/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q18d_voter_say/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q18d_voter_say/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q18d_voter_say/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q18d_voter_say/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q18d_voter_say/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q20_revenue_priority": {
+      "state": {
+        "state wide": "crosstabs/q20_revenue_priority/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q20_revenue_priority/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q20_revenue_priority/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q20_revenue_priority/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q20_revenue_priority/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q20_revenue_priority/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q20_revenue_priority/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q20_revenue_priority/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q20_revenue_priority/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q21_intensity": {
+      "state": {
+        "state wide": "crosstabs/q21_intensity/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q21_intensity/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q21_intensity/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q21_intensity/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q21_intensity/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q21_intensity/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q21_intensity/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q21_intensity/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q21_intensity/cultural_region/southwest_louisiana.json"
+      }
+    },
+    "q22_trusted_messengers": {
+      "state": {
+        "state wide": "crosstabs/q22_trusted_messengers/state/state_wide.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/q22_trusted_messengers/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/q22_trusted_messengers/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/q22_trusted_messengers/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/q22_trusted_messengers/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/q22_trusted_messengers/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/q22_trusted_messengers/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/q22_trusted_messengers/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/q22_trusted_messengers/cultural_region/southwest_louisiana.json"
+      }
+    }
+  }
+}

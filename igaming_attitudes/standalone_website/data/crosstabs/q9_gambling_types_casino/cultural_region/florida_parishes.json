@@ -1,0 +1,6866 @@
+{
+  "meta": {
+    "question_id": "q9_gambling_types_casino",
+    "geography_type_id": "cultural_region",
+    "geography_unit_id": "florida_parishes",
+    "source_file": "xgboost_2026-05-22_IGaming_2026_05_15.parquet",
+    "generated_at_utc": "2026-05-25 13:30:56 UTC",
+    "fallback_origin": null
+  },
+  "question": {
+    "id": "q9_gambling_types_casino",
+    "label": "Gambling Type: Casino (In-Person)",
+    "variables": [
+      {
+        "id": "party",
+        "label": "Party",
+        "levels": [
+          {
+            "id": "R",
+            "label": "Republicans",
+            "order": 2
+          },
+          {
+            "id": "O",
+            "label": "Independents/Other",
+            "order": 3
+          },
+          {
+            "id": "D",
+            "label": "Democrats",
+            "order": 4
+          }
+        ]
+      },
+      {
+        "id": "gender",
+        "label": "Gender",
+        "levels": [
+          {
+            "id": "Male",
+            "label": "Male",
+            "order": 2
+          },
+          {
+            "id": "Female",
+            "label": "Female",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "race",
+        "label": "Race",
+        "levels": [
+          {
+            "id": "White",
+            "label": "White",
+            "order": 2
+          },
+          {
+            "id": "Black",
+            "label": "Black",
+            "order": 3
+          },
+          {
+            "id": "Hispanic",
+            "label": "Hispanic",
+            "order": 4
+          },
+          {
+            "id": "Other",
+            "label": "Other",
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "education",
+        "label": "Education",
+        "levels": [
+          {
+            "id": "No college",
+            "label": "No college",
+            "order": 2
+          },
+          {
+            "id": "College completed",
+            "label": "College completed",
+            "order": 3
+          },
+          {
+            "id": "Graduate/professional degree",
+            "label": "Graduate / professional",
+            "order": 4
+          }
+        ]
+      },
+      {
+        "id": "rus_code",
+        "label": "Rural / Suburban / Urban",
+        "levels": [
+          {
+            "id": "Rural",
+            "label": "Rural",
+            "order": 2
+          },
+          {
+            "id": "Suburban",
+            "label": "Suburban",
+            "order": 3
+          },
+          {
+            "id": "Urban",
+            "label": "Urban",
+            "order": 4
+          }
+        ]
+      },
+      {
+        "id": "income",
+        "label": "Income",
+        "levels": [
+          {
+            "id": "Poor (less than 35k)",
+            "label": "< $35k",
+            "order": 2
+          },
+          {
+            "id": "Below median (35k to less than 75k)",
+            "label": "$35k-$75k",
+            "order": 3
+          },
+          {
+            "id": "Above median (75k to less than 125k)",
+            "label": "$75k-$125k",
+            "order": 4
+          },
+          {
+            "id": "Rich (more than 125k)",
+            "label": "> $125k",
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "religion",
+        "label": "Religion",
+        "levels": [
+          {
+            "id": "Protestant",
+            "label": "Protestant",
+            "order": 2
+          },
+          {
+            "id": "Catholic",
+            "label": "Catholic",
+            "order": 3
+          },
+          {
+            "id": "Other religion",
+            "label": "Other religion",
+            "order": 4
+          },
+          {
+            "id": "Not religious",
+            "label": "Not religious",
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "levels": [
+          {
+            "id": "Gen Z",
+            "label": "Gen Z",
+            "order": 2
+          },
+          {
+            "id": "Millennials",
+            "label": "Millennials",
+            "order": 3
+          },
+          {
+            "id": "Gen X",
+            "label": "Gen X",
+            "order": 4
+          },
+          {
+            "id": "Baby Boomers",
+            "label": "Baby Boomers",
+            "order": 5
+          }
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "id": "yes",
+        "label": "Yes",
+        "unit": "percent"
+      },
+      {
+        "id": "no",
+        "label": "No",
+        "unit": "percent"
+      }
+    ],
+    "pairs": [
+      {
+        "pair_id": "age|education",
+        "var_a": "age",
+        "var_b": "education",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "College completed",
+            "metric": "yes",
+            "value": 27.83,
+            "values_by_universe": {
+              "all_americans": 27.83,
+              "with_view": 27.83
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "College completed",
+            "metric": "no",
+            "value": 72.17,
+            "values_by_universe": {
+              "all_americans": 72.17,
+              "with_view": 72.17
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Graduate/professional degree",
+            "metric": "yes",
+            "value": 28.16,
+            "values_by_universe": {
+              "all_americans": 28.16,
+              "with_view": 28.16
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Graduate/professional degree",
+            "metric": "no",
+            "value": 71.84,
+            "values_by_universe": {
+              "all_americans": 71.84,
+              "with_view": 71.84
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "No college",
+            "metric": "yes",
+            "value": 27.76,
+            "values_by_universe": {
+              "all_americans": 27.76,
+              "with_view": 27.76
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "No college",
+            "metric": "no",
+            "value": 72.24,
+            "values_by_universe": {
+              "all_americans": 72.24,
+              "with_view": 72.24
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "College completed",
+            "metric": "yes",
+            "value": 30.95,
+            "values_by_universe": {
+              "all_americans": 30.95,
+              "with_view": 30.95
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "College completed",
+            "metric": "no",
+            "value": 69.05,
+            "values_by_universe": {
+              "all_americans": 69.05,
+              "with_view": 69.05
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Graduate/professional degree",
+            "metric": "yes",
+            "value": 30.94,
+            "values_by_universe": {
+              "all_americans": 30.94,
+              "with_view": 30.94
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Graduate/professional degree",
+            "metric": "no",
+            "value": 69.06,
+            "values_by_universe": {
+              "all_americans": 69.06,
+              "with_view": 69.06
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "No college",
+            "metric": "yes",
+            "value": 30.87,
+            "values_by_universe": {
+              "all_americans": 30.87,
+              "with_view": 30.87
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "No college",
+            "metric": "no",
+            "value": 69.13,
+            "values_by_universe": {
+              "all_americans": 69.13,
+              "with_view": 69.13
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "College completed",
+            "metric": "yes",
+            "value": 30.97,
+            "values_by_universe": {
+              "all_americans": 30.97,
+              "with_view": 30.97
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "College completed",
+            "metric": "no",
+            "value": 69.03,
+            "values_by_universe": {
+              "all_americans": 69.03,
+              "with_view": 69.03
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Graduate/professional degree",
+            "metric": "yes",
+            "value": 31.11,
+            "values_by_universe": {
+              "all_americans": 31.11,
+              "with_view": 31.11
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Graduate/professional degree",
+            "metric": "no",
+            "value": 68.89,
+            "values_by_universe": {
+              "all_americans": 68.89,
+              "with_view": 68.89
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "No college",
+            "metric": "yes",
+            "value": 30.88,
+            "values_by_universe": {
+              "all_americans": 30.88,
+              "with_view": 30.88
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "No college",
+            "metric": "no",
+            "value": 69.12,
+            "values_by_universe": {
+              "all_americans": 69.12,
+              "with_view": 69.12
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "College completed",
+            "metric": "yes",
+            "value": 37.12,
+            "values_by_universe": {
+              "all_americans": 37.12,
+              "with_view": 37.12
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "College completed",
+            "metric": "no",
+            "value": 62.88,
+            "values_by_universe": {
+              "all_americans": 62.88,
+              "with_view": 62.88
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Graduate/professional degree",
+            "metric": "yes",
+            "value": 37.27,
+            "values_by_universe": {
+              "all_americans": 37.27,
+              "with_view": 37.27
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Graduate/professional degree",
+            "metric": "no",
+            "value": 62.73,
+            "values_by_universe": {
+              "all_americans": 62.73,
+              "with_view": 62.73
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "No college",
+            "metric": "yes",
+            "value": 36.73,
+            "values_by_universe": {
+              "all_americans": 36.73,
+              "with_view": 36.73
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "No college",
+            "metric": "no",
+            "value": 63.27,
+            "values_by_universe": {
+              "all_americans": 63.27,
+              "with_view": 63.27
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "age|gender",
+        "var_a": "age",
+        "var_b": "gender",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Female",
+            "metric": "yes",
+            "value": 27.42,
+            "values_by_universe": {
+              "all_americans": 27.42,
+              "with_view": 27.42
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Female",
+            "metric": "no",
+            "value": 72.58,
+            "values_by_universe": {
+              "all_americans": 72.58,
+              "with_view": 72.58
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Male",
+            "metric": "yes",
+            "value": 28.37,
+            "values_by_universe": {
+              "all_americans": 28.37,
+              "with_view": 28.37
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Male",
+            "metric": "no",
+            "value": 71.63,
+            "values_by_universe": {
+              "all_americans": 71.63,
+              "with_view": 71.63
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Female",
+            "metric": "yes",
+            "value": 30.45,
+            "values_by_universe": {
+              "all_americans": 30.45,
+              "with_view": 30.45
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Female",
+            "metric": "no",
+            "value": 69.55,
+            "values_by_universe": {
+              "all_americans": 69.55,
+              "with_view": 69.55
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Male",
+            "metric": "yes",
+            "value": 31.51,
+            "values_by_universe": {
+              "all_americans": 31.51,
+              "with_view": 31.51
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Male",
+            "metric": "no",
+            "value": 68.49,
+            "values_by_universe": {
+              "all_americans": 68.49,
+              "with_view": 68.49
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Female",
+            "metric": "yes",
+            "value": 30.53,
+            "values_by_universe": {
+              "all_americans": 30.53,
+              "with_view": 30.53
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Female",
+            "metric": "no",
+            "value": 69.47,
+            "values_by_universe": {
+              "all_americans": 69.47,
+              "with_view": 69.47
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Male",
+            "metric": "yes",
+            "value": 31.5,
+            "values_by_universe": {
+              "all_americans": 31.5,
+              "with_view": 31.5
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Male",
+            "metric": "no",
+            "value": 68.5,
+            "values_by_universe": {
+              "all_americans": 68.5,
+              "with_view": 68.5
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Female",
+            "metric": "yes",
+            "value": 35.68,
+            "values_by_universe": {
+              "all_americans": 35.68,
+              "with_view": 35.68
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Female",
+            "metric": "no",
+            "value": 64.32,
+            "values_by_universe": {
+              "all_americans": 64.32,
+              "with_view": 64.32
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Male",
+            "metric": "yes",
+            "value": 38.66,
+            "values_by_universe": {
+              "all_americans": 38.66,
+              "with_view": 38.66
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Male",
+            "metric": "no",
+            "value": 61.34,
+            "values_by_universe": {
+              "all_americans": 61.34,
+              "with_view": 61.34
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "age|income",
+        "var_a": "age",
+        "var_b": "income",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 26.06,
+            "values_by_universe": {
+              "all_americans": 26.06,
+              "with_view": 26.06
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 73.94,
+            "values_by_universe": {
+              "all_americans": 73.94,
+              "with_view": 73.94
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 24.44,
+            "values_by_universe": {
+              "all_americans": 24.44,
+              "with_view": 24.44
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 75.56,
+            "values_by_universe": {
+              "all_americans": 75.56,
+              "with_view": 75.56
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 24.52,
+            "values_by_universe": {
+              "all_americans": 24.52,
+              "with_view": 24.52
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 75.48,
+            "values_by_universe": {
+              "all_americans": 75.48,
+              "with_view": 75.48
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 30.72,
+            "values_by_universe": {
+              "all_americans": 30.72,
+              "with_view": 30.72
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 69.28,
+            "values_by_universe": {
+              "all_americans": 69.28,
+              "with_view": 69.28
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 29,
+            "values_by_universe": {
+              "all_americans": 29,
+              "with_view": 29
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 71,
+            "values_by_universe": {
+              "all_americans": 71,
+              "with_view": 71
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 27.37,
+            "values_by_universe": {
+              "all_americans": 27.37,
+              "with_view": 27.37
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 72.63,
+            "values_by_universe": {
+              "all_americans": 72.63,
+              "with_view": 72.63
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 27.1,
+            "values_by_universe": {
+              "all_americans": 27.1,
+              "with_view": 27.1
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 72.9,
+            "values_by_universe": {
+              "all_americans": 72.9,
+              "with_view": 72.9
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 33.72,
+            "values_by_universe": {
+              "all_americans": 33.72,
+              "with_view": 33.72
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 66.28,
+            "values_by_universe": {
+              "all_americans": 66.28,
+              "with_view": 66.28
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 29.14,
+            "values_by_universe": {
+              "all_americans": 29.14,
+              "with_view": 29.14
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 70.86,
+            "values_by_universe": {
+              "all_americans": 70.86,
+              "with_view": 70.86
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 27.41,
+            "values_by_universe": {
+              "all_americans": 27.41,
+              "with_view": 27.41
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 72.59,
+            "values_by_universe": {
+              "all_americans": 72.59,
+              "with_view": 72.59
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 27.17,
+            "values_by_universe": {
+              "all_americans": 27.17,
+              "with_view": 27.17
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 72.83,
+            "values_by_universe": {
+              "all_americans": 72.83,
+              "with_view": 72.83
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 33.65,
+            "values_by_universe": {
+              "all_americans": 33.65,
+              "with_view": 33.65
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 66.35,
+            "values_by_universe": {
+              "all_americans": 66.35,
+              "with_view": 66.35
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 36.43,
+            "values_by_universe": {
+              "all_americans": 36.43,
+              "with_view": 36.43
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 63.57,
+            "values_by_universe": {
+              "all_americans": 63.57,
+              "with_view": 63.57
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 33.31,
+            "values_by_universe": {
+              "all_americans": 33.31,
+              "with_view": 33.31
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 66.69,
+            "values_by_universe": {
+              "all_americans": 66.69,
+              "with_view": 66.69
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 33.1,
+            "values_by_universe": {
+              "all_americans": 33.1,
+              "with_view": 33.1
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 66.9,
+            "values_by_universe": {
+              "all_americans": 66.9,
+              "with_view": 66.9
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 39.34,
+            "values_by_universe": {
+              "all_americans": 39.34,
+              "with_view": 39.34
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 60.66,
+            "values_by_universe": {
+              "all_americans": 60.66,
+              "with_view": 60.66
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "age|party",
+        "var_a": "age",
+        "var_b": "party",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 27.85,
+            "values_by_universe": {
+              "all_americans": 27.85,
+              "with_view": 27.85
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "D",
+            "metric": "no",
+            "value": 72.15,
+            "values_by_universe": {
+              "all_americans": 72.15,
+              "with_view": 72.15
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 27.26,
+            "values_by_universe": {
+              "all_americans": 27.26,
+              "with_view": 27.26
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "O",
+            "metric": "no",
+            "value": 72.74,
+            "values_by_universe": {
+              "all_americans": 72.74,
+              "with_view": 72.74
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 28.02,
+            "values_by_universe": {
+              "all_americans": 28.02,
+              "with_view": 28.02
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "R",
+            "metric": "no",
+            "value": 71.98,
+            "values_by_universe": {
+              "all_americans": 71.98,
+              "with_view": 71.98
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 30.42,
+            "values_by_universe": {
+              "all_americans": 30.42,
+              "with_view": 30.42
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "D",
+            "metric": "no",
+            "value": 69.58,
+            "values_by_universe": {
+              "all_americans": 69.58,
+              "with_view": 69.58
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 30.25,
+            "values_by_universe": {
+              "all_americans": 30.25,
+              "with_view": 30.25
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "O",
+            "metric": "no",
+            "value": 69.75,
+            "values_by_universe": {
+              "all_americans": 69.75,
+              "with_view": 69.75
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 31.66,
+            "values_by_universe": {
+              "all_americans": 31.66,
+              "with_view": 31.66
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "R",
+            "metric": "no",
+            "value": 68.34,
+            "values_by_universe": {
+              "all_americans": 68.34,
+              "with_view": 68.34
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 30.62,
+            "values_by_universe": {
+              "all_americans": 30.62,
+              "with_view": 30.62
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "D",
+            "metric": "no",
+            "value": 69.38,
+            "values_by_universe": {
+              "all_americans": 69.38,
+              "with_view": 69.38
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 30.24,
+            "values_by_universe": {
+              "all_americans": 30.24,
+              "with_view": 30.24
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "O",
+            "metric": "no",
+            "value": 69.76,
+            "values_by_universe": {
+              "all_americans": 69.76,
+              "with_view": 69.76
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 31.73,
+            "values_by_universe": {
+              "all_americans": 31.73,
+              "with_view": 31.73
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "R",
+            "metric": "no",
+            "value": 68.27,
+            "values_by_universe": {
+              "all_americans": 68.27,
+              "with_view": 68.27
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 36.49,
+            "values_by_universe": {
+              "all_americans": 36.49,
+              "with_view": 36.49
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "D",
+            "metric": "no",
+            "value": 63.51,
+            "values_by_universe": {
+              "all_americans": 63.51,
+              "with_view": 63.51
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 36.42,
+            "values_by_universe": {
+              "all_americans": 36.42,
+              "with_view": 36.42
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "O",
+            "metric": "no",
+            "value": 63.58,
+            "values_by_universe": {
+              "all_americans": 63.58,
+              "with_view": 63.58
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 37.85,
+            "values_by_universe": {
+              "all_americans": 37.85,
+              "with_view": 37.85
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "R",
+            "metric": "no",
+            "value": 62.15,
+            "values_by_universe": {
+              "all_americans": 62.15,
+              "with_view": 62.15
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "age|race",
+        "var_a": "age",
+        "var_b": "race",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 27.58,
+            "values_by_universe": {
+              "all_americans": 27.58,
+              "with_view": 27.58
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 72.42,
+            "values_by_universe": {
+              "all_americans": 72.42,
+              "with_view": 72.42
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 28.11,
+            "values_by_universe": {
+              "all_americans": 28.11,
+              "with_view": 28.11
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 71.89,
+            "values_by_universe": {
+              "all_americans": 71.89,
+              "with_view": 71.89
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 28.45,
+            "values_by_universe": {
+              "all_americans": 28.45,
+              "with_view": 28.45
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 71.55,
+            "values_by_universe": {
+              "all_americans": 71.55,
+              "with_view": 71.55
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 27.95,
+            "values_by_universe": {
+              "all_americans": 27.95,
+              "with_view": 27.95
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "White",
+            "metric": "no",
+            "value": 72.05,
+            "values_by_universe": {
+              "all_americans": 72.05,
+              "with_view": 72.05
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.71,
+            "values_by_universe": {
+              "all_americans": 29.71,
+              "with_view": 29.71
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.29,
+            "values_by_universe": {
+              "all_americans": 70.29,
+              "with_view": 70.29
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.38,
+            "values_by_universe": {
+              "all_americans": 31.38,
+              "with_view": 31.38
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.62,
+            "values_by_universe": {
+              "all_americans": 68.62,
+              "with_view": 68.62
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.13,
+            "values_by_universe": {
+              "all_americans": 31.13,
+              "with_view": 31.13
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.87,
+            "values_by_universe": {
+              "all_americans": 68.87,
+              "with_view": 68.87
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.43,
+            "values_by_universe": {
+              "all_americans": 31.43,
+              "with_view": 31.43
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.57,
+            "values_by_universe": {
+              "all_americans": 68.57,
+              "with_view": 68.57
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.88,
+            "values_by_universe": {
+              "all_americans": 29.88,
+              "with_view": 29.88
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.12,
+            "values_by_universe": {
+              "all_americans": 70.12,
+              "with_view": 70.12
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.34,
+            "values_by_universe": {
+              "all_americans": 31.34,
+              "with_view": 31.34
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.66,
+            "values_by_universe": {
+              "all_americans": 68.66,
+              "with_view": 68.66
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.07,
+            "values_by_universe": {
+              "all_americans": 31.07,
+              "with_view": 31.07
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.93,
+            "values_by_universe": {
+              "all_americans": 68.93,
+              "with_view": 68.93
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.46,
+            "values_by_universe": {
+              "all_americans": 31.46,
+              "with_view": 31.46
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.54,
+            "values_by_universe": {
+              "all_americans": 68.54,
+              "with_view": 68.54
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 35.59,
+            "values_by_universe": {
+              "all_americans": 35.59,
+              "with_view": 35.59
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 64.41,
+            "values_by_universe": {
+              "all_americans": 64.41,
+              "with_view": 64.41
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 37.55,
+            "values_by_universe": {
+              "all_americans": 37.55,
+              "with_view": 37.55
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 62.45,
+            "values_by_universe": {
+              "all_americans": 62.45,
+              "with_view": 62.45
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 37.52,
+            "values_by_universe": {
+              "all_americans": 37.52,
+              "with_view": 37.52
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 62.48,
+            "values_by_universe": {
+              "all_americans": 62.48,
+              "with_view": 62.48
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 37.63,
+            "values_by_universe": {
+              "all_americans": 37.63,
+              "with_view": 37.63
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "White",
+            "metric": "no",
+            "value": 62.37,
+            "values_by_universe": {
+              "all_americans": 62.37,
+              "with_view": 62.37
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "age|religion",
+        "var_a": "age",
+        "var_b": "religion",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 28.07,
+            "values_by_universe": {
+              "all_americans": 28.07,
+              "with_view": 28.07
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 71.93,
+            "values_by_universe": {
+              "all_americans": 71.93,
+              "with_view": 71.93
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 28.2,
+            "values_by_universe": {
+              "all_americans": 28.2,
+              "with_view": 28.2
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 71.8,
+            "values_by_universe": {
+              "all_americans": 71.8,
+              "with_view": 71.8
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 28.62,
+            "values_by_universe": {
+              "all_americans": 28.62,
+              "with_view": 28.62
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 71.38,
+            "values_by_universe": {
+              "all_americans": 71.38,
+              "with_view": 71.38
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 27.6,
+            "values_by_universe": {
+              "all_americans": 27.6,
+              "with_view": 27.6
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 72.4,
+            "values_by_universe": {
+              "all_americans": 72.4,
+              "with_view": 72.4
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.42,
+            "values_by_universe": {
+              "all_americans": 31.42,
+              "with_view": 31.42
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.58,
+            "values_by_universe": {
+              "all_americans": 68.58,
+              "with_view": 68.58
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.13,
+            "values_by_universe": {
+              "all_americans": 31.13,
+              "with_view": 31.13
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.87,
+            "values_by_universe": {
+              "all_americans": 68.87,
+              "with_view": 68.87
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.64,
+            "values_by_universe": {
+              "all_americans": 31.64,
+              "with_view": 31.64
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.36,
+            "values_by_universe": {
+              "all_americans": 68.36,
+              "with_view": 68.36
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.64,
+            "values_by_universe": {
+              "all_americans": 30.64,
+              "with_view": 30.64
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.36,
+            "values_by_universe": {
+              "all_americans": 69.36,
+              "with_view": 69.36
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.46,
+            "values_by_universe": {
+              "all_americans": 31.46,
+              "with_view": 31.46
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.54,
+            "values_by_universe": {
+              "all_americans": 68.54,
+              "with_view": 68.54
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.13,
+            "values_by_universe": {
+              "all_americans": 31.13,
+              "with_view": 31.13
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.87,
+            "values_by_universe": {
+              "all_americans": 68.87,
+              "with_view": 68.87
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.63,
+            "values_by_universe": {
+              "all_americans": 31.63,
+              "with_view": 31.63
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.37,
+            "values_by_universe": {
+              "all_americans": 68.37,
+              "with_view": 68.37
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.69,
+            "values_by_universe": {
+              "all_americans": 30.69,
+              "with_view": 30.69
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.31,
+            "values_by_universe": {
+              "all_americans": 69.31,
+              "with_view": 69.31
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 37.36,
+            "values_by_universe": {
+              "all_americans": 37.36,
+              "with_view": 37.36
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 62.64,
+            "values_by_universe": {
+              "all_americans": 62.64,
+              "with_view": 62.64
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 37.01,
+            "values_by_universe": {
+              "all_americans": 37.01,
+              "with_view": 37.01
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 62.99,
+            "values_by_universe": {
+              "all_americans": 62.99,
+              "with_view": 62.99
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 37.2,
+            "values_by_universe": {
+              "all_americans": 37.2,
+              "with_view": 37.2
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 62.8,
+            "values_by_universe": {
+              "all_americans": 62.8,
+              "with_view": 62.8
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 36.84,
+            "values_by_universe": {
+              "all_americans": 36.84,
+              "with_view": 36.84
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 63.16,
+            "values_by_universe": {
+              "all_americans": 63.16,
+              "with_view": 63.16
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "age|rus_code",
+        "var_a": "age",
+        "var_b": "rus_code",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 27.63,
+            "values_by_universe": {
+              "all_americans": 27.63,
+              "with_view": 27.63
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 72.37,
+            "values_by_universe": {
+              "all_americans": 72.37,
+              "with_view": 72.37
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 28.42,
+            "values_by_universe": {
+              "all_americans": 28.42,
+              "with_view": 28.42
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 71.58,
+            "values_by_universe": {
+              "all_americans": 71.58,
+              "with_view": 71.58
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 28.15,
+            "values_by_universe": {
+              "all_americans": 28.15,
+              "with_view": 28.15
+            }
+          },
+          {
+            "a_level": "Baby Boomers",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 71.85,
+            "values_by_universe": {
+              "all_americans": 71.85,
+              "with_view": 71.85
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.29,
+            "values_by_universe": {
+              "all_americans": 31.29,
+              "with_view": 31.29
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.71,
+            "values_by_universe": {
+              "all_americans": 68.71,
+              "with_view": 68.71
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.23,
+            "values_by_universe": {
+              "all_americans": 30.23,
+              "with_view": 30.23
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.77,
+            "values_by_universe": {
+              "all_americans": 69.77,
+              "with_view": 69.77
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 29.99,
+            "values_by_universe": {
+              "all_americans": 29.99,
+              "with_view": 29.99
+            }
+          },
+          {
+            "a_level": "Gen X",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 70.01,
+            "values_by_universe": {
+              "all_americans": 70.01,
+              "with_view": 70.01
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.3,
+            "values_by_universe": {
+              "all_americans": 31.3,
+              "with_view": 31.3
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.7,
+            "values_by_universe": {
+              "all_americans": 68.7,
+              "with_view": 68.7
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.42,
+            "values_by_universe": {
+              "all_americans": 30.42,
+              "with_view": 30.42
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.58,
+            "values_by_universe": {
+              "all_americans": 69.58,
+              "with_view": 69.58
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 30.18,
+            "values_by_universe": {
+              "all_americans": 30.18,
+              "with_view": 30.18
+            }
+          },
+          {
+            "a_level": "Gen Z",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 69.82,
+            "values_by_universe": {
+              "all_americans": 69.82,
+              "with_view": 69.82
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 36.88,
+            "values_by_universe": {
+              "all_americans": 36.88,
+              "with_view": 36.88
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 63.12,
+            "values_by_universe": {
+              "all_americans": 63.12,
+              "with_view": 63.12
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 35.16,
+            "values_by_universe": {
+              "all_americans": 35.16,
+              "with_view": 35.16
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 64.84,
+            "values_by_universe": {
+              "all_americans": 64.84,
+              "with_view": 64.84
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 39.07,
+            "values_by_universe": {
+              "all_americans": 39.07,
+              "with_view": 39.07
+            }
+          },
+          {
+            "a_level": "Millennials",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 60.93,
+            "values_by_universe": {
+              "all_americans": 60.93,
+              "with_view": 60.93
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "education|gender",
+        "var_a": "education",
+        "var_b": "gender",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "College completed",
+            "b_level": "Female",
+            "metric": "yes",
+            "value": 30.2,
+            "values_by_universe": {
+              "all_americans": 30.2,
+              "with_view": 30.2
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Female",
+            "metric": "no",
+            "value": 69.8,
+            "values_by_universe": {
+              "all_americans": 69.8,
+              "with_view": 69.8
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Male",
+            "metric": "yes",
+            "value": 31.58,
+            "values_by_universe": {
+              "all_americans": 31.58,
+              "with_view": 31.58
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Male",
+            "metric": "no",
+            "value": 68.42,
+            "values_by_universe": {
+              "all_americans": 68.42,
+              "with_view": 68.42
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Female",
+            "metric": "yes",
+            "value": 30.44,
+            "values_by_universe": {
+              "all_americans": 30.44,
+              "with_view": 30.44
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Female",
+            "metric": "no",
+            "value": 69.56,
+            "values_by_universe": {
+              "all_americans": 69.56,
+              "with_view": 69.56
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Male",
+            "metric": "yes",
+            "value": 31.93,
+            "values_by_universe": {
+              "all_americans": 31.93,
+              "with_view": 31.93
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Male",
+            "metric": "no",
+            "value": 68.07,
+            "values_by_universe": {
+              "all_americans": 68.07,
+              "with_view": 68.07
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Female",
+            "metric": "yes",
+            "value": 30,
+            "values_by_universe": {
+              "all_americans": 30,
+              "with_view": 30
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Female",
+            "metric": "no",
+            "value": 70,
+            "values_by_universe": {
+              "all_americans": 70,
+              "with_view": 70
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Male",
+            "metric": "yes",
+            "value": 31.32,
+            "values_by_universe": {
+              "all_americans": 31.32,
+              "with_view": 31.32
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Male",
+            "metric": "no",
+            "value": 68.68,
+            "values_by_universe": {
+              "all_americans": 68.68,
+              "with_view": 68.68
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "education|income",
+        "var_a": "education",
+        "var_b": "income",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "College completed",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 29.06,
+            "values_by_universe": {
+              "all_americans": 29.06,
+              "with_view": 29.06
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 70.94,
+            "values_by_universe": {
+              "all_americans": 70.94,
+              "with_view": 70.94
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 27.15,
+            "values_by_universe": {
+              "all_americans": 27.15,
+              "with_view": 27.15
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 72.85,
+            "values_by_universe": {
+              "all_americans": 72.85,
+              "with_view": 72.85
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 27.05,
+            "values_by_universe": {
+              "all_americans": 27.05,
+              "with_view": 27.05
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 72.95,
+            "values_by_universe": {
+              "all_americans": 72.95,
+              "with_view": 72.95
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 33.59,
+            "values_by_universe": {
+              "all_americans": 33.59,
+              "with_view": 33.59
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 66.41,
+            "values_by_universe": {
+              "all_americans": 66.41,
+              "with_view": 66.41
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 29.4,
+            "values_by_universe": {
+              "all_americans": 29.4,
+              "with_view": 29.4
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 70.6,
+            "values_by_universe": {
+              "all_americans": 70.6,
+              "with_view": 70.6
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 27.2,
+            "values_by_universe": {
+              "all_americans": 27.2,
+              "with_view": 27.2
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 72.8,
+            "values_by_universe": {
+              "all_americans": 72.8,
+              "with_view": 72.8
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 27.06,
+            "values_by_universe": {
+              "all_americans": 27.06,
+              "with_view": 27.06
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 72.94,
+            "values_by_universe": {
+              "all_americans": 72.94,
+              "with_view": 72.94
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 33.74,
+            "values_by_universe": {
+              "all_americans": 33.74,
+              "with_view": 33.74
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 66.26,
+            "values_by_universe": {
+              "all_americans": 66.26,
+              "with_view": 66.26
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 29.14,
+            "values_by_universe": {
+              "all_americans": 29.14,
+              "with_view": 29.14
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 70.86,
+            "values_by_universe": {
+              "all_americans": 70.86,
+              "with_view": 70.86
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 27.11,
+            "values_by_universe": {
+              "all_americans": 27.11,
+              "with_view": 27.11
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 72.89,
+            "values_by_universe": {
+              "all_americans": 72.89,
+              "with_view": 72.89
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 27.03,
+            "values_by_universe": {
+              "all_americans": 27.03,
+              "with_view": 27.03
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 72.97,
+            "values_by_universe": {
+              "all_americans": 72.97,
+              "with_view": 72.97
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 33.5,
+            "values_by_universe": {
+              "all_americans": 33.5,
+              "with_view": 33.5
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 66.5,
+            "values_by_universe": {
+              "all_americans": 66.5,
+              "with_view": 66.5
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "education|race",
+        "var_a": "education",
+        "var_b": "race",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "College completed",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.88,
+            "values_by_universe": {
+              "all_americans": 29.88,
+              "with_view": 29.88
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.12,
+            "values_by_universe": {
+              "all_americans": 70.12,
+              "with_view": 70.12
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.15,
+            "values_by_universe": {
+              "all_americans": 31.15,
+              "with_view": 31.15
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.85,
+            "values_by_universe": {
+              "all_americans": 68.85,
+              "with_view": 68.85
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.29,
+            "values_by_universe": {
+              "all_americans": 31.29,
+              "with_view": 31.29
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.71,
+            "values_by_universe": {
+              "all_americans": 68.71,
+              "with_view": 68.71
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.18,
+            "values_by_universe": {
+              "all_americans": 31.18,
+              "with_view": 31.18
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.82,
+            "values_by_universe": {
+              "all_americans": 68.82,
+              "with_view": 68.82
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.98,
+            "values_by_universe": {
+              "all_americans": 29.98,
+              "with_view": 29.98
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.02,
+            "values_by_universe": {
+              "all_americans": 70.02,
+              "with_view": 70.02
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.35,
+            "values_by_universe": {
+              "all_americans": 31.35,
+              "with_view": 31.35
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.65,
+            "values_by_universe": {
+              "all_americans": 68.65,
+              "with_view": 68.65
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.48,
+            "values_by_universe": {
+              "all_americans": 31.48,
+              "with_view": 31.48
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.52,
+            "values_by_universe": {
+              "all_americans": 68.52,
+              "with_view": 68.52
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.4,
+            "values_by_universe": {
+              "all_americans": 31.4,
+              "with_view": 31.4
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.6,
+            "values_by_universe": {
+              "all_americans": 68.6,
+              "with_view": 68.6
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.83,
+            "values_by_universe": {
+              "all_americans": 29.83,
+              "with_view": 29.83
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.17,
+            "values_by_universe": {
+              "all_americans": 70.17,
+              "with_view": 70.17
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.1,
+            "values_by_universe": {
+              "all_americans": 31.1,
+              "with_view": 31.1
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.9,
+            "values_by_universe": {
+              "all_americans": 68.9,
+              "with_view": 68.9
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.09,
+            "values_by_universe": {
+              "all_americans": 31.09,
+              "with_view": 31.09
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.91,
+            "values_by_universe": {
+              "all_americans": 68.91,
+              "with_view": 68.91
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.05,
+            "values_by_universe": {
+              "all_americans": 31.05,
+              "with_view": 31.05
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.95,
+            "values_by_universe": {
+              "all_americans": 68.95,
+              "with_view": 68.95
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "education|religion",
+        "var_a": "education",
+        "var_b": "religion",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "College completed",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.22,
+            "values_by_universe": {
+              "all_americans": 31.22,
+              "with_view": 31.22
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.78,
+            "values_by_universe": {
+              "all_americans": 68.78,
+              "with_view": 68.78
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 30.93,
+            "values_by_universe": {
+              "all_americans": 30.93,
+              "with_view": 30.93
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 69.07,
+            "values_by_universe": {
+              "all_americans": 69.07,
+              "with_view": 69.07
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.48,
+            "values_by_universe": {
+              "all_americans": 31.48,
+              "with_view": 31.48
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.52,
+            "values_by_universe": {
+              "all_americans": 68.52,
+              "with_view": 68.52
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.59,
+            "values_by_universe": {
+              "all_americans": 30.59,
+              "with_view": 30.59
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.41,
+            "values_by_universe": {
+              "all_americans": 69.41,
+              "with_view": 69.41
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.47,
+            "values_by_universe": {
+              "all_americans": 31.47,
+              "with_view": 31.47
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.53,
+            "values_by_universe": {
+              "all_americans": 68.53,
+              "with_view": 68.53
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.11,
+            "values_by_universe": {
+              "all_americans": 31.11,
+              "with_view": 31.11
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.89,
+            "values_by_universe": {
+              "all_americans": 68.89,
+              "with_view": 68.89
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.67,
+            "values_by_universe": {
+              "all_americans": 31.67,
+              "with_view": 31.67
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.33,
+            "values_by_universe": {
+              "all_americans": 68.33,
+              "with_view": 68.33
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.93,
+            "values_by_universe": {
+              "all_americans": 30.93,
+              "with_view": 30.93
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.07,
+            "values_by_universe": {
+              "all_americans": 69.07,
+              "with_view": 69.07
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.04,
+            "values_by_universe": {
+              "all_americans": 31.04,
+              "with_view": 31.04
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.96,
+            "values_by_universe": {
+              "all_americans": 68.96,
+              "with_view": 68.96
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 30.76,
+            "values_by_universe": {
+              "all_americans": 30.76,
+              "with_view": 30.76
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 69.24,
+            "values_by_universe": {
+              "all_americans": 69.24,
+              "with_view": 69.24
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.24,
+            "values_by_universe": {
+              "all_americans": 31.24,
+              "with_view": 31.24
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.76,
+            "values_by_universe": {
+              "all_americans": 68.76,
+              "with_view": 68.76
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.35,
+            "values_by_universe": {
+              "all_americans": 30.35,
+              "with_view": 30.35
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.65,
+            "values_by_universe": {
+              "all_americans": 69.65,
+              "with_view": 69.65
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "education|rus_code",
+        "var_a": "education",
+        "var_b": "rus_code",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "College completed",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.78,
+            "values_by_universe": {
+              "all_americans": 30.78,
+              "with_view": 30.78
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.22,
+            "values_by_universe": {
+              "all_americans": 69.22,
+              "with_view": 69.22
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.54,
+            "values_by_universe": {
+              "all_americans": 30.54,
+              "with_view": 30.54
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.46,
+            "values_by_universe": {
+              "all_americans": 69.46,
+              "with_view": 69.46
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.18,
+            "values_by_universe": {
+              "all_americans": 31.18,
+              "with_view": 31.18
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.82,
+            "values_by_universe": {
+              "all_americans": 68.82,
+              "with_view": 68.82
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.93,
+            "values_by_universe": {
+              "all_americans": 30.93,
+              "with_view": 30.93
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.07,
+            "values_by_universe": {
+              "all_americans": 69.07,
+              "with_view": 69.07
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.96,
+            "values_by_universe": {
+              "all_americans": 30.96,
+              "with_view": 30.96
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.04,
+            "values_by_universe": {
+              "all_americans": 69.04,
+              "with_view": 69.04
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.61,
+            "values_by_universe": {
+              "all_americans": 31.61,
+              "with_view": 31.61
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.39,
+            "values_by_universe": {
+              "all_americans": 68.39,
+              "with_view": 68.39
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.65,
+            "values_by_universe": {
+              "all_americans": 30.65,
+              "with_view": 30.65
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.35,
+            "values_by_universe": {
+              "all_americans": 69.35,
+              "with_view": 69.35
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.06,
+            "values_by_universe": {
+              "all_americans": 30.06,
+              "with_view": 30.06
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.94,
+            "values_by_universe": {
+              "all_americans": 69.94,
+              "with_view": 69.94
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 30.7,
+            "values_by_universe": {
+              "all_americans": 30.7,
+              "with_view": 30.7
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 69.3,
+            "values_by_universe": {
+              "all_americans": 69.3,
+              "with_view": 69.3
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "gender|income",
+        "var_a": "gender",
+        "var_b": "income",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Female",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 28.42,
+            "values_by_universe": {
+              "all_americans": 28.42,
+              "with_view": 28.42
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 71.58,
+            "values_by_universe": {
+              "all_americans": 71.58,
+              "with_view": 71.58
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 26.65,
+            "values_by_universe": {
+              "all_americans": 26.65,
+              "with_view": 26.65
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 73.35,
+            "values_by_universe": {
+              "all_americans": 73.35,
+              "with_view": 73.35
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 26.53,
+            "values_by_universe": {
+              "all_americans": 26.53,
+              "with_view": 26.53
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 73.47,
+            "values_by_universe": {
+              "all_americans": 73.47,
+              "with_view": 73.47
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 32.97,
+            "values_by_universe": {
+              "all_americans": 32.97,
+              "with_view": 32.97
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 67.03,
+            "values_by_universe": {
+              "all_americans": 67.03,
+              "with_view": 67.03
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "yes",
+            "value": 30.02,
+            "values_by_universe": {
+              "all_americans": 30.02,
+              "with_view": 30.02
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Above median (75k to less than 125k)",
+            "metric": "no",
+            "value": 69.98,
+            "values_by_universe": {
+              "all_americans": 69.98,
+              "with_view": 69.98
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "yes",
+            "value": 27.76,
+            "values_by_universe": {
+              "all_americans": 27.76,
+              "with_view": 27.76
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Below median (35k to less than 75k)",
+            "metric": "no",
+            "value": 72.24,
+            "values_by_universe": {
+              "all_americans": 72.24,
+              "with_view": 72.24
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Poor (less than 35k)",
+            "metric": "yes",
+            "value": 27.73,
+            "values_by_universe": {
+              "all_americans": 27.73,
+              "with_view": 27.73
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Poor (less than 35k)",
+            "metric": "no",
+            "value": 72.27,
+            "values_by_universe": {
+              "all_americans": 72.27,
+              "with_view": 72.27
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Rich (more than 125k)",
+            "metric": "yes",
+            "value": 34.34,
+            "values_by_universe": {
+              "all_americans": 34.34,
+              "with_view": 34.34
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Rich (more than 125k)",
+            "metric": "no",
+            "value": 65.66,
+            "values_by_universe": {
+              "all_americans": 65.66,
+              "with_view": 65.66
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "gender|race",
+        "var_a": "gender",
+        "var_b": "race",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Female",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.27,
+            "values_by_universe": {
+              "all_americans": 29.27,
+              "with_view": 29.27
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.73,
+            "values_by_universe": {
+              "all_americans": 70.73,
+              "with_view": 70.73
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 30.55,
+            "values_by_universe": {
+              "all_americans": 30.55,
+              "with_view": 30.55
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 69.45,
+            "values_by_universe": {
+              "all_americans": 69.45,
+              "with_view": 69.45
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 30.64,
+            "values_by_universe": {
+              "all_americans": 30.64,
+              "with_view": 30.64
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 69.36,
+            "values_by_universe": {
+              "all_americans": 69.36,
+              "with_view": 69.36
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 30.57,
+            "values_by_universe": {
+              "all_americans": 30.57,
+              "with_view": 30.57
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "White",
+            "metric": "no",
+            "value": 69.43,
+            "values_by_universe": {
+              "all_americans": 69.43,
+              "with_view": 69.43
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 30.66,
+            "values_by_universe": {
+              "all_americans": 30.66,
+              "with_view": 30.66
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 69.34,
+            "values_by_universe": {
+              "all_americans": 69.34,
+              "with_view": 69.34
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.91,
+            "values_by_universe": {
+              "all_americans": 31.91,
+              "with_view": 31.91
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.09,
+            "values_by_universe": {
+              "all_americans": 68.09,
+              "with_view": 68.09
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 32.08,
+            "values_by_universe": {
+              "all_americans": 32.08,
+              "with_view": 32.08
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 67.92,
+            "values_by_universe": {
+              "all_americans": 67.92,
+              "with_view": 67.92
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.9,
+            "values_by_universe": {
+              "all_americans": 31.9,
+              "with_view": 31.9
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.1,
+            "values_by_universe": {
+              "all_americans": 68.1,
+              "with_view": 68.1
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "gender|religion",
+        "var_a": "gender",
+        "var_b": "religion",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Female",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 30.58,
+            "values_by_universe": {
+              "all_americans": 30.58,
+              "with_view": 30.58
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 69.42,
+            "values_by_universe": {
+              "all_americans": 69.42,
+              "with_view": 69.42
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 30.3,
+            "values_by_universe": {
+              "all_americans": 30.3,
+              "with_view": 30.3
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 69.7,
+            "values_by_universe": {
+              "all_americans": 69.7,
+              "with_view": 69.7
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 30.81,
+            "values_by_universe": {
+              "all_americans": 30.81,
+              "with_view": 30.81
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 69.19,
+            "values_by_universe": {
+              "all_americans": 69.19,
+              "with_view": 69.19
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 29.93,
+            "values_by_universe": {
+              "all_americans": 29.93,
+              "with_view": 29.93
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 70.07,
+            "values_by_universe": {
+              "all_americans": 70.07,
+              "with_view": 70.07
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.93,
+            "values_by_universe": {
+              "all_americans": 31.93,
+              "with_view": 31.93
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.07,
+            "values_by_universe": {
+              "all_americans": 68.07,
+              "with_view": 68.07
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.63,
+            "values_by_universe": {
+              "all_americans": 31.63,
+              "with_view": 31.63
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.37,
+            "values_by_universe": {
+              "all_americans": 68.37,
+              "with_view": 68.37
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 32.2,
+            "values_by_universe": {
+              "all_americans": 32.2,
+              "with_view": 32.2
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 67.8,
+            "values_by_universe": {
+              "all_americans": 67.8,
+              "with_view": 67.8
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 31.31,
+            "values_by_universe": {
+              "all_americans": 31.31,
+              "with_view": 31.31
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 68.69,
+            "values_by_universe": {
+              "all_americans": 68.69,
+              "with_view": 68.69
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "gender|rus_code",
+        "var_a": "gender",
+        "var_b": "rus_code",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Female",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.2,
+            "values_by_universe": {
+              "all_americans": 30.2,
+              "with_view": 30.2
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.8,
+            "values_by_universe": {
+              "all_americans": 69.8,
+              "with_view": 69.8
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 29.72,
+            "values_by_universe": {
+              "all_americans": 29.72,
+              "with_view": 29.72
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 70.28,
+            "values_by_universe": {
+              "all_americans": 70.28,
+              "with_view": 70.28
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 30.37,
+            "values_by_universe": {
+              "all_americans": 30.37,
+              "with_view": 30.37
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 69.63,
+            "values_by_universe": {
+              "all_americans": 69.63,
+              "with_view": 69.63
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.4,
+            "values_by_universe": {
+              "all_americans": 31.4,
+              "with_view": 31.4
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.6,
+            "values_by_universe": {
+              "all_americans": 68.6,
+              "with_view": 68.6
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 31.45,
+            "values_by_universe": {
+              "all_americans": 31.45,
+              "with_view": 31.45
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 68.55,
+            "values_by_universe": {
+              "all_americans": 68.55,
+              "with_view": 68.55
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 32.07,
+            "values_by_universe": {
+              "all_americans": 32.07,
+              "with_view": 32.07
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 67.93,
+            "values_by_universe": {
+              "all_americans": 67.93,
+              "with_view": 67.93
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "income|religion",
+        "var_a": "income",
+        "var_b": "religion",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 29.48,
+            "values_by_universe": {
+              "all_americans": 29.48,
+              "with_view": 29.48
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 70.52,
+            "values_by_universe": {
+              "all_americans": 70.52,
+              "with_view": 70.52
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 29.3,
+            "values_by_universe": {
+              "all_americans": 29.3,
+              "with_view": 29.3
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 70.7,
+            "values_by_universe": {
+              "all_americans": 70.7,
+              "with_view": 70.7
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 29.6,
+            "values_by_universe": {
+              "all_americans": 29.6,
+              "with_view": 29.6
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 70.4,
+            "values_by_universe": {
+              "all_americans": 70.4,
+              "with_view": 70.4
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 28.93,
+            "values_by_universe": {
+              "all_americans": 28.93,
+              "with_view": 28.93
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 71.07,
+            "values_by_universe": {
+              "all_americans": 71.07,
+              "with_view": 71.07
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 27.6,
+            "values_by_universe": {
+              "all_americans": 27.6,
+              "with_view": 27.6
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 72.4,
+            "values_by_universe": {
+              "all_americans": 72.4,
+              "with_view": 72.4
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 27.42,
+            "values_by_universe": {
+              "all_americans": 27.42,
+              "with_view": 27.42
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 72.58,
+            "values_by_universe": {
+              "all_americans": 72.58,
+              "with_view": 72.58
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 27.7,
+            "values_by_universe": {
+              "all_americans": 27.7,
+              "with_view": 27.7
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 72.3,
+            "values_by_universe": {
+              "all_americans": 72.3,
+              "with_view": 72.3
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 26.88,
+            "values_by_universe": {
+              "all_americans": 26.88,
+              "with_view": 26.88
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 73.12,
+            "values_by_universe": {
+              "all_americans": 73.12,
+              "with_view": 73.12
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 27.52,
+            "values_by_universe": {
+              "all_americans": 27.52,
+              "with_view": 27.52
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 72.48,
+            "values_by_universe": {
+              "all_americans": 72.48,
+              "with_view": 72.48
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 27.33,
+            "values_by_universe": {
+              "all_americans": 27.33,
+              "with_view": 27.33
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 72.67,
+            "values_by_universe": {
+              "all_americans": 72.67,
+              "with_view": 72.67
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 27.58,
+            "values_by_universe": {
+              "all_americans": 27.58,
+              "with_view": 27.58
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 72.42,
+            "values_by_universe": {
+              "all_americans": 72.42,
+              "with_view": 72.42
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 26.8,
+            "values_by_universe": {
+              "all_americans": 26.8,
+              "with_view": 26.8
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 73.2,
+            "values_by_universe": {
+              "all_americans": 73.2,
+              "with_view": 73.2
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 33.85,
+            "values_by_universe": {
+              "all_americans": 33.85,
+              "with_view": 33.85
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 66.15,
+            "values_by_universe": {
+              "all_americans": 66.15,
+              "with_view": 66.15
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 33.52,
+            "values_by_universe": {
+              "all_americans": 33.52,
+              "with_view": 33.52
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 66.48,
+            "values_by_universe": {
+              "all_americans": 66.48,
+              "with_view": 66.48
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 33.9,
+            "values_by_universe": {
+              "all_americans": 33.9,
+              "with_view": 33.9
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 66.1,
+            "values_by_universe": {
+              "all_americans": 66.1,
+              "with_view": 66.1
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 33.48,
+            "values_by_universe": {
+              "all_americans": 33.48,
+              "with_view": 33.48
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 66.52,
+            "values_by_universe": {
+              "all_americans": 66.52,
+              "with_view": 66.52
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "education|party",
+        "var_a": "education",
+        "var_b": "party",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "College completed",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 30.29,
+            "values_by_universe": {
+              "all_americans": 30.29,
+              "with_view": 30.29
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "D",
+            "metric": "no",
+            "value": 69.71,
+            "values_by_universe": {
+              "all_americans": 69.71,
+              "with_view": 69.71
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 30.69,
+            "values_by_universe": {
+              "all_americans": 30.69,
+              "with_view": 30.69
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "D",
+            "metric": "no",
+            "value": 69.31,
+            "values_by_universe": {
+              "all_americans": 69.31,
+              "with_view": 69.31
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 30.13,
+            "values_by_universe": {
+              "all_americans": 30.13,
+              "with_view": 30.13
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "D",
+            "metric": "no",
+            "value": 69.87,
+            "values_by_universe": {
+              "all_americans": 69.87,
+              "with_view": 69.87
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 31,
+            "values_by_universe": {
+              "all_americans": 31,
+              "with_view": 31
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "O",
+            "metric": "no",
+            "value": 69,
+            "values_by_universe": {
+              "all_americans": 69,
+              "with_view": 69
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 31.31,
+            "values_by_universe": {
+              "all_americans": 31.31,
+              "with_view": 31.31
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "O",
+            "metric": "no",
+            "value": 68.69,
+            "values_by_universe": {
+              "all_americans": 68.69,
+              "with_view": 68.69
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 30.79,
+            "values_by_universe": {
+              "all_americans": 30.79,
+              "with_view": 30.79
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "O",
+            "metric": "no",
+            "value": 69.21,
+            "values_by_universe": {
+              "all_americans": 69.21,
+              "with_view": 69.21
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 31.14,
+            "values_by_universe": {
+              "all_americans": 31.14,
+              "with_view": 31.14
+            }
+          },
+          {
+            "a_level": "College completed",
+            "b_level": "R",
+            "metric": "no",
+            "value": 68.86,
+            "values_by_universe": {
+              "all_americans": 68.86,
+              "with_view": 68.86
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 31.31,
+            "values_by_universe": {
+              "all_americans": 31.31,
+              "with_view": 31.31
+            }
+          },
+          {
+            "a_level": "Graduate/professional degree",
+            "b_level": "R",
+            "metric": "no",
+            "value": 68.69,
+            "values_by_universe": {
+              "all_americans": 68.69,
+              "with_view": 68.69
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 31.04,
+            "values_by_universe": {
+              "all_americans": 31.04,
+              "with_view": 31.04
+            }
+          },
+          {
+            "a_level": "No college",
+            "b_level": "R",
+            "metric": "no",
+            "value": 68.96,
+            "values_by_universe": {
+              "all_americans": 68.96,
+              "with_view": 68.96
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "gender|party",
+        "var_a": "gender",
+        "var_b": "party",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Female",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 29.62,
+            "values_by_universe": {
+              "all_americans": 29.62,
+              "with_view": 29.62
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "D",
+            "metric": "no",
+            "value": 70.38,
+            "values_by_universe": {
+              "all_americans": 70.38,
+              "with_view": 70.38
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 31.09,
+            "values_by_universe": {
+              "all_americans": 31.09,
+              "with_view": 31.09
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "D",
+            "metric": "no",
+            "value": 68.91,
+            "values_by_universe": {
+              "all_americans": 68.91,
+              "with_view": 68.91
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 30.49,
+            "values_by_universe": {
+              "all_americans": 30.49,
+              "with_view": 30.49
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "O",
+            "metric": "no",
+            "value": 69.51,
+            "values_by_universe": {
+              "all_americans": 69.51,
+              "with_view": 69.51
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 31.56,
+            "values_by_universe": {
+              "all_americans": 31.56,
+              "with_view": 31.56
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "O",
+            "metric": "no",
+            "value": 68.44,
+            "values_by_universe": {
+              "all_americans": 68.44,
+              "with_view": 68.44
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 30.5,
+            "values_by_universe": {
+              "all_americans": 30.5,
+              "with_view": 30.5
+            }
+          },
+          {
+            "a_level": "Female",
+            "b_level": "R",
+            "metric": "no",
+            "value": 69.5,
+            "values_by_universe": {
+              "all_americans": 69.5,
+              "with_view": 69.5
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 31.89,
+            "values_by_universe": {
+              "all_americans": 31.89,
+              "with_view": 31.89
+            }
+          },
+          {
+            "a_level": "Male",
+            "b_level": "R",
+            "metric": "no",
+            "value": 68.11,
+            "values_by_universe": {
+              "all_americans": 68.11,
+              "with_view": 68.11
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "income|party",
+        "var_a": "income",
+        "var_b": "party",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 28.84,
+            "values_by_universe": {
+              "all_americans": 28.84,
+              "with_view": 28.84
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "D",
+            "metric": "no",
+            "value": 71.16,
+            "values_by_universe": {
+              "all_americans": 71.16,
+              "with_view": 71.16
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 26.68,
+            "values_by_universe": {
+              "all_americans": 26.68,
+              "with_view": 26.68
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "D",
+            "metric": "no",
+            "value": 73.32,
+            "values_by_universe": {
+              "all_americans": 73.32,
+              "with_view": 73.32
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 26.59,
+            "values_by_universe": {
+              "all_americans": 26.59,
+              "with_view": 26.59
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "D",
+            "metric": "no",
+            "value": 73.41,
+            "values_by_universe": {
+              "all_americans": 73.41,
+              "with_view": 73.41
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "D",
+            "metric": "yes",
+            "value": 33.27,
+            "values_by_universe": {
+              "all_americans": 33.27,
+              "with_view": 33.27
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "D",
+            "metric": "no",
+            "value": 66.73,
+            "values_by_universe": {
+              "all_americans": 66.73,
+              "with_view": 66.73
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 29.3,
+            "values_by_universe": {
+              "all_americans": 29.3,
+              "with_view": 29.3
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "O",
+            "metric": "no",
+            "value": 70.7,
+            "values_by_universe": {
+              "all_americans": 70.7,
+              "with_view": 70.7
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 27.36,
+            "values_by_universe": {
+              "all_americans": 27.36,
+              "with_view": 27.36
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "O",
+            "metric": "no",
+            "value": 72.64,
+            "values_by_universe": {
+              "all_americans": 72.64,
+              "with_view": 72.64
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 27.26,
+            "values_by_universe": {
+              "all_americans": 27.26,
+              "with_view": 27.26
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "O",
+            "metric": "no",
+            "value": 72.74,
+            "values_by_universe": {
+              "all_americans": 72.74,
+              "with_view": 72.74
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "O",
+            "metric": "yes",
+            "value": 33.58,
+            "values_by_universe": {
+              "all_americans": 33.58,
+              "with_view": 33.58
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "O",
+            "metric": "no",
+            "value": 66.42,
+            "values_by_universe": {
+              "all_americans": 66.42,
+              "with_view": 66.42
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 29.3,
+            "values_by_universe": {
+              "all_americans": 29.3,
+              "with_view": 29.3
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "R",
+            "metric": "no",
+            "value": 70.7,
+            "values_by_universe": {
+              "all_americans": 70.7,
+              "with_view": 70.7
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 27.5,
+            "values_by_universe": {
+              "all_americans": 27.5,
+              "with_view": 27.5
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "R",
+            "metric": "no",
+            "value": 72.5,
+            "values_by_universe": {
+              "all_americans": 72.5,
+              "with_view": 72.5
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 27.49,
+            "values_by_universe": {
+              "all_americans": 27.49,
+              "with_view": 27.49
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "R",
+            "metric": "no",
+            "value": 72.51,
+            "values_by_universe": {
+              "all_americans": 72.51,
+              "with_view": 72.51
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "R",
+            "metric": "yes",
+            "value": 33.85,
+            "values_by_universe": {
+              "all_americans": 33.85,
+              "with_view": 33.85
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "R",
+            "metric": "no",
+            "value": 66.15,
+            "values_by_universe": {
+              "all_americans": 66.15,
+              "with_view": 66.15
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "party|race",
+        "var_a": "party",
+        "var_b": "race",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "D",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.85,
+            "values_by_universe": {
+              "all_americans": 29.85,
+              "with_view": 29.85
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.15,
+            "values_by_universe": {
+              "all_americans": 70.15,
+              "with_view": 70.15
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.21,
+            "values_by_universe": {
+              "all_americans": 31.21,
+              "with_view": 31.21
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.79,
+            "values_by_universe": {
+              "all_americans": 68.79,
+              "with_view": 68.79
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.44,
+            "values_by_universe": {
+              "all_americans": 31.44,
+              "with_view": 31.44
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.56,
+            "values_by_universe": {
+              "all_americans": 68.56,
+              "with_view": 68.56
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.14,
+            "values_by_universe": {
+              "all_americans": 31.14,
+              "with_view": 31.14
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.86,
+            "values_by_universe": {
+              "all_americans": 68.86,
+              "with_view": 68.86
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.99,
+            "values_by_universe": {
+              "all_americans": 29.99,
+              "with_view": 29.99
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.01,
+            "values_by_universe": {
+              "all_americans": 70.01,
+              "with_view": 70.01
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.21,
+            "values_by_universe": {
+              "all_americans": 31.21,
+              "with_view": 31.21
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.79,
+            "values_by_universe": {
+              "all_americans": 68.79,
+              "with_view": 68.79
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.36,
+            "values_by_universe": {
+              "all_americans": 31.36,
+              "with_view": 31.36
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.64,
+            "values_by_universe": {
+              "all_americans": 68.64,
+              "with_view": 68.64
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.24,
+            "values_by_universe": {
+              "all_americans": 31.24,
+              "with_view": 31.24
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.76,
+            "values_by_universe": {
+              "all_americans": 68.76,
+              "with_view": 68.76
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 29.71,
+            "values_by_universe": {
+              "all_americans": 29.71,
+              "with_view": 29.71
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 70.29,
+            "values_by_universe": {
+              "all_americans": 70.29,
+              "with_view": 70.29
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 31.1,
+            "values_by_universe": {
+              "all_americans": 31.1,
+              "with_view": 31.1
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 68.9,
+            "values_by_universe": {
+              "all_americans": 68.9,
+              "with_view": 68.9
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 31.14,
+            "values_by_universe": {
+              "all_americans": 31.14,
+              "with_view": 31.14
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 68.86,
+            "values_by_universe": {
+              "all_americans": 68.86,
+              "with_view": 68.86
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 31.15,
+            "values_by_universe": {
+              "all_americans": 31.15,
+              "with_view": 31.15
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "White",
+            "metric": "no",
+            "value": 68.85,
+            "values_by_universe": {
+              "all_americans": 68.85,
+              "with_view": 68.85
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "party|religion",
+        "var_a": "party",
+        "var_b": "religion",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "D",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 30.78,
+            "values_by_universe": {
+              "all_americans": 30.78,
+              "with_view": 30.78
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 69.22,
+            "values_by_universe": {
+              "all_americans": 69.22,
+              "with_view": 69.22
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 30.47,
+            "values_by_universe": {
+              "all_americans": 30.47,
+              "with_view": 30.47
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 69.53,
+            "values_by_universe": {
+              "all_americans": 69.53,
+              "with_view": 69.53
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.07,
+            "values_by_universe": {
+              "all_americans": 31.07,
+              "with_view": 31.07
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.93,
+            "values_by_universe": {
+              "all_americans": 68.93,
+              "with_view": 68.93
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.07,
+            "values_by_universe": {
+              "all_americans": 30.07,
+              "with_view": 30.07
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.93,
+            "values_by_universe": {
+              "all_americans": 69.93,
+              "with_view": 69.93
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.25,
+            "values_by_universe": {
+              "all_americans": 31.25,
+              "with_view": 31.25
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.75,
+            "values_by_universe": {
+              "all_americans": 68.75,
+              "with_view": 68.75
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.04,
+            "values_by_universe": {
+              "all_americans": 31.04,
+              "with_view": 31.04
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.96,
+            "values_by_universe": {
+              "all_americans": 68.96,
+              "with_view": 68.96
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.51,
+            "values_by_universe": {
+              "all_americans": 31.51,
+              "with_view": 31.51
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.49,
+            "values_by_universe": {
+              "all_americans": 68.49,
+              "with_view": 68.49
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.78,
+            "values_by_universe": {
+              "all_americans": 30.78,
+              "with_view": 30.78
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.22,
+            "values_by_universe": {
+              "all_americans": 69.22,
+              "with_view": 69.22
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.34,
+            "values_by_universe": {
+              "all_americans": 31.34,
+              "with_view": 31.34
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.66,
+            "values_by_universe": {
+              "all_americans": 68.66,
+              "with_view": 68.66
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.22,
+            "values_by_universe": {
+              "all_americans": 31.22,
+              "with_view": 31.22
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.78,
+            "values_by_universe": {
+              "all_americans": 68.78,
+              "with_view": 68.78
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.57,
+            "values_by_universe": {
+              "all_americans": 31.57,
+              "with_view": 31.57
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.43,
+            "values_by_universe": {
+              "all_americans": 68.43,
+              "with_view": 68.43
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 30.96,
+            "values_by_universe": {
+              "all_americans": 30.96,
+              "with_view": 30.96
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69.04,
+            "values_by_universe": {
+              "all_americans": 69.04,
+              "with_view": 69.04
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "party|rus_code",
+        "var_a": "party",
+        "var_b": "rus_code",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "D",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.24,
+            "values_by_universe": {
+              "all_americans": 30.24,
+              "with_view": 30.24
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.76,
+            "values_by_universe": {
+              "all_americans": 69.76,
+              "with_view": 69.76
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 29.85,
+            "values_by_universe": {
+              "all_americans": 29.85,
+              "with_view": 29.85
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 70.15,
+            "values_by_universe": {
+              "all_americans": 70.15,
+              "with_view": 70.15
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 30.68,
+            "values_by_universe": {
+              "all_americans": 30.68,
+              "with_view": 30.68
+            }
+          },
+          {
+            "a_level": "D",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 69.32,
+            "values_by_universe": {
+              "all_americans": 69.32,
+              "with_view": 69.32
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.86,
+            "values_by_universe": {
+              "all_americans": 30.86,
+              "with_view": 30.86
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.14,
+            "values_by_universe": {
+              "all_americans": 69.14,
+              "with_view": 69.14
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.69,
+            "values_by_universe": {
+              "all_americans": 30.69,
+              "with_view": 30.69
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.31,
+            "values_by_universe": {
+              "all_americans": 69.31,
+              "with_view": 69.31
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.55,
+            "values_by_universe": {
+              "all_americans": 31.55,
+              "with_view": 31.55
+            }
+          },
+          {
+            "a_level": "O",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.45,
+            "values_by_universe": {
+              "all_americans": 68.45,
+              "with_view": 68.45
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.04,
+            "values_by_universe": {
+              "all_americans": 31.04,
+              "with_view": 31.04
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.96,
+            "values_by_universe": {
+              "all_americans": 68.96,
+              "with_view": 68.96
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 31.31,
+            "values_by_universe": {
+              "all_americans": 31.31,
+              "with_view": 31.31
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 68.69,
+            "values_by_universe": {
+              "all_americans": 68.69,
+              "with_view": 68.69
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.51,
+            "values_by_universe": {
+              "all_americans": 31.51,
+              "with_view": 31.51
+            }
+          },
+          {
+            "a_level": "R",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.49,
+            "values_by_universe": {
+              "all_americans": 68.49,
+              "with_view": 68.49
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "income|race",
+        "var_a": "income",
+        "var_b": "race",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 28.57,
+            "values_by_universe": {
+              "all_americans": 28.57,
+              "with_view": 28.57
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 71.43,
+            "values_by_universe": {
+              "all_americans": 71.43,
+              "with_view": 71.43
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 26.38,
+            "values_by_universe": {
+              "all_americans": 26.38,
+              "with_view": 26.38
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 73.62,
+            "values_by_universe": {
+              "all_americans": 73.62,
+              "with_view": 73.62
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 26.3,
+            "values_by_universe": {
+              "all_americans": 26.3,
+              "with_view": 26.3
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 73.7,
+            "values_by_universe": {
+              "all_americans": 73.7,
+              "with_view": 73.7
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Black",
+            "metric": "yes",
+            "value": 32.9,
+            "values_by_universe": {
+              "all_americans": 32.9,
+              "with_view": 32.9
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Black",
+            "metric": "no",
+            "value": 67.1,
+            "values_by_universe": {
+              "all_americans": 67.1,
+              "with_view": 67.1
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 29.3,
+            "values_by_universe": {
+              "all_americans": 29.3,
+              "with_view": 29.3
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 70.7,
+            "values_by_universe": {
+              "all_americans": 70.7,
+              "with_view": 70.7
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 27.46,
+            "values_by_universe": {
+              "all_americans": 27.46,
+              "with_view": 27.46
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 72.54,
+            "values_by_universe": {
+              "all_americans": 72.54,
+              "with_view": 72.54
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 27.41,
+            "values_by_universe": {
+              "all_americans": 27.41,
+              "with_view": 27.41
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 72.59,
+            "values_by_universe": {
+              "all_americans": 72.59,
+              "with_view": 72.59
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Hispanic",
+            "metric": "yes",
+            "value": 33.64,
+            "values_by_universe": {
+              "all_americans": 33.64,
+              "with_view": 33.64
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Hispanic",
+            "metric": "no",
+            "value": 66.36,
+            "values_by_universe": {
+              "all_americans": 66.36,
+              "with_view": 66.36
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 29.3,
+            "values_by_universe": {
+              "all_americans": 29.3,
+              "with_view": 29.3
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 70.7,
+            "values_by_universe": {
+              "all_americans": 70.7,
+              "with_view": 70.7
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 27.39,
+            "values_by_universe": {
+              "all_americans": 27.39,
+              "with_view": 27.39
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 72.61,
+            "values_by_universe": {
+              "all_americans": 72.61,
+              "with_view": 72.61
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 27.36,
+            "values_by_universe": {
+              "all_americans": 27.36,
+              "with_view": 27.36
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 72.64,
+            "values_by_universe": {
+              "all_americans": 72.64,
+              "with_view": 72.64
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Other",
+            "metric": "yes",
+            "value": 33.57,
+            "values_by_universe": {
+              "all_americans": 33.57,
+              "with_view": 33.57
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Other",
+            "metric": "no",
+            "value": 66.43,
+            "values_by_universe": {
+              "all_americans": 66.43,
+              "with_view": 66.43
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 29.37,
+            "values_by_universe": {
+              "all_americans": 29.37,
+              "with_view": 29.37
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "White",
+            "metric": "no",
+            "value": 70.63,
+            "values_by_universe": {
+              "all_americans": 70.63,
+              "with_view": 70.63
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 27.54,
+            "values_by_universe": {
+              "all_americans": 27.54,
+              "with_view": 27.54
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "White",
+            "metric": "no",
+            "value": 72.46,
+            "values_by_universe": {
+              "all_americans": 72.46,
+              "with_view": 72.46
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 27.53,
+            "values_by_universe": {
+              "all_americans": 27.53,
+              "with_view": 27.53
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "White",
+            "metric": "no",
+            "value": 72.47,
+            "values_by_universe": {
+              "all_americans": 72.47,
+              "with_view": 72.47
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "White",
+            "metric": "yes",
+            "value": 33.88,
+            "values_by_universe": {
+              "all_americans": 33.88,
+              "with_view": 33.88
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "White",
+            "metric": "no",
+            "value": 66.12,
+            "values_by_universe": {
+              "all_americans": 66.12,
+              "with_view": 66.12
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "race|religion",
+        "var_a": "race",
+        "var_b": "religion",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Black",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 30.36,
+            "values_by_universe": {
+              "all_americans": 30.36,
+              "with_view": 30.36
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 69.64,
+            "values_by_universe": {
+              "all_americans": 69.64,
+              "with_view": 69.64
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 30.08,
+            "values_by_universe": {
+              "all_americans": 30.08,
+              "with_view": 30.08
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 69.92,
+            "values_by_universe": {
+              "all_americans": 69.92,
+              "with_view": 69.92
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 30.61,
+            "values_by_universe": {
+              "all_americans": 30.61,
+              "with_view": 30.61
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 69.39,
+            "values_by_universe": {
+              "all_americans": 69.39,
+              "with_view": 69.39
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 29.69,
+            "values_by_universe": {
+              "all_americans": 29.69,
+              "with_view": 29.69
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 70.31,
+            "values_by_universe": {
+              "all_americans": 70.31,
+              "with_view": 70.31
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.36,
+            "values_by_universe": {
+              "all_americans": 31.36,
+              "with_view": 31.36
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.64,
+            "values_by_universe": {
+              "all_americans": 68.64,
+              "with_view": 68.64
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.25,
+            "values_by_universe": {
+              "all_americans": 31.25,
+              "with_view": 31.25
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.75,
+            "values_by_universe": {
+              "all_americans": 68.75,
+              "with_view": 68.75
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.69,
+            "values_by_universe": {
+              "all_americans": 31.69,
+              "with_view": 31.69
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.31,
+            "values_by_universe": {
+              "all_americans": 68.31,
+              "with_view": 68.31
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 31,
+            "values_by_universe": {
+              "all_americans": 31,
+              "with_view": 31
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 69,
+            "values_by_universe": {
+              "all_americans": 69,
+              "with_view": 69
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.46,
+            "values_by_universe": {
+              "all_americans": 31.46,
+              "with_view": 31.46
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.54,
+            "values_by_universe": {
+              "all_americans": 68.54,
+              "with_view": 68.54
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.35,
+            "values_by_universe": {
+              "all_americans": 31.35,
+              "with_view": 31.35
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.65,
+            "values_by_universe": {
+              "all_americans": 68.65,
+              "with_view": 68.65
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.8,
+            "values_by_universe": {
+              "all_americans": 31.8,
+              "with_view": 31.8
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.2,
+            "values_by_universe": {
+              "all_americans": 68.2,
+              "with_view": 68.2
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 31.14,
+            "values_by_universe": {
+              "all_americans": 31.14,
+              "with_view": 31.14
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 68.86,
+            "values_by_universe": {
+              "all_americans": 68.86,
+              "with_view": 68.86
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Catholic",
+            "metric": "yes",
+            "value": 31.4,
+            "values_by_universe": {
+              "all_americans": 31.4,
+              "with_view": 31.4
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Catholic",
+            "metric": "no",
+            "value": 68.6,
+            "values_by_universe": {
+              "all_americans": 68.6,
+              "with_view": 68.6
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Not religious",
+            "metric": "yes",
+            "value": 31.27,
+            "values_by_universe": {
+              "all_americans": 31.27,
+              "with_view": 31.27
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Not religious",
+            "metric": "no",
+            "value": 68.73,
+            "values_by_universe": {
+              "all_americans": 68.73,
+              "with_view": 68.73
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Other religion",
+            "metric": "yes",
+            "value": 31.67,
+            "values_by_universe": {
+              "all_americans": 31.67,
+              "with_view": 31.67
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Other religion",
+            "metric": "no",
+            "value": 68.33,
+            "values_by_universe": {
+              "all_americans": 68.33,
+              "with_view": 68.33
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Protestant",
+            "metric": "yes",
+            "value": 31.01,
+            "values_by_universe": {
+              "all_americans": 31.01,
+              "with_view": 31.01
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Protestant",
+            "metric": "no",
+            "value": 68.99,
+            "values_by_universe": {
+              "all_americans": 68.99,
+              "with_view": 68.99
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "race|rus_code",
+        "var_a": "race",
+        "var_b": "rus_code",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Black",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 29.9,
+            "values_by_universe": {
+              "all_americans": 29.9,
+              "with_view": 29.9
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 70.1,
+            "values_by_universe": {
+              "all_americans": 70.1,
+              "with_view": 70.1
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 29.42,
+            "values_by_universe": {
+              "all_americans": 29.42,
+              "with_view": 29.42
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 70.58,
+            "values_by_universe": {
+              "all_americans": 70.58,
+              "with_view": 70.58
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 30.22,
+            "values_by_universe": {
+              "all_americans": 30.22,
+              "with_view": 30.22
+            }
+          },
+          {
+            "a_level": "Black",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 69.78,
+            "values_by_universe": {
+              "all_americans": 69.78,
+              "with_view": 69.78
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.97,
+            "values_by_universe": {
+              "all_americans": 30.97,
+              "with_view": 30.97
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.03,
+            "values_by_universe": {
+              "all_americans": 69.03,
+              "with_view": 69.03
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 31.31,
+            "values_by_universe": {
+              "all_americans": 31.31,
+              "with_view": 31.31
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 68.69,
+            "values_by_universe": {
+              "all_americans": 68.69,
+              "with_view": 68.69
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.77,
+            "values_by_universe": {
+              "all_americans": 31.77,
+              "with_view": 31.77
+            }
+          },
+          {
+            "a_level": "Hispanic",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.23,
+            "values_by_universe": {
+              "all_americans": 68.23,
+              "with_view": 68.23
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.05,
+            "values_by_universe": {
+              "all_americans": 31.05,
+              "with_view": 31.05
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.95,
+            "values_by_universe": {
+              "all_americans": 68.95,
+              "with_view": 68.95
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 31.32,
+            "values_by_universe": {
+              "all_americans": 31.32,
+              "with_view": 31.32
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 68.68,
+            "values_by_universe": {
+              "all_americans": 68.68,
+              "with_view": 68.68
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.75,
+            "values_by_universe": {
+              "all_americans": 31.75,
+              "with_view": 31.75
+            }
+          },
+          {
+            "a_level": "Other",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.25,
+            "values_by_universe": {
+              "all_americans": 68.25,
+              "with_view": 68.25
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.02,
+            "values_by_universe": {
+              "all_americans": 31.02,
+              "with_view": 31.02
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.98,
+            "values_by_universe": {
+              "all_americans": 68.98,
+              "with_view": 68.98
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 31.35,
+            "values_by_universe": {
+              "all_americans": 31.35,
+              "with_view": 31.35
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 68.65,
+            "values_by_universe": {
+              "all_americans": 68.65,
+              "with_view": 68.65
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.82,
+            "values_by_universe": {
+              "all_americans": 31.82,
+              "with_view": 31.82
+            }
+          },
+          {
+            "a_level": "White",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.18,
+            "values_by_universe": {
+              "all_americans": 68.18,
+              "with_view": 68.18
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "income|rus_code",
+        "var_a": "income",
+        "var_b": "rus_code",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 29.17,
+            "values_by_universe": {
+              "all_americans": 29.17,
+              "with_view": 29.17
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 70.83,
+            "values_by_universe": {
+              "all_americans": 70.83,
+              "with_view": 70.83
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 27.35,
+            "values_by_universe": {
+              "all_americans": 27.35,
+              "with_view": 27.35
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 72.65,
+            "values_by_universe": {
+              "all_americans": 72.65,
+              "with_view": 72.65
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 27.36,
+            "values_by_universe": {
+              "all_americans": 27.36,
+              "with_view": 27.36
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 72.64,
+            "values_by_universe": {
+              "all_americans": 72.64,
+              "with_view": 72.64
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 33.73,
+            "values_by_universe": {
+              "all_americans": 33.73,
+              "with_view": 33.73
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 66.27,
+            "values_by_universe": {
+              "all_americans": 66.27,
+              "with_view": 66.27
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 28.69,
+            "values_by_universe": {
+              "all_americans": 28.69,
+              "with_view": 28.69
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 71.31,
+            "values_by_universe": {
+              "all_americans": 71.31,
+              "with_view": 71.31
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 26.22,
+            "values_by_universe": {
+              "all_americans": 26.22,
+              "with_view": 26.22
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 73.78,
+            "values_by_universe": {
+              "all_americans": 73.78,
+              "with_view": 73.78
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 26.13,
+            "values_by_universe": {
+              "all_americans": 26.13,
+              "with_view": 26.13
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 73.87,
+            "values_by_universe": {
+              "all_americans": 73.87,
+              "with_view": 73.87
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 32.98,
+            "values_by_universe": {
+              "all_americans": 32.98,
+              "with_view": 32.98
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 67.02,
+            "values_by_universe": {
+              "all_americans": 67.02,
+              "with_view": 67.02
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 29.32,
+            "values_by_universe": {
+              "all_americans": 29.32,
+              "with_view": 29.32
+            }
+          },
+          {
+            "a_level": "Above median (75k to less than 125k)",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 70.68,
+            "values_by_universe": {
+              "all_americans": 70.68,
+              "with_view": 70.68
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 26.9,
+            "values_by_universe": {
+              "all_americans": 26.9,
+              "with_view": 26.9
+            }
+          },
+          {
+            "a_level": "Below median (35k to less than 75k)",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 73.1,
+            "values_by_universe": {
+              "all_americans": 73.1,
+              "with_view": 73.1
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 26.67,
+            "values_by_universe": {
+              "all_americans": 26.67,
+              "with_view": 26.67
+            }
+          },
+          {
+            "a_level": "Poor (less than 35k)",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 73.33,
+            "values_by_universe": {
+              "all_americans": 73.33,
+              "with_view": 73.33
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 33.62,
+            "values_by_universe": {
+              "all_americans": 33.62,
+              "with_view": 33.62
+            }
+          },
+          {
+            "a_level": "Rich (more than 125k)",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 66.38,
+            "values_by_universe": {
+              "all_americans": 66.38,
+              "with_view": 66.38
+            }
+          }
+        ]
+      },
+      {
+        "pair_id": "religion|rus_code",
+        "var_a": "religion",
+        "var_b": "rus_code",
+        "available_metrics": [
+          "yes",
+          "no"
+        ],
+        "cells": [
+          {
+            "a_level": "Catholic",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.1,
+            "values_by_universe": {
+              "all_americans": 31.1,
+              "with_view": 31.1
+            }
+          },
+          {
+            "a_level": "Catholic",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.9,
+            "values_by_universe": {
+              "all_americans": 68.9,
+              "with_view": 68.9
+            }
+          },
+          {
+            "a_level": "Not religious",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.91,
+            "values_by_universe": {
+              "all_americans": 30.91,
+              "with_view": 30.91
+            }
+          },
+          {
+            "a_level": "Not religious",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.09,
+            "values_by_universe": {
+              "all_americans": 69.09,
+              "with_view": 69.09
+            }
+          },
+          {
+            "a_level": "Other religion",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 31.36,
+            "values_by_universe": {
+              "all_americans": 31.36,
+              "with_view": 31.36
+            }
+          },
+          {
+            "a_level": "Other religion",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 68.64,
+            "values_by_universe": {
+              "all_americans": 68.64,
+              "with_view": 68.64
+            }
+          },
+          {
+            "a_level": "Protestant",
+            "b_level": "Rural",
+            "metric": "yes",
+            "value": 30.51,
+            "values_by_universe": {
+              "all_americans": 30.51,
+              "with_view": 30.51
+            }
+          },
+          {
+            "a_level": "Protestant",
+            "b_level": "Rural",
+            "metric": "no",
+            "value": 69.49,
+            "values_by_universe": {
+              "all_americans": 69.49,
+              "with_view": 69.49
+            }
+          },
+          {
+            "a_level": "Catholic",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 31.13,
+            "values_by_universe": {
+              "all_americans": 31.13,
+              "with_view": 31.13
+            }
+          },
+          {
+            "a_level": "Catholic",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 68.87,
+            "values_by_universe": {
+              "all_americans": 68.87,
+              "with_view": 68.87
+            }
+          },
+          {
+            "a_level": "Not religious",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.52,
+            "values_by_universe": {
+              "all_americans": 30.52,
+              "with_view": 30.52
+            }
+          },
+          {
+            "a_level": "Not religious",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.48,
+            "values_by_universe": {
+              "all_americans": 69.48,
+              "with_view": 69.48
+            }
+          },
+          {
+            "a_level": "Other religion",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 31.22,
+            "values_by_universe": {
+              "all_americans": 31.22,
+              "with_view": 31.22
+            }
+          },
+          {
+            "a_level": "Other religion",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 68.78,
+            "values_by_universe": {
+              "all_americans": 68.78,
+              "with_view": 68.78
+            }
+          },
+          {
+            "a_level": "Protestant",
+            "b_level": "Suburban",
+            "metric": "yes",
+            "value": 30.22,
+            "values_by_universe": {
+              "all_americans": 30.22,
+              "with_view": 30.22
+            }
+          },
+          {
+            "a_level": "Protestant",
+            "b_level": "Suburban",
+            "metric": "no",
+            "value": 69.78,
+            "values_by_universe": {
+              "all_americans": 69.78,
+              "with_view": 69.78
+            }
+          },
+          {
+            "a_level": "Catholic",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.64,
+            "values_by_universe": {
+              "all_americans": 31.64,
+              "with_view": 31.64
+            }
+          },
+          {
+            "a_level": "Catholic",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.36,
+            "values_by_universe": {
+              "all_americans": 68.36,
+              "with_view": 68.36
+            }
+          },
+          {
+            "a_level": "Not religious",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.1,
+            "values_by_universe": {
+              "all_americans": 31.1,
+              "with_view": 31.1
+            }
+          },
+          {
+            "a_level": "Not religious",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.9,
+            "values_by_universe": {
+              "all_americans": 68.9,
+              "with_view": 68.9
+            }
+          },
+          {
+            "a_level": "Other religion",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 31.79,
+            "values_by_universe": {
+              "all_americans": 31.79,
+              "with_view": 31.79
+            }
+          },
+          {
+            "a_level": "Other religion",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 68.21,
+            "values_by_universe": {
+              "all_americans": 68.21,
+              "with_view": 68.21
+            }
+          },
+          {
+            "a_level": "Protestant",
+            "b_level": "Urban",
+            "metric": "yes",
+            "value": 30.9,
+            "values_by_universe": {
+              "all_americans": 30.9,
+              "with_view": 30.9
+            }
+          },
+          {
+            "a_level": "Protestant",
+            "b_level": "Urban",
+            "metric": "no",
+            "value": 69.1,
+            "values_by_universe": {
+              "all_americans": 69.1,
+              "with_view": 69.1
+            }
+          }
+        ]
+      }
+    ],
+    "defaults": {
+      "row_var": "party",
+      "col_var": "gender",
+      "metric": "yes"
+    }
+  }
+}
