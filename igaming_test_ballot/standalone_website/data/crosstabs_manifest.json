@@ -1,0 +1,1260 @@
+{
+  "meta": {
+    "source_files": {
+      "ballot_governor_2027_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet"
+    },
+    "codebook_file": "codebook.json",
+    "generated_at_utc": "2026-05-25 20:37:26 UTC",
+    "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "delivery": {
+      "scheme": "manifest_plus_shards",
+      "shard_path_root": "crosstabs/",
+      "asset_host_base_url": null,
+      "max_asset_bytes": 25165824,
+      "r2_ready_note": "Optional future offload seam: set meta.delivery.asset_host_base_url to an R2/public bucket base URL and keep relative shard paths in manifest."
+    }
+  },
+  "response_universe": {
+    "enabled": true,
+    "default_mode": "with_view",
+    "modes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "explainer": "In \"What respondents with a view said\", we remove Undecided responses and rescale the remaining responses to sum to 100%.",
+    "questions": [
+      {
+        "question_id": "ballot_governor_2027_pre",
+        "opinion_ids": [
+          "jeff_landry",
+          "republican_challenger",
+          "democratic_candidate"
+        ],
+        "non_opinion_ids": [
+          "undecided"
+        ],
+        "combined_definitions": [],
+        "signed_metric_definitions": []
+      }
+    ]
+  },
+  "response_geography": {
+    "enabled": true,
+    "default_type_id": "state",
+    "default_unit_id": "state wide",
+    "default_unit_by_type": {
+      "state": "state wide",
+      "county": "ACADIA PARISH",
+      "cultural_region": "acadiana_lafayette",
+      "congressional_district": "CD 01",
+      "state_house_district": "HD 001",
+      "state_senate_district": "SD 001"
+    },
+    "types": [
+      {
+        "id": "state",
+        "label": "Louisiana",
+        "unit_type": "state",
+        "selector_label": "Statewide",
+        "supports_unit_select": false,
+        "default_unit_id": "state wide",
+        "units": [
+          {
+            "id": "state wide",
+            "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "county",
+        "label": "Parish",
+        "unit_type": "County",
+        "selector_label": "Parish",
+        "supports_unit_select": true,
+        "default_unit_id": "ACADIA PARISH",
+        "units": [
+          {
+            "id": "ACADIA PARISH",
+            "label": "Acadia Parish"
+          },
+          {
+            "id": "ALLEN PARISH",
+            "label": "Allen Parish"
+          },
+          {
+            "id": "ASCENSION PARISH",
+            "label": "Ascension Parish"
+          },
+          {
+            "id": "ASSUMPTION PARISH",
+            "label": "Assumption Parish"
+          },
+          {
+            "id": "AVOYELLES PARISH",
+            "label": "Avoyelles Parish"
+          },
+          {
+            "id": "BEAUREGARD PARISH",
+            "label": "Beauregard Parish"
+          },
+          {
+            "id": "BIENVILLE PARISH",
+            "label": "Bienville Parish"
+          },
+          {
+            "id": "BOSSIER PARISH",
+            "label": "Bossier Parish"
+          },
+          {
+            "id": "CADDO PARISH",
+            "label": "Caddo Parish"
+          },
+          {
+            "id": "CALCASIEU PARISH",
+            "label": "Calcasieu Parish"
+          },
+          {
+            "id": "CALDWELL PARISH",
+            "label": "Caldwell Parish"
+          },
+          {
+            "id": "CAMERON PARISH",
+            "label": "Cameron Parish"
+          },
+          {
+            "id": "CATAHOULA PARISH",
+            "label": "Catahoula Parish"
+          },
+          {
+            "id": "CLAIBORNE PARISH",
+            "label": "Claiborne Parish"
+          },
+          {
+            "id": "CONCORDIA PARISH",
+            "label": "Concordia Parish"
+          },
+          {
+            "id": "DE SOTO PARISH",
+            "label": "De Soto Parish"
+          },
+          {
+            "id": "EAST BATON ROUGE PARISH",
+            "label": "East Baton Rouge Parish"
+          },
+          {
+            "id": "EAST CARROLL PARISH",
+            "label": "East Carroll Parish"
+          },
+          {
+            "id": "EAST FELICIANA PARISH",
+            "label": "East Feliciana Parish"
+          },
+          {
+            "id": "EVANGELINE PARISH",
+            "label": "Evangeline Parish"
+          },
+          {
+            "id": "FRANKLIN PARISH",
+            "label": "Franklin Parish"
+          },
+          {
+            "id": "GRANT PARISH",
+            "label": "Grant Parish"
+          },
+          {
+            "id": "IBERIA PARISH",
+            "label": "Iberia Parish"
+          },
+          {
+            "id": "IBERVILLE PARISH",
+            "label": "Iberville Parish"
+          },
+          {
+            "id": "JACKSON PARISH",
+            "label": "Jackson Parish"
+          },
+          {
+            "id": "JEFFERSON DAVIS PARISH",
+            "label": "Jefferson Davis Parish"
+          },
+          {
+            "id": "JEFFERSON PARISH",
+            "label": "Jefferson Parish"
+          },
+          {
+            "id": "LA SALLE PARISH",
+            "label": "La Salle Parish"
+          },
+          {
+            "id": "LAFAYETTE PARISH",
+            "label": "Lafayette Parish"
+          },
+          {
+            "id": "LAFOURCHE PARISH",
+            "label": "Lafourche Parish"
+          },
+          {
+            "id": "LINCOLN PARISH",
+            "label": "Lincoln Parish"
+          },
+          {
+            "id": "LIVINGSTON PARISH",
+            "label": "Livingston Parish"
+          },
+          {
+            "id": "MADISON PARISH",
+            "label": "Madison Parish"
+          },
+          {
+            "id": "MOREHOUSE PARISH",
+            "label": "Morehouse Parish"
+          },
+          {
+            "id": "NATCHITOCHES PARISH",
+            "label": "Natchitoches Parish"
+          },
+          {
+            "id": "ORLEANS PARISH",
+            "label": "Orleans Parish"
+          },
+          {
+            "id": "OUACHITA PARISH",
+            "label": "Ouachita Parish"
+          },
+          {
+            "id": "PLAQUEMINES PARISH",
+            "label": "Plaquemines Parish"
+          },
+          {
+            "id": "POINTE COUPEE PARISH",
+            "label": "Pointe Coupee Parish"
+          },
+          {
+            "id": "RAPIDES PARISH",
+            "label": "Rapides Parish"
+          },
+          {
+            "id": "RED RIVER PARISH",
+            "label": "Red River Parish"
+          },
+          {
+            "id": "RICHLAND PARISH",
+            "label": "Richland Parish"
+          },
+          {
+            "id": "SABINE PARISH",
+            "label": "Sabine Parish"
+          },
+          {
+            "id": "ST. BERNARD PARISH",
+            "label": "St. Bernard Parish"
+          },
+          {
+            "id": "ST. CHARLES PARISH",
+            "label": "St. Charles Parish"
+          },
+          {
+            "id": "ST. HELENA PARISH",
+            "label": "St. Helena Parish"
+          },
+          {
+            "id": "ST. JAMES PARISH",
+            "label": "St. James Parish"
+          },
+          {
+            "id": "ST. JOHN THE BAPTIST PARISH",
+            "label": "St. John the Baptist Parish"
+          },
+          {
+            "id": "ST. LANDRY PARISH",
+            "label": "St. Landry Parish"
+          },
+          {
+            "id": "ST. MARTIN PARISH",
+            "label": "St. Martin Parish"
+          },
+          {
+            "id": "ST. MARY PARISH",
+            "label": "St. Mary Parish"
+          },
+          {
+            "id": "ST. TAMMANY PARISH",
+            "label": "St. Tammany Parish"
+          },
+          {
+            "id": "TANGIPAHOA PARISH",
+            "label": "Tangipahoa Parish"
+          },
+          {
+            "id": "TENSAS PARISH",
+            "label": "Tensas Parish"
+          },
+          {
+            "id": "TERREBONNE PARISH",
+            "label": "Terrebonne Parish"
+          },
+          {
+            "id": "UNION PARISH",
+            "label": "Union Parish"
+          },
+          {
+            "id": "VERMILION PARISH",
+            "label": "Vermilion Parish"
+          },
+          {
+            "id": "VERNON PARISH",
+            "label": "Vernon Parish"
+          },
+          {
+            "id": "WASHINGTON PARISH",
+            "label": "Washington Parish"
+          },
+          {
+            "id": "WEBSTER PARISH",
+            "label": "Webster Parish"
+          },
+          {
+            "id": "WEST BATON ROUGE PARISH",
+            "label": "West Baton Rouge Parish"
+          },
+          {
+            "id": "WEST CARROLL PARISH",
+            "label": "West Carroll Parish"
+          },
+          {
+            "id": "WEST FELICIANA PARISH",
+            "label": "West Feliciana Parish"
+          },
+          {
+            "id": "WINN PARISH",
+            "label": "Winn Parish"
+          }
+        ]
+      },
+      {
+        "id": "cultural_region",
+        "label": "Cultural Region",
+        "unit_type": "Cultural Region",
+        "selector_label": "Cultural Region",
+        "supports_unit_select": true,
+        "default_unit_id": "acadiana_lafayette",
+        "units": [
+          {
+            "id": "acadiana_lafayette",
+            "label": "Acadiana Lafayette"
+          },
+          {
+            "id": "arklamiss_delta",
+            "label": "Arklamiss Delta"
+          },
+          {
+            "id": "arklatex",
+            "label": "Arklatex"
+          },
+          {
+            "id": "bayou_country",
+            "label": "Bayou Country"
+          },
+          {
+            "id": "central_louisiana",
+            "label": "Central Louisiana"
+          },
+          {
+            "id": "florida_parishes",
+            "label": "Florida Parishes"
+          },
+          {
+            "id": "greater_new_orleans",
+            "label": "Greater New Orleans"
+          },
+          {
+            "id": "southwest_louisiana",
+            "label": "Southwest Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "congressional_district",
+        "label": "Congressional District",
+        "unit_type": "Congressional District",
+        "selector_label": "Congressional District",
+        "supports_unit_select": true,
+        "default_unit_id": "CD 01",
+        "units": [
+          {
+            "id": "CD 01",
+            "label": "Cd 01"
+          },
+          {
+            "id": "CD 02",
+            "label": "Cd 02"
+          },
+          {
+            "id": "CD 03",
+            "label": "Cd 03"
+          },
+          {
+            "id": "CD 04",
+            "label": "Cd 04"
+          },
+          {
+            "id": "CD 05",
+            "label": "Cd 05"
+          },
+          {
+            "id": "CD 06",
+            "label": "Cd 06"
+          }
+        ]
+      },
+      {
+        "id": "state_house_district",
+        "label": "State House District",
+        "unit_type": "State House District",
+        "selector_label": "State House District",
+        "supports_unit_select": true,
+        "default_unit_id": "HD 001",
+        "units": [
+          {
+            "id": "HD 001",
+            "label": "Hd 001"
+          },
+          {
+            "id": "HD 002",
+            "label": "Hd 002"
+          },
+          {
+            "id": "HD 003",
+            "label": "Hd 003"
+          },
+          {
+            "id": "HD 004",
+            "label": "Hd 004"
+          },
+          {
+            "id": "HD 005",
+            "label": "Hd 005"
+          },
+          {
+            "id": "HD 006",
+            "label": "Hd 006"
+          },
+          {
+            "id": "HD 007",
+            "label": "Hd 007"
+          },
+          {
+            "id": "HD 008",
+            "label": "Hd 008"
+          },
+          {
+            "id": "HD 009",
+            "label": "Hd 009"
+          },
+          {
+            "id": "HD 010",
+            "label": "Hd 010"
+          },
+          {
+            "id": "HD 011",
+            "label": "Hd 011"
+          },
+          {
+            "id": "HD 012",
+            "label": "Hd 012"
+          },
+          {
+            "id": "HD 013",
+            "label": "Hd 013"
+          },
+          {
+            "id": "HD 014",
+            "label": "Hd 014"
+          },
+          {
+            "id": "HD 015",
+            "label": "Hd 015"
+          },
+          {
+            "id": "HD 016",
+            "label": "Hd 016"
+          },
+          {
+            "id": "HD 017",
+            "label": "Hd 017"
+          },
+          {
+            "id": "HD 018",
+            "label": "Hd 018"
+          },
+          {
+            "id": "HD 019",
+            "label": "Hd 019"
+          },
+          {
+            "id": "HD 020",
+            "label": "Hd 020"
+          },
+          {
+            "id": "HD 021",
+            "label": "Hd 021"
+          },
+          {
+            "id": "HD 022",
+            "label": "Hd 022"
+          },
+          {
+            "id": "HD 023",
+            "label": "Hd 023"
+          },
+          {
+            "id": "HD 024",
+            "label": "Hd 024"
+          },
+          {
+            "id": "HD 025",
+            "label": "Hd 025"
+          },
+          {
+            "id": "HD 026",
+            "label": "Hd 026"
+          },
+          {
+            "id": "HD 027",
+            "label": "Hd 027"
+          },
+          {
+            "id": "HD 028",
+            "label": "Hd 028"
+          },
+          {
+            "id": "HD 029",
+            "label": "Hd 029"
+          },
+          {
+            "id": "HD 030",
+            "label": "Hd 030"
+          },
+          {
+            "id": "HD 031",
+            "label": "Hd 031"
+          },
+          {
+            "id": "HD 032",
+            "label": "Hd 032"
+          },
+          {
+            "id": "HD 033",
+            "label": "Hd 033"
+          },
+          {
+            "id": "HD 034",
+            "label": "Hd 034"
+          },
+          {
+            "id": "HD 035",
+            "label": "Hd 035"
+          },
+          {
+            "id": "HD 036",
+            "label": "Hd 036"
+          },
+          {
+            "id": "HD 037",
+            "label": "Hd 037"
+          },
+          {
+            "id": "HD 038",
+            "label": "Hd 038"
+          },
+          {
+            "id": "HD 039",
+            "label": "Hd 039"
+          },
+          {
+            "id": "HD 040",
+            "label": "Hd 040"
+          },
+          {
+            "id": "HD 041",
+            "label": "Hd 041"
+          },
+          {
+            "id": "HD 042",
+            "label": "Hd 042"
+          },
+          {
+            "id": "HD 043",
+            "label": "Hd 043"
+          },
+          {
+            "id": "HD 044",
+            "label": "Hd 044"
+          },
+          {
+            "id": "HD 045",
+            "label": "Hd 045"
+          },
+          {
+            "id": "HD 046",
+            "label": "Hd 046"
+          },
+          {
+            "id": "HD 047",
+            "label": "Hd 047"
+          },
+          {
+            "id": "HD 048",
+            "label": "Hd 048"
+          },
+          {
+            "id": "HD 049",
+            "label": "Hd 049"
+          },
+          {
+            "id": "HD 050",
+            "label": "Hd 050"
+          },
+          {
+            "id": "HD 051",
+            "label": "Hd 051"
+          },
+          {
+            "id": "HD 052",
+            "label": "Hd 052"
+          },
+          {
+            "id": "HD 053",
+            "label": "Hd 053"
+          },
+          {
+            "id": "HD 054",
+            "label": "Hd 054"
+          },
+          {
+            "id": "HD 055",
+            "label": "Hd 055"
+          },
+          {
+            "id": "HD 056",
+            "label": "Hd 056"
+          },
+          {
+            "id": "HD 057",
+            "label": "Hd 057"
+          },
+          {
+            "id": "HD 058",
+            "label": "Hd 058"
+          },
+          {
+            "id": "HD 059",
+            "label": "Hd 059"
+          },
+          {
+            "id": "HD 060",
+            "label": "Hd 060"
+          },
+          {
+            "id": "HD 061",
+            "label": "Hd 061"
+          },
+          {
+            "id": "HD 062",
+            "label": "Hd 062"
+          },
+          {
+            "id": "HD 063",
+            "label": "Hd 063"
+          },
+          {
+            "id": "HD 064",
+            "label": "Hd 064"
+          },
+          {
+            "id": "HD 065",
+            "label": "Hd 065"
+          },
+          {
+            "id": "HD 066",
+            "label": "Hd 066"
+          },
+          {
+            "id": "HD 067",
+            "label": "Hd 067"
+          },
+          {
+            "id": "HD 068",
+            "label": "Hd 068"
+          },
+          {
+            "id": "HD 069",
+            "label": "Hd 069"
+          },
+          {
+            "id": "HD 070",
+            "label": "Hd 070"
+          },
+          {
+            "id": "HD 071",
+            "label": "Hd 071"
+          },
+          {
+            "id": "HD 072",
+            "label": "Hd 072"
+          },
+          {
+            "id": "HD 073",
+            "label": "Hd 073"
+          },
+          {
+            "id": "HD 074",
+            "label": "Hd 074"
+          },
+          {
+            "id": "HD 075",
+            "label": "Hd 075"
+          },
+          {
+            "id": "HD 076",
+            "label": "Hd 076"
+          },
+          {
+            "id": "HD 077",
+            "label": "Hd 077"
+          },
+          {
+            "id": "HD 078",
+            "label": "Hd 078"
+          },
+          {
+            "id": "HD 079",
+            "label": "Hd 079"
+          },
+          {
+            "id": "HD 080",
+            "label": "Hd 080"
+          },
+          {
+            "id": "HD 081",
+            "label": "Hd 081"
+          },
+          {
+            "id": "HD 082",
+            "label": "Hd 082"
+          },
+          {
+            "id": "HD 083",
+            "label": "Hd 083"
+          },
+          {
+            "id": "HD 084",
+            "label": "Hd 084"
+          },
+          {
+            "id": "HD 085",
+            "label": "Hd 085"
+          },
+          {
+            "id": "HD 086",
+            "label": "Hd 086"
+          },
+          {
+            "id": "HD 087",
+            "label": "Hd 087"
+          },
+          {
+            "id": "HD 088",
+            "label": "Hd 088"
+          },
+          {
+            "id": "HD 089",
+            "label": "Hd 089"
+          },
+          {
+            "id": "HD 090",
+            "label": "Hd 090"
+          },
+          {
+            "id": "HD 091",
+            "label": "Hd 091"
+          },
+          {
+            "id": "HD 092",
+            "label": "Hd 092"
+          },
+          {
+            "id": "HD 093",
+            "label": "Hd 093"
+          },
+          {
+            "id": "HD 094",
+            "label": "Hd 094"
+          },
+          {
+            "id": "HD 095",
+            "label": "Hd 095"
+          },
+          {
+            "id": "HD 096",
+            "label": "Hd 096"
+          },
+          {
+            "id": "HD 097",
+            "label": "Hd 097"
+          },
+          {
+            "id": "HD 098",
+            "label": "Hd 098"
+          },
+          {
+            "id": "HD 099",
+            "label": "Hd 099"
+          },
+          {
+            "id": "HD 100",
+            "label": "Hd 100"
+          },
+          {
+            "id": "HD 101",
+            "label": "Hd 101"
+          },
+          {
+            "id": "HD 102",
+            "label": "Hd 102"
+          },
+          {
+            "id": "HD 103",
+            "label": "Hd 103"
+          },
+          {
+            "id": "HD 104",
+            "label": "Hd 104"
+          },
+          {
+            "id": "HD 105",
+            "label": "Hd 105"
+          }
+        ]
+      },
+      {
+        "id": "state_senate_district",
+        "label": "State Senate District",
+        "unit_type": "State Senate District",
+        "selector_label": "State Senate District",
+        "supports_unit_select": true,
+        "default_unit_id": "SD 001",
+        "units": [
+          {
+            "id": "SD 001",
+            "label": "Sd 001"
+          },
+          {
+            "id": "SD 002",
+            "label": "Sd 002"
+          },
+          {
+            "id": "SD 003",
+            "label": "Sd 003"
+          },
+          {
+            "id": "SD 004",
+            "label": "Sd 004"
+          },
+          {
+            "id": "SD 005",
+            "label": "Sd 005"
+          },
+          {
+            "id": "SD 006",
+            "label": "Sd 006"
+          },
+          {
+            "id": "SD 007",
+            "label": "Sd 007"
+          },
+          {
+            "id": "SD 008",
+            "label": "Sd 008"
+          },
+          {
+            "id": "SD 009",
+            "label": "Sd 009"
+          },
+          {
+            "id": "SD 010",
+            "label": "Sd 010"
+          },
+          {
+            "id": "SD 011",
+            "label": "Sd 011"
+          },
+          {
+            "id": "SD 012",
+            "label": "Sd 012"
+          },
+          {
+            "id": "SD 013",
+            "label": "Sd 013"
+          },
+          {
+            "id": "SD 014",
+            "label": "Sd 014"
+          },
+          {
+            "id": "SD 015",
+            "label": "Sd 015"
+          },
+          {
+            "id": "SD 016",
+            "label": "Sd 016"
+          },
+          {
+            "id": "SD 017",
+            "label": "Sd 017"
+          },
+          {
+            "id": "SD 018",
+            "label": "Sd 018"
+          },
+          {
+            "id": "SD 019",
+            "label": "Sd 019"
+          },
+          {
+            "id": "SD 020",
+            "label": "Sd 020"
+          },
+          {
+            "id": "SD 021",
+            "label": "Sd 021"
+          },
+          {
+            "id": "SD 022",
+            "label": "Sd 022"
+          },
+          {
+            "id": "SD 023",
+            "label": "Sd 023"
+          },
+          {
+            "id": "SD 024",
+            "label": "Sd 024"
+          },
+          {
+            "id": "SD 025",
+            "label": "Sd 025"
+          },
+          {
+            "id": "SD 026",
+            "label": "Sd 026"
+          },
+          {
+            "id": "SD 027",
+            "label": "Sd 027"
+          },
+          {
+            "id": "SD 028",
+            "label": "Sd 028"
+          },
+          {
+            "id": "SD 029",
+            "label": "Sd 029"
+          },
+          {
+            "id": "SD 030",
+            "label": "Sd 030"
+          },
+          {
+            "id": "SD 031",
+            "label": "Sd 031"
+          },
+          {
+            "id": "SD 032",
+            "label": "Sd 032"
+          },
+          {
+            "id": "SD 033",
+            "label": "Sd 033"
+          },
+          {
+            "id": "SD 034",
+            "label": "Sd 034"
+          },
+          {
+            "id": "SD 035",
+            "label": "Sd 035"
+          },
+          {
+            "id": "SD 036",
+            "label": "Sd 036"
+          },
+          {
+            "id": "SD 037",
+            "label": "Sd 037"
+          },
+          {
+            "id": "SD 038",
+            "label": "Sd 038"
+          },
+          {
+            "id": "SD 039",
+            "label": "Sd 039"
+          }
+        ]
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "ballot_governor_2027_pre",
+      "label": "2027 Governor Ballot",
+      "default_metric": "jeff_landry"
+    }
+  ],
+  "shards_by_question": {
+    "ballot_governor_2027_pre": {
+      "state": {
+        "state wide": "crosstabs/ballot_governor_2027_pre/state/state_wide.json"
+      },
+      "county": {
+        "ACADIA PARISH": "crosstabs/ballot_governor_2027_pre/county/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/ballot_governor_2027_pre/county/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/ballot_governor_2027_pre/county/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/ballot_governor_2027_pre/county/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/ballot_governor_2027_pre/county/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/ballot_governor_2027_pre/county/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/ballot_governor_2027_pre/county/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/ballot_governor_2027_pre/county/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/ballot_governor_2027_pre/county/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/ballot_governor_2027_pre/county/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/ballot_governor_2027_pre/county/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/ballot_governor_2027_pre/county/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/ballot_governor_2027_pre/county/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/ballot_governor_2027_pre/county/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/ballot_governor_2027_pre/county/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/ballot_governor_2027_pre/county/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/ballot_governor_2027_pre/county/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/ballot_governor_2027_pre/county/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/ballot_governor_2027_pre/county/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/ballot_governor_2027_pre/county/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/ballot_governor_2027_pre/county/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/ballot_governor_2027_pre/county/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/ballot_governor_2027_pre/county/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/ballot_governor_2027_pre/county/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/ballot_governor_2027_pre/county/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/ballot_governor_2027_pre/county/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/ballot_governor_2027_pre/county/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/ballot_governor_2027_pre/county/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/ballot_governor_2027_pre/county/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/ballot_governor_2027_pre/county/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/ballot_governor_2027_pre/county/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/ballot_governor_2027_pre/county/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/ballot_governor_2027_pre/county/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/ballot_governor_2027_pre/county/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/ballot_governor_2027_pre/county/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/ballot_governor_2027_pre/county/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/ballot_governor_2027_pre/county/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/ballot_governor_2027_pre/county/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/ballot_governor_2027_pre/county/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/ballot_governor_2027_pre/county/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/ballot_governor_2027_pre/county/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/ballot_governor_2027_pre/county/richland_parish.json",
+        "SABINE PARISH": "crosstabs/ballot_governor_2027_pre/county/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/ballot_governor_2027_pre/county/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/ballot_governor_2027_pre/county/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/ballot_governor_2027_pre/county/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/ballot_governor_2027_pre/county/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/ballot_governor_2027_pre/county/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/ballot_governor_2027_pre/county/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/ballot_governor_2027_pre/county/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/ballot_governor_2027_pre/county/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/ballot_governor_2027_pre/county/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/ballot_governor_2027_pre/county/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/ballot_governor_2027_pre/county/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/ballot_governor_2027_pre/county/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/ballot_governor_2027_pre/county/union_parish.json",
+        "VERMILION PARISH": "crosstabs/ballot_governor_2027_pre/county/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/ballot_governor_2027_pre/county/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/ballot_governor_2027_pre/county/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/ballot_governor_2027_pre/county/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/ballot_governor_2027_pre/county/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/ballot_governor_2027_pre/county/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/ballot_governor_2027_pre/county/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/ballot_governor_2027_pre/county/winn_parish.json"
+      },
+      "cultural_region": {
+        "acadiana_lafayette": "crosstabs/ballot_governor_2027_pre/cultural_region/acadiana_lafayette.json",
+        "arklamiss_delta": "crosstabs/ballot_governor_2027_pre/cultural_region/arklamiss_delta.json",
+        "arklatex": "crosstabs/ballot_governor_2027_pre/cultural_region/arklatex.json",
+        "bayou_country": "crosstabs/ballot_governor_2027_pre/cultural_region/bayou_country.json",
+        "central_louisiana": "crosstabs/ballot_governor_2027_pre/cultural_region/central_louisiana.json",
+        "florida_parishes": "crosstabs/ballot_governor_2027_pre/cultural_region/florida_parishes.json",
+        "greater_new_orleans": "crosstabs/ballot_governor_2027_pre/cultural_region/greater_new_orleans.json",
+        "southwest_louisiana": "crosstabs/ballot_governor_2027_pre/cultural_region/southwest_louisiana.json"
+      },
+      "congressional_district": {
+        "CD 01": "crosstabs/ballot_governor_2027_pre/congressional_district/cd_01.json",
+        "CD 02": "crosstabs/ballot_governor_2027_pre/congressional_district/cd_02.json",
+        "CD 03": "crosstabs/ballot_governor_2027_pre/congressional_district/cd_03.json",
+        "CD 04": "crosstabs/ballot_governor_2027_pre/congressional_district/cd_04.json",
+        "CD 05": "crosstabs/ballot_governor_2027_pre/congressional_district/cd_05.json",
+        "CD 06": "crosstabs/ballot_governor_2027_pre/congressional_district/cd_06.json"
+      },
+      "state_house_district": {
+        "HD 001": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_001.json",
+        "HD 002": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_002.json",
+        "HD 003": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_003.json",
+        "HD 004": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_004.json",
+        "HD 005": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_005.json",
+        "HD 006": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_006.json",
+        "HD 007": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_007.json",
+        "HD 008": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_008.json",
+        "HD 009": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_009.json",
+        "HD 010": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_010.json",
+        "HD 011": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_011.json",
+        "HD 012": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_012.json",
+        "HD 013": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_013.json",
+        "HD 014": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_014.json",
+        "HD 015": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_015.json",
+        "HD 016": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_016.json",
+        "HD 017": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_017.json",
+        "HD 018": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_018.json",
+        "HD 019": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_019.json",
+        "HD 020": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_020.json",
+        "HD 021": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_021.json",
+        "HD 022": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_022.json",
+        "HD 023": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_023.json",
+        "HD 024": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_024.json",
+        "HD 025": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_025.json",
+        "HD 026": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_026.json",
+        "HD 027": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_027.json",
+        "HD 028": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_028.json",
+        "HD 029": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_029.json",
+        "HD 030": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_030.json",
+        "HD 031": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_031.json",
+        "HD 032": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_032.json",
+        "HD 033": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_033.json",
+        "HD 034": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_034.json",
+        "HD 035": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_035.json",
+        "HD 036": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_036.json",
+        "HD 037": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_037.json",
+        "HD 038": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_038.json",
+        "HD 039": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_039.json",
+        "HD 040": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_040.json",
+        "HD 041": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_041.json",
+        "HD 042": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_042.json",
+        "HD 043": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_043.json",
+        "HD 044": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_044.json",
+        "HD 045": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_045.json",
+        "HD 046": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_046.json",
+        "HD 047": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_047.json",
+        "HD 048": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_048.json",
+        "HD 049": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_049.json",
+        "HD 050": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_050.json",
+        "HD 051": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_051.json",
+        "HD 052": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_052.json",
+        "HD 053": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_053.json",
+        "HD 054": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_054.json",
+        "HD 055": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_055.json",
+        "HD 056": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_056.json",
+        "HD 057": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_057.json",
+        "HD 058": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_058.json",
+        "HD 059": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_059.json",
+        "HD 060": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_060.json",
+        "HD 061": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_061.json",
+        "HD 062": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_062.json",
+        "HD 063": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_063.json",
+        "HD 064": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_064.json",
+        "HD 065": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_065.json",
+        "HD 066": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_066.json",
+        "HD 067": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_067.json",
+        "HD 068": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_068.json",
+        "HD 069": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_069.json",
+        "HD 070": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_070.json",
+        "HD 071": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_071.json",
+        "HD 072": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_072.json",
+        "HD 073": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_073.json",
+        "HD 074": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_074.json",
+        "HD 075": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_075.json",
+        "HD 076": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_076.json",
+        "HD 077": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_077.json",
+        "HD 078": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_078.json",
+        "HD 079": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_079.json",
+        "HD 080": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_080.json",
+        "HD 081": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_081.json",
+        "HD 082": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_082.json",
+        "HD 083": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_083.json",
+        "HD 084": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_084.json",
+        "HD 085": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_085.json",
+        "HD 086": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_086.json",
+        "HD 087": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_087.json",
+        "HD 088": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_088.json",
+        "HD 089": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_089.json",
+        "HD 090": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_090.json",
+        "HD 091": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_091.json",
+        "HD 092": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_092.json",
+        "HD 093": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_093.json",
+        "HD 094": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_094.json",
+        "HD 095": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_095.json",
+        "HD 096": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_096.json",
+        "HD 097": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_097.json",
+        "HD 098": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_098.json",
+        "HD 099": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_099.json",
+        "HD 100": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_100.json",
+        "HD 101": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_101.json",
+        "HD 102": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_102.json",
+        "HD 103": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_103.json",
+        "HD 104": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_104.json",
+        "HD 105": "crosstabs/ballot_governor_2027_pre/state_house_district/hd_105.json"
+      },
+      "state_senate_district": {
+        "SD 001": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_001.json",
+        "SD 002": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_002.json",
+        "SD 003": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_003.json",
+        "SD 004": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_004.json",
+        "SD 005": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_005.json",
+        "SD 006": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_006.json",
+        "SD 007": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_007.json",
+        "SD 008": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_008.json",
+        "SD 009": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_009.json",
+        "SD 010": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_010.json",
+        "SD 011": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_011.json",
+        "SD 012": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_012.json",
+        "SD 013": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_013.json",
+        "SD 014": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_014.json",
+        "SD 015": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_015.json",
+        "SD 016": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_016.json",
+        "SD 017": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_017.json",
+        "SD 018": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_018.json",
+        "SD 019": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_019.json",
+        "SD 020": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_020.json",
+        "SD 021": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_021.json",
+        "SD 022": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_022.json",
+        "SD 023": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_023.json",
+        "SD 024": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_024.json",
+        "SD 025": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_025.json",
+        "SD 026": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_026.json",
+        "SD 027": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_027.json",
+        "SD 028": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_028.json",
+        "SD 029": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_029.json",
+        "SD 030": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_030.json",
+        "SD 031": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_031.json",
+        "SD 032": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_032.json",
+        "SD 033": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_033.json",
+        "SD 034": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_034.json",
+        "SD 035": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_035.json",
+        "SD 036": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_036.json",
+        "SD 037": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_037.json",
+        "SD 038": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_038.json",
+        "SD 039": "crosstabs/ballot_governor_2027_pre/state_senate_district/sd_039.json"
+      }
+    }
+  }
+}

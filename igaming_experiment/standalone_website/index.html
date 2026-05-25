@@ -253,9 +253,11 @@ body {
 .hero::before { width: 360px; height: 360px; right: -150px; top: -190px; background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%); }
 .hero::after { width: 300px; height: 300px; left: -120px; bottom: -160px; background: radial-gradient(circle, rgba(72, 180, 190, 0.25) 0%, transparent 74%); }
 .hero-inner { position: relative; z-index: 1; }
-.hero .eyebrow { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.88; }
+.hero .eyebrow { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.88; }
 .hero .eyebrow::before { content: ""; width: 18px; height: 2px; border-radius: 999px; background: rgba(255, 255, 255, 0.65); }
-.hero h1 { margin-top: 0.62rem; font-size: clamp(1.52rem, 2.4vw, 2.24rem); line-height: 1.16; letter-spacing: -0.01em; }
+/* iGaming TYPOGRAPHY CONTRACT: .hero h1 must match all sibling iGaming pages.
+         Shared: font-weight 800, clamp sizing, line-height, letter-spacing, color. No one-off variants. */
+      .hero h1 { margin-top: 0.62rem; font-size: clamp(1.55rem, 3.1vw, 2.25rem); font-weight: 800; line-height: 1.17; color: #f4faff; letter-spacing: -0.025em; max-width: 660px; }
 .hero p { margin-top: 0.58rem; color: rgba(238, 244, 255, 0.9); max-width: 78ch; }
 .hero-meta { margin-top: 0.88rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
 .pill { display: inline-flex; align-items: center; border-radius: var(--r-full); border: 1px solid rgba(255, 255, 255, 0.24); background: rgba(255, 255, 255, 0.08); color: rgba(238, 244, 255, 0.95); font-size: 0.74rem; font-weight: 640; padding: 0.3rem 0.64rem; }
@@ -511,25 +513,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       </section>
 
 
-      <section class="card" id="componentStrategicImpact" data-component-id="strategic_impact" data-universe-scope="analytic">
-        <h2 class="section-title">Strategic Impact in Numbers</h2>
-        <div class="section-mode-label" id="modeLabelStrategicImpact"></div>
-        <div class="si-grid" id="siGrid"></div>
-      </section>
-
-      <section class="card" id="componentPartyBreakdown" data-component-id="party_breakdown" data-universe-scope="analytic">
-        <h2 class="section-title">Effect by Party: Ballot vs. Favorability</h2>
-        <div class="section-mode-label" id="modeLabelPartyBreakdown"></div>
-        <div id="partyBreakdownContent"></div>
-      </section>
-
-      <section class="card" id="componentKeyFindings" data-component-id="key_findings">
-        <h2 class="section-title">Key Findings</h2>
-        <div class="section-mode-label" id="modeLabelKeyFindings"></div>
-        <div class="findings-stack" id="findingsGrid"></div>
-        <p class="findings-turnout-note" id="findingsTurnoutNote"></p>
-      </section>
-
       <section class="card" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
         <details class="methodology-details">
           <summary id="h-methodology-note">Note on Methodology</summary>
@@ -557,6 +540,18 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             </ul>
           </article>
         </div>
+      </section>
+
+      <section class="card" id="componentStrategicImpact" data-component-id="strategic_impact" data-universe-scope="analytic">
+        <h2 class="section-title">Strategic Impact in Numbers</h2>
+        <div class="section-mode-label" id="modeLabelStrategicImpact"></div>
+        <div class="si-grid" id="siGrid"></div>
+      </section>
+
+      <section class="card" id="componentPartyBreakdown" data-component-id="party_breakdown" data-universe-scope="analytic">
+        <h2 class="section-title">Effect by Party: Ballot vs. Favorability</h2>
+        <div class="section-mode-label" id="modeLabelPartyBreakdown"></div>
+        <div id="partyBreakdownContent"></div>
       </section>
 
       <section class="card" id="componentSummary" data-component-id="political_impact_summary">
@@ -664,6 +659,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       <section class="card" id="componentSubgroups" data-component-id="subgroup_explorer">
         <h2 class="section-title">Explore Effects by Group</h2>
         <div class="section-mode-label" id="modeLabelSubgroups"></div>
+        <p class="explainer">Bar length and row order reflect estimated <strong>vote-equivalent contribution</strong> — how much each group's movement translates into votes in Landry's margin. Hover any row for percentage-point change, action/inaction breakdown, and denominator details.</p>
         <div class="controls n4">
           <div>
             <label for="subOutcome">Outcome</label>
@@ -683,55 +679,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           </div>
         </div>
         <div class="bar-list" id="subBars"></div>
-      </section>
-
-      <section class="card" id="componentQuadrant" data-component-id="risk_opportunity_quadrant">
-        <h2 class="section-title">Action vs. Inaction: Full Subgroup Map</h2>
-        <div class="section-mode-label" id="modeLabelQuadrant"></div>
-        <details class="submap-details" id="submapDisclosure">
-          <summary class="submap-summary">Show full subgroup map</summary>
-          <div class="submap-details-body">
-        <p class="quad-explainer">Each point is a subgroup. The x-axis shows how that subgroup moves under the action-delivery scenario. The y-axis shows how it moves under the inaction/no-delivery scenario. The lower-right quadrant is usually the most politically valuable: these groups improve under action and worsen under inaction.</p>
-        <details class="methodology-details quad-note">
-          <summary>How to read this chart</summary>
-          <div class="methodology-details-body">Use the point tooltip for the exact subgroup movement. By default the chart labels only one subgroup, preferring Tradwives when that archetype is available for the selected view and otherwise falling back to the strongest action-vs.-inaction mover. Use Highlighted subgroups to label specific points. Zoom with the mouse wheel or trackpad, drag to pan, and use Reset view to return to the default frame.</div>
-        </details>
-        <div class="controls">
-          <div>
-            <label for="quadOutcome">Outcome</label>
-            <select id="quadOutcome"></select>
-          </div>
-          <div>
-            <label for="quadResponse">Response</label>
-            <select id="quadResponse"></select>
-          </div>
-          <div>
-            <label for="quadDemographic">Demographic</label>
-            <select id="quadDemographic"></select>
-          </div>
-          <div>
-            <label for="quadHighlights">Highlighted subgroups</label>
-            <select id="quadHighlights" multiple size="6"></select>
-          </div>
-          <div class="control-button-wrap">
-            <label class="control-button-label" for="quadResetBtn">Chart view</label>
-            <button type="button" class="control-button quad-reset" id="quadResetBtn">Reset view</button>
-          </div>
-        </div>
-        <div class="quad-wrap" id="quadPlot">
-          <div class="quad-surface" id="quadSurface">
-            <div class="quad-mid-x"></div>
-            <div class="quad-mid-y"></div>
-            <div class="quad-label" style="right:10px; top:8px;">Responds well to action</div>
-            <div class="quad-label" style="left:10px; top:8px;">Compact/action risk</div>
-            <div class="quad-label" style="left:10px; bottom:8px;">Broad political risk</div>
-            <div class="quad-label" style="right:10px; bottom:8px;">Action upside + inaction danger</div>
-          </div>
-          <div class="quad-axis-caption x">Effect of signing compact</div>
-          <div class="quad-axis-caption y">Effect of inaction / no delivery</div>
-        </div>
-          </div><!-- /.submap-details-body -->
-        </details><!-- /.submap-details -->
       </section>
 
       <section class="card" id="componentGeography" data-component-id="geography_explorer">
@@ -1639,13 +1586,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           "modeLabelStrategicImpact",
           "modeLabelPartyBreakdown",
           "modeLabelArchetypeCard",
-          "modeLabelKeyFindings",
-          "modeLabelSummary",
+                "modeLabelSummary",
           "modeLabelMainEffects",
           "modeLabelCalculator",
           "modeLabelSubgroups",
-          "modeLabelQuadrant",
-          "modeLabelGeography",
+                "modeLabelGeography",
           "modeLabelTechnical"
         ];
         const text = `Response universe: ${getActiveResponseUniverseLabel()}`;
@@ -1673,13 +1618,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         renderStrategicImpact();
         renderPartyBreakdownCard();
         renderArchetypeCard();
-        renderKeyFindings();
-        renderSummary();
+            renderSummary();
         initMainEffects();
         initCalculator();
         initSubgroups();
-        initQuadrant();
-        initGeography();
+            initGeography();
         initTechnicalTable();
       }
 
@@ -1889,7 +1832,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
               <div class="zero"></div>
               <div class="bar ${cls}" style="width:${widthPct}%;"></div>
             </div>
-            <div class="bar-val">${fmtDeltaHtml(value)}</div>
+            <div class="bar-val">${item.valueHtml !== undefined ? item.valueHtml : fmtDeltaHtml(value)}</div>
           `;
           if (item.tooltipHtml) {
             attachSharedTooltip(row, () => item.tooltipHtml);
@@ -2162,10 +2105,15 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             .filter((item) => item[selectedEstimand])
             .map((item) => {
               const selectedRow = item[selectedEstimand];
+              // Bar width and sort use vote_equivalent (political weight).
+              // pp change is preserved in tooltip only.
+              const ve = Number(selectedRow.vote_equivalent) || 0;
+              const pp = selectedRow.estimate_pp;
               return {
                 label: item.label,
-                value: selectedRow.estimate_pp,
-                voteEquivalent: selectedRow.vote_equivalent,
+                value: ve,
+                valueHtml: fmtEquivalentValueHtml(ve),
+                voteEquivalent: ve,
                 tooltip: item.label,
                 tooltipHtml: buildDecompositionTooltipHtml({
                   title: item.label,
@@ -2185,16 +2133,13 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
                   denominatorVoters: selectedRow.denominator_voters,
                   denominatorScope: selectedRow.denominator_scope,
                   denominatorSource: selectedRow.denominator_source,
-                  selectedEffectValue: selectedRow.estimate_pp
+                  selectedEffectValue: pp
                 })
               };
             });
 
-          if (demoSel.value === "profile") {
-            rows.sort((a, b) => Math.abs(Number(b.voteEquivalent)) - Math.abs(Number(a.voteEquivalent)));
-          } else {
-            rows.sort((a, b) => Number(b.value) - Number(a.value));
-          }
+          // Sort all demographics by absolute vote-equivalent contribution.
+          rows.sort((a, b) => Math.abs(Number(b.voteEquivalent)) - Math.abs(Number(a.voteEquivalent)));
           drawBars(
             bars,
             rows
@@ -2210,306 +2155,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         render();
       }
 
-      function initQuadrant() {
-        const outcomeSel = document.getElementById("quadOutcome");
-        const responseSel = document.getElementById("quadResponse");
-        const demoSel = document.getElementById("quadDemographic");
-        const highlightSel = document.getElementById("quadHighlights");
-        const plot = document.getElementById("quadPlot");
-        const surface = document.getElementById("quadSurface");
-        const resetBtn = document.getElementById("quadResetBtn");
-
-        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "short_label", "ballot");
-
-        const demographics = uniqueBy(
-          filterRecords({})
-            .filter((r) => r.unit_type === "state" && r.demographic !== "overall")
-            .map((r) => ({ id: r.demographic, label: r.demographic_label || r.demographic })),
-          (x) => x.id
-        );
-        setSelectOptions(demoSel, demographics, "id", "label", "profile");
-
-        const quadView = { scale: 1, panX: 0, panY: 0, dragging: false, startX: 0, startY: 0 };
-        const specialHighlightIds = new Set(["__none__", "__top_did__", "__top_abs_did__"]);
-        let highlightedSelection = [];
-
-        function applyView() {
-          surface.style.transform = `translate(${quadView.panX}px, ${quadView.panY}px) scale(${quadView.scale})`;
-        }
-
-        function resetView() {
-          quadView.scale = 1;
-          quadView.panX = 0;
-          quadView.panY = 0;
-          applyView();
-        }
-
-        function syncResponses() {
-          const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
-          setSelectOptions(responseSel, responseOptions(outcomeSel.value, true), "id", "label", preferred);
-        }
-
-        function findDefaultHighlightedValues(points) {
-          const evangelicalPoint = points.find((point) => /evangelical_republican/i.test(`${point.key}`));
-          if (evangelicalPoint) return [evangelicalPoint.key];
-          const tradwifePoint = points.find((point) => /tradwif/i.test(`${point.key} ${point.label}`));
-          if (tradwifePoint) return [tradwifePoint.key];
-          const strongestPoint = points
-            .slice()
-            .sort((a, b) => Math.abs(Number(b.did)) - Math.abs(Number(a.did)))[0];
-          return strongestPoint ? [strongestPoint.key] : [];
-        }
-
-        function normalizeHighlightSelection(points, selection, fallbackToDefault = true) {
-          const availableKeys = new Set(points.map((point) => point.key));
-          let nextSelection = (selection || []).filter((value, index, values) => {
-            if (!value || values.indexOf(value) !== index) return false;
-            return specialHighlightIds.has(value) || availableKeys.has(value);
-          });
-          if (nextSelection.includes("__none__")) nextSelection = ["__none__"];
-          if (!nextSelection.length && fallbackToDefault) {
-            nextSelection = findDefaultHighlightedValues(points);
-          }
-          return nextSelection;
-        }
-
-        function syncHighlightOptions(points) {
-          const options = [
-            { id: "__none__", label: "Clear labels", title: "Leave the chart unlabeled." },
-            { id: "__top_did__", label: "Top 3 by advantage", title: "Label the three strongest positive action-vs.-inaction movers." },
-            { id: "__top_abs_did__", label: "Top 3 by absolute advantage", title: "Label the three biggest movers by absolute action-vs.-inaction effect." }
-          ].concat(
-            points
-              .slice()
-              .sort((a, b) => String(a.label).localeCompare(String(b.label)))
-              .map((point) => ({ id: point.key, label: point.label }))
-          );
-          highlightedSelection = normalizeHighlightSelection(points, highlightedSelection, true);
-          setMultiSelectOptions(highlightSel, options, highlightedSelection);
-        }
-
-        function resolveHighlightedKeys(points) {
-          highlightedSelection = normalizeHighlightSelection(points, highlightedSelection, true);
-          if (highlightedSelection.includes("__none__")) return new Set();
-
-          const keys = new Set();
-          if (highlightedSelection.includes("__top_did__")) {
-            points
-              .slice()
-              .sort((a, b) => Number(b.did) - Number(a.did))
-              .slice(0, 3)
-              .forEach((point) => keys.add(point.key));
-          }
-          if (highlightedSelection.includes("__top_abs_did__")) {
-            points
-              .slice()
-              .sort((a, b) => Math.abs(Number(b.did)) - Math.abs(Number(a.did)))
-              .slice(0, 3)
-              .forEach((point) => keys.add(point.key));
-          }
-          highlightedSelection
-            .filter((value) => !specialHighlightIds.has(value))
-            .forEach((value) => keys.add(value));
-
-          if (!keys.size) {
-            findDefaultHighlightedValues(points).forEach((value) => keys.add(value));
-          }
-          return keys;
-        }
-
-        function clearDynamic() {
-          surface.querySelectorAll(".quad-point, .quad-point-label, .quad-point-connector").forEach((el) => el.remove());
-          if (tooltipOwner && plot.contains(tooltipOwner)) hideSharedTooltip();
-        }
-
-        plot.addEventListener("wheel", (evt) => {
-          evt.preventDefault();
-          const rect = plot.getBoundingClientRect();
-          const cursorX = evt.clientX - rect.left;
-          const cursorY = evt.clientY - rect.top;
-          const prevScale = quadView.scale;
-          const nextScale = Math.max(1, Math.min(2.8, prevScale * (evt.deltaY < 0 ? 1.12 : 0.89)));
-          if (nextScale === prevScale) return;
-          const localX = (cursorX - quadView.panX) / prevScale;
-          const localY = (cursorY - quadView.panY) / prevScale;
-          quadView.scale = nextScale;
-          quadView.panX = cursorX - localX * nextScale;
-          quadView.panY = cursorY - localY * nextScale;
-          applyView();
-        }, { passive: false });
-
-        plot.addEventListener("pointerdown", (evt) => {
-          if (evt.target.closest(".quad-point")) return;
-          quadView.dragging = true;
-          quadView.startX = evt.clientX - quadView.panX;
-          quadView.startY = evt.clientY - quadView.panY;
-          plot.classList.add("is-dragging");
-        });
-
-        window.addEventListener("pointermove", (evt) => {
-          if (!quadView.dragging) return;
-          quadView.panX = evt.clientX - quadView.startX;
-          quadView.panY = evt.clientY - quadView.startY;
-          applyView();
-        });
-
-        window.addEventListener("pointerup", () => {
-          quadView.dragging = false;
-          plot.classList.remove("is-dragging");
-        });
-
-        if (resetBtn) {
-          resetBtn.addEventListener("click", resetView);
-        }
-
-        function render() {
-          clearDynamic();
-          resetView();
-
-          const rowsA = filterRecords({
-            outcome_id: outcomeSel.value,
-            response_id: responseSel.value,
-            estimand: "arm_a_effect",
-            unit_type: "state",
-            demographic: demoSel.value
-          }).filter((r) => r.level !== "overall");
-
-          const rowsB = filterRecords({
-            outcome_id: outcomeSel.value,
-            response_id: responseSel.value,
-            estimand: "arm_b_effect",
-            unit_type: "state",
-            demographic: demoSel.value
-          }).filter((r) => r.level !== "overall");
-
-          const rowsD = filterRecords({
-            outcome_id: outcomeSel.value,
-            response_id: responseSel.value,
-            estimand: "difference_in_differences",
-            unit_type: "state",
-            demographic: demoSel.value
-          }).filter((r) => r.level !== "overall");
-
-          const byB = new Map(rowsB.map((r) => [r.level, r]));
-          const byD = new Map(rowsD.map((r) => [r.level, r]));
-
-          const points = rowsA.map((a) => {
-            const b = byB.get(a.level);
-            const d = byD.get(a.level);
-            return {
-              key: a.level,
-              label: a.level_label || a.level,
-              x: Number(a.estimate_pp),
-              y: Number(b?.estimate_pp),
-              did: Number(d?.estimate_pp),
-              voteEquivalent: Number(d?.vote_equivalent || a?.vote_equivalent || 0),
-              partisanLean: archetypeMetaMap().get(a.level)?.partisan_lean || null,
-              demographic: a.demographic_label || a.demographic,
-              rowA: a,
-              rowB: b,
-              rowD: d
-            };
-          }).filter((p) => Number.isFinite(p.x) && Number.isFinite(p.y) && Number.isFinite(p.did));
-
-          if (!points.length) {
-            highlightedSelection = [];
-            setMultiSelectOptions(highlightSel, [], []);
-            return;
-          }
-
-          const maxAbs = Math.max(1, ...points.map((p) => Math.max(Math.abs(p.x), Math.abs(p.y))));
-          syncHighlightOptions(points);
-          const highlightedKeys = resolveHighlightedKeys(points);
-
-          const width = plot.clientWidth;
-          const height = plot.clientHeight;
-          let labelIndex = 0;
-
-          points.forEach((pt) => {
-            const xPct = 50 + (pt.x / maxAbs) * 42;
-            const yPct = 50 - (pt.y / maxAbs) * 42;
-            const dot = document.createElement("div");
-            const maxVE = Math.max(1, ...points.map(p => Math.abs(p.voteEquivalent)));
-            const veRatio = maxVE > 0 ? Math.min(1, Math.abs(pt.voteEquivalent) / maxVE) : 0;
-            const ptSz = pt.partisanLean && pt.voteEquivalent > 0 ? Math.round(7 + veRatio * 9) : 9;
-            const ptOff = Math.round(ptSz / 2);
-            const leanClass = pt.partisanLean === "republican" ? "lean-rep-pt" : pt.partisanLean === "democratic" ? "lean-dem-pt" : pt.partisanLean === "swing" ? "lean-swing-pt" : "";
-            dot.className = `quad-point ${deltaClass(pt.did)}${highlightedKeys.has(pt.key) ? " is-highlighted" : ""}${leanClass ? " " + leanClass : ""}`;
-            dot.style.left = `${xPct}%`;
-            dot.style.top = `${yPct}%`;
-            if (pt.voteEquivalent > 0) {
-              dot.style.width = `${ptSz}px`;
-              dot.style.height = `${ptSz}px`;
-              dot.style.marginLeft = `-${ptOff}px`;
-              dot.style.marginTop = `-${ptOff}px`;
-            }
-            attachSharedTooltip(dot, () => buildDecompositionTooltipHtml({
-              title: pt.label,
-              entityKind: "subgroup",
-              entityCategory: pt.demographic,
-              entityLabel: "Demographic",
-              entityType: pt.demographic,
-              outcomeId: outcomeSel.value,
-              responseId: responseSel.value,
-              metricShown: "Action vs. inaction advantage",
-              responseUniverseId: pt.rowD?.response_universe_id || pt.rowA?.response_universe_id || "all_americans",
-              actionEffect: pt.x,
-              inactionEffect: pt.y,
-              didEffect: pt.did,
-              voteEquivalent: pt.rowD?.vote_equivalent,
-              voteEquivalentLabel: pt.rowD?.vote_equivalent_label,
-              denominatorVoters: pt.rowD?.denominator_voters,
-              denominatorScope: pt.rowD?.denominator_scope,
-              denominatorSource: pt.rowD?.denominator_source,
-              selectedEffectValue: pt.did
-            }));
-
-            surface.appendChild(dot);
-
-            if (highlightedKeys.has(pt.key)) {
-              const pointX = (xPct / 100) * width;
-              const pointY = (yPct / 100) * height;
-              const dx = pt.x >= 0 ? 18 : -18;
-              const dyBase = labelIndex % 2 === 0 ? -20 : 12;
-              const dy = dyBase + (labelIndex % 3) * 4;
-              const labelX = Math.max(12, Math.min(width - 150, pointX + dx));
-              const labelY = Math.max(12, Math.min(height - 26, pointY + dy));
-
-              const connector = document.createElement("div");
-              connector.className = "quad-point-connector";
-              const deltaX = labelX - pointX;
-              const deltaY = labelY - pointY;
-              connector.style.left = `${pointX}px`;
-              connector.style.top = `${pointY}px`;
-              connector.style.width = `${Math.sqrt(deltaX * deltaX + deltaY * deltaY)}px`;
-              connector.style.transform = `rotate(${Math.atan2(deltaY, deltaX)}rad)`;
-              surface.appendChild(connector);
-
-              const lbl = document.createElement("div");
-              lbl.className = "quad-point-label";
-              lbl.textContent = pt.label;
-              lbl.style.left = `${labelX}px`;
-              lbl.style.top = `${labelY}px`;
-              surface.appendChild(lbl);
-              labelIndex += 1;
-            }
-          });
-        }
-
-        outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
-        responseSel.addEventListener("change", render);
-        demoSel.addEventListener("change", render);
-        highlightSel.addEventListener("change", () => {
-          highlightedSelection = Array.from(highlightSel.selectedOptions || []).map((option) => option.value);
-          if (highlightedSelection.includes("__none__")) {
-            highlightedSelection = ["__none__"];
-          }
-          render();
-        });
-
-        syncResponses();
-        render();
-      }
 
       function initGeography() {
         const outcomeSel = document.getElementById("geoOutcome");
@@ -2714,15 +2359,13 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           "componentStrategicImpact",
           "componentPartyBreakdown",
           "componentArchetypeCard",
-          "componentKeyFindings",
-          "componentMethodology",
+              "componentMethodology",
           "componentArms",
           "componentSummary",
           "componentMainEffects",
           "componentCalculator",
           "componentSubgroups",
-          "componentQuadrant",
-          "componentGeography",
+              "componentGeography",
           "componentTechnical"
         ];
         idsToHide.forEach((id) => {
@@ -2955,9 +2598,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         items.sort((a, b) => Math.abs(Number(getSortRow(b)?.vote_equivalent) || 0) - Math.abs(Number(getSortRow(a)?.vote_equivalent) || 0));
 
         const GROUPS = [
-          { id: "republican", label: "Republican-leaning / Landry base",         cssClass: "lean-rep"   },
-          { id: "swing",      label: "Swing / Independent / cross-pressured",     cssClass: "lean-swing" },
-          { id: "democratic", label: "Democratic-leaning",                         cssClass: "lean-dem"   }
+          // Louisiana two-group classification. Reclassified from national "swing" using
+          // Louisiana baseline data in R/site_template_helpers.R (see partisan_lean field).
+          // Do NOT add "Landry Base" or a swing/independent bucket.
+          { id: "republican", label: "Republican-Leaning", cssClass: "lean-rep" },
+          { id: "democratic", label: "Democratic-Leaning", cssClass: "lean-dem" }
         ];
 
         const colHead = `<div class="archetype-row-item arch-col-head">
@@ -3019,13 +2664,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         renderStrategicImpact();
         renderPartyBreakdownCard();
         initArchetypeCard();
-        renderKeyFindings();
-        renderSummary();
+            renderSummary();
         initMainEffects();
         initCalculator();
         initSubgroups();
-        initQuadrant();
-        initGeography();
+            initGeography();
         initTechnicalTable();
         applyFeedbackCard();
 
