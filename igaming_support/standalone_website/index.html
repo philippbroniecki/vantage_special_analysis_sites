@@ -1634,7 +1634,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
    FEEDBACK CALLOUT
    ============================================================ */
 .feedback-callout {
-  max-width: 760px;
   margin: 2.5rem auto 2rem;
   padding: 2.5rem 2rem;
   background: var(--accent-tint2);
@@ -1859,14 +1858,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         <div id="archetypeChart" class="archetype-grid"></div>
       </section>
 
-    </main>
+      <!-- FEEDBACK CALLOUT -->
+      <section class="feedback-callout" id="feedbackCallout" hidden>
+        <h2 id="feedbackHeading">Share Your Feedback</h2>
+        <p id="feedbackBody">Have questions about this analysis or suggestions for future topics? We&#x2019;d love to hear from you.</p>
+        <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
+      </section>
 
-    <!-- FEEDBACK CALLOUT -->
-    <section class="feedback-callout" id="feedbackCallout" hidden>
-      <h2 id="feedbackHeading">Share Your Feedback</h2>
-      <p id="feedbackBody">Have questions about this analysis or suggestions for future topics? We&#x2019;d love to hear from you.</p>
-      <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
-    </section>
+    </main>
 
     <script id="embeddedReportData" type="application/json">
 {
@@ -33885,7 +33884,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
       "policy_igaming_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet"
     },
     "codebook_file": "codebook.json",
-    "generated_at_utc": "2026-05-25 13:29:28 UTC",
+    "generated_at_utc": "2026-05-25 16:08:34 UTC",
     "crosstabs": {
       "manifest_file": "crosstabs_manifest.json",
       "manifest_path": "data/crosstabs_manifest.json",

@@ -476,6 +476,20 @@ body {
   transform: translateY(-1px);
 }
 
+.site-nav-link--current {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--accent);
+  background: var(--accent-tint2);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: default;
+}
+
 /* ============================================================
    CARD BASE
    ============================================================ */
@@ -1435,6 +1449,44 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   transition: color 280ms ease;
 }
 
+/* ── Key Findings stat cards ───────────────────────────────────── */
+.kf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.kf-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 1.1rem 1.2rem;
+}
+.kf-stat {
+  font-size: 2rem;
+  font-weight: 780;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+.kf-label {
+  font-size: 0.82rem;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.kf-detail {
+  font-size: 0.75rem;
+  color: var(--ink-muted, var(--ink-soft));
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+@media (max-width: 600px) {
+  .kf-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 380px) {
+  .kf-grid { grid-template-columns: 1fr; }
+}
+
 /* ============================================================
    METHODOLOGY NOTE
    ============================================================ */
@@ -1636,7 +1688,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
    FEEDBACK CALLOUT
    ============================================================ */
 .feedback-callout {
-  max-width: 760px;
   margin: 2.5rem auto 2rem;
   padding: 2.5rem 2rem;
   background: var(--accent-tint2);
@@ -1735,6 +1786,18 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   font-style: italic;
   padding: 0.5rem 0;
 }
+.att-group-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin: 1rem 0 0.4rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.att-group-header:first-child { margin-top: 0.4rem; }
+.att-group-divider { height: 0; }
 .att-matchup-card {
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -1813,24 +1876,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         </div>
       </section>
 
-      <!-- KEY FINDINGS -->
-      <section class="card reveal" id="componentTakeaways" data-component-id="key_takeaways" aria-labelledby="h-findings">
-        <div class="section-head">
-          <p class="section-eyebrow">Overview</p>
-          <h2 id="h-findings">Key Findings</h2>
-          <p>High-level takeaways from modeled estimates</p>
-        </div>
-        <div id="takeaways" class="takeaways-grid"></div>
-      </section>
-
-      <!-- METHODOLOGY NOTE -->
-      <section class="card reveal" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
-        <details class="methodology-details">
-          <summary id="h-methodology-note">Note on Methodology</summary>
-          <p class="methodology-details-body" id="methodologyBody">We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).</p>
-        </details>
-      </section>
-
       <!-- RESPONSE UNIVERSE TOGGLE -->
       <section class="card card--control reveal" id="componentResponseUniverse" data-component-id="response_universe_toggle" hidden>
         <div id="responseUniverseToggle" class="response-universe-toggle">
@@ -1841,6 +1886,25 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           </div>
           <p class="response-universe-explainer" id="responseUniverseExplainer"></p>
         </div>
+      </section>
+
+      <!-- METHODOLOGY NOTE -->
+      <section class="card reveal" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
+        <details class="methodology-details">
+          <summary id="h-methodology-note">Methodology Explainer</summary>
+          <p class="methodology-details-body" id="methodologyBody">We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).</p>
+        </details>
+      </section>
+
+      <!-- KEY FINDINGS -->
+      <section class="card reveal" id="componentTakeaways" data-component-id="key_takeaways" aria-labelledby="h-findings">
+        <div class="section-mode-label" id="modeLabelKeyFindings"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Overview</p>
+          <h2 id="h-findings">Key Findings</h2>
+          <p>High-level takeaways from modeled estimates</p>
+        </div>
+        <div id="keyFindingsGrid" class="kf-grid"></div>
       </section>
 
       <!-- RESPONSE GEOGRAPHY -->
@@ -1870,6 +1934,16 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <h2 id="h-behavior-awareness">Gambling Behavior &amp; Offshore Awareness</h2>
           <p>Gambling participation, types of gambling, and awareness of offshore online casinos</p>
         </div>
+        <div class="xt-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="behaviorGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="behaviorGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="behaviorGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="behaviorGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="behaviorGeographyUnitSelect"></select>
+          </div>
+        </div>
         <div id="behaviorAwarenessContent"></div>
       </section>
 
@@ -1886,7 +1960,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
             <label class="xt-control-label" for="beliefMetricSelect">Metric</label>
             <select class="xt-select" id="beliefMetricSelect">
               <option value="total_agree">Total agree</option>
-              <option value="net_agree">Net agree</option>
+              <option value="net_agree" selected>Net agree</option>
               <option value="strongly_agree">Strongly agree</option>
               <option value="dont_know">Don&apos;t know</option>
             </select>
@@ -1899,6 +1973,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
               <option value="local_control">Local control / risk / family</option>
               <option value="tribal_corporate">Tribal / corporate frame</option>
             </select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="beliefGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="beliefGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="beliefGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="beliefGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="beliefGeographyUnitSelect"></select>
           </div>
         </div>
         <div id="beliefLandscapeContent"></div>
@@ -1913,6 +1995,16 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <h2 id="h-argument-tradeoffs">Argument Matchups</h2>
           <p>Head-to-head argument pairings &#8212; which framing wins statewide?</p>
         </div>
+        <div class="xt-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="argGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="argGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="argGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="argGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="argGeographyUnitSelect"></select>
+          </div>
+        </div>
         <div id="argumentTradeoffsContent"></div>
         <p class="xt-note">Sorted by winning-side margin. &ldquo;Neither / Don&apos;t know&rdquo; shown separately.</p>
       </section>
@@ -1925,6 +2017,16 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <h2 id="h-priorities">Priorities &amp; Revenue Uses</h2>
           <p>Top issue priorities and preferred uses of iGaming tax revenue</p>
         </div>
+        <div class="xt-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="priorityGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="priorityGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="priorityGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="priorityGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="priorityGeographyUnitSelect"></select>
+          </div>
+        </div>
         <div id="prioritiesContent"></div>
       </section>
 
@@ -1936,6 +2038,16 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <h2 id="h-persuadability">Persuadability &amp; Trusted Messengers</h2>
           <p>Firmness of views on iGaming and most trusted voices on this issue</p>
         </div>
+        <div class="xt-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="persuadabilityGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="persuadabilityGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="persuadabilityGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="persuadabilityGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="persuadabilityGeographyUnitSelect"></select>
+          </div>
+        </div>
         <div id="persuadabilityMessengersContent"></div>
       </section>
 
@@ -1946,6 +2058,22 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <p class="section-eyebrow">Survey Questions</p>
           <h2 id="h-questions">Topline Results</h2>
           <p>All 28 attitude and behavior questions from the Louisiana iGaming survey</p>
+        </div>
+        <div class="xt-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="toplineQuestionSelect">Question</label>
+            <select class="xt-select" id="toplineQuestionSelect">
+              <option value="__all__">— All questions —</option>
+            </select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="toplineGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="toplineGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="toplineGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="toplineGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="toplineGeographyUnitSelect"></select>
+          </div>
         </div>
         <div id="questionCards" class="question-grid" role="region" aria-label="Topline question cards"></div>
       </section>
@@ -1970,6 +2098,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <div class="xt-control-group">
             <label class="xt-control-label" for="demographicMetricSelect">Response category</label>
             <select class="xt-select" id="demographicMetricSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="demographicGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="demographicGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="demographicGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="demographicGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="demographicGeographyUnitSelect"></select>
           </div>
         </div>
         <p class="section-question-prompt" id="demographicQuestionPrompt"></p>
@@ -2002,6 +2138,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
             <label class="xt-control-label" for="crosstabMetricSelect">Response category</label>
             <select class="xt-select" id="crosstabMetricSelect"></select>
           </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="crosstabGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="crosstabGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="crosstabGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="crosstabGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="crosstabGeographyUnitSelect"></select>
+          </div>
         </div>
         <p class="section-question-prompt" id="crosstabQuestionPrompt"></p>
         <div id="crosstabExplorers" class="crosstabs-stack"></div>
@@ -2017,23 +2161,34 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <p>View archetype support by question and response category</p>
         </div>
         <div class="archetype-controls">
-          <div class="segmented" id="archetypeQuestionToggle" role="tablist" aria-label="Archetype question selector"></div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="archetypeQuestionSelect">Question</label>
+            <select class="xt-select" id="archetypeQuestionSelect"></select>
+          </div>
           <div class="archetype-metric-control">
             <label for="archetypeMetricSelect">Response category</label>
             <select class="xt-select" id="archetypeMetricSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="archetypeGeographyTypeSelect">Geography</label>
+            <select class="xt-select att-geo-type" id="archetypeGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="archetypeGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="archetypeGeographyUnitSelect">Unit</label>
+            <select class="xt-select att-geo-unit" id="archetypeGeographyUnitSelect"></select>
           </div>
         </div>
         <div id="archetypeChart" class="archetype-grid"></div>
       </section>
 
-    </main>
+      <!-- FEEDBACK CALLOUT -->
+      <section class="feedback-callout" id="feedbackCallout" hidden>
+        <h2 id="feedbackHeading">Share Your Feedback</h2>
+        <p id="feedbackBody">Have questions about this analysis or suggestions for future topics? We&#x2019;d love to hear from you.</p>
+        <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
+      </section>
 
-    <!-- FEEDBACK CALLOUT -->
-    <section class="feedback-callout" id="feedbackCallout" hidden>
-      <h2 id="feedbackHeading">Share Your Feedback</h2>
-      <p id="feedbackBody">Have questions about this analysis or suggestions for future topics? We&#x2019;d love to hear from you.</p>
-      <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
-    </section>
+    </main>
 
     <script id="embeddedReportData" type="application/json">
 {
@@ -2691,8 +2846,9 @@ function renderBehaviorAwareness() {
   // Q8: Gambling participation
   const q8 = attGetQuestion('q8_gambling_participation');
   html += attSubHead('Past-Year Gambling Participation');
-  if (q8 && q8.options && q8.options.length) {
-    q8.options.forEach((opt) => {
+  const q8Opts = getQuestionOptionsForActiveGeography(q8);
+  if (q8 && q8Opts.length) {
+    q8Opts.forEach((opt) => {
       const clr = opt.color || (opt.id === 'yes' ? '#1a6b73' : '#c46525');
       html += attHorzBar(opt.label || opt.id, attGetOptVal(opt), clr);
     });
@@ -2717,7 +2873,7 @@ function renderBehaviorAwareness() {
   q9Ids.forEach((qid) => {
     const q = attGetQuestion(qid);
     if (!q) return;
-    const yesOpt = (q.options || []).find((o) => o.id === 'yes');
+    const yesOpt = getQuestionOptionsForActiveGeography(q).find((o) => o.id === 'yes');
     if (!yesOpt) return;
     q9Rows.push({ label: Q9_TYPE_LABELS[qid] || qid, value: attGetOptVal(yesOpt), color: yesOpt.color || '#1a6b73' });
   });
@@ -2732,8 +2888,9 @@ function renderBehaviorAwareness() {
   // Q10: Offshore awareness
   const q10 = attGetQuestion('q10_offshore_awareness');
   html += attSubHead('Awareness of Offshore Online Casino Gambling');
-  if (q10 && q10.options && q10.options.length) {
-    q10.options.forEach((opt) => {
+  const q10Opts = getQuestionOptionsForActiveGeography(q10);
+  if (q10 && q10Opts.length) {
+    q10Opts.forEach((opt) => {
       html += attHorzBar(opt.label || opt.id, attGetOptVal(opt), opt.color || '#557c99');
     });
   } else {
@@ -2744,7 +2901,84 @@ function renderBehaviorAwareness() {
 }
 
 function initBehaviorAwarenessControls() {
-  // No interactive controls on behavior/awareness for now
+  // Geography wired via shared per-card geography system
+}
+
+/* ============================================================
+   PER-CARD GEOGRAPHY HELPERS
+   ============================================================ */
+const ATT_CARD_GEO_CONFIGS = [
+  { typeSelId: 'behaviorGeographyTypeSelect',      unitSelId: 'behaviorGeographyUnitSelect',      unitGroupId: 'behaviorGeographyUnitGroup' },
+  { typeSelId: 'beliefGeographyTypeSelect',         unitSelId: 'beliefGeographyUnitSelect',         unitGroupId: 'beliefGeographyUnitGroup' },
+  { typeSelId: 'argGeographyTypeSelect',            unitSelId: 'argGeographyUnitSelect',            unitGroupId: 'argGeographyUnitGroup' },
+  { typeSelId: 'priorityGeographyTypeSelect',       unitSelId: 'priorityGeographyUnitSelect',       unitGroupId: 'priorityGeographyUnitGroup' },
+  { typeSelId: 'persuadabilityGeographyTypeSelect', unitSelId: 'persuadabilityGeographyUnitSelect', unitGroupId: 'persuadabilityGeographyUnitGroup' },
+  { typeSelId: 'toplineGeographyTypeSelect',        unitSelId: 'toplineGeographyUnitSelect',        unitGroupId: 'toplineGeographyUnitGroup' },
+  { typeSelId: 'demographicGeographyTypeSelect',    unitSelId: 'demographicGeographyUnitSelect',    unitGroupId: 'demographicGeographyUnitGroup' },
+  { typeSelId: 'crosstabGeographyTypeSelect',       unitSelId: 'crosstabGeographyUnitSelect',       unitGroupId: 'crosstabGeographyUnitGroup' },
+  { typeSelId: 'archetypeGeographyTypeSelect',      unitSelId: 'archetypeGeographyUnitSelect',      unitGroupId: 'archetypeGeographyUnitGroup' },
+];
+
+function syncCardGeographyUnitSelect(unitSelId, unitGroupId, typeId) {
+  const unitSel   = document.getElementById(unitSelId);
+  const unitGroup = document.getElementById(unitGroupId);
+  if (!unitSel || !unitGroup) return;
+  const type  = getResponseGeographyType(typeId);
+  const units = toArray(type?.units);
+  const supportsUnitSelect = Boolean(type?.supports_unit_select) && units.length > 1;
+  unitGroup.hidden = !supportsUnitSelect;
+  unitSel.innerHTML = '';
+  units.forEach((unit) => {
+    unitSel.appendChild(new Option(unit?.label || unit?.id || '', unit?.id || ''));
+  });
+  if (supportsUnitSelect && activeGeographyUnitId) {
+    unitSel.value = activeGeographyUnitId;
+  }
+}
+
+function syncAllCardGeographySelects() {
+  ATT_CARD_GEO_CONFIGS.forEach(({ typeSelId, unitSelId, unitGroupId }) => {
+    const typeSel = document.getElementById(typeSelId);
+    if (!typeSel) return;
+    typeSel.value = activeGeographyTypeId || '';
+    syncCardGeographyUnitSelect(unitSelId, unitGroupId, activeGeographyTypeId);
+  });
+}
+
+function initAllCardGeographySelects() {
+  const cfg   = getResponseGeographyConfig();
+  const types = toArray(cfg?.types);
+  if (!cfg || cfg.enabled === false || !types.length) return;
+
+  ATT_CARD_GEO_CONFIGS.forEach(({ typeSelId, unitSelId, unitGroupId }) => {
+    const typeSel = document.getElementById(typeSelId);
+    const unitSel = document.getElementById(unitSelId);
+    if (!typeSel) return;
+
+    // Populate type options
+    typeSel.innerHTML = '';
+    types.forEach((type) => {
+      typeSel.appendChild(new Option(
+        type?.selector_label || type?.label || type?.id || '',
+        type?.id || ''
+      ));
+    });
+    typeSel.value = activeGeographyTypeId || '';
+    syncCardGeographyUnitSelect(unitSelId, unitGroupId, activeGeographyTypeId);
+
+    if (!typeSel.dataset.bound) {
+      typeSel.dataset.bound = 'true';
+      typeSel.addEventListener('change', () => {
+        setResponseGeography(typeSel.value, null, true);
+      });
+    }
+    if (unitSel && !unitSel.dataset.bound) {
+      unitSel.dataset.bound = 'true';
+      unitSel.addEventListener('change', () => {
+        setResponseGeography(activeGeographyTypeId, unitSel.value, true);
+      });
+    }
+  });
 }
 
 /* ============================================================
@@ -2756,7 +2990,7 @@ function renderBeliefLandscape() {
 
   const metricSel = document.getElementById('beliefMetricSelect');
   const groupSel  = document.getElementById('beliefGroupSelect');
-  const metric    = metricSel ? metricSel.value : 'total_agree';
+  const metric    = metricSel ? metricSel.value : 'net_agree';
   const group     = groupSel  ? groupSel.value  : 'all';
 
   const Q17_IDS = ['q17a','q17c','q17f','q17g','q17i','q17j','q17k','q17l','q17m'];
@@ -2767,10 +3001,10 @@ function renderBeliefLandscape() {
     if (!meta) return;
     if (group !== 'all' && meta.group !== group) return;
     const q = attGetQuestion(qid);
-    if (!q || !q.options) return;
+    if (!q) return;
 
     const getVal = (id) => {
-      const opt = q.options.find((o) => o.id === id);
+      const opt = getQuestionOptionsForActiveGeography(q).find((o) => o.id === id);
       return opt ? attGetOptVal(opt) : 0;
     };
     const sa   = getVal('strongly_agree');
@@ -2802,7 +3036,17 @@ function renderBeliefLandscape() {
     });
   });
 
-  rows.sort((a, b) => b.value - a.value);
+  if (group === 'all') {
+    const GROUP_ORDER = ['pro_legalization', 'local_control', 'tribal_corporate'];
+    rows.sort((a, b) => {
+      const ga = GROUP_ORDER.indexOf(a.group);
+      const gb = GROUP_ORDER.indexOf(b.group);
+      if (ga !== gb) return ga - gb;
+      return b.value - a.value;
+    });
+  } else {
+    rows.sort((a, b) => b.value - a.value);
+  }
 
   let html = '';
   const METRIC_COLORS = {
@@ -2824,7 +3068,18 @@ function renderBeliefLandscape() {
     html = attEmptyMsg('Belief data not available for the selected group.');
   } else {
     html += `<p class="att-metric-note"><strong>Metric:</strong> ${metricLabel}</p>`;
+    const GROUP_LABELS = {
+      pro_legalization: 'Pro-legalization / Economic',
+      local_control: 'Local Control / Risk / Family',
+      tribal_corporate: 'Tribal / Corporate Frame'
+    };
+    let lastGroup = null;
     rows.forEach((row) => {
+      if (group === 'all' && row.group !== lastGroup) {
+        if (lastGroup !== null) html += '<div class="att-group-divider"></div>';
+        html += `<h4 class="att-group-header">${GROUP_LABELS[row.group] || row.group}</h4>`;
+        lastGroup = row.group;
+      }
       const displayVal = metric === 'net_agree'
         ? (row.value >= 0 ? '+' : '') + Math.round(row.value) + ' pts'
         : attFmt(row.value);
@@ -2861,11 +3116,12 @@ function renderArgumentTradeoffs() {
     const meta = Q18_LABELS[qid];
     if (!meta) return;
     const q = attGetQuestion(qid);
-    if (!q || !q.options) return;
+    if (!q) return;
+    const qOpts = getQuestionOptionsForActiveGeography(q);
     const sideIds = Object.keys(meta.sides);
-    const sideA   = q.options.find((o) => o.id === sideIds[0]);
-    const sideB   = q.options.find((o) => o.id === sideIds[1]);
-    const neither = q.options.find((o) => o.id === 'neither_dk');
+    const sideA   = qOpts.find((o) => o.id === sideIds[0]);
+    const sideB   = qOpts.find((o) => o.id === sideIds[1]);
+    const neither = qOpts.find((o) => o.id === 'neither_dk');
     if (!sideA || !sideB) return;
     const valA = attGetOptVal(sideA);
     const valB = attGetOptVal(sideB);
@@ -2916,8 +3172,9 @@ function renderPriorities() {
   // Q12: Promise / priority ranked #1
   const q12 = attGetQuestion('q12_promise_rank1');
   html += attSubHead('Top Issue Priority (Ranked #1)');
-  if (q12 && q12.options && q12.options.length) {
-    const rows = q12.options.map((opt) => ({
+  const q12Opts = getQuestionOptionsForActiveGeography(q12);
+  if (q12 && q12Opts.length) {
+    const rows = q12Opts.map((opt) => ({
       label: Q12_LABELS[opt.id] || opt.label || opt.id,
       value: attGetOptVal(opt),
       color: opt.color || '#1a6b73'
@@ -2931,8 +3188,9 @@ function renderPriorities() {
   // Q20: Revenue use priority
   const q20 = attGetQuestion('q20_revenue_priority');
   html += attSubHead('Preferred Use of iGaming Tax Revenue');
-  if (q20 && q20.options && q20.options.length) {
-    const rows = q20.options.map((opt) => ({
+  const q20Opts = getQuestionOptionsForActiveGeography(q20);
+  if (q20 && q20Opts.length) {
+    const rows = q20Opts.map((opt) => ({
       label: Q20_LABELS[opt.id] || opt.label || opt.id,
       value: attGetOptVal(opt),
       color: opt.color || '#1a6b73'
@@ -2956,11 +3214,12 @@ function renderPersuadabilityMessengers() {
   // Q21: View intensity
   const q21 = attGetQuestion('q21_intensity');
   html += attSubHead('Intensity of Views on iGaming');
-  if (q21 && q21.options && q21.options.length) {
+  const q21Opts = getQuestionOptionsForActiveGeography(q21);
+  if (q21 && q21Opts.length) {
     const firmOpts   = ['very_firm','fairly_firm'];
     const openOpts   = ['open_persuasion','no_strong_view'];
     let firmTotal = 0, openTotal = 0;
-    q21.options.forEach((opt) => {
+    q21Opts.forEach((opt) => {
       const v = attGetOptVal(opt);
       html += attHorzBar(Q21_LABELS[opt.id] || opt.label || opt.id, v, opt.color || '#1a6b73');
       if (firmOpts.includes(opt.id)) firmTotal += v;
@@ -2981,8 +3240,9 @@ function renderPersuadabilityMessengers() {
   // Q22: Trusted messengers
   const q22 = attGetQuestion('q22_trusted_messengers');
   html += attSubHead('Most Trusted Voices on iGaming');
-  if (q22 && q22.options && q22.options.length) {
-    const rows = q22.options.map((opt) => ({
+  const q22Opts = getQuestionOptionsForActiveGeography(q22);
+  if (q22 && q22Opts.length) {
+    const rows = q22Opts.map((opt) => ({
       label: Q22_LABELS[opt.id] || opt.label || opt.id,
       value: attGetOptVal(opt),
       color: opt.color || '#1a6b73'
@@ -3235,7 +3495,7 @@ function updateResponseUniverseTheme() {
 }
 
 function updateModeLabelElements() {
-  const ids = ['modeLabelTopline', 'modeLabelDemographics', 'modeLabelCrosstabs', 'modeLabelArchetypes', 'modeLabelStates', 'modeLabelBehaviorAwareness', 'modeLabelBeliefLandscape', 'modeLabelArgumentTradeoffs', 'modeLabelPriorities', 'modeLabelPersuadability'];
+  const ids = ['modeLabelKeyFindings', 'modeLabelTopline', 'modeLabelDemographics', 'modeLabelCrosstabs', 'modeLabelArchetypes', 'modeLabelStates', 'modeLabelBehaviorAwareness', 'modeLabelBeliefLandscape', 'modeLabelArgumentTradeoffs', 'modeLabelPriorities', 'modeLabelPersuadability'];
   const activeLabel = getResponseUniverseModeLabel(activeResponseUniverse)
     || (activeResponseUniverse === 'with_view'
       ? 'What respondents with a view said'
@@ -3366,6 +3626,7 @@ function populateMetricOptions(
 }
 
 function rerenderResponseUniverseSections() {
+  renderTakeaways();
   renderQuestionCards();
   renderDemographicExplorer();
   renderCrosstabExplorer();
@@ -3489,6 +3750,7 @@ function syncResponseGeographyControlUI() {
     unitSel.value = activeGeographyUnitId || '';
   }
   updateResponseGeographyExplainer();
+  syncAllCardGeographySelects();
 }
 
 function setResponseGeography(typeId, unitId = null, rerender = true) {
@@ -3535,38 +3797,45 @@ function initResponseGeographyControl() {
   const cardWrap = document.getElementById('componentResponseGeography');
   const typeSel = document.getElementById('responseGeographyTypeSelect');
   const unitSel = document.getElementById('responseGeographyUnitSelect');
-  if (!cardWrap || !typeSel || !unitSel) return;
+
+  // Standalone geography card is always hidden — geography selectors live inside each content card.
+  if (cardWrap) cardWrap.hidden = true;
 
   const cfg = getResponseGeographyConfig();
   const types = toArray(cfg?.types);
   if (!cfg || cfg.enabled === false || types.length === 0) {
-    cardWrap.hidden = true;
     activeGeographyTypeId = null;
     activeGeographyUnitId = null;
     activeGeographyUnitByType = {};
     return;
   }
 
-  cardWrap.hidden = false;
-  typeSel.innerHTML = '';
-  types.forEach((type) => {
-    typeSel.appendChild(new Option(
-      type?.selector_label || type?.label || type?.id || '',
-      type?.id || ''
-    ));
-  });
+  // Populate the hidden standalone select (so existing syncResponseGeographyControlUI code still works)
+  if (typeSel) {
+    typeSel.innerHTML = '';
+    types.forEach((type) => {
+      typeSel.appendChild(new Option(
+        type?.selector_label || type?.label || type?.id || '',
+        type?.id || ''
+      ));
+    });
+    typeSel.addEventListener('change', () => {
+      setResponseGeography(typeSel.value, null, true);
+    });
+  }
+  if (unitSel) {
+    unitSel.addEventListener('change', () => {
+      setResponseGeography(activeGeographyTypeId, unitSel.value, true);
+    });
+  }
 
   const defaultTypeId = (cfg?.default_type_id && types.some((entry) => entry?.id === cfg.default_type_id))
     ? cfg.default_type_id
     : (types[0]?.id || null);
   setResponseGeography(defaultTypeId, cfg?.default_unit_id || null, false);
 
-  typeSel.addEventListener('change', () => {
-    setResponseGeography(typeSel.value, null, true);
-  });
-  unitSel.addEventListener('change', () => {
-    setResponseGeography(activeGeographyTypeId, unitSel.value, true);
-  });
+  // Init all per-card geography selects
+  initAllCardGeographySelects();
 }
 
 /* ============================================================
@@ -4139,7 +4408,7 @@ function applyComponentOrder() {
   if (!main) return;
   const configured = getContentConfig().component_order;
   if (!Array.isArray(configured) || configured.length === 0) return;
-  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'response_geography'];
+  const mandatory = ['hero_title', 'response_universe_toggle', 'methodology_note', 'key_takeaways', 'response_geography'];
   const nodes = Array.from(main.querySelectorAll('[data-component-id]'));
   const nodeById = {};
   const availableIds = [];
@@ -4168,6 +4437,10 @@ function applyComponentOrder() {
     const node = nodeById[componentId];
     if (node) main.appendChild(node);
   });
+
+  // Always move feedback callout to the very end of main, after all components.
+  const feedback = document.getElementById('feedbackCallout');
+  if (feedback && feedback.parentElement === main) main.appendChild(feedback);
 }
 
 /* ============================================================
@@ -4201,13 +4474,15 @@ function normalizeSiteNavLinks(items) {
       const canonicalHref = String(item?.canonical_href || item?.href || '').trim();
       const localHref = String(item?.local_href || '').trim();
       const siteSlug = String(item?.site_slug || item?.siteSlug || '').trim();
+      const isCurrent = item?.is_current === true;
       if (!label || (!canonicalHref && !localHref)) return null;
       return {
         label,
         href: canonicalHref || localHref,
         canonical_href: canonicalHref,
         local_href: localHref,
-        site_slug: siteSlug
+        site_slug: siteSlug,
+        is_current: isCurrent
       };
     })
     .filter(Boolean);
@@ -4239,10 +4514,7 @@ function renderSiteNavigation() {
   backLink.textContent = backLabel || 'Portal';
 
   const currentSlug = String(reportData?.template?.site_slug || '').trim();
-  const siblings = normalizeSiteNavLinks(navCfg?.siblings).filter((entry) => {
-    if (!entry?.site_slug || !currentSlug) return true;
-    return entry.site_slug !== currentSlug;
-  });
+  const siblings = normalizeSiteNavLinks(navCfg?.siblings);
 
   siblingWrap.innerHTML = '';
   if (siblings.length === 0) {
@@ -4251,6 +4523,14 @@ function renderSiteNavigation() {
   }
 
   siblings.forEach((entry) => {
+    const isCurrent = entry.is_current === true || (entry.site_slug && currentSlug && entry.site_slug === currentSlug);
+    if (isCurrent) {
+      const span = document.createElement('span');
+      span.className = 'site-nav-link site-nav-link--current';
+      span.textContent = entry.label;
+      siblingWrap.appendChild(span);
+      return;
+    }
     const resolvedHref = resolveSiblingHref(entry);
     if (!resolvedHref) return;
     const link = document.createElement('a');
@@ -4320,19 +4600,181 @@ function renderFeedbackCallout() {
 }
 
 function renderTakeaways() {
-  const wrap = document.getElementById('takeaways');
-  if (!wrap) return;
-  const takeaways = normalizeTakeaways(getContentConfig().key_takeaways);
-  wrap.innerHTML = '';
-  takeaways.forEach((text, i) => {
-    const div = document.createElement('div');
-    div.className = 'takeaway-item';
-    div.innerHTML = `
-      <span class="takeaway-num" aria-hidden="true">${i + 1}</span>
-      <span class="takeaway-text">${text}</span>
-    `;
-    wrap.appendChild(div);
+  const container = document.getElementById('keyFindingsGrid');
+  if (!container) return;
+  const parent = container.closest('#componentTakeaways');
+
+  const findings = [];
+
+  // 1. Past-year gambling participation (q8 Yes)
+  const q8 = attGetQuestion('q8_gambling_participation');
+  if (q8) {
+    const yesOpt = (q8.options || []).find((o) => o.id === 'yes');
+    if (yesOpt) {
+      findings.push({
+        stat: attFmt(attGetOptVal(yesOpt)),
+        label: 'past-year gambling participation',
+        detail: null,
+        color: 'var(--accent)'
+      });
+    }
+  }
+
+  // 2. Offshore awareness gap (q10 not aware)
+  const q10 = attGetQuestion('q10_offshore_awareness');
+  if (q10) {
+    const noOpt = (q10.options || []).find((o) => o.id === 'no' || o.id === 'not_aware');
+    const dkOpt = (q10.options || []).find((o) => o.id === 'dont_know' || o.id === 'dk');
+    const noVal = noOpt ? attGetOptVal(noOpt) : 0;
+    const dkVal = dkOpt ? attGetOptVal(dkOpt) : 0;
+    const notAware = noVal + dkVal;
+    if (notAware > 0) {
+      findings.push({
+        stat: attFmt(notAware),
+        label: 'not aware of offshore online casinos',
+        detail: null,
+        color: '#6b7280'
+      });
+    }
+  }
+
+  // 3. Strongest belief: best net agree from q17
+  const Q17_KF_IDS = ['q17a','q17c','q17f','q17g','q17i','q17j','q17k','q17l','q17m'];
+  const Q17_KF_LABELS = {
+    q17a: 'Gambling benefits Louisiana',
+    q17c: 'Offshore already happening',
+    q17f: 'Money leaving Louisiana',
+    q17g: 'Parish opt-out',
+    q17i: 'Tribes-only unfair',
+    q17j: 'Tribal keeps revenue in LA',
+    q17k: 'Apps designed addictive',
+    q17l: 'Adult freedom',
+    q17m: 'State protects families'
+  };
+  let bestQ17 = null;
+  let bestNetAgree = -Infinity;
+  Q17_KF_IDS.forEach((qid) => {
+    const q = attGetQuestion(qid);
+    if (!q) return;
+    const getV = (id) => {
+      const opt = (q.options || []).find((o) => o.id === id);
+      return opt ? attGetOptVal(opt) : 0;
+    };
+    const netAgree = (getV('strongly_agree') + getV('somewhat_agree')) - (getV('somewhat_disagree') + getV('strongly_disagree'));
+    if (netAgree > bestNetAgree) {
+      bestNetAgree = netAgree;
+      bestQ17 = qid;
+    }
   });
+  if (bestQ17 !== null) {
+    const sign = bestNetAgree >= 0 ? '+' : '';
+    findings.push({
+      stat: sign + Math.round(bestNetAgree) + ' pts',
+      label: 'net agree — ' + (Q17_KF_LABELS[bestQ17] || bestQ17),
+      detail: 'strongest belief (net agree)',
+      color: '#2a8040'
+    });
+  }
+
+  // 4. Strongest argument matchup (q18)
+  const Q18_KF_IDS = ['q18a_corporate_unfair','q18b_addiction_protection','q18c_freedom_protection','q18d_voter_say'];
+  const Q18_WINNER_LABELS = {
+    q18a_corporate_unfair: { sideA: 'open market / fairness', sideB: 'tribal/local revenue' },
+    q18b_addiction_protection: { sideA: 'addiction risk', sideB: 'regulation safeguards' },
+    q18c_freedom_protection: { sideA: 'adult freedom', sideB: 'state protection' },
+    q18d_voter_say: { sideA: 'voter direct say', sideB: 'tribal framework' }
+  };
+  let bestQ18id = null;
+  let bestMargin = -Infinity;
+  let bestWinnerLabel = '';
+  Q18_KF_IDS.forEach((qid) => {
+    const q = attGetQuestion(qid);
+    if (!q) return;
+    const opts = q.options || [];
+    const side1 = opts[0];
+    const side2 = opts[1];
+    if (!side1 || !side2) return;
+    const v1 = attGetOptVal(side1);
+    const v2 = attGetOptVal(side2);
+    const margin = Math.abs(v1 - v2);
+    const winLabel = Q18_WINNER_LABELS[qid];
+    if (margin > bestMargin) {
+      bestMargin = margin;
+      bestQ18id = qid;
+      bestWinnerLabel = winLabel ? (v1 >= v2 ? winLabel.sideA : winLabel.sideB) : (v1 >= v2 ? side1.label : side2.label);
+    }
+  });
+  if (bestQ18id !== null) {
+    findings.push({
+      stat: Math.round(bestMargin) + '-pt margin',
+      label: bestWinnerLabel + ' wins',
+      detail: 'strongest argument matchup',
+      color: '#1a6b73'
+    });
+  }
+
+  // 5. Top revenue priority (q20)
+  const q20 = attGetQuestion('q20_revenue_priority');
+  if (q20) {
+    let topOpt = null;
+    let topVal = -Infinity;
+    (q20.options || []).forEach((opt) => {
+      if (opt.id === 'dont_know' || opt.id === 'oppose') return;
+      const v = attGetOptVal(opt);
+      if (v > topVal) { topVal = v; topOpt = opt; }
+    });
+    if (topOpt) {
+      findings.push({
+        stat: attFmt(topVal),
+        label: 'top revenue priority: ' + (topOpt.label || topOpt.id),
+        detail: null,
+        color: '#7c3aed'
+      });
+    }
+  }
+
+  // 6. Persuadable share (q21) + top messenger (q22)
+  const q21 = attGetQuestion('q21_intensity');
+  if (q21) {
+    let persuadableTotal = 0;
+    (q21.options || []).forEach((opt) => {
+      const id = (opt.id || '').toLowerCase();
+      if (id.includes('very_firm') || id.includes('very firm')) return;
+      if (id.includes('dont_know') || id === 'dk') return;
+      persuadableTotal += attGetOptVal(opt);
+    });
+    const q22 = attGetQuestion('q22_trusted_messengers');
+    let topMessenger = null;
+    let topMessengerVal = -Infinity;
+    if (q22) {
+      (q22.options || []).forEach((opt) => {
+        if (opt.id === 'none' || opt.id === 'dont_know' || opt.id === 'dk') return;
+        const v = attGetOptVal(opt);
+        if (v > topMessengerVal) { topMessengerVal = v; topMessenger = opt; }
+      });
+    }
+    const messengerPart = topMessenger ? ` · top messenger: ${topMessenger.label || topMessenger.id} (${attFmt(topMessengerVal)})` : '';
+    findings.push({
+      stat: attFmt(persuadableTotal),
+      label: 'open to persuasion or no strong view' + messengerPart,
+      detail: 'persuadability window',
+      color: '#c46525'
+    });
+  }
+
+  if (!findings.length) {
+    if (parent) parent.hidden = true;
+    return;
+  }
+  if (parent) parent.hidden = false;
+
+  container.innerHTML = findings.map((f) => `
+    <div class="kf-card">
+      <div class="kf-stat" style="color:${f.color}">${f.stat}</div>
+      <div class="kf-label">${f.label}</div>
+      ${f.detail ? `<div class="kf-detail">${f.detail}</div>` : ''}
+    </div>
+  `).join('');
 }
 
 function renderMethodology() {
@@ -4358,8 +4800,14 @@ function renderQuestionCards() {
   if (!root) return;
 
   root.innerHTML = '';
-  const questions = toArray(reportData?.questions);
+  const allQuestions = toArray(reportData?.questions);
   const isWithView = activeResponseUniverse === 'with_view';
+
+  const questionSel = document.getElementById('toplineQuestionSelect');
+  const selectedId = questionSel ? questionSel.value : '__all__';
+  const questions = selectedId === '__all__'
+    ? allQuestions
+    : allQuestions.filter((q) => (q?.id || '') === selectedId);
 
   questions.forEach((question) => {
     const questionId = question?.id || null;
@@ -4428,6 +4876,23 @@ function renderQuestionCards() {
 
     root.appendChild(card);
   });
+}
+
+function initToplineQuestionSelect() {
+  const questionSel = document.getElementById('toplineQuestionSelect');
+  if (!questionSel) return;
+  const allQuestions = toArray(reportData?.questions);
+  questionSel.innerHTML = '<option value="__all__">— All questions —</option>';
+  allQuestions.forEach((q) => {
+    const opt = document.createElement('option');
+    opt.value = q.id || '';
+    opt.textContent = q.title || q.id || 'Question';
+    questionSel.appendChild(opt);
+  });
+  if (allQuestions.length > 0) {
+    questionSel.value = allQuestions[0].id || '__all__';
+  }
+  questionSel.addEventListener('change', renderQuestionCards);
 }
 
 /* ============================================================
@@ -4776,10 +5241,10 @@ function renderArchetypeChart(question, metricId) {
 }
 
 function initArchetypes() {
-  const toggleRoot = document.getElementById('archetypeQuestionToggle');
+  const questionSel = document.getElementById('archetypeQuestionSelect');
   const metricSel = document.getElementById('archetypeMetricSelect');
   const root = document.getElementById('archetypeChart');
-  if (!toggleRoot || !metricSel || !root) return;
+  if (!metricSel || !root) return;
 
   const sourceQuestions = toArray(reportData?.archetypes?.questions);
   archetypeQuestions = sourceQuestions.length > 0
@@ -4792,40 +5257,36 @@ function initArchetypes() {
   }
 
   const defaultQuestionId = reportData?.archetypes?.default_question || archetypeQuestions[0]?.id;
-  toggleRoot.style.display = archetypeQuestions.length > 1 ? '' : 'none';
 
-  const applyQuestion = (questionId, keepMetric = false) => {
-    activeArchetypeQuestion = getArchetypeQuestionById(questionId) || archetypeQuestions[0];
-    if (!activeArchetypeQuestion) return;
-    const preferredMetricId = keepMetric
-      ? activeArchetypeMetric
-      : (activeArchetypeQuestion.default_metric || activeArchetypeMetric);
-    activeArchetypeMetric = preferredMetricId || null;
-
-    Array.from(toggleRoot.querySelectorAll('.seg-btn')).forEach((btn) => {
-      btn.classList.toggle('active', btn.dataset.questionId === activeArchetypeQuestion.id);
+  if (questionSel) {
+    questionSel.innerHTML = '';
+    archetypeQuestions.forEach((question) => {
+      const opt = document.createElement('option');
+      opt.value = question.id;
+      opt.textContent = normalizeDisplayLabel(question.label || question.title || question.id);
+      questionSel.appendChild(opt);
     });
-
-    renderArchetypeChart(activeArchetypeQuestion, preferredMetricId);
-  };
-
-  toggleRoot.innerHTML = '';
-  archetypeQuestions.forEach((question) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'seg-btn';
-    btn.dataset.questionId = question.id;
-    btn.textContent = normalizeDisplayLabel(question.label || question.id);
-    btn.addEventListener('click', () => applyQuestion(question.id, false));
-    toggleRoot.appendChild(btn);
-  });
+    questionSel.value = defaultQuestionId || '';
+    questionSel.style.display = archetypeQuestions.length > 1 ? '' : 'none';
+    questionSel.addEventListener('change', () => {
+      activeArchetypeQuestion = getArchetypeQuestionById(questionSel.value) || archetypeQuestions[0];
+      if (!activeArchetypeQuestion) return;
+      const preferredMetricId = activeArchetypeQuestion.default_metric || activeArchetypeMetric;
+      activeArchetypeMetric = preferredMetricId || null;
+      renderArchetypeChart(activeArchetypeQuestion, preferredMetricId);
+    });
+  }
 
   metricSel.addEventListener('change', () => {
     activeArchetypeMetric = metricSel.value;
     renderArchetypeChart(activeArchetypeQuestion, activeArchetypeMetric);
   });
 
-  applyQuestion(defaultQuestionId, false);
+  activeArchetypeQuestion = getArchetypeQuestionById(defaultQuestionId) || archetypeQuestions[0];
+  if (!activeArchetypeQuestion) return;
+  const preferredMetricId = activeArchetypeQuestion.default_metric || activeArchetypeMetric;
+  activeArchetypeMetric = preferredMetricId || null;
+  renderArchetypeChart(activeArchetypeQuestion, preferredMetricId);
 }
 
 /* ============================================================
@@ -5397,6 +5858,7 @@ async function init() {
   renderSiteNavigation();
   renderTakeaways();
   renderMethodology();
+  initToplineQuestionSelect();
   renderQuestionCards();
   renderBehaviorAwareness();
   renderBeliefLandscape();
