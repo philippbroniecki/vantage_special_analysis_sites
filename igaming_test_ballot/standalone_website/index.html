@@ -881,14 +881,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   z-index: 10;
 }
 
-.delta-badge[data-tooltip]:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: calc(100% + 7px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 200px;
-  max-width: 280px;
+/* delta-badge pseudo-tooltip replaced by JS body-level #vdhTooltip */
+
+/* ── Singleton body-level tooltip ── */
+#vdhTooltip {
+  position: fixed;
+  z-index: 9000;
+  pointer-events: none;
+  max-width: 300px;
   padding: 0.45rem 0.65rem;
   background: var(--ink);
   color: var(--bg);
@@ -896,23 +896,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   font-size: 0.71rem;
   font-weight: 500;
   white-space: pre-line;
-  line-height: 1.45;
+  line-height: 1.5;
   text-align: left;
-  pointer-events: none;
   box-shadow: 0 4px 14px rgba(0,0,0,0.28);
-  z-index: 100;
+  opacity: 0;
+  transition: opacity 80ms ease;
 }
-
-.delta-badge[data-tooltip]:hover::before {
-  content: '';
-  position: absolute;
-  bottom: calc(100% + 1px);
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: var(--ink);
-  pointer-events: none;
-  z-index: 100;
+#vdhTooltip.vdh-tooltip--visible {
+  opacity: 1;
 }
 
 .delta-badge.landry {
@@ -978,6 +969,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.62rem;
+}
+.findings-breadth-grid {
+  grid-template-columns: 1fr;
 }
 
 .finding {
@@ -1229,6 +1223,102 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   font-size: 0.73rem;
   color: var(--muted);
   margin-left: 0.35rem;
+}
+
+/* Archetype profile-breadth badges */
+.breadth-badge {
+  position: relative;
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.1rem 0.38rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-alt);
+  cursor: default;
+}
+/* breadth-badge pseudo-tooltip replaced by JS body-level #vdhTooltip */
+
+/* Profile-breadth stacked-bar cards */
+.breadth-bar-card {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-alt);
+  margin-bottom: 0.75rem;
+}
+.breadth-bar-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.breadth-bar-subtitle {
+  font-size: 0.77rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.breadth-bar-wrap {
+  display: flex;
+  height: 28px;
+  border-radius: 5px;
+  overflow: hidden;
+  gap: 2px;
+}
+.breadth-bar-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  min-width: 0;
+  cursor: help;
+  transition: filter 0.15s;
+}
+.breadth-bar-seg:hover { filter: brightness(1.15); }
+.breadth-bar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.75rem;
+  margin-top: 0.5rem;
+}
+.breadth-bar-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+}
+.breadth-bar-legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Party-camp delta display in findings cards */
+.party-camp-deltas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.45rem;
+  align-items: center;
+  margin-top: 0.2rem;
+}
+.party-camp-deltas .delta-label {
+  font-size: 0.73rem;
+  color: var(--muted);
+}
+
+/* Coalition card section sub-headers */
+.coalition-section-head {
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+  font-size: 0.87rem;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--line);
 }
 
 .archetype-label {
@@ -2090,25 +2180,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         </div>
       </section>
 
-      <!-- KEY FINDINGS -->
-      <section class="card reveal" id="componentTakeaways" data-component-id="key_takeaways" aria-labelledby="h-findings">
-        <div class="section-head">
-          <p class="section-eyebrow">Overview</p>
-          <h2 id="h-findings">Key Findings</h2>
-          <p>Current 2027 performance relative to the 2023 Louisiana governor baseline</p>
-        </div>
-        <div class="findings-stack" id="findingsGrid"></div>
-        <p class="findings-turnout-note" id="findingsTurnoutNote"></p>
-      </section>
-
-      <!-- METHODOLOGY NOTE -->
-      <section class="card reveal" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
-        <details class="methodology-details">
-          <summary id="h-methodology-note">Note on Methodology</summary>
-          <p class="methodology-details-body" id="methodologyBody">We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).</p>
-        </details>
-      </section>
-
       <!-- RESPONSE UNIVERSE TOGGLE -->
       <section class="card card--control reveal" id="componentResponseUniverse" data-component-id="response_universe_toggle" hidden>
         <div id="responseUniverseToggle" class="response-universe-toggle">
@@ -2119,6 +2190,26 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           </div>
           <p class="response-universe-explainer" id="responseUniverseExplainer"></p>
         </div>
+      </section>
+
+      <!-- METHODOLOGY EXPLAINER -->
+      <section class="card reveal" id="componentMethodology" data-component-id="methodology_note" aria-labelledby="h-methodology-note">
+        <details class="methodology-details">
+          <summary id="h-methodology-note">Methodology Explainer</summary>
+          <p class="methodology-details-body" id="methodologyBody">We estimate a machine learning ensemble that predicts opinion as a function of party, geography, age, sex, education, income, religion, race, and contextual variables. We generate predicted probabilities for detailed demographic cells and post-stratify them to the county, congressional district, state house, and state senate levels using turnout-adjusted population weights before aggregating to the national level. Reported differences (e.g., rural vs. urban) reflect differences in predicted support for those populations as they are composed—including their partisan and demographic makeup—rather than simple unweighted survey averages. As a result, rural–urban differences are not strictly ceteris paribus; they partly reflect differences in partisan composition. For ceteris paribus-style comparisons, we report within-group breakdowns and crosstabs (e.g., rural vs. urban within party).</p>
+        </details>
+      </section>
+
+      <!-- KEY FINDINGS -->
+      <section class="card reveal" id="componentTakeaways" data-component-id="key_takeaways" aria-labelledby="h-findings">
+        <div class="section-mode-label" id="modeLabelKeyFindings"></div>
+        <div class="section-head">
+          <p class="section-eyebrow">Overview</p>
+          <h2 id="h-findings">Key Findings</h2>
+          <p>Current 2027 performance relative to the 2023 Louisiana governor baseline</p>
+        </div>
+        <div class="findings-stack" id="findingsGrid"></div>
+        <p class="findings-turnout-note" id="findingsTurnoutNote"></p>
       </section>
 
       <!-- RESPONSE GEOGRAPHY -->
@@ -2406,7 +2497,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         "key": "comparison_2023",
         "path": "data/igaming_test_ballot_comparison_2023.json",
         "file_name": "igaming_test_ballot_comparison_2023.json",
-        "size_bytes": 10361322
+        "size_bytes": 10545959
       },
       {
         "key": "demographics",
@@ -2419,6 +2510,12 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         "path": "data/igaming_test_ballot_archetypes.json",
         "file_name": "igaming_test_ballot_archetypes.json",
         "size_bytes": 24926117
+      },
+      {
+        "key": "denominators",
+        "path": "data/igaming_test_ballot_denominators.json",
+        "file_name": "igaming_test_ballot_denominators.json",
+        "size_bytes": 4955
       }
     ]
   },
@@ -2737,9 +2834,11 @@ function updateResponseUniverseTheme() {
 
 function updateModeLabelElements() {
   const ids = [
+    'modeLabelKeyFindings',
     'modeLabelTopline',
     'modeLabelDemographics',
     'modeLabelCrosstabs',
+    'modeLabelCoalition',
     'modeLabelArchetypes',
     'modeLabelGeographyExplorer'
   ];
@@ -3645,7 +3744,7 @@ function applyComponentOrder() {
   if (!main) return;
   const configured = getContentConfig().component_order;
   if (!Array.isArray(configured) || configured.length === 0) return;
-  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'topline_questions', 'demographic_breakdown', 'crosstabs_explorer', 'coalition_base', 'archetype_breakdown', 'geography_explorer'];
+  const mandatory = ['hero_title', 'response_universe_toggle', 'methodology_note', 'key_takeaways', 'response_geography', 'topline_questions', 'demographic_breakdown', 'crosstabs_explorer', 'coalition_base', 'archetype_breakdown', 'geography_explorer'];
   const nodes = Array.from(main.querySelectorAll('[data-component-id]'));
   const nodeById = {};
   const availableIds = [];
@@ -4921,8 +5020,14 @@ function lookupDenominator(type, key) {
     return Number.isFinite(v) ? { voters: v, label: `approx. expected 2027 voters in this group` } : null;
   }
   if (type === 'county') {
-    const v = Number(d.geography?.county?.[key]);
-    return Number.isFinite(v) ? { voters: v, label: `approx. expected 2027 voters in ${key} Parish` } : null;
+    // Normalize key to "Title Case Parish" so lookups work regardless of whether the
+    // caller passes "ACADIA Parish", "Acadia Parish", "ACADIA", or "acadia parish".
+    const stripped = String(key || '').replace(/\s*parish\s*$/i, '').trim();
+    const normalizedKey = stripped.split(' ')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+      .join(' ') + ' Parish';
+    const v = Number(d.geography?.county?.[normalizedKey]);
+    return Number.isFinite(v) ? { voters: v, label: `approx. expected 2027 voters in ${normalizedKey}` } : null;
   }
   if (type === 'cultural_region') {
     const v = Number(d.geography?.cultural_region?.[key]);
@@ -4978,7 +5083,7 @@ function fmtPctValue(value, digits = 1) {
  * @param {number|null} baselineValue  - baseline % (optional)
  * @param {object|null} denomCtx       - {voters, label} from lookupDenominator(); if null, no vote counts shown
  */
-function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineValue = null, denomCtx = null) {
+function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineValue = null, denomCtx = null, unavailableMsg = null) {
   const n = Number(value);
   const cls = deltaClass(n);
   const dv = (denomCtx && Number.isFinite(Number(denomCtx.voters)) && Number(denomCtx.voters) > 0)
@@ -4986,7 +5091,7 @@ function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineVal
   const denomLabel = denomCtx?.label || null;
 
   const buildTooltip = (inner) => {
-    const lines = [inner];
+    const lines = [];
     const cur = currentValue != null ? Number(currentValue) : null;
     const bas = baselineValue != null ? Number(baselineValue) : null;
     const derivedBaseline = (bas == null && Number.isFinite(n) && cur != null && Number.isFinite(cur))
@@ -4994,21 +5099,20 @@ function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineVal
     const effectiveBaseline = Number.isFinite(bas) ? bas : (Number.isFinite(derivedBaseline) ? derivedBaseline : null);
 
     if (cur != null && Number.isFinite(cur)) {
-      const curVotes = dv ? `(~${Math.round(dv * cur / 100).toLocaleString()} votes)` : '';
-      lines.push(`Current: ${fmtPctValue(cur)} ${curVotes}`.trim());
+      lines.push(`Current: ${fmtPctValue(cur)}`);
     }
     if (effectiveBaseline != null) {
-      const basVotes = dv ? `(~${Math.round(dv * effectiveBaseline / 100).toLocaleString()} votes)` : '';
-      lines.push(`2023 baseline: ${fmtPctValue(effectiveBaseline)} ${basVotes}`.trim());
+      lines.push(`2023 baseline: ${fmtPctValue(effectiveBaseline)}`);
     }
-    lines.push('Delta = current modeled share minus 2023 parish-calibrated baseline.');
     if (dv && Number.isFinite(n)) {
       const deltaVotes = Math.round(dv * n / 100);
       const sign = deltaVotes >= 0 ? '+' : '';
-      lines.push(`Delta: ${n.toFixed(1)} pp (~${sign}${deltaVotes.toLocaleString()} votes)`);
+      const ppSign = n >= 0 ? '+' : '';
+      lines.push(`Delta: ${ppSign}${n.toFixed(1)} pp (~${sign}${deltaVotes.toLocaleString()} votes)`);
       lines.push(`Denominator: ${denomLabel || `approx. ${Math.round(dv).toLocaleString()} expected 2027 voters`}.`);
     } else if (!dv) {
-      lines.push('Vote-equivalent denominator unavailable for this row.');
+      lines.push(inner); // fallback: show original header for non-additive rows
+      lines.push(unavailableMsg || 'Vote-equivalent denominator is unavailable for this row.');
     }
     return lines.join('\n');
   };
@@ -5023,7 +5127,7 @@ function fmtDeltaHtml(value, responseId = null, currentValue = null, baselineVal
   const arrow = n > 0 ? '▲' : '▼';
   const sign = n > 0 ? '+' : '';
   const tt = buildTooltip(`Delta vs 2023 baseline: ${sign}${n.toFixed(1)} pp`);
-  return `<span class="delta-badge ${escapeHtml(responseId || '')}" data-tooltip="${escapeHtml(tt)}" title="${escapeHtml(tt)}"><span class="delta ${cls}">${arrow} ${sign}${n.toFixed(1)} pp</span></span>`;
+  return `<span class="delta-badge ${escapeHtml(responseId || '')}" data-tooltip="${escapeHtml(tt)}"><span class="delta ${cls}">${arrow} ${sign}${n.toFixed(1)} pp</span></span>`;
 }
 
 function getAllGeographyTypes() {
@@ -5324,6 +5428,20 @@ function renderTakeaways() {
   const over = topGeo[0];
   const under = topGeo[topGeo.length - 1];
 
+  // Cultural-region geography highlights
+  const crRows = [];
+  const crUnits = comparison?.topline?.by_geography?.cultural_region || {};
+  Object.keys(crUnits).forEach((unitId) => {
+    const entry = getResponseEntryById(crUnits[unitId], 'jeff_landry');
+    const cur = resolveUniverseValue(entry?.current?.all_americans, entry?.current);
+    const bas = resolveUniverseValue(entry?.baseline_2023?.all_americans, entry?.baseline_2023);
+    const delta = resolveUniverseValue(entry?.delta_vs_2023_baseline?.all_americans, entry?.delta_vs_2023_baseline);
+    if (entry) crRows.push({ label: crUnits[unitId].unit_label || unitId, unitId, delta, current: cur, baseline: bas });
+  });
+  const topCR = crRows.filter((r) => Number.isFinite(r.delta)).sort((a, b) => b.delta - a.delta);
+  const overCR = topCR[0];
+  const underCR = topCR[topCR.length - 1];
+
   // Camp-level archetype data
   const archetypeRows = toArray(comparison?.archetypes?.by_geography?.state?.['state wide']?.rows);
   const campLandry = [], campGop = [], campDem = [];
@@ -5360,6 +5478,119 @@ function renderTakeaways() {
     return ` (~${Math.round(voters * pct / 100).toLocaleString()} votes)`;
   };
 
+  // Party-camp movement helpers
+  const partyDimTakeaway = toArray(comparison?.demographics).find((d) => d?.id === 'party');
+  const partyStateRowsTakeaway = toArray(partyDimTakeaway?.by_geography?.state?.['state wide']?.rows);
+
+  function getPartyRespEntry(row, responseId) {
+    return toArray(row?.responses).find((r) => r?.id === responseId) || null;
+  }
+  function prtCur(row, responseId) {
+    const e = getPartyRespEntry(row, responseId);
+    return resolveUniverseValue(e?.current?.all_americans, e?.current);
+  }
+  function prtBase(row, responseId) {
+    const e = getPartyRespEntry(row, responseId);
+    return resolveUniverseValue(e?.baseline_2023?.all_americans, e?.baseline_2023);
+  }
+  function prtDelta(row, responseId) {
+    const e = getPartyRespEntry(row, responseId);
+    return resolveUniverseValue(e?.delta_vs_2023_baseline?.all_americans, e?.delta_vs_2023_baseline);
+  }
+
+  const partyCardsHtml = ['R', 'O', 'D'].map((levelId) => {
+    const row = partyStateRowsTakeaway.find((r) => r?.level_id === levelId);
+    if (!row) return '';
+    const denom = Number(row.denominator_votes) > 0
+      ? { voters: Number(row.denominator_votes), label: `approx. expected 2027 ${row.level_label} voters` }
+      : null;
+    const lCur = prtCur(row, 'jeff_landry');
+    const lBase = prtBase(row, 'jeff_landry');
+    const lDelta = prtDelta(row, 'jeff_landry');
+    const gCur = prtCur(row, 'republican_challenger');
+    const gBase = prtBase(row, 'republican_challenger');
+    const gDelta = prtDelta(row, 'republican_challenger');
+    const dCur = prtCur(row, 'democratic_candidate');
+    const dBase = prtBase(row, 'democratic_candidate');
+    const dDelta = prtDelta(row, 'democratic_candidate');
+    return `<article class="finding">
+          <div class="k">${escapeHtml(row.level_label)}</div>
+          <div class="v">${fmtPctValue(lCur)} <span class="finding-sublabel">Landry</span></div>
+          <div class="m"><div class="party-camp-deltas">
+            <span class="delta-label">Landry</span>${fmtDeltaHtml(lDelta, 'jeff_landry', lCur, lBase, denom)}
+            <span class="delta-label">Challenger</span>${fmtDeltaHtml(gDelta, 'republican_challenger', gCur, gBase, denom)}
+            <span class="delta-label">Dem</span>${fmtDeltaHtml(dDelta, 'democratic_candidate', dCur, dBase, denom)}
+          </div></div>
+        </article>`;
+  }).join('');
+
+  // Archetype profile-breadth helpers
+  function campEquivTakeaway(campRows, responseId) {
+    let sum = 0;
+    campRows.forEach((row) => {
+      const e = getResponseEntryById(row, responseId);
+      const v = resolveUniverseValue(e?.current?.all_americans, e?.current);
+      if (Number.isFinite(v)) sum += v / 100;
+    });
+    return sum;
+  }
+  const makeBreadthTip = (equiv, n, campName) => {
+    const rawScore = n > 0 ? `${equiv.toFixed(1)} / ${n} archetype-equivalents` : '—';
+    const campDesc = campName ? `across the ${n} ${campName}` : `across ${n} archetypes in this camp`;
+    return `Average support ${campDesc}.\nRaw score: ${rawScore}.`;
+  };
+
+  // Stacked-bar card for archetype profile breadth (Key Findings section)
+  const CAND_COLORS = { jeff_landry: '#cb1d1d', republican_challenger: '#e55030', democratic_candidate: '#0015bc' };
+  const CAND_LABELS = { jeff_landry: 'Landry', republican_challenger: 'Challenger', democratic_candidate: 'Dem candidate' };
+  const makeBreadthBarCard = (campName, campLen, equivMap) => {
+    if (!campLen) return '';
+    const segs = ['jeff_landry', 'republican_challenger', 'democratic_candidate'].map((id) => {
+      const equiv = equivMap[id] || 0;
+      const pct = Math.round(equiv / campLen * 100);
+      const rawScore = `${equiv.toFixed(1)} / ${campLen} archetype-equivalents`;
+      const tip = `Raw score: ${rawScore}.`;
+      return { id, pct, color: CAND_COLORS[id], tip };
+    });
+    const segsHtml = segs.map(({ pct, color, tip }) => {
+      const label = pct >= 12 ? `${pct}%` : '';
+      return `<div class="breadth-bar-seg" style="flex:${pct || 1};background:${color}" data-tooltip="${escapeHtml(tip)}">${label}</div>`;
+    }).join('');
+    const legendHtml = segs.map(({ id, pct, color }) => {
+      return `<span class="breadth-bar-legend-item"><span class="breadth-bar-legend-dot" style="background:${color}"></span>${escapeHtml(CAND_LABELS[id])} ${pct}%</span>`;
+    }).join('');
+    return `<div class="breadth-bar-card">
+      <div class="breadth-bar-title">${escapeHtml(campName)}</div>
+      <div class="breadth-bar-subtitle">Average support across ${campLen} archetypes in this camp.</div>
+      <div class="breadth-bar-wrap">${segsHtml}</div>
+      <div class="breadth-bar-legend">${legendHtml}</div>
+    </div>`;
+  };
+
+  const makeBBadge = (equiv, n, campName) => {
+    if (n <= 0) return '\u2014';
+    const pct = Math.round(equiv / n * 100);
+    return `<span class="breadth-badge" data-tooltip="${escapeHtml(makeBreadthTip(equiv, n, campName))}">${pct}%</span>`;
+  };
+
+  const lcLen = campLandry.length, gcLen = campGop.length, dcLen = campDem.length;
+  const lcLE = campEquivTakeaway(campLandry, 'jeff_landry');
+  const lcGE = campEquivTakeaway(campLandry, 'republican_challenger');
+  const lcDE = campEquivTakeaway(campLandry, 'democratic_candidate');
+  const gcGE = campEquivTakeaway(campGop, 'republican_challenger');
+  const gcLE = campEquivTakeaway(campGop, 'jeff_landry');
+  const gcDE = campEquivTakeaway(campGop, 'democratic_candidate');
+  const dcDE = campEquivTakeaway(campDem, 'democratic_candidate');
+  const dcLE = campEquivTakeaway(campDem, 'jeff_landry');
+  const dcGE = campEquivTakeaway(campDem, 'republican_challenger');
+
+  const lcBreadthBar = makeBreadthBarCard('Republican-Leaning Archetypes', lcLen,
+    { jeff_landry: lcLE, republican_challenger: lcGE, democratic_candidate: lcDE });
+  const gcBreadthBar = makeBreadthBarCard('Challenger-Leaning Archetypes', gcLen,
+    { jeff_landry: gcLE, republican_challenger: gcGE, democratic_candidate: gcDE });
+  const dcBreadthBar = makeBreadthBarCard('Democratic-Leaning Archetypes', dcLen,
+    { jeff_landry: dcLE, republican_challenger: dcGE, democratic_candidate: dcDE });
+
   grid.innerHTML = `
     <section class="findings-group">
       <div class="findings-group-head">
@@ -5371,17 +5602,17 @@ function renderTakeaways() {
       <div class="findings-grid">
         <article class="finding">
           <div class="k">Landry vs. 2023 baseline</div>
-          <div class="v">${fmtPctValue(landryCurrent)}${fmtVotes(statewideDenom?.voters, landryCurrent)}</div>
+          <div class="v">${fmtPctValue(landryCurrent)}</div>
           <div class="m">${fmtDeltaHtml(landryDelta, 'jeff_landry', landryCurrent, landryBaseline, statewideDenom)}</div>
         </article>
         <article class="finding">
           <div class="k">Democratic candidate vs. 2023 baseline</div>
-          <div class="v">${fmtPctValue(demCurrent)}${fmtVotes(statewideDenom?.voters, demCurrent)}</div>
+          <div class="v">${fmtPctValue(demCurrent)}</div>
           <div class="m">${fmtDeltaHtml(demDelta, 'democratic_candidate', demCurrent, demBaseline, statewideDenom)}</div>
         </article>
         <article class="finding">
           <div class="k">Republican challenger vs. 2023 baseline</div>
-          <div class="v">${fmtPctValue(gopCurrent)}${fmtVotes(statewideDenom?.voters, gopCurrent)}</div>
+          <div class="v">${fmtPctValue(gopCurrent)}</div>
           <div class="m">${fmtDeltaHtml(gopDelta, 'republican_challenger', gopCurrent, gopBaseline, statewideDenom)}</div>
         </article>
       </div>
@@ -5389,26 +5620,21 @@ function renderTakeaways() {
     <section class="findings-group">
       <div class="findings-group-head">
         <div>
-          <h3>Camp-level analysis</h3>
-          <p>Archetypes grouped by leading choice. Deltas show Landry's movement vs. 2023 within each camp.</p>
+          <h3>Party-camp vote movement</h3>
+          <p>Party denominators are real expected-voter counts. Hover delta badges for vote-equivalent context.</p>
         </div>
       </div>
-      <div class="findings-grid">
-        <article class="finding">
-          <div class="k">Landry / Republican camp (${campLandry.length} archetypes)</div>
-          <div class="v">${Number.isFinite(landryLandryAvg) ? fmtPctValue(landryLandryAvg) : '—'} <span class="finding-sublabel">avg across archetypes</span></div>
-          <div class="m">${fmtDeltaHtml(landryLandryDelta, 'jeff_landry', landryLandryAvg, null, null)}</div>
-        </article>
-        <article class="finding">
-          <div class="k">Republican challenger camp (${campGop.length} archetypes)</div>
-          <div class="v">${Number.isFinite(gopGopAvg) ? fmtPctValue(gopGopAvg) : '—'} <span class="finding-sublabel">avg across archetypes</span></div>
-          <div class="m">${fmtDeltaHtml(gopGopDelta, 'republican_challenger', gopGopAvg, null, null)}</div>
-        </article>
-        ${campDem.length ? `<article class="finding">
-          <div class="k">Democratic-leaning camp (${campDem.length} archetypes)</div>
-          <div class="v">Dem avg ${Number.isFinite(demDemAvg) ? fmtPctValue(demDemAvg) : '—'} · Landry ${Number.isFinite(demLandryAvg) ? fmtPctValue(demLandryAvg) : '—'} <span class="finding-sublabel">avg across archetypes</span></div>
-          <div class="m">${fmtDeltaHtml(demLandryDelta, 'jeff_landry', demLandryAvg, null, null)} <span class="finding-sublabel">Landry in Dem camp</span></div>
-        </article>` : ''}
+      <div class="findings-grid">${partyCardsHtml}</div>
+    </section>
+    <section class="findings-group">
+      <div class="findings-group-head">
+        <div>
+          <h3>Archetype profile breadth</h3>
+          <p>Profile breadth shows average candidate support across archetypes in each camp. It is not a vote count.</p>
+        </div>
+      </div>
+      <div class="findings-grid findings-breadth-grid">
+        ${lcBreadthBar}${gcBreadthBar}${dcBreadthBar}
       </div>
     </section>
     <section class="findings-group">
@@ -5424,6 +5650,16 @@ function renderTakeaways() {
           <div class="v">${escapeHtml(under?.label || 'Unavailable')}</div>
           <div class="m">${under ? fmtDeltaHtml(under.delta, 'jeff_landry', under.current, under.baseline, lookupDenominator('county', under.label || '')) : 'Unavailable'}</div>
         </article>
+        ${overCR ? `<article class="finding-highlight">
+          <div class="k">${overCR.delta === 0 ? 'Closest to 2023 baseline cultural region (Landry)' : overCR.delta > 0 ? 'Most above baseline cultural region (Landry)' : 'Least below baseline cultural region (Landry)'}</div>
+          <div class="v">${escapeHtml(overCR.label)}</div>
+          <div class="m">${fmtDeltaHtml(overCR.delta, 'jeff_landry', overCR.current, overCR.baseline, lookupDenominator('cultural_region', overCR.unitId))}</div>
+        </article>` : ''}
+        ${underCR ? `<article class="finding-highlight">
+          <div class="k">${underCR.delta === 0 ? 'Closest to 2023 baseline cultural region (Landry)' : 'Most below baseline cultural region (Landry)'}</div>
+          <div class="v">${escapeHtml(underCR.label)}</div>
+          <div class="m">${fmtDeltaHtml(underCR.delta, 'jeff_landry', underCR.current, underCR.baseline, lookupDenominator('cultural_region', underCR.unitId))}</div>
+        </article>` : ''}
       </div>
     </section>
   `;
@@ -5562,10 +5798,13 @@ function renderComparisonBars(container, rows, responseId, dimensionId, geograph
     const delta = resolveUniverseValue(response?.delta_vs_2023_baseline?.all_americans, response?.delta_vs_2023_baseline);
     const width = Number.isFinite(current) ? ((current / maxVal) * 100).toFixed(2) : '0';
 
-    // Per-row denominator: only available for statewide demographic breakdown
+    // Per-row denominator: prefer builder-attached field, fall back to shard lookup
     const levelId = row.level_id || row.key || '';
     let denomCtx = null;
-    if (dimensionId && (geographyTypeId === 'state' || !geographyTypeId)) {
+    const rowDenomVoters = Number(row.denominator_votes);
+    if (Number.isFinite(rowDenomVoters) && rowDenomVoters > 0) {
+      denomCtx = { voters: rowDenomVoters, label: `approx. expected 2027 voters in this group` };
+    } else if (dimensionId && (geographyTypeId === 'state' || !geographyTypeId)) {
       denomCtx = lookupDenominator('demographic', `${dimensionId}:${levelId}`);
     }
 
@@ -5771,7 +6010,6 @@ function renderArchetypeChart() {
       // Full-width stacked bar
       const barWrap = document.createElement('div');
       barWrap.className = 'arch-overview-bar-wrap';
-      barWrap.setAttribute('title', hoverText);
 
       const barEl = document.createElement('div');
       barEl.className = 'arch-overview-bar';
@@ -5780,8 +6018,8 @@ function renderArchetypeChart() {
         const pct = (v / total * 100).toFixed(2);
         const seg = document.createElement('div');
         seg.className = 'arch-overview-seg';
-        seg.style.cssText = `flex:${v};background:${m.color || '#999'};`;
-        seg.title = `${m.label.split(',')[0]}: ${fmtPctValue(v)}`;
+        seg.style.cssText = `flex:${v};background:${m.color || '#999'};cursor:help;`;
+        seg.setAttribute('data-tooltip', `${m.label.split(',')[0]}: ${fmtPctValue(v)}`);
         // Show label inside segment if wide enough (>=10%)
         if (v >= 10) {
           seg.textContent = `${v.toFixed(0)}%`;
@@ -5870,7 +6108,7 @@ function renderArchetypeChart() {
       <div class="comparison-response-note">Current</div>
       <div class="mini-meter"><div class="mini-fill" style="width:${width}%; background:${escapeHtml(response?.color || '#1a6b73')};"></div></div>
       <div class="bar-value">${fmtPctValue(value)}</div>
-      <div>${fmtDeltaHtml(delta, comparisonArchetypeMetricId, value, baseline, archDenom)}</div>
+      <div>${fmtDeltaHtml(delta, comparisonArchetypeMetricId, value, baseline, archDenom, 'Vote totals are not shown because archetype camps are profile-breadth groups, not mutually exclusive electorate groups.')}</div>
     `;
     item.appendChild(rowWrap);
     root.appendChild(item);
@@ -5881,83 +6119,134 @@ function renderCoalitionCard() {
   const root = document.getElementById('coalitionCard');
   if (!root) return;
   const comparison = getComparison2023();
-  const rows = toArray(comparison?.archetypes?.by_geography?.state?.['state wide']?.rows);
-  if (!rows.length) {
-    root.innerHTML = '<div class="comparison-empty">Coalition data unavailable.</div>';
-    return;
+
+  // --- Part 1: Party-camp vote movement (real denominators) ---
+  const partyDimCoal = toArray(comparison?.demographics).find((d) => d?.id === 'party');
+  const partyRowsCoal = toArray(partyDimCoal?.by_geography?.state?.['state wide']?.rows);
+
+  function getPRE(row, responseId) {
+    return toArray(row?.responses).find((r) => r?.id === responseId) || null;
+  }
+  function pCur(row, responseId) {
+    const e = getPRE(row, responseId);
+    return resolveUniverseValue(e?.current?.all_americans, e?.current);
+  }
+  function pBase(row, responseId) {
+    const e = getPRE(row, responseId);
+    return resolveUniverseValue(e?.baseline_2023?.all_americans, e?.baseline_2023);
+  }
+  function pDelta(row, responseId) {
+    const e = getPRE(row, responseId);
+    return resolveUniverseValue(e?.delta_vs_2023_baseline?.all_americans, e?.delta_vs_2023_baseline);
   }
 
-  function getVal(row, responseId) {
+  const partyCandidates = [
+    { id: 'jeff_landry', label: 'Landry', color: '#cb1d1d' },
+    { id: 'republican_challenger', label: 'Challenger', color: '#e55030' },
+    { id: 'democratic_candidate', label: 'Dem candidate', color: '#0015bc' }
+  ];
+  const partyGroupClassMap = { R: 'landry-group', D: 'dem-group', O: 'gop-group' };
+
+  const partySectionHtml = partyRowsCoal.length ? ['R', 'O', 'D'].map((levelId) => {
+    const row = partyRowsCoal.find((r) => r?.level_id === levelId);
+    if (!row) return '';
+    const denom = Number(row.denominator_votes) > 0
+      ? { voters: Number(row.denominator_votes), label: `approx. expected 2027 ${row.level_label} voters` }
+      : null;
+    const denomNote = denom ? `~${Math.round(denom.voters).toLocaleString()} exp. voters` : '';
+    const rowsHtml = partyCandidates.map(({ id, label, color }) => {
+      const cur = pCur(row, id);
+      const base = pBase(row, id);
+      const delta = pDelta(row, id);
+      return `
+        <div class="coalition-row">
+          <div class="coalition-row-label">${escapeHtml(label)}</div>
+          <div class="coalition-row-value" style="color:${escapeHtml(color)};">${fmtPctValue(cur)}</div>
+          <div>${fmtDeltaHtml(delta, id, cur, base, denom)}</div>
+        </div>`;
+    }).join('');
+    return `
+      <div class="coalition-group ${escapeHtml(partyGroupClassMap[levelId] || '')}">
+        <div class="coalition-group-head">
+          <span class="coalition-group-title">${escapeHtml(row.level_label)}</span>
+          <span class="coalition-group-count">${escapeHtml(denomNote)}</span>
+        </div>
+        <div class="coalition-group-rows">${rowsHtml}</div>
+      </div>`;
+  }).join('') : '<div class="comparison-empty">Party data unavailable.</div>';
+
+  // --- Part 2: Archetype profile breadth (non-additive; no vote totals) ---
+  const archetypeRowsCoal = toArray(comparison?.archetypes?.by_geography?.state?.['state wide']?.rows);
+
+  function getAVal(row, responseId) {
     const entry = getResponseEntryById(row, responseId);
     return resolveUniverseValue(entry?.current?.all_americans, entry?.current);
   }
-  function getBaseline(row, responseId) {
-    const entry = getResponseEntryById(row, responseId);
-    return resolveUniverseValue(entry?.baseline_2023?.all_americans, entry?.baseline_2023);
-  }
-  function getDelta(row, responseId) {
-    const entry = getResponseEntryById(row, responseId);
-    return resolveUniverseValue(entry?.delta_vs_2023_baseline?.all_americans, entry?.delta_vs_2023_baseline);
-  }
 
-  // Classify each archetype by leading choice
-  const groups = { landry: [], gop: [], dem: [] };
-  rows.forEach((row) => {
-    const l = getVal(row, 'jeff_landry') || 0;
-    const g = getVal(row, 'republican_challenger') || 0;
-    const d = getVal(row, 'democratic_candidate') || 0;
-    if (l >= g && l >= d) groups.landry.push(row);
-    else if (d >= g) groups.dem.push(row);
-    else groups.gop.push(row);
+  const campL = [], campG = [], campD = [];
+  archetypeRowsCoal.forEach((row) => {
+    const l = getAVal(row, 'jeff_landry') || 0;
+    const g = getAVal(row, 'republican_challenger') || 0;
+    const d = getAVal(row, 'democratic_candidate') || 0;
+    if (l >= g && l >= d) campL.push(row);
+    else if (d >= g) campD.push(row);
+    else campG.push(row);
   });
 
-  // Sort: Landry group by Landry share desc, GOP group by challenger share desc, Dem group by dem share desc
-  groups.landry.sort((a, b) => (getVal(b, 'jeff_landry') || 0) - (getVal(a, 'jeff_landry') || 0));
-  groups.gop.sort((a, b) => (getVal(b, 'republican_challenger') || 0) - (getVal(a, 'republican_challenger') || 0));
-  groups.dem.sort((a, b) => (getVal(b, 'democratic_candidate') || 0) - (getVal(a, 'democratic_candidate') || 0));
-
-  // Archetype profiles are non-mutually-exclusive; use simple average of percentages only.
-  function getCampSimpleAvg(groupRows, responseId) {
-    const vals = groupRows.map((row) => getVal(row, responseId)).filter(Number.isFinite);
-    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+  function campEquivCoal(campRows, responseId) {
+    let sum = 0;
+    campRows.forEach((row) => {
+      const v = getAVal(row, responseId);
+      if (Number.isFinite(v)) sum += v / 100;
+    });
+    return sum;
   }
 
-  function renderGroupSummary(groupRows, primaryId) {
-    const campAvg = getCampSimpleAvg(groupRows, primaryId);
-    if (campAvg == null) return '';
-    return `<div class="coalition-camp-summary"><span class="coalition-camp-stat">Camp avg: ${fmtPctValue(campAvg)}</span></div>`;
-  }
+  const makeBreadthTipCoal = (equiv, n, campName) => {
+    const rawScore = n > 0 ? `${equiv.toFixed(1)} / ${n} archetype-equivalents` : '—';
+    const campDesc = campName ? `across the ${n} ${campName}` : `across ${n} archetypes in this camp`;
+    return `Average support ${campDesc}.\nRaw score: ${rawScore}.`;
+  };
+  const bbadge = (equiv, n, campName) => {
+    if (n <= 0) return '\u2014';
+    const pct = Math.round(equiv / n * 100);
+    return `<span class="breadth-badge" data-tooltip="${escapeHtml(makeBreadthTipCoal(equiv, n, campName))}">${pct}%</span>`;
+  };
 
-  function renderGroup(groupRows, groupClass, title, primaryId, primaryColor) {
-    if (!groupRows.length) return '';
-    const rowsHtml = groupRows.map((row) => {
-      const pVal = getVal(row, primaryId);
-      const pBaseline = getBaseline(row, primaryId);
-      const delta = getDelta(row, primaryId);
-      const archDenom = lookupDenominator('archetype', row.key || '');
+  function renderBreadthGroup(campRows, groupClass, title, primaryId) {
+    if (!campRows.length) return '';
+    const n = campRows.length;
+    const rowsHtml = partyCandidates.map(({ id, label, color }) => {
+      const equiv = campEquivCoal(campRows, id);
       return `
         <div class="coalition-row">
-          <div class="coalition-row-label">${escapeHtml(normalizeDisplayLabel(row.label || row.key || ''))}</div>
-          <div class="coalition-row-value" style="color:${escapeHtml(primaryColor)};">${fmtPctValue(pVal)}</div>
-          <div>${fmtDeltaHtml(delta, primaryId, pVal, pBaseline, archDenom)}</div>
+          <div class="coalition-row-label">${escapeHtml(label)}</div>
+          <div class="coalition-row-value" style="color:${escapeHtml(color)};">${bbadge(equiv, n, title)}</div>
+          <div></div>
         </div>`;
     }).join('');
     return `
       <div class="coalition-group ${escapeHtml(groupClass)}">
         <div class="coalition-group-head">
           <span class="coalition-group-title">${escapeHtml(title)}</span>
-          <span class="coalition-group-count">${groupRows.length} archetype${groupRows.length !== 1 ? 's' : ''}</span>
+          <span class="coalition-group-count">${n} archetype${n !== 1 ? 's' : ''}</span>
         </div>
-        ${renderGroupSummary(groupRows, primaryId)}
         <div class="coalition-group-rows">${rowsHtml}</div>
       </div>`;
   }
 
-  root.innerHTML = [
-    renderGroup(groups.landry, 'landry-group', 'Landry Base', 'jeff_landry', '#cb1d1d'),
-    renderGroup(groups.gop, 'gop-group', 'Republican Challenger Opportunity', 'republican_challenger', '#e55030'),
-    renderGroup(groups.dem, 'dem-group', 'Democratic-Leaning', 'democratic_candidate', '#0015bc')
-  ].join('');
+  const breadthSectionHtml = [
+    renderBreadthGroup(campL, 'landry-group', 'Republican-Leaning Archetypes', 'jeff_landry'),
+    renderBreadthGroup(campG, 'gop-group', 'Challenger-Leaning Archetypes', 'republican_challenger'),
+    renderBreadthGroup(campD, 'dem-group', 'Democratic-Leaning Archetypes', 'democratic_candidate')
+  ].join('') || '<div class="comparison-empty">Archetype data unavailable.</div>';
+
+  root.innerHTML = `
+    <div class="coalition-section-head">Party-camp vote movement</div>
+    <div class="coalition-groups" style="padding:1rem;">${partySectionHtml}</div>
+    <div class="coalition-section-head">Archetype profile breadth <span style="font-size:0.78rem;font-weight:400;color:var(--muted)">(profile-breadth score · not vote counts)</span></div>
+    <div class="coalition-groups" style="padding:1rem;">${breadthSectionHtml}</div>
+  `;
 }
 
 function initArchetypes() {
@@ -6161,6 +6450,7 @@ function initGeographyExplorer() {
     const deltaValue = valueForComparison(activeGeographyExplorerResponseId, type?.id, unit.id, 'delta_vs_2023_baseline');
     return {
       label: unit.label || unit.id,
+      unit_id: unit.id,
       currentValue,
       baselineValue,
       deltaValue
@@ -6187,7 +6477,7 @@ function initGeographyExplorer() {
     const geoTypeId = comparisonGeographyState.geographyExplorer.typeId;
     let geoDenomCtx = null;
     if (geoTypeId === 'county') geoDenomCtx = lookupDenominator('county', row.label || '');
-    else if (geoTypeId === 'cultural_region') geoDenomCtx = lookupDenominator('cultural_region', row.label || '');
+    else if (geoTypeId === 'cultural_region') geoDenomCtx = lookupDenominator('cultural_region', row.unit_id || row.label || '');
     else if (geoTypeId === 'state') geoDenomCtx = lookupDenominator('statewide', '');
     const line = document.createElement('div');
     line.className = 'comparison-row';
@@ -6270,6 +6560,69 @@ function initReveal() {
 document.readyState === 'loading'
   ? document.addEventListener('DOMContentLoaded', init)
   : init();
+
+/* ── Body-level singleton tooltip ── */
+(function initVdhTooltip() {
+  const el = document.createElement('div');
+  el.id = 'vdhTooltip';
+  document.body.appendChild(el);
+
+  let hideTimer = null;
+
+  function show(text, target) {
+    clearTimeout(hideTimer);
+    el.textContent = text;
+    el.classList.add('vdh-tooltip--visible');
+    reposition(target);
+  }
+
+  function hide() {
+    hideTimer = setTimeout(() => el.classList.remove('vdh-tooltip--visible'), 60);
+  }
+
+  function reposition(target) {
+    const r = target.getBoundingClientRect();
+    const tw = el.offsetWidth || 240;
+    const th = el.offsetHeight || 80;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const GAP = 8;
+
+    // Prefer above
+    let top = r.top - th - GAP;
+    let left = r.left + r.width / 2 - tw / 2;
+
+    // If above clips top, show below
+    if (top < GAP) top = r.bottom + GAP;
+    // Viewport right clip
+    if (left + tw > vw - GAP) left = vw - tw - GAP;
+    // Viewport left clip
+    if (left < GAP) left = GAP;
+    // Below clips bottom: force above regardless
+    if (top + th > vh - GAP) top = r.top - th - GAP;
+
+    el.style.top = `${top}px`;
+    el.style.left = `${left}px`;
+  }
+
+  document.body.addEventListener('mouseenter', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (!target) return;
+    show(target.getAttribute('data-tooltip'), target);
+  }, true);
+
+  document.body.addEventListener('mouseleave', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (!target) return;
+    hide();
+  }, true);
+
+  document.body.addEventListener('mousemove', (e) => {
+    if (!el.classList.contains('vdh-tooltip--visible')) return;
+    const target = e.target.closest('[data-tooltip]');
+    if (target) reposition(target);
+  }, { passive: true });
+})();
     </script>
 
   </body>
