@@ -1724,6 +1724,22 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+.att-bar-label > .att-info-icon {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.62rem;
+}
+.att-bar-label-text {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .att-bar-track {
   background: var(--border);
@@ -2734,15 +2750,15 @@ const Q9_TYPE_LABELS = {
 };
 
 const Q17_LABELS = {
-  q17a: { short: 'Benefits/jobs/revenue',        group: 'pro_legalization',  full: 'Online casino gambling would benefit Louisiana through jobs and tax revenue.' },
-  q17c: { short: 'Offshore already happening',   group: 'pro_legalization',  full: 'Offshore online casino gambling is already happening and generating revenue that leaves the state.' },
-  q17f: { short: 'Money leaving Louisiana',      group: 'pro_legalization',  full: 'Money leaving the state for offshore gambling should be kept in Louisiana.' },
-  q17g: { short: 'Parish opt-out',               group: 'local_control',     full: 'Individual parishes should be allowed to opt out of online casino gambling.' },
-  q17i: { short: 'Tribes-only unfair',           group: 'tribal_corporate',  full: 'Restricting online casino licenses only to tribal operators is unfair and limits competition.' },
-  q17j: { short: 'Tribal keeps revenue in LA',   group: 'tribal_corporate',  full: 'Keeping online casino revenue within Louisiana tribes is the best way to ensure the money stays in-state.' },
-  q17k: { short: 'Apps addictive',               group: 'local_control',     full: 'Mobile casino apps are designed to be addictive and pose a danger to Louisiana families.' },
-  q17l: { short: 'Adult freedom',                group: 'pro_legalization',  full: 'Adults should have the freedom to gamble online if they choose to.' },
-  q17m: { short: 'State protects families',      group: 'local_control',     full: 'The state has a responsibility to protect families and communities from gambling addiction.' }
+  q17a: { short: 'Benefits/jobs/revenue',        group: 'pro_legalization',  full: 'Generally, legalized gambling in Louisiana has provided good jobs and tax revenue, producing more benefits than harm.' },
+  q17c: { short: 'Offshore already happening',   group: 'pro_legalization',  full: "Online gambling is already happening in Louisiana through illegal offshore sites; legalizing it would bring tax revenue and consumer protections that don\u2019t exist today." },
+  q17f: { short: 'Money leaving Louisiana',      group: 'pro_legalization',  full: "If Louisiana doesn\u2019t legalize online casino gaming, other states will, and Louisianans who want to play will send their money out of state instead of keeping it in Louisiana." },
+  q17g: { short: 'Parish opt-out',               group: 'local_control',     full: 'Online gaming should not be allowed in parishes that previously voted to limit or reject gambling.' },
+  q17i: { short: 'Tribes-only unfair',           group: 'tribal_corporate',  full: "Allowing only Louisiana tribes to operate online casino gaming would be unfair, because other Louisiana businesses wouldn\u2019t get the same opportunity to compete." },
+  q17j: { short: 'Tribal keeps revenue in LA',   group: 'tribal_corporate',  full: "Tribal gaming keeps revenue and jobs inside Louisiana\u2019s economy, while corporate-owned gaming sends profits to out-of-state shareholders." },
+  q17k: { short: 'Apps addictive',               group: 'local_control',     full: "Online casino gambling apps are designed to be addictive, and legalizing them would cause Louisiana families to lose money they can\u2019t afford." },
+  q17l: { short: 'Adult freedom',                group: 'pro_legalization',  full: 'Adults in Louisiana should be free to make their own choices about legal entertainment, including online casino gaming, just like they are with alcohol.' },
+  q17m: { short: 'State protects families',      group: 'local_control',     full: 'The state has a responsibility to protect Louisiana families from gambling industries that profit from addiction.' }
 };
 
 const Q18_LABELS = {
@@ -2751,28 +2767,36 @@ const Q18_LABELS = {
     sides: {
       tribes_unfair_open_market: 'Corporate fairness / open market',
       tribal_local_revenue:      'Tribal/local revenue'
-    }
+    },
+    fullA: "Allowing only Louisiana\u2019s tribes to operate online casino gaming is unfair. It gives one group of operators a special deal and shuts other companies out of the market.",
+    fullB: 'The companies calling this \u201cunfair\u201d are big corporate gaming operators based outside of Louisiana. Letting Louisiana tribes operate online casino gaming means that more money stays in Louisiana.'
   },
   q18b_addiction_protection: {
     title: 'Addiction risk vs. Regulated safeguards',
     sides: {
       addiction_family_risk:   'Addiction/family risk',
       regulation_safeguards:   'Regulation/consumer safeguards'
-    }
+    },
+    fullA: "Online casino gambling apps are designed to be addictive, and would put a casino in every Louisiana smartphone, making it easier for kids and addicted Louisianans to lose money their families can\u2019t afford. Governor Landry would be putting tax revenue ahead of Louisiana families.",
+    fullB: 'Illegal offshore gambling sites already operate in Louisiana today with no rules. A regulated tribal-state framework would add age verification, consumer protections, enforcement, and safeguards that do not exist today.'
   },
   q18c_freedom_protection: {
     title: 'Adult freedom vs. State protection',
     sides: {
       adult_freedom:    'Adult freedom',
       state_protection: 'State protection from addiction'
-    }
+    },
+    fullA: 'Adults in Louisiana should be free to make their own choices about legal entertainment, including online casino gaming, just like they are with alcohol.',
+    fullB: 'The state has a responsibility to protect Louisiana families from gambling industries that profit from addiction.'
   },
   q18d_voter_say: {
     title: 'Direct voter say vs. Limited tribal framework',
     sides: {
-      voter_direct_say:       'Voters should have direct say',
+      voter_direct_say:         'Voters should have direct say',
       limited_tribal_framework: 'Limited regulated tribal framework'
-    }
+    },
+    fullA: 'Opponents say this would let the Governor approve a major gambling expansion without voters having a direct say, and could open the door to online gambling in communities that have voted against gambling.',
+    fullB: 'Supporters say this is not a gambling free-for-all. It is a limited, regulated tribal framework with strict guardrails aimed at replacing illegal offshore activity.'
   }
 };
 
@@ -2855,6 +2879,66 @@ function attNote(text) {
 function attEmptyMsg(msg) {
   return `<p class="att-empty">${msg}</p>`;
 }
+
+function escAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+function attInfoIcon(fullText) {
+  if (!fullText) return '';
+  return `<button type="button" class="att-info-icon info-icon" tabindex="0" aria-label="Survey text" data-att-tip="${escAttr(fullText)}">i</button>`;
+}
+
+let attCardTooltipsInitialized = false;
+function initAttCardTooltips() {
+  if (attCardTooltipsInitialized) return;
+  attCardTooltipsInitialized = true;
+  ensureArchetypeTooltip();
+  bindArchetypeTooltipListeners();
+
+  document.addEventListener('mouseover', (e) => {
+    const btn = e.target.closest('.att-info-icon');
+    if (!btn) return;
+    const txt = btn.dataset.attTip;
+    if (!txt) return;
+    showArchetypeTooltip(btn, { subtitle: 'Survey text', body: txt });
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const btn = e.target.closest('.att-info-icon');
+    if (!btn) return;
+    if (!pinnedArchetypeIcon) hideArchetypeTooltip();
+  });
+
+  document.addEventListener('focusin', (e) => {
+    const btn = e.target.closest('.att-info-icon');
+    if (!btn) return;
+    const txt = btn.dataset.attTip;
+    if (!txt) return;
+    showArchetypeTooltip(btn, { subtitle: 'Survey text', body: txt });
+  });
+
+  document.addEventListener('focusout', (e) => {
+    const btn = e.target.closest('.att-info-icon');
+    if (!btn) return;
+    if (!pinnedArchetypeIcon) hideArchetypeTooltip();
+  });
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.att-info-icon');
+    if (!btn) return;
+    const txt = btn.dataset.attTip;
+    if (!txt) return;
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      pinnedArchetypeIcon = null;
+      hideArchetypeTooltip({ force: true });
+    } else {
+      showArchetypeTooltip(btn, { subtitle: 'Survey text', body: txt }, { pinned: true });
+    }
+  }, true);
+}
+
 
 /* ============================================================
    PER-CARD DEMOGRAPHIC STATE & HELPERS
@@ -3197,7 +3281,7 @@ function renderBeliefLandscape() {
         ? (row.value >= 0 ? '+' : '') + Math.round(row.value) + ' pts'
         : attFmt(row.value);
       html += `<div class="att-bar-row">
-        <div class="att-bar-label" title="${row.full.replace(/"/g,'&quot;')}">${row.label}</div>
+        <div class="att-bar-label"><span class="att-bar-label-text">${row.label}</span>${attInfoIcon(row.full)}</div>
         <div class="att-bar-track">
           <div class="att-bar-fill" style="width:${Math.min(100,Math.max(0,Math.abs(row.value))).toFixed(1)}%;background:${barColor}"></div>
         </div>
@@ -3241,7 +3325,7 @@ function renderArgumentTradeoffs() {
     const valB = attGetOptVal(sideB);
     const valN = neither ? attGetOptVal(neither) : 0;
     const margin = valA - valB;
-    matchups.push({ qid, title: meta.title, labelA: meta.sides[sideIds[0]], labelB: meta.sides[sideIds[1]], valA, valB, valN, margin, colorA: sideA.color || '#1a6b73', colorB: sideB.color || '#c46525' });
+    matchups.push({ qid, title: meta.title, labelA: meta.sides[sideIds[0]], labelB: meta.sides[sideIds[1]], fullA: meta.fullA || '', fullB: meta.fullB || '', valA, valB, valN, margin, colorA: sideA.color || '#1a6b73', colorB: sideB.color || '#c46525' });
   });
 
   matchups.sort((a, b) => Math.abs(b.margin) - Math.abs(a.margin));
@@ -3254,12 +3338,12 @@ function renderArgumentTradeoffs() {
       <h4 class="att-matchup-title">${m.title}</h4>
       <div class="att-matchup-winner">Winner: <strong>${winner}</strong> &nbsp;(${marginText})</div>
       <div class="att-bar-row">
-        <div class="att-bar-label">${m.labelA}</div>
+        <div class="att-bar-label"><span class="att-bar-label-text">${m.labelA}</span>${attInfoIcon(m.fullA)}</div>
         <div class="att-bar-track"><div class="att-bar-fill" style="width:${Math.min(100,m.valA).toFixed(1)}%;background:${m.colorA}"></div></div>
         <div class="att-bar-value">${attFmt(m.valA)}</div>
       </div>
       <div class="att-bar-row">
-        <div class="att-bar-label">${m.labelB}</div>
+        <div class="att-bar-label"><span class="att-bar-label-text">${m.labelB}</span>${attInfoIcon(m.fullB)}</div>
         <div class="att-bar-track"><div class="att-bar-fill" style="width:${Math.min(100,m.valB).toFixed(1)}%;background:${m.colorB}"></div></div>
         <div class="att-bar-value">${attFmt(m.valB)}</div>
       </div>
@@ -5994,6 +6078,7 @@ async function init() {
   initCardDemographicSelect('priority', 'priorityDemographicSelect', 'priorityLevelSelect', 'priorityLevelGroup', renderPriorities);
   initCardDemographicSelect('persuadability', 'persuadabilityDemographicSelect', 'persuadabilityLevelSelect', 'persuadabilityLevelGroup', renderPersuadabilityMessengers);
   initCardDemographicSelect('topline', 'toplineDemographicSelect', 'toplineLevelSelect', 'toplineLevelGroup', renderQuestionCards);
+  initAttCardTooltips();
   initDemographics();
   initCrosstabs();
   initArchetypes();
