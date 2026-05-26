@@ -2839,6 +2839,45 @@ const Q22_LABELS = {
   dont_know:                 "Don\u2019t know"
 };
 
+const Q12_FULL = {
+  income_tax:                              'Eliminating the state income tax',
+  property_taxes:                          'Lowering property taxes for Louisiana homeowners',
+  illegal_offshore_gambling_law_enforcement: 'Cracking down on illegal offshore gambling and strengthening Louisiana law enforcement',
+  education_savings_accounts:              'Funding education savings accounts and the LA GATOR school choice program',
+  roads_bridges:                           'Repairing roads and bridges across Louisiana',
+  power_infrastructure:                    "Improving Louisiana\u2019s power infrastructure to support economic growth"
+};
+
+const Q20_FULL = {
+  eliminate_income_tax:  'Eliminating the state income tax',
+  lower_property_taxes:  'Lowering property taxes',
+  power_infrastructure:  "Improving Louisiana\u2019s power infrastructure",
+  education_savings:     'Funding education savings accounts',
+  roads_bridges:         'Fixing roads and bridges',
+  law_enforcement:       'Increasing law enforcement resources',
+  oppose_always:         'None. I oppose this no matter how the revenue is used.',
+  dont_know:             "Don\u2019t know"
+};
+
+const Q21_FULL = {
+  very_firm:       'Very firm. Nothing would change my mind.',
+  fairly_firm:     'Fairly firm but could imagine my view shifting with strong arguments.',
+  open_persuasion: 'Open to persuasion in either direction.',
+  no_strong_view:  "I really don\u2019t have a strong view either way.",
+  dont_know:       "Don\u2019t know"
+};
+
+const Q22_FULL = {
+  local_law_enforcement:   'Local sheriffs and law enforcement',
+  faith_leaders:           'Pastors and faith leaders',
+  louisiana_tribes:        'Louisiana tribes',
+  business_owners:         'Louisiana business owners',
+  economists_universities: 'Independent economists or universities (e.g., LSU)',
+  state_legislators:       'State legislators from your area',
+  none_of_these:           'None of these',
+  dont_know:               "Don\u2019t know"
+};
+
 function attGetQuestion(id) {
   if (!Array.isArray(reportData?.questions)) return null;
   return reportData.questions.find((q) => q.id === id) || null;
@@ -3375,10 +3414,11 @@ function renderPriorities() {
   if (q12 && q12Opts.length) {
     const rows = q12Opts.map((opt) => ({
       label: Q12_LABELS[opt.id] || opt.label || opt.id,
+      full:  Q12_FULL[opt.id]   || Q12_LABELS[opt.id] || opt.label || opt.id,
       value: attGetOptVal(opt),
       color: opt.color || '#1a6b73'
     })).sort((a, b) => b.value - a.value);
-    rows.forEach((row) => html += attHorzBar(row.label, row.value, row.color));
+    rows.forEach((row) => html += attHorzBar(`<span class="att-bar-label-text">${row.label}</span>${attInfoIcon(row.full)}`, row.value, row.color));
     html += attNote('Respondents ranked this as their top priority for evaluating Governor Landry\'s record.');
   } else {
     html += attEmptyMsg('Priority data not available.');
@@ -3391,10 +3431,11 @@ function renderPriorities() {
   if (q20 && q20Opts.length) {
     const rows = q20Opts.map((opt) => ({
       label: Q20_LABELS[opt.id] || opt.label || opt.id,
+      full:  Q20_FULL[opt.id]   || Q20_LABELS[opt.id] || opt.label || opt.id,
       value: attGetOptVal(opt),
       color: opt.color || '#1a6b73'
     })).sort((a, b) => b.value - a.value);
-    rows.forEach((row) => html += attHorzBar(row.label, row.value, row.color));
+    rows.forEach((row) => html += attHorzBar(`<span class="att-bar-label-text">${row.label}</span>${attInfoIcon(row.full)}`, row.value, row.color));
   } else {
     html += attEmptyMsg('Revenue priority data not available.');
   }
@@ -3420,8 +3461,10 @@ function renderPersuadabilityMessengers() {
     const openOpts   = ['open_persuasion','no_strong_view'];
     let firmTotal = 0, openTotal = 0;
     q21Opts.forEach((opt) => {
-      const v = attGetOptVal(opt);
-      html += attHorzBar(Q21_LABELS[opt.id] || opt.label || opt.id, v, opt.color || '#1a6b73');
+      const v   = attGetOptVal(opt);
+      const lbl = Q21_LABELS[opt.id] || opt.label || opt.id;
+      const full = Q21_FULL[opt.id] || lbl;
+      html += attHorzBar(`<span class="att-bar-label-text">${lbl}</span>${attInfoIcon(full)}`, v, opt.color || '#1a6b73');
       if (firmOpts.includes(opt.id)) firmTotal += v;
       if (openOpts.includes(opt.id)) openTotal += v;
     });
@@ -3444,10 +3487,11 @@ function renderPersuadabilityMessengers() {
   if (q22 && q22Opts.length) {
     const rows = q22Opts.map((opt) => ({
       label: Q22_LABELS[opt.id] || opt.label || opt.id,
+      full:  Q22_FULL[opt.id]   || Q22_LABELS[opt.id] || opt.label || opt.id,
       value: attGetOptVal(opt),
       color: opt.color || '#1a6b73'
     })).sort((a, b) => b.value - a.value);
-    rows.forEach((row) => html += attHorzBar(row.label, row.value, row.color));
+    rows.forEach((row) => html += attHorzBar(`<span class="att-bar-label-text">${row.label}</span>${attInfoIcon(row.full)}`, row.value, row.color));
   } else {
     html += attEmptyMsg('Messenger data not available.');
   }
