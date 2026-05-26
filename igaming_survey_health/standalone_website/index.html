@@ -472,6 +472,9 @@ body {
   background: #48b4be;
 }
 
+/* iGaming TYPOGRAPHY CONTRACT: hero title/subtitle spacing must match all sibling iGaming pages.
+   h1 has no bottom margin; subtitle spacing uses margin-top 0.58rem;
+   meta-pills spacing uses .hero-meta margin-top 0.88rem. New pages must not invent separate hero spacing. */
 .hero h1 {
   font-size: clamp(1.55rem, 3.1vw, 2.25rem);
   font-weight: 800;
@@ -479,11 +482,11 @@ body {
   color: #f4faff;
   letter-spacing: -0.025em;
   max-width: 760px;
-  margin-bottom: 0.6rem;
 }
 
 .hero-subtitle {
-  margin: 0 0 0.95rem;
+  margin-top: 0.58rem;
+  margin-bottom: 0;
   color: rgba(215, 235, 255, 0.88);
   font-size: 0.95rem;
 }
@@ -493,6 +496,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.45rem;
+  margin-top: 0.88rem;
 }
 
 .meta-pill {
@@ -1741,7 +1745,7 @@ const FALLBACK_REPORT = {
     "demographics_from": "screened CSV (survey.csv), all 1350 rows",
     "geography_from": "cr_code column in screened CSV (national cross-state cultural-region framework)",
     "out_of_state_note": "3 respondents fall outside Louisiana state boundaries in the screened file. They remain counted in the national cross-state cultural-region framework where applicable.",
-    "generated_at_utc": "2026-05-25T20:46:18Z",
+    "generated_at_utc": "2026-05-26T11:43:19Z",
     "parser": "igaming_survey_stats_csv_v1",
     "map_bin_logic": "Five-level bins: 0, 1-24, 25-49, 50-99, 100+ respondents per cultural region."
   }
@@ -2419,6 +2423,10 @@ function renderFeedbackCallout() {
   }
 
   section.hidden = false;
+  const main = document.querySelector('main.layout');
+  if (main && section.parentElement === main) {
+    main.appendChild(section);
+  }
   const heading = document.getElementById('feedbackHeading');
   const body = document.getElementById('feedbackBody');
   const cta = document.getElementById('feedbackCta');

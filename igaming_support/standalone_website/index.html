@@ -549,6 +549,9 @@ body {
   flex-shrink: 0;
 }
 
+/* iGaming TYPOGRAPHY CONTRACT: hero title/subtitle spacing must match all sibling iGaming pages.
+   h1 has no bottom margin; subtitle spacing uses .hero p margin-top 0.58rem;
+   meta-pills spacing uses .hero-meta margin-top 0.88rem. New pages must not invent separate hero spacing. */
 .hero h1 {
   font-size: clamp(1.55rem, 3.1vw, 2.25rem);
   font-weight: 800;
@@ -556,14 +559,15 @@ body {
   color: #f4faff;
   letter-spacing: -0.025em;
   max-width: 660px;
-  margin-bottom: 1.1rem;
 }
+.hero p#heroSubtitle:not([hidden]) { margin-top: 0.58rem; color: rgba(238, 244, 255, 0.9); max-width: 78ch; line-height: 1.5; }
 
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.45rem;
+  margin-top: 0.88rem;
 }
 
 .meta-pill {
@@ -1633,45 +1637,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
 /* ============================================================
    FEEDBACK CALLOUT
    ============================================================ */
-.feedback-callout {
-  margin: 2.5rem auto 2rem;
-  padding: 2.5rem 2rem;
-  background: var(--accent-tint2);
-  border: 2px solid var(--accent);
-  border-radius: var(--r-lg);
-  text-align: center;
-}
-.feedback-callout h2 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0 0 0.6rem;
-}
-.feedback-callout p {
-  color: var(--ink-soft);
-  font-size: 0.97rem;
-  line-height: 1.55;
-  margin: 0 0 1.4rem;
-  max-width: 540px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.feedback-cta {
-  display: inline-block;
-  padding: 0.65rem 1.8rem;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.92rem;
-  border-radius: var(--r-full);
-  text-decoration: none;
-  transition: background 0.15s var(--ease-out);
-}
-.feedback-cta:hover {
-  background: var(--accent-hover);
-}
-@media (max-width: 480px) {
-  .feedback-callout { padding: 1.5rem 1.2rem; margin: 1.5rem 0.6rem 1.5rem; }
+/* iGaming family shared feedback-callout style — must match experiment page */
+.feedback-callout { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--accent-tint2); padding: 1.7rem 1.8rem; }
+.feedback-callout h2 { margin-bottom: 0.45rem; font-size: 1.02rem; color: var(--ink); }
+.feedback-callout p { margin-bottom: 0.9rem; color: var(--ink-soft); font-size: 0.84rem; }
+.feedback-cta { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-full); border: 1px solid transparent; background: var(--accent); color: #f5fbff; text-decoration: none; font-size: 0.78rem; font-weight: 760; padding: 0.46rem 0.9rem; transition: background 0.15s ease; }
+.feedback-cta:hover { background: var(--accent-hover); }
+@media (max-width: 700px) {
+  .feedback-callout { padding: 1.5rem 1.2rem; }
 }
     </style>
   </head>
@@ -33934,7 +33907,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
       "policy_igaming_pre": "xgboost_2026-05-15_IGaming_2026_05_15.parquet"
     },
     "codebook_file": "codebook.json",
-    "generated_at_utc": "2026-05-25 20:40:48 UTC",
+    "generated_at_utc": "2026-05-26 11:39:24 UTC",
     "crosstabs": {
       "manifest_file": "crosstabs_manifest.json",
       "manifest_path": "data/crosstabs_manifest.json",
@@ -35264,6 +35237,10 @@ function renderFeedbackCallout() {
     if (cfg.cta_url) cta.href = cfg.cta_url;
   }
   section.removeAttribute('hidden');
+  const main = document.querySelector('main.layout');
+  if (main && section.parentElement === main) {
+    main.appendChild(section);
+  }
 }
 
 function renderTakeaways() {
