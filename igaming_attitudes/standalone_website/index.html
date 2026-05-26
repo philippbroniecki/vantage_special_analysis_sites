@@ -1916,6 +1916,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
             <label class="xt-control-label" for="behaviorGeographyUnitSelect">Unit</label>
             <select class="xt-select att-geo-unit" id="behaviorGeographyUnitSelect"></select>
           </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="behaviorDemographicSelect">Demographic</label>
+            <select class="xt-select" id="behaviorDemographicSelect"></select>
+          </div>
+          <div class="xt-control-group" id="behaviorLevelGroup" hidden>
+            <label class="xt-control-label" for="behaviorLevelSelect">Level</label>
+            <select class="xt-select" id="behaviorLevelSelect"></select>
+          </div>
         </div>
         <div id="behaviorAwarenessContent"></div>
       </section>
@@ -1955,6 +1963,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
             <label class="xt-control-label" for="beliefGeographyUnitSelect">Unit</label>
             <select class="xt-select att-geo-unit" id="beliefGeographyUnitSelect"></select>
           </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="beliefDemographicSelect">Demographic</label>
+            <select class="xt-select" id="beliefDemographicSelect"></select>
+          </div>
+          <div class="xt-control-group" id="beliefLevelGroup" hidden>
+            <label class="xt-control-label" for="beliefLevelSelect">Level</label>
+            <select class="xt-select" id="beliefLevelSelect"></select>
+          </div>
         </div>
         <div id="beliefLandscapeContent"></div>
         <p class="xt-note">Sorted by selected metric (descending). Hover bar labels for full statement text.</p>
@@ -1976,6 +1992,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <div class="xt-control-group" id="argGeographyUnitGroup" hidden>
             <label class="xt-control-label" for="argGeographyUnitSelect">Unit</label>
             <select class="xt-select att-geo-unit" id="argGeographyUnitSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="argDemographicSelect">Demographic</label>
+            <select class="xt-select" id="argDemographicSelect"></select>
+          </div>
+          <div class="xt-control-group" id="argLevelGroup" hidden>
+            <label class="xt-control-label" for="argLevelSelect">Level</label>
+            <select class="xt-select" id="argLevelSelect"></select>
           </div>
         </div>
         <div id="argumentTradeoffsContent"></div>
@@ -1999,6 +2023,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
             <label class="xt-control-label" for="priorityGeographyUnitSelect">Unit</label>
             <select class="xt-select att-geo-unit" id="priorityGeographyUnitSelect"></select>
           </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="priorityDemographicSelect">Demographic</label>
+            <select class="xt-select" id="priorityDemographicSelect"></select>
+          </div>
+          <div class="xt-control-group" id="priorityLevelGroup" hidden>
+            <label class="xt-control-label" for="priorityLevelSelect">Level</label>
+            <select class="xt-select" id="priorityLevelSelect"></select>
+          </div>
         </div>
         <div id="prioritiesContent"></div>
       </section>
@@ -2019,6 +2051,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <div class="xt-control-group" id="persuadabilityGeographyUnitGroup" hidden>
             <label class="xt-control-label" for="persuadabilityGeographyUnitSelect">Unit</label>
             <select class="xt-select att-geo-unit" id="persuadabilityGeographyUnitSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="persuadabilityDemographicSelect">Demographic</label>
+            <select class="xt-select" id="persuadabilityDemographicSelect"></select>
+          </div>
+          <div class="xt-control-group" id="persuadabilityLevelGroup" hidden>
+            <label class="xt-control-label" for="persuadabilityLevelSelect">Level</label>
+            <select class="xt-select" id="persuadabilityLevelSelect"></select>
           </div>
         </div>
         <div id="persuadabilityMessengersContent"></div>
@@ -2046,6 +2086,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <div class="xt-control-group" id="toplineGeographyUnitGroup" hidden>
             <label class="xt-control-label" for="toplineGeographyUnitSelect">Unit</label>
             <select class="xt-select att-geo-unit" id="toplineGeographyUnitSelect"></select>
+          </div>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="toplineDemographicSelect">Demographic</label>
+            <select class="xt-select" id="toplineDemographicSelect"></select>
+          </div>
+          <div class="xt-control-group" id="toplineLevelGroup" hidden>
+            <label class="xt-control-label" for="toplineLevelSelect">Level</label>
+            <select class="xt-select" id="toplineLevelSelect"></select>
           </div>
         </div>
         <div id="questionCards" class="question-grid" role="region" aria-label="Topline question cards"></div>
@@ -2809,17 +2857,108 @@ function attEmptyMsg(msg) {
 }
 
 /* ============================================================
+   PER-CARD DEMOGRAPHIC STATE & HELPERS
+   ============================================================ */
+const cardDemState = {
+  behavior:       { demId: '__overall__', levelId: '__overall__' },
+  belief:         { demId: '__overall__', levelId: '__overall__' },
+  arg:            { demId: '__overall__', levelId: '__overall__' },
+  priority:       { demId: '__overall__', levelId: '__overall__' },
+  persuadability: { demId: '__overall__', levelId: '__overall__' },
+  topline:        { demId: '__overall__', levelId: '__overall__' },
+};
+
+function getDimLevels(demId) {
+  if (!demId || demId === '__overall__') return [];
+  const dim = toArray(reportData?.demographics).find((d) => d.id === demId);
+  if (!dim || !dim.cards) return [];
+  const firstCardKey = Object.keys(dim.cards)[0];
+  if (!firstCardKey) return [];
+  return toArray(dim.cards[firstCardKey]?.rows).map((r) => ({
+    id: r.level_id,
+    label: r.level_label || r.level_id,
+  }));
+}
+
+// Returns option array with values overridden from the demographic row for the given level.
+// Falls back to standard geography-based options if no demographic match.
+function makeEnrichedOpts(q, demId, levelId) {
+  const baseOpts = getQuestionOptionsForActiveGeography(q);
+  if (!demId || demId === '__overall__' || !levelId || levelId === '__overall__') {
+    return baseOpts;
+  }
+  const qid = q?.id;
+  if (!qid) return baseOpts;
+  const card = getDemographicCard(qid, demId);
+  if (!card) return baseOpts;
+  const rows = getDemographicRowsForActiveGeography(card);
+  const row = rows.find((r) => r.level_id === levelId);
+  if (!row) return baseOpts;
+  return baseOpts.map((opt) => ({
+    ...opt,
+    value: row.values?.[opt.id] ?? opt.value,
+    values_by_universe: row.values_by_universe?.[opt.id] ?? opt.values_by_universe,
+  }));
+}
+
+function initCardDemographicSelect(cardKey, demSelId, lvlSelId, lvlGroupId, renderFn) {
+  const demSel   = document.getElementById(demSelId);
+  const lvlSel   = document.getElementById(lvlSelId);
+  const lvlGroup = document.getElementById(lvlGroupId);
+  if (!demSel) return;
+
+  const dimOptions = toArray(reportData?.demographic_controls?.options);
+  demSel.innerHTML = '<option value="__overall__">Overall</option>';
+  dimOptions.forEach((opt) => {
+    demSel.appendChild(new Option(opt.label || opt.id, opt.id));
+  });
+
+  function updateLevels() {
+    const demId = demSel.value;
+    cardDemState[cardKey].demId = demId;
+    if (!demId || demId === '__overall__') {
+      if (lvlSel) lvlSel.innerHTML = '';
+      if (lvlGroup) lvlGroup.hidden = true;
+      cardDemState[cardKey].levelId = '__overall__';
+      return;
+    }
+    const levels = getDimLevels(demId);
+    if (lvlSel) {
+      lvlSel.innerHTML = levels.map((l) =>
+        `<option value="${l.id}">${l.label}</option>`
+      ).join('');
+      cardDemState[cardKey].levelId = levels[0]?.id || '__overall__';
+      lvlSel.value = cardDemState[cardKey].levelId;
+    }
+    if (lvlGroup) lvlGroup.hidden = (levels.length === 0);
+  }
+
+  demSel.addEventListener('change', () => {
+    updateLevels();
+    renderFn();
+  });
+  if (lvlSel) {
+    lvlSel.addEventListener('change', () => {
+      cardDemState[cardKey].levelId = lvlSel.value;
+      renderFn();
+    });
+  }
+  updateLevels();
+}
+
+/* ============================================================
    BEHAVIOR & AWARENESS
    ============================================================ */
 function renderBehaviorAwareness() {
   const el = document.getElementById('behaviorAwarenessContent');
   if (!el) return;
   let html = '';
+  const { demId, levelId } = cardDemState.behavior;
 
   // Q8: Gambling participation
   const q8 = attGetQuestion('q8_gambling_participation');
   html += attSubHead('Past-Year Gambling Participation');
-  const q8Opts = getQuestionOptionsForActiveGeography(q8);
+  const q8Opts = makeEnrichedOpts(q8, demId, levelId);
   if (q8 && q8Opts.length) {
     q8Opts.forEach((opt) => {
       const clr = opt.color || (opt.id === 'yes' ? '#1a6b73' : '#c46525');
@@ -2846,7 +2985,7 @@ function renderBehaviorAwareness() {
   q9Ids.forEach((qid) => {
     const q = attGetQuestion(qid);
     if (!q) return;
-    const yesOpt = getQuestionOptionsForActiveGeography(q).find((o) => o.id === 'yes');
+    const yesOpt = makeEnrichedOpts(q, demId, levelId).find((o) => o.id === 'yes');
     if (!yesOpt) return;
     q9Rows.push({ label: Q9_TYPE_LABELS[qid] || qid, value: attGetOptVal(yesOpt), color: yesOpt.color || '#1a6b73' });
   });
@@ -2861,7 +3000,7 @@ function renderBehaviorAwareness() {
   // Q10: Offshore awareness
   const q10 = attGetQuestion('q10_offshore_awareness');
   html += attSubHead('Awareness of Offshore Online Casino Gambling');
-  const q10Opts = getQuestionOptionsForActiveGeography(q10);
+  const q10Opts = makeEnrichedOpts(q10, demId, levelId);
   if (q10 && q10Opts.length) {
     q10Opts.forEach((opt) => {
       html += attHorzBar(opt.label || opt.id, attGetOptVal(opt), opt.color || '#557c99');
@@ -2965,6 +3104,7 @@ function renderBeliefLandscape() {
   const groupSel  = document.getElementById('beliefGroupSelect');
   const metric    = metricSel ? metricSel.value : 'net_agree';
   const group     = groupSel  ? groupSel.value  : 'all';
+  const { demId, levelId } = cardDemState.belief;
 
   const Q17_IDS = ['q17a','q17c','q17f','q17g','q17i','q17j','q17k','q17l','q17m'];
   const rows = [];
@@ -2977,7 +3117,7 @@ function renderBeliefLandscape() {
     if (!q) return;
 
     const getVal = (id) => {
-      const opt = getQuestionOptionsForActiveGeography(q).find((o) => o.id === id);
+      const opt = makeEnrichedOpts(q, demId, levelId).find((o) => o.id === id);
       return opt ? attGetOptVal(opt) : 0;
     };
     const sa   = getVal('strongly_agree');
@@ -3081,6 +3221,7 @@ function initBeliefLandscapeControls() {
 function renderArgumentTradeoffs() {
   const el = document.getElementById('argumentTradeoffsContent');
   if (!el) return;
+  const { demId, levelId } = cardDemState.arg;
 
   const Q18_IDS = ['q18a_corporate_unfair','q18b_addiction_protection','q18c_freedom_protection','q18d_voter_say'];
   const matchups = [];
@@ -3090,7 +3231,7 @@ function renderArgumentTradeoffs() {
     if (!meta) return;
     const q = attGetQuestion(qid);
     if (!q) return;
-    const qOpts = getQuestionOptionsForActiveGeography(q);
+    const qOpts = makeEnrichedOpts(q, demId, levelId);
     const sideIds = Object.keys(meta.sides);
     const sideA   = qOpts.find((o) => o.id === sideIds[0]);
     const sideB   = qOpts.find((o) => o.id === sideIds[1]);
@@ -3141,11 +3282,12 @@ function renderPriorities() {
   const el = document.getElementById('prioritiesContent');
   if (!el) return;
   let html = '';
+  const { demId, levelId } = cardDemState.priority;
 
   // Q12: Promise / priority ranked #1
   const q12 = attGetQuestion('q12_promise_rank1');
   html += attSubHead('Top Issue Priority (Ranked #1)');
-  const q12Opts = getQuestionOptionsForActiveGeography(q12);
+  const q12Opts = makeEnrichedOpts(q12, demId, levelId);
   if (q12 && q12Opts.length) {
     const rows = q12Opts.map((opt) => ({
       label: Q12_LABELS[opt.id] || opt.label || opt.id,
@@ -3161,7 +3303,7 @@ function renderPriorities() {
   // Q20: Revenue use priority
   const q20 = attGetQuestion('q20_revenue_priority');
   html += attSubHead('Preferred Use of iGaming Tax Revenue');
-  const q20Opts = getQuestionOptionsForActiveGeography(q20);
+  const q20Opts = makeEnrichedOpts(q20, demId, levelId);
   if (q20 && q20Opts.length) {
     const rows = q20Opts.map((opt) => ({
       label: Q20_LABELS[opt.id] || opt.label || opt.id,
@@ -3183,11 +3325,12 @@ function renderPersuadabilityMessengers() {
   const el = document.getElementById('persuadabilityMessengersContent');
   if (!el) return;
   let html = '';
+  const { demId, levelId } = cardDemState.persuadability;
 
   // Q21: View intensity
   const q21 = attGetQuestion('q21_intensity');
   html += attSubHead('Intensity of Views on iGaming');
-  const q21Opts = getQuestionOptionsForActiveGeography(q21);
+  const q21Opts = makeEnrichedOpts(q21, demId, levelId);
   if (q21 && q21Opts.length) {
     const firmOpts   = ['very_firm','fairly_firm'];
     const openOpts   = ['open_persuasion','no_strong_view'];
@@ -3213,7 +3356,7 @@ function renderPersuadabilityMessengers() {
   // Q22: Trusted messengers
   const q22 = attGetQuestion('q22_trusted_messengers');
   html += attSubHead('Most Trusted Voices on iGaming');
-  const q22Opts = getQuestionOptionsForActiveGeography(q22);
+  const q22Opts = makeEnrichedOpts(q22, demId, levelId);
   if (q22 && q22Opts.length) {
     const rows = q22Opts.map((opt) => ({
       label: Q22_LABELS[opt.id] || opt.label || opt.id,
@@ -4779,6 +4922,7 @@ function renderQuestionCards() {
   root.innerHTML = '';
   const allQuestions = toArray(reportData?.questions);
   const isWithView = activeResponseUniverse === 'with_view';
+  const { demId, levelId } = cardDemState.topline;
 
   const questionSel = document.getElementById('toplineQuestionSelect');
   const selectedId = questionSel ? questionSel.value : '__all__';
@@ -4792,7 +4936,7 @@ function renderQuestionCards() {
     const card = document.createElement('article');
     card.className = 'question-card';
 
-    const geographyOptions = getQuestionOptionsForActiveGeography(question);
+    const geographyOptions = makeEnrichedOpts(question, demId, levelId);
     if (geographyOptions.length === 0) {
       card.innerHTML = `
         <h3>${question.title || question.id || 'Question'}</h3>
@@ -5844,6 +5988,12 @@ async function init() {
   renderPersuadabilityMessengers();
   initBehaviorAwarenessControls();
   initBeliefLandscapeControls();
+  initCardDemographicSelect('behavior', 'behaviorDemographicSelect', 'behaviorLevelSelect', 'behaviorLevelGroup', renderBehaviorAwareness);
+  initCardDemographicSelect('belief', 'beliefDemographicSelect', 'beliefLevelSelect', 'beliefLevelGroup', renderBeliefLandscape);
+  initCardDemographicSelect('arg', 'argDemographicSelect', 'argLevelSelect', 'argLevelGroup', renderArgumentTradeoffs);
+  initCardDemographicSelect('priority', 'priorityDemographicSelect', 'priorityLevelSelect', 'priorityLevelGroup', renderPriorities);
+  initCardDemographicSelect('persuadability', 'persuadabilityDemographicSelect', 'persuadabilityLevelSelect', 'persuadabilityLevelGroup', renderPersuadabilityMessengers);
+  initCardDemographicSelect('topline', 'toplineDemographicSelect', 'toplineLevelSelect', 'toplineLevelGroup', renderQuestionCards);
   initDemographics();
   initCrosstabs();
   initArchetypes();
