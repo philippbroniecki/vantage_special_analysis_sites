@@ -427,9 +427,19 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 .si-big-num.neg { color: var(--neg); }
 .si-subtext { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.1rem; }
 .si-party-rows { display: grid; gap: 0.28rem; margin-top: 0.18rem; }
-.si-party-row { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.si-party-row { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; border-radius: 6px; }
+.si-party-row.tooltip-target { padding: 0.1rem 0.2rem; margin: -0.1rem -0.2rem; transition: background-color 140ms ease; }
+.si-party-row.tooltip-target:hover, .si-party-row.tooltip-target:focus-visible { background: color-mix(in srgb, var(--accent-tint) 52%, var(--surface) 48%); }
 .si-party-label { font-size: 0.79rem; color: var(--ink-soft); }
 .si-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.18rem; line-height: 1.35; }
+.si-overall { display: flex; align-items: baseline; gap: 0.5rem; margin: 0.1rem 0 0.15rem; }
+.si-overall-val { font-size: 1.28rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.si-overall-val.pos { color: var(--pos); }
+.si-overall-val.neg { color: var(--neg); }
+.si-overall-val.neutral { color: var(--neutral); }
+.si-overall-val.tooltip-target { border-radius: 6px; padding: 0 0.18rem; transition: background-color 140ms ease; cursor: help; }
+.si-overall-val.tooltip-target:hover, .si-overall-val.tooltip-target:focus-visible { background: color-mix(in srgb, var(--accent-tint) 52%, var(--surface) 48%); }
+.si-overall-label { font-size: 0.74rem; color: var(--muted); }
 @media (max-width: 980px) { .si-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 700px) { .si-grid { grid-template-columns: minmax(0, 1fr); } }
 
@@ -841,7 +851,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
     }
   },
   "turnout_assumption": {
-    "default_expected_voters": 1635847,
+    "default_expected_voters": 1635847.3994,
     "default_registered_voters": 2874643.0084,
     "default_turnout_rate": 0.5691,
     "note": "Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline. Key Findings and summary tooltips use modeled poststratified denominators from weights.rds for the matching geography or subgroup."
@@ -2435,67 +2445,172 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           { key: "D", label: "Democrats" }
         ];
 
-        function getEffect(outcomeId, responseId, estimand) {
+        // Returns { partyKey: record } for state-level party records
+        function getEffectRecs(outcomeId, responseId, estimand) {
           const result = {};
           parties.forEach((p) => {
-            const rec = findRecord({ outcome_id: outcomeId, response_id: responseId, estimand, unit_type: "state", demographic: "party", level: p.key });
-            result[p.key] = rec ? Number(rec.estimate_pp) : NaN;
+            result[p.key] = findRecord({ outcome_id: outcomeId, response_id: responseId, estimand, unit_type: "state", demographic: "party", level: p.key });
           });
           return result;
         }
 
-        function partyDeltaRows(effects) {
-          return parties.map((p) => {
-            const v = effects[p.key];
-            return `<div class="si-party-row"><span class="si-party-label">${escapeHtml(p.label)}</span><span class="delta ${deltaClass(v)}">${fmtDeltaHtml(v)}</span></div>`;
-          }).join("");
+        // Returns the state-level overall record
+        function getOverallRec(outcomeId, responseId, estimand) {
+          return findRecord({ outcome_id: outcomeId, response_id: responseId, estimand, unit_type: "state", demographic: "overall", level: "overall" });
         }
 
-        const signing  = getEffect("ballot", NET_LANDRY_ID, "arm_a_effect");
-        const did      = getEffect("ballot", NET_LANDRY_ID, "difference_in_differences");
-        const fav      = getEffect("favorability", "net_favorability", "arm_a_effect");
+        // Builds a <div class="si-party-rows"> element with tooltip-equipped rows
+        function buildPartyRows(effectRecs, estimandLbl, outcomeLbl) {
+          const wrap = document.createElement("div");
+          wrap.className = "si-party-rows";
+          parties.forEach((p) => {
+            const rec = effectRecs[p.key];
+            const value = rec ? Number(rec.estimate_pp) : NaN;
+            const row = document.createElement("div");
+            row.className = "si-party-row";
+            row.innerHTML = `<span class="si-party-label">${escapeHtml(p.label)}</span>${fmtDeltaHtml(value)}`;
+            attachSharedTooltip(row, () => `
+              <h4>${escapeHtml(p.label)}</h4>
+              <div class="tooltip-subtitle">${escapeHtml(estimandLbl)}</div>
+              ${tooltipLine("Outcome", outcomeLbl)}
+              ${tooltipDivider()}
+              ${rec ? buildVoteMetadataLines(rec, rec.estimate_pp) : tooltipLine("Data", "Unavailable")}
+            `);
+            wrap.appendChild(row);
+          });
+          return wrap;
+        }
 
+        // Builds the overall effect element (big-num style) with tooltip
+        function buildOverallStatEl(rec, label, estimandLbl, outcomeLbl) {
+          const el = document.createElement("div");
+          el.className = "si-overall";
+          const value = rec ? Number(rec.estimate_pp) : NaN;
+          const valEl = document.createElement("span");
+          valEl.className = `si-overall-val ${deltaClass(value)}`;
+          const sign = Number.isFinite(value) && value > 0 ? "+" : "";
+          valEl.textContent = Number.isFinite(value) ? `${sign}${value.toFixed(1)} pp` : "NA";
+          const lblEl = document.createElement("span");
+          lblEl.className = "si-overall-label";
+          lblEl.textContent = "overall";
+          el.appendChild(valEl);
+          el.appendChild(lblEl);
+          if (rec) {
+            attachSharedTooltip(valEl, () => `
+              <h4>${escapeHtml(label)}</h4>
+              <div class="tooltip-subtitle">${escapeHtml(estimandLbl)} · statewide</div>
+              ${tooltipLine("Outcome", outcomeLbl)}
+              ${tooltipDivider()}
+              ${buildVoteMetadataLines(rec, rec.estimate_pp)}
+            `);
+          }
+          return el;
+        }
+
+        // ── Card 1: Baseline ballot ───────────────────────────────────────────
+        const baselineMetrics = (reportData?.strategic_impact?.cards?.baseline_ballot?.metrics) || [];
         const baselineNote = activeResponseUniverse === "with_view"
-          ? "Pre-experiment toplines (respondents with a view)."
-          : "Baseline shown for \"respondents with a view\" universe only.";
+          ? "Pre-experiment statewide toplines (respondents with a view)."
+          : "Pre-experiment statewide toplines (all respondents).";
 
-        grid.innerHTML = `
-          <div class="si-card">
-            <div class="si-eyebrow">1 of 5 · Baseline ballot</div>
-            <div class="si-headline">Landry is weak right now</div>
-            <div class="si-party-rows">
-              <div class="si-party-row"><span class="si-party-label">Landry</span><span class="delta neg">37%</span></div>
-              <div class="si-party-row"><span class="si-party-label">Dem. challenger</span><span class="delta pos">43%</span></div>
-              <div class="si-party-row"><span class="si-party-label">R. challenger (among Rs)</span><span class="delta neutral">31.5%</span></div>
-            </div>
-            <p class="si-note">${escapeHtml(baselineNote)}</p>
-          </div>
-          <div class="si-card">
-            <div class="si-eyebrow">2 of 5 · iGaming Support</div>
-            <div class="si-headline">iGaming isn't the risk driver</div>
-            <div class="si-big-num pos">~68%</div>
-            <p class="si-subtext">net statewide support</p>
-            <p class="si-note">Broad, broadly nonpartisan. From baseline support survey (with a view).</p>
-          </div>
-          <div class="si-card">
-            <div class="si-eyebrow">3 of 5 · Signing Effect</div>
-            <div class="si-headline">Compact signing: ~net zero overall</div>
-            <div class="si-party-rows">${partyDeltaRows(signing)}</div>
-            <p class="si-note">Net Landry ballot effect if Landry signs the iGaming compact.</p>
-          </div>
-          <div class="si-card">
-            <div class="si-eyebrow">4 of 5 · Action vs. Inaction</div>
-            <div class="si-headline">Doing nothing hurts more than signing</div>
-            <div class="si-party-rows">${partyDeltaRows(did)}</div>
-            <p class="si-note">Advantage of acting vs. doing nothing, assuming revenue is used as promised.</p>
-          </div>
-          <div class="si-card">
-            <div class="si-eyebrow">5 of 5 · Favorability (early warning)</div>
-            <div class="si-headline">Favorability moves before vote choice</div>
-            <div class="si-party-rows">${partyDeltaRows(fav)}</div>
-            <p class="si-note">Landry net favorability effect of signing. Favorability leads vote choice.</p>
-          </div>
+        const card1 = document.createElement("div");
+        card1.className = "si-card";
+        card1.innerHTML = `<div class="si-eyebrow">1 of 5 · Baseline ballot</div><div class="si-headline">Landry is weak right now</div>`;
+        const bRows = document.createElement("div");
+        bRows.className = "si-party-rows";
+        baselineMetrics.forEach((m) => {
+          const raw = (m.values_by_universe || {})[activeResponseUniverse];
+          const n = Number(raw);
+          const displayVal = Number.isFinite(n) ? `${n.toFixed(1)}%` : "NA";
+          const row = document.createElement("div");
+          row.className = "si-party-row";
+          const labelSpan = document.createElement("span");
+          labelSpan.className = "si-party-label";
+          labelSpan.textContent = m.label || m.id;
+          const valSpan = document.createElement("span");
+          valSpan.className = "delta";
+          if (m.color) {
+            valSpan.style.color = m.color;
+          } else if (m.emphasis_class === "pos") {
+            valSpan.classList.add("pos");
+          } else if (m.emphasis_class === "neg") {
+            valSpan.classList.add("neg");
+          } else {
+            valSpan.classList.add("neutral");
+          }
+          valSpan.textContent = displayVal;
+          row.appendChild(labelSpan);
+          row.appendChild(valSpan);
+          bRows.appendChild(row);
+        });
+        if (baselineMetrics.length === 0) {
+          bRows.innerHTML = '<span class="muted">Baseline data unavailable</span>';
+        }
+        card1.appendChild(bRows);
+        const bNote = document.createElement("p");
+        bNote.className = "si-note";
+        bNote.textContent = baselineNote;
+        card1.appendChild(bNote);
+
+        // ── Card 2: iGaming Support ───────────────────────────────────────────
+        const supportVals = reportData?.strategic_impact?.cards?.support?.values_by_universe || {};
+        const supportVal = Number(supportVals[activeResponseUniverse]);
+        const supportDisplay = Number.isFinite(supportVal) ? `${supportVal.toFixed(0)}%` : "NA";
+        const card2 = document.createElement("div");
+        card2.className = "si-card";
+        card2.innerHTML = `
+          <div class="si-eyebrow">2 of 5 · iGaming Support</div>
+          <div class="si-headline">iGaming isn't the risk driver</div>
+          <div class="si-big-num pos">${escapeHtml(supportDisplay)}</div>
+          <p class="si-subtext">net statewide support</p>
+          <p class="si-note">Strongly + somewhat support, from pre-experiment iGaming support survey.</p>
         `;
+
+        // ── Card 3: Signing Effect ────────────────────────────────────────────
+        const signingRecs = getEffectRecs("ballot", NET_LANDRY_ID, "arm_a_effect");
+        const signingOverall = getOverallRec("ballot", NET_LANDRY_ID, "arm_a_effect");
+        const card3 = document.createElement("div");
+        card3.className = "si-card";
+        card3.innerHTML = `<div class="si-eyebrow">3 of 5 · Signing Effect</div><div class="si-headline">Compact signing: net positive overall</div>`;
+        card3.appendChild(buildOverallStatEl(signingOverall, "Signing effect", "Action / delivery effect", "Net Landry ballot position"));
+        card3.appendChild(buildPartyRows(signingRecs, "Action / delivery effect", "Net Landry ballot position"));
+        const sigNote = document.createElement("p");
+        sigNote.className = "si-note";
+        sigNote.textContent = "Net Landry ballot effect if Landry signs the iGaming compact. Positive across all parties; largest among Independents.";
+        card3.appendChild(sigNote);
+
+        // ── Card 4: Action vs. Inaction ──────────────────────────────────────
+        const didRecs = getEffectRecs("ballot", NET_LANDRY_ID, "difference_in_differences");
+        const didOverall = getOverallRec("ballot", NET_LANDRY_ID, "difference_in_differences");
+        const card4 = document.createElement("div");
+        card4.className = "si-card";
+        card4.innerHTML = `<div class="si-eyebrow">4 of 5 · Action vs. Inaction</div><div class="si-headline">Doing nothing hurts more than signing</div>`;
+        card4.appendChild(buildOverallStatEl(didOverall, "Action vs. inaction", "Action vs. inaction advantage", "Net Landry ballot position"));
+        card4.appendChild(buildPartyRows(didRecs, "Action vs. inaction advantage", "Net Landry ballot position"));
+        const didNote = document.createElement("p");
+        didNote.className = "si-note";
+        didNote.textContent = "Action / delivery advantage over inaction / non-delivery, assuming revenue is used as promised.";
+        card4.appendChild(didNote);
+
+        // ── Card 5: Favorability ─────────────────────────────────────────────
+        const favRecs = getEffectRecs("favorability", "net_favorability", "arm_a_effect");
+        const favOverall = getOverallRec("favorability", "net_favorability", "arm_a_effect");
+        const card5 = document.createElement("div");
+        card5.className = "si-card";
+        card5.innerHTML = `<div class="si-eyebrow">5 of 5 · Favorability (early warning)</div><div class="si-headline">Favorability moves before vote choice</div>`;
+        card5.appendChild(buildOverallStatEl(favOverall, "Favorability effect", "Action / delivery effect", "Net Landry favorability"));
+        card5.appendChild(buildPartyRows(favRecs, "Action / delivery effect", "Net Landry favorability"));
+        const favNote = document.createElement("p");
+        favNote.className = "si-note";
+        favNote.textContent = "Landry net favorability effect of signing. Republican favorability lift exceeds the direct ballot lift, suggesting total Republican upside may be understated from ballot alone.";
+        card5.appendChild(favNote);
+
+        grid.innerHTML = "";
+        grid.appendChild(card1);
+        grid.appendChild(card2);
+        grid.appendChild(card3);
+        grid.appendChild(card4);
+        grid.appendChild(card5);
       }
 
       // ── Party Breakdown Card ──────────────────────────────────────────────────
@@ -2544,7 +2659,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             </table>
           </div>
           <div class="party-callout">
-            Republicans are the key tension: signing creates some ballot risk from the right, but acting and delivering is better than inaction for all parties — and favorability moves before the ballot.
+            Signing moves Landry's position in the favorable direction across all three party groups. Republican favorability lift (+8.9 pp) exceeds the direct Republican ballot effect (+4.5 pp), so the full Republican upside is understated when looking at ballot movement alone. Acting and delivering outperforms inaction for every party group by a wide margin.
           </div>
         `;
       }
