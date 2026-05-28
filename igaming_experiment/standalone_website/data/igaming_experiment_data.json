@@ -907,7 +907,7 @@
     "cards": {
       "baseline_ballot": {
         "headline": "Statewide pre-experiment ballot",
-        "note": "Current Governor Ballot payload values. Republican challenger row is restricted to Republicans.",
+        "note": "Pre-experiment statewide toplines from Governor Ballot payload. R. challenger is the overall statewide share.",
         "metrics": [
           {
             "id": "jeff_landry",
@@ -923,6 +923,20 @@
             }
           },
           {
+            "id": "republican_challenger",
+            "label": "R. challenger",
+            "emphasis_class": "neutral",
+            "color": "#e55030",
+            "values_by_universe": {
+              "all_americans": 16.9,
+              "with_view": 19.7
+            },
+            "source": {
+              "file": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_data.json",
+              "field": "questions[ballot_governor_2027_pre].options[republican_challenger].values_by_universe"
+            }
+          },
+          {
             "id": "democratic_candidate",
             "label": "Dem. challenger",
             "emphasis_class": "pos",
@@ -933,19 +947,6 @@
             "source": {
               "file": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_data.json",
               "field": "questions[ballot_governor_2027_pre].options[democratic_candidate].values_by_universe"
-            }
-          },
-          {
-            "id": "republican_challenger_among_republicans",
-            "label": "R. challenger (among Rs)",
-            "emphasis_class": "neutral",
-            "values_by_universe": {
-              "all_americans": "NA",
-              "with_view": "NA"
-            },
-            "source": {
-              "file": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_demographics.json",
-              "field": "demographics[party].cards[ballot_governor_2027_pre].rows[R].values_by_universe[republican_challenger]"
             }
           }
         ]
