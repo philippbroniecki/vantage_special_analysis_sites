@@ -79,8 +79,8 @@
     }
   },
   "turnout_assumption": {
-    "default_expected_voters": 872650.01755906199,
-    "default_registered_voters": 1533491.0045020357,
+    "default_expected_voters": 1635847.3994474271,
+    "default_registered_voters": 2874643.0084394007,
     "default_turnout_rate": 0.569061060676,
     "note": "Adjust the turnout-rate assumption. The default uses the current poststratified expected-turnout topline. Key Findings and summary tooltips use modeled poststratified denominators from weights.rds for the matching geography or subgroup."
   },
@@ -891,6 +891,152 @@
       }
     ]
   },
+  "strategic_impact": {
+    "default_response_universe_id": "with_view",
+    "response_universes": [
+      {
+        "id": "all_americans",
+        "label": "What all respondents said"
+      },
+      {
+        "id": "with_view",
+        "label": "What respondents with a view said"
+      }
+    ],
+    "warnings": [],
+    "cards": {
+      "baseline_ballot": {
+        "headline": "Statewide pre-experiment ballot",
+        "note": "Current Governor Ballot payload values. Republican challenger row is restricted to Republicans.",
+        "metrics": [
+          {
+            "id": "jeff_landry",
+            "label": "Landry",
+            "emphasis_class": "neg",
+            "values_by_universe": {
+              "all_americans": 33.1,
+              "with_view": 38.5
+            },
+            "source": {
+              "file": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_data.json",
+              "field": "questions[ballot_governor_2027_pre].options[jeff_landry].values_by_universe"
+            }
+          },
+          {
+            "id": "democratic_candidate",
+            "label": "Dem. challenger",
+            "emphasis_class": "pos",
+            "values_by_universe": {
+              "all_americans": 36,
+              "with_view": 41.8
+            },
+            "source": {
+              "file": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_data.json",
+              "field": "questions[ballot_governor_2027_pre].options[democratic_candidate].values_by_universe"
+            }
+          },
+          {
+            "id": "republican_challenger_among_republicans",
+            "label": "R. challenger (among Rs)",
+            "emphasis_class": "neutral",
+            "values_by_universe": {
+              "all_americans": "NA",
+              "with_view": "NA"
+            },
+            "source": {
+              "file": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_demographics.json",
+              "field": "demographics[party].cards[ballot_governor_2027_pre].rows[R].values_by_universe[republican_challenger]"
+            }
+          }
+        ]
+      },
+      "support": {
+        "headline": "Statewide baseline support",
+        "subtext": "Support (strongly + somewhat support)",
+        "values_by_universe": {
+          "all_americans": 58.1,
+          "with_view": 65.4
+        },
+        "note": "Current iGaming Support payload values.",
+        "source": {
+          "file": "igaming/igaming_support/standalone_website/data/igaming_support_data.json",
+          "field": "questions[policy_igaming_pre].options[strongly_support].values_by_universe + questions[policy_igaming_pre].options[somewhat_support].values_by_universe"
+        }
+      },
+      "signing": {
+        "headline": "Signing effect on net Landry position",
+        "note": "Current experiment ballot effect payload.",
+        "overall_by_universe": {
+          "all_americans": -2.984658766076,
+          "with_view": 9.090941458648
+        },
+        "party_by_universe": {
+          "all_americans": {
+            "R": 0.4109126719305,
+            "O": 0.5909111910136,
+            "D": -8.714637349135
+          },
+          "with_view": {
+            "R": 4.514790435816,
+            "O": 15.719153876959,
+            "D": 9.385867724743
+          }
+        },
+        "source": {
+          "file": "igaming/experiment/standalone_website/data/igaming_experiment_records_ballot.json",
+          "field": "records filtered to outcome_id=ballot, response_id=net_landry_position, estimand=arm_a_effect, unit_type=state"
+        }
+      },
+      "action_vs_inaction": {
+        "headline": "Action vs. inaction advantage",
+        "note": "Current experiment ballot effect payload.",
+        "overall_by_universe": {
+          "all_americans": -2.984658766076,
+          "with_view": 9.090941458648
+        },
+        "party_by_universe": {
+          "all_americans": {
+            "R": 0.4109126719305,
+            "O": 0.5909111910136,
+            "D": -8.714637349135
+          },
+          "with_view": {
+            "R": 4.514790435816,
+            "O": 15.719153876959,
+            "D": 9.385867724743
+          }
+        },
+        "source": {
+          "file": "igaming/experiment/standalone_website/data/igaming_experiment_records_ballot.json",
+          "field": "records filtered to outcome_id=ballot, response_id=net_landry_position, estimand=difference_in_differences, unit_type=state"
+        }
+      },
+      "favorability": {
+        "headline": "Signing effect on net favorability",
+        "note": "Current experiment favorability effect payload.",
+        "overall_by_universe": {
+          "all_americans": -2.984658766076,
+          "with_view": 9.090941458648
+        },
+        "party_by_universe": {
+          "all_americans": {
+            "R": 0.4109126719305,
+            "O": 0.5909111910136,
+            "D": -8.714637349135
+          },
+          "with_view": {
+            "R": 4.514790435816,
+            "O": 15.719153876959,
+            "D": 9.385867724743
+          }
+        },
+        "source": {
+          "file": "igaming/experiment/standalone_website/data/igaming_experiment_records_favorability.json",
+          "field": "records filtered to outcome_id=favorability, response_id=net_favorability, estimand=arm_a_effect, unit_type=state"
+        }
+      }
+    }
+  },
   "summary_rows": [
     {
       "outcome_id": "ballot",
@@ -900,10 +1046,10 @@
       "arm_b_effect": -16.070041205295,
       "difference_in_differences": 24.698396482783,
       "vote_equivalent_label": "vote-margin equivalent",
-      "arm_a_vote_equivalent": 75295,
-      "arm_b_vote_equivalent": -140235,
-      "difference_in_differences_vote_equivalent": 215531,
-      "denominator_voters": 872650.01755906199,
+      "arm_a_vote_equivalent": 141147,
+      "arm_b_vote_equivalent": -262881,
+      "difference_in_differences_vote_equivalent": 404028,
+      "denominator_voters": 1635847.3994474271,
       "denominator_scope": "Statewide expected voters",
       "denominator_source": "weights.rds::toplines.expected_voters",
       "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -918,10 +1064,10 @@
       "arm_b_effect": -7.432201511955,
       "difference_in_differences": 12.637646148431,
       "vote_equivalent_label": "illustrative vote-equivalent change",
-      "arm_a_vote_equivalent": 45425,
-      "arm_b_vote_equivalent": -64857,
-      "difference_in_differences_vote_equivalent": 110282,
-      "denominator_voters": 872650.01755906199,
+      "arm_a_vote_equivalent": 85153,
+      "arm_b_vote_equivalent": -121579,
+      "difference_in_differences_vote_equivalent": 206733,
+      "denominator_voters": 1635847.3994474271,
       "denominator_scope": "Statewide expected voters",
       "denominator_source": "weights.rds::toplines.expected_voters",
       "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -936,10 +1082,10 @@
       "arm_b_effect": 12.225427002486,
       "difference_in_differences": -4.645310114837,
       "vote_equivalent_label": "illustrative vote-equivalent change",
-      "arm_a_vote_equivalent": 66148,
-      "arm_b_vote_equivalent": 106685,
-      "difference_in_differences_vote_equivalent": -40537,
-      "denominator_voters": 872650.01755906199,
+      "arm_a_vote_equivalent": 123999,
+      "arm_b_vote_equivalent": 199989,
+      "difference_in_differences_vote_equivalent": -75990,
+      "denominator_voters": 1635847.3994474271,
       "denominator_scope": "Statewide expected voters",
       "denominator_source": "weights.rds::toplines.expected_voters",
       "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -954,10 +1100,10 @@
       "arm_b_effect": -19.724627140877,
       "difference_in_differences": 28.815568599525,
       "vote_equivalent_label": "vote-margin equivalent",
-      "arm_a_vote_equivalent": 79332,
-      "arm_b_vote_equivalent": -172127,
-      "difference_in_differences_vote_equivalent": 251459,
-      "denominator_voters": 872650.01755906199,
+      "arm_a_vote_equivalent": 148714,
+      "arm_b_vote_equivalent": -322665,
+      "difference_in_differences_vote_equivalent": 471379,
+      "denominator_voters": 1635847.3994474271,
       "denominator_scope": "Statewide expected voters",
       "denominator_source": "weights.rds::toplines.expected_voters",
       "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -972,10 +1118,10 @@
       "arm_b_effect": -7.639709900582,
       "difference_in_differences": 13.091604743179,
       "vote_equivalent_label": "illustrative vote-equivalent change",
-      "arm_a_vote_equivalent": 47576,
-      "arm_b_vote_equivalent": -66668,
-      "difference_in_differences_vote_equivalent": 114244,
-      "denominator_voters": 872650.01755906199,
+      "arm_a_vote_equivalent": 89185,
+      "arm_b_vote_equivalent": -124974,
+      "difference_in_differences_vote_equivalent": 214159,
+      "denominator_voters": 1635847.3994474271,
       "denominator_scope": "Statewide expected voters",
       "denominator_source": "weights.rds::toplines.expected_voters",
       "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -990,10 +1136,10 @@
       "arm_b_effect": 13.030645395831,
       "difference_in_differences": -5.626746564159,
       "vote_equivalent_label": "illustrative vote-equivalent change",
-      "arm_a_vote_equivalent": 64610,
-      "arm_b_vote_equivalent": 113712,
-      "difference_in_differences_vote_equivalent": -49102,
-      "denominator_voters": 872650.01755906199,
+      "arm_a_vote_equivalent": 121116,
+      "arm_b_vote_equivalent": 213161,
+      "difference_in_differences_vote_equivalent": -92045,
+      "denominator_voters": 1635847.3994474271,
       "denominator_scope": "Statewide expected voters",
       "denominator_source": "weights.rds::toplines.expected_voters",
       "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1016,10 +1162,10 @@
             "estimand": "arm_a_effect",
             "label": "Action / delivery effect",
             "estimate_pp": 8.628355277488,
-            "vote_equivalent": 75295,
+            "vote_equivalent": 141147,
             "vote_equivalent_label": "vote-margin equivalent",
             "vote_context": "margin",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1029,10 +1175,10 @@
             "estimand": "arm_b_effect",
             "label": "Inaction / no-delivery effect",
             "estimate_pp": -16.070041205295,
-            "vote_equivalent": -140235,
+            "vote_equivalent": -262881,
             "vote_equivalent_label": "vote-margin equivalent",
             "vote_context": "margin",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1042,10 +1188,10 @@
             "estimand": "difference_in_differences",
             "label": "Action vs. inaction advantage",
             "estimate_pp": 24.698396482783,
-            "vote_equivalent": 215531,
+            "vote_equivalent": 404028,
             "vote_equivalent_label": "vote-margin equivalent",
             "vote_context": "margin",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1055,9 +1201,9 @@
         "strongest_subgroup": {
           "label": "Archetype: Tradwives",
           "estimate_pp": 51.390648500612,
-          "vote_equivalent": 18121,
+          "vote_equivalent": 33969,
           "vote_equivalent_label": "vote-margin equivalent",
-          "denominator_voters": 35260.845316512416,
+          "denominator_voters": 66099.078614217622,
           "denominator_scope": "Statewide archetype expected voters",
           "denominator_source": "weights.rds::archetypes.expected_voters",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1066,9 +1212,9 @@
         "strongest_region": {
           "label": "Acadiana / Lafayette",
           "estimate_pp": 29.835485915777,
-          "vote_equivalent": 37683,
+          "vote_equivalent": 70640,
           "vote_equivalent_label": "vote-margin equivalent",
-          "denominator_voters": 126304.16838571298,
+          "denominator_voters": 236766.56303872087,
           "denominator_scope": "Cultural Region expected voters",
           "denominator_source": "weights.rds::toplines.expected_voters rolled up from county totals via county_culture_lookup.rds",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1087,10 +1233,10 @@
             "estimand": "arm_a_effect",
             "label": "Action / delivery effect",
             "estimate_pp": 5.205444636476,
-            "vote_equivalent": 45425,
+            "vote_equivalent": 85153,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1100,10 +1246,10 @@
             "estimand": "arm_b_effect",
             "label": "Inaction / no-delivery effect",
             "estimate_pp": -7.432201511955,
-            "vote_equivalent": -64857,
+            "vote_equivalent": -121579,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1113,10 +1259,10 @@
             "estimand": "difference_in_differences",
             "label": "Action vs. inaction advantage",
             "estimate_pp": 12.637646148431,
-            "vote_equivalent": 110282,
+            "vote_equivalent": 206733,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1126,9 +1272,9 @@
         "strongest_subgroup": {
           "label": "Archetype: Tradwives",
           "estimate_pp": 29.995475272149,
-          "vote_equivalent": 10577,
+          "vote_equivalent": 19827,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 35260.845316512416,
+          "denominator_voters": 66099.078614217622,
           "denominator_scope": "Statewide archetype expected voters",
           "denominator_source": "weights.rds::archetypes.expected_voters",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1137,9 +1283,9 @@
         "strongest_region": {
           "label": "Southwest Louisiana",
           "estimate_pp": 20.231782911536,
-          "vote_equivalent": 10734,
+          "vote_equivalent": 20121,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 53054.539592809888,
+          "denominator_voters": 99454.682719816294,
           "denominator_scope": "Cultural Region expected voters",
           "denominator_source": "weights.rds::toplines.expected_voters rolled up from county totals via county_culture_lookup.rds",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1158,10 +1304,10 @@
             "estimand": "arm_a_effect",
             "label": "Action / delivery effect",
             "estimate_pp": 7.580116887649,
-            "vote_equivalent": 66148,
+            "vote_equivalent": 123999,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1171,10 +1317,10 @@
             "estimand": "arm_b_effect",
             "label": "Inaction / no-delivery effect",
             "estimate_pp": 12.225427002486,
-            "vote_equivalent": 106685,
+            "vote_equivalent": 199989,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1184,10 +1330,10 @@
             "estimand": "difference_in_differences",
             "label": "Action vs. inaction advantage",
             "estimate_pp": -4.645310114837,
-            "vote_equivalent": -40537,
+            "vote_equivalent": -75990,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1197,9 +1343,9 @@
         "strongest_subgroup": {
           "label": "Race: Black",
           "estimate_pp": -13.189869974349,
-          "vote_equivalent": -33052,
+          "vote_equivalent": -61959,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 250589.3748856888,
+          "denominator_voters": 469748.43177398568,
           "denominator_scope": "Statewide Race expected voters",
           "denominator_source": "weights.rds::weights.expected_voters",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1208,9 +1354,9 @@
         "strongest_region": {
           "label": "Ark-La-Tex",
           "estimate_pp": -8.266309025746,
-          "vote_equivalent": -8917,
+          "vote_equivalent": -16715,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 107870.7957267626,
+          "denominator_voters": 202211.83420076678,
           "denominator_scope": "Cultural Region expected voters",
           "denominator_source": "weights.rds::toplines.expected_voters rolled up from county totals via county_culture_lookup.rds",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1229,10 +1375,10 @@
             "estimand": "arm_a_effect",
             "label": "Action / delivery effect",
             "estimate_pp": 9.090941458648,
-            "vote_equivalent": 79332,
+            "vote_equivalent": 148714,
             "vote_equivalent_label": "vote-margin equivalent",
             "vote_context": "margin",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1242,10 +1388,10 @@
             "estimand": "arm_b_effect",
             "label": "Inaction / no-delivery effect",
             "estimate_pp": -19.724627140877,
-            "vote_equivalent": -172127,
+            "vote_equivalent": -322665,
             "vote_equivalent_label": "vote-margin equivalent",
             "vote_context": "margin",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1255,10 +1401,10 @@
             "estimand": "difference_in_differences",
             "label": "Action vs. inaction advantage",
             "estimate_pp": 28.815568599525,
-            "vote_equivalent": 251459,
+            "vote_equivalent": 471379,
             "vote_equivalent_label": "vote-margin equivalent",
             "vote_context": "margin",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1268,9 +1414,9 @@
         "strongest_subgroup": {
           "label": "Archetype: Tradwives",
           "estimate_pp": 58.004291414663,
-          "vote_equivalent": 20453,
+          "vote_equivalent": 38340,
           "vote_equivalent_label": "vote-margin equivalent",
-          "denominator_voters": 35260.845316512416,
+          "denominator_voters": 66099.078614217622,
           "denominator_scope": "Statewide archetype expected voters",
           "denominator_source": "weights.rds::archetypes.expected_voters",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1279,9 +1425,9 @@
         "strongest_region": {
           "label": "Acadiana / Lafayette",
           "estimate_pp": 35.083854179806,
-          "vote_equivalent": 44312,
+          "vote_equivalent": 83067,
           "vote_equivalent_label": "vote-margin equivalent",
-          "denominator_voters": 126304.16838571298,
+          "denominator_voters": 236766.56303872087,
           "denominator_scope": "Cultural Region expected voters",
           "denominator_source": "weights.rds::toplines.expected_voters rolled up from county totals via county_culture_lookup.rds",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1300,10 +1446,10 @@
             "estimand": "arm_a_effect",
             "label": "Action / delivery effect",
             "estimate_pp": 5.451894842597,
-            "vote_equivalent": 47576,
+            "vote_equivalent": 89185,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1313,10 +1459,10 @@
             "estimand": "arm_b_effect",
             "label": "Inaction / no-delivery effect",
             "estimate_pp": -7.639709900582,
-            "vote_equivalent": -66668,
+            "vote_equivalent": -124974,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1326,10 +1472,10 @@
             "estimand": "difference_in_differences",
             "label": "Action vs. inaction advantage",
             "estimate_pp": 13.091604743179,
-            "vote_equivalent": 114244,
+            "vote_equivalent": 214159,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1339,9 +1485,9 @@
         "strongest_subgroup": {
           "label": "Archetype: Tradwives",
           "estimate_pp": 30.53531620024,
-          "vote_equivalent": 10767,
+          "vote_equivalent": 20184,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 35260.845316512416,
+          "denominator_voters": 66099.078614217622,
           "denominator_scope": "Statewide archetype expected voters",
           "denominator_source": "weights.rds::archetypes.expected_voters",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1350,9 +1496,9 @@
         "strongest_region": {
           "label": "Southwest Louisiana",
           "estimate_pp": 21.165707744253,
-          "vote_equivalent": 11229,
+          "vote_equivalent": 21050,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 53054.539592809888,
+          "denominator_voters": 99454.682719816294,
           "denominator_scope": "Cultural Region expected voters",
           "denominator_source": "weights.rds::toplines.expected_voters rolled up from county totals via county_culture_lookup.rds",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1371,10 +1517,10 @@
             "estimand": "arm_a_effect",
             "label": "Action / delivery effect",
             "estimate_pp": 7.403898831672,
-            "vote_equivalent": 64610,
+            "vote_equivalent": 121116,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1384,10 +1530,10 @@
             "estimand": "arm_b_effect",
             "label": "Inaction / no-delivery effect",
             "estimate_pp": 13.030645395831,
-            "vote_equivalent": 113712,
+            "vote_equivalent": 213161,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1397,10 +1543,10 @@
             "estimand": "difference_in_differences",
             "label": "Action vs. inaction advantage",
             "estimate_pp": -5.626746564159,
-            "vote_equivalent": -49102,
+            "vote_equivalent": -92045,
             "vote_equivalent_label": "illustrative vote-equivalent change",
             "vote_context": "illustrative",
-            "denominator_voters": 872650.01755906199,
+            "denominator_voters": 1635847.3994474271,
             "denominator_scope": "Statewide expected voters",
             "denominator_source": "weights.rds::toplines.expected_voters",
             "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1410,9 +1556,9 @@
         "strongest_subgroup": {
           "label": "Race: Black",
           "estimate_pp": -15.161801714274,
-          "vote_equivalent": -37994,
+          "vote_equivalent": -71222,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 250589.3748856888,
+          "denominator_voters": 469748.43177398568,
           "denominator_scope": "Statewide Race expected voters",
           "denominator_source": "weights.rds::weights.expected_voters",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
@@ -1421,9 +1567,9 @@
         "strongest_region": {
           "label": "Ark-La-Tex",
           "estimate_pp": -8.849209242587,
-          "vote_equivalent": -9546,
+          "vote_equivalent": -17894,
           "vote_equivalent_label": "illustrative vote-equivalent change",
-          "denominator_voters": 107870.7957267626,
+          "denominator_voters": 202211.83420076678,
           "denominator_scope": "Cultural Region expected voters",
           "denominator_source": "weights.rds::toplines.expected_voters rolled up from county totals via county_culture_lookup.rds",
           "vote_equivalent_formula": "vote_equivalent = estimate_pp / 100 * denominator_voters",
