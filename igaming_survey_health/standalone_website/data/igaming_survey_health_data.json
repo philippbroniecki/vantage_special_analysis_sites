@@ -1,9 +1,9 @@
 {
   "meta": {
     "title": "Louisiana iGaming Survey Health",
-    "subtitle": "Survey quality diagnostics for the Louisiana Voter Opinion Study baseline sample",
+    "subtitle": "Survey quality diagnostics for the Louisiana Voter Opinion Study intake and analysis sample",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "N = 1,205 respondents",
+    "sample": "N = 1,708 respondents",
     "fieldDates": "May 15, 2026",
     "methodLabel": "Pipeline survey-health diagnostics",
     "group_navigation": {
@@ -71,18 +71,43 @@
     }
   },
   "key_takeaways": [
-    "The staged survey-health folder includes a screened baseline sample of 1,205 respondents for the Louisiana Voter Opinion Study.",
-    "Respondent geography is concentrated in Greater New Orleans, the Florida Parishes, and Acadiana, with 1,201 respondents in Louisiana and 4 out-of-state respondents retained in the cross-state cultural-region framework.",
-    "This prototype survey-health page focuses on screened-sample diagnostics and baseline-question distributions because the raw screener CSV is not staged in this folder."
+    "This page traces the Louisiana iGaming survey from the full raw intake file to the final analysis sample used across the site family.",
+    "The baseline screening sequence uses the survey pledge, Louisiana registration, 2027 likely-voter, and completion-status screens from the raw survey file.",
+    "Geographic and demographic diagnostics use the final screened analysis sample so the survey-health page matches the denominator shown on the modeled sites."
   ],
-  "methodology_note": "This standalone report is built from the staged screened survey CSV for the Louisiana iGaming survey. Geographic and demographic distributions use the screened sample directly. The third section reports observed distributions for the three baseline special-question items rather than raw screener-question counts because the raw intake file is not included in this workspace.",
+  "methodology_note": "This standalone report is built from the staged raw intake CSV and the analysis-ready survey CSV for the Louisiana iGaming survey. The survey-response funnel applies the survey pledge, Louisiana registration, 2027 likely-voter, and completion-status screens in sequence to the raw file. Geographic and demographic distributions use the final analysis-ready sample directly.",
   "content": {
     "survey_responses": {
       "card_title": "Survey Responses",
-      "raw_survey_rows": 1708,
+      "raw_survey_rows": 2819,
       "after_screens": 1708,
-      "retained_pct": 100,
-      "analysis_ready_high_n": [],
+      "retained_pct": 60.6,
+      "analysis_ready_high_n": [
+        {
+          "label": "Raw/full survey rows",
+          "n": 2819
+        },
+        {
+          "label": "After Survey pledge",
+          "n": 2459
+        },
+        {
+          "label": "After Louisiana registration",
+          "n": 1909
+        },
+        {
+          "label": "After 2027 likely-voter screen",
+          "n": 1712
+        },
+        {
+          "label": "After Completion status",
+          "n": 1708
+        },
+        {
+          "label": "Final analysis sample rows",
+          "n": 1708
+        }
+      ],
       "exclusions": {
         "favorability_numbers_excluded": true,
         "special_question_under_1000_excluded": true,
@@ -165,121 +190,138 @@
       }
     },
     "survey_screens": {
-      "card_title": "Baseline Question Diagnostics",
+      "card_title": "Baseline Screening Questions",
       "charts": [],
       "distributions": [
         {
-          "id": "fav_la_political_figures_landry_pre",
-          "label": "Landry Favorability Before Scenario",
-          "question_text": "Overall, how would you rate your opinion of the following people and organizations? — Governor Jeff Landry",
-          "n_label": "N = 1,708 screened respondents",
+          "id": "survey_pledge",
+          "label": "Survey pledge",
+          "question_text": "Keep only respondents who answered: \"Yes, I will provide thoughtful and honest answers\".",
+          "n_label": "N = 2,819 respondents entering this step",
           "distributions": {
-            "total": 1708,
+            "total": 2819,
             "bars": [
               {
-                "label": "Very favorable",
-                "count": 433,
-                "pct": 25.4,
+                "label": "Yes, I will provide thoughtful and honest answers",
+                "count": 2459,
+                "pct": 87.2,
                 "retained": true
               },
               {
-                "label": "Somewhat favorable",
-                "count": 548,
-                "pct": 32.1,
-                "retained": true
+                "label": "No, I will not provide a thoughtful and honest answers",
+                "count": 12,
+                "pct": 0.4,
+                "retained": false
               },
               {
-                "label": "Somewhat unfavorable",
-                "count": 311,
-                "pct": 18.2,
-                "retained": true
+                "label": "No",
+                "count": 25,
+                "pct": 0.9,
+                "retained": false
               },
               {
-                "label": "Very unfavorable",
-                "count": 358,
-                "pct": 21,
-                "retained": true
-              },
-              {
-                "label": "Never heard of / Can't rate",
-                "count": 58,
-                "pct": 3.4,
+                "label": "Blank / missing",
+                "count": 323,
+                "pct": 11.5,
                 "retained": false
               }
             ]
           }
         },
         {
-          "id": "ballot_governor_2027_pre",
-          "label": "2027 Governor Ballot Before Scenario",
-          "question_text": "If the 2027 election for Governor of Louisiana were held today, and the choices were the following, who would you vote for?",
-          "n_label": "N = 1,708 screened respondents",
+          "id": "s1_registration_la",
+          "label": "Louisiana registration",
+          "question_text": "Keep only respondents with s1_registration_la == \"Yes\".",
+          "n_label": "N = 2,459 respondents entering this step",
           "distributions": {
-            "total": 1708,
+            "total": 2459,
             "bars": [
               {
-                "label": "Jeff Landry, the Republican incumbent",
-                "count": 530,
-                "pct": 31,
+                "label": "Yes",
+                "count": 1909,
+                "pct": 77.6,
                 "retained": true
               },
               {
-                "label": "A Republican challenger from outside the current administration",
-                "count": 328,
+                "label": "No",
+                "count": 471,
                 "pct": 19.2,
-                "retained": true
+                "retained": false
               },
               {
-                "label": "A Democratic candidate",
-                "count": 540,
-                "pct": 31.6,
-                "retained": true
-              },
-              {
-                "label": "Undecided",
-                "count": 310,
-                "pct": 18.1,
+                "label": "Unsure",
+                "count": 79,
+                "pct": 3.2,
                 "retained": false
               }
             ]
           }
         },
         {
-          "id": "policy_igaming_pre",
-          "label": "iGaming Support Before Scenario",
-          "question_text": "Generally speaking, do you support or oppose legalizing online casino gaming in Louisiana?",
-          "n_label": "N = 1,708 screened respondents",
+          "id": "s3_lv_2027",
+          "label": "2027 likely-voter screen",
+          "question_text": "Keep only respondents who selected one of the accepted 2027 likely-voter answers: \"I will definitely vote, and I already know how or when I'll do it\", \"I plan to vote, but I haven't thought much about how or when yet\", or \"I want to vote, but something could come up that prevents me\".",
+          "n_label": "N = 1,909 respondents entering this step",
           "distributions": {
-            "total": 1708,
+            "total": 1909,
             "bars": [
               {
-                "label": "Strongly support",
-                "count": 514,
-                "pct": 30.1,
+                "label": "I will definitely vote, and I already know how or when I'll do it",
+                "count": 955,
+                "pct": 50,
                 "retained": true
               },
               {
-                "label": "Somewhat support",
-                "count": 547,
-                "pct": 32,
+                "label": "I plan to vote, but I haven't thought much about how or when yet",
+                "count": 686,
+                "pct": 35.9,
                 "retained": true
               },
               {
-                "label": "Somewhat oppose",
-                "count": 238,
-                "pct": 13.9,
+                "label": "I want to vote, but something could come up that prevents me",
+                "count": 71,
+                "pct": 3.7,
                 "retained": true
               },
               {
-                "label": "Strongly oppose",
-                "count": 214,
-                "pct": 12.5,
+                "label": "I probably won't vote, unless something major convinces me to",
+                "count": 70,
+                "pct": 3.7,
+                "retained": false
+              },
+              {
+                "label": "I don't plan to vote in the 2027 general election",
+                "count": 52,
+                "pct": 2.7,
+                "retained": false
+              },
+              {
+                "label": "Unsure",
+                "count": 75,
+                "pct": 3.9,
+                "retained": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "completion_status",
+          "label": "Completion status",
+          "question_text": "Drop respondents with completion_status == \"Terminated\".",
+          "n_label": "N = 1,712 respondents entering this step",
+          "distributions": {
+            "total": 1712,
+            "bars": [
+              {
+                "label": "Completed",
+                "count": 1708,
+                "pct": 99.8,
                 "retained": true
               },
               {
-                "label": "Undecided",
-                "count": 195,
-                "pct": 11.4,
+                "label": "Terminated",
+                "count": 4,
+                "pct": 0.2,
                 "retained": false
               }
             ]
@@ -511,13 +553,13 @@
   },
   "dataSource": {
     "source": "survey_csv_direct",
-    "raw_survey_csv": "igaming/survey_health/survey.csv",
+    "raw_survey_csv": "igaming/survey_health/IGaming_2026_05_15.csv",
     "screened_survey_csv": "igaming/survey_health/survey.csv",
-    "screen_distributions_from": "screened CSV (survey.csv), all 1708 rows",
-    "demographics_from": "screened CSV (survey.csv), all 1708 rows",
+    "screen_distributions_from": "raw survey CSV (IGaming_2026_05_15.csv), all 2819 rows",
+    "demographics_from": "analysis-ready survey CSV (survey.csv), all 1708 rows",
     "geography_from": "cr_code column in screened CSV (national cross-state cultural-region framework)",
     "out_of_state_note": "4 respondents fall outside Louisiana state boundaries in the screened file. They remain counted in the national cross-state cultural-region framework where applicable.",
-    "generated_at_utc": "2026-05-27T12:34:01Z",
+    "generated_at_utc": "2026-05-28T12:46:50Z",
     "parser": "igaming_survey_stats_csv_v1",
     "map_bin_logic": "Five-level bins: 0, 1-24, 25-49, 50-99, 100+ respondents per cultural region."
   }
