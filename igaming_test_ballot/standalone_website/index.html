@@ -1095,6 +1095,205 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   color: var(--muted);
 }
 
+/* ============================================================
+   BALLOT MAP CARD – SVG map styles (adapted from survey-health)
+   ============================================================ */
+
+.map-svg-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface);
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.ga-cr-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cr-region {
+  stroke: rgba(255,255,255,0.88);
+  stroke-width: 0.75px;
+  transition: opacity .12s ease, filter .12s ease;
+  cursor: pointer;
+}
+
+.cr-region:hover {
+  opacity: 0.83;
+  filter: brightness(1.12) saturate(1.08);
+}
+
+.map-tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 300;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-raise);
+  padding: .55rem .75rem;
+  font-size: .8rem;
+  max-width: 268px;
+  min-width: 180px;
+  opacity: 0;
+  transition: opacity .08s ease;
+}
+.map-tooltip.visible { opacity: 1; }
+.map-tooltip .tt-label {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .25rem;
+  font-size: .85rem;
+}
+.map-tooltip .tt-body { color: var(--muted); }
+.map-tooltip .tt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: .12rem;
+  align-items: center;
+}
+.map-tooltip .tt-key { color: var(--ink-soft); font-size: .77rem; }
+.map-tooltip .tt-val { font-weight: 600; color: var(--ink); font-size: .8rem; }
+.map-tooltip .tt-divider {
+  border: none;
+  border-top: 1px solid var(--line-soft);
+  margin: .28rem 0;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .75rem;
+  padding: .5rem .8rem .55rem;
+  border-top: 1px solid var(--line-soft);
+  background: var(--surface-alt);
+}
+.map-legend-label {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.map-legend-break { flex-basis: 100%; height: 0; }
+.map-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .28rem;
+  font-size: .73rem;
+  color: var(--ink-soft);
+}
+.map-legend-swatch {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,.1);
+  flex-shrink: 0;
+}
+.map-legend-bin-group {
+  display: inline-flex;
+  gap: 2px;
+  margin-right: 2px;
+  align-items: center;
+}
+
+/* Ballot statewide summary box */
+.ballot-statewide-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  padding: .8rem 1rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  margin-bottom: 1rem;
+}
+.ballot-statewide-cand {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: .12rem;
+}
+.ballot-statewide-cand-label {
+  font-size: .75rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.ballot-statewide-cand-value {
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.ballot-statewide-cand-name { font-size: .72rem; color: var(--muted); }
+.ballot-statewide-cand-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin-top: .2rem;
+  max-width: 100%;
+}
+
+/* Ballot map controls */
+.ballot-map-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.2rem;
+  align-items: flex-end;
+  margin-bottom: .4rem;
+}
+
+/* Parish ranked-table fallback */
+.ballot-parish-note {
+  font-size: .8rem;
+  color: var(--muted);
+  padding: .4rem 0 .5rem;
+  font-style: italic;
+}
+.ballot-parish-table-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin-top: .3rem;
+}
+.ballot-parish-row {
+  display: grid;
+  grid-template-columns: minmax(120px,1fr) 60px 60px 60px 64px 64px;
+  gap: .25rem;
+  padding: .37rem .7rem;
+  font-size: .8rem;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: center;
+}
+.ballot-parish-row:last-child { border-bottom: none; }
+.ballot-parish-row.header {
+  font-weight: 600;
+  font-size: .72rem;
+  background: var(--surface-alt);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  border-bottom: 1px solid var(--line);
+}
+.ballot-parish-leader-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: .35rem;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+@media (max-width: 620px) {
+  .ballot-parish-row { grid-template-columns: minmax(100px,1fr) 52px 52px 52px; }
+  .ballot-parish-col-margin,
+  .ballot-parish-col-baseline { display: none; }
+}
+
 .comparison-row {
   display: grid;
   grid-template-columns: minmax(110px, 12rem) minmax(0, 1fr) 56px 86px;
@@ -2234,25 +2433,66 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         </div>
       </section>
 
-      <!-- TOPLINE QUESTIONS -->
-      <section class="card reveal" id="componentTopline" data-component-id="topline_questions" aria-labelledby="h-questions">
+      <!-- TOPLINE MAP CARD -->
+      <section class="card reveal" id="componentTopline" data-component-id="topline_questions" aria-labelledby="h-ballot-map">
         <div class="section-mode-label" id="modeLabelTopline"></div>
         <div class="section-head">
           <p class="section-eyebrow">Survey Questions</p>
-          <h2 id="h-questions">Topline Results</h2>
-          <p>Current modeled test-ballot performance alongside the official 2023 statewide baseline.</p>
+          <h2 id="h-ballot-map">Modeled 2027 Governor Ballot by Geography</h2>
+          <p>Statewide summary and interactive map of current modeled results. Hover a region for full candidate shares and 2023 comparison.</p>
         </div>
-        <div class="xt-controls comparison-controls">
+
+        <!-- Statewide summary bar (rendered by JS) -->
+        <div id="ballotStatewideBox" class="ballot-statewide-box"></div>
+
+        <!-- Map controls -->
+        <div class="ballot-map-controls">
           <div class="xt-control-group">
-            <label class="xt-control-label" for="toplineGeographyTypeSelect">Geography</label>
-            <select class="xt-select" id="toplineGeographyTypeSelect"></select>
+            <label class="xt-control-label">Geography</label>
+            <div class="view-toggle" id="ballotMapGeoToggle">
+              <button class="toggle-btn active" data-geo="cultural_region">Cultural Region</button>
+              <button class="toggle-btn" data-geo="county">Parish</button>
+            </div>
           </div>
-          <div class="xt-control-group" id="toplineGeographyUnitGroup">
-            <label class="xt-control-label" for="toplineGeographyUnitSelect">Unit</label>
-            <select class="xt-select" id="toplineGeographyUnitSelect"></select>
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="ballotMapMetricSelect">Map metric</label>
+            <select class="xt-select" id="ballotMapMetricSelect">
+              <option value="leader">Leader / Strongest competitor</option>
+              <option value="democratic_candidate">Democratic candidate share</option>
+              <option value="jeff_landry">Jeff Landry share</option>
+              <option value="republican_challenger">Republican challenger share</option>
+              <option value="landry_margin">Landry margin vs. strongest rival</option>
+            </select>
           </div>
         </div>
-        <div id="questionCards" class="question-grid" role="region" aria-label="Topline question cards"></div>
+
+        <!-- Cultural Region SVG map -->
+        <div id="ballotMapCrWrap" class="map-svg-wrap">
+          <div id="ballotMapCrContainer" aria-label="Louisiana cultural regions — 2027 governor ballot map"></div>
+          <div class="map-legend" id="ballotMapLegend"></div>
+        </div>
+
+        <!-- Parish ranked-table fallback (shown when Parish geography is selected) -->
+        <div id="ballotParishTableWrap" hidden>
+          <p class="ballot-parish-note">Parish-level boundary geometry is not available locally. Results are shown as a ranked table sorted by the selected metric.</p>
+          <div class="ballot-parish-table-wrap">
+            <div class="ballot-parish-row header">
+              <span>Parish</span>
+              <span>Dem %</span>
+              <span>Landry %</span>
+              <span>Challgr %</span>
+              <span class="ballot-parish-col-margin">Margin</span>
+              <span class="ballot-parish-col-baseline">2023 Ldry</span>
+            </div>
+            <div id="ballotParishTableRows"></div>
+          </div>
+        </div>
+
+        <!-- Floating tooltip -->
+        <div id="ballotMapTooltip" class="map-tooltip" role="tooltip" aria-hidden="true">
+          <div class="tt-label" id="ballotMapTooltipLabel"></div>
+          <div class="tt-body" id="ballotMapTooltipBody"></div>
+        </div>
       </section>
 
       <!-- DEMOGRAPHIC BREAKDOWN -->
@@ -5680,121 +5920,430 @@ function renderTakeaways() {
   }
 }
 
-function renderQuestionCards() {
-  const root = document.getElementById('questionCards');
-  if (!root) return;
-  const state = wireComparisonGeographyControls(
-    'topline',
-    'toplineGeographyTypeSelect',
-    'toplineGeographyUnitSelect',
-    'toplineGeographyUnitGroup',
-    renderQuestionCards
-  );
-  const comparisonUnit = getComparisonToplineUnit(state.typeId, state.unitId);
-  const officialRaw = getOfficialStatewideBaselineMap();
-  const useStatewideOfficial = state.typeId === 'state';
-  const currentResponsesBase = comparisonUnit
-    ? toArray(comparisonUnit.responses).map((response) => ({
-      id: response.id,
-      label: response.label,
-      color: response.color,
-      current: resolveUniverseValue(response?.current?.all_americans, response?.current),
-      baseline_2023: useStatewideOfficial
-        ? null
-        : resolveUniverseValue(response?.baseline_2023?.all_americans, response?.baseline_2023)
-    }))
-    : getDisplayedCurrentResponses(state.typeId, state.unitId);
 
-  // Add undecided in all_americans mode (not in 2023 official results)
-  const currentResponses = currentResponsesBase.slice();
-  if (activeResponseUniverse === 'all_americans') {
-    const allOpts = getCurrentQuestionOptionsForGeography(state.typeId, state.unitId);
-    const undecidedOpt = allOpts.find((o) => o?.id === 'undecided');
-    const undecidedVal = undecidedOpt
-      ? resolveUniverseValue(undecidedOpt?.value, undecidedOpt?.values_by_universe)
-      : null;
-    if (Number.isFinite(undecidedVal) && !currentResponses.some((r) => r.id === 'undecided')) {
-      currentResponses.push({
-        id: 'undecided',
-        label: 'Undecided',
-        color: '#6b7280',
-        current: undecidedVal,
-        baseline_2023: null
-      });
-    }
+/* ============================================================
+   BALLOT MAP CARD — constants, state, helper functions
+   ============================================================ */
+
+// Map state
+var activeBallotMapGeo = 'cultural_region';
+var activeBallotMapMetric = 'leader';
+var ballotCrSvgLoaded = false;
+
+const BALLOT_CAND_IDS = ['democratic_candidate', 'jeff_landry', 'republican_challenger'];
+
+// Candidate base colors (must match existing site palette)
+const BALLOT_CAND_BASE_COLORS = {
+  democratic_candidate: '#0015bc',
+  jeff_landry: '#cb1d1d',
+  republican_challenger: '#e55030'
+};
+
+// 5 intensity bins (toss-up→very strong) per candidate
+const BALLOT_MARGIN_COLORS = {
+  democratic_candidate: ['#d4d9f7', '#8898ee', '#3355d4', '#0015bc', '#000d80'],
+  jeff_landry:          ['#f5d8d8', '#ec9595', '#dc4848', '#cb1d1d', '#8c1515'],
+  republican_challenger:['#f7e0d9', '#edaa95', '#e07050', '#e55030', '#b03618']
+};
+
+// 5 sequential bins for single-candidate share views
+const BALLOT_SINGLE_COLORS = {
+  democratic_candidate: ['#e8ecff', '#b3bfef', '#7085df', '#3355d4', '#0015bc'],
+  jeff_landry:          ['#ffe8e8', '#f5b5b5', '#e06060', '#cb1d1d', '#8b0000'],
+  republican_challenger:['#fff0eb', '#f5c5b5', '#ee8060', '#e55030', '#a03010'],
+  landry_margin:        ['#ffe8e8', '#f5d8d8', '#ec9595', '#dc4848', '#8c1515']
+};
+
+// Margin bins in pp: lower bound of each bin
+// Bin 0: 0–2 (toss-up), 1: 2–5 (lean), 2: 5–10 (likely), 3: 10–20 (strong), 4: 20+ (very strong)
+const BALLOT_MARGIN_BINS = [0, 2, 5, 10, 20];
+const BALLOT_MARGIN_LABELS = [
+  'Toss-up (0–2 pp)',
+  'Lean (2–5 pp)',
+  'Likely (5–10 pp)',
+  'Strong (10–20 pp)',
+  'Very Strong (20+ pp)'
+];
+
+const BALLOT_CAND_SHORT = {
+  democratic_candidate: 'Dem candidate',
+  jeff_landry: 'Jeff Landry',
+  republican_challenger: 'Rep. challenger'
+};
+
+function ballotGetMarginBin(margin) {
+  for (let i = BALLOT_MARGIN_BINS.length - 1; i >= 0; i--) {
+    if (margin >= BALLOT_MARGIN_BINS[i]) return i;
   }
-
-  const responses = currentResponses.slice().sort((a, b) => {
-    const valA = Number(a?.current);
-    const valB = Number(b?.current);
-    return valB - valA;
-  });
-  // Baseline panel excludes undecided (not in official 2023 results)
-  const baselineResponses = responses.filter((r) => r.id !== 'undecided');
-  const geographyLabel = getResponseGeographyUnitLabel(state.typeId, state.unitId) || comparisonUnit?.unit_label || 'Louisiana';
-  const baselineUnavailable = !comparisonUnit;
-
-  const renderPanelRows = (rows, sourceKey) => rows.map((response) => {
-    let value;
-    if (sourceKey === 'current') {
-      value = Number(response?.current);
-    } else if (!useStatewideOfficial && response?.baseline_2023 != null && Number.isFinite(Number(response?.baseline_2023))) {
-      value = Number(response?.baseline_2023);
-    } else {
-      value = Number(officialRaw?.[response.id]);
-    }
-    const width = Number.isFinite(value) ? Math.max(0, Math.min(100, value)).toFixed(2) : '0';
-    return `
-      <li class="q-opt">
-        <div class="q-opt-left">
-          <span class="q-opt-label">${escapeHtml(response.label)}</span>
-          <span class="q-opt-track">
-            <span class="q-opt-fill" style="width:${width}%; background:${escapeHtml(response.color || '#5a7d9a')};"></span>
-          </span>
-        </div>
-        <span class="q-opt-value">${fmtPctValue(value)}</span>
-      </li>
-    `;
-  }).join('');
-
-  const baselineHeading = useStatewideOfficial
-    ? '2023 official statewide baseline'
-    : '2023 calibrated baseline';
-  const baselineSubtext = useStatewideOfficial
-    ? 'Official 2023 statewide vote share • raw vote share'
-    : `${escapeHtml(geographyLabel)} • parish-calibrated 2023 vote share`;
-
-  root.innerHTML = `
-    <article class="question-card">
-      <h3>${escapeHtml(getComparison2023()?.question_label || 'Test Ballot')}</h3>
-      <blockquote class="question-blockquote">“${escapeHtml(getQuestionById(getComparison2023()?.question_id)?.prompt || '')}”</blockquote>
-      <div class="topline-compare">
-        <section class="topline-panel">
-          <div class="topline-panel-head">
-            <div>
-              <h3>Current 2027 modeled outcomes</h3>
-              <p>${escapeHtml(geographyLabel)} • ${escapeHtml(getResponseUniverseModeLabel(activeResponseUniverse) || activeResponseUniverse)}</p>
-            </div>
-          </div>
-          <ul class="question-opts">${renderPanelRows(responses, 'current')}</ul>
-        </section>
-        <section class="topline-panel">
-          <div class="topline-panel-head">
-            <div>
-              <h3>${escapeHtml(baselineHeading)}</h3>
-              <p>${baselineSubtext}</p>
-            </div>
-          </div>
-          ${baselineUnavailable
-            ? `<div class="comparison-empty">Parish-calibrated comparison is not available for ${escapeHtml(geographyLabel)} in this build. District-level baseline surfaces would require parish-by-district poststrat weights upstream.</div>`
-            : `<ul class="question-opts">${renderPanelRows(baselineResponses, 'official')}</ul>`}
-          <p class="topline-footnote" title="These are the official statewide 2023 Louisiana governor vote shares for the three displayed categories. Other and independent 2023 candidates are excluded from the displayed panel, so these three values do not sum to 100%.">Official statewide 2023 comparison values exclude other and independent candidates from the displayed panel.</p>
-        </section>
-      </div>
-    </article>
-  `;
+  return 0;
 }
 
+function ballotGetLeaderInfo(responses) {
+  const sorted = responses.slice().sort((a, b) => b.current - a.current);
+  if (sorted.length < 2) return null;
+  return {
+    leaderId: sorted[0].id,
+    leaderShare: sorted[0].current,
+    margin: sorted[0].current - sorted[1].current,
+    secondId: sorted[1].id
+  };
+}
+
+function ballotGetFill(responses, metric) {
+  if (!responses || responses.length === 0) return '#cccccc';
+  if (metric === 'leader') {
+    const info = ballotGetLeaderInfo(responses);
+    if (!info) return '#cccccc';
+    const bin = ballotGetMarginBin(info.margin);
+    return (BALLOT_MARGIN_COLORS[info.leaderId] || [])[bin] || BALLOT_CAND_BASE_COLORS[info.leaderId] || '#aaaaaa';
+  }
+  if (metric === 'landry_margin') {
+    const landry = responses.find((r) => r.id === 'jeff_landry');
+    const others = responses.filter((r) => r.id !== 'jeff_landry');
+    if (!landry || others.length === 0) return '#cccccc';
+    const maxOther = Math.max(...others.map((r) => r.current));
+    const margin = landry.current - maxOther;
+    // positive = Landry leads (red), negative = Landry trails (gray-red)
+    const cols = BALLOT_SINGLE_COLORS.landry_margin;
+    const bin = ballotGetMarginBin(Math.abs(margin));
+    return margin >= 0 ? cols[bin] : '#c8c8c8';
+  }
+  // Single candidate share view
+  const cand = responses.find((r) => r.id === metric);
+  if (!cand) return '#cccccc';
+  const share = Number.isFinite(cand.current) ? cand.current : 0;
+  const cols = BALLOT_SINGLE_COLORS[metric] || ['#e8e8e8', '#b0b0b0', '#808080', '#505050', '#202020'];
+  const shareBins = [25, 35, 45, 55];
+  let bin = shareBins.findIndex((b) => share < b);
+  if (bin === -1) bin = 4;
+  return cols[bin];
+}
+
+function ballotExtractResponses(unit) {
+  if (!unit || !Array.isArray(unit.responses)) return [];
+  return unit.responses
+    .filter((r) => BALLOT_CAND_IDS.includes(r.id))
+    .map((r) => ({
+      id: r.id,
+      label: r.label,
+      color: r.color || BALLOT_CAND_BASE_COLORS[r.id],
+      current: resolveUniverseValue(r?.current?.all_americans, r?.current),
+      baseline_2023: resolveUniverseValue(r?.baseline_2023?.all_americans, r?.baseline_2023)
+    }));
+}
+
+function ballotGetCrData() {
+  const comp = getComparison2023();
+  return (comp?.topline?.by_geography?.cultural_region) || {};
+}
+
+function ballotGetCountyData() {
+  const comp = getComparison2023();
+  return (comp?.topline?.by_geography?.county) || {};
+}
+
+function ballotBuildTooltipHtml(unit, responses) {
+  const rows = [];
+  const ordered = ['democratic_candidate', 'jeff_landry', 'republican_challenger'];
+  ordered.forEach((rid) => {
+    const r = responses.find((x) => x.id === rid);
+    if (!r) return;
+    const pct = Number.isFinite(r.current) ? r.current.toFixed(1) + '%' : '—';
+    const dot = `<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${BALLOT_CAND_BASE_COLORS[rid] || '#888'};margin-right:4px;vertical-align:middle;"></span>`;
+    rows.push(`<div class="tt-row"><span class="tt-key">${dot}${escapeHtml(BALLOT_CAND_SHORT[rid] || rid)}</span><span class="tt-val">${pct}</span></div>`);
+  });
+  const info = ballotGetLeaderInfo(responses);
+  if (info) {
+    rows.push('<hr class="tt-divider">');
+    rows.push(`<div class="tt-row"><span class="tt-key">Leader</span><span class="tt-val">${escapeHtml(BALLOT_CAND_SHORT[info.leaderId] || info.leaderId)}</span></div>`);
+    rows.push(`<div class="tt-row"><span class="tt-key">Margin</span><span class="tt-val">+${info.margin.toFixed(1)} pp</span></div>`);
+  }
+  // 2023 baseline in tooltip
+  const hasBaseline = responses.some((r) => Number.isFinite(r.baseline_2023));
+  if (hasBaseline) {
+    rows.push('<hr class="tt-divider">');
+    rows.push('<div class="tt-row" style="font-size:.72rem"><span class="tt-key" style="color:var(--muted)">2023 parish-calibrated baseline</span></div>');
+    ordered.forEach((rid) => {
+      const r = responses.find((x) => x.id === rid);
+      if (!r || !Number.isFinite(r.baseline_2023)) return;
+      rows.push(`<div class="tt-row" style="font-size:.72rem"><span class="tt-key" style="color:var(--muted)">${escapeHtml(BALLOT_CAND_SHORT[rid] || rid)}</span><span class="tt-val" style="color:var(--muted)">${r.baseline_2023.toFixed(1)}%</span></div>`);
+    });
+  }
+  return rows.join('');
+}
+
+function renderBallotMapLegend(metric) {
+  const node = document.getElementById('ballotMapLegend');
+  if (!node) return;
+  node.innerHTML = '';
+
+  if (metric === 'leader') {
+    // Candidate color key
+    const candLabel = document.createElement('span');
+    candLabel.className = 'map-legend-label';
+    candLabel.textContent = 'Leader:';
+    node.appendChild(candLabel);
+    ['democratic_candidate', 'jeff_landry', 'republican_challenger'].forEach((cid) => {
+      const item = document.createElement('span');
+      item.className = 'map-legend-item';
+      const sw = document.createElement('span');
+      sw.className = 'map-legend-swatch';
+      sw.style.background = BALLOT_CAND_BASE_COLORS[cid];
+      const txt = { democratic_candidate: 'Dem', jeff_landry: 'Landry', republican_challenger: 'Challenger' };
+      item.appendChild(sw);
+      item.appendChild(document.createTextNode(txt[cid]));
+      node.appendChild(item);
+    });
+    // Line break
+    const br = document.createElement('span');
+    br.className = 'map-legend-break';
+    node.appendChild(br);
+    // Margin bin key
+    const marginLabel = document.createElement('span');
+    marginLabel.className = 'map-legend-label';
+    marginLabel.textContent = 'Margin:';
+    node.appendChild(marginLabel);
+    BALLOT_MARGIN_LABELS.forEach((binLabel, idx) => {
+      const item = document.createElement('span');
+      item.className = 'map-legend-item';
+      const group = document.createElement('span');
+      group.className = 'map-legend-bin-group';
+      ['democratic_candidate', 'jeff_landry', 'republican_challenger'].forEach((cid) => {
+        const sw = document.createElement('span');
+        sw.className = 'map-legend-swatch';
+        sw.style.width = '8px';
+        sw.style.height = '8px';
+        sw.style.background = (BALLOT_MARGIN_COLORS[cid] || [])[idx] || '#aaa';
+        group.appendChild(sw);
+      });
+      item.appendChild(group);
+      item.appendChild(document.createTextNode(binLabel));
+      node.appendChild(item);
+    });
+  } else {
+    const candMap = {
+      democratic_candidate:  { label: 'Dem candidate share', cols: BALLOT_SINGLE_COLORS.democratic_candidate,  bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
+      jeff_landry:           { label: 'Landry share',         cols: BALLOT_SINGLE_COLORS.jeff_landry,           bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
+      republican_challenger: { label: 'Challenger share',     cols: BALLOT_SINGLE_COLORS.republican_challenger, bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
+      landry_margin:         { label: 'Landry leads by',      cols: BALLOT_SINGLE_COLORS.landry_margin,         bins: ['0–2 pp','2–5 pp','5–10 pp','10–20 pp','20+ pp'] }
+    };
+    const entry = candMap[metric];
+    if (!entry) return;
+    const label = document.createElement('span');
+    label.className = 'map-legend-label';
+    label.textContent = entry.label + ':';
+    node.appendChild(label);
+    entry.cols.forEach((col, idx) => {
+      const item = document.createElement('span');
+      item.className = 'map-legend-item';
+      const sw = document.createElement('span');
+      sw.className = 'map-legend-swatch';
+      sw.style.background = col;
+      item.appendChild(sw);
+      item.appendChild(document.createTextNode(entry.bins[idx]));
+      node.appendChild(item);
+    });
+  }
+}
+
+function renderBallotStatewideBox() {
+  const box = document.getElementById('ballotStatewideBox');
+  if (!box) return;
+  const crData = ballotGetCrData();
+  // Use statewide from comparison_2023 state level
+  const comp = getComparison2023();
+  const stateGeo = comp?.topline?.by_geography?.state;
+  const stateUnit = stateGeo ? stateGeo[Object.keys(stateGeo)[0]] : null;
+  const responses = stateUnit ? ballotExtractResponses(stateUnit) : [];
+  if (responses.length === 0) {
+    box.innerHTML = '<p class="xt-note">Statewide summary not available.</p>';
+    return;
+  }
+  const maxShare = Math.max(...responses.map((r) => r.current).filter(Number.isFinite), 1);
+  const ordered = ['democratic_candidate', 'jeff_landry', 'republican_challenger'];
+  const shortLabels = {
+    democratic_candidate: 'Democratic candidate',
+    jeff_landry: 'Jeff Landry (R incumbent)',
+    republican_challenger: 'Rep. challenger'
+  };
+  box.innerHTML = ordered.map((rid) => {
+    const r = responses.find((x) => x.id === rid);
+    if (!r) return '';
+    const share = Number.isFinite(r.current) ? r.current : 0;
+    const pct = Number.isFinite(r.current) ? r.current.toFixed(1) + '%' : '—';
+    const barW = ((share / maxShare) * 100).toFixed(1) + '%';
+    const color = r.color || BALLOT_CAND_BASE_COLORS[rid];
+    return `<div class="ballot-statewide-cand">
+      <div class="ballot-statewide-cand-label">${escapeHtml(shortLabels[rid] || r.label)}</div>
+      <div class="ballot-statewide-cand-value" style="color:${color}">${pct}</div>
+      <div class="ballot-statewide-cand-bar" style="background:${color};width:${barW};"></div>
+    </div>`;
+  }).join('');
+}
+
+async function loadAndRenderBallotCrMap() {
+  const container = document.getElementById('ballotMapCrContainer');
+  if (!container) return;
+  if (window.location.protocol === 'file:') {
+    container.innerHTML = '<p class="xt-note" style="padding:.8rem">Serve over HTTP to see the interactive map (e.g. <code>python3 -m http.server 8000</code>).</p>';
+    return;
+  }
+  let svgText = null;
+  try {
+    const res = await fetch('data/igaming_louisiana_cr_map.svg', { cache: 'no-store' });
+    if (res.ok) svgText = await res.text();
+  } catch (_) {}
+  if (!svgText) {
+    container.innerHTML = '<p class="xt-note" style="padding:.8rem">SVG map failed to load.</p>';
+    return;
+  }
+  container.innerHTML = svgText;
+  const svgEl = container.querySelector('svg');
+  if (!svgEl) return;
+  svgEl.style.display = 'block';
+  svgEl.style.width = '100%';
+  svgEl.style.height = 'auto';
+  ballotCrSvgLoaded = true;
+  applyBallotCrFills();
+  setupBallotCrTooltips(svgEl);
+}
+
+function applyBallotCrFills() {
+  const container = document.getElementById('ballotMapCrContainer');
+  if (!container) return;
+  const svgEl = container.querySelector('svg');
+  if (!svgEl) return;
+  const crData = ballotGetCrData();
+  const metric = activeBallotMapMetric;
+  svgEl.querySelectorAll('.cr-region').forEach((path) => {
+    const crKey = (path.id || '').replace(/^cr_/, '');
+    const unit = crData[crKey];
+    if (!unit) { path.style.fill = '#d0d0d0'; return; }
+    const responses = ballotExtractResponses(unit);
+    path.style.fill = ballotGetFill(responses, metric);
+    path.dataset.ballotCrKey = crKey;
+  });
+  renderBallotMapLegend(metric);
+}
+
+function setupBallotCrTooltips(svgEl) {
+  const tooltip  = document.getElementById('ballotMapTooltip');
+  const ttLabel  = document.getElementById('ballotMapTooltipLabel');
+  const ttBody   = document.getElementById('ballotMapTooltipBody');
+  if (!tooltip || !ttLabel || !ttBody) return;
+  svgEl.querySelectorAll('.cr-region').forEach((path) => {
+    path.addEventListener('mousemove', (e) => {
+      const crKey = path.dataset.ballotCrKey || (path.id || '').replace(/^cr_/, '');
+      const unit = ballotGetCrData()[crKey];
+      if (!unit) return;
+      const responses = ballotExtractResponses(unit);
+      ttLabel.textContent = unit.unit_label || crKey;
+      ttBody.innerHTML = ballotBuildTooltipHtml(unit, responses);
+      tooltip.classList.add('visible');
+      tooltip.setAttribute('aria-hidden', 'false');
+      tooltip.style.left = Math.min(e.clientX + 14, window.innerWidth - 285) + 'px';
+      tooltip.style.top  = Math.max(e.clientY - 10, 6) + 'px';
+    });
+    path.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('visible');
+      tooltip.setAttribute('aria-hidden', 'true');
+    });
+  });
+}
+
+function renderBallotParishTable() {
+  const rowsEl = document.getElementById('ballotParishTableRows');
+  if (!rowsEl) return;
+  const countyData = ballotGetCountyData();
+  const metric = activeBallotMapMetric;
+  const parishes = Object.entries(countyData).map(([key, unit]) => {
+    const responses = ballotExtractResponses(unit);
+    const info = ballotGetLeaderInfo(responses);
+    const dem = (responses.find((r) => r.id === 'democratic_candidate') || {}).current;
+    const landry = (responses.find((r) => r.id === 'jeff_landry') || {}).current;
+    const chall = (responses.find((r) => r.id === 'republican_challenger') || {}).current;
+    const landryB = (responses.find((r) => r.id === 'jeff_landry') || {}).baseline_2023;
+    return { label: unit.unit_label || key, dem, landry, chall, margin: info ? info.margin : null, leaderId: info ? info.leaderId : null, landryB };
+  });
+  // Sort by selected metric descending
+  parishes.sort((a, b) => {
+    if (metric === 'democratic_candidate') return (b.dem || 0) - (a.dem || 0);
+    if (metric === 'jeff_landry') return (b.landry || 0) - (a.landry || 0);
+    if (metric === 'republican_challenger') return (b.chall || 0) - (a.chall || 0);
+    if (metric === 'landry_margin') {
+      const am = Number.isFinite(a.landry) && Number.isFinite(a.dem) ? a.landry - Math.max(a.dem, a.chall || 0) : -999;
+      const bm = Number.isFinite(b.landry) && Number.isFinite(b.dem) ? b.landry - Math.max(b.dem, b.chall || 0) : -999;
+      return bm - am;
+    }
+    return (b.margin || 0) - (a.margin || 0);
+  });
+  rowsEl.innerHTML = parishes.map((p) => {
+    const dot = p.leaderId
+      ? `<span class="ballot-parish-leader-dot" style="background:${BALLOT_CAND_BASE_COLORS[p.leaderId] || '#888'}"></span>`
+      : '';
+    const fmt = (v) => Number.isFinite(v) ? v.toFixed(1) + '%' : '—';
+    const fmtM = (v) => Number.isFinite(v) ? '+' + v.toFixed(1) + ' pp' : '—';
+    return `<div class="ballot-parish-row">
+      <span>${dot}${escapeHtml(p.label)}</span>
+      <span>${fmt(p.dem)}</span>
+      <span>${fmt(p.landry)}</span>
+      <span>${fmt(p.chall)}</span>
+      <span class="ballot-parish-col-margin">${fmtM(p.margin)}</span>
+      <span class="ballot-parish-col-baseline">${fmt(p.landryB)}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderBallotMap() {
+  renderBallotStatewideBox();
+  const crWrap     = document.getElementById('ballotMapCrWrap');
+  const parishWrap = document.getElementById('ballotParishTableWrap');
+  if (activeBallotMapGeo === 'cultural_region') {
+    if (crWrap)     crWrap.removeAttribute('hidden');
+    if (parishWrap) parishWrap.setAttribute('hidden', '');
+    if (!ballotCrSvgLoaded) {
+      loadAndRenderBallotCrMap();
+    } else {
+      applyBallotCrFills();
+    }
+  } else {
+    if (crWrap)     crWrap.setAttribute('hidden', '');
+    if (parishWrap) parishWrap.removeAttribute('hidden');
+    renderBallotParishTable();
+  }
+}
+
+function renderQuestionCards() {
+  // Wire geo toggle (idempotent)
+  const toggle = document.getElementById('ballotMapGeoToggle');
+  if (toggle && !toggle.dataset.bound) {
+    toggle.dataset.bound = 'true';
+    toggle.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-geo]');
+      if (!btn) return;
+      const geo = btn.dataset.geo;
+      if (geo === activeBallotMapGeo) return;
+      activeBallotMapGeo = geo;
+      toggle.querySelectorAll('.toggle-btn').forEach((b) =>
+        b.classList.toggle('active', b.dataset.geo === geo)
+      );
+      renderBallotMap();
+    });
+  }
+
+  // Wire metric selector (idempotent)
+  const metricSel = document.getElementById('ballotMapMetricSelect');
+  if (metricSel && !metricSel.dataset.bound) {
+    metricSel.dataset.bound = 'true';
+    metricSel.addEventListener('change', () => {
+      activeBallotMapMetric = metricSel.value;
+      renderBallotMap();
+    });
+  }
+  if (metricSel) metricSel.value = activeBallotMapMetric;
+
+  renderBallotMap();
+}
 function renderComparisonBars(container, rows, responseId, dimensionId, geographyTypeId) {
   const values = rows.map((row) => {
     const response = getResponseEntryById(row, responseId);
