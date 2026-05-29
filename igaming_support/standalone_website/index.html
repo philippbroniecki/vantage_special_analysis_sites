@@ -1765,6 +1765,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         </div>
         <div class="xt-controls demographic-controls">
           <div class="xt-control-group">
+            <label class="xt-control-label" for="demographicGeographyTypeSelect">Geography</label>
+            <select class="xt-select supp-geo-type" id="demographicGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="demographicGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="demographicGeographyUnitSelect">Unit</label>
+            <select class="xt-select supp-geo-unit" id="demographicGeographyUnitSelect"></select>
+          </div>
+          <div class="xt-control-group">
             <label class="xt-control-label" for="demographicQuestionSelect">Question</label>
             <select class="xt-select" id="demographicQuestionSelect"></select>
           </div>
@@ -1790,6 +1798,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <p>Cross-tabulated estimates for one selected question</p>
         </div>
         <div class="xt-controls crosstabs-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="crosstabGeographyTypeSelect">Geography</label>
+            <select class="xt-select supp-geo-type" id="crosstabGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="crosstabGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="crosstabGeographyUnitSelect">Unit</label>
+            <select class="xt-select supp-geo-unit" id="crosstabGeographyUnitSelect"></select>
+          </div>
           <div class="xt-control-group">
             <label class="xt-control-label" for="crosstabQuestionSelect">Question</label>
             <select class="xt-select" id="crosstabQuestionSelect"></select>
@@ -1822,6 +1838,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <p>View archetype support by question and response category</p>
         </div>
         <div class="archetype-controls">
+          <div class="xt-control-group">
+            <label class="xt-control-label" for="archetypeGeographyTypeSelect">Geography</label>
+            <select class="xt-select supp-geo-type" id="archetypeGeographyTypeSelect"></select>
+          </div>
+          <div class="xt-control-group" id="archetypeGeographyUnitGroup" hidden>
+            <label class="xt-control-label" for="archetypeGeographyUnitSelect">Unit</label>
+            <select class="xt-select supp-geo-unit" id="archetypeGeographyUnitSelect"></select>
+          </div>
           <div class="segmented" id="archetypeQuestionToggle" role="tablist" aria-label="Archetype question selector"></div>
           <div class="archetype-metric-control">
             <label for="archetypeMetricSelect">Response category</label>
@@ -33884,7 +33908,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
       "key_takeaways",
       "methodology_note",
       "response_universe_toggle",
-      "response_geography",
       "topline_questions",
       "demographic_breakdown",
       "crosstabs_explorer",
@@ -33907,7 +33930,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
       "policy_igaming_pre": "xgboost_2026-05-26_IGaming_2026_05_15.parquet"
     },
     "codebook_file": "codebook.json",
-    "generated_at_utc": "2026-05-29 14:13:03 UTC",
+    "generated_at_utc": "2026-05-29 15:03:56 UTC",
     "crosstabs": {
       "manifest_file": "crosstabs_manifest.json",
       "manifest_path": "data/crosstabs_manifest.json",
@@ -34448,6 +34471,7 @@ function syncResponseGeographyControlUI() {
     unitSel.value = activeGeographyUnitId || '';
   }
   updateResponseGeographyExplainer();
+  syncAllCardGeographySelects();
 }
 
 function setResponseGeography(typeId, unitId = null, rerender = true) {
@@ -34490,42 +34514,115 @@ function setResponseGeography(typeId, unitId = null, rerender = true) {
   }
 }
 
+const SUPP_CARD_GEO_CONFIGS = [
+  { typeSelId: 'demographicGeographyTypeSelect',  unitSelId: 'demographicGeographyUnitSelect',  unitGroupId: 'demographicGeographyUnitGroup' },
+  { typeSelId: 'crosstabGeographyTypeSelect',     unitSelId: 'crosstabGeographyUnitSelect',     unitGroupId: 'crosstabGeographyUnitGroup' },
+  { typeSelId: 'archetypeGeographyTypeSelect',    unitSelId: 'archetypeGeographyUnitSelect',    unitGroupId: 'archetypeGeographyUnitGroup' },
+];
+
+function syncCardGeographyUnitSelect(unitSelId, unitGroupId, typeId) {
+  const unitSel   = document.getElementById(unitSelId);
+  const unitGroup = document.getElementById(unitGroupId);
+  if (!unitSel || !unitGroup) return;
+  const type  = getResponseGeographyType(typeId);
+  const units = toArray(type?.units);
+  const supportsUnitSelect = Boolean(type?.supports_unit_select) && units.length > 1;
+  unitGroup.hidden = !supportsUnitSelect;
+  unitSel.innerHTML = '';
+  units.forEach((unit) => {
+    unitSel.appendChild(new Option(unit?.label || unit?.id || '', unit?.id || ''));
+  });
+  if (supportsUnitSelect && activeGeographyUnitId) {
+    unitSel.value = activeGeographyUnitId;
+  }
+}
+
+function syncAllCardGeographySelects() {
+  SUPP_CARD_GEO_CONFIGS.forEach(({ typeSelId, unitSelId, unitGroupId }) => {
+    const typeSel = document.getElementById(typeSelId);
+    if (!typeSel) return;
+    typeSel.value = activeGeographyTypeId || '';
+    syncCardGeographyUnitSelect(unitSelId, unitGroupId, activeGeographyTypeId);
+  });
+}
+
+function initAllCardGeographySelects() {
+  const cfg   = getResponseGeographyConfig();
+  const types = toArray(cfg?.types);
+  if (!cfg || cfg.enabled === false || !types.length) return;
+
+  SUPP_CARD_GEO_CONFIGS.forEach(({ typeSelId, unitSelId, unitGroupId }) => {
+    const typeSel = document.getElementById(typeSelId);
+    const unitSel = document.getElementById(unitSelId);
+    if (!typeSel) return;
+
+    typeSel.innerHTML = '';
+    types.forEach((type) => {
+      typeSel.appendChild(new Option(
+        type?.selector_label || type?.label || type?.id || '',
+        type?.id || ''
+      ));
+    });
+    typeSel.value = activeGeographyTypeId || '';
+    syncCardGeographyUnitSelect(unitSelId, unitGroupId, activeGeographyTypeId);
+
+    if (!typeSel.dataset.bound) {
+      typeSel.dataset.bound = 'true';
+      typeSel.addEventListener('change', () => {
+        setResponseGeography(typeSel.value, null, true);
+      });
+    }
+    if (unitSel && !unitSel.dataset.bound) {
+      unitSel.dataset.bound = 'true';
+      unitSel.addEventListener('change', () => {
+        setResponseGeography(activeGeographyTypeId, unitSel.value, true);
+      });
+    }
+  });
+}
+
 function initResponseGeographyControl() {
   const cardWrap = document.getElementById('componentResponseGeography');
   const typeSel = document.getElementById('responseGeographyTypeSelect');
   const unitSel = document.getElementById('responseGeographyUnitSelect');
-  if (!cardWrap || !typeSel || !unitSel) return;
+
+  // Standalone geography card is always hidden — geography selectors live inside each content card.
+  if (cardWrap) cardWrap.hidden = true;
 
   const cfg = getResponseGeographyConfig();
   const types = toArray(cfg?.types);
   if (!cfg || cfg.enabled === false || types.length === 0) {
-    cardWrap.hidden = true;
     activeGeographyTypeId = null;
     activeGeographyUnitId = null;
     activeGeographyUnitByType = {};
     return;
   }
 
-  cardWrap.hidden = false;
-  typeSel.innerHTML = '';
-  types.forEach((type) => {
-    typeSel.appendChild(new Option(
-      type?.selector_label || type?.label || type?.id || '',
-      type?.id || ''
-    ));
-  });
+  // Populate the hidden standalone selects so syncResponseGeographyControlUI still works.
+  if (typeSel) {
+    typeSel.innerHTML = '';
+    types.forEach((type) => {
+      typeSel.appendChild(new Option(
+        type?.selector_label || type?.label || type?.id || '',
+        type?.id || ''
+      ));
+    });
+    typeSel.addEventListener('change', () => {
+      setResponseGeography(typeSel.value, null, true);
+    });
+  }
+  if (unitSel) {
+    unitSel.addEventListener('change', () => {
+      setResponseGeography(activeGeographyTypeId, unitSel.value, true);
+    });
+  }
 
   const defaultTypeId = (cfg?.default_type_id && types.some((entry) => entry?.id === cfg.default_type_id))
     ? cfg.default_type_id
     : (types[0]?.id || null);
   setResponseGeography(defaultTypeId, cfg?.default_unit_id || null, false);
 
-  typeSel.addEventListener('change', () => {
-    setResponseGeography(typeSel.value, null, true);
-  });
-  unitSel.addEventListener('change', () => {
-    setResponseGeography(activeGeographyTypeId, unitSel.value, true);
-  });
+  initAllCardGeographySelects();
 }
 
 /* ============================================================
@@ -35059,7 +35156,7 @@ function applyComponentOrder() {
   if (!main) return;
   const configured = getContentConfig().component_order;
   if (!Array.isArray(configured) || configured.length === 0) return;
-  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle', 'response_geography'];
+  const mandatory = ['hero_title', 'key_takeaways', 'methodology_note', 'response_universe_toggle'];
   const nodes = Array.from(main.querySelectorAll('[data-component-id]'));
   const nodeById = {};
   const availableIds = [];
