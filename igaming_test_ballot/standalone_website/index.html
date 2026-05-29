@@ -2436,7 +2436,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
               <option value="two_party_margin">D vs combined R margin</option>
               <option value="combined_republican">Combined Republican share</option>
               <option value="democratic_candidate">Democratic candidate share</option>
-              <option value="jeff_landry">Jeff Landry share</option>
+              <option value="jeff_landry" selected>Jeff Landry share</option>
               <option value="republican_challenger">Republican challenger share</option>
             </select>
           </div>
@@ -5893,7 +5893,7 @@ function renderTakeaways() {
 
 // Map state
 var activeBallotMapGeo = 'cultural_region';
-var activeBallotMapMetric = 'leader';
+var activeBallotMapMetric = 'jeff_landry';
 var ballotCrSvgLoaded = false;
 var ballotParishSvgLoaded = false;
 
@@ -5993,7 +5993,9 @@ function ballotGetFill(responses, metric) {
   if (!cand) return '#cccccc';
   const share = Number.isFinite(cand.current) ? cand.current : 0;
   const cols = BALLOT_SINGLE_COLORS[metric] || ['#e8e8e8', '#b0b0b0', '#808080', '#505050', '#202020'];
-  const shareBins = [25, 35, 45, 55];
+  // jeff_landry uses distribution-aware bins (thresholds: 30, 37, 44, 51)
+  // Other metrics use standard 5-bin scale (thresholds: 25, 35, 45, 55)
+  const shareBins = metric === 'jeff_landry' ? [30, 37, 44, 51] : [25, 35, 45, 55];
   let bin = shareBins.findIndex((b) => share < b);
   if (bin === -1) bin = 4;
   return cols[bin];
@@ -6113,7 +6115,7 @@ function renderBallotMapLegend(metric) {
       const candMap = {
         combined_republican:   { label: 'Combined R share',    cols: BALLOT_SINGLE_COLORS.jeff_landry,           bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
         democratic_candidate:  { label: 'Dem candidate share', cols: BALLOT_SINGLE_COLORS.democratic_candidate,  bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
-        jeff_landry:           { label: 'Landry share',        cols: BALLOT_SINGLE_COLORS.jeff_landry,           bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
+        jeff_landry:           { label: 'Landry share',        cols: BALLOT_SINGLE_COLORS.jeff_landry,           bins: ['<30%','30–37%','37–44%','44–51%','51%+'] },
         republican_challenger: { label: 'Challenger share',    cols: BALLOT_SINGLE_COLORS.republican_challenger, bins: ['<25%','25–35%','35–45%','45–55%','55%+'] }
       };
       const entry = candMap[metric];
@@ -6231,7 +6233,8 @@ function setupBallotCrTooltips(svgEl) {
       ttBody.innerHTML = ballotBuildTooltipHtml(unit, responses);
       tooltip.classList.add('visible');
       tooltip.setAttribute('aria-hidden', 'false');
-      tooltip.style.left = Math.min(e.clientX + 14, window.innerWidth - 285) + 'px';
+      const ttLeft = (e.clientX + 14 + 270 > window.innerWidth - 10) ? Math.max(10, e.clientX - 270 - 12) : e.clientX + 14;
+      tooltip.style.left = ttLeft + 'px';
       tooltip.style.top  = Math.max(e.clientY - 10, 6) + 'px';
     });
     path.addEventListener('mouseleave', () => {
@@ -6313,7 +6316,8 @@ function setupBallotParishTooltips(svgEl) {
       ttBody.innerHTML = ballotBuildTooltipHtml(unit, responses);
       tooltip.classList.add('visible');
       tooltip.setAttribute('aria-hidden', 'false');
-      tooltip.style.left = Math.min(e.clientX + 14, window.innerWidth - 285) + 'px';
+      const ttLeft = (e.clientX + 14 + 270 > window.innerWidth - 10) ? Math.max(10, e.clientX - 270 - 12) : e.clientX + 14;
+      tooltip.style.left = ttLeft + 'px';
       tooltip.style.top  = Math.max(e.clientY - 10, 6) + 'px';
     });
     path.addEventListener('mouseleave', () => {
