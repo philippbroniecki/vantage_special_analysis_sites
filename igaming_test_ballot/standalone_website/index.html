@@ -1122,8 +1122,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
 }
 
 #ballotMapContainer[data-geo-mode="cultural_region"] .cr-region {
-  stroke: rgba(255,255,255,0.95);
-  stroke-width: 1.35px;
+  stroke: none;
+  vector-effect: non-scaling-stroke;
 }
 
 .cr-region:hover {
@@ -1131,10 +1131,32 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   filter: brightness(1.12) saturate(1.08);
 }
 
-#ballotMapContainer[data-geo-mode="cultural_region"] .cr-region.cr-hover {
+#ballotMapContainer[data-geo-mode="cultural_region"] .ballot-cr-outline-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#ballotMapContainer[data-geo-mode="cultural_region"] .ballot-cr-outline-layer .cr-region {
+  fill: none;
+  stroke: rgba(255,255,255,0.96);
+  stroke-width: 1.45px;
+  vector-effect: non-scaling-stroke;
+}
+
+#ballotMapContainer[data-geo-mode="cultural_region"] .ballot-cr-outline-layer .cr-region.cr-hover {
+  stroke: rgba(255,255,255,1);
+  stroke-width: 1.9px;
+}
+
+#ballotMapContainer[data-geo-mode="cultural_region"] .ballot-cr-fill-layer {
+  position: relative;
+  z-index: 1;
+}
+
+#ballotMapContainer[data-geo-mode="cultural_region"] .ballot-cr-fill-layer .cr-region.cr-hover {
   filter: brightness(0.9) saturate(1.08);
-  stroke: rgba(255,255,255,0.98);
-  stroke-width: 1.85px;
 }
 
 .map-tooltip {
@@ -6258,6 +6280,9 @@ function ballotMapSvgPathForGeo(geoMode) {
   if (geoMode === 'cultural_region') return 'data/igaming_louisiana_cr_map.svg';
   return 'data/igaming_louisiana_parish_map.svg';
 }
+function ballotMapCrOutlineSvgPath() {
+  return 'data/igaming_louisiana_cr_outline.svg';
+}
 
 async function ensureBallotMapGeometry(geoMode) {
   const container = document.getElementById('ballotMapContainer');
@@ -6295,6 +6320,42 @@ async function ensureBallotMapGeometry(geoMode) {
   svgEl.style.display = 'block';
   svgEl.style.width = '100%';
   svgEl.style.height = 'auto';
+  svgEl.style.position = 'relative';
+  svgEl.style.zIndex = '1';
+
+  if (targetGeoMode === 'cultural_region') {
+    svgEl.classList.add('ballot-cr-fill-layer');
+    svgEl.setAttribute('aria-hidden', 'false');
+
+    // Load the dedicated CR outline SVG (boundary edges only — no internal
+    // parish strokes).  Cache it to avoid repeated fetches on geo-mode toggle.
+    let outlineSvgText = ballotMapSvgCache['cultural_region_outline'];
+    if (!outlineSvgText) {
+      try {
+        const outlineRes = await fetch(ballotMapCrOutlineSvgPath(), { cache: 'no-store' });
+        if (outlineRes.ok) outlineSvgText = await outlineRes.text();
+      } catch (_) {}
+      if (outlineSvgText) ballotMapSvgCache['cultural_region_outline'] = outlineSvgText;
+    }
+
+    if (outlineSvgText) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = outlineSvgText;
+      const outlineLayer = tmp.querySelector('svg');
+      if (outlineLayer) {
+        outlineLayer.classList.add('ballot-cr-outline-layer');
+        outlineLayer.setAttribute('aria-hidden', 'true');
+        outlineLayer.style.display = 'block';
+        outlineLayer.style.position = 'absolute';
+        outlineLayer.style.inset = '0';
+        outlineLayer.style.width = '100%';
+        outlineLayer.style.height = 'auto';
+        outlineLayer.style.pointerEvents = 'none';
+        outlineLayer.style.zIndex = '2';
+        container.appendChild(outlineLayer);
+      }
+    }
+  }
 
   ballotMapGeometryMode = targetGeoMode;
   setupBallotMapTooltips(svgEl);
@@ -6320,11 +6381,13 @@ function applyBallotCrFills(svgEl) {
     const unit = crKey ? crData[crKey] : null;
     if (!unit) {
       path.style.fill = '#d0d0d0';
+      path.style.stroke = 'none';
       path.dataset.ballotCrKey = '';
       return;
     }
     const responses = ballotExtractResponses(unit);
     path.style.fill = ballotGetFill(responses, metric);
+    path.style.stroke = 'none';
     path.dataset.ballotCrKey = crKey;
   });
 
