@@ -2423,11 +2423,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         <!-- Map controls -->
         <div class="ballot-map-controls">
           <div class="xt-control-group">
-            <label class="xt-control-label">Geography</label>
-            <div class="view-toggle" id="ballotMapGeoToggle">
-              <button class="toggle-btn active" data-geo="cultural_region">Cultural Region</button>
-              <button class="toggle-btn" data-geo="county">Parish</button>
-            </div>
+            <label class="xt-control-label" for="ballotMapGeoSelect">Geography</label>
+            <select class="xt-select" id="ballotMapGeoSelect">
+              <option value="cultural_region" selected>Cultural Region</option>
+              <option value="county">Parish</option>
+            </select>
           </div>
           <div class="xt-control-group">
             <label class="xt-control-label" for="ballotMapMetricSelect">Map metric</label>
@@ -6364,22 +6364,18 @@ function renderBallotMap() {
 }
 
 function renderQuestionCards() {
-  // Wire geo toggle (idempotent)
-  const toggle = document.getElementById('ballotMapGeoToggle');
-  if (toggle && !toggle.dataset.bound) {
-    toggle.dataset.bound = 'true';
-    toggle.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-geo]');
-      if (!btn) return;
-      const geo = btn.dataset.geo;
+  // Wire geo selector (idempotent)
+  const geoSel = document.getElementById('ballotMapGeoSelect');
+  if (geoSel && !geoSel.dataset.bound) {
+    geoSel.dataset.bound = 'true';
+    geoSel.addEventListener('change', () => {
+      const geo = geoSel.value;
       if (geo === activeBallotMapGeo) return;
       activeBallotMapGeo = geo;
-      toggle.querySelectorAll('.toggle-btn').forEach((b) =>
-        b.classList.toggle('active', b.dataset.geo === geo)
-      );
       renderBallotMap();
     });
   }
+  if (geoSel) geoSel.value = activeBallotMapGeo;
 
   // Wire metric selector (idempotent)
   const metricSel = document.getElementById('ballotMapMetricSelect');
