@@ -1248,9 +1248,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   margin-bottom: .4rem;
 }
 
-/* Parish ranked-table fallback */
 /* Parish SVG map container */
-#ballotMapParishContainer svg {
+#ballotMapContainer svg {
   display: block;
   width: 100%;
   height: auto;
@@ -1261,12 +1260,23 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   cursor: pointer;
   transition: filter 0.15s ease;
 }
+/* Parish mode: per-path hover */
 .parish-region:hover {
   filter: brightness(0.85);
   stroke-width: 1.2;
 }
+/* CR mode: suppress per-path hover; use group highlight instead */
+#ballotMapContainer[data-geo-mode="cultural_region"] .parish-region:hover {
+  filter: none;
+  stroke-width: 0.5;
+}
+#ballotMapContainer[data-geo-mode="cultural_region"] .parish-region.cr-hover {
+  filter: brightness(0.88) saturate(1.08);
+  stroke: rgba(255,255,255,0.95);
+  stroke-width: 1.4;
+}
 @media (max-width: 620px) {
-  #ballotMapParishContainer { min-height: 220px; }
+  #ballotMapContainer { min-height: 220px; }
 }
 
 .comparison-row {
@@ -2442,16 +2452,10 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           </div>
         </div>
 
-        <!-- Cultural Region SVG map -->
-        <div id="ballotMapCrWrap" class="map-svg-wrap">
-          <div id="ballotMapCrContainer" aria-label="Louisiana cultural regions — 2027 governor ballot map"></div>
+        <!-- Single canonical parish SVG map — used for both Parish and Cultural Region modes -->
+        <div id="ballotMapWrap" class="map-svg-wrap">
+          <div id="ballotMapContainer" aria-label="Louisiana governor ballot map"></div>
           <div class="map-legend" id="ballotMapLegend"></div>
-        </div>
-
-        <!-- Parish SVG map (shown when Parish geography is selected) -->
-        <div id="ballotMapParishWrap" class="map-svg-wrap" hidden>
-          <div id="ballotMapParishContainer" aria-label="Louisiana parishes — 2027 governor ballot map"></div>
-          <div class="map-legend" id="ballotParishMapLegend"></div>
         </div>
 
       </section>
@@ -5889,8 +5893,75 @@ function renderTakeaways() {
 // Map state
 var activeBallotMapGeo = 'cultural_region';
 var activeBallotMapMetric = 'jeff_landry';
-var ballotCrSvgLoaded = false;
 var ballotParishSvgLoaded = false;
+
+// Parish → Cultural Region membership (stable Louisiana geography)
+const PARISH_TO_CR = {
+  "ACADIA":               "acadiana_lafayette",
+  "EVANGELINE":           "acadiana_lafayette",
+  "IBERIA":               "acadiana_lafayette",
+  "LAFAYETTE":            "acadiana_lafayette",
+  "ST. LANDRY":           "acadiana_lafayette",
+  "ST. MARTIN":           "acadiana_lafayette",
+  "ST. MARY":             "acadiana_lafayette",
+  "VERMILION":            "acadiana_lafayette",
+  "CALDWELL":             "arklamiss_delta",
+  "EAST CARROLL":         "arklamiss_delta",
+  "FRANKLIN":             "arklamiss_delta",
+  "JACKSON":              "arklamiss_delta",
+  "MADISON":              "arklamiss_delta",
+  "MOREHOUSE":            "arklamiss_delta",
+  "OUACHITA":             "arklamiss_delta",
+  "RICHLAND":             "arklamiss_delta",
+  "TENSAS":               "arklamiss_delta",
+  "UNION":                "arklamiss_delta",
+  "WEST CARROLL":         "arklamiss_delta",
+  "BIENVILLE":            "arklatex",
+  "BOSSIER":              "arklatex",
+  "CADDO":                "arklatex",
+  "CLAIBORNE":            "arklatex",
+  "DE SOTO":              "arklatex",
+  "LINCOLN":              "arklatex",
+  "NATCHITOCHES":         "arklatex",
+  "RED RIVER":            "arklatex",
+  "SABINE":               "arklatex",
+  "WEBSTER":              "arklatex",
+  "ASCENSION":            "bayou_country",
+  "ASSUMPTION":           "bayou_country",
+  "LAFOURCHE":            "bayou_country",
+  "ST. CHARLES":          "bayou_country",
+  "ST. JAMES":            "bayou_country",
+  "ST. JOHN THE BAPTIST": "bayou_country",
+  "TERREBONNE":           "bayou_country",
+  "AVOYELLES":            "central_louisiana",
+  "CATAHOULA":            "central_louisiana",
+  "CONCORDIA":            "central_louisiana",
+  "GRANT":                "central_louisiana",
+  "LA SALLE":             "central_louisiana",
+  "RAPIDES":              "central_louisiana",
+  "VERNON":               "central_louisiana",
+  "WINN":                 "central_louisiana",
+  "EAST BATON ROUGE":     "florida_parishes",
+  "EAST FELICIANA":       "florida_parishes",
+  "IBERVILLE":            "florida_parishes",
+  "LIVINGSTON":           "florida_parishes",
+  "POINTE COUPEE":        "florida_parishes",
+  "ST. HELENA":           "florida_parishes",
+  "TANGIPAHOA":           "florida_parishes",
+  "WASHINGTON":           "florida_parishes",
+  "WEST BATON ROUGE":     "florida_parishes",
+  "WEST FELICIANA":       "florida_parishes",
+  "JEFFERSON":            "greater_new_orleans",
+  "ORLEANS":              "greater_new_orleans",
+  "PLAQUEMINES":          "greater_new_orleans",
+  "ST. BERNARD":          "greater_new_orleans",
+  "ST. TAMMANY":          "greater_new_orleans",
+  "ALLEN":                "southwest_louisiana",
+  "BEAUREGARD":           "southwest_louisiana",
+  "CALCASIEU":            "southwest_louisiana",
+  "CAMERON":              "southwest_louisiana",
+  "JEFFERSON DAVIS":      "southwest_louisiana"
+};
 
 const BALLOT_CAND_IDS = ['democratic_candidate', 'jeff_landry', 'republican_challenger'];
 
@@ -6058,8 +6129,8 @@ function ballotBuildTooltipHtml(unit, responses) {
 }
 
 function renderBallotMapLegend(metric) {
-  // Render legend into both CR and Parish legend containers
-  ['ballotMapLegend', 'ballotParishMapLegend'].forEach((nodeId) => {
+  // Single legend container now that both modes share one map div
+  ['ballotMapLegend'].forEach((nodeId) => {
     const node = document.getElementById(nodeId);
     if (!node) return;
     node.innerHTML = '';
@@ -6168,8 +6239,8 @@ function renderBallotStatewideBox() {
   }).join('');
 }
 
-async function loadAndRenderBallotCrMap() {
-  const container = document.getElementById('ballotMapCrContainer');
+async function loadAndRenderBallotParishMap() {
+  const container = document.getElementById('ballotMapContainer');
   if (!container) return;
   if (window.location.protocol === 'file:') {
     container.innerHTML = '<p class="xt-note" style="padding:.8rem">Serve over HTTP to see the interactive map (e.g. <code>python3 -m http.server 8000</code>).</p>';
@@ -6177,11 +6248,11 @@ async function loadAndRenderBallotCrMap() {
   }
   let svgText = null;
   try {
-    const res = await fetch('data/igaming_louisiana_cr_map.svg', { cache: 'no-store' });
+    const res = await fetch('data/igaming_louisiana_parish_map.svg', { cache: 'no-store' });
     if (res.ok) svgText = await res.text();
   } catch (_) {}
   if (!svgText) {
-    container.innerHTML = '<p class="xt-note" style="padding:.8rem">SVG map failed to load.</p>';
+    container.innerHTML = '<p class="xt-note" style="padding:.8rem">Parish SVG map failed to load.</p>';
     return;
   }
   container.innerHTML = svgText;
@@ -6190,26 +6261,61 @@ async function loadAndRenderBallotCrMap() {
   svgEl.style.display = 'block';
   svgEl.style.width = '100%';
   svgEl.style.height = 'auto';
-  ballotCrSvgLoaded = true;
-  applyBallotCrFills();
-  setupBallotCrTooltips(svgEl);
+  ballotParishSvgLoaded = true;
+  if (activeBallotMapGeo === 'cultural_region') {
+    applyBallotCrFills();
+  } else {
+    applyBallotParishFills();
+  }
+  setupBallotMapTooltips(svgEl);
 }
 
+// Fill parish paths with CR-aggregated values (Cultural Region mode).
+// Each parish is colored by its cultural region's metric value.
 function applyBallotCrFills() {
-  const container = document.getElementById('ballotMapCrContainer');
+  const container = document.getElementById('ballotMapContainer');
   if (!container) return;
   const svgEl = container.querySelector('svg');
   if (!svgEl) return;
+  container.dataset.geoMode = 'cultural_region';
   const crData = ballotGetCrData();
   const metric = activeBallotMapMetric;
-  svgEl.querySelectorAll('.cr-region').forEach((path) => {
-    const crKey = (path.id || '').replace(/^cr_/, '');
-    const unit = crData[crKey];
-    if (!unit) { path.style.fill = '#d0d0d0'; return; }
+  svgEl.querySelectorAll('.parish-region').forEach((path) => {
+    const jsonKey = path.dataset.jsonKey;
+    const crKey   = jsonKey ? PARISH_TO_CR[jsonKey] : null;
+    const unit    = crKey ? crData[crKey] : null;
+    if (!unit) { path.style.fill = '#d0d0d0'; path.dataset.ballotCrKey = ''; return; }
     const responses = ballotExtractResponses(unit);
     path.style.fill = ballotGetFill(responses, metric);
     path.dataset.ballotCrKey = crKey;
   });
+  renderBallotMapLegend(metric);
+}
+
+// Fill parish paths individually (Parish mode).
+function applyBallotParishFills() {
+  const container = document.getElementById('ballotMapContainer');
+  if (!container) return;
+  const svgEl = container.querySelector('svg');
+  if (!svgEl) return;
+  container.dataset.geoMode = 'parish';
+  const countyData = ballotGetCountyData();
+  const metric = activeBallotMapMetric;
+  let matched = 0, unmatched = 0;
+  svgEl.querySelectorAll('.parish-region').forEach((path) => {
+    const jsonKey = path.dataset.jsonKey;
+    const unit = jsonKey ? countyData[jsonKey] : null;
+    if (!unit) {
+      path.style.fill = '#d0d0d0';
+      unmatched++;
+      return;
+    }
+    matched++;
+    const responses = ballotExtractResponses(unit);
+    path.style.fill = ballotGetFill(responses, metric);
+    path.dataset.ballotParishKey = jsonKey;
+  });
+  if (unmatched > 0) console.warn('[ballot map] unmatched parish paths:', unmatched, '/', matched + unmatched);
   renderBallotMapLegend(metric);
 }
 
@@ -6235,99 +6341,31 @@ function positionBallotTooltip(tooltip, cx, cy) {
   tooltip.style.top  = top  + 'px';
 }
 
-function setupBallotCrTooltips(svgEl) {
-  const tooltip  = document.getElementById('ballotMapTooltip');
-  const ttLabel  = document.getElementById('ballotMapTooltipLabel');
-  const ttBody   = document.getElementById('ballotMapTooltipBody');
-  if (!tooltip || !ttLabel || !ttBody) return;
-  svgEl.querySelectorAll('.cr-region').forEach((path) => {
-    path.addEventListener('mousemove', (e) => {
-      const crKey = path.dataset.ballotCrKey || (path.id || '').replace(/^cr_/, '');
-      const unit = ballotGetCrData()[crKey];
-      if (!unit) return;
-      const responses = ballotExtractResponses(unit);
-      ttLabel.textContent = unit.unit_label || crKey;
-      ttBody.innerHTML = ballotBuildTooltipHtml(unit, responses);
-      tooltip.classList.add('visible');
-      tooltip.setAttribute('aria-hidden', 'false');
-      positionBallotTooltip(tooltip, e.clientX, e.clientY);
-    });
-    path.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('visible');
-      tooltip.setAttribute('aria-hidden', 'true');
-    });
-  });
-}
-
-// Convert parish JSON key (e.g. "ST. JOHN THE BAPTIST") to SVG path id (e.g. "parish-st_john_the_baptist")
-function jsonKeyToParishSvgId(key) {
-  return 'parish-' + key.toLowerCase().replace(/\./g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
-}
-
-async function loadAndRenderBallotParishMap() {
-  const container = document.getElementById('ballotMapParishContainer');
-  if (!container) return;
-  if (window.location.protocol === 'file:') {
-    container.innerHTML = '<p class="xt-note" style="padding:.8rem">Serve over HTTP to see the interactive parish map.</p>';
-    return;
-  }
-  let svgText = null;
-  try {
-    const res = await fetch('data/igaming_louisiana_parish_map.svg', { cache: 'no-store' });
-    if (res.ok) svgText = await res.text();
-  } catch (_) {}
-  if (!svgText) {
-    container.innerHTML = '<p class="xt-note" style="padding:.8rem">Parish SVG map failed to load.</p>';
-    return;
-  }
-  container.innerHTML = svgText;
-  const svgEl = container.querySelector('svg');
-  if (!svgEl) return;
-  svgEl.style.display = 'block';
-  svgEl.style.width = '100%';
-  svgEl.style.height = 'auto';
-  ballotParishSvgLoaded = true;
-  applyBallotParishFills();
-  setupBallotParishTooltips(svgEl);
-}
-
-function applyBallotParishFills() {
-  const container = document.getElementById('ballotMapParishContainer');
-  if (!container) return;
-  const svgEl = container.querySelector('svg');
-  if (!svgEl) return;
-  const countyData = ballotGetCountyData();
-  const metric = activeBallotMapMetric;
-  let matched = 0, unmatched = 0;
-  svgEl.querySelectorAll('.parish-region').forEach((path) => {
-    const jsonKey = path.dataset.jsonKey;
-    const unit = jsonKey ? countyData[jsonKey] : null;
-    if (!unit) {
-      path.style.fill = '#d0d0d0';
-      unmatched++;
-      return;
-    }
-    matched++;
-    const responses = ballotExtractResponses(unit);
-    path.style.fill = ballotGetFill(responses, metric);
-    path.dataset.ballotParishKey = jsonKey;
-  });
-  if (unmatched > 0) console.warn('[ballot parish map] unmatched paths:', unmatched, '/', matched + unmatched);
-  renderBallotMapLegend(metric);
-}
-
-function setupBallotParishTooltips(svgEl) {
+// Mode-aware tooltip handler: CR mode shows CR-aggregated data + group highlight;
+// Parish mode shows parish-level data.
+function setupBallotMapTooltips(svgEl) {
   const tooltip = document.getElementById('ballotMapTooltip');
-  const ttLabel  = document.getElementById('ballotMapTooltipLabel');
-  const ttBody   = document.getElementById('ballotMapTooltipBody');
+  const ttLabel = document.getElementById('ballotMapTooltipLabel');
+  const ttBody  = document.getElementById('ballotMapTooltipBody');
   if (!tooltip || !ttLabel || !ttBody) return;
   svgEl.querySelectorAll('.parish-region').forEach((path) => {
     path.addEventListener('mousemove', (e) => {
-      const jsonKey = path.dataset.ballotParishKey || path.dataset.jsonKey;
-      const unit = jsonKey ? ballotGetCountyData()[jsonKey] : null;
+      let unit, responses;
+      if (activeBallotMapGeo === 'cultural_region') {
+        const crKey = path.dataset.ballotCrKey;
+        unit = crKey ? ballotGetCrData()[crKey] : null;
+        if (unit) responses = ballotExtractResponses(unit);
+        // Highlight all parishes in the same CR
+        svgEl.querySelectorAll('.parish-region').forEach((p) => {
+          p.classList.toggle('cr-hover', p.dataset.ballotCrKey === crKey && !!crKey);
+        });
+      } else {
+        const jsonKey = path.dataset.ballotParishKey || path.dataset.jsonKey;
+        unit = jsonKey ? ballotGetCountyData()[jsonKey] : null;
+        if (unit) responses = ballotExtractResponses(unit);
+      }
       if (!unit) return;
-      const responses = ballotExtractResponses(unit);
-      ttLabel.textContent = unit.unit_label || jsonKey;
+      ttLabel.textContent = unit.unit_label || '';
       ttBody.innerHTML = ballotBuildTooltipHtml(unit, responses);
       tooltip.classList.add('visible');
       tooltip.setAttribute('aria-hidden', 'false');
@@ -6336,30 +6374,19 @@ function setupBallotParishTooltips(svgEl) {
     path.addEventListener('mouseleave', () => {
       tooltip.classList.remove('visible');
       tooltip.setAttribute('aria-hidden', 'true');
+      svgEl.querySelectorAll('.cr-hover').forEach((p) => p.classList.remove('cr-hover'));
     });
   });
 }
 
 function renderBallotMap() {
   renderBallotStatewideBox();
-  const crWrap     = document.getElementById('ballotMapCrWrap');
-  const parishWrap = document.getElementById('ballotMapParishWrap');
-  if (activeBallotMapGeo === 'cultural_region') {
-    if (crWrap)     crWrap.removeAttribute('hidden');
-    if (parishWrap) parishWrap.setAttribute('hidden', '');
-    if (!ballotCrSvgLoaded) {
-      loadAndRenderBallotCrMap();
-    } else {
-      applyBallotCrFills();
-    }
+  if (!ballotParishSvgLoaded) {
+    loadAndRenderBallotParishMap();
+  } else if (activeBallotMapGeo === 'cultural_region') {
+    applyBallotCrFills();
   } else {
-    if (crWrap)     crWrap.setAttribute('hidden', '');
-    if (parishWrap) parishWrap.removeAttribute('hidden');
-    if (!ballotParishSvgLoaded) {
-      loadAndRenderBallotParishMap();
-    } else {
-      applyBallotParishFills();
-    }
+    applyBallotParishFills();
   }
 }
 
