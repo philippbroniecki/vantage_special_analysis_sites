@@ -2454,11 +2454,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <div class="map-legend" id="ballotParishMapLegend"></div>
         </div>
 
-        <!-- Floating tooltip -->
-        <div id="ballotMapTooltip" class="map-tooltip" role="tooltip" aria-hidden="true">
-          <div class="tt-label" id="ballotMapTooltipLabel"></div>
-          <div class="tt-body" id="ballotMapTooltipBody"></div>
-        </div>
       </section>
 
       <!-- DEMOGRAPHIC BREAKDOWN -->
@@ -6218,6 +6213,28 @@ function applyBallotCrFills() {
   renderBallotMapLegend(metric);
 }
 
+// Shared tooltip positioning helper.
+// The #ballotMapTooltip element must be a direct child of <body> so that
+// position:fixed is relative to the viewport (not a transformed ancestor).
+function positionBallotTooltip(tooltip, cx, cy) {
+  const margin = 8;
+  const offsetX = 14;
+  const offsetY = 12;
+  const rect = tooltip.getBoundingClientRect();
+  const w = rect.width  || 270;
+  const h = rect.height || 180;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  let left = cx + offsetX;
+  let top  = cy + offsetY;
+  // Flip left when tooltip would overflow right edge
+  if (left + w + margin > vw) left = Math.max(margin, cx - w - offsetX);
+  // Flip up when tooltip would overflow bottom edge
+  if (top + h + margin > vh) top = Math.max(margin, cy - h - offsetY);
+  tooltip.style.left = left + 'px';
+  tooltip.style.top  = top  + 'px';
+}
+
 function setupBallotCrTooltips(svgEl) {
   const tooltip  = document.getElementById('ballotMapTooltip');
   const ttLabel  = document.getElementById('ballotMapTooltipLabel');
@@ -6233,9 +6250,7 @@ function setupBallotCrTooltips(svgEl) {
       ttBody.innerHTML = ballotBuildTooltipHtml(unit, responses);
       tooltip.classList.add('visible');
       tooltip.setAttribute('aria-hidden', 'false');
-      const ttLeft = (e.clientX + 14 + 270 > window.innerWidth - 10) ? Math.max(10, e.clientX - 270 - 12) : e.clientX + 14;
-      tooltip.style.left = ttLeft + 'px';
-      tooltip.style.top  = Math.max(e.clientY - 10, 6) + 'px';
+      positionBallotTooltip(tooltip, e.clientX, e.clientY);
     });
     path.addEventListener('mouseleave', () => {
       tooltip.classList.remove('visible');
@@ -6316,9 +6331,7 @@ function setupBallotParishTooltips(svgEl) {
       ttBody.innerHTML = ballotBuildTooltipHtml(unit, responses);
       tooltip.classList.add('visible');
       tooltip.setAttribute('aria-hidden', 'false');
-      const ttLeft = (e.clientX + 14 + 270 > window.innerWidth - 10) ? Math.max(10, e.clientX - 270 - 12) : e.clientX + 14;
-      tooltip.style.left = ttLeft + 'px';
-      tooltip.style.top  = Math.max(e.clientY - 10, 6) + 'px';
+      positionBallotTooltip(tooltip, e.clientX, e.clientY);
     });
     path.addEventListener('mouseleave', () => {
       tooltip.classList.remove('visible');
@@ -7221,6 +7234,13 @@ document.readyState === 'loading'
   }, { passive: true });
 })();
     </script>
+
+  <!-- Map tooltip: must be a direct child of body so position:fixed is relative to the viewport,
+       not to an ancestor with a CSS transform (the .reveal card has transform:translateY(0)). -->
+  <div id="ballotMapTooltip" class="map-tooltip" role="tooltip" aria-hidden="true">
+    <div class="tt-label" id="ballotMapTooltipLabel"></div>
+    <div class="tt-body" id="ballotMapTooltipBody"></div>
+  </div>
 
   </body>
 </html>
