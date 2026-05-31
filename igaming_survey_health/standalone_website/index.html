@@ -1408,10 +1408,10 @@ const FALLBACK_REPORT = {
         "bin_mode": "la_2026_05_12_cr_quantile",
         "legend_bins": [
           "0",
-          "1-24",
-          "25-49",
-          "50-99",
-          "100+"
+          "1–149",
+          "150–224",
+          "225–349",
+          "350+"
         ],
         "legend_text": "Respondents per cultural region",
         "alt": "Louisiana cultural regions respondent map"
@@ -2193,6 +2193,32 @@ function setupMapTooltip(svgEl) {
   });
 }
 
+// Bin thresholds for choropleth: index = bin number, value = minimum count for that bin.
+// Bin 0: 0 (no respondents), Bin 1: 1-149, Bin 2: 150-224, Bin 3: 225-349, Bin 4: 350+
+const CR_BIN_THRESHOLDS = [0, 1, 150, 225, 350];
+
+function applyRespondentBins(svgEl) {
+  const block = reportData?.content?.respondent_geography || {};
+  const total = block.respondents_mapped || 0;
+  const counts = {};
+  toArray(block.top_cultural_regions).concat(toArray(block.bottom_cultural_regions))
+    .forEach(function(r) { if (r && r.id) counts[r.id] = r.count || 0; });
+
+  svgEl.querySelectorAll('.cr-region').forEach(function(path) {
+    const rawId = path.id || '';
+    const key   = rawId.startsWith('cr_') ? rawId.slice(3) : rawId;
+    const count = Object.prototype.hasOwnProperty.call(counts, key) ? counts[key] : 0;
+    const pct   = total > 0 ? Math.round(count / total * 100) : 0;
+    let bin = 0;
+    for (let i = CR_BIN_THRESHOLDS.length - 1; i >= 0; i--) {
+      if (count >= CR_BIN_THRESHOLDS[i]) { bin = i; break; }
+    }
+    path.dataset.bin   = String(bin);
+    path.dataset.count = String(count);
+    path.dataset.pct   = String(pct);
+  });
+}
+
 function insertSvgMarkup(container, svgText) {
   container.innerHTML = svgText;
   const svgEl = container.querySelector('svg');
@@ -2200,6 +2226,7 @@ function insertSvgMarkup(container, svgText) {
     svgEl.style.display = 'block';
     svgEl.style.width   = '100%';
     svgEl.style.height  = 'auto';
+    applyRespondentBins(svgEl);
     setupMapTooltip(svgEl);
     return true;
   }
