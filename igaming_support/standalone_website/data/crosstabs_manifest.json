@@ -4,8 +4,27 @@
       "policy_igaming_pre": "xgboost_2026-05-26_IGaming_2026_05_15.parquet"
     },
     "codebook_file": "codebook.json",
-    "generated_at_utc": "2026-05-29 22:14:30 UTC",
+    "generated_at_utc": "2026-05-30 21:59:44 UTC",
     "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
+    "turnout_adjustment": {
+      "enabled": true,
+      "method": "logit_intercept_shift",
+      "target_turnout_rate": 0.41,
+      "original_modeled_turnout_rate": 0.3443,
+      "adjusted_turnout_rate": 0.41,
+      "intercept_shift_alpha": 0.3377,
+      "original_weight_column": "poststrat_weight_modeled",
+      "active_weight_column": "poststrat_weight_turnout_adjusted",
+      "turnout_prob_modeled_column": "turnout_prob_modeled",
+      "turnout_prob_adjusted_column": "turnout_prob_adjusted",
+      "input_path": "igaming/igaming_support/data_in/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.parquet",
+      "manifest_path": "igaming/igaming_support/data_in/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.manifest.json",
+      "source_snapshot": "predictions_snapshots/special_questions/IGaming_2026_05_15/policy_igaming_pre/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.parquet",
+      "turnout_model": "general_2022_2023",
+      "state_fips": "22",
+      "model_file_name": "model_fits/special_question/IGaming_2026_05_15/policy_igaming_pre/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.rds",
+      "ps_frame_manifest_path": "ps_frames/Louisiana.manifest.json"
+    },
     "delivery": {
       "scheme": "manifest_plus_shards",
       "shard_path_root": "crosstabs/",

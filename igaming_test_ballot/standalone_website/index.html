@@ -2644,7 +2644,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
     "title": "Test Ballot",
     "subtitle": "Comparison between current performance and the 2023 baseline",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "N = 1,708 respondents",
+    "sample": "Modeled poststratified estimates",
     "fieldDates": "May 15, 2026",
     "methodLabel": "Poststratified ML estimates",
     "group_navigation": {
@@ -2700,10 +2700,10 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
     "feedback_callout": []
   },
   "turnout_assumption": {
-    "default_expected_voters": 1635847.3994,
-    "default_registered_voters": 2874643.0084,
-    "default_turnout_rate": 0.5691,
-    "note": "The turnout control uses weights.rds turnout denominators. It updates vote-equivalent context and active-setting labels, but does not rescore the modeled percentages in this build."
+    "default_expected_voters": 628333.4469,
+    "default_registered_voters": 1533491,
+    "default_turnout_rate": 0.4097,
+    "note": "The turnout control defaults to turnout-adjusted poststratified denominators. The reported modeled percentages in this build already use the turnout-adjusted active poststratification weight."
   },
   "response_universe": {
     "enabled": true,
@@ -2746,25 +2746,25 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
         "key": "comparison_2023",
         "path": "data/igaming_test_ballot_comparison_2023.json",
         "file_name": "igaming_test_ballot_comparison_2023.json",
-        "size_bytes": 10544305
+        "size_bytes": 10543221
       },
       {
         "key": "demographics",
         "path": "data/igaming_test_ballot_demographics.json",
         "file_name": "igaming_test_ballot_demographics.json",
-        "size_bytes": 5874805
+        "size_bytes": 5875201
       },
       {
         "key": "archetypes",
         "path": "data/igaming_test_ballot_archetypes.json",
         "file_name": "igaming_test_ballot_archetypes.json",
-        "size_bytes": 24927503
+        "size_bytes": 24928014
       },
       {
         "key": "denominators",
         "path": "data/igaming_test_ballot_denominators.json",
         "file_name": "igaming_test_ballot_denominators.json",
-        "size_bytes": 4983
+        "size_bytes": 4943
       }
     ]
   },
