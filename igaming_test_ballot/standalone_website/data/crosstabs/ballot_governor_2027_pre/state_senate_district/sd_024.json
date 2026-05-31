@@ -4,7 +4,7 @@
     "geography_type_id": "state_senate_district",
     "geography_unit_id": "SD 024",
     "source_file": "xgboost_2026-05-26_IGaming_2026_05_15.parquet",
-    "generated_at_utc": "2026-05-30 21:53:31 UTC",
+    "generated_at_utc": "2026-05-31 18:52:10 UTC",
     "fallback_origin": null,
     "turnout_adjustment": {
       "enabled": true,
@@ -17,13 +17,31 @@
       "active_weight_column": "poststrat_weight_turnout_adjusted",
       "turnout_prob_modeled_column": "turnout_prob_modeled",
       "turnout_prob_adjusted_column": "turnout_prob_adjusted",
-      "input_path": "igaming/test_ballot/data_in/ballot_governor_2027_pre/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.parquet",
-      "manifest_path": "igaming/test_ballot/data_in/ballot_governor_2027_pre/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.manifest.json",
+      "input_path": "xgboost_2026-05-26_IGaming_2026_05_15.parquet",
+      "manifest_path": "xgboost_2026-05-26_IGaming_2026_05_15.manifest.json",
       "source_snapshot": "predictions_snapshots/special_questions/IGaming_2026_05_15/ballot_governor_2027_pre/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.parquet",
       "turnout_model": "general_2022_2023",
       "state_fips": "22",
       "model_file_name": "model_fits/special_question/IGaming_2026_05_15/ballot_governor_2027_pre/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.rds",
       "ps_frame_manifest_path": "ps_frames/Louisiana.manifest.json"
+    },
+    "registered_voter_correction": {
+      "enabled": true,
+      "applied": true,
+      "temporary": true,
+      "state": "Louisiana",
+      "old_registered_voters": 1533491,
+      "corrected_registered_voters": 2874643,
+      "scale_factor": 1.8746,
+      "target_turnout_rate": 0.41,
+      "source_date": "2026-05-31",
+      "source_note": "Temporary website-side Louisiana registered-voter correction. Keep the 41% turnout-adjusted active weights, but rescale count denominators from 1,533,491 to 2,874,643 for generated voter-count outputs only. Remove this correction once upstream Louisiana weights are regenerated with the corrected registered-voter denominator.",
+      "affected_source_file": "xgboost_2026-05-26_IGaming_2026_05_15.parquet",
+      "applied_stage": "website_json_generation",
+      "applied_order": "after_turnout_adjustment",
+      "applies_to_output_counts": false,
+      "count_outputs_present": false,
+      "count_fields_scaled": []
     }
   },
   "question": {
