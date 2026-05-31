@@ -2468,8 +2468,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <div class="xt-control-group">
             <label class="xt-control-label" for="ballotMapGeoSelect">Geography</label>
             <select class="xt-select" id="ballotMapGeoSelect">
-              <option value="cultural_region" selected>Cultural Region</option>
-              <option value="county">Parish</option>
+              <option value="cultural_region">Cultural Region</option>
+              <option value="county" selected>Parish</option>
             </select>
           </div>
           <div class="xt-control-group">
@@ -5923,7 +5923,7 @@ function renderTakeaways() {
    ============================================================ */
 
 // Map state
-var activeBallotMapGeo = 'cultural_region';
+var activeBallotMapGeo = 'county';
 var activeBallotMapMetric = 'jeff_landry';
 var ballotMapGeometryMode = '';
 var ballotMapSvgCache = {
@@ -6008,30 +6008,43 @@ const BALLOT_CAND_BASE_COLORS = {
   republican_challenger: '#e55030'
 };
 
-// Two-party (D vs combined R) colors — 5 intensity bins
+// Two-party (D vs combined R) colors — 5 intensity bins per party side
 const BALLOT_MARGIN_COLORS = {
   democrat:   ['#b8c4f8', '#8898ee', '#3355d4', '#0015bc', '#000d80'],
   republican: ['#f0c0c0', '#ec9595', '#dc4848', '#cb1d1d', '#8c1515']
 };
 
-// 5 sequential bins for single-candidate share views
+// Sequential bins for single-candidate share views (bin count varies by metric; see BALLOT_SHARE_BINS)
 const BALLOT_SINGLE_COLORS = {
-  democratic_candidate: ['#c4ccf8', '#9aaae8', '#7085df', '#3355d4', '#0015bc'],
-  jeff_landry:          ['#f8c0c0', '#f08080', '#e06060', '#cb1d1d', '#8b0000'],
-  republican_challenger:['#f8c4a0', '#f59060', '#e06040', '#c83020', '#8c2010'],
-  landry_margin:        ['#f8c0c0', '#f0c0c0', '#ec9595', '#dc4848', '#8c1515']
+  // 7 bins: <25, 25-32, 32-37, 37-41, 41-46, 46-55, 55+
+  democratic_candidate:  ['#d4deff', '#a8c0f8', '#7898f0', '#4870e0', '#2050c8', '#0830a8', '#001580'],
+  // 6 bins: <25, 25-34, 34-37, 37-40, 40-44, 44+
+  jeff_landry:           ['#fce0e0', '#f0a8a8', '#e07070', '#cc3838', '#a00808', '#680000'],
+  // 6 bins: <10, 10-15, 15-19, 19-23, 23-27, 27+
+  republican_challenger: ['#fce8d4', '#f8b878', '#f08040', '#e05820', '#c03010', '#801800'],
+  // 6 bins: <40, 40-50, 50-55, 55-60, 60-65, 65+
+  combined_republican:   ['#fce4c0', '#f8a870', '#ec7040', '#d84018', '#b01800', '#780000'],
+  landry_margin:         ['#f8c0c0', '#f0c0c0', '#ec9595', '#dc4848', '#8c1515']
 };
 
-// Margin bins in pp: lower bound of each bin
-// Bin 0: 0–2 (toss-up), 1: 2–5 (lean), 2: 5–10 (likely), 3: 10–20 (strong), 4: 20+ (very strong)
-const BALLOT_MARGIN_BINS = [0, 2, 5, 10, 20];
+// Margin bins for D vs combined R leader — lower bound of each bin
+// Bin 0: 0–5 (toss-up), 1: 5–10 (lean), 2: 10–18 (likely), 3: 18–25 (strong), 4: 25+ (very strong)
+const BALLOT_MARGIN_BINS = [0, 5, 10, 18, 25];
 const BALLOT_MARGIN_LABELS = [
-  'Toss-up (0–2 pp)',
-  'Lean (2–5 pp)',
-  'Likely (5–10 pp)',
-  'Strong (10–20 pp)',
-  'Very Strong (20+ pp)'
+  'Toss-up (0–5 pp)',
+  'Lean (5–10 pp)',
+  'Likely (10–18 pp)',
+  'Strong (18–25 pp)',
+  'Very Strong (25+ pp)'
 ];
+
+// Per-metric share bin thresholds (upper bounds; last bin is everything above the highest threshold)
+const BALLOT_SHARE_BINS = {
+  jeff_landry:           [25, 34, 37, 40, 44],     // 6 bins
+  republican_challenger: [10, 15, 19, 23, 27],     // 6 bins
+  democratic_candidate:  [25, 32, 37, 41, 46, 55], // 7 bins
+  combined_republican:   [40, 50, 55, 60, 65]      // 6 bins
+};
 
 const BALLOT_CAND_SHORT = {
   democratic_candidate: 'Dem candidate',
@@ -6074,20 +6087,14 @@ function ballotGetFill(responses, metric) {
     const bin = ballotGetMarginBin(info.margin);
     return (BALLOT_MARGIN_COLORS[info.leader] || [])[bin] || '#cccccc';
   }
-  if (metric === 'two_party_margin') {
-    const info = ballotGetTwoPartyInfo(responses);
-    if (!info) return '#cccccc';
-    const bin = ballotGetMarginBin(info.margin);
-    return (BALLOT_MARGIN_COLORS[info.leader] || [])[bin] || '#cccccc';
-  }
   if (metric === 'combined_republican') {
     const info = ballotGetTwoPartyInfo(responses);
     if (!info) return '#cccccc';
     const share = info.combinedR;
-    const cols = BALLOT_SINGLE_COLORS.jeff_landry;
-    const shareBins = [25, 35, 45, 55];
-    let bin = shareBins.findIndex((b) => share < b);
-    if (bin === -1) bin = 4;
+    const cols = BALLOT_SINGLE_COLORS.combined_republican;
+    const thresholds = BALLOT_SHARE_BINS.combined_republican;
+    let bin = thresholds.findIndex((b) => share < b);
+    if (bin === -1) bin = cols.length - 1;
     return cols[bin];
   }
   // Single candidate share view
@@ -6095,11 +6102,9 @@ function ballotGetFill(responses, metric) {
   if (!cand) return '#cccccc';
   const share = Number.isFinite(cand.current) ? cand.current : 0;
   const cols = BALLOT_SINGLE_COLORS[metric] || ['#e8e8e8', '#b0b0b0', '#808080', '#505050', '#202020'];
-  // jeff_landry uses distribution-aware bins (thresholds: 30, 37, 44, 51)
-  // Other metrics use standard 5-bin scale (thresholds: 25, 35, 45, 55)
-  const shareBins = metric === 'jeff_landry' ? [30, 37, 44, 51] : [25, 35, 45, 55];
-  let bin = shareBins.findIndex((b) => share < b);
-  if (bin === -1) bin = 4;
+  const thresholds = BALLOT_SHARE_BINS[metric] || [25, 35, 45, 55];
+  let bin = thresholds.findIndex((b) => share < b);
+  if (bin === -1) bin = cols.length - 1;
   return cols[bin];
 }
 
@@ -6171,11 +6176,11 @@ function renderBallotMapLegend(metric) {
     if (!node) return;
     node.innerHTML = '';
 
-    if (metric === 'leader' || metric === 'two_party_margin') {
+    if (metric === 'leader') {
       // D vs combined R two-party legend
       const titleLabel = document.createElement('span');
       titleLabel.className = 'map-legend-label';
-      titleLabel.textContent = metric === 'leader' ? 'D vs combined R leader:' : 'D vs combined R margin:';
+      titleLabel.textContent = 'D vs combined R leader:';
       node.appendChild(titleLabel);
 
       // Dem bins
@@ -6215,10 +6220,10 @@ function renderBallotMapLegend(metric) {
       });
     } else {
       const candMap = {
-        combined_republican:   { label: 'Combined R share',    cols: BALLOT_SINGLE_COLORS.jeff_landry,           bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
-        democratic_candidate:  { label: 'Dem candidate share', cols: BALLOT_SINGLE_COLORS.democratic_candidate,  bins: ['<25%','25–35%','35–45%','45–55%','55%+'] },
-        jeff_landry:           { label: 'Landry share',        cols: BALLOT_SINGLE_COLORS.jeff_landry,           bins: ['<30%','30–37%','37–44%','44–51%','51%+'] },
-        republican_challenger: { label: 'Challenger share',    cols: BALLOT_SINGLE_COLORS.republican_challenger, bins: ['<25%','25–35%','35–45%','45–55%','55%+'] }
+        combined_republican:   { label: 'Combined R share',    cols: BALLOT_SINGLE_COLORS.combined_republican,   bins: ['<40%','40–50%','50–55%','55–60%','60–65%','65%+'] },
+        democratic_candidate:  { label: 'Dem candidate share', cols: BALLOT_SINGLE_COLORS.democratic_candidate,  bins: ['<25%','25–32%','32–37%','37–41%','41–46%','46–55%','55%+'] },
+        jeff_landry:           { label: 'Landry share',        cols: BALLOT_SINGLE_COLORS.jeff_landry,           bins: ['<25%','25–34%','34–37%','37–40%','40–44%','44%+'] },
+        republican_challenger: { label: 'Challenger share',    cols: BALLOT_SINGLE_COLORS.republican_challenger, bins: ['<10%','10–15%','15–19%','19–23%','23–27%','27%+'] }
       };
       const entry = candMap[metric];
       if (!entry) return;
