@@ -739,12 +739,15 @@ body {
 :root {
   /* Sequential choropleth: bin 0 (zero) → bin 4 (highest) */
   --map-bin0: #cddae6;   /* zero respondents: very faint blue-gray */
-  --map-bin1: #7ba7bc;   /* low  (1-48): muted steel-teal */
-  --map-bin2: #4a7c99;   /* med  (49-58): medium teal-blue */
-  --map-bin3: #2d8a94;   /* high (59-256): strong accent-teal */
-  --map-bin4: #1a6b73;   /* max  (257+): deep accent (= --accent light) */
-  --map-stroke: rgba(255,255,255,0.88);       /* raised for clearer region boundaries */
-  --map-stroke-hover: rgba(255,255,255,1.0);
+  --map-bin1: #7ba7bc;   /* low  (1-149): muted steel-teal */
+  --map-bin2: #4a7c99;   /* med  (150-224): medium teal-blue */
+  --map-bin3: #2d8a94;   /* high (225-349): strong accent-teal */
+  --map-bin4: #1a6b73;   /* max  (350+): deep accent (= --accent light) */
+  /* Stroke tokens: fill layer has stroke:none; outline overlay uses these */
+  --map-cr-outline-stroke: rgba(255,255,255,0.96);
+  --map-cr-outline-stroke-hover: rgba(255,255,255,1);
+  --map-cr-outline-width: 1.45px;
+  --map-cr-outline-width-hover: 1.9px;
 }
 :root[data-theme='dark'] {
   --map-bin0: #1a2e42;
@@ -752,8 +755,8 @@ body {
   --map-bin2: #236e80;
   --map-bin3: #2fa0af;
   --map-bin4: #48b4be;   /* = --accent dark */
-  --map-stroke: rgba(255,255,255,0.28);       /* white on dark fills — far better contrast than black */
-  --map-stroke-hover: rgba(255,255,255,0.65);
+  --map-cr-outline-stroke: rgba(255,255,255,0.96);
+  --map-cr-outline-stroke-hover: rgba(255,255,255,1);
 }
 
 /* ============================================================
@@ -783,16 +786,41 @@ body {
 .cr-region[data-bin="4"] { fill: var(--map-bin4); }
 
 .cr-region {
-  stroke: var(--map-stroke);
-  stroke-width: 0.75px;
-  transition: opacity 0.12s ease, filter 0.12s ease, stroke 0.12s ease;
+  /* No stroke on fill layer — boundary is drawn by the cr-boundary-overlay SVG above. */
+  stroke: none;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 0.12s ease, filter 0.12s ease;
   cursor: pointer;
 }
 
 .cr-region:hover {
   opacity: 0.85;
-  stroke: var(--map-stroke-hover);
-  filter: brightness(1.12) saturate(1.08);
+  filter: brightness(0.9) saturate(1.08);
+}
+
+/* Outline overlay: absolute-positioned SVG rendered above the fill layer.
+   pointer-events:none keeps hover/clicks on the fill layer paths. */
+.cr-boundary-overlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+  aria-hidden: true;
+}
+.cr-boundary-overlay .cr-region {
+  fill: none !important;
+  stroke: var(--map-cr-outline-stroke);
+  stroke-width: var(--map-cr-outline-width);
+  vector-effect: non-scaling-stroke;
+  cursor: default;
+  transition: stroke 0.12s ease, stroke-width 0.12s ease;
+}
+.cr-boundary-overlay .cr-region.cr-hover {
+  stroke: var(--map-cr-outline-stroke-hover);
+  stroke-width: var(--map-cr-outline-width-hover);
 }
 
 .map-tooltip {
@@ -1793,8 +1821,9 @@ const FALLBACK_REPORT = {
   }
 };
 
-const DATA_URL = 'data/igaming_survey_health_data.json';
-const SVG_URL  = 'data/igaming_louisiana_cr_map.svg';
+const DATA_URL    = 'data/igaming_survey_health_data.json';
+const SVG_URL     = 'data/igaming_louisiana_cr_map.svg';
+const OUTLINE_URL = 'data/igaming_louisiana_cr_outline.svg';
 let reportData = FALLBACK_REPORT;
 
 // ---------------------------------------------------------------------------
@@ -2164,6 +2193,14 @@ function renderMapLegend(bins) {
 // Map rendering: interactive SVG with hover tooltip
 // ---------------------------------------------------------------------------
 
+let crOutlineSvgEl = null;
+
+function syncOutlineHover(pathId, on) {
+  if (!crOutlineSvgEl || !pathId) return;
+  const outlinePath = crOutlineSvgEl.getElementById(pathId);
+  if (outlinePath) outlinePath.classList.toggle('cr-hover', on);
+}
+
 function setupMapTooltip(svgEl) {
   const tooltip = document.getElementById('mapTooltip');
   const ttLabel = document.getElementById('mapTooltipLabel');
@@ -2185,10 +2222,13 @@ function setupMapTooltip(svgEl) {
       const ty = Math.max(e.clientY - 10, 6);
       tooltip.style.left = tx + 'px';
       tooltip.style.top  = ty + 'px';
+
+      syncOutlineHover(path.id, true);
     });
     path.addEventListener('mouseleave', () => {
       tooltip.classList.remove('visible');
       tooltip.setAttribute('aria-hidden', 'true');
+      syncOutlineHover(path.id, false);
     });
   });
 }
@@ -2233,6 +2273,36 @@ function insertSvgMarkup(container, svgText) {
   return false;
 }
 
+async function appendCrOutlineLayer(container) {
+  const existing = container.querySelector('.cr-boundary-overlay');
+  if (existing) existing.remove();
+  crOutlineSvgEl = null;
+
+  if (window.location.protocol === 'file:') return;
+
+  try {
+    const res = await fetch(OUTLINE_URL, { cache: 'no-store' });
+    if (!res.ok) return;
+    const svgText = await res.text();
+    const tmp = document.createElement('div');
+    tmp.innerHTML = svgText;
+    const outlineSvg = tmp.querySelector('svg');
+    if (!outlineSvg) return;
+    outlineSvg.classList.add('cr-boundary-overlay');
+    outlineSvg.setAttribute('aria-hidden', 'true');
+    outlineSvg.style.display       = 'block';
+    outlineSvg.style.position      = 'absolute';
+    outlineSvg.style.inset         = '0';
+    outlineSvg.style.width         = '100%';
+    outlineSvg.style.height        = 'auto';
+    outlineSvg.style.pointerEvents = 'none';
+    outlineSvg.style.zIndex        = '2';
+    container.style.position       = 'relative';
+    container.appendChild(outlineSvg);
+    crOutlineSvgEl = outlineSvg;
+  } catch (_) {}
+}
+
 async function loadAndRenderSvgMap() {
   const container = document.getElementById('mapSvgContainer');
   if (!container) return;
@@ -2245,7 +2315,10 @@ async function loadAndRenderSvgMap() {
       const res = await fetch(SVG_URL, { cache: 'no-store' });
       if (res.ok) {
         const svgText = await res.text();
-        if (insertSvgMarkup(container, svgText)) return;
+        if (insertSvgMarkup(container, svgText)) {
+          await appendCrOutlineLayer(container);
+          return;
+        }
       }
     } catch (_) {}
   }
@@ -2263,7 +2336,7 @@ async function loadAndRenderSvgMap() {
     container.style.padding = '0';
     const img = document.createElement('img');
     img.src     = String(map.image_data_url);
-    img.alt     = String(map.alt || 'Georgia respondent geography map');
+    img.alt     = String(map.alt || 'Louisiana respondent geography map');
     img.style.cssText = 'display:block;width:100%;height:auto;';
     img.loading = 'lazy';
     container.appendChild(img);
