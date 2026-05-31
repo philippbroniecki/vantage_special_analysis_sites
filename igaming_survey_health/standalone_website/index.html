@@ -1260,7 +1260,7 @@ const FALLBACK_REPORT = {
     "subtitle": "Survey quality diagnostics for the Louisiana Voter Opinion Study intake and analysis sample",
     "site": "https://www.vantagedatahouse.com",
     "sample": "N = 1,708 respondents",
-    "fieldDates": "May 15, 2026",
+    "fieldDates": "May 15-21, 2026",
     "methodLabel": "Pipeline survey-health diagnostics",
     "group_navigation": {
       "group_id": "louisiana_igaming_baseline_2026",
@@ -2080,7 +2080,15 @@ function fillMeta() {
     siteEl.href = m.site;
     siteEl.textContent = String(m.site).replace(/^https?:\/\//, '');
   }
-  if (sampleEl && m.sample) sampleEl.textContent = m.sample;
+  if (sampleEl) {
+    const isBlankSample = !m.sample || /^(N\/A|NA)$/i.test(String(m.sample).trim());
+    if (isBlankSample) {
+      sampleEl.style.display = 'none';
+    } else {
+      sampleEl.style.display = '';
+      sampleEl.textContent = m.sample;
+    }
+  }
   if (datesEl && m.fieldDates) datesEl.textContent = m.fieldDates;
   if (methodEl && m.methodLabel) methodEl.textContent = m.methodLabel;
 }

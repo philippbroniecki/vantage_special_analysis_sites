@@ -1859,7 +1859,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
               <a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a>
             </span>
             <span class="meta-pill" id="metaSample">N = 1,205 respondents</span>
-            <span class="meta-pill" id="metaDates">May 15, 2026</span>
+            <span class="meta-pill" id="metaDates">May 15-21, 2026</span>
             <span class="meta-pill" id="metaMethod">Poststratified ML estimates</span>
           </div>
         </div>
@@ -2234,8 +2234,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
     "title": "Gambling Attitudes & Priorities",
     "subtitle": "Behavior, awareness, issue priorities, and attitudes toward online casino gaming in Louisiana",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "Modeled poststratified estimates",
-    "fieldDates": "May 15, 2026",
+    "sample": "",
+    "fieldDates": "May 15-21, 2026",
     "methodLabel": "Poststratified ML estimates",
     "group_navigation": {
       "group_id": "louisiana_igaming_baseline_2026",
@@ -2705,7 +2705,7 @@ function loadEmbeddedFallback() {
         source: 'Vantage Data House',
         title: 'Gambling Attitudes & Priorities',
         site: 'https://www.vantagedatahouse.com',
-        sample: 'Modeled poststratified estimates',
+        sample: null,
         fieldDates: 'Model snapshot: Not provided'
       },
       questions: [],
@@ -2722,7 +2722,7 @@ function loadEmbeddedFallback() {
         source: 'Vantage Data House',
         title: 'Gambling Attitudes & Priorities',
         site: 'https://www.vantagedatahouse.com',
-        sample: 'Modeled poststratified estimates',
+        sample: null,
         fieldDates: 'Model snapshot: Not provided'
       },
       questions: [],
@@ -4810,7 +4810,15 @@ function fillMeta() {
   }
 
   const sampleEl = byId('metaSample');
-  if (sampleEl && m.sample) sampleEl.textContent = m.sample;
+  if (sampleEl) {
+    const isBlankSample = !m.sample || /^(N\/A|NA)$/i.test(String(m.sample).trim());
+    if (isBlankSample) {
+      sampleEl.style.display = 'none';
+    } else {
+      sampleEl.style.display = '';
+      sampleEl.textContent = m.sample;
+    }
+  }
 
   const dateEl = byId('metaDates');
   if (dateEl && m.fieldDates) dateEl.textContent = m.fieldDates;
@@ -4833,7 +4841,6 @@ function renderFeedbackCallout() {
   const heading = document.getElementById('feedbackHeading');
   const body = document.getElementById('feedbackBody');
   const cta = document.getElementById('feedbackCta');
-
   if (heading && cfg.heading) heading.textContent = cfg.heading;
   if (body && cfg.body) body.textContent = cfg.body;
   if (cta) {
