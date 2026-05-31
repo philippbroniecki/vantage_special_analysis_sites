@@ -335,7 +335,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 .bar.neg { background: var(--neg); right: 50%; }
 .bar.neutral { background: var(--neutral); left: 50%; }
 .bar-val { font-size: 0.78rem; text-align: right; font-variant-numeric: tabular-nums; }
-.delta { font-variant-numeric: tabular-nums; font-weight: 700; }
+.delta { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
 .delta.pos { color: var(--pos); }
 .delta.neg { color: var(--neg); }
 .delta.neutral { color: var(--neutral); }
@@ -433,7 +433,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 .si-party-label { font-size: 0.79rem; color: var(--ink-soft); }
 .si-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.18rem; line-height: 1.35; }
 .si-overall { display: flex; align-items: baseline; gap: 0.5rem; margin: 0.1rem 0 0.15rem; }
-.si-overall-val { font-size: 1.28rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.si-overall-val { font-size: 1.28rem; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .si-overall-val.pos { color: var(--pos); }
 .si-overall-val.neg { color: var(--neg); }
 .si-overall-val.neutral { color: var(--neutral); }
@@ -776,7 +776,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
     "title": "Impact of Online Gaming on Governor Landry's 2027 Prospects",
     "subtitle": "Testing the political effect of signing an online gaming compact and delivering voter priorities versus inaction",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "N/A",
+    "sample": "",
     "fieldDates": "May 15, 2026",
     "methodLabel": "Poststratified experiment-effect estimates",
     "group_navigation": {
@@ -2410,7 +2410,16 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         document.getElementById("heroTitle").textContent = reportData?.meta?.title || "Impact of Online Gaming on Governor Landry's 2027 Prospects";
         document.getElementById("heroSubtitle").textContent = reportData?.meta?.subtitle || "";
         document.getElementById("metaSite").textContent = (reportData?.meta?.site || "https://www.vantagedatahouse.com").replace(/^https?:\/\//, "");
-        document.getElementById("metaSample").textContent = reportData?.meta?.sample || "N = respondents";
+        const sampleVal = reportData?.meta?.sample;
+        const sampleEl = document.getElementById("metaSample");
+        if (sampleEl) {
+          const isBlank = !sampleVal || /^(N\/A|NA)$/i.test(String(sampleVal).trim());
+          if (isBlank) {
+            sampleEl.style.display = "none";
+          } else {
+            sampleEl.textContent = sampleVal;
+          }
+        }
         document.getElementById("metaDates").textContent = reportData?.meta?.fieldDates || "Field dates";
         document.getElementById("metaMethod").textContent = reportData?.meta?.methodLabel || "Poststratified experiment-effect estimates";
         document.getElementById("methodologyBody").textContent = reportData?.methodology_note || "";
@@ -2658,10 +2667,18 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
               </tbody>
             </table>
           </div>
-          <div class="party-callout">
-            Signing moves Landry's position in the favorable direction across all three party groups. Republican favorability lift (+8.9 pp) exceeds the direct Republican ballot effect (+4.5 pp), so the full Republican upside is understated when looking at ballot movement alone. Acting and delivering outperforms inaction for every party group by a wide margin.
-          </div>
+          <div class="party-callout" id="partyCalloutText"></div>
         `;
+
+        // Build narrative from actual data values
+        const calloutEl = host.querySelector("#partyCalloutText");
+        if (calloutEl) {
+          const rRow = rows[0]; // Republicans
+          const rFav     = Number.isFinite(rRow.fav)     ? fmtPP(rRow.fav)     : "N/A";
+          const rSigning = Number.isFinite(rRow.signing) ? fmtPP(rRow.signing) : "N/A";
+          const rDid     = Number.isFinite(rRow.did)     ? fmtPP(rRow.did)     : "N/A";
+          calloutEl.textContent = `Signing moves Landry's position in the favorable direction across all three party groups. Among Republicans, the favorability lift (${rFav}) is larger than the direct ballot effect (${rSigning}), so the full Republican upside is understated when looking at ballot movement alone. Acting and delivering outperforms inaction for every party group, with the largest advantage among Republicans (${rDid}).`;
+        }
       }
 
       // ── Archetype Card ───────────────────────────────────────────────────────
