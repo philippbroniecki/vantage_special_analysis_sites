@@ -2523,43 +2523,43 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           <p class="si-note">Strongly + somewhat support, from pre-experiment iGaming support survey.</p>
         `;
 
-        // ── Card 3: Signing Effect ────────────────────────────────────────────
+        // ── Card 3: Test ballot – Signing + delivery ──────────────────────────
         const signingRecs = getEffectRecs("ballot", NET_LANDRY_ID, "arm_a_effect");
         const signingOverall = getOverallRec("ballot", NET_LANDRY_ID, "arm_a_effect");
         const card3 = document.createElement("div");
         card3.className = "si-card";
-        card3.innerHTML = `<div class="si-eyebrow">3 of 5 · Signing Effect</div><div class="si-headline">Compact signing: net positive overall</div>`;
-        card3.appendChild(buildOverallStatEl(signingOverall, "Signing effect", "Action / delivery effect", "Net Landry ballot position"));
-        card3.appendChild(buildPartyRows(signingRecs, "Action / delivery effect", "Net Landry ballot position"));
+        card3.innerHTML = `<div class="si-eyebrow">3 of 5 · TEST BALLOT</div><div class="si-headline">Signing + delivery improves Landry's ballot position</div>`;
+        card3.appendChild(buildOverallStatEl(signingOverall, "Signing + delivery", "Action / delivery effect", "Net Landry position"));
+        card3.appendChild(buildPartyRows(signingRecs, "Action / delivery effect", "Net Landry position"));
         const sigNote = document.createElement("p");
         sigNote.className = "si-note";
-        sigNote.textContent = "Net Landry ballot effect if Landry signs the iGaming compact. Positive across all parties; largest among Independents.";
+        sigNote.textContent = "Net Landry position under the Signing + delivery scenario. Positive across all parties; largest among Independents.";
         card3.appendChild(sigNote);
 
-        // ── Card 4: Action vs. Inaction ──────────────────────────────────────
+        // ── Card 4: Test ballot – Signing advantage ───────────────────────────
         const didRecs = getEffectRecs("ballot", NET_LANDRY_ID, "difference_in_differences");
         const didOverall = getOverallRec("ballot", NET_LANDRY_ID, "difference_in_differences");
         const card4 = document.createElement("div");
         card4.className = "si-card";
-        card4.innerHTML = `<div class="si-eyebrow">4 of 5 · Action vs. Inaction</div><div class="si-headline">Doing nothing hurts more than signing</div>`;
-        card4.appendChild(buildOverallStatEl(didOverall, "Action vs. inaction", "Action vs. inaction advantage", "Net Landry ballot position"));
-        card4.appendChild(buildPartyRows(didRecs, "Action vs. inaction advantage", "Net Landry ballot position"));
+        card4.innerHTML = `<div class="si-eyebrow">4 of 5 · TEST BALLOT</div><div class="si-headline">Signing advantage over no signing</div>`;
+        card4.appendChild(buildOverallStatEl(didOverall, "Signing advantage", "Action vs. inaction advantage", "Net Landry position"));
+        card4.appendChild(buildPartyRows(didRecs, "Action vs. inaction advantage", "Net Landry position"));
         const didNote = document.createElement("p");
         didNote.className = "si-note";
-        didNote.textContent = "Action / delivery advantage over inaction / non-delivery, assuming revenue is used as promised.";
+        didNote.textContent = "Signing advantage is Signing + delivery minus No signing / no delivery for Net Landry position.";
         card4.appendChild(didNote);
 
-        // ── Card 5: Favorability ─────────────────────────────────────────────
+        // ── Card 5: Favorability – Signing + delivery ─────────────────────────
         const favRecs = getEffectRecs("favorability", "net_favorability", "arm_a_effect");
         const favOverall = getOverallRec("favorability", "net_favorability", "arm_a_effect");
         const card5 = document.createElement("div");
         card5.className = "si-card";
-        card5.innerHTML = `<div class="si-eyebrow">5 of 5 · Favorability (early warning)</div><div class="si-headline">Favorability moves before vote choice</div>`;
-        card5.appendChild(buildOverallStatEl(favOverall, "Favorability effect", "Action / delivery effect", "Net Landry favorability"));
-        card5.appendChild(buildPartyRows(favRecs, "Action / delivery effect", "Net Landry favorability"));
+        card5.innerHTML = `<div class="si-eyebrow">5 of 5 · FAVORABILITY</div><div class="si-headline">Signing + delivery improves favorability</div>`;
+        card5.appendChild(buildOverallStatEl(favOverall, "Signing + delivery", "Action / delivery effect", "Net favorability"));
+        card5.appendChild(buildPartyRows(favRecs, "Action / delivery effect", "Net favorability"));
         const favNote = document.createElement("p");
         favNote.className = "si-note";
-        favNote.textContent = "Landry net favorability effect of signing. Republican favorability lift exceeds the direct ballot lift, suggesting total Republican upside may be understated from ballot alone.";
+        favNote.textContent = "Net favorability effect under the Signing + delivery scenario. This can capture movement before ballot choice changes.";
         card5.appendChild(favNote);
 
         grid.innerHTML = "";
