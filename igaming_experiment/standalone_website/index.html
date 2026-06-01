@@ -566,24 +566,24 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         <div class="si-grid" id="siGrid"></div>
       </section>
 
-      <section class="card" id="componentPartyBreakdown" data-component-id="party_breakdown" data-universe-scope="analytic">
-        <h2 class="section-title">Effect by Party: Ballot vs. Favorability</h2>
-        <div class="section-mode-label" id="modeLabelPartyBreakdown"></div>
-        <div id="partyBreakdownContent"></div>
-      </section>
-
       <section class="card" id="componentSummary" data-component-id="political_impact_summary">
         <h2 class="section-title">Political Impact Summary</h2>
         <div class="section-mode-label" id="modeLabelSummary"></div>
-        <div class="explainer">For test ballot, the default metric is <strong>Net Landry position</strong>: Landry's change minus the combined change among all non-Landry ballot choices.</div>
+        <div class="controls">
+          <div>
+            <label for="summaryOutcome">Outcome</label>
+            <select id="summaryOutcome"></select>
+          </div>
+        </div>
+        <div class="explainer" id="summaryBallotNote">For test ballot, values show <strong>Net Landry position</strong>: Landry's change minus the combined change among all non-Landry ballot choices.</div>
         <div class="table-wrap">
-          <table class="table">
+          <table class="party-bk-table">
             <thead>
               <tr>
-                <th>Outcome</th>
-                <th>Action / delivery scenario</th>
-                <th>Inaction / no-delivery scenario</th>
-                <th>Action vs. inaction advantage</th>
+                <th>Party</th>
+                <th>Signing + delivery</th>
+                <th>No signing / no delivery</th>
+                <th>Signing advantage</th>
               </tr>
             </thead>
             <tbody id="summaryBody"></tbody>
@@ -721,47 +721,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           </div>
         </div>
         <div class="bar-list" id="geoBars"></div>
-      </section>
-
-      <section class="card" id="componentTechnical" data-component-id="technical_appendix">
-        <h2 class="section-title">Technical Appendix</h2>
-        <div class="section-mode-label" id="modeLabelTechnical"></div>
-        <p class="explainer">Detailed modeled percentage-point effects by outcome, response, geography, demographic group, and estimand.</p>
-        <p class="explainer" id="technicalAppendixNote"></p>
-        <div class="controls n4">
-          <div>
-            <label for="techOutcome">Outcome</label>
-            <select id="techOutcome"></select>
-          </div>
-          <div>
-            <label for="techResponse">Response</label>
-            <select id="techResponse"></select>
-          </div>
-          <div>
-            <label for="techUnitType">Unit type</label>
-            <select id="techUnitType"></select>
-          </div>
-          <div>
-            <label for="techDemographic">Demographic</label>
-            <select id="techDemographic"></select>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Unit / level</th>
-                <th>Action / delivery</th>
-                <th>Inaction / no-delivery</th>
-                <th>Action vs. inaction</th>
-                <th>Estimate SD</th>
-                <th>Low</th>
-                <th>High</th>
-              </tr>
-            </thead>
-            <tbody id="techBody"></tbody>
-          </table>
-        </div>
       </section>
 
       <section class="feedback-callout" id="feedbackCallout" hidden>
@@ -1602,14 +1561,12 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
       function updateModeLabelElements() {
         const ids = [
           "modeLabelStrategicImpact",
-          "modeLabelPartyBreakdown",
           "modeLabelArchetypeCard",
                 "modeLabelSummary",
           "modeLabelMainEffects",
           "modeLabelCalculator",
           "modeLabelSubgroups",
-                "modeLabelGeography",
-          "modeLabelTechnical"
+                "modeLabelGeography"
         ];
         const text = `Response universe: ${getActiveResponseUniverseLabel()}`;
         ids.forEach((id) => {
@@ -1634,14 +1591,12 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         });
         if (!rerender) return;
         renderStrategicImpact();
-        renderPartyBreakdownCard();
         renderArchetypeCard();
             renderSummary();
         initMainEffects();
         initCalculator();
         initSubgroups();
             initGeography();
-        initTechnicalTable();
       }
 
       function initResponseUniverseToggle() {
@@ -1799,28 +1754,100 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         if (note) note.textContent = findings?.note || "";
       }
 
+      function getSummaryResponseId(outcomeId) {
+        if (outcomeId === "ballot") return NET_LANDRY_ID;
+        if (outcomeId === "favorability") return NET_FAVORABILITY_ID;
+        if (outcomeId === "support") return NET_SUPPORT_ID;
+        return NET_LANDRY_ID;
+      }
+
+      function buildPartySummaryTooltipHtml(rec, estimandId, rowLabel) {
+        if (!rec) return `<h4>${escapeHtml(rowLabel)}</h4><div class="tooltip-subtitle">No data available</div>`;
+        const effectValue = rec?.estimate_pp;
+        const entry = {
+          estimate_pp: effectValue,
+          vote_equivalent: rec?.vote_equivalent,
+          vote_equivalent_label: rec?.vote_equivalent_label,
+          denominator_voters: rec?.denominator_voters,
+          denominator_scope: rec?.denominator_scope,
+          denominator_source: rec?.denominator_source,
+          response_universe_id: rec?.response_universe_id
+        };
+        return `
+          <h4>${escapeHtml(rowLabel)}</h4>
+          <div class="tooltip-subtitle">Political Impact Summary</div>
+          ${tooltipLine("Outcome", outcomeLabel(rec?.outcome_id))}
+          ${tooltipLine("Response", rec?.response_label || responseLabel(rec?.outcome_id, rec?.response_id, false))}
+          ${tooltipLine("Metric", estimandLabel(estimandId))}
+          ${tooltipDivider()}
+          ${buildVoteMetadataLines(entry, effectValue)}
+        `;
+      }
+
+      function initSummaryCard() {
+        const sel = document.getElementById("summaryOutcome");
+        if (sel && sel.options.length === 0) {
+          [
+            { id: "ballot",       label: "Test ballot" },
+            { id: "favorability", label: "Favorability" },
+            { id: "support",      label: "iGaming support" }
+          ].forEach((opt) => {
+            const el = document.createElement("option");
+            el.value = opt.id;
+            el.textContent = opt.label;
+            sel.appendChild(el);
+          });
+          sel.value = "ballot";
+          sel.addEventListener("change", renderSummary);
+        }
+        renderSummary();
+      }
+
       function renderSummary() {
+        const sel = document.getElementById("summaryOutcome");
+        const outcomeId = sel ? sel.value : "ballot";
+        const responseId = getSummaryResponseId(outcomeId);
+
+        const note = document.getElementById("summaryBallotNote");
+        if (note) note.hidden = (outcomeId !== "ballot");
+
         const body = document.getElementById("summaryBody");
-        const rows = (Array.isArray(reportData.summary_rows) ? reportData.summary_rows : [])
-          .filter((row) => (row?.response_universe_id || "all_americans") === activeResponseUniverse);
-        body.innerHTML = "";
-        const summaryMetrics = [
-          { estimand: "arm_a_effect", field: "arm_a_effect" },
-          { estimand: "arm_b_effect", field: "arm_b_effect" },
-          { estimand: "difference_in_differences", field: "difference_in_differences" }
+        if (!body) return;
+
+        const rows = [
+          { label: "Overall",      demographic: "overall", level: "overall" },
+          { label: "Republicans",  demographic: "party",   level: "R" },
+          { label: "Independents", demographic: "party",   level: "O" },
+          { label: "Democrats",    demographic: "party",   level: "D" }
         ];
+        const cols = [
+          { estimandId: "arm_a_effect",              label: "Signing + delivery" },
+          { estimandId: "arm_b_effect",              label: "No signing / no delivery" },
+          { estimandId: "difference_in_differences", label: "Signing advantage" }
+        ];
+
+        body.innerHTML = "";
         rows.forEach((row) => {
           const tr = document.createElement("tr");
-          const labelCell = document.createElement("td");
-          labelCell.textContent = row.label || "";
-          tr.appendChild(labelCell);
+          const nameCell = document.createElement("td");
+          nameCell.className = "pname";
+          nameCell.textContent = row.label;
+          tr.appendChild(nameCell);
 
-          summaryMetrics.forEach((metric) => {
+          cols.forEach((col) => {
+            const rec = findRecord({
+              outcome_id:  outcomeId,
+              response_id: responseId,
+              estimand:    col.estimandId,
+              unit_type:   "state",
+              demographic: row.demographic,
+              level:       row.level
+            });
             const td = document.createElement("td");
             const trigger = document.createElement("span");
             trigger.className = "summary-cell-trigger";
-            trigger.innerHTML = fmtDeltaHtml(row[metric.field]);
-            attachSharedTooltip(trigger, () => buildSummaryTooltipHtml(row, metric.estimand));
+            trigger.innerHTML = fmtDeltaHtml(rec ? Number(rec.estimate_pp) : NaN);
+            attachSharedTooltip(trigger, () => buildPartySummaryTooltipHtml(rec, col.estimandId, row.label));
             td.appendChild(trigger);
             tr.appendChild(td);
           });
@@ -2268,91 +2295,6 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         render();
       }
 
-      function initTechnicalTable() {
-        const outcomeSel = document.getElementById("techOutcome");
-        const responseSel = document.getElementById("techResponse");
-        const unitTypeSel = document.getElementById("techUnitType");
-        const demoSel = document.getElementById("techDemographic");
-        const body = document.getElementById("techBody");
-
-        setSelectOptions(outcomeSel, reportData.outcomes || [], "id", "short_label", "ballot");
-
-        const unitTypes = uniqueBy(
-          filterRecords({}).map((r) => ({ id: r.unit_type, label: r.unit_type_label || r.unit_type })),
-          (x) => x.id
-        );
-        setSelectOptions(unitTypeSel, unitTypes, "id", "label", "state");
-
-        const demographics = uniqueBy(
-          filterRecords({}).map((r) => ({ id: r.demographic, label: r.demographic_label || r.demographic })),
-          (x) => x.id
-        );
-        setSelectOptions(demoSel, demographics, "id", "label", "overall");
-
-        function syncResponses() {
-          const preferred = getOutcomeById(outcomeSel.value)?.default_response || NET_LANDRY_ID;
-          setSelectOptions(responseSel, responseOptions(outcomeSel.value, false), "id", "label", preferred);
-        }
-
-        function render() {
-          const rows = filterRecords({
-            outcome_id: outcomeSel.value,
-            response_id: responseSel.value,
-            unit_type: unitTypeSel.value,
-            demographic: demoSel.value
-          });
-
-          const grouped = new Map();
-          rows.forEach((row) => {
-            const key = `${row.unit_id}||${row.level}`;
-            if (!grouped.has(key)) {
-              grouped.set(key, {
-                unit_label: row.unit_label,
-                level_label: row.level_label,
-                arm_a_effect: null,
-                arm_b_effect: null,
-                difference_in_differences: null
-              });
-            }
-            grouped.get(key)[row.estimand] = row;
-          });
-
-          const ordered = Array.from(grouped.values()).sort((a, b) => {
-            const aName = `${a.unit_label || ""} ${a.level_label || ""}`.trim();
-            const bName = `${b.unit_label || ""} ${b.level_label || ""}`.trim();
-            return aName.localeCompare(bName);
-          });
-
-          body.innerHTML = ordered.map((row) => {
-            const unitLevel = row.level_label && row.level_label !== "Overall"
-              ? `${row.unit_label} / ${row.level_label}`
-              : row.unit_label;
-
-            return `
-              <tr>
-                <td>${escapeHtml(unitLevel || "")}</td>
-                <td>${fmtDeltaHtml(row.arm_a_effect?.estimate_pp)}</td>
-                <td>${fmtDeltaHtml(row.arm_b_effect?.estimate_pp)}</td>
-                <td>${fmtDeltaHtml(row.difference_in_differences?.estimate_pp)}</td>
-                <td>${fmtPP(row.difference_in_differences?.estimate_sd_pp)}</td>
-                <td>${fmtPP(row.difference_in_differences?.estimate_low_pp)}</td>
-                <td>${fmtPP(row.difference_in_differences?.estimate_high_pp)}</td>
-              </tr>
-            `;
-          }).join("");
-        }
-
-        outcomeSel.addEventListener("change", () => { syncResponses(); render(); });
-        responseSel.addEventListener("change", render);
-        unitTypeSel.addEventListener("change", render);
-        demoSel.addEventListener("change", render);
-
-        syncResponses();
-        render();
-        const note = document.getElementById("technicalAppendixNote");
-        if (note) note.textContent = reportData?.notes?.uncertainty_note || "";
-      }
-
       function applyFeedbackCard() {
         const cfg = reportData?.template?.feedback_callout || {};
         const enabled = cfg.enabled !== false;
@@ -2383,8 +2325,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           "componentMainEffects",
           "componentCalculator",
           "componentSubgroups",
-              "componentGeography",
-          "componentTechnical"
+              "componentGeography"
         ];
         idsToHide.forEach((id) => {
           const node = document.getElementById(id);
@@ -2629,64 +2570,8 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         grid.appendChild(card5);
       }
 
-      // ── Party Breakdown Card ──────────────────────────────────────────────────
-      function renderPartyBreakdownCard() {
-        const host = document.getElementById("partyBreakdownContent");
-        if (!host) return;
-
-        const parties = [
-          { key: "R", label: "Republicans" },
-          { key: "O", label: "Independents" },
-          { key: "D", label: "Democrats" }
-        ];
-
-        function getVal(outcomeId, responseId, estimand, partyKey) {
-          const rec = findRecord({ outcome_id: outcomeId, response_id: responseId, estimand, unit_type: "state", demographic: "party", level: partyKey });
-          return rec ? Number(rec.estimate_pp) : NaN;
-        }
-
-        const rows = parties.map((p) => ({
-          label: p.label,
-          signing: getVal("ballot", NET_LANDRY_ID, "arm_a_effect", p.key),
-          did:     getVal("ballot", NET_LANDRY_ID, "difference_in_differences", p.key),
-          fav:     getVal("favorability", "net_favorability", "arm_a_effect", p.key)
-        }));
-
-        host.innerHTML = `
-          <div class="table-wrap">
-            <table class="party-bk-table">
-              <thead>
-                <tr>
-                  <th>Party</th>
-                  <th>Signing effect on ballot</th>
-                  <th>Action vs. inaction advantage</th>
-                  <th>Favorability effect (signing)</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${rows.map((r) => `
-                  <tr>
-                    <td class="pname">${escapeHtml(r.label)}</td>
-                    <td>${fmtDeltaHtml(r.signing)}</td>
-                    <td>${fmtDeltaHtml(r.did)}</td>
-                    <td>${fmtDeltaHtml(r.fav)}</td>
-                  </tr>`).join("")}
-              </tbody>
-            </table>
-          </div>
-          <div class="party-callout" id="partyCalloutText"></div>
-        `;
-
-        // Build narrative from actual data values
-        const calloutEl = host.querySelector("#partyCalloutText");
-        if (calloutEl) {
-          const rRow = rows[0]; // Republicans
-          const rFav     = Number.isFinite(rRow.fav)     ? fmtPP(rRow.fav)     : "N/A";
-          const rSigning = Number.isFinite(rRow.signing) ? fmtPP(rRow.signing) : "N/A";
-          const rDid     = Number.isFinite(rRow.did)     ? fmtPP(rRow.did)     : "N/A";
-          calloutEl.textContent = `Signing moves Landry's position in the favorable direction across all three party groups. Among Republicans, the favorability lift (${rFav}) is larger than the direct ballot effect (${rSigning}), so the full Republican upside is understated when looking at ballot movement alone. Acting and delivering outperforms inaction for every party group, with the largest advantage among Republicans (${rDid}).`;
-        }
-      }
+      // ── Party Breakdown Card (removed) ───────────────────────────────────────
+      function renderPartyBreakdownCard() { /* card removed; no-op retained for safety */ }
 
       // ── Archetype Card ───────────────────────────────────────────────────────
       function initArchetypeCard() {
@@ -2807,14 +2692,12 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         }
         initResponseUniverseToggle();
         renderStrategicImpact();
-        renderPartyBreakdownCard();
         initArchetypeCard();
-            renderSummary();
+            initSummaryCard();
         initMainEffects();
         initCalculator();
         initSubgroups();
             initGeography();
-        initTechnicalTable();
         applyFeedbackCard();
 
         const themeToggle = document.getElementById("themeToggle");
