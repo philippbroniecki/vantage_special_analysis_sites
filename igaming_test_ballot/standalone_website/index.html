@@ -2641,10 +2641,10 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   "meta": {
     "source": "Vantage Data House",
     "title": "Test Ballot",
-    "subtitle": "Comparison between current performance and the 2023 baseline",
+    "subtitle": "Test Ballot Baseline Before Experimental Treatment with comparison to the 2023 Gubernatorial election result.",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "Modeled poststratified estimates",
-    "fieldDates": "May 15, 2026",
+    "sample": "",
+    "fieldDates": "May 15-21, 2026",
     "methodLabel": "Poststratified ML estimates",
     "group_navigation": {
       "group_id": "louisiana_igaming_baseline_2026",
@@ -5413,9 +5413,12 @@ function ensureComparisonGeographyState(key) {
   return state;
 }
 
-function syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId) {
+function syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId, allowedTypeIds) {
   const state = ensureComparisonGeographyState(key);
-  const types = getAllGeographyTypes();
+  let types = getAllGeographyTypes();
+  if (Array.isArray(allowedTypeIds) && allowedTypeIds.length > 0) {
+    types = types.filter((type) => allowedTypeIds.includes(type?.id));
+  }
   const typeSel = document.getElementById(typeSelId);
   const unitSel = document.getElementById(unitSelId);
   const unitGroup = document.getElementById(unitGroupId);
@@ -5425,6 +5428,7 @@ function syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId)
   types.forEach((type) => {
     typeSel.appendChild(new Option(type?.selector_label || type?.label || type?.id || '', type?.id || ''));
   });
+  // If the active type was filtered out, reset to the first allowed type.
   const activeType = types.find((type) => type?.id === state.typeId) || types[0] || null;
   if (!activeType) return state;
   state.typeId = activeType.id;
@@ -5443,17 +5447,17 @@ function syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId)
   return state;
 }
 
-function wireComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId, rerender) {
+function wireComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId, rerender, allowedTypeIds) {
   const typeSel = document.getElementById(typeSelId);
   const unitSel = document.getElementById(unitSelId);
-  const state = syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId);
+  const state = syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId, allowedTypeIds);
   if (!typeSel || !unitSel) return state;
   if (!typeSel.dataset.bound) {
     typeSel.dataset.bound = 'true';
     typeSel.addEventListener('change', () => {
       comparisonGeographyState[key].typeId = typeSel.value;
       comparisonGeographyState[key].unitId = null;
-      syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId);
+      syncComparisonGeographyControls(key, typeSelId, unitSelId, unitGroupId, allowedTypeIds);
       rerender();
     });
   }
@@ -6587,7 +6591,8 @@ function renderDemographicExplorer() {
     'demographicGeographyTypeSelect',
     'demographicGeographyUnitSelect',
     'demographicGeographyUnitGroup',
-    renderDemographicExplorer
+    renderDemographicExplorer,
+    ['state', 'county', 'cultural_region']
   );
 
   const comparison = getComparison2023();
