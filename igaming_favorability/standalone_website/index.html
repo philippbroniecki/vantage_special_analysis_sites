@@ -1697,6 +1697,81 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   margin-bottom: .4rem;
 }
 
+.fav-statewide-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+  padding: .8rem 1rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  margin-bottom: 1rem;
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.fav-statewide-heading {
+  flex: 0 0 100%;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: -.15rem;
+  transition: color 280ms ease;
+}
+
+.fav-statewide-stat-item {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: .12rem;
+}
+
+.fav-statewide-stat-label {
+  font-size: .75rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+  transition: color 280ms ease;
+}
+
+.fav-statewide-stat-value {
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  transition: color 280ms ease;
+}
+
+.fav-statewide-stat-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin-top: .2rem;
+  max-width: 100%;
+}
+
+.fav-statewide-breakdown {
+  flex: 2;
+  min-width: 160px;
+  font-size: .77rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  transition: color 280ms ease;
+}
+
+.fav-statewide-breakdown strong {
+  color: var(--ink);
+  transition: color 280ms ease;
+}
+
+@media (max-width: 640px) {
+  .fav-statewide-breakdown {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+}
+
 .map-svg-wrap {
   border: 1px solid var(--line);
   border-radius: var(--r-md);
@@ -2322,10 +2397,10 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <p id="heroSubtitle" hidden></p>
           <div class="hero-meta" aria-label="Survey metadata">
             <span class="meta-pill">
-              <a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a>
+              <a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">www.vantagedatahouse.com</a>
             </span>
-            <span class="meta-pill" id="metaSample">N = 1,009 respondents</span>
-            <span class="meta-pill" id="metaDates">March 28-30, 2026</span>
+            <span class="meta-pill" id="metaSample" style="display:none"></span>
+            <span class="meta-pill" id="metaDates">May 15-21, 2026</span>
             <span class="meta-pill" id="metaMethod">Poststratified ML estimates</span>
           </div>
         </div>
@@ -2443,6 +2518,27 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
           <p class="section-eyebrow">Geography</p>
           <h2 id="h-fav-map">Net Favorability Map</h2>
           <p>Modeled net favorability for the selected figure across Louisiana parishes or cultural regions. Hover a unit for the full opinion breakdown.</p>
+        </div>
+        <div class="fav-statewide-box" id="favStatewideBox">
+          <div class="fav-statewide-heading">Louisiana Statewide:</div>
+          <div class="fav-statewide-stat-item">
+            <span class="fav-statewide-stat-label">Net favorability</span>
+            <span class="fav-statewide-stat-value" id="favStatewideNet">—</span>
+            <div class="fav-statewide-stat-bar" id="favStatewideBarNet" style="background:var(--brand-primary,#4a9baa);"></div>
+          </div>
+          <div class="fav-statewide-stat-item">
+            <span class="fav-statewide-stat-label">Favorable</span>
+            <span class="fav-statewide-stat-value" id="favStatewideFavorable" title="Very favorable + Somewhat favorable">—</span>
+            <div class="fav-statewide-stat-bar" id="favStatewideBarFavorable" style="background:#4a9baa;"></div>
+          </div>
+          <div class="fav-statewide-stat-item">
+            <span class="fav-statewide-stat-label">Unfavorable</span>
+            <span class="fav-statewide-stat-value" id="favStatewideUnfavorable" title="Somewhat unfavorable + Very unfavorable">—</span>
+            <div class="fav-statewide-stat-bar" id="favStatewideBarUnfavorable" style="background:#b24a28;"></div>
+          </div>
+          <div class="fav-statewide-breakdown">
+            <span id="favStatewideBreakdown">—</span>
+          </div>
         </div>
         <div class="fav-map-controls">
           <div class="xt-control-group">
@@ -2666,7 +2762,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
     "title": "Favorability",
     "subtitle": "Favorability Baseline Before Experimental Treatment for Governor Landry and Other Republican Leaders",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "Modeled poststratified estimates",
+    "sample": "",
     "fieldDates": "May 15-21, 2026",
     "methodLabel": "Poststratified ML estimates",
     "group_navigation": {
@@ -7252,6 +7348,45 @@ function favGetMapNetFavorability(options, modeId) {
   );
 }
 
+function favGetStatewideOptions(figureId) {
+  var question = favGetMapQuestion(figureId);
+  if (!question) return null;
+  var stateMap = question.options_by_geography && question.options_by_geography.state;
+  if (stateMap && typeof stateMap === 'object') {
+    var keys = Object.keys(stateMap);
+    var stateKey = keys.find(function(key) { return /state\s*wide/i.test(key); })
+      || keys.find(function(key) { return /louisiana/i.test(key); })
+      || keys[0]
+      || null;
+    var stateOptions = stateKey ? stateMap[stateKey] : null;
+    if (Array.isArray(stateOptions) && stateOptions.length) return stateOptions;
+  }
+  return Array.isArray(question.options) ? question.options : null;
+}
+
+function favGetStatewideMetrics(figureId, modeId) {
+  var options = favGetStatewideOptions(figureId);
+  if (!Array.isArray(options) || !options.length) return null;
+  var veryFavorable = favGetMapOptionValue(options, 'very_favorable', modeId);
+  var somewhatFavorable = favGetMapOptionValue(options, 'somewhat_favorable', modeId);
+  var somewhatUnfavorable = favGetMapOptionValue(options, 'somewhat_unfavorable', modeId);
+  var veryUnfavorable = favGetMapOptionValue(options, 'very_unfavorable', modeId);
+  if (![veryFavorable, somewhatFavorable, somewhatUnfavorable, veryUnfavorable].every(Number.isFinite)) {
+    return null;
+  }
+  var favorable = veryFavorable + somewhatFavorable;
+  var unfavorable = somewhatUnfavorable + veryUnfavorable;
+  return {
+    favorable: favorable,
+    unfavorable: unfavorable,
+    netFavorability: favorable - unfavorable,
+    veryFavorable: veryFavorable,
+    somewhatFavorable: somewhatFavorable,
+    somewhatUnfavorable: somewhatUnfavorable,
+    veryUnfavorable: veryUnfavorable
+  };
+}
+
 function favFormatSignedPp(value) {
   if (!Number.isFinite(value)) return '—';
   var safe = Math.abs(value) < 0.05 ? 0 : value;
@@ -7261,6 +7396,64 @@ function favFormatSignedPp(value) {
 
 function favFormatPct(value) {
   return Number.isFinite(value) ? value.toFixed(1) + '%' : '—';
+}
+
+function favFormatSignedPct(value) {
+  if (!Number.isFinite(value)) return '—';
+  var safe = Math.abs(value) < 0.05 ? 0 : value;
+  var prefix = safe > 0 ? '+' : '';
+  return prefix + safe.toFixed(1) + '%';
+}
+
+function favRenderStatewideSummary() {
+  var netEl = document.getElementById('favStatewideNet');
+  var favorableEl = document.getElementById('favStatewideFavorable');
+  var unfavorableEl = document.getElementById('favStatewideUnfavorable');
+  var breakdownEl = document.getElementById('favStatewideBreakdown');
+  var barNet = document.getElementById('favStatewideBarNet');
+  var barFavorable = document.getElementById('favStatewideBarFavorable');
+  var barUnfavorable = document.getElementById('favStatewideBarUnfavorable');
+  if (!netEl || !favorableEl || !unfavorableEl || !breakdownEl) return;
+
+  var metrics = favGetStatewideMetrics(favMapActiveFigure, activeResponseUniverse);
+  if (!metrics) {
+    netEl.textContent = '—';
+    favorableEl.textContent = '—';
+    unfavorableEl.textContent = '—';
+    breakdownEl.textContent = '—';
+    netEl.style.color = '';
+    favorableEl.title = 'Very favorable + Somewhat favorable';
+    unfavorableEl.title = 'Somewhat unfavorable + Very unfavorable';
+    if (barNet) barNet.style.width = '0%';
+    if (barFavorable) barFavorable.style.width = '0%';
+    if (barUnfavorable) barUnfavorable.style.width = '0%';
+    return;
+  }
+
+  netEl.textContent = favFormatSignedPct(metrics.netFavorability);
+  netEl.style.color = metrics.netFavorability >= 0 ? '#1a6b73' : '#b24a28';
+  favorableEl.textContent = favFormatPct(metrics.favorable);
+  favorableEl.title = 'Very favorable: ' + favFormatPct(metrics.veryFavorable) + ' · Somewhat favorable: ' + favFormatPct(metrics.somewhatFavorable);
+  unfavorableEl.textContent = favFormatPct(metrics.unfavorable);
+  unfavorableEl.title = 'Somewhat unfavorable: ' + favFormatPct(metrics.somewhatUnfavorable) + ' · Very unfavorable: ' + favFormatPct(metrics.veryUnfavorable);
+
+  if (barNet) {
+    barNet.style.width = Math.min(100, Math.abs(metrics.netFavorability)) + '%';
+    barNet.style.background = metrics.netFavorability >= 0 ? '#1a6b73' : '#b24a28';
+  }
+  if (barFavorable) {
+    barFavorable.style.width = Math.min(100, metrics.favorable) + '%';
+    barFavorable.style.background = '#4a9baa';
+  }
+  if (barUnfavorable) {
+    barUnfavorable.style.width = Math.min(100, metrics.unfavorable) + '%';
+    barUnfavorable.style.background = '#b24a28';
+  }
+
+  breakdownEl.innerHTML = '<strong>Very favorable:</strong> ' + favFormatPct(metrics.veryFavorable)
+    + ' &nbsp;·&nbsp; <strong>Somewhat favorable:</strong> ' + favFormatPct(metrics.somewhatFavorable)
+    + ' &nbsp;·&nbsp; <strong>Somewhat unfavorable:</strong> ' + favFormatPct(metrics.somewhatUnfavorable)
+    + ' &nbsp;·&nbsp; <strong>Very unfavorable:</strong> ' + favFormatPct(metrics.veryUnfavorable);
 }
 
 function favNormalizeGeoKey(value) {
@@ -7440,6 +7633,7 @@ function applyFavMapFills(svgEl, geoMode, unitLookup) {
 async function renderFavMap() {
   var container = document.getElementById('favMapContainer');
   if (!container) return;
+  favRenderStatewideSummary();
 
   var geoEntries = favGetMapGeoEntries();
   if (!geoEntries.length) {
