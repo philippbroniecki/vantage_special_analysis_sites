@@ -10,7 +10,7 @@
       "fav_la_political_figures_fleming_pre": "xgboost_2026-05-26_IGaming_2026_05_15.parquet"
     },
     "codebook_file": null,
-    "generated_at_utc": "2026-05-30 21:34:56 UTC",
+    "generated_at_utc": "2026-05-31 23:39:53 UTC",
     "note": "Louisiana geography-aware weighted poststratified crosstabs; shares in percent.",
     "turnout_adjustment": {
       "enabled": true,
@@ -30,6 +30,24 @@
       "state_fips": "22",
       "model_file_name": "model_fits/special_question/IGaming_2026_05_15/fav_la_political_figures_landry_pre/as_of_survey_id=IGaming_2026_05_15/policy=current_only/model=xgboost/xgboost_2026-05-26_IGaming_2026_05_15.rds",
       "ps_frame_manifest_path": "ps_frames/Louisiana.manifest.json"
+    },
+    "registered_voter_correction": {
+      "enabled": true,
+      "applied": true,
+      "temporary": true,
+      "state": "Louisiana",
+      "old_registered_voters": 1533491,
+      "corrected_registered_voters": 2874643,
+      "scale_factor": 1.8746,
+      "target_turnout_rate": 0.41,
+      "source_date": "2026-05-31",
+      "source_note": "Temporary website-side Louisiana registered-voter correction. Keep the 41% turnout-adjusted active weights, but rescale count denominators from 1,533,491 to 2,874,643 for generated voter-count outputs only. Remove this correction once upstream Louisiana weights are regenerated with the corrected registered-voter denominator.",
+      "affected_source_file": "xgboost_2026-05-26_IGaming_2026_05_15.parquet",
+      "applied_stage": "website_json_generation",
+      "applied_order": "after_turnout_adjustment",
+      "applies_to_output_counts": false,
+      "count_outputs_present": false,
+      "count_fields_scaled": []
     },
     "delivery": {
       "scheme": "manifest_plus_shards",
@@ -244,6 +262,7 @@
     "default_unit_id": "state wide",
     "default_unit_by_type": {
       "state": "state wide",
+      "parish": "ACADIA PARISH",
       "cultural_region": "acadiana_lafayette"
     },
     "types": [
@@ -258,6 +277,272 @@
           {
             "id": "state wide",
             "label": "Louisiana"
+          }
+        ]
+      },
+      {
+        "id": "parish",
+        "label": "Parish",
+        "unit_type": "County",
+        "selector_label": "Parish",
+        "supports_unit_select": true,
+        "default_unit_id": "ACADIA PARISH",
+        "units": [
+          {
+            "id": "ACADIA PARISH",
+            "label": "Acadia Parish"
+          },
+          {
+            "id": "ALLEN PARISH",
+            "label": "Allen Parish"
+          },
+          {
+            "id": "ASCENSION PARISH",
+            "label": "Ascension Parish"
+          },
+          {
+            "id": "ASSUMPTION PARISH",
+            "label": "Assumption Parish"
+          },
+          {
+            "id": "AVOYELLES PARISH",
+            "label": "Avoyelles Parish"
+          },
+          {
+            "id": "BEAUREGARD PARISH",
+            "label": "Beauregard Parish"
+          },
+          {
+            "id": "BIENVILLE PARISH",
+            "label": "Bienville Parish"
+          },
+          {
+            "id": "BOSSIER PARISH",
+            "label": "Bossier Parish"
+          },
+          {
+            "id": "CADDO PARISH",
+            "label": "Caddo Parish"
+          },
+          {
+            "id": "CALCASIEU PARISH",
+            "label": "Calcasieu Parish"
+          },
+          {
+            "id": "CALDWELL PARISH",
+            "label": "Caldwell Parish"
+          },
+          {
+            "id": "CAMERON PARISH",
+            "label": "Cameron Parish"
+          },
+          {
+            "id": "CATAHOULA PARISH",
+            "label": "Catahoula Parish"
+          },
+          {
+            "id": "CLAIBORNE PARISH",
+            "label": "Claiborne Parish"
+          },
+          {
+            "id": "CONCORDIA PARISH",
+            "label": "Concordia Parish"
+          },
+          {
+            "id": "DE SOTO PARISH",
+            "label": "De Soto Parish"
+          },
+          {
+            "id": "EAST BATON ROUGE PARISH",
+            "label": "East Baton Rouge Parish"
+          },
+          {
+            "id": "EAST CARROLL PARISH",
+            "label": "East Carroll Parish"
+          },
+          {
+            "id": "EAST FELICIANA PARISH",
+            "label": "East Feliciana Parish"
+          },
+          {
+            "id": "EVANGELINE PARISH",
+            "label": "Evangeline Parish"
+          },
+          {
+            "id": "FRANKLIN PARISH",
+            "label": "Franklin Parish"
+          },
+          {
+            "id": "GRANT PARISH",
+            "label": "Grant Parish"
+          },
+          {
+            "id": "IBERIA PARISH",
+            "label": "Iberia Parish"
+          },
+          {
+            "id": "IBERVILLE PARISH",
+            "label": "Iberville Parish"
+          },
+          {
+            "id": "JACKSON PARISH",
+            "label": "Jackson Parish"
+          },
+          {
+            "id": "JEFFERSON DAVIS PARISH",
+            "label": "Jefferson Davis Parish"
+          },
+          {
+            "id": "JEFFERSON PARISH",
+            "label": "Jefferson Parish"
+          },
+          {
+            "id": "LA SALLE PARISH",
+            "label": "La Salle Parish"
+          },
+          {
+            "id": "LAFAYETTE PARISH",
+            "label": "Lafayette Parish"
+          },
+          {
+            "id": "LAFOURCHE PARISH",
+            "label": "Lafourche Parish"
+          },
+          {
+            "id": "LINCOLN PARISH",
+            "label": "Lincoln Parish"
+          },
+          {
+            "id": "LIVINGSTON PARISH",
+            "label": "Livingston Parish"
+          },
+          {
+            "id": "MADISON PARISH",
+            "label": "Madison Parish"
+          },
+          {
+            "id": "MOREHOUSE PARISH",
+            "label": "Morehouse Parish"
+          },
+          {
+            "id": "NATCHITOCHES PARISH",
+            "label": "Natchitoches Parish"
+          },
+          {
+            "id": "ORLEANS PARISH",
+            "label": "Orleans Parish"
+          },
+          {
+            "id": "OUACHITA PARISH",
+            "label": "Ouachita Parish"
+          },
+          {
+            "id": "PLAQUEMINES PARISH",
+            "label": "Plaquemines Parish"
+          },
+          {
+            "id": "POINTE COUPEE PARISH",
+            "label": "Pointe Coupee Parish"
+          },
+          {
+            "id": "RAPIDES PARISH",
+            "label": "Rapides Parish"
+          },
+          {
+            "id": "RED RIVER PARISH",
+            "label": "Red River Parish"
+          },
+          {
+            "id": "RICHLAND PARISH",
+            "label": "Richland Parish"
+          },
+          {
+            "id": "SABINE PARISH",
+            "label": "Sabine Parish"
+          },
+          {
+            "id": "ST. BERNARD PARISH",
+            "label": "St. Bernard Parish"
+          },
+          {
+            "id": "ST. CHARLES PARISH",
+            "label": "St. Charles Parish"
+          },
+          {
+            "id": "ST. HELENA PARISH",
+            "label": "St. Helena Parish"
+          },
+          {
+            "id": "ST. JAMES PARISH",
+            "label": "St. James Parish"
+          },
+          {
+            "id": "ST. JOHN THE BAPTIST PARISH",
+            "label": "St. John the Baptist Parish"
+          },
+          {
+            "id": "ST. LANDRY PARISH",
+            "label": "St. Landry Parish"
+          },
+          {
+            "id": "ST. MARTIN PARISH",
+            "label": "St. Martin Parish"
+          },
+          {
+            "id": "ST. MARY PARISH",
+            "label": "St. Mary Parish"
+          },
+          {
+            "id": "ST. TAMMANY PARISH",
+            "label": "St. Tammany Parish"
+          },
+          {
+            "id": "TANGIPAHOA PARISH",
+            "label": "Tangipahoa Parish"
+          },
+          {
+            "id": "TENSAS PARISH",
+            "label": "Tensas Parish"
+          },
+          {
+            "id": "TERREBONNE PARISH",
+            "label": "Terrebonne Parish"
+          },
+          {
+            "id": "UNION PARISH",
+            "label": "Union Parish"
+          },
+          {
+            "id": "VERMILION PARISH",
+            "label": "Vermilion Parish"
+          },
+          {
+            "id": "VERNON PARISH",
+            "label": "Vernon Parish"
+          },
+          {
+            "id": "WASHINGTON PARISH",
+            "label": "Washington Parish"
+          },
+          {
+            "id": "WEBSTER PARISH",
+            "label": "Webster Parish"
+          },
+          {
+            "id": "WEST BATON ROUGE PARISH",
+            "label": "West Baton Rouge Parish"
+          },
+          {
+            "id": "WEST CARROLL PARISH",
+            "label": "West Carroll Parish"
+          },
+          {
+            "id": "WEST FELICIANA PARISH",
+            "label": "West Feliciana Parish"
+          },
+          {
+            "id": "WINN PARISH",
+            "label": "Winn Parish"
           }
         ]
       },
@@ -347,6 +632,72 @@
       "state": {
         "state wide": "crosstabs/fav_la_political_figures_landry_pre/state/state_wide.json"
       },
+      "parish": {
+        "ACADIA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/richland_parish.json",
+        "SABINE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/union_parish.json",
+        "VERMILION PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/fav_la_political_figures_landry_pre/parish/winn_parish.json"
+      },
       "cultural_region": {
         "acadiana_lafayette": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/acadiana_lafayette.json",
         "arklamiss_delta": "crosstabs/fav_la_political_figures_landry_pre/cultural_region/arklamiss_delta.json",
@@ -361,6 +712,72 @@
     "fav_la_political_figures_trump_pre": {
       "state": {
         "state wide": "crosstabs/fav_la_political_figures_trump_pre/state/state_wide.json"
+      },
+      "parish": {
+        "ACADIA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/richland_parish.json",
+        "SABINE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/union_parish.json",
+        "VERMILION PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/fav_la_political_figures_trump_pre/parish/winn_parish.json"
       },
       "cultural_region": {
         "acadiana_lafayette": "crosstabs/fav_la_political_figures_trump_pre/cultural_region/acadiana_lafayette.json",
@@ -377,6 +794,72 @@
       "state": {
         "state wide": "crosstabs/fav_la_political_figures_cassidy_pre/state/state_wide.json"
       },
+      "parish": {
+        "ACADIA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/richland_parish.json",
+        "SABINE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/union_parish.json",
+        "VERMILION PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/fav_la_political_figures_cassidy_pre/parish/winn_parish.json"
+      },
       "cultural_region": {
         "acadiana_lafayette": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/acadiana_lafayette.json",
         "arklamiss_delta": "crosstabs/fav_la_political_figures_cassidy_pre/cultural_region/arklamiss_delta.json",
@@ -391,6 +874,72 @@
     "fav_la_political_figures_kennedy_pre": {
       "state": {
         "state wide": "crosstabs/fav_la_political_figures_kennedy_pre/state/state_wide.json"
+      },
+      "parish": {
+        "ACADIA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/richland_parish.json",
+        "SABINE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/union_parish.json",
+        "VERMILION PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/fav_la_political_figures_kennedy_pre/parish/winn_parish.json"
       },
       "cultural_region": {
         "acadiana_lafayette": "crosstabs/fav_la_political_figures_kennedy_pre/cultural_region/acadiana_lafayette.json",
@@ -407,6 +956,72 @@
       "state": {
         "state wide": "crosstabs/fav_la_political_figures_letlow_pre/state/state_wide.json"
       },
+      "parish": {
+        "ACADIA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/richland_parish.json",
+        "SABINE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/union_parish.json",
+        "VERMILION PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/fav_la_political_figures_letlow_pre/parish/winn_parish.json"
+      },
       "cultural_region": {
         "acadiana_lafayette": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/acadiana_lafayette.json",
         "arklamiss_delta": "crosstabs/fav_la_political_figures_letlow_pre/cultural_region/arklamiss_delta.json",
@@ -422,6 +1037,72 @@
       "state": {
         "state wide": "crosstabs/fav_la_political_figures_la_legislature_pre/state/state_wide.json"
       },
+      "parish": {
+        "ACADIA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/richland_parish.json",
+        "SABINE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/union_parish.json",
+        "VERMILION PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/fav_la_political_figures_la_legislature_pre/parish/winn_parish.json"
+      },
       "cultural_region": {
         "acadiana_lafayette": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/acadiana_lafayette.json",
         "arklamiss_delta": "crosstabs/fav_la_political_figures_la_legislature_pre/cultural_region/arklamiss_delta.json",
@@ -436,6 +1117,72 @@
     "fav_la_political_figures_fleming_pre": {
       "state": {
         "state wide": "crosstabs/fav_la_political_figures_fleming_pre/state/state_wide.json"
+      },
+      "parish": {
+        "ACADIA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/acadia_parish.json",
+        "ALLEN PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/allen_parish.json",
+        "ASCENSION PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/ascension_parish.json",
+        "ASSUMPTION PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/assumption_parish.json",
+        "AVOYELLES PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/avoyelles_parish.json",
+        "BEAUREGARD PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/beauregard_parish.json",
+        "BIENVILLE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/bienville_parish.json",
+        "BOSSIER PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/bossier_parish.json",
+        "CADDO PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/caddo_parish.json",
+        "CALCASIEU PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/calcasieu_parish.json",
+        "CALDWELL PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/caldwell_parish.json",
+        "CAMERON PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/cameron_parish.json",
+        "CATAHOULA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/catahoula_parish.json",
+        "CLAIBORNE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/claiborne_parish.json",
+        "CONCORDIA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/concordia_parish.json",
+        "DE SOTO PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/de_soto_parish.json",
+        "EAST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/east_baton_rouge_parish.json",
+        "EAST CARROLL PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/east_carroll_parish.json",
+        "EAST FELICIANA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/east_feliciana_parish.json",
+        "EVANGELINE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/evangeline_parish.json",
+        "FRANKLIN PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/franklin_parish.json",
+        "GRANT PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/grant_parish.json",
+        "IBERIA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/iberia_parish.json",
+        "IBERVILLE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/iberville_parish.json",
+        "JACKSON PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/jackson_parish.json",
+        "JEFFERSON DAVIS PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/jefferson_davis_parish.json",
+        "JEFFERSON PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/jefferson_parish.json",
+        "LA SALLE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/la_salle_parish.json",
+        "LAFAYETTE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/lafayette_parish.json",
+        "LAFOURCHE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/lafourche_parish.json",
+        "LINCOLN PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/lincoln_parish.json",
+        "LIVINGSTON PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/livingston_parish.json",
+        "MADISON PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/madison_parish.json",
+        "MOREHOUSE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/morehouse_parish.json",
+        "NATCHITOCHES PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/natchitoches_parish.json",
+        "ORLEANS PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/orleans_parish.json",
+        "OUACHITA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/ouachita_parish.json",
+        "PLAQUEMINES PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/plaquemines_parish.json",
+        "POINTE COUPEE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/pointe_coupee_parish.json",
+        "RAPIDES PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/rapides_parish.json",
+        "RED RIVER PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/red_river_parish.json",
+        "RICHLAND PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/richland_parish.json",
+        "SABINE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/sabine_parish.json",
+        "ST. BERNARD PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._bernard_parish.json",
+        "ST. CHARLES PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._charles_parish.json",
+        "ST. HELENA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._helena_parish.json",
+        "ST. JAMES PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._james_parish.json",
+        "ST. JOHN THE BAPTIST PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._john_the_baptist_parish.json",
+        "ST. LANDRY PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._landry_parish.json",
+        "ST. MARTIN PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._martin_parish.json",
+        "ST. MARY PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._mary_parish.json",
+        "ST. TAMMANY PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/st._tammany_parish.json",
+        "TANGIPAHOA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/tangipahoa_parish.json",
+        "TENSAS PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/tensas_parish.json",
+        "TERREBONNE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/terrebonne_parish.json",
+        "UNION PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/union_parish.json",
+        "VERMILION PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/vermilion_parish.json",
+        "VERNON PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/vernon_parish.json",
+        "WASHINGTON PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/washington_parish.json",
+        "WEBSTER PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/webster_parish.json",
+        "WEST BATON ROUGE PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/west_baton_rouge_parish.json",
+        "WEST CARROLL PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/west_carroll_parish.json",
+        "WEST FELICIANA PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/west_feliciana_parish.json",
+        "WINN PARISH": "crosstabs/fav_la_political_figures_fleming_pre/parish/winn_parish.json"
       },
       "cultural_region": {
         "acadiana_lafayette": "crosstabs/fav_la_political_figures_fleming_pre/cultural_region/acadiana_lafayette.json",
