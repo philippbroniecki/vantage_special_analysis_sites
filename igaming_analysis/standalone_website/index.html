@@ -1,0 +1,2178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Louisiana iGaming Public Opinion Analysis | Vantage Data House</title>
+    <link rel="canonical" href="https://analysis.igaming.vantage.philippbroniecki.com/" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231a6b73'/%3E%3C/svg%3E" />
+    <script>
+      (function bootstrapVDHTheme() {
+        const THEME_PARAM_KEY = 'theme';
+        const THEME_COOKIE_KEY = 'vdh_theme';
+        const THEME_STORAGE_KEY = 'vdh_theme';
+        const LEGACY_STORAGE_KEYS = [
+          'vantage-theme',
+          'vdh_iran2_theme',
+          'vdh_ice2_theme',
+          'vdh_trump_theme',
+          'vdh_louisiana_us_senate_test_ballot_theme',
+          'vdh_louisiana_us_senate_favorability_theme',
+          'vdh_louisiana_us_senate_test_ballot_re_ask_theme',
+          'vdh_louisiana_us_senate_state_perception_theme',
+          'vdh_louisiana_us_senate_top_priority_issue_trust_theme',
+          'vdh_louisiana_us_senate_ideology_theme',
+          'vdh_louisiana_us_senate_voter_flows_theme'
+        ];
+
+        function normalizeTheme(value) {
+          return value === 'dark' || value === 'light' ? value : null;
+        }
+
+        function readThemeFromQuery() {
+          try {
+            const params = new URLSearchParams(window.location.search || '');
+            return normalizeTheme(params.get(THEME_PARAM_KEY));
+          } catch (err) {
+            return null;
+          }
+        }
+
+        function readThemeFromCookie() {
+          try {
+            const entries = String(document.cookie || '').split(';');
+            for (const entry of entries) {
+              const trimmed = entry.trim();
+              if (!trimmed) continue;
+              const idx = trimmed.indexOf('=');
+              if (idx <= 0) continue;
+              const key = trimmed.slice(0, idx).trim();
+              if (key !== THEME_COOKIE_KEY) continue;
+              const value = decodeURIComponent(trimmed.slice(idx + 1));
+              const normalized = normalizeTheme(value);
+              if (normalized) return normalized;
+            }
+          } catch (err) {}
+          return null;
+        }
+
+        function readThemeFromStorage() {
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try {
+              const normalized = normalizeTheme(window.localStorage.getItem(key));
+              if (normalized) return normalized;
+            } catch (err) {}
+          }
+          return null;
+        }
+
+        function readThemeFromSystem() {
+          try {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              return 'dark';
+            }
+            if (window.matchMedia) return 'light';
+          } catch (err) {}
+          return null;
+        }
+
+        function resolveInitialTheme() {
+          const fromQuery = readThemeFromQuery();
+          if (fromQuery) return { theme: fromQuery, source: 'param' };
+
+          const fromCookie = readThemeFromCookie();
+          if (fromCookie) return { theme: fromCookie, source: 'cookie' };
+
+          const fromStorage = readThemeFromStorage();
+          if (fromStorage) return { theme: fromStorage, source: 'storage' };
+
+          const fromSystem = readThemeFromSystem();
+          if (fromSystem) return { theme: fromSystem, source: 'system' };
+
+          return { theme: 'light', source: 'fallback' };
+        }
+
+        function isPhilippDomain(hostname) {
+          const host = String(hostname || '').toLowerCase();
+          return host === 'philippbroniecki.com' || host.endsWith('.philippbroniecki.com');
+        }
+
+        function getSharedCookieDomain() {
+          return isPhilippDomain(window.location.hostname) ? '.philippbroniecki.com' : '';
+        }
+
+        function persistTheme(theme) {
+          const normalized = normalizeTheme(theme);
+          if (!normalized) return;
+
+          const securePart = window.location.protocol === 'https:' ? '; Secure' : '';
+          const baseCookie = `${THEME_COOKIE_KEY}=${encodeURIComponent(normalized)}; Path=/; Max-Age=31536000; SameSite=Lax${securePart}`;
+          const sharedDomain = getSharedCookieDomain();
+
+          try {
+            if (sharedDomain) {
+              document.cookie = `${baseCookie}; Domain=${sharedDomain}`;
+            }
+            document.cookie = baseCookie;
+          } catch (err) {}
+
+          const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
+          for (const key of keys) {
+            try { window.localStorage.setItem(key, normalized); } catch (err) {}
+          }
+        }
+
+        function shouldPropagateThemeToURL(url, rawHref) {
+          const raw = String(rawHref || '').trim();
+          if (!raw || raw.startsWith('#') || /^mailto:/i.test(raw) || /^tel:/i.test(raw) || /^javascript:/i.test(raw)) {
+            return false;
+          }
+
+          const protocol = String((url && url.protocol) || '').toLowerCase();
+          if (protocol === 'file:') return true;
+          if (protocol !== 'http:' && protocol !== 'https:') return false;
+
+          const host = String((url && url.hostname) || '').toLowerCase();
+          if (host === 'localhost' || host === '127.0.0.1' || host === '[::1]') return true;
+          return isPhilippDomain(host);
+        }
+
+        function withThemeParam(rawHref, theme) {
+          const normalizedTheme = normalizeTheme(theme);
+          if (!normalizedTheme) return rawHref;
+
+          try {
+            const url = new URL(rawHref, window.location.href);
+            if (!shouldPropagateThemeToURL(url, rawHref)) return rawHref;
+            url.searchParams.set(THEME_PARAM_KEY, normalizedTheme);
+            return url.toString();
+          } catch (err) {
+            return rawHref;
+          }
+        }
+
+        function getActiveTheme() {
+          return normalizeTheme(document.documentElement.getAttribute('data-theme')) || 'light';
+        }
+
+        window.VDHTheme = {
+          normalizeTheme,
+          resolveInitialTheme,
+          persistTheme,
+          withThemeParam,
+          getActiveTheme,
+          shouldPropagateThemeToURL,
+          themeParamKey: THEME_PARAM_KEY
+        };
+
+        const initialTheme = resolveInitialTheme();
+        document.documentElement.setAttribute('data-theme', initialTheme.theme);
+        window.__VDH_THEME_BOOT__ = initialTheme;
+      })();
+    </script>
+    <style>
+:root {
+  --bg: #edf2f8;
+  --bg-deep: #d6e3f0;
+  --surface: #ffffff;
+  --surface-alt: #f3f7fc;
+  --surface-hi: #fafcff;
+  --ink: #0d1d2e;
+  --ink-soft: #364d63;
+  --muted: #5c7289;
+  --muted-faint: #8aa2b5;
+  --line: #ccd8e5;
+  --line-soft: #dce7f0;
+  --accent: #1a6b73;
+  --accent-hover: #145d64;
+  --accent-tint: rgba(26, 107, 115, 0.09);
+  --accent-tint2: rgba(26, 107, 115, 0.16);
+  --warm: #c46525;
+  --warm-tint: rgba(196, 101, 37, 0.1);
+  --cool: #1f5f89;
+  --cool-tint: rgba(31, 95, 137, 0.09);
+  --shadow-card: 0 1px 2px rgba(10, 25, 55, 0.04), 0 4px 14px rgba(10, 25, 55, 0.055), 0 0 0 1px rgba(10, 25, 55, 0.028);
+  --shadow-raise: 0 2px 5px rgba(10, 25, 55, 0.06), 0 10px 28px rgba(10, 25, 55, 0.09), 0 0 0 1px rgba(10, 25, 55, 0.04);
+  --hero-from: #0c2240;
+  --hero-to: #1c4a80;
+  --topbar-bg: rgba(237, 242, 248, 0.86);
+  --pos: #2e7d32;
+  --neg: #c62828;
+  --rep: #e55030;
+  --dem: #1976d2;
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-full: 9999px;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0c1520;
+  --bg-deep: #07101a;
+  --surface: #111c2b;
+  --surface-alt: #172338;
+  --surface-hi: #1c2c42;
+  --ink: #e3ecf8;
+  --ink-soft: #b0cbdf;
+  --muted: #728ea8;
+  --muted-faint: #4d6880;
+  --line: #1e3049;
+  --line-soft: #172640;
+  --accent: #48b4be;
+  --accent-hover: #60c6d0;
+  --accent-tint: rgba(72, 180, 190, 0.1);
+  --accent-tint2: rgba(72, 180, 190, 0.18);
+  --warm: #e09058;
+  --warm-tint: rgba(224, 144, 88, 0.12);
+  --cool: #5aaad5;
+  --cool-tint: rgba(90, 170, 213, 0.12);
+  --topbar-bg: rgba(11, 20, 31, 0.9);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.04);
+  --shadow-raise: 0 2px 5px rgba(0,0,0,0.4), 0 10px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+  --hero-from: #162e52;
+  --hero-to: #0c1f3a;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: light dark; overflow-x: hidden; }
+body { overflow-x: hidden; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 14% 7%, rgba(26, 107, 115, 0.14) 0%, transparent 46%),
+    radial-gradient(ellipse at 86% 0%, rgba(196, 101, 37, 0.1) 0%, transparent 38%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+.topbar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 1px solid var(--line-soft);
+  transition: background-color 280ms ease, border-color 280ms ease;
+}
+
+.topbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.6rem;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-tint2);
+}
+
+.brand-text {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.88rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-card);
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 180ms ease, transform 150ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-raise);
+}
+
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.4rem 1.6rem 4rem;
+  display: grid;
+  gap: 1.35rem;
+}
+
+.data-banner {
+  display: none;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
+  padding: 0.72rem 0.84rem;
+  font-size: 0.78rem;
+  background: var(--warm-tint);
+  color: var(--ink-soft);
+}
+
+.data-banner.show { display: block; }
+
+.back-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+}
+
+.sibling-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.back-btn,
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 150ms ease;
+}
+
+.back-btn {
+  gap: 0.35rem;
+  background: var(--surface);
+}
+
+.back-btn::before {
+  content: '\2190';
+  line-height: 1;
+}
+
+.site-nav-link { background: var(--surface-alt); }
+
+.back-btn:hover,
+.site-nav-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem 1.7rem;
+  transition: background-color 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 2.1rem 2.2rem 1.85rem;
+  background: linear-gradient(148deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  border-color: transparent;
+  color: #edf5ff;
+}
+
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: var(--r-full);
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(72, 181, 192, 0.18) 0%, transparent 70%);
+  top: -120px;
+  right: -90px;
+}
+
+.hero::after {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(196, 101, 37, 0.14) 0%, transparent 70%);
+  bottom: -48px;
+  left: 33%;
+}
+
+.hero-inner { position: relative; z-index: 1; }
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(155, 200, 220, 0.95);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow-pip {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--r-full);
+  background: #48b4be;
+}
+
+.hero h1 {
+  font-size: clamp(1.55rem, 3.1vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.17;
+  color: #f4faff;
+  letter-spacing: -0.025em;
+  max-width: 760px;
+}
+
+.hero-subtitle {
+  margin-top: 0.58rem;
+  margin-bottom: 0;
+  color: rgba(215, 235, 255, 0.88);
+  font-size: 0.95rem;
+  max-width: 780px;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.88rem;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.27rem 0.7rem;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: var(--r-full);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(215, 235, 255, 0.9);
+  white-space: nowrap;
+}
+
+.meta-pill a { color: inherit; text-decoration: none; }
+
+.section-head { margin-bottom: 1.1rem; }
+.section-eyebrow {
+  font-size: 0.63rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+  margin-bottom: 0.28rem;
+}
+
+.section-head h2 {
+  font-size: 1.08rem;
+  font-weight: 760;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.18rem;
+}
+
+.section-head p,
+.section-intro {
+  font-size: 0.81rem;
+  color: var(--muted);
+}
+
+.methodology-details {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-alt);
+  overflow: hidden;
+}
+
+.methodology-details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.95rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 760;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.methodology-details summary::-webkit-details-marker { display: none; }
+.methodology-details summary::after {
+  content: '+';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.methodology-details[open] summary::after { content: '\2212'; }
+.methodology-details-body {
+  padding: 0 1rem 1rem;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+.callout {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
+  padding: 1rem 1.05rem;
+}
+
+.callout strong { color: var(--ink); }
+
+.callout-grid,
+.dashboard-grid,
+.split-grid,
+.dual-grid,
+.quote-grid,
+.map-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.dashboard-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.callout-grid,
+.dual-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.split-grid,
+.map-grid {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+
+.quote-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.stat-card,
+.subcard,
+.quote-card,
+.map-card,
+.table-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-alt);
+  padding: 1rem 1.05rem;
+}
+
+.stat-card-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-card-value {
+  margin-top: 0.38rem;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.stat-card-value.positive { color: var(--pos); }
+.stat-card-value.negative { color: var(--neg); }
+
+.stat-card-detail {
+  margin-top: 0.38rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.subcard h3,
+.map-card h3,
+.table-card h3 {
+  font-size: 0.92rem;
+  font-weight: 760;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.subcard p,
+.map-card p,
+.table-card p {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.table-shell {
+  overflow-x: auto;
+  margin-top: 0.8rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  min-width: 540px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.62rem 0.65rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+th {
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+td strong { color: var(--ink); }
+
+.numeric { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.positive { color: var(--pos); }
+.negative { color: var(--neg); }
+
+.stacked-bar {
+  display: flex;
+  width: 100%;
+  min-height: 18px;
+  border-radius: var(--r-full);
+  overflow: hidden;
+  background: var(--surface-hi);
+  border: 1px solid var(--line);
+}
+
+.stacked-segment {
+  display: block;
+  height: 100%;
+  min-width: 0;
+}
+
+.legend,
+.mini-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.85rem;
+  margin-top: 0.8rem;
+}
+
+.legend-item,
+.mini-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+.legend-swatch,
+.mini-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--r-full);
+  flex: 0 0 auto;
+}
+
+.bar-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.bar-row {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.bar-row-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.bar-label {
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+
+.bar-value {
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.bar-track {
+  position: relative;
+  height: 11px;
+  border-radius: var(--r-full);
+  background: rgba(135, 162, 188, 0.22);
+  overflow: hidden;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  align-items: end;
+}
+
+.compare-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-alt);
+  padding: 0.8rem 0.9rem;
+}
+
+.compare-card h4 {
+  font-size: 0.83rem;
+  color: var(--ink);
+  margin-bottom: 0.45rem;
+}
+
+.candidate-bars {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.candidate-bar {
+  display: grid;
+  gap: 0.28rem;
+}
+
+.candidate-bar-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.candidate-track {
+  height: 12px;
+  border-radius: var(--r-full);
+  background: rgba(135, 162, 188, 0.18);
+  overflow: hidden;
+}
+
+.candidate-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.tone-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--r-full);
+  padding: 0.22rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+}
+
+.tone-chip.positive {
+  border-color: rgba(46, 125, 50, 0.2);
+  background: rgba(46, 125, 50, 0.08);
+  color: var(--pos);
+}
+
+.tone-chip.negative {
+  border-color: rgba(198, 40, 40, 0.2);
+  background: rgba(198, 40, 40, 0.08);
+  color: var(--neg);
+}
+
+.narrative-blocks {
+  display: grid;
+  gap: 0.78rem;
+  margin-top: 0.95rem;
+}
+
+.narrative-blocks p,
+.narrative-blocks li,
+.narrative-blocks blockquote,
+.narrative-blocks td,
+.narrative-blocks th {
+  overflow-wrap: anywhere;
+}
+
+.narrative-blocks p {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+.narrative-blocks ul,
+.narrative-blocks ol {
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.narrative-blocks blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 0.9rem;
+  color: var(--ink);
+  font-size: 0.84rem;
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.section-divider::before {
+  content: '';
+  width: 22px;
+  height: 2px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+}
+
+.section-divider span {
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.diverging-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.diverging-row {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.diverging-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.diverging-track {
+  position: relative;
+  height: 18px;
+  border-radius: var(--r-full);
+  background: linear-gradient(90deg, rgba(198, 40, 40, 0.1) 0%, rgba(198, 40, 40, 0.06) 49.9%, rgba(46, 125, 50, 0.06) 50.1%, rgba(46, 125, 50, 0.1) 100%);
+  overflow: hidden;
+}
+
+.diverging-midline {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 1px;
+  background: var(--line);
+}
+
+.diverging-fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.diverging-fill.positive {
+  left: 50%;
+  background: var(--pos);
+}
+
+.diverging-fill.negative {
+  right: 50%;
+  background: var(--neg);
+}
+
+.quote-card h4 {
+  font-size: 0.83rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.quote-card p {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.quote-support {
+  margin-bottom: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--accent);
+  font-weight: 760;
+}
+
+.map-shell {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: linear-gradient(180deg, rgba(255,255,255,0.28), transparent);
+  overflow: hidden;
+}
+
+.map-svg-host,
+.map-outline-host {
+  position: absolute;
+  inset: 0;
+}
+
+.map-outline-host {
+  pointer-events: none;
+}
+
+.map-svg-host svg,
+.map-outline-host svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.map-note {
+  margin-top: 0.6rem;
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.feedback-callout {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--accent-tint2);
+  padding: 1.7rem 1.8rem;
+}
+
+.feedback-callout h2 {
+  margin-bottom: 0.45rem;
+  font-size: 1.02rem;
+  color: var(--ink);
+}
+
+.feedback-callout p {
+  margin-bottom: 0.9rem;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+}
+
+.feedback-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-full);
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #f5fbff;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 760;
+  padding: 0.46rem 0.9rem;
+  transition: background 0.15s ease;
+}
+
+.feedback-cta:hover { background: var(--accent-hover); }
+
+@media (max-width: 900px) {
+  .split-grid,
+  .map-grid,
+  .compare-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .layout {
+    padding: 1rem 0.9rem 3rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card,
+  .hero {
+    padding: 1.15rem 1.05rem;
+  }
+
+  .topbar {
+    padding: 0 0.9rem;
+  }
+
+  table {
+    min-width: 460px;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <div class="topbar-wrap">
+      <nav class="topbar" aria-label="Site navigation">
+        <a class="brand" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">VDH Policy Lab</span>
+        </a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
+          <span class="toggle-icon" id="toggleIcon" aria-hidden="true">&#9788;</span>
+          <span id="toggleLabel">Light</span>
+        </button>
+      </nav>
+    </div>
+
+    <main class="layout">
+      <div id="dataBanner" class="data-banner"></div>
+
+      <div class="back-nav" id="siteNavRow">
+        <a class="back-btn" id="backToPortalLink" href="https://igaming.vantage.philippbroniecki.com/" data-skip-theme-param="true">Portal</a>
+        <div class="sibling-nav" id="siblingNavLinks" hidden></div>
+      </div>
+
+      <section class="hero card reveal" id="componentHero" data-component-id="hero_title">
+        <div class="hero-inner">
+          <p class="eyebrow"><span class="eyebrow-pip" aria-hidden="true"></span>Vantage Data House</p>
+          <h1 id="heroTitle">Louisiana iGaming Public Opinion Analysis</h1>
+          <p class="hero-subtitle" id="heroSubtitle">A static synthesis of the Louisiana iGaming baseline, attitudes, experiment, and geography artifacts.</p>
+          <div class="hero-meta" aria-label="Survey metadata">
+            <span class="meta-pill"><a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a></span>
+            <span class="meta-pill" id="metaSample">N = 1,708 respondents</span>
+            <span class="meta-pill" id="metaDates">May 15-21, 2026</span>
+            <span class="meta-pill" id="metaMethod">Static analysis report from existing website artifacts</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="componentMethodology" data-component-id="methodology_note">
+        <details class="methodology-details">
+          <summary id="methodologySummary">Methodology Note</summary>
+          <p class="methodology-details-body" id="methodologyBody"></p>
+        </details>
+      </section>
+
+      <section class="card" id="componentExecutive">
+        <div class="section-head">
+          <p class="section-eyebrow">Executive summary</p>
+          <h2>Decision context</h2>
+          <p>The analysis page keeps the report narrative but anchors each visual to the current static iGaming artifacts already in this repo.</p>
+        </div>
+        <div class="callout" id="executiveSummaryIntro"></div>
+        <div class="narrative-blocks" id="headlineFindings"></div>
+        <div class="callout" id="centralDecision" style="margin-top:0.95rem;"></div>
+      </section>
+
+      <section class="card" id="componentDecisionMatrix" data-component-id="decision_matrix">
+        <div class="section-head">
+          <p class="section-eyebrow">Hero visual</p>
+          <h2>Decision matrix</h2>
+          <p>Baseline risk is rendered from the report template; action and inaction effects are pulled from the current experiment artifact.</p>
+        </div>
+        <div class="table-shell" id="decisionMatrixTable"></div>
+      </section>
+
+      <section class="card" id="componentDashboard" data-component-id="key_indicators_dashboard">
+        <div class="section-head">
+          <p class="section-eyebrow">Key indicators</p>
+          <h2>Dashboard</h2>
+          <p>Cards use the existing site payloads directly, with the source universe called out in the supporting copy.</p>
+        </div>
+        <div class="dashboard-grid" id="dashboardGrid"></div>
+      </section>
+
+      <section class="card" id="componentPartI" data-component-id="baseline_problem">
+        <div class="section-divider"><span>Part I: The baseline problem</span></div>
+        <div class="section-head">
+          <h2>2023 result vs. the current ballot</h2>
+          <p>The current modeled ballot remains the core baseline problem. This card uses the with-view ballot artifact alongside the report template's 2023-gap framing.</p>
+        </div>
+        <div class="compare-row" id="ballotComparison"></div>
+        <div class="dual-grid" style="margin-top:0.95rem;">
+          <div class="subcard">
+            <h3>Gap summary</h3>
+            <div id="baselineGapCallout" class="callout"></div>
+          </div>
+          <div class="subcard">
+            <h3>Favorability baseline</h3>
+            <div id="landryFavorabilityBreakdown"></div>
+          </div>
+        </div>
+        <div class="split-grid" style="margin-top:0.95rem;">
+          <div class="subcard">
+            <h3>Republican comparison</h3>
+            <div class="bar-list" id="favorabilityRanking"></div>
+          </div>
+          <div class="subcard">
+            <h3>Regional range</h3>
+            <div class="bar-list" id="favorabilityRegions"></div>
+          </div>
+        </div>
+        <div class="narrative-blocks" id="partINarrative"></div>
+      </section>
+
+      <section class="card" id="componentPartII" data-component-id="igaming_popularity">
+        <div class="section-divider"><span>Part II: Is iGaming popular?</span></div>
+        <div class="split-grid">
+          <div class="subcard">
+            <h3>Statewide support</h3>
+            <div id="supportTopline"></div>
+          </div>
+          <div class="subcard">
+            <h3>Support by party</h3>
+            <div class="bar-list" id="supportByParty"></div>
+          </div>
+        </div>
+        <div class="split-grid" style="margin-top:0.95rem;">
+          <div class="subcard">
+            <h3>Behavior and awareness</h3>
+            <div id="behaviorSummary"></div>
+          </div>
+          <div class="subcard">
+            <h3>Belief landscape</h3>
+            <div class="bar-list" id="beliefBars"></div>
+          </div>
+        </div>
+        <div class="narrative-blocks" id="partIINarrative"></div>
+      </section>
+
+      <section class="card" id="componentPartIII" data-component-id="experiment_effects">
+        <div class="section-divider"><span>Part III: The experiment</span></div>
+        <div class="split-grid">
+          <div class="subcard">
+            <h3>Action vs. inaction</h3>
+            <div class="diverging-list" id="experimentOutcomes"></div>
+          </div>
+          <div class="subcard">
+            <h3>Revenue priorities</h3>
+            <div class="bar-list" id="revenuePriorityBars"></div>
+          </div>
+        </div>
+        <div class="table-shell" id="experimentEffectsTable" style="margin-top:0.95rem;"></div>
+        <div class="narrative-blocks" id="partIIINarrative"></div>
+      </section>
+
+      <section class="card" id="componentPartIV" data-component-id="concerns_and_messaging">
+        <div class="section-divider"><span>Part IV: Concerns and messaging</span></div>
+        <div class="split-grid">
+          <div class="subcard">
+            <h3>Concern groups in the current experiment artifact</h3>
+            <div class="table-shell" id="subgroupEffectsTable"></div>
+          </div>
+          <div class="subcard">
+            <h3>Trusted messengers</h3>
+            <div class="bar-list" id="messengerBars"></div>
+          </div>
+        </div>
+        <div class="split-grid" style="margin-top:0.95rem;">
+          <div class="subcard">
+            <h3>Argument matchups</h3>
+            <div class="bar-list" id="matchupBars"></div>
+          </div>
+          <div class="subcard">
+            <h3>Persuadability and existing gambling</h3>
+            <div class="bar-list" id="intensityBars"></div>
+            <div class="bar-list" id="gamblingTypeBars" style="margin-top:0.95rem;"></div>
+          </div>
+        </div>
+        <div class="quote-grid" id="quoteCards" style="margin-top:0.95rem;"></div>
+        <div class="narrative-blocks" id="partIVNarrative"></div>
+      </section>
+
+      <section class="card" id="componentPartV" data-component-id="geographic_patterns">
+        <div class="section-divider"><span>Part V: Geographic patterns</span></div>
+        <div class="map-grid">
+          <div class="map-card">
+            <h3>Parish support map</h3>
+            <p>Existing support payload + existing parish SVG asset, with all-respondents support shown as a static choropleth.</p>
+            <div class="map-shell" id="parishMapShell">
+              <div class="map-svg-host" id="parishMapHost"></div>
+            </div>
+            <div class="mini-legend" id="parishMapLegend"></div>
+            <p class="map-note">The map is a static report card built from the current support artifact and the existing parish SVG asset. No geographic model outputs were regenerated.</p>
+          </div>
+          <div class="map-card">
+            <h3>Cultural region support</h3>
+            <p>The clean cultural-region outline treatment is reused from the existing support page.</p>
+            <div class="map-shell" id="crMapShell">
+              <div class="map-svg-host" id="crMapHost"></div>
+              <div class="map-outline-host" id="crOutlineHost"></div>
+            </div>
+            <div class="mini-legend" id="crMapLegend"></div>
+          </div>
+        </div>
+        <div class="subcard" style="margin-top:0.95rem;">
+          <h3>Regional ranking</h3>
+          <div class="bar-list" id="regionSupportBars"></div>
+        </div>
+        <div class="narrative-blocks" id="partVNarrative"></div>
+      </section>
+
+      <section class="card" id="componentConclusion">
+        <div class="section-head">
+          <p class="section-eyebrow">Conclusion</p>
+          <h2>What the data is saying</h2>
+          <p>The close uses the template's original narrative, while the cards above stay tied to the current static payloads.</p>
+        </div>
+        <div class="narrative-blocks" id="conclusionNarrative"></div>
+      </section>
+
+      <section class="card" id="componentAppendices">
+        <div class="section-head">
+          <p class="section-eyebrow">Appendices</p>
+          <h2>Data sources, palette, and map assets</h2>
+          <p>Appendix tables are rendered directly as static report tables.</p>
+        </div>
+        <div class="split-grid">
+          <div class="table-card">
+            <h3>Data sources</h3>
+            <div class="table-shell" id="appendixSources"></div>
+          </div>
+          <div class="table-card">
+            <h3>Chart color palette</h3>
+            <div class="table-shell" id="appendixPalette"></div>
+          </div>
+        </div>
+        <div class="subcard" style="margin-top:0.95rem;">
+          <h3>SVG assets</h3>
+          <div class="narrative-blocks" id="appendixAssets"></div>
+        </div>
+      </section>
+
+      <section class="feedback-callout" id="feedbackCallout" hidden>
+        <h2 id="feedbackHeading">Share Your Feedback</h2>
+        <p id="feedbackBody">Have questions about this analysis report or ideas for future additions? We'd love to hear from you.</p>
+        <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
+      </section>
+    </main>
+
+    <script src="lib/html-to-image.min.js"></script>
+    <script src="lib/png-export-helper.js"></script>
+    <script>
+const FALLBACK_REPORT = {
+  "meta": {
+    "source": "Vantage Data House",
+    "title": "Louisiana iGaming Public Opinion Analysis",
+    "subtitle": "A static synthesis of Louisiana iGaming baseline, experiment, attitudes, and geography artifacts.",
+    "site": "https://www.vantagedatahouse.com",
+    "sample": "N = 1,708 respondents",
+    "fieldDates": "May 15-21, 2026",
+    "methodLabel": "Static analysis report from existing website artifacts",
+    "group_navigation": {
+      "group_id": "louisiana_igaming_baseline_2026",
+      "group_label": "Louisiana Voter Opinion Study",
+      "back": {
+        "label": "Portal",
+        "href": "https://igaming.vantage.philippbroniecki.com/",
+        "local_href": "https://igaming.vantage.philippbroniecki.com/"
+      },
+      "siblings": [
+        {
+          "site_slug": "igaming_favorability",
+          "label": "Favorability",
+          "href": "https://favorability.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://favorability.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../favorability/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_test_ballot",
+          "label": "Test Ballot",
+          "href": "https://test-ballot.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://test-ballot.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../test_ballot/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_support",
+          "label": "iGaming Support",
+          "href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://support.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../igaming_support/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_attitudes",
+          "label": "Gambling Attitudes",
+          "href": "https://attitudes.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://attitudes.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../attitudes/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_experiment",
+          "label": "Experiment Effects",
+          "href": "https://experiments.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://experiments.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../experiment/standalone_website/"
+        },
+        {
+          "site_slug": "igaming_survey_health",
+          "label": "Survey Health",
+          "href": "https://survey-health.igaming.vantage.philippbroniecki.com/",
+          "canonical_href": "https://survey-health.igaming.vantage.philippbroniecki.com/",
+          "local_href": "../../survey_health/standalone_website/"
+        }
+      ]
+    }
+  },
+  "template": {
+    "site_slug": "igaming_analysis",
+    "component_order": [],
+    "feedback_callout": {
+      "enabled": true,
+      "heading": "Share Your Feedback",
+      "body": "Have questions about this analysis report or ideas for future additions? We'd love to hear from you.",
+      "cta_label": "Get in Touch",
+      "cta_url": "mailto:philipp@vantagedatahouse.com"
+    }
+  },
+  "turnout_assumption": [],
+  "response_universe": [],
+  "notes": {
+    "pre_post_levels_note": "",
+    "uncertainty_note": ""
+  },
+  "data_files": [],
+  "records": [],
+  "summary_rows": [],
+  "key_findings": {
+    "groups": []
+  },
+  "outcomes": [],
+  "estimands": [],
+  "selectors": {
+    "geography_types": [],
+    "demographics": []
+  },
+  "archetype_metadata": [],
+  "load_error_message": "Experiment data could not be loaded. Please refresh or contact Vantage Data House."
+};
+
+let reportData = FALLBACK_REPORT;
+
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderInlineMarkdown(value) {
+  let html = escapeHtml(value);
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+  return html;
+}
+
+function toArray(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function isLocalPreviewHost() {
+  if (location.protocol === 'file:') return true;
+  const host = String(location.hostname || '').toLowerCase();
+  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+}
+
+function normalizeSiteNavLinks(items) {
+  return toArray(items)
+    .map((item) => {
+      const label = String(item?.label || '').trim();
+      const canonicalHref = String(item?.canonical_href || item?.href || '').trim();
+      const localHref = String(item?.local_href || '').trim();
+      const siteSlug = String(item?.site_slug || item?.siteSlug || '').trim();
+      if (!label || (!canonicalHref && !localHref)) return null;
+      return { label, canonical_href: canonicalHref, local_href: localHref, site_slug: siteSlug };
+    })
+    .filter(Boolean);
+}
+
+function resolveSiblingHref(entry) {
+  const canonicalHref = String(entry?.canonical_href || '').trim();
+  const localHref = String(entry?.local_href || '').trim();
+  if (isLocalPreviewHost() && localHref) return localHref;
+  return canonicalHref || localHref;
+}
+
+function renderSiteNavigation() {
+  const backLink = document.getElementById('backToPortalLink');
+  const siblingWrap = document.getElementById('siblingNavLinks');
+  if (!backLink || !siblingWrap) return;
+
+  const navCfg = reportData?.meta?.group_navigation || {};
+  const backCfg = navCfg?.back || {};
+  const backHref = String(
+    (isLocalPreviewHost() ? (backCfg?.local_href || '') : '') ||
+    backCfg?.href ||
+    backLink.getAttribute('href') ||
+    ''
+  ).trim();
+  const backLabel = String(backCfg?.label || backLink.textContent || 'Portal').trim();
+  if (backHref) backLink.href = backHref;
+  backLink.textContent = backLabel || 'Portal';
+
+  const currentSlug = String(reportData?.template?.site_slug || '').trim();
+  const siblings = normalizeSiteNavLinks(navCfg?.siblings).filter((entry) => entry.site_slug !== currentSlug);
+  siblingWrap.innerHTML = '';
+  if (!siblings.length) {
+    siblingWrap.hidden = true;
+    return;
+  }
+
+  siblings.forEach((entry) => {
+    const href = resolveSiblingHref(entry);
+    if (!href) return;
+    const link = document.createElement('a');
+    link.className = 'site-nav-link';
+    link.href = href;
+    link.textContent = entry.label;
+    siblingWrap.appendChild(link);
+  });
+  siblingWrap.hidden = false;
+}
+
+function applyTheme(theme) {
+  const helper = window.VDHTheme;
+  const normalized = helper?.normalizeTheme ? helper.normalizeTheme(theme) : null;
+  if (!normalized) return;
+  document.documentElement.setAttribute('data-theme', normalized);
+  helper?.persistTheme?.(normalized);
+  const icon = document.getElementById('toggleIcon');
+  const label = document.getElementById('toggleLabel');
+  if (icon) icon.textContent = normalized === 'dark' ? '\u263D' : '\u263C';
+  if (label) label.textContent = normalized === 'dark' ? 'Dark' : 'Light';
+  applyThemeToLinks(document);
+}
+
+function applyThemeToLinks(root = document) {
+  const helper = window.VDHTheme;
+  if (!helper || typeof helper.withThemeParam !== 'function') return;
+  const activeTheme = helper.getActiveTheme();
+  const links = root.querySelectorAll('a[href]');
+  links.forEach((link) => {
+    const rawHref = link.getAttribute('href');
+    if (!rawHref) return;
+    if (String(link.getAttribute('data-skip-theme-param') || '').trim() === 'true') return;
+    if (!link.dataset.rawHref) link.dataset.rawHref = rawHref;
+    const themedHref = helper.withThemeParam(link.dataset.rawHref, activeTheme);
+    if (themedHref) link.setAttribute('href', themedHref);
+  });
+}
+
+function initThemeControls() {
+  const initialTheme = window.VDHTheme?.resolveInitialTheme?.()?.theme ||
+    window.VDHTheme?.getActiveTheme?.() ||
+    document.documentElement.getAttribute('data-theme') ||
+    'light';
+  applyTheme(initialTheme);
+  const toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const current = window.VDHTheme?.getActiveTheme?.() || 'light';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+}
+
+async function loadReportData() {
+  const banner = document.getElementById('dataBanner');
+  try {
+    const response = await fetch('data/igaming_analysis_data.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload = await response.json();
+    if (!payload || typeof payload !== 'object') throw new Error('Invalid JSON payload');
+    reportData = payload;
+    return;
+  } catch (err) {
+    reportData = FALLBACK_REPORT;
+    if (banner) {
+      banner.classList.add('show');
+      banner.textContent = 'Using embedded fallback data because the analysis JSON could not be loaded.';
+    }
+  }
+}
+
+function formatSignedNumber(value, suffix = '') {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return 'NA';
+  const sign = numeric > 0 ? '+' : '';
+  return `${sign}${numeric.toLocaleString('en-US')}${suffix}`;
+}
+
+function formatPercent(value, digits = 1) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return 'NA';
+  return `${numeric.toFixed(digits)}%`;
+}
+
+function createTable(headers, rows) {
+  const shell = document.createElement('div');
+  shell.className = 'table-shell';
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const headRow = document.createElement('tr');
+  headers.forEach((header) => {
+    const th = document.createElement('th');
+    th.innerHTML = renderInlineMarkdown(header);
+    headRow.appendChild(th);
+  });
+  thead.appendChild(headRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  rows.forEach((row) => {
+    const tr = document.createElement('tr');
+    row.forEach((cell) => {
+      const td = document.createElement('td');
+      td.innerHTML = renderInlineMarkdown(cell);
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  shell.appendChild(table);
+  return shell;
+}
+
+function renderBlocks(container, blocks) {
+  container.innerHTML = '';
+  toArray(blocks).forEach((block) => {
+    if (block.type === 'paragraph') {
+      const p = document.createElement('p');
+      p.innerHTML = renderInlineMarkdown(block.text);
+      container.appendChild(p);
+    } else if (block.type === 'list') {
+      const list = document.createElement('ul');
+      block.items.forEach((item) => {
+        const li = document.createElement('li');
+        li.innerHTML = renderInlineMarkdown(item);
+        list.appendChild(li);
+      });
+      container.appendChild(list);
+    } else if (block.type === 'quote') {
+      const quote = document.createElement('blockquote');
+      quote.innerHTML = renderInlineMarkdown(block.text);
+      container.appendChild(quote);
+    } else if (block.type === 'table') {
+      container.appendChild(createTable(block.headers, block.rows));
+    }
+  });
+}
+
+function sectionBlocks(slug) {
+  return reportData?.template_sections?.[slug]?.blocks || [];
+}
+
+function appendSectionGroup(containerId, slugs) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const blocks = [];
+  slugs.forEach((slug) => {
+    blocks.push(...sectionBlocks(slug));
+  });
+  renderBlocks(container, blocks);
+}
+
+function renderHero() {
+  const heroMeta = reportData?.hero_meta || {};
+  const meta = reportData?.meta || {};
+  document.getElementById('heroTitle').textContent = meta.title || 'Louisiana iGaming Public Opinion Analysis';
+  document.getElementById('heroSubtitle').textContent = `${heroMeta.prepared_for || 'Governor Jeff Landry'} \u00b7 ${heroMeta.geography || 'Louisiana Statewide'} \u00b7 ${heroMeta.issue || 'Online Casino Gaming Compact'} \u00b7 ${heroMeta.report_date || 'June 2026'}`;
+  document.getElementById('metaSample').textContent = meta.sample || 'N = 1,708 respondents';
+  document.getElementById('metaDates').textContent = meta.fieldDates || 'May 15-21, 2026';
+  document.getElementById('metaMethod').textContent = meta.methodLabel || 'Static analysis report from existing website artifacts';
+}
+
+function renderMethodology() {
+  document.getElementById('methodologyBody').textContent = reportData?.methodology_note || '';
+}
+
+function renderExecutiveSummary() {
+  const intro = document.getElementById('executiveSummaryIntro');
+  const introBlocks = sectionBlocks('executive-summary');
+  intro.innerHTML = '';
+  introBlocks.forEach((block) => {
+    if (block.type !== 'paragraph') return;
+    const p = document.createElement('p');
+    p.innerHTML = renderInlineMarkdown(block.text);
+    intro.appendChild(p);
+  });
+
+  appendSectionGroup('headlineFindings', ['headline-findings']);
+
+  const central = document.getElementById('centralDecision');
+  renderBlocks(central, sectionBlocks('the-central-decision'));
+}
+
+function renderDecisionMatrix() {
+  const target = document.getElementById('decisionMatrixTable');
+  const headers = ['Path', 'Effect on Landry (votes)', 'Where it leaves him'];
+  const rows = toArray(reportData?.experiment?.decision_matrix).map((item) => [
+    `**${item.path}**`,
+    item.effect_label,
+    item.description
+  ]);
+  target.innerHTML = '';
+  target.appendChild(createTable(headers, rows));
+}
+
+function renderDashboard() {
+  const host = document.getElementById('dashboardGrid');
+  host.innerHTML = '';
+  toArray(reportData?.dashboard_cards).forEach((card) => {
+    const article = document.createElement('article');
+    article.className = 'stat-card';
+    article.innerHTML = `
+      <div class="stat-card-label">${escapeHtml(card.label)}</div>
+      <div class="stat-card-value ${escapeHtml(card.tone || '')}">${escapeHtml(card.value)}</div>
+      <div class="stat-card-detail">${escapeHtml(card.detail)}</div>
+    `;
+    host.appendChild(article);
+  });
+}
+
+function makeCandidateBars(rows, colorMap) {
+  const wrap = document.createElement('div');
+  wrap.className = 'candidate-bars';
+  rows.forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'candidate-bar';
+    row.innerHTML = `
+      <div class="candidate-bar-top">
+        <span>${escapeHtml(item.label)}</span>
+        <span class="numeric">${formatPercent(item.value)}</span>
+      </div>
+      <div class="candidate-track">
+        <span class="candidate-fill" style="width:${Math.max(0, Math.min(100, item.value))}%;background:${colorMap[item.id] || 'var(--accent)'};"></span>
+      </div>
+    `;
+    wrap.appendChild(row);
+  });
+  return wrap;
+}
+
+function renderBaselineProblem() {
+  const comparisonWrap = document.getElementById('ballotComparison');
+  comparisonWrap.innerHTML = '';
+  const currentCard = document.createElement('div');
+  currentCard.className = 'compare-card';
+  currentCard.innerHTML = '<h4>2027 modeled ballot (with-view respondents)</h4>';
+  currentCard.appendChild(
+    makeCandidateBars(
+      toArray(reportData?.baseline?.current_with_view),
+      {
+        jeff_landry: 'var(--rep)',
+        republican_challenger: '#f39b84',
+        democratic_candidate: 'var(--dem)'
+      }
+    )
+  );
+  const oldCard = document.createElement('div');
+  oldCard.className = 'compare-card';
+  oldCard.innerHTML = '<h4>2023 actual primary result</h4>';
+  oldCard.appendChild(
+    makeCandidateBars(
+      toArray(reportData?.baseline?.comparison_2023).map((item, idx) => ({ ...item, id: `comp-${idx}` })),
+      {
+        'comp-0': 'var(--rep)',
+        'comp-1': 'var(--dem)',
+        'comp-2': '#f39b84',
+        'comp-3': '#a8b5c4'
+      }
+    )
+  );
+  comparisonWrap.appendChild(currentCard);
+  comparisonWrap.appendChild(oldCard);
+
+  const gap = reportData?.baseline?.gap_from_template || {};
+  document.getElementById('baselineGapCallout').innerHTML = `
+    <p><strong>Drop from 2023:</strong> ${formatSignedNumber(gap.share_drop, ' pp')}</p>
+    <p style="margin-top:0.45rem;"><strong>Vote equivalent:</strong> ${formatSignedNumber(gap.vote_gap)}</p>
+    <p style="margin-top:0.45rem;color:var(--muted);font-size:0.78rem;">This translated 2023-gap figure is rendered from the report template because the current ballot comparison artifact does not expose the same precomputed vote-gap card.</p>
+  `;
+
+  const favorability = reportData?.favorability?.landry_breakdown || [];
+  const supportTotal = reportData?.favorability?.landry_totals?.favorable || 0;
+  const opposeTotal = reportData?.favorability?.landry_totals?.unfavorable || 0;
+  const host = document.getElementById('landryFavorabilityBreakdown');
+  host.innerHTML = `
+    <div class="stacked-bar">
+      ${favorability.map((item) => `<span class="stacked-segment" style="width:${item.value}%;background:${item.color};"></span>`).join('')}
+    </div>
+    <div class="legend">
+      ${favorability.map((item) => `<span class="legend-item"><span class="legend-swatch" style="background:${item.color};"></span>${escapeHtml(item.label)} (${formatPercent(item.value)})</span>`).join('')}
+    </div>
+    <p class="section-intro" style="margin-top:0.8rem;">Total favorable: <strong>${formatPercent(supportTotal)}</strong> &middot; Total unfavorable: <strong>${formatPercent(opposeTotal)}</strong> &middot; Net: <strong>${formatSignedNumber(reportData?.favorability?.landry_totals?.net)}</strong></p>
+  `;
+
+  const rankingHost = document.getElementById('favorabilityRanking');
+  rankingHost.innerHTML = '';
+  toArray(reportData?.favorability?.ranking).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.title)}</span>
+        <span class="bar-value">${formatSignedNumber(item.net)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, Math.min(100, item.net + 50))}%;background:var(--accent);"></span></div>
+    `;
+    rankingHost.appendChild(row);
+  });
+
+  const regionHost = document.getElementById('favorabilityRegions');
+  regionHost.innerHTML = '';
+  toArray(reportData?.favorability?.regional_nets).forEach((item) => {
+    const width = Math.max(0, Math.min(100, ((item.net + 25) / 50) * 100));
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatSignedNumber(item.net)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${width}%;background:var(--cool);"></span></div>
+    `;
+    regionHost.appendChild(row);
+  });
+
+  appendSectionGroup('partINarrative', [
+    'section-1-where-landry-stands-2023-vs-2027',
+    'section-2-governor-landry-s-favorability'
+  ]);
+}
+
+function renderSupportSection() {
+  const support = reportData?.support || {};
+  const toplineHost = document.getElementById('supportTopline');
+  toplineHost.innerHTML = `
+    <div class="stacked-bar">
+      ${toArray(support?.topline?.segments).map((item) => `<span class="stacked-segment" style="width:${item.value}%;background:${item.color};"></span>`).join('')}
+    </div>
+    <div class="legend">
+      ${toArray(support?.topline?.segments).map((item) => `<span class="legend-item"><span class="legend-swatch" style="background:${item.color};"></span>${escapeHtml(item.label)} (${formatPercent(item.value)})</span>`).join('')}
+    </div>
+    <p class="section-intro" style="margin-top:0.8rem;">Total support: <strong>${formatPercent(support?.topline?.support_total)}</strong> &middot; Total oppose: <strong>${formatPercent(support?.topline?.oppose_total)}</strong> &middot; Net support: <strong>${formatSignedNumber(support?.topline?.net_support)}</strong></p>
+  `;
+
+  const partyHost = document.getElementById('supportByParty');
+  partyHost.innerHTML = '';
+  toArray(support?.by_party).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatSignedNumber(item.net)} net</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, Math.min(100, item.support))}%;background:var(--accent);"></span></div>
+    `;
+    partyHost.appendChild(row);
+  });
+
+  const behavior = reportData?.attitudes || {};
+  const behaviorHost = document.getElementById('behaviorSummary');
+  const awareness = toArray(behavior?.offshore_awareness);
+  behaviorHost.innerHTML = `
+    <div class="callout">
+      <p><strong>${formatPercent(behavior?.participation?.gambled_last_year)}</strong> of voters report gambling in the last year.</p>
+      <p style="margin-top:0.45rem;"><strong>${formatPercent(awareness[0]?.value)}</strong> say they were already aware offshore online casino gambling exists.</p>
+      <p style="margin-top:0.45rem;color:var(--muted);font-size:0.78rem;">Both metrics come directly from the current attitudes payload and are shown as all-respondents toplines.</p>
+    </div>
+    <div class="bar-list" style="margin-top:0.85rem;">
+      ${awareness.map((item) => `
+        <div class="bar-row">
+          <div class="bar-row-top">
+            <span class="bar-label">${escapeHtml(item.label)}</span>
+            <span class="bar-value">${formatPercent(item.value)}</span>
+          </div>
+          <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--cool);"></span></div>
+        </div>`).join('')}
+    </div>
+  `;
+
+  const beliefHost = document.getElementById('beliefBars');
+  beliefHost.innerHTML = '';
+  toArray(behavior?.beliefs).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.agree)} agree</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.agree}%;background:var(--accent);"></span></div>
+    `;
+    beliefHost.appendChild(row);
+  });
+
+  appendSectionGroup('partIINarrative', [
+    'section-3-baseline-igaming-support',
+    'section-4-what-voters-believe-about-gambling'
+  ]);
+}
+
+function renderExperimentSection() {
+  const experiment = reportData?.experiment || {};
+  const outcomesHost = document.getElementById('experimentOutcomes');
+  outcomesHost.innerHTML = '';
+  toArray(experiment?.outcomes).forEach((item) => {
+    const maxAbs = 30;
+    const posWidth = Math.min(50, (Math.max(0, item.signing_pp) / maxAbs) * 50);
+    const negWidth = Math.min(50, (Math.abs(Math.min(0, item.inaction_pp)) / maxAbs) * 50);
+    const row = document.createElement('div');
+    row.className = 'diverging-row';
+    row.innerHTML = `
+      <div class="diverging-label">
+        <span>${escapeHtml(item.label)}</span>
+        <span class="numeric">${formatSignedNumber(item.signing_pp, ' pp')} / ${formatSignedNumber(item.inaction_pp, ' pp')}</span>
+      </div>
+      <div class="diverging-track">
+        <span class="diverging-midline"></span>
+        <span class="diverging-fill negative" style="width:${negWidth}%;"></span>
+        <span class="diverging-fill positive" style="width:${posWidth}%;"></span>
+      </div>
+    `;
+    outcomesHost.appendChild(row);
+  });
+
+  const revenueHost = document.getElementById('revenuePriorityBars');
+  revenueHost.innerHTML = '';
+  toArray(reportData?.attitudes?.revenue_priorities).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
+    `;
+    revenueHost.appendChild(row);
+  });
+
+  const matrix = experiment?.ballot_effects || {};
+  const tableHost = document.getElementById('experimentEffectsTable');
+  tableHost.innerHTML = '';
+  tableHost.appendChild(createTable(
+    ['Scenario', 'Effect', 'Vote equivalent'],
+    [
+      ['**Sign and deliver**', `${formatSignedNumber(matrix.signing_effect_pp, ' pp')}`, formatSignedNumber(matrix.signing_votes)],
+      ['**Do not deliver**', `${formatSignedNumber(matrix.inaction_effect_pp, ' pp')}`, formatSignedNumber(matrix.inaction_votes)],
+      ['**Swing between paths**', `${formatSignedNumber(matrix.swing_effect_pp, ' pp')}`, formatSignedNumber(matrix.swing_votes)]
+    ]
+  ));
+
+  appendSectionGroup('partIIINarrative', [
+    'section-5-what-happens-if-landry-signs-vs-doesn-t',
+    'section-6-where-voters-want-the-revenue'
+  ]);
+}
+
+function renderMessagingSection() {
+  const subgroupHost = document.getElementById('subgroupEffectsTable');
+  subgroupHost.innerHTML = '';
+  subgroupHost.appendChild(createTable(
+    ['Group', 'Effect of signing', 'Effect of inaction', 'Net swing'],
+    toArray(reportData?.experiment?.subgroup_effects).map((item) => [
+      `**${item.label}**`,
+      `${formatSignedNumber(item.signing_effect, ' pp')} (${formatSignedNumber(item.signing_votes)})`,
+      `${formatSignedNumber(item.inaction_effect, ' pp')} (${formatSignedNumber(item.inaction_votes)})`,
+      `${formatSignedNumber(item.swing_effect, ' pp')} (${formatSignedNumber(item.swing_votes)})`
+    ])
+  ));
+
+  const messengerHost = document.getElementById('messengerBars');
+  messengerHost.innerHTML = '';
+  toArray(reportData?.attitudes?.messengers).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--cool);"></span></div>
+    `;
+    messengerHost.appendChild(row);
+  });
+
+  const matchupHost = document.getElementById('matchupBars');
+  matchupHost.innerHTML = '';
+  toArray(reportData?.attitudes?.argument_matchups).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.matchup)}</span>
+        <span class="bar-value">${formatSignedNumber(item.gap, ' pp')}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, item.pro_value)}%;background:var(--accent);"></span></div>
+      <p class="section-intro">${escapeHtml(item.winner)} frame: ${formatPercent(item.pro_value)} vs. ${formatPercent(item.anti_value)}</p>
+    `;
+    matchupHost.appendChild(row);
+  });
+
+  const intensityHost = document.getElementById('intensityBars');
+  intensityHost.innerHTML = '<h4 style="font-size:0.83rem;color:var(--ink);margin-bottom:0.6rem;">View intensity</h4>';
+  toArray(reportData?.attitudes?.intensity).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
+    `;
+    intensityHost.appendChild(row);
+  });
+
+  const typeHost = document.getElementById('gamblingTypeBars');
+  typeHost.innerHTML = '<h4 style="font-size:0.83rem;color:var(--ink);margin-bottom:0.6rem;">Gambling types</h4>';
+  toArray(reportData?.attitudes?.gambling_types).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--accent);"></span></div>
+    `;
+    typeHost.appendChild(row);
+  });
+
+  const quotesHost = document.getElementById('quoteCards');
+  quotesHost.innerHTML = '';
+  toArray(reportData?.attitudes?.quote_cards).forEach((item) => {
+    const article = document.createElement('article');
+    article.className = 'quote-card';
+    article.innerHTML = `
+      <div class="quote-support">${formatPercent(item.support)} support &middot; ${escapeHtml(item.winner)}</div>
+      <h4>${escapeHtml(item.matchup)}</h4>
+      <p>&ldquo;${escapeHtml(item.text)}&rdquo;</p>
+    `;
+    quotesHost.appendChild(article);
+  });
+
+  appendSectionGroup('partIVNarrative', [
+    'section-7-will-this-hurt-with-evangelicals-and-conservatives',
+    'section-8-message-testing-what-frames-win',
+    'section-9-how-persuadable-are-voters'
+  ]);
+}
+
+function buildMapLegend(host, labels, colors) {
+  host.innerHTML = '';
+  labels.forEach((label, idx) => {
+    const item = document.createElement('span');
+    item.className = 'mini-legend-item';
+    item.innerHTML = `<span class="mini-legend-swatch" style="background:${colors[idx]};"></span>${escapeHtml(label)}`;
+    host.appendChild(item);
+  });
+}
+
+function supportColor(value) {
+  if (value >= 62) return '#1a6b73';
+  if (value >= 59) return '#2f7f8a';
+  if (value >= 56) return '#66a5ac';
+  if (value >= 53) return '#8ec2c7';
+  return '#b9d9dd';
+}
+
+async function injectSvg(path, hostId) {
+  const host = document.getElementById(hostId);
+  if (!host) return null;
+  const response = await fetch(path, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`Failed to load ${path}`);
+  const text = await response.text();
+  host.innerHTML = text;
+  return host.querySelector('svg');
+}
+
+async function renderMaps() {
+  const regionRows = toArray(reportData?.support?.regions);
+  const parishRows = reportData?.support?.parish_support || {};
+  try {
+    const crSvg = await injectSvg('data/igaming_louisiana_cr_map.svg', 'crMapHost');
+    await injectSvg('data/igaming_louisiana_cr_outline.svg', 'crOutlineHost');
+    if (crSvg) {
+      regionRows.forEach((item) => {
+        const path = crSvg.querySelector(`#cr_${CSS.escape(item.id)}`);
+        if (!path) return;
+        path.style.fill = supportColor(item.support);
+      });
+    }
+    buildMapLegend(document.getElementById('crMapLegend'), ['53-55%', '56-58%', '59-61%', '62%+'], ['#b9d9dd', '#8ec2c7', '#2f7f8a', '#1a6b73']);
+  } catch (err) {
+    document.getElementById('crMapHost').innerHTML = '<p class="map-note">Cultural region map could not be loaded in this preview.</p>';
+  }
+
+  try {
+    const parishSvg = await injectSvg('data/igaming_louisiana_parish_map.svg', 'parishMapHost');
+    if (parishSvg) {
+      Object.entries(parishRows).forEach(([id, item]) => {
+        const path = parishSvg.querySelector(`#${CSS.escape(id)}`);
+        if (!path) return;
+        path.style.fill = supportColor(item.support);
+      });
+    }
+    buildMapLegend(document.getElementById('parishMapLegend'), ['53-55%', '56-58%', '59-61%', '62%+'], ['#b9d9dd', '#8ec2c7', '#2f7f8a', '#1a6b73']);
+  } catch (err) {
+    document.getElementById('parishMapHost').innerHTML = '<p class="map-note">Parish map could not be loaded in this preview.</p>';
+  }
+
+  const regionHost = document.getElementById('regionSupportBars');
+  regionHost.innerHTML = '';
+  regionRows.forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.support)} support</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.support}%;background:${supportColor(item.support)};"></span></div>
+    `;
+    regionHost.appendChild(row);
+  });
+
+  appendSectionGroup('partVNarrative', ['section-10-regional-support']);
+}
+
+function renderConclusion() {
+  appendSectionGroup('conclusionNarrative', ['section-11-what-the-data-is-saying']);
+}
+
+function renderAppendices() {
+  const appendix = reportData?.appendices || {};
+  const sourcesHost = document.getElementById('appendixSources');
+  sourcesHost.innerHTML = '';
+  sourcesHost.appendChild(createTable(
+    ['Module', 'Primary file'],
+    toArray(appendix?.sources).map((item) => [item.module, `\`${item.file}\``])
+  ));
+
+  const paletteHost = document.getElementById('appendixPalette');
+  paletteHost.innerHTML = '';
+  paletteHost.appendChild(createTable(
+    ['Element', 'Hex code'],
+    toArray(appendix?.palette).map((item) => [
+      `${item.label} <span class="tone-chip" style="margin-left:0.35rem;background:${item.hex};color:#fff;border-color:${item.hex};">${item.hex}</span>`,
+      `\`${item.hex}\``
+    ])
+  ));
+
+  const assetHost = document.getElementById('appendixAssets');
+  renderBlocks(
+    assetHost,
+    [{ type: 'list', items: toArray(appendix?.svg_assets).map((item) => `\`${item}\``) }]
+  );
+}
+
+function renderFeedback() {
+  const section = document.getElementById('feedbackCallout');
+  const cfg = reportData?.template?.feedback_callout || {};
+  if (!section || cfg.enabled === false) return;
+  document.getElementById('feedbackHeading').textContent = cfg.heading || 'Share Your Feedback';
+  document.getElementById('feedbackBody').textContent = cfg.body || '';
+  const cta = document.getElementById('feedbackCta');
+  cta.textContent = cfg.cta_label || 'Get in Touch';
+  cta.href = cfg.cta_url || 'mailto:philipp@vantagedatahouse.com';
+  section.hidden = false;
+}
+
+function renderAll() {
+  renderSiteNavigation();
+  renderHero();
+  renderMethodology();
+  renderExecutiveSummary();
+  renderDecisionMatrix();
+  renderDashboard();
+  renderBaselineProblem();
+  renderSupportSection();
+  renderExperimentSection();
+  renderMessagingSection();
+  renderConclusion();
+  renderAppendices();
+  renderFeedback();
+  applyThemeToLinks(document);
+}
+
+(async function init() {
+  initThemeControls();
+  await loadReportData();
+  renderAll();
+  await renderMaps();
+  if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
+    window.VDH_PNG_EXPORT.init({
+      siteSlug: 'igaming_analysis',
+      components: [
+        { componentId: 'decision_matrix', label: 'decision-matrix' },
+        { componentId: 'key_indicators_dashboard', label: 'dashboard' },
+        { componentId: 'baseline_problem', label: 'baseline-problem' },
+        { componentId: 'igaming_popularity', label: 'igaming-popularity' },
+        { componentId: 'experiment_effects', label: 'experiment-effects' },
+        { componentId: 'concerns_and_messaging', label: 'messaging' },
+        { componentId: 'geographic_patterns', label: 'geography' }
+      ]
+    });
+  }
+})();
+    </script>
+  </body>
+</html>
