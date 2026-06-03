@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Louisiana iGaming Public Opinion Analysis | Vantage Data House</title>
     <link rel="canonical" href="https://analysis.igaming.vantage.philippbroniecki.com/" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231a6b73'/%3E%3C/svg%3E" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231a6b73'/%3E%3C/svg%3E"
+    />
     <script>
       (function bootstrapVDHTheme() {
         const THEME_PARAM_KEY = 'theme';
@@ -119,7 +122,9 @@
 
           const keys = [THEME_STORAGE_KEY, ...LEGACY_STORAGE_KEYS];
           for (const key of keys) {
-            try { window.localStorage.setItem(key, normalized); } catch (err) {}
+            try {
+              window.localStorage.setItem(key, normalized);
+            } catch (err) {}
           }
         }
 
@@ -172,1517 +177,674 @@
       })();
     </script>
     <style>
-:root {
-  --bg: #edf2f8;
-  --bg-deep: #d6e3f0;
-  --surface: #ffffff;
-  --surface-alt: #f3f7fc;
-  --surface-hi: #fafcff;
-  --ink: #0d1d2e;
-  --ink-soft: #364d63;
-  --muted: #5c7289;
-  --muted-faint: #8aa2b5;
-  --line: #ccd8e5;
-  --line-soft: #dce7f0;
-  --accent: #1a6b73;
-  --accent-hover: #145d64;
-  --accent-tint: rgba(26, 107, 115, 0.09);
-  --accent-tint2: rgba(26, 107, 115, 0.16);
-  --warm: #c46525;
-  --warm-tint: rgba(196, 101, 37, 0.1);
-  --cool: #1f5f89;
-  --cool-tint: rgba(31, 95, 137, 0.09);
-  --shadow-card: 0 1px 2px rgba(10, 25, 55, 0.04), 0 4px 14px rgba(10, 25, 55, 0.055), 0 0 0 1px rgba(10, 25, 55, 0.028);
-  --shadow-raise: 0 2px 5px rgba(10, 25, 55, 0.06), 0 10px 28px rgba(10, 25, 55, 0.09), 0 0 0 1px rgba(10, 25, 55, 0.04);
-  --hero-from: #0c2240;
-  --hero-to: #1c4a80;
-  --topbar-bg: rgba(237, 242, 248, 0.86);
-  --pos: #2e7d32;
-  --neg: #c62828;
-  --rep: #e55030;
-  --dem: #1976d2;
-  --r-xs: 6px;
-  --r-sm: 10px;
-  --r-md: 16px;
-  --r-lg: 20px;
-  --r-full: 9999px;
-}
-
-:root[data-theme='dark'] {
-  --bg: #0c1520;
-  --bg-deep: #07101a;
-  --surface: #111c2b;
-  --surface-alt: #172338;
-  --surface-hi: #1c2c42;
-  --ink: #e3ecf8;
-  --ink-soft: #b0cbdf;
-  --muted: #728ea8;
-  --muted-faint: #4d6880;
-  --line: #1e3049;
-  --line-soft: #172640;
-  --accent: #48b4be;
-  --accent-hover: #60c6d0;
-  --accent-tint: rgba(72, 180, 190, 0.1);
-  --accent-tint2: rgba(72, 180, 190, 0.18);
-  --warm: #e09058;
-  --warm-tint: rgba(224, 144, 88, 0.12);
-  --cool: #5aaad5;
-  --cool-tint: rgba(90, 170, 213, 0.12);
-  --topbar-bg: rgba(11, 20, 31, 0.9);
-  --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.04);
-  --shadow-raise: 0 2px 5px rgba(0,0,0,0.4), 0 10px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
-  --hero-from: #162e52;
-  --hero-to: #0c1f3a;
-}
-
-*,
-*::before,
-*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { color-scheme: light dark; overflow-x: hidden; }
-body { overflow-x: hidden; }
-
-body {
-  min-height: 100vh;
-  font-family: 'Inter', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--ink);
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(ellipse at 14% 7%, rgba(26, 107, 115, 0.14) 0%, transparent 46%),
-    radial-gradient(ellipse at 86% 0%, rgba(196, 101, 37, 0.1) 0%, transparent 38%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-  transition: background-color 280ms ease, color 280ms ease;
-}
-
-.topbar-wrap {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: var(--topbar-bg);
-  backdrop-filter: blur(18px) saturate(1.6);
-  -webkit-backdrop-filter: blur(18px) saturate(1.6);
-  border-bottom: 1px solid var(--line-soft);
-  transition: background-color 280ms ease, border-color 280ms ease;
-}
-
-.topbar {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.6rem;
-  height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  text-decoration: none;
-}
-
-.brand-mark {
-  width: 8px;
-  height: 8px;
-  border-radius: var(--r-full);
-  background: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-tint2);
-}
-
-.brand-text {
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.38rem 0.88rem;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-full);
-  color: var(--ink-soft);
-  font-size: 0.76rem;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 0.02em;
-  box-shadow: var(--shadow-card);
-  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 180ms ease, transform 150ms ease;
-}
-
-.theme-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-raise);
-}
-
-.layout {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1.4rem 1.6rem 4rem;
-  display: grid;
-  gap: 1.35rem;
-}
-
-.data-banner {
-  display: none;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--line);
-  padding: 0.72rem 0.84rem;
-  font-size: 0.78rem;
-  background: var(--warm-tint);
-  color: var(--ink-soft);
-}
-
-.data-banner.show { display: block; }
-
-.back-nav {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.52rem;
-}
-
-.sibling-nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.back-btn,
-.site-nav-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--r-full);
-  border: 1px solid var(--line);
-  color: var(--ink-soft);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 150ms ease;
-}
-
-.back-btn {
-  gap: 0.35rem;
-  background: var(--surface);
-}
-
-.back-btn::before {
-  content: '\2190';
-  line-height: 1;
-}
-
-.site-nav-link { background: var(--surface-alt); }
-
-.back-btn:hover,
-.site-nav-link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-1px);
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-card);
-  padding: 1.5rem 1.7rem;
-  transition: background-color 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
-}
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 2.1rem 2.2rem 1.85rem;
-  background: linear-gradient(148deg, var(--hero-from) 0%, var(--hero-to) 100%);
-  border-color: transparent;
-  color: #edf5ff;
-}
-
-.hero::before,
-.hero::after {
-  content: '';
-  position: absolute;
-  border-radius: var(--r-full);
-  pointer-events: none;
-}
-
-.hero::before {
-  width: 360px;
-  height: 360px;
-  background: radial-gradient(circle, rgba(72, 181, 192, 0.18) 0%, transparent 70%);
-  top: -120px;
-  right: -90px;
-}
-
-.hero::after {
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(196, 101, 37, 0.14) 0%, transparent 70%);
-  bottom: -48px;
-  left: 33%;
-}
-
-.hero-inner { position: relative; z-index: 1; }
-.hero .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.65rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(155, 200, 220, 0.95);
-  margin-bottom: 0.75rem;
-}
-
-.eyebrow-pip {
-  width: 5px;
-  height: 5px;
-  border-radius: var(--r-full);
-  background: #48b4be;
-}
-
-.hero h1 {
-  font-size: clamp(1.55rem, 3.1vw, 2.25rem);
-  font-weight: 800;
-  line-height: 1.17;
-  color: #f4faff;
-  letter-spacing: -0.025em;
-  max-width: 760px;
-}
-
-.hero-subtitle {
-  margin-top: 0.58rem;
-  margin-bottom: 0;
-  color: rgba(215, 235, 255, 0.88);
-  font-size: 0.95rem;
-  max-width: 780px;
-}
-
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.45rem;
-  margin-top: 0.88rem;
-}
-
-.meta-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.27rem 0.7rem;
-  background: rgba(255, 255, 255, 0.09);
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: var(--r-full);
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: rgba(215, 235, 255, 0.9);
-  white-space: nowrap;
-}
-
-.meta-pill a { color: inherit; text-decoration: none; }
-
-.section-head { margin-bottom: 1.1rem; }
-.section-eyebrow {
-  font-size: 0.63rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  color: var(--accent);
-  margin-bottom: 0.28rem;
-}
-
-.section-head h2 {
-  font-size: 1.08rem;
-  font-weight: 760;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin-bottom: 0.18rem;
-}
-
-.section-head p,
-.section-intro {
-  font-size: 0.81rem;
-  color: var(--muted);
-}
-
-.methodology-details {
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface-alt);
-  overflow: hidden;
-}
-
-.methodology-details summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 0.95rem 1rem;
-  font-size: 0.92rem;
-  font-weight: 760;
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.8rem;
-}
-
-.methodology-details summary::-webkit-details-marker { display: none; }
-.methodology-details summary::after {
-  content: '+';
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: var(--r-full);
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--accent);
-}
-
-.methodology-details[open] summary::after { content: '\2212'; }
-.methodology-details-body {
-  padding: 0 1rem 1rem;
-  font-size: 0.84rem;
-  color: var(--ink-soft);
-}
-
-.callout {
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
-  padding: 1rem 1.05rem;
-}
-
-.callout strong { color: var(--ink); }
-
-.callout-grid,
-.dashboard-grid,
-.split-grid,
-.dual-grid,
-.quote-grid,
-.map-grid {
-  display: grid;
-  gap: 0.9rem;
-}
-
-.dashboard-grid {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-
-.callout-grid,
-.dual-grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.split-grid,
-.map-grid {
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-}
-
-.quote-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.stat-card,
-.subcard,
-.quote-card,
-.map-card,
-.table-card {
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface-alt);
-  padding: 1rem 1.05rem;
-}
-
-.stat-card-label {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.stat-card-value {
-  margin-top: 0.38rem;
-  font-size: 1.55rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-
-.stat-card-value.positive { color: var(--pos); }
-.stat-card-value.negative { color: var(--neg); }
-
-.stat-card-detail {
-  margin-top: 0.38rem;
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-}
-
-.subcard h3,
-.map-card h3,
-.table-card h3 {
-  font-size: 0.92rem;
-  font-weight: 760;
-  color: var(--ink);
-  margin-bottom: 0.3rem;
-}
-
-.subcard p,
-.map-card p,
-.table-card p {
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-
-.table-shell {
-  overflow-x: auto;
-  margin-top: 0.8rem;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.8rem;
-  min-width: 540px;
-}
-
-th,
-td {
-  text-align: left;
-  padding: 0.62rem 0.65rem;
-  border-bottom: 1px solid var(--line);
-  vertical-align: top;
-}
-
-th {
-  font-size: 0.69rem;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-td strong { color: var(--ink); }
-
-.numeric { white-space: nowrap; font-variant-numeric: tabular-nums; }
-.positive { color: var(--pos); }
-.negative { color: var(--neg); }
-
-.stacked-bar {
-  display: flex;
-  width: 100%;
-  min-height: 18px;
-  border-radius: var(--r-full);
-  overflow: hidden;
-  background: var(--surface-hi);
-  border: 1px solid var(--line);
-}
-
-.stacked-segment {
-  display: block;
-  height: 100%;
-  min-width: 0;
-}
-
-.legend,
-.mini-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem 0.85rem;
-  margin-top: 0.8rem;
-}
-
-.legend-item,
-.mini-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.42rem;
-  font-size: 0.76rem;
-  color: var(--ink-soft);
-}
-
-.legend-swatch,
-.mini-legend-swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--r-full);
-  flex: 0 0 auto;
-}
-
-.bar-list {
-  display: grid;
-  gap: 0.7rem;
-}
-
-.bar-row {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.bar-row-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.8rem;
-}
-
-.bar-label {
-  font-size: 0.8rem;
-  font-weight: 650;
-  color: var(--ink-soft);
-}
-
-.bar-value {
-  font-size: 0.78rem;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-}
-
-.bar-track {
-  position: relative;
-  height: 11px;
-  border-radius: var(--r-full);
-  background: rgba(135, 162, 188, 0.22);
-  overflow: hidden;
-}
-
-.bar-fill {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-}
-
-.compare-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-  align-items: end;
-}
-
-.compare-card {
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface-alt);
-  padding: 0.8rem 0.9rem;
-}
-
-.compare-card h4 {
-  font-size: 0.83rem;
-  color: var(--ink);
-  margin-bottom: 0.45rem;
-}
-
-.candidate-bars {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.candidate-bar {
-  display: grid;
-  gap: 0.28rem;
-}
-
-.candidate-bar-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  font-size: 0.75rem;
-  color: var(--ink-soft);
-}
-
-.candidate-track {
-  height: 12px;
-  border-radius: var(--r-full);
-  background: rgba(135, 162, 188, 0.18);
-  overflow: hidden;
-}
-
-.candidate-fill {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-}
-
-.tone-chip {
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--r-full);
-  padding: 0.22rem 0.55rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink-soft);
-}
-
-.tone-chip.positive {
-  border-color: rgba(46, 125, 50, 0.2);
-  background: rgba(46, 125, 50, 0.08);
-  color: var(--pos);
-}
-
-.tone-chip.negative {
-  border-color: rgba(198, 40, 40, 0.2);
-  background: rgba(198, 40, 40, 0.08);
-  color: var(--neg);
-}
-
-.narrative-blocks {
-  display: grid;
-  gap: 0.78rem;
-  margin-top: 0.95rem;
-}
-
-.narrative-blocks p,
-.narrative-blocks li,
-.narrative-blocks blockquote,
-.narrative-blocks td,
-.narrative-blocks th {
-  overflow-wrap: anywhere;
-}
-
-.narrative-blocks p {
-  font-size: 0.84rem;
-  color: var(--ink-soft);
-}
-
-.narrative-blocks ul,
-.narrative-blocks ol {
-  padding-left: 1.15rem;
-  display: grid;
-  gap: 0.35rem;
-  color: var(--ink-soft);
-  font-size: 0.82rem;
-}
-
-.narrative-blocks blockquote {
-  border-left: 3px solid var(--accent);
-  padding-left: 0.9rem;
-  color: var(--ink);
-  font-size: 0.84rem;
-}
-
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 1rem;
-}
-
-.section-divider::before {
-  content: '';
-  width: 22px;
-  height: 2px;
-  border-radius: var(--r-full);
-  background: var(--accent);
-}
-
-.section-divider span {
-  font-size: 0.73rem;
-  font-weight: 800;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.diverging-list {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.diverging-row {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.diverging-label {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.8rem;
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-}
-
-.diverging-track {
-  position: relative;
-  height: 18px;
-  border-radius: var(--r-full);
-  background: linear-gradient(90deg, rgba(198, 40, 40, 0.1) 0%, rgba(198, 40, 40, 0.06) 49.9%, rgba(46, 125, 50, 0.06) 50.1%, rgba(46, 125, 50, 0.1) 100%);
-  overflow: hidden;
-}
-
-.diverging-midline {
-  position: absolute;
-  inset: 0 auto 0 50%;
-  width: 1px;
-  background: var(--line);
-}
-
-.diverging-fill {
-  position: absolute;
-  top: 0;
-  height: 100%;
-}
-
-.diverging-fill.positive {
-  left: 50%;
-  background: var(--pos);
-}
-
-.diverging-fill.negative {
-  right: 50%;
-  background: var(--neg);
-}
-
-.quote-card h4 {
-  font-size: 0.83rem;
-  color: var(--ink);
-  margin-bottom: 0.4rem;
-}
-
-.quote-card p {
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-}
-
-.quote-support {
-  margin-bottom: 0.5rem;
-  font-size: 0.74rem;
-  color: var(--accent);
-  font-weight: 760;
-}
-
-.map-shell {
-  position: relative;
-  width: 100%;
-  min-height: 280px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: linear-gradient(180deg, rgba(255,255,255,0.28), transparent);
-  overflow: hidden;
-}
-
-.map-svg-host,
-.map-outline-host {
-  position: absolute;
-  inset: 0;
-}
-
-.map-outline-host {
-  pointer-events: none;
-}
-
-.map-svg-host svg,
-.map-outline-host svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.map-note {
-  margin-top: 0.6rem;
-  font-size: 0.76rem;
-  color: var(--muted);
-}
-
-.feedback-callout {
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--accent-tint2);
-  padding: 1.7rem 1.8rem;
-}
-
-.feedback-callout h2 {
-  margin-bottom: 0.45rem;
-  font-size: 1.02rem;
-  color: var(--ink);
-}
-
-.feedback-callout p {
-  margin-bottom: 0.9rem;
-  color: var(--ink-soft);
-  font-size: 0.84rem;
-}
-
-.feedback-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--r-full);
-  border: 1px solid transparent;
-  background: var(--accent);
-  color: #f5fbff;
-  text-decoration: none;
-  font-size: 0.78rem;
-  font-weight: 760;
-  padding: 0.46rem 0.9rem;
-  transition: background 0.15s ease;
-}
-
-.feedback-cta:hover { background: var(--accent-hover); }
-
-/* Analysis report overrides */
-.layout {
-  max-width: 1160px;
-  padding: 1.35rem 1.6rem 4rem;
-  gap: 1.1rem;
-}
-
-.card {
-  padding: 1.45rem 1.55rem;
-}
-
-.hero {
-  padding: 2rem 2.1rem 1.95rem;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.78fr);
-  gap: 1.15rem;
-  align-items: stretch;
-}
-
-.hero-copy {
-  display: grid;
-  gap: 0.8rem;
-  align-content: start;
-}
-
-.hero-kicker {
-  font-size: 0.74rem;
-  font-weight: 750;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: rgba(215, 235, 255, 0.72);
-}
-
-.hero h1 {
-  font-size: clamp(1.7rem, 3.4vw, 2.8rem);
-  line-height: 1.08;
-  max-width: 780px;
-}
-
-.hero-subtitle {
-  margin: 0;
-  font-size: 0.99rem;
-  max-width: 68ch;
-}
-
-.hero-thesis {
-  max-width: 64ch;
-  font-size: 0.93rem;
-  line-height: 1.6;
-  color: rgba(233, 243, 255, 0.92);
-}
-
-.hero-meta {
-  margin-top: 0;
-}
-
-.hero-rail {
-  display: grid;
-  gap: 0.85rem;
-  align-content: start;
-}
-
-.hero-brief,
-.hero-stat,
-.toc-note,
-.thesis-card,
-.aside-card,
-.chart-card,
-.table-card,
-.map-card,
-.finding-card,
-.footer-sheet {
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: var(--surface-alt);
-}
-
-.hero-brief {
-  padding: 1rem 1.05rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.16);
-  color: rgba(233, 243, 255, 0.95);
-}
-
-.brief-label,
-.mini-label {
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.brief-label { color: rgba(215, 235, 255, 0.72); }
-
-.hero-brief h2 {
-  margin-top: 0.35rem;
-  font-size: 1rem;
-  line-height: 1.28;
-  color: #f4faff;
-}
-
-.hero-brief p {
-  margin-top: 0.45rem;
-  font-size: 0.82rem;
-  color: rgba(215, 235, 255, 0.82);
-}
-
-.hero-stat-grid {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.hero-stat {
-  padding: 0.82rem 0.88rem;
-  background: rgba(8, 20, 36, 0.22);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.section-head h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.24rem;
-}
-
-.section-head p,
-.section-intro,
-.caption {
-  font-size: 0.83rem;
-  color: var(--muted);
-  max-width: 72ch;
-}
-
-.section-head.compact {
-  margin-bottom: 0.9rem;
-}
-
-.toc-card {
-  position: sticky;
-  top: 66px;
-  z-index: 12;
-}
-
-.toc-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-  gap: 0.85rem;
-}
-
-.toc-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  align-content: start;
-}
-
-.toc-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.15rem;
-  padding: 0.5rem 0.78rem;
-  text-decoration: none;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--ink-soft);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-full);
-  transition: border-color 160ms ease, color 160ms ease, transform 150ms ease;
-}
-
-.toc-link:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-1px);
-}
-
-.toc-note {
-  padding: 0.95rem 1rem;
-}
-
-.toc-note p {
-  font-size: 0.82rem;
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
-
-.pill-grid,
-.executive-grid,
-.finding-list,
-.decision-grid,
-.kpi-grid,
-.chart-grid,
-.map-grid,
-.quote-grid,
-.scenario-grid,
-.footer-grid {
-  display: grid;
-  gap: 0.9rem;
-}
-
-.pill-grid {
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-.pill-card {
-  padding: 0.85rem 0.9rem;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
-}
-
-.pill-card-label {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.pill-card-value {
-  display: block;
-  margin-top: 0.34rem;
-  font-size: 0.92rem;
-  font-weight: 760;
-  color: var(--ink);
-  line-height: 1.35;
-}
-
-.methodology-callout {
-  margin-top: 0.85rem;
-}
-
-.executive-grid {
-  grid-template-columns: minmax(0, 1.18fr) minmax(260px, 0.82fr);
-}
-
-.thesis-card,
-.aside-card,
-.chart-card,
-.table-card,
-.map-card,
-.footer-sheet {
-  padding: 1rem 1.05rem;
-}
-
-.thesis-card {
-  background: linear-gradient(180deg, rgba(26, 107, 115, 0.08), rgba(26, 107, 115, 0.02)), var(--surface-alt);
-}
-
-.thesis-card h3 {
-  margin-top: 0.42rem;
-  font-size: 1.24rem;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-}
-
-.thesis-card p {
-  margin-top: 0.72rem;
-  max-width: 60ch;
-  font-size: 0.89rem;
-  line-height: 1.62;
-  color: var(--ink-soft);
-}
-
-.bottom-line-card {
-  display: grid;
-  align-content: start;
-  gap: 0.6rem;
-  background: linear-gradient(180deg, rgba(196, 101, 37, 0.08), rgba(196, 101, 37, 0.02)), var(--surface-alt);
-}
-
-.bottom-line-card p:last-child,
-.pull-quote-card p,
-.pull-quote-wide p {
-  font-size: 0.95rem;
-  line-height: 1.62;
-  color: var(--ink);
-}
-
-.finding-list {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  margin-top: 0.95rem;
-}
-
-.finding-card {
-  padding: 0.95rem 1rem;
-}
-
-.finding-number {
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.finding-card h3 {
-  margin-top: 0.45rem;
-  font-size: 0.95rem;
-  line-height: 1.35;
-  color: var(--ink);
-}
-
-.finding-card p {
-  margin-top: 0.5rem;
-  font-size: 0.83rem;
-  line-height: 1.58;
-  color: var(--ink-soft);
-}
-
-.finding-metric {
-  margin-top: 0.72rem;
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--r-full);
-  border: 1px solid var(--line);
-  background: var(--surface);
-  padding: 0.22rem 0.62rem;
-  font-size: 0.73rem;
-  font-weight: 760;
-  color: var(--ink);
-}
-
-.decision-grid {
-  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
-}
-
-.matrix-stack {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.decision-tile {
-  padding: 1rem 1.05rem;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
-}
-
-.decision-tile.positive {
-  border-color: rgba(46, 125, 50, 0.22);
-}
-
-.decision-tile.negative {
-  border-color: rgba(198, 40, 40, 0.22);
-}
-
-.decision-tile.neutral {
-  border-color: rgba(31, 95, 137, 0.18);
-}
-
-.decision-tile-label,
-.kpi-label {
-  font-size: 0.73rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.decision-tile-value,
-.kpi-value {
-  margin-top: 0.38rem;
-  font-size: 1.54rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-
-.kpi-value.positive,
-.decision-tile-value.positive { color: var(--pos); }
-.kpi-value.negative,
-.decision-tile-value.negative { color: var(--neg); }
-
-.decision-tile p {
-  margin-top: 0.45rem;
-  font-size: 0.83rem;
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
-
-.kpi-grid {
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-}
-
-.kpi-card {
-  padding: 1rem 1.02rem;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
-}
-
-.kpi-supporting {
-  margin-top: 0.34rem;
-  font-size: 0.79rem;
-  font-weight: 760;
-  color: var(--ink);
-}
-
-.kpi-detail {
-  margin-top: 0.34rem;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-.hero-stat .kpi-label { color: rgba(215, 235, 255, 0.78); }
-.hero-stat .kpi-value { color: #fff; font-size: 1.3rem; }
-.hero-stat .kpi-supporting,
-.hero-stat .kpi-detail { color: rgba(220, 238, 255, 0.84); }
-
-.chart-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.chart-grid-wide {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-  gap: 0.9rem;
-}
-
-.map-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.quote-grid {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-
-.scenario-grid {
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-}
-
-.scenario-card {
-  padding: 0.9rem 0.95rem;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
-}
-
-.scenario-card .mini-label { color: var(--accent); }
-
-.scenario-card h4 {
-  margin-top: 0.42rem;
-  font-size: 0.95rem;
-  color: var(--ink);
-}
-
-.scenario-card p {
-  margin-top: 0.45rem;
-  font-size: 0.83rem;
-  line-height: 1.56;
-  color: var(--ink-soft);
-}
-
-.chart-card h3,
-.aside-card h3,
-.map-card h3,
-.table-card h3 {
-  font-size: 0.96rem;
-  font-weight: 760;
-  color: var(--ink);
-  margin-bottom: 0.38rem;
-}
-
-.prose {
-  display: grid;
-  gap: 0.82rem;
-  margin-top: 0.95rem;
-}
-
-.compact-prose {
-  margin-top: 0;
-}
-
-.prose p,
-.prose li,
-.prose blockquote,
-.prose td,
-.prose th {
-  overflow-wrap: anywhere;
-}
-
-.prose p {
-  max-width: 70ch;
-  font-size: 0.87rem;
-  line-height: 1.66;
-  color: var(--ink-soft);
-}
-
-.prose ul,
-.prose ol {
-  padding-left: 1.1rem;
-  display: grid;
-  gap: 0.35rem;
-  font-size: 0.84rem;
-  color: var(--ink-soft);
-}
-
-.prose blockquote {
-  max-width: 62ch;
-  border-left: 3px solid var(--accent);
-  padding-left: 0.9rem;
-  color: var(--ink);
-  font-size: 0.88rem;
-  line-height: 1.62;
-}
-
-.compact-callout p {
-  font-size: 0.84rem;
-  color: var(--ink-soft);
-}
-
-.compare-row {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.compare-card,
-.scenario-card,
-.kpi-card,
-.decision-tile,
-.pill-card {
-  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
-}
-
-.compare-card h4 {
-  font-size: 0.85rem;
-}
-
-.insight-note,
-.pull-quote-card,
-.pull-quote-wide {
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
-  padding: 0.95rem 1rem;
-}
-
-.insight-note h4,
-.pull-quote-card h4 {
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.42rem;
-}
-
-.insight-note p {
-  font-size: 0.84rem;
-  line-height: 1.58;
-  color: var(--ink-soft);
-}
-
-.quote-card p {
-  line-height: 1.56;
-}
-
-.map-shell {
-  min-height: 300px;
-}
-
-.footer-sheet {
-  background: linear-gradient(180deg, rgba(12, 34, 64, 0.04), rgba(12, 34, 64, 0.01)), var(--surface-alt);
-}
-
-.footer-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.footer-item {
-  display: grid;
-  gap: 0.32rem;
-}
-
-.footer-item span {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.footer-item strong {
-  font-size: 0.87rem;
-  line-height: 1.5;
-  color: var(--ink);
-}
-
-.footer-prepared {
-  margin-top: 0.95rem;
-  font-size: 0.84rem;
-  font-weight: 760;
-  color: var(--ink-soft);
-}
-
-@media (max-width: 900px) {
-  .hero-grid,
-  .toc-grid,
-  .executive-grid,
-  .decision-grid,
-  .chart-grid,
-  .chart-grid-wide,
-  .map-grid,
-  .footer-grid,
-  .compare-row {
-    grid-template-columns: 1fr;
-  }
-
-  .toc-card {
-    position: static;
-  }
-}
-
-@media (max-width: 720px) {
-  .layout {
-    padding: 1rem 0.9rem 3rem;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .card,
-  .hero {
-    padding: 1.15rem 1.05rem;
-  }
-
-  .topbar {
-    padding: 0 0.9rem;
-  }
-
-  table {
-    min-width: 460px;
-  }
-
-  .kpi-grid,
-  .finding-list,
-  .quote-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero h1 {
-    font-size: clamp(1.55rem, 8vw, 2.1rem);
-  }
-}
+      :root {
+        --bg: #eef3f7;
+        --surface: #ffffff;
+        --surface-soft: #f6f9fb;
+        --ink: #162433;
+        --ink-soft: #43576b;
+        --muted: #66798c;
+        --line: #d8e2ea;
+        --line-strong: #c4d0da;
+        --accent: #1a6b73;
+        --accent-soft: rgba(26, 107, 115, 0.1);
+        --warm: #bf6c32;
+        --warm-soft: rgba(191, 108, 50, 0.14);
+        --positive: #2f7a45;
+        --negative: #ae4333;
+        --shadow: 0 16px 42px rgba(12, 28, 46, 0.08);
+        --article-width: 760px;
+        --page-width: 1120px;
+      }
+
+      :root[data-theme='dark'] {
+        --bg: #0d1722;
+        --surface: #13202d;
+        --surface-soft: #172737;
+        --ink: #ebf2f8;
+        --ink-soft: #bbccda;
+        --muted: #95aabf;
+        --line: #223446;
+        --line-strong: #31475d;
+        --accent: #51b8c2;
+        --accent-soft: rgba(81, 184, 194, 0.12);
+        --warm: #e2a06f;
+        --warm-soft: rgba(226, 160, 111, 0.14);
+        --positive: #70c28d;
+        --negative: #ef8f81;
+        --shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        color-scheme: light dark;
+        overflow-x: hidden;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(26, 107, 115, 0.08), transparent 32%),
+          linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 86%, #cfd9e3 14%) 100%);
+        font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+        overflow-x: hidden;
+        transition: background-color 220ms ease, color 220ms ease;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .topbar-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid color-mix(in srgb, var(--line) 80%, transparent 20%);
+        backdrop-filter: blur(18px);
+        background: color-mix(in srgb, var(--bg) 86%, transparent 14%);
+      }
+
+      .topbar {
+        width: min(100%, var(--page-width));
+        margin: 0 auto;
+        padding: 0 1rem;
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--ink);
+      }
+
+      .brand-mark {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, white 40%));
+        box-shadow: 0 0 0 4px var(--accent-soft);
+      }
+
+      .brand-text {
+        font-size: 0.98rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .theme-toggle {
+        appearance: none;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink);
+        padding: 0.55rem 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .page-shell {
+        width: min(100%, var(--page-width));
+        margin: 0 auto;
+        padding: 1.25rem 1rem 3rem;
+      }
+
+      .status-banner {
+        display: none;
+        margin: 0 auto 1rem;
+        width: min(100%, var(--article-width));
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+        background: var(--surface);
+        color: var(--ink-soft);
+        padding: 0.85rem 1rem;
+        font-size: 0.95rem;
+      }
+
+      .status-banner.show {
+        display: block;
+      }
+
+      .site-nav-row {
+        width: min(100%, 980px);
+        margin: 0 auto 1.35rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .back-btn,
+      .site-nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        min-height: 40px;
+        padding: 0.6rem 0.95rem;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        text-decoration: none;
+        color: var(--ink-soft);
+        font-size: 0.94rem;
+        line-height: 1.1;
+      }
+
+      .back-btn {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .sibling-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+      }
+
+      .report-article {
+        width: min(100%, var(--article-width));
+        margin: 0 auto;
+        padding: 2.2rem clamp(1.15rem, 2.8vw, 2.8rem);
+        background: var(--surface);
+        border: 1px solid color-mix(in srgb, var(--line) 82%, transparent 18%);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .report-header {
+        margin-bottom: 2.2rem;
+        padding-bottom: 1.75rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .report-kicker {
+        margin: 0 0 0.8rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .report-title {
+        margin: 0;
+        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+        font-size: clamp(2.15rem, 4.8vw, 3.35rem);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+
+      .report-meta {
+        margin-top: 1.15rem;
+        display: grid;
+        gap: 0.45rem;
+        color: var(--ink-soft);
+        font-size: 0.98rem;
+      }
+
+      .report-meta-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .report-meta-label {
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .report-section {
+        margin-top: 2.4rem;
+      }
+
+      .part-heading {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .part-heading h2 {
+        margin: 0;
+        font-size: 0.92rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .section-title {
+        margin: 0 0 1rem;
+        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        line-height: 1.18;
+        color: var(--ink);
+      }
+
+      .subsection-title {
+        margin: 0 0 0.95rem;
+        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+        font-size: clamp(1.32rem, 2.2vw, 1.6rem);
+        line-height: 1.2;
+        color: var(--ink);
+      }
+
+      .section-copy {
+        color: var(--ink-soft);
+        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+        font-size: 1.13rem;
+        line-height: 1.76;
+      }
+
+      .section-copy > :first-child {
+        margin-top: 0;
+      }
+
+      .section-copy p {
+        margin: 0 0 1.05rem;
+      }
+
+      .section-copy strong {
+        color: var(--ink);
+      }
+
+      .section-copy ul,
+      .section-copy ol {
+        margin: 0.2rem 0 1.15rem 1.35rem;
+        padding: 0;
+      }
+
+      .section-copy li {
+        margin-bottom: 0.55rem;
+        padding-left: 0.15rem;
+      }
+
+      .section-copy blockquote {
+        margin: 1.15rem 0;
+        padding: 0.2rem 0 0.2rem 1rem;
+        border-left: 3px solid var(--accent);
+        color: var(--ink);
+      }
+
+      .section-copy code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 0.9em;
+      }
+
+      .table-wrap {
+        margin: 1.2rem 0;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface-soft);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 520px;
+        font-size: 0.97rem;
+        line-height: 1.45;
+        color: var(--ink);
+      }
+
+      th,
+      td {
+        padding: 0.85rem 1rem;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      th {
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        background: color-mix(in srgb, var(--surface-soft) 72%, var(--accent-soft) 28%);
+      }
+
+      .figure-block {
+        margin: 1.35rem 0 1.5rem;
+        padding: 1.2rem 1.2rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--surface-soft);
+      }
+
+      .figure-title {
+        margin: 0 0 0.9rem;
+        font-size: 1.02rem;
+        line-height: 1.3;
+        color: var(--ink);
+      }
+
+      .figure-caption {
+        margin: 0.85rem 0 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+        line-height: 1.55;
+      }
+
+      .figure-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .figure-grid.two-up {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .comparison-grid {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .comparison-card {
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+      }
+
+      .comparison-card h4,
+      .stat-card h4 {
+        margin: 0 0 0.75rem;
+        font-size: 0.94rem;
+        color: var(--ink);
+      }
+
+      .candidate-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 2.2fr) auto;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .candidate-row:last-child,
+      .meter-row:last-child,
+      .diverging-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .meter-track {
+        position: relative;
+        height: 0.72rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--line) 72%, transparent 28%);
+        overflow: hidden;
+      }
+
+      .meter-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 62%, white 38%));
+      }
+
+      .meter-value {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
+      .stacked-bar {
+        display: flex;
+        width: 100%;
+        height: 1rem;
+        overflow: hidden;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--line) 75%, transparent 25%);
+      }
+
+      .stacked-segment {
+        height: 100%;
+      }
+
+      .segment-key {
+        margin-top: 0.95rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+
+      .segment-row {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 0.94rem;
+      }
+
+      .segment-dot {
+        width: 0.82rem;
+        height: 0.82rem;
+        border-radius: 999px;
+      }
+
+      .meter-list {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .meter-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 2fr) auto;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .stat-grid {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .stat-card {
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+      }
+
+      .stat-value {
+        display: block;
+        font-size: 2rem;
+        line-height: 1;
+        font-weight: 800;
+        color: var(--ink);
+      }
+
+      .stat-note {
+        margin-top: 0.45rem;
+        color: var(--ink-soft);
+        font-size: 0.94rem;
+        line-height: 1.45;
+      }
+
+      .diverging-list {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .diverging-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 2.35fr) auto;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .diverging-track {
+        position: relative;
+        height: 1rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--line) 76%, transparent 24%);
+        overflow: hidden;
+      }
+
+      .diverging-track::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: color-mix(in srgb, var(--line-strong) 70%, transparent 30%);
+      }
+
+      .diverging-fill {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+
+      .diverging-fill.left {
+        right: 50%;
+        border-radius: 999px 0 0 999px;
+        background: color-mix(in srgb, var(--negative) 72%, white 28%);
+      }
+
+      .diverging-fill.right {
+        left: 50%;
+        border-radius: 0 999px 999px 0;
+        background: color-mix(in srgb, var(--positive) 72%, white 28%);
+      }
+
+      .quote-stack {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .quote-chip {
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+        color: var(--ink);
+        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+        line-height: 1.62;
+      }
+
+      .map-shell {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+        overflow: hidden;
+      }
+
+      .map-host {
+        width: 100%;
+        padding: 0.6rem;
+      }
+
+      .map-host svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .legend-list {
+        margin-top: 0.85rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .legend-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.45rem 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink-soft);
+        font-size: 0.88rem;
+      }
+
+      .footer-note {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-grid {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .footer-item {
+        display: grid;
+        gap: 0.18rem;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+      }
+
+      .footer-item strong {
+        color: var(--ink);
+      }
+
+      .prepared-by {
+        margin-top: 1.35rem;
+        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+        font-size: 1.02rem;
+        color: var(--ink);
+      }
+
+      @media (max-width: 900px) {
+        .figure-grid.two-up {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page-shell {
+          padding: 1rem 0.85rem 2rem;
+        }
+
+        .topbar {
+          padding: 0 0.85rem;
+        }
+
+        .report-article {
+          padding: 1.45rem 1rem 1.8rem;
+          border-radius: 22px;
+        }
+
+        .section-copy {
+          font-size: 1.04rem;
+          line-height: 1.7;
+        }
+
+        .candidate-row,
+        .meter-row,
+        .diverging-row {
+          grid-template-columns: 1fr;
+          gap: 0.45rem;
+        }
+
+        .meter-value {
+          justify-self: start;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1693,349 +855,157 @@ td strong { color: var(--ink); }
           <span class="brand-text">VDH Policy Lab</span>
         </a>
         <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">
-          <span class="toggle-icon" id="toggleIcon" aria-hidden="true">&#9788;</span>
+          <span id="toggleIcon" aria-hidden="true">&#9788;</span>
           <span id="toggleLabel">Light</span>
         </button>
       </nav>
     </div>
 
-    <main class="layout">
-      <div id="dataBanner" class="data-banner"></div>
+    <main class="page-shell">
+      <div id="dataBanner" class="status-banner"></div>
 
-      <div class="back-nav" id="siteNavRow">
+      <div class="site-nav-row" id="siteNavRow">
         <a class="back-btn" id="backToPortalLink" href="https://igaming.vantage.philippbroniecki.com/" data-skip-theme-param="true">Portal</a>
         <div class="sibling-nav" id="siblingNavLinks" hidden></div>
       </div>
 
-      <section class="hero card" id="componentHero" data-component-id="hero_title">
-        <div class="hero-inner">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <p class="eyebrow"><span class="eyebrow-pip" aria-hidden="true"></span>Vantage Data House</p>
-              <p class="hero-kicker">Executive briefing</p>
-              <h1 id="heroTitle">Louisiana iGaming Public Opinion Analysis</h1>
-              <p class="hero-subtitle" id="heroSubtitle">A report-style synthesis of the existing Louisiana iGaming artifacts.</p>
-              <p class="hero-thesis" id="heroThesis"></p>
-              <div class="hero-meta" aria-label="Survey metadata">
-                <span class="meta-pill"><a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a></span>
-                <span class="meta-pill" id="metaSample">N = 1,708 respondents</span>
-                <span class="meta-pill" id="metaDates">May 15-21, 2026</span>
-                <span class="meta-pill" id="metaMethod">Static analysis report from existing website artifacts</span>
-              </div>
+      <article class="report-article">
+        <header class="report-header">
+          <p class="report-kicker">Vantage Data House</p>
+          <h1 class="report-title" id="reportTitle">Louisiana iGaming Public Opinion Analysis</h1>
+          <div class="report-meta">
+            <div class="report-meta-line"><span class="report-meta-label">Prepared for:</span> <span id="metaPreparedFor">Governor Jeff Landry</span></div>
+            <div class="report-meta-line"><span class="report-meta-label">Geography:</span> <span id="metaGeography">Louisiana Statewide</span></div>
+            <div class="report-meta-line"><span class="report-meta-label">Issue:</span> <span id="metaIssue">Online Casino Gaming Compact</span></div>
+            <div class="report-meta-line">
+              <span class="report-meta-label">Date:</span> <span id="metaDate">June 2026</span>
+              <span aria-hidden="true">|</span>
+              <span id="metaSample">N = 1,708 Louisiana voters</span>
             </div>
-            <aside class="hero-rail">
-              <div class="hero-brief">
-                <p class="brief-label">Report brief</p>
-                <h2 id="heroBriefTitle">Governor Jeff Landry · Louisiana Statewide</h2>
-                <p id="heroBriefMeta">Online Casino Gaming Compact · June 2026</p>
-              </div>
-              <div class="hero-stat-grid" id="heroSnapshot"></div>
-            </aside>
           </div>
-        </div>
-      </section>
+        </header>
 
-      <section class="card toc-card" id="section-navigation">
-        <div class="section-head compact">
-          <p class="section-eyebrow">Report map</p>
-          <h2>Readout structure</h2>
-          <p>This page keeps the iGaming family shell, but it reads like a memo rather than a dashboard.</p>
-        </div>
-        <div class="toc-grid">
-          <nav class="toc-list" id="reportToc" aria-label="Report sections"></nav>
-          <div class="toc-note">
-            <p>Every chart and callout below is driven by the current static iGaming artifacts already in the repo. Where the template asked for a chart but only summary values were available, the page now uses a report card or table instead of a placeholder.</p>
-          </div>
-        </div>
-      </section>
+        <section id="section-methodology" class="report-section">
+          <h2 class="section-title">Methodology</h2>
+          <div class="section-copy" id="methodologyContent"></div>
+        </section>
 
-      <section class="card report-section" id="section-methodology" data-component-id="methodology_note">
-        <div class="section-head">
-          <p class="section-eyebrow">Methodology</p>
-          <h2>How to read this report</h2>
-          <p>The methodology note is visible up front so the page reads like a confidence-building report, not a buried appendix.</p>
-        </div>
-        <div class="pill-grid" id="methodologyHighlights"></div>
-        <div class="callout methodology-callout">
-          <p id="methodologySummaryText"></p>
-        </div>
-        <details class="methodology-details" style="margin-top:0.95rem;">
-          <summary id="methodologySummary">Full methodology note</summary>
-          <div class="methodology-details-body prose" id="methodologyBody"></div>
-        </details>
-      </section>
+        <section id="section-executive-summary" class="report-section">
+          <h2 class="section-title">Executive Summary</h2>
+          <div class="section-copy" id="executiveSummaryContent"></div>
+          <div id="section-decision-matrix" class="report-section">
+            <h3 class="subsection-title">Decision Matrix</h3>
+            <div class="section-copy" id="decisionMatrixContent"></div>
+          </div>
+          <div class="section-copy" id="headlineFindingsContent"></div>
+          <div class="section-copy" id="centralDecisionContent"></div>
+        </section>
 
-      <section class="card report-section" id="section-executive-summary">
-        <div class="section-head">
-          <p class="section-eyebrow">Executive summary</p>
-          <h2>The strategic read</h2>
-          <p>A short thesis, a set of decision-grade findings, and a clear bottom line.</p>
-        </div>
-        <div class="executive-grid">
-          <div class="thesis-card">
-            <p class="mini-label" id="thesisLabel"></p>
-            <h3 id="thesisHeadline"></h3>
-            <p id="thesisBody"></p>
-          </div>
-          <aside class="aside-card bottom-line-card">
-            <p class="mini-label">Bottom line</p>
-            <p id="bottomLineText"></p>
-          </aside>
-        </div>
-        <div class="finding-list" id="executiveFindings"></div>
-      </section>
+        <section id="section-key-indicators" class="report-section">
+          <h2 class="section-title">Key Indicators</h2>
+          <div class="section-copy" id="keyIndicatorsContent"></div>
+        </section>
 
-      <section class="card report-section" id="section-decision-matrix" data-component-id="decision_matrix">
-        <div class="section-head">
-          <p class="section-eyebrow">Decision matrix</p>
-          <h2>What each path does politically</h2>
-          <p>The baseline gap comes from the report template. The action and inaction paths use the current experiment artifact's with-view vote equivalents.</p>
-        </div>
-        <div class="decision-grid">
-          <div class="matrix-stack" id="decisionTiles"></div>
-          <div class="table-card">
-            <h3>Decision matrix</h3>
-            <div class="table-shell" id="decisionMatrixTable"></div>
-            <p class="caption">Vote translations use the projected 2027 expected-voter denominator already present in the experiment artifact. The baseline 2023 gap remains the template's translated reference point.</p>
-          </div>
-        </div>
-      </section>
+        <section id="section-part-i" class="part-heading report-section">
+          <h2>Part I: The Baseline Problem</h2>
+        </section>
 
-      <section class="card report-section" id="section-key-indicators" data-component-id="key_indicators_dashboard">
-        <div class="section-head">
-          <p class="section-eyebrow">Key indicators</p>
-          <h2>Decision-grade numbers</h2>
-          <p>A compact KPI deck for the values most likely to be cited in a memo, briefing deck, or meeting.</p>
-        </div>
-        <div class="kpi-grid" id="dashboardGrid"></div>
-      </section>
+        <section id="section-landry-position" class="report-section">
+          <h2 class="section-title">Landry's Position: 2023 versus 2027</h2>
+          <div class="section-copy" id="landryPositionContent"></div>
+          <div id="landryPositionFigure"></div>
+        </section>
 
-      <section class="card report-section" id="section-part-i" data-component-id="baseline_problem">
-        <div class="section-divider"><span>Part I</span></div>
-        <div class="section-head">
-          <h2>The baseline problem</h2>
-          <p id="partIIntro"></p>
-        </div>
-        <div class="chart-grid chart-grid-wide">
-          <div class="chart-card">
-            <h3>Landry's position: 2023 versus 2027</h3>
-            <div class="compare-row" id="ballotComparison"></div>
-            <p class="caption">The current ballot chart reuses the test-ballot artifact's with-view statewide topline. The 2023 comparison uses the official statewide baseline file.</p>
-          </div>
-          <aside class="aside-card">
-            <h3>Gap summary</h3>
-            <div id="baselineGapCallout" class="callout compact-callout"></div>
-            <div class="insight-note" id="baselineSidebar" style="margin-top:0.8rem;"></div>
-          </aside>
-        </div>
-        <div class="chart-grid">
-          <div class="chart-card">
-            <h3>Governor Landry favorability</h3>
-            <div id="landryFavorabilityBreakdown"></div>
-            <p class="caption">The favorability card uses the current favorability artifact's statewide breakdown for Governor Landry.</p>
-          </div>
-          <div class="chart-card">
-            <h3>Republican comparison set</h3>
-            <div class="bar-list" id="favorabilityRanking"></div>
-            <p class="caption">This ranking reuses the statewide favorability series already shipped in the sibling favorability page.</p>
-          </div>
-        </div>
-        <div class="chart-card" style="margin-top:0.95rem;">
-          <h3>Regional favorability range</h3>
-          <div class="bar-list" id="favorabilityRegions"></div>
-          <p class="caption">Regional net favorability is rendered as a static bar list because the analysis page only needs a clean readout, not the full geography explorer.</p>
-        </div>
-        <div class="prose" id="partINarrative"></div>
-      </section>
+        <section id="section-favorability" class="report-section">
+          <h2 class="section-title">Favorability</h2>
+          <div class="section-copy" id="favorabilityContent"></div>
+          <div id="favorabilityFigure"></div>
+        </section>
 
-      <section class="card report-section" id="section-part-ii" data-component-id="igaming_popularity">
-        <div class="section-divider"><span>Part II</span></div>
-        <div class="section-head">
-          <h2>Is iGaming popular?</h2>
-          <p id="partIIIntro"></p>
-        </div>
-        <div class="chart-grid">
-          <div class="chart-card">
-            <h3>Statewide support</h3>
-            <div id="supportTopline"></div>
-            <p class="caption">The stacked support bar is pulled directly from the current iGaming support payload.</p>
-          </div>
-          <aside class="aside-card">
-            <h3>Support by party</h3>
-            <div class="bar-list" id="supportByParty"></div>
-            <div class="insight-note" id="supportSidebar" style="margin-top:0.8rem;"></div>
-          </aside>
-        </div>
-        <div class="map-grid" style="margin-top:0.95rem;">
-          <div class="map-card">
-            <h3>Parish support map</h3>
-            <p>Existing support payload plus the existing parish SVG asset, rendered here as a clean static report map.</p>
-            <div class="map-shell" id="parishMapShell">
-              <div class="map-svg-host" id="parishMapHost"></div>
+        <section id="section-part-ii" class="part-heading report-section">
+          <h2>Part II: Is iGaming Popular?</h2>
+        </section>
+
+        <section id="section-baseline-support" class="report-section">
+          <h2 class="section-title">Baseline Support</h2>
+          <div class="section-copy" id="baselineSupportContent"></div>
+          <div id="baselineSupportFigure"></div>
+        </section>
+
+        <section id="section-beliefs" class="report-section">
+          <h2 class="section-title">What Voters Believe About Gambling</h2>
+          <div class="section-copy" id="beliefsContent"></div>
+          <div id="beliefsFigure"></div>
+        </section>
+
+        <section id="section-message-testing" class="report-section">
+          <h2 class="section-title">Message Testing</h2>
+          <div class="section-copy" id="messageTestingContent"></div>
+          <div id="messageTestingFigure"></div>
+        </section>
+
+        <section id="section-persuadability" class="report-section">
+          <h2 class="section-title">Persuadability</h2>
+          <div class="section-copy" id="persuadabilityContent"></div>
+          <div id="persuadabilityFigure"></div>
+        </section>
+
+        <section id="section-part-iii" class="part-heading report-section">
+          <h2>Part III: The Experiment</h2>
+        </section>
+
+        <section id="section-experiment-design" class="report-section">
+          <h2 class="section-title">Design and Methodology</h2>
+          <div class="section-copy" id="experimentDesignContent"></div>
+        </section>
+
+        <section id="section-experiment-results" class="report-section">
+          <h2 class="section-title">Results</h2>
+          <div class="section-copy" id="experimentResultsContent"></div>
+          <div id="experimentResultsFigure"></div>
+        </section>
+
+        <section id="section-revenue-priorities" class="report-section">
+          <h2 class="section-title">Revenue Priorities</h2>
+          <div class="section-copy" id="revenueContent"></div>
+          <div id="revenueFigure"></div>
+        </section>
+
+        <section id="section-conclusion" class="part-heading report-section">
+          <h2>Conclusion</h2>
+          <div class="section-copy" id="conclusionContent"></div>
+        </section>
+
+        <footer id="section-report-footer" class="footer-note">
+          <div class="footer-grid">
+            <div class="footer-item">
+              <span>Field dates</span>
+              <strong id="footerDates">May 15-21, 2026</strong>
             </div>
-            <div class="mini-legend" id="parishMapLegend"></div>
-            <p class="map-note">No geographic model outputs were regenerated for this section.</p>
-          </div>
-          <div class="map-card">
-            <h3>Cultural region support</h3>
-            <p>The clean outline treatment is reused from the existing support page's SVG assets.</p>
-            <div class="map-shell" id="crMapShell">
-              <div class="map-svg-host" id="crMapHost"></div>
-              <div class="map-outline-host" id="crOutlineHost"></div>
+            <div class="footer-item">
+              <span>Sample size</span>
+              <strong id="footerSample">N = 1,708 Louisiana voters</strong>
             </div>
-            <div class="mini-legend" id="crMapLegend"></div>
+            <div class="footer-item">
+              <span>Methodology</span>
+              <strong id="footerMethod">Poststratified ML estimates with experimental treatment effects</strong>
+            </div>
           </div>
-        </div>
-        <div class="chart-grid" style="margin-top:0.95rem;">
-          <div class="chart-card">
-            <h3>Gambling behavior and offshore awareness</h3>
-            <div id="behaviorSummary"></div>
-            <p class="caption">These cards replace template placeholders with clean static summaries backed by the current attitudes payload.</p>
-          </div>
-          <div class="chart-card">
-            <h3>Belief landscape</h3>
-            <div class="bar-list" id="beliefBars"></div>
-            <p class="caption">Agreement bars are sorted from strongest to weakest belief so the hierarchy is easy to scan.</p>
-          </div>
-        </div>
-        <div class="chart-grid" style="margin-top:0.95rem;">
-          <div class="chart-card">
-            <h3>Message testing</h3>
-            <div class="bar-list" id="matchupBars"></div>
-            <p class="caption">The template's "argument matchup" placeholders are rendered as static report bars because the attitudes payload already exposes a clean head-to-head series.</p>
-          </div>
-          <aside class="aside-card">
-            <h3>Winning language</h3>
-            <div class="quote-grid" id="quoteCards"></div>
-          </aside>
-        </div>
-        <div class="chart-grid" style="margin-top:0.95rem;">
-          <div class="chart-card">
-            <h3>Persuadability</h3>
-            <div class="bar-list" id="intensityBars"></div>
-            <p class="caption">This section highlights how much of the electorate remains movable rather than fixed.</p>
-          </div>
-          <div class="chart-card">
-            <h3>Existing gambling behavior</h3>
-            <div class="bar-list" id="gamblingTypeBars"></div>
-            <h3 style="margin-top:1rem;">Trusted messengers</h3>
-            <div class="bar-list" id="messengerBars"></div>
-          </div>
-        </div>
-        <div class="chart-card" style="margin-top:0.95rem;">
-          <h3>Regional support ranking</h3>
-          <div class="bar-list" id="regionSupportBars"></div>
-          <p class="caption">The regional ranking is a deliberate report card rather than a second interactive geography control.</p>
-        </div>
-        <div class="prose" id="partIINarrative"></div>
-      </section>
-
-      <section class="card report-section" id="section-part-iii" data-component-id="experiment_effects">
-        <div class="section-divider"><span>Part III</span></div>
-        <div class="section-head">
-          <h2>The experiment</h2>
-          <p id="partIIIIntro"></p>
-        </div>
-        <div class="chart-grid">
-          <div class="chart-card">
-            <h3>Design and methodology</h3>
-            <div class="scenario-grid" id="experimentDesign"></div>
-            <p class="caption">The experiment section explains the two tested scenarios directly, so the result cards that follow have narrative context.</p>
-          </div>
-          <aside class="aside-card">
-            <h3>Interpretation notes</h3>
-            <div class="prose compact-prose" id="experimentTakeaways"></div>
-          </aside>
-        </div>
-        <div class="chart-grid" style="margin-top:0.95rem;">
-          <div class="chart-card">
-            <h3>Outcome movement</h3>
-            <div class="diverging-list" id="experimentOutcomes"></div>
-            <p class="caption">These bars use the existing experiment summary rows and default to the with-view universe when available.</p>
-          </div>
-          <div class="table-card">
-            <h3>Ballot result summary</h3>
-            <div class="table-shell" id="experimentEffectsTable"></div>
-            <p class="caption">The template's placeholder experiment summary is replaced by a tighter ballot-only table based on the current summary artifact.</p>
-          </div>
-        </div>
-        <div class="chart-grid" style="margin-top:0.95rem;">
-          <div class="table-card">
-            <h3>Concern groups</h3>
-            <div class="table-shell" id="subgroupEffectsTable"></div>
-          </div>
-          <aside class="aside-card">
-            <h3>Why the concern case is weaker than it looks</h3>
-            <div class="insight-note" id="concernInterpretation"></div>
-          </aside>
-        </div>
-        <div class="prose" id="partIIINarrative"></div>
-      </section>
-
-      <section class="card report-section" id="section-revenue" data-component-id="revenue_priorities">
-        <div class="section-divider"><span>Revenue priorities</span></div>
-        <div class="section-head">
-          <h2>Where voters want the money to go</h2>
-          <p id="revenueIntro"></p>
-        </div>
-        <div class="chart-grid">
-          <div class="chart-card">
-            <h3>Priority order</h3>
-            <div class="bar-list" id="revenuePriorityBars"></div>
-            <p class="caption">This replaces the template's chart note with the current attitudes payload's ranked revenue series.</p>
-          </div>
-          <aside class="aside-card pull-quote-card" id="revenueCallout"></aside>
-        </div>
-        <div class="prose" id="revenueNarrative"></div>
-      </section>
-
-      <section class="card report-section" id="section-conclusion">
-        <div class="section-head">
-          <p class="section-eyebrow">Conclusion</p>
-          <h2>What the data is saying</h2>
-          <p>The closing section preserves the report logic while keeping every figure anchored to the current analysis inputs.</p>
-        </div>
-        <div class="pull-quote-wide" id="conclusionPull"></div>
-        <div class="prose" id="conclusionNarrative"></div>
-      </section>
-
-      <section class="card footer-sheet" id="section-footer">
-        <div class="footer-grid">
-          <div class="footer-item">
-            <span>Field dates</span>
-            <strong id="footerDates">May 15-21, 2026</strong>
-          </div>
-          <div class="footer-item">
-            <span>Sample size</span>
-            <strong id="footerSample">N = 1,708 respondents</strong>
-          </div>
-          <div class="footer-item">
-            <span>Methodology</span>
-            <strong id="footerMethod">Static analysis report built from existing iGaming JSON and SVG artifacts in this repo.</strong>
-          </div>
-        </div>
-        <p class="footer-prepared" id="footerPreparedBy">Prepared by Vantage Data House</p>
-      </section>
-
-      <section class="feedback-callout" id="feedbackCallout" hidden>
-        <h2 id="feedbackHeading">Share Your Feedback</h2>
-        <p id="feedbackBody">Have questions about this analysis report or ideas for future additions? We'd love to hear from you.</p>
-        <a class="feedback-cta" id="feedbackCta" href="mailto:philipp@vantagedatahouse.com" target="_blank" rel="noreferrer">Get in Touch</a>
-      </section>
+          <p class="prepared-by" id="footerPreparedBy">Prepared by Vantage Data House</p>
+        </footer>
+      </article>
     </main>
 
-    <script src="lib/html-to-image.min.js"></script>
-    <script src="lib/png-export-helper.js"></script>
     <script>
-const FALLBACK_REPORT = {
+      const FALLBACK_REPORT = {
   "meta": {
     "source": "Vantage Data House",
     "title": "Louisiana iGaming Public Opinion Analysis",
-    "subtitle": "A static synthesis of Louisiana iGaming baseline, experiment, attitudes, and geography artifacts.",
+    "subtitle": "",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "N = 1,708 respondents",
+    "sample": "N = 1,708 Louisiana voters",
     "fieldDates": "May 15-21, 2026",
-    "methodLabel": "Static analysis report from existing website artifacts",
+    "methodLabel": "Analysis report",
     "group_navigation": {
       "group_id": "louisiana_igaming_baseline_2026",
       "group_label": "Louisiana Voter Opinion Study",
@@ -2123,871 +1093,904 @@ const FALLBACK_REPORT = {
   "load_error_message": "Experiment data could not be loaded. Please refresh or contact Vantage Data House."
 };
 
-let reportData = FALLBACK_REPORT;
+      let reportData = FALLBACK_REPORT;
 
-function escapeHtml(value) {
-  return String(value == null ? '' : value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-function renderInlineMarkdown(value) {
-  let html = escapeHtml(value);
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/`(.+?)`/g, '<code>$1</code>');
-  return html;
-}
-
-function toArray(value) {
-  return Array.isArray(value) ? value : [];
-}
-
-function isLocalPreviewHost() {
-  if (location.protocol === 'file:') return true;
-  const host = String(location.hostname || '').toLowerCase();
-  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
-}
-
-function normalizeSiteNavLinks(items) {
-  return toArray(items)
-    .map((item) => {
-      const label = String(item?.label || '').trim();
-      const canonicalHref = String(item?.canonical_href || item?.href || '').trim();
-      const localHref = String(item?.local_href || '').trim();
-      const siteSlug = String(item?.site_slug || item?.siteSlug || '').trim();
-      if (!label || (!canonicalHref && !localHref)) return null;
-      return { label, canonical_href: canonicalHref, local_href: localHref, site_slug: siteSlug };
-    })
-    .filter(Boolean);
-}
-
-function resolveSiblingHref(entry) {
-  const canonicalHref = String(entry?.canonical_href || '').trim();
-  const localHref = String(entry?.local_href || '').trim();
-  if (isLocalPreviewHost() && localHref) return localHref;
-  return canonicalHref || localHref;
-}
-
-function renderSiteNavigation() {
-  const backLink = document.getElementById('backToPortalLink');
-  const siblingWrap = document.getElementById('siblingNavLinks');
-  if (!backLink || !siblingWrap) return;
-
-  const navCfg = reportData?.meta?.group_navigation || {};
-  const backCfg = navCfg?.back || {};
-  const backHref = String(
-    (isLocalPreviewHost() ? (backCfg?.local_href || '') : '') ||
-    backCfg?.href ||
-    backLink.getAttribute('href') ||
-    ''
-  ).trim();
-  const backLabel = String(backCfg?.label || backLink.textContent || 'Portal').trim();
-  if (backHref) backLink.href = backHref;
-  backLink.textContent = backLabel || 'Portal';
-
-  const currentSlug = String(reportData?.template?.site_slug || '').trim();
-  const siblings = normalizeSiteNavLinks(navCfg?.siblings).filter((entry) => entry.site_slug !== currentSlug);
-  siblingWrap.innerHTML = '';
-  if (!siblings.length) {
-    siblingWrap.hidden = true;
-    return;
-  }
-
-  siblings.forEach((entry) => {
-    const href = resolveSiblingHref(entry);
-    if (!href) return;
-    const link = document.createElement('a');
-    link.className = 'site-nav-link';
-    link.href = href;
-    link.textContent = entry.label;
-    siblingWrap.appendChild(link);
-  });
-  siblingWrap.hidden = false;
-}
-
-function applyTheme(theme) {
-  const helper = window.VDHTheme;
-  const normalized = helper?.normalizeTheme ? helper.normalizeTheme(theme) : null;
-  if (!normalized) return;
-  document.documentElement.setAttribute('data-theme', normalized);
-  helper?.persistTheme?.(normalized);
-  const icon = document.getElementById('toggleIcon');
-  const label = document.getElementById('toggleLabel');
-  if (icon) icon.textContent = normalized === 'dark' ? '\u263D' : '\u263C';
-  if (label) label.textContent = normalized === 'dark' ? 'Dark' : 'Light';
-  applyThemeToLinks(document);
-}
-
-function applyThemeToLinks(root = document) {
-  const helper = window.VDHTheme;
-  if (!helper || typeof helper.withThemeParam !== 'function') return;
-  const activeTheme = helper.getActiveTheme();
-  const links = root.querySelectorAll('a[href]');
-  links.forEach((link) => {
-    const rawHref = link.getAttribute('href');
-    if (!rawHref) return;
-    if (String(link.getAttribute('data-skip-theme-param') || '').trim() === 'true') return;
-    if (!link.dataset.rawHref) link.dataset.rawHref = rawHref;
-    const themedHref = helper.withThemeParam(link.dataset.rawHref, activeTheme);
-    if (themedHref) link.setAttribute('href', themedHref);
-  });
-}
-
-function initThemeControls() {
-  const initialTheme = window.VDHTheme?.resolveInitialTheme?.()?.theme ||
-    window.VDHTheme?.getActiveTheme?.() ||
-    document.documentElement.getAttribute('data-theme') ||
-    'light';
-  applyTheme(initialTheme);
-  const toggle = document.getElementById('themeToggle');
-  if (!toggle) return;
-  toggle.addEventListener('click', () => {
-    const current = window.VDHTheme?.getActiveTheme?.() || 'light';
-    applyTheme(current === 'dark' ? 'light' : 'dark');
-  });
-}
-
-async function loadReportData() {
-  const banner = document.getElementById('dataBanner');
-  try {
-    const response = await fetch('data/igaming_analysis_data.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const payload = await response.json();
-    if (!payload || typeof payload !== 'object') throw new Error('Invalid JSON payload');
-    reportData = payload;
-    return;
-  } catch (err) {
-    reportData = FALLBACK_REPORT;
-    if (banner) {
-      banner.classList.add('show');
-      banner.textContent = 'Using embedded fallback data because the analysis JSON could not be loaded.';
-    }
-  }
-}
-
-function formatSignedNumber(value, suffix = '') {
-  const numeric = Number(value);
-  if (!Number.isFinite(numeric)) return 'NA';
-  const sign = numeric > 0 ? '+' : '';
-  return `${sign}${numeric.toLocaleString('en-US')}${suffix}`;
-}
-
-function formatPercent(value, digits = 1) {
-  const numeric = Number(value);
-  if (!Number.isFinite(numeric)) return 'NA';
-  return `${numeric.toFixed(digits)}%`;
-}
-
-function createTable(headers, rows) {
-  const shell = document.createElement('div');
-  shell.className = 'table-shell';
-  const table = document.createElement('table');
-  const thead = document.createElement('thead');
-  const headRow = document.createElement('tr');
-  headers.forEach((header) => {
-    const th = document.createElement('th');
-    th.innerHTML = renderInlineMarkdown(header);
-    headRow.appendChild(th);
-  });
-  thead.appendChild(headRow);
-  table.appendChild(thead);
-
-  const tbody = document.createElement('tbody');
-  rows.forEach((row) => {
-    const tr = document.createElement('tr');
-    row.forEach((cell) => {
-      const td = document.createElement('td');
-      td.innerHTML = renderInlineMarkdown(cell);
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-  table.appendChild(tbody);
-  shell.appendChild(table);
-  return shell;
-}
-
-function renderBlocks(container, blocks) {
-  container.innerHTML = '';
-  toArray(blocks).forEach((block) => {
-    if (block.type === 'paragraph') {
-      const p = document.createElement('p');
-      p.innerHTML = renderInlineMarkdown(block.text);
-      container.appendChild(p);
-    } else if (block.type === 'list') {
-      const list = document.createElement('ul');
-      block.items.forEach((item) => {
-        const li = document.createElement('li');
-        li.innerHTML = renderInlineMarkdown(item);
-        list.appendChild(li);
-      });
-      container.appendChild(list);
-    } else if (block.type === 'quote') {
-      const quote = document.createElement('blockquote');
-      quote.innerHTML = renderInlineMarkdown(block.text);
-      container.appendChild(quote);
-    } else if (block.type === 'table') {
-      container.appendChild(createTable(block.headers, block.rows));
-    }
-  });
-}
-
-function sectionBlocks(slug) {
-  return reportData?.template_sections?.[slug]?.blocks || [];
-}
-
-function appendSectionGroup(containerId, slugs) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const blocks = [];
-  slugs.forEach((slug) => {
-    blocks.push(...sectionBlocks(slug));
-  });
-  renderBlocks(container, blocks);
-}
-
-function renderToc() {
-  const host = document.getElementById('reportToc');
-  if (!host) return;
-  host.innerHTML = '';
-  toArray(reportData?.report?.toc).forEach((item) => {
-    const link = document.createElement('a');
-    link.className = 'toc-link';
-    link.href = `#${item.id}`;
-    link.textContent = item.label;
-    host.appendChild(link);
-  });
-}
-
-function renderHero() {
-  const heroMeta = reportData?.hero_meta || {};
-  const meta = reportData?.meta || {};
-  const report = reportData?.report || {};
-  document.getElementById('heroTitle').textContent = meta.title || 'Louisiana iGaming Public Opinion Analysis';
-  document.getElementById('heroSubtitle').textContent = report.deck || meta.subtitle || '';
-  document.getElementById('heroThesis').textContent = report?.thesis?.headline || '';
-  document.getElementById('metaSample').textContent = meta.sample || 'N = 1,708 respondents';
-  document.getElementById('metaDates').textContent = meta.fieldDates || 'May 15-21, 2026';
-  document.getElementById('metaMethod').textContent = meta.methodLabel || 'Static analysis report from existing website artifacts';
-  document.getElementById('heroBriefTitle').textContent = `${heroMeta.prepared_for || 'Governor Jeff Landry'} \u00b7 ${heroMeta.geography || 'Louisiana Statewide'}`;
-  document.getElementById('heroBriefMeta').textContent = `${heroMeta.issue || 'Online Casino Gaming Compact'} \u00b7 ${heroMeta.report_date || 'June 2026'}`;
-
-  const snapshotHost = document.getElementById('heroSnapshot');
-  snapshotHost.innerHTML = '';
-  toArray(report?.hero_snapshot).forEach((item) => {
-    const card = document.createElement('article');
-    card.className = 'hero-stat';
-    card.innerHTML = `
-      <div class="kpi-label">${escapeHtml(item.label)}</div>
-      <div class="kpi-value ${escapeHtml(item.tone || '')}">${escapeHtml(item.value)}</div>
-      <div class="kpi-supporting">${escapeHtml(item.detail || '')}</div>
-    `;
-    snapshotHost.appendChild(card);
-  });
-}
-
-function renderMethodology() {
-  const report = reportData?.report || {};
-  const highlights = document.getElementById('methodologyHighlights');
-  highlights.innerHTML = '';
-  toArray(report?.methodology_highlights).forEach((item) => {
-    const card = document.createElement('div');
-    card.className = 'pill-card';
-    card.innerHTML = `
-      <span class="pill-card-label">${escapeHtml(item.label)}</span>
-      <span class="pill-card-value">${escapeHtml(item.value)}</span>
-    `;
-    highlights.appendChild(card);
-  });
-  document.getElementById('methodologySummaryText').textContent = report.methodology_summary || '';
-  renderBlocks(document.getElementById('methodologyBody'), sectionBlocks('methodology-note'));
-}
-
-function renderExecutiveSummary() {
-  const report = reportData?.report || {};
-  document.getElementById('thesisLabel').textContent = report?.thesis?.label || 'Central thesis';
-  document.getElementById('thesisHeadline').textContent = report?.thesis?.headline || '';
-  document.getElementById('thesisBody').textContent = report?.thesis?.body || '';
-  document.getElementById('bottomLineText').textContent = report?.bottom_line || '';
-
-  const host = document.getElementById('executiveFindings');
-  host.innerHTML = '';
-  toArray(report?.executive_findings).forEach((item) => {
-    const card = document.createElement('article');
-    card.className = 'finding-card';
-    card.innerHTML = `
-      <div class="finding-number">${escapeHtml(item.number)}</div>
-      <h3>${escapeHtml(item.headline)}</h3>
-      <p>${escapeHtml(item.body)}</p>
-      <div class="finding-metric">${escapeHtml(item.metric)}</div>
-    `;
-    host.appendChild(card);
-  });
-}
-
-function renderDecisionMatrix() {
-  const tiles = document.getElementById('decisionTiles');
-  tiles.innerHTML = '';
-  toArray(reportData?.experiment?.decision_matrix).forEach((item) => {
-    const tone = item.path === 'Today (baseline)' ? 'neutral' : (item.effect_votes > 0 ? 'positive' : 'negative');
-    const article = document.createElement('article');
-    article.className = `decision-tile ${tone}`;
-    article.innerHTML = `
-      <div class="decision-tile-label">${escapeHtml(item.path)}</div>
-      <div class="decision-tile-value ${tone === 'neutral' ? '' : tone}">${escapeHtml(item.effect_label)}</div>
-      <p>${escapeHtml(item.description)}</p>
-    `;
-    tiles.appendChild(article);
-  });
-
-  const target = document.getElementById('decisionMatrixTable');
-  const headers = ['Path', 'Effect on Landry (votes)', 'Where it leaves him'];
-  const rows = toArray(reportData?.experiment?.decision_matrix).map((item) => [
-    `**${item.path}**`,
-    item.effect_label,
-    item.description
-  ]);
-  target.innerHTML = '';
-  target.appendChild(createTable(headers, rows));
-}
-
-function renderDashboard() {
-  const host = document.getElementById('dashboardGrid');
-  host.innerHTML = '';
-  toArray(reportData?.dashboard_cards).forEach((card) => {
-    const article = document.createElement('article');
-    article.className = 'kpi-card';
-    article.innerHTML = `
-      <div class="kpi-label">${escapeHtml(card.label)}</div>
-      <div class="kpi-value ${escapeHtml(card.tone || '')}">${escapeHtml(card.value)}</div>
-      <div class="kpi-supporting">${escapeHtml(card.supporting || '')}</div>
-      <div class="kpi-detail">${escapeHtml(card.detail)}</div>
-    `;
-    host.appendChild(article);
-  });
-}
-
-function makeCandidateBars(rows, colorMap) {
-  const wrap = document.createElement('div');
-  wrap.className = 'candidate-bars';
-  rows.forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'candidate-bar';
-    row.innerHTML = `
-      <div class="candidate-bar-top">
-        <span>${escapeHtml(item.label)}</span>
-        <span class="numeric">${formatPercent(item.value)}</span>
-      </div>
-      <div class="candidate-track">
-        <span class="candidate-fill" style="width:${Math.max(0, Math.min(100, item.value))}%;background:${colorMap[item.id] || 'var(--accent)'};"></span>
-      </div>
-    `;
-    wrap.appendChild(row);
-  });
-  return wrap;
-}
-
-function renderBaselineProblem() {
-  const report = reportData?.report || {};
-  document.getElementById('partIIntro').textContent = report?.section_intros?.part_i || '';
-  const comparisonWrap = document.getElementById('ballotComparison');
-  comparisonWrap.innerHTML = '';
-  const currentCard = document.createElement('div');
-  currentCard.className = 'compare-card';
-  currentCard.innerHTML = '<h4>2027 modeled ballot (with-view respondents)</h4>';
-  currentCard.appendChild(
-    makeCandidateBars(
-      toArray(reportData?.baseline?.current_with_view),
-      {
-        jeff_landry: 'var(--rep)',
-        republican_challenger: '#f39b84',
-        democratic_candidate: 'var(--dem)'
+      function escapeHtml(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
       }
-    )
-  );
-  const oldCard = document.createElement('div');
-  oldCard.className = 'compare-card';
-  oldCard.innerHTML = '<h4>2023 actual primary result</h4>';
-  oldCard.appendChild(
-    makeCandidateBars(
-      toArray(reportData?.baseline?.comparison_2023).map((item, idx) => ({ ...item, id: `comp-${idx}` })),
-      {
-        'comp-0': 'var(--rep)',
-        'comp-1': 'var(--dem)',
-        'comp-2': '#f39b84',
-        'comp-3': '#a8b5c4'
+
+      function renderInlineMarkdown(value) {
+        let html = escapeHtml(value);
+        html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+        return html;
       }
-    )
-  );
-  comparisonWrap.appendChild(currentCard);
-  comparisonWrap.appendChild(oldCard);
 
-  const gap = reportData?.baseline?.gap_from_template || {};
-  document.getElementById('baselineGapCallout').innerHTML = `
-    <p><strong>2023 result:</strong> 52.6%</p>
-    <p style="margin-top:0.45rem;"><strong>Drop from 2023:</strong> ${formatSignedNumber(gap.share_drop, ' pp')}</p>
-    <p style="margin-top:0.45rem;"><strong>Vote equivalent:</strong> ${formatSignedNumber(gap.vote_gap)}</p>
-  `;
-  document.getElementById('baselineSidebar').innerHTML = `
-    <h4>${escapeHtml(report?.baseline_sidebar?.title || 'What this means')}</h4>
-    <p>${escapeHtml(report?.baseline_sidebar?.body || '')}</p>
-  `;
+      function toArray(value) {
+        return Array.isArray(value) ? value : [];
+      }
 
-  const favorability = reportData?.favorability?.landry_breakdown || [];
-  const supportTotal = reportData?.favorability?.landry_totals?.favorable || 0;
-  const opposeTotal = reportData?.favorability?.landry_totals?.unfavorable || 0;
-  const host = document.getElementById('landryFavorabilityBreakdown');
-  host.innerHTML = `
-    <div class="stacked-bar">
-      ${favorability.map((item) => `<span class="stacked-segment" style="width:${item.value}%;background:${item.color};"></span>`).join('')}
-    </div>
-    <div class="legend">
-      ${favorability.map((item) => `<span class="legend-item"><span class="legend-swatch" style="background:${item.color};"></span>${escapeHtml(item.label)} (${formatPercent(item.value)})</span>`).join('')}
-    </div>
-    <p class="section-intro" style="margin-top:0.8rem;">Total favorable: <strong>${formatPercent(supportTotal)}</strong> &middot; Total unfavorable: <strong>${formatPercent(opposeTotal)}</strong> &middot; Net: <strong>${formatSignedNumber(reportData?.favorability?.landry_totals?.net)}</strong></p>
-  `;
+      function isLocalPreviewHost() {
+        if (location.protocol === 'file:') return true;
+        const host = String(location.hostname || '').toLowerCase();
+        return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+      }
 
-  const rankingHost = document.getElementById('favorabilityRanking');
-  rankingHost.innerHTML = '';
-  toArray(reportData?.favorability?.ranking).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.title)}</span>
-        <span class="bar-value">${formatSignedNumber(item.net)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, Math.min(100, item.net + 50))}%;background:var(--accent);"></span></div>
-    `;
-    rankingHost.appendChild(row);
-  });
+      function normalizeSiteNavLinks(items) {
+        return toArray(items)
+          .map((item) => {
+            const label = String(item?.label || '').trim();
+            const canonicalHref = String(item?.canonical_href || item?.href || '').trim();
+            const localHref = String(item?.local_href || '').trim();
+            const siteSlug = String(item?.site_slug || item?.siteSlug || '').trim();
+            if (!label || (!canonicalHref && !localHref)) return null;
+            return { label, canonical_href: canonicalHref, local_href: localHref, site_slug: siteSlug };
+          })
+          .filter(Boolean);
+      }
 
-  const regionHost = document.getElementById('favorabilityRegions');
-  regionHost.innerHTML = '';
-  toArray(reportData?.favorability?.regional_nets).forEach((item) => {
-    const width = Math.max(0, Math.min(100, ((item.net + 25) / 50) * 100));
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatSignedNumber(item.net)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${width}%;background:var(--cool);"></span></div>
-    `;
-    regionHost.appendChild(row);
-  });
+      function resolveSiblingHref(entry) {
+        const canonicalHref = String(entry?.canonical_href || '').trim();
+        const localHref = String(entry?.local_href || '').trim();
+        if (isLocalPreviewHost() && localHref) return localHref;
+        return canonicalHref || localHref;
+      }
 
-  appendSectionGroup('partINarrative', [
-    'section-1-where-landry-stands-2023-vs-2027',
-    'section-2-governor-landry-s-favorability'
-  ]);
-}
+      function renderSiteNavigation() {
+        const backLink = document.getElementById('backToPortalLink');
+        const siblingWrap = document.getElementById('siblingNavLinks');
+        if (!backLink || !siblingWrap) return;
 
-function renderSupportSection() {
-  const report = reportData?.report || {};
-  document.getElementById('partIIIntro').textContent = report?.section_intros?.part_ii || '';
-  const support = reportData?.support || {};
-  const toplineHost = document.getElementById('supportTopline');
-  toplineHost.innerHTML = `
-    <div class="stacked-bar">
-      ${toArray(support?.topline?.segments).map((item) => `<span class="stacked-segment" style="width:${item.value}%;background:${item.color};"></span>`).join('')}
-    </div>
-    <div class="legend">
-      ${toArray(support?.topline?.segments).map((item) => `<span class="legend-item"><span class="legend-swatch" style="background:${item.color};"></span>${escapeHtml(item.label)} (${formatPercent(item.value)})</span>`).join('')}
-    </div>
-    <p class="section-intro" style="margin-top:0.8rem;">Total support: <strong>${formatPercent(support?.topline?.support_total)}</strong> &middot; Total oppose: <strong>${formatPercent(support?.topline?.oppose_total)}</strong> &middot; Net support: <strong>${formatSignedNumber(support?.topline?.net_support)}</strong></p>
-  `;
+        const navCfg = reportData?.meta?.group_navigation || {};
+        const backCfg = navCfg?.back || {};
+        const backHref = String(
+          (isLocalPreviewHost() ? (backCfg?.local_href || '') : '') ||
+          backCfg?.href ||
+          backLink.getAttribute('href') ||
+          ''
+        ).trim();
+        const backLabel = String(backCfg?.label || backLink.textContent || 'Portal').trim();
+        if (backHref) backLink.href = backHref;
+        backLink.textContent = backLabel || 'Portal';
 
-  const partyHost = document.getElementById('supportByParty');
-  partyHost.innerHTML = '';
-  toArray(support?.by_party).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatSignedNumber(item.net)} net</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, Math.min(100, item.support))}%;background:var(--accent);"></span></div>
-    `;
-    partyHost.appendChild(row);
-  });
-  document.getElementById('supportSidebar').innerHTML = `
-    <h4>${escapeHtml(report?.support_sidebar?.title || 'Belief environment')}</h4>
-    <p>${escapeHtml(report?.support_sidebar?.body || '')}</p>
-  `;
+        const currentSlug = String(reportData?.template?.site_slug || '').trim();
+        const siblings = normalizeSiteNavLinks(navCfg?.siblings).filter((entry) => entry.site_slug !== currentSlug);
+        siblingWrap.innerHTML = '';
+        if (!siblings.length) {
+          siblingWrap.hidden = true;
+          return;
+        }
 
-  const behavior = reportData?.attitudes || {};
-  const behaviorHost = document.getElementById('behaviorSummary');
-  const awareness = toArray(behavior?.offshore_awareness);
-  behaviorHost.innerHTML = `
-    <div class="callout">
-      <p><strong>${formatPercent(behavior?.participation?.gambled_last_year)}</strong> of voters report gambling in the last year.</p>
-      <p style="margin-top:0.45rem;"><strong>${formatPercent(awareness[0]?.value)}</strong> say they were already aware offshore online casino gambling exists.</p>
-      <p style="margin-top:0.45rem;color:var(--muted);font-size:0.78rem;">Both metrics come directly from the current attitudes payload and are shown as all-respondents toplines.</p>
-    </div>
-    <div class="bar-list" style="margin-top:0.85rem;">
-      ${awareness.map((item) => `
-        <div class="bar-row">
-          <div class="bar-row-top">
-            <span class="bar-label">${escapeHtml(item.label)}</span>
-            <span class="bar-value">${formatPercent(item.value)}</span>
-          </div>
-          <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--cool);"></span></div>
-        </div>`).join('')}
-    </div>
-  `;
+        siblings.forEach((entry) => {
+          const href = resolveSiblingHref(entry);
+          if (!href) return;
+          const link = document.createElement('a');
+          link.className = 'site-nav-link';
+          link.href = href;
+          link.textContent = entry.label;
+          siblingWrap.appendChild(link);
+        });
+        siblingWrap.hidden = false;
+      }
 
-  const beliefHost = document.getElementById('beliefBars');
-  beliefHost.innerHTML = '';
-  toArray(behavior?.beliefs).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.agree)} agree</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.agree}%;background:var(--accent);"></span></div>
-    `;
-    beliefHost.appendChild(row);
-  });
+      function applyThemeToLinks(root = document) {
+        const helper = window.VDHTheme;
+        if (!helper || typeof helper.withThemeParam !== 'function') return;
+        const activeTheme = helper.getActiveTheme();
+        const links = root.querySelectorAll('a[href]');
+        links.forEach((link) => {
+          const rawHref = link.getAttribute('href');
+          if (!rawHref) return;
+          if (String(link.getAttribute('data-skip-theme-param') || '').trim() === 'true') return;
+          if (!link.dataset.rawHref) link.dataset.rawHref = rawHref;
+          const themedHref = helper.withThemeParam(link.dataset.rawHref, activeTheme);
+          if (themedHref) link.setAttribute('href', themedHref);
+        });
+      }
 
-  const matchupHost = document.getElementById('matchupBars');
-  matchupHost.innerHTML = '';
-  toArray(reportData?.attitudes?.argument_matchups).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.matchup)}</span>
-        <span class="bar-value">${formatSignedNumber(item.gap, ' pp')}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, item.pro_value)}%;background:var(--accent);"></span></div>
-      <p class="section-intro">${escapeHtml(item.winner)} frame: ${formatPercent(item.pro_value)} vs. ${formatPercent(item.anti_value)}</p>
-    `;
-    matchupHost.appendChild(row);
-  });
+      function applyTheme(theme) {
+        const helper = window.VDHTheme;
+        const normalized = helper?.normalizeTheme ? helper.normalizeTheme(theme) : null;
+        if (!normalized) return;
+        document.documentElement.setAttribute('data-theme', normalized);
+        helper?.persistTheme?.(normalized);
+        const icon = document.getElementById('toggleIcon');
+        const label = document.getElementById('toggleLabel');
+        if (icon) icon.textContent = normalized === 'dark' ? '\u263D' : '\u263C';
+        if (label) label.textContent = normalized === 'dark' ? 'Dark' : 'Light';
+        applyThemeToLinks(document);
+      }
 
-  const quotesHost = document.getElementById('quoteCards');
-  quotesHost.innerHTML = '';
-  toArray(reportData?.attitudes?.quote_cards).forEach((item) => {
-    const article = document.createElement('article');
-    article.className = 'quote-card';
-    article.innerHTML = `
-      <div class="quote-support">${formatPercent(item.support)} support &middot; ${escapeHtml(item.winner)}</div>
-      <h4>${escapeHtml(item.matchup)}</h4>
-      <p>&ldquo;${escapeHtml(item.text)}&rdquo;</p>
-    `;
-    quotesHost.appendChild(article);
-  });
+      function initThemeControls() {
+        const initialTheme = window.VDHTheme?.resolveInitialTheme?.()?.theme ||
+          window.VDHTheme?.getActiveTheme?.() ||
+          document.documentElement.getAttribute('data-theme') ||
+          'light';
+        applyTheme(initialTheme);
+        const toggle = document.getElementById('themeToggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', () => {
+          const current = window.VDHTheme?.getActiveTheme?.() || 'light';
+          applyTheme(current === 'dark' ? 'light' : 'dark');
+        });
+      }
 
-  const intensityHost = document.getElementById('intensityBars');
-  intensityHost.innerHTML = '';
-  toArray(reportData?.attitudes?.intensity).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
-    `;
-    intensityHost.appendChild(row);
-  });
+      async function loadReportData() {
+        const banner = document.getElementById('dataBanner');
+        try {
+          const response = await fetch('data/igaming_analysis_data.json', { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const payload = await response.json();
+          if (!payload || typeof payload !== 'object') throw new Error('Invalid JSON payload');
+          reportData = payload;
+        } catch (err) {
+          reportData = FALLBACK_REPORT;
+          if (banner) {
+            banner.classList.add('show');
+            banner.textContent = 'Analysis data could not be loaded. Showing the page shell only.';
+          }
+        }
+      }
 
-  const typeHost = document.getElementById('gamblingTypeBars');
-  typeHost.innerHTML = '';
-  toArray(reportData?.attitudes?.gambling_types).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--accent);"></span></div>
-    `;
-    typeHost.appendChild(row);
-  });
+      function formatPercent(value, digits = 1) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return 'NA';
+        return `${numeric.toFixed(digits)}%`;
+      }
 
-  const messengerHost = document.getElementById('messengerBars');
-  messengerHost.innerHTML = '';
-  toArray(reportData?.attitudes?.messengers).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--cool);"></span></div>
-    `;
-    messengerHost.appendChild(row);
-  });
+      function formatSignedPercent(value) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return 'NA';
+        const sign = numeric > 0 ? '+' : '';
+        return `${sign}${numeric.toFixed(1)} pp`;
+      }
 
-  appendSectionGroup('partIINarrative', [
-    'section-3-baseline-igaming-support',
-    'section-4-what-voters-believe-about-gambling',
-    'section-8-message-testing-what-frames-win',
-    'section-9-how-persuadable-are-voters',
-    'section-10-regional-support'
-  ]);
-}
+      function formatSignedVotes(value) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return 'NA';
+        const sign = numeric > 0 ? '+' : '';
+        return `${sign}${Math.round(numeric).toLocaleString('en-US')} votes`;
+      }
 
-function renderExperimentSection() {
-  const report = reportData?.report || {};
-  document.getElementById('partIIIIntro').textContent = report?.section_intros?.part_iii || '';
+      function createTable(headers, rows) {
+        const wrap = document.createElement('div');
+        wrap.className = 'table-wrap';
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const headRow = document.createElement('tr');
+        headers.forEach((header) => {
+          const th = document.createElement('th');
+          th.innerHTML = renderInlineMarkdown(header);
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
 
-  const designHost = document.getElementById('experimentDesign');
-  designHost.innerHTML = '';
-  toArray(report?.experiment_design).forEach((item) => {
-    const card = document.createElement('article');
-    card.className = 'scenario-card';
-    card.innerHTML = `
-      <div class="mini-label">${escapeHtml(item.label)}</div>
-      <h4>${escapeHtml(item.title)}</h4>
-      <p>${escapeHtml(item.body)}</p>
-    `;
-    designHost.appendChild(card);
-  });
+        const tbody = document.createElement('tbody');
+        toArray(rows).forEach((row) => {
+          const tr = document.createElement('tr');
+          toArray(row).forEach((cell) => {
+            const td = document.createElement('td');
+            td.innerHTML = renderInlineMarkdown(cell);
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        wrap.appendChild(table);
+        return wrap;
+      }
 
-  renderBlocks(
-    document.getElementById('experimentTakeaways'),
-    [{ type: 'list', items: toArray(report?.experiment_takeaways) }]
-  );
+      function renderBlocks(container, blocks) {
+        container.innerHTML = '';
+        appendBlocks(container, blocks);
+      }
 
-  const experiment = reportData?.experiment || {};
-  const outcomesHost = document.getElementById('experimentOutcomes');
-  outcomesHost.innerHTML = '';
-  toArray(experiment?.outcomes).forEach((item) => {
-    const maxAbs = 30;
-    const posWidth = Math.min(50, (Math.max(0, item.signing_pp) / maxAbs) * 50);
-    const negWidth = Math.min(50, (Math.abs(Math.min(0, item.inaction_pp)) / maxAbs) * 50);
-    const row = document.createElement('div');
-    row.className = 'diverging-row';
-    row.innerHTML = `
-      <div class="diverging-label">
-        <span>${escapeHtml(item.label)}</span>
-        <span class="numeric">${formatSignedNumber(item.signing_pp, ' pp')} / ${formatSignedNumber(item.inaction_pp, ' pp')}</span>
-      </div>
-      <div class="diverging-track">
-        <span class="diverging-midline"></span>
-        <span class="diverging-fill negative" style="width:${negWidth}%;"></span>
-        <span class="diverging-fill positive" style="width:${posWidth}%;"></span>
-      </div>
-    `;
-    outcomesHost.appendChild(row);
-  });
+      function appendBlocks(container, blocks) {
+        toArray(blocks).forEach((block) => {
+          if (!block || typeof block !== 'object') return;
+          if (block.type === 'paragraph') {
+            const p = document.createElement('p');
+            p.innerHTML = renderInlineMarkdown(block.text);
+            container.appendChild(p);
+          } else if (block.type === 'table') {
+            container.appendChild(createTable(block.headers, block.rows));
+          } else if (block.type === 'list') {
+            const list = document.createElement(block.ordered ? 'ol' : 'ul');
+            toArray(block.items).forEach((item) => {
+              const li = document.createElement('li');
+              li.innerHTML = renderInlineMarkdown(item);
+              list.appendChild(li);
+            });
+            container.appendChild(list);
+          } else if (block.type === 'quote') {
+            const quote = document.createElement('blockquote');
+            const p = document.createElement('p');
+            p.innerHTML = renderInlineMarkdown(block.text);
+            quote.appendChild(p);
+            container.appendChild(quote);
+          }
+        });
+      }
 
-  const matrix = experiment?.ballot_effects || {};
-  const tableHost = document.getElementById('experimentEffectsTable');
-  tableHost.innerHTML = '';
-  tableHost.appendChild(createTable(
-    ['Scenario', 'Effect', 'Vote equivalent'],
-    [
-      ['**Sign and deliver**', `${formatSignedNumber(matrix.signing_effect_pp, ' pp')}`, formatSignedNumber(matrix.signing_votes)],
-      ['**Do not deliver**', `${formatSignedNumber(matrix.inaction_effect_pp, ' pp')}`, formatSignedNumber(matrix.inaction_votes)],
-      ['**Swing between paths**', `${formatSignedNumber(matrix.swing_effect_pp, ' pp')}`, formatSignedNumber(matrix.swing_votes)]
-    ]
-  ));
+      function renderSectionGroup(containerId, titles, options = {}) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        const headingTag = options.headingTag || 'h3';
+        const headingClass = options.headingClass || 'subsection-title';
+        const showFirstHeading = options.showFirstHeading === true;
 
-  const subgroupHost = document.getElementById('subgroupEffectsTable');
-  subgroupHost.innerHTML = '';
-  subgroupHost.appendChild(createTable(
-    ['Group', 'Effect of signing', 'Effect of inaction', 'Net swing'],
-    toArray(reportData?.experiment?.subgroup_effects).map((item) => [
-      `**${item.label}**`,
-      `${formatSignedNumber(item.signing_effect, ' pp')} (${formatSignedNumber(item.signing_votes)})`,
-      `${formatSignedNumber(item.inaction_effect, ' pp')} (${formatSignedNumber(item.inaction_votes)})`,
-      `${formatSignedNumber(item.swing_effect, ' pp')} (${formatSignedNumber(item.swing_votes)})`
-    ])
-  ));
+        titles.forEach((title, index) => {
+          const section = findSection(title);
+          if (!section) return;
+          if (index > 0 || showFirstHeading) {
+            const heading = document.createElement(headingTag);
+            heading.className = headingClass;
+            heading.textContent = section.title;
+            container.appendChild(heading);
+          }
+          appendBlocks(container, section.blocks);
+        });
+      }
 
-  document.getElementById('concernInterpretation').innerHTML = `
-    <h4>Interpretation</h4>
-    <p>Across the selected concern groups, the consistent pattern is that non-delivery does more damage than signing. That asymmetry matters more than the headline worry that simply touching gambling would be toxic.</p>
-  `;
+      function getSections() {
+        return toArray(reportData?.report_sections);
+      }
 
-  renderBlocks(
-    document.getElementById('partIIINarrative'),
-    toArray(report?.experiment_narrative).map((text) => ({ type: 'paragraph', text }))
-  );
-}
+      function normalizeSectionKey(value) {
+        return String(value || '')
+          .normalize('NFKD')
+          .replace(/[\u2010-\u2015]/g, '-')
+          .replace(/[^a-zA-Z0-9]+/g, ' ')
+          .trim()
+          .toLowerCase();
+      }
 
-function buildMapLegend(host, labels, colors) {
-  host.innerHTML = '';
-  labels.forEach((label, idx) => {
-    const item = document.createElement('span');
-    item.className = 'mini-legend-item';
-    item.innerHTML = `<span class="mini-legend-swatch" style="background:${colors[idx]};"></span>${escapeHtml(label)}`;
-    host.appendChild(item);
-  });
-}
+      function findSection(title) {
+        const target = normalizeSectionKey(title);
+        return getSections().find((section) => normalizeSectionKey(section?.title) === target) || null;
+      }
 
-function supportColor(value) {
-  if (value >= 62) return '#1a6b73';
-  if (value >= 59) return '#2f7f8a';
-  if (value >= 56) return '#66a5ac';
-  if (value >= 53) return '#8ec2c7';
-  return '#b9d9dd';
-}
+      function splitBlocksAtFirstTable(blocks) {
+        const items = toArray(blocks);
+        const index = items.findIndex((block) => block?.type === 'table');
+        if (index === -1) return { before: items, after: [] };
+        return {
+          before: items.slice(0, index),
+          after: items.slice(index)
+        };
+      }
 
-async function injectSvg(path, hostId) {
-  const host = document.getElementById(hostId);
-  if (!host) return null;
-  const response = await fetch(path, { cache: 'no-store' });
-  if (!response.ok) throw new Error(`Failed to load ${path}`);
-  const text = await response.text();
-  host.innerHTML = text;
-  return host.querySelector('svg');
-}
+      function setText(id, value) {
+        const node = document.getElementById(id);
+        if (node) node.textContent = value || '';
+      }
 
-async function renderMaps() {
-  const regionRows = toArray(reportData?.support?.regions);
-  const parishRows = reportData?.support?.parish_support || {};
-  try {
-    const crSvg = await injectSvg('data/igaming_louisiana_cr_map.svg', 'crMapHost');
-    await injectSvg('data/igaming_louisiana_cr_outline.svg', 'crOutlineHost');
-    if (crSvg) {
-      regionRows.forEach((item) => {
-        const path = crSvg.querySelector(`#cr_${CSS.escape(item.id)}`);
-        if (!path) return;
-        path.style.fill = supportColor(item.support);
+      function createFigureBlock(title, caption) {
+        const section = document.createElement('section');
+        section.className = 'figure-block';
+        const heading = document.createElement('h3');
+        heading.className = 'figure-title';
+        heading.textContent = title;
+        section.appendChild(heading);
+        const body = document.createElement('div');
+        body.className = 'figure-grid';
+        section.appendChild(body);
+        if (caption) {
+          const note = document.createElement('p');
+          note.className = 'figure-caption';
+          note.textContent = caption;
+          section.appendChild(note);
+        }
+        return { section, body };
+      }
+
+      function createStackedSupportFigure(segments) {
+        const wrap = document.createElement('div');
+        const bar = document.createElement('div');
+        bar.className = 'stacked-bar';
+        toArray(segments).forEach((segment) => {
+          const value = Number(segment?.value);
+          if (!Number.isFinite(value) || value <= 0) return;
+          const piece = document.createElement('div');
+          piece.className = 'stacked-segment';
+          piece.style.width = `${Math.max(0, value)}%`;
+          piece.style.background = segment?.color || 'var(--accent)';
+          piece.setAttribute('aria-label', `${segment?.label || ''}: ${formatPercent(value)}`);
+          bar.appendChild(piece);
+        });
+        wrap.appendChild(bar);
+
+        const key = document.createElement('div');
+        key.className = 'segment-key';
+        toArray(segments).forEach((segment) => {
+          const value = Number(segment?.value);
+          if (!Number.isFinite(value)) return;
+          const row = document.createElement('div');
+          row.className = 'segment-row';
+          row.innerHTML = `
+            <span class="segment-dot" style="background:${escapeHtml(segment?.color || 'var(--accent)')}"></span>
+            <span>${escapeHtml(segment?.label || '')}</span>
+            <strong>${escapeHtml(formatPercent(value))}</strong>
+          `;
+          key.appendChild(row);
+        });
+        wrap.appendChild(key);
+        return wrap;
+      }
+
+      function createMeterList(rows, valueFormatter) {
+        const list = document.createElement('div');
+        list.className = 'meter-list';
+        toArray(rows).forEach((row) => {
+          const value = Number(row?.value);
+          if (!Number.isFinite(value)) return;
+          const item = document.createElement('div');
+          item.className = 'meter-row';
+          item.innerHTML = `<span>${escapeHtml(row?.label || '')}</span>`;
+          const track = document.createElement('div');
+          track.className = 'meter-track';
+          const fill = document.createElement('div');
+          fill.className = 'meter-fill';
+          fill.style.width = `${Math.max(0, Math.min(100, value))}%`;
+          track.appendChild(fill);
+          item.appendChild(track);
+          const valueNode = document.createElement('span');
+          valueNode.className = 'meter-value';
+          valueNode.textContent = valueFormatter(value, row);
+          item.appendChild(valueNode);
+          list.appendChild(item);
+        });
+        return list;
+      }
+
+      function createComparisonCard(title, rows) {
+        const card = document.createElement('section');
+        card.className = 'comparison-card';
+        const heading = document.createElement('h4');
+        heading.textContent = title;
+        card.appendChild(heading);
+        toArray(rows).forEach((row) => {
+          const value = Number(row?.value);
+          if (!Number.isFinite(value)) return;
+          const item = document.createElement('div');
+          item.className = 'candidate-row';
+          item.innerHTML = `<span>${escapeHtml(row?.label || '')}</span>`;
+          const track = document.createElement('div');
+          track.className = 'meter-track';
+          const fill = document.createElement('div');
+          fill.className = 'meter-fill';
+          fill.style.width = `${Math.max(0, Math.min(100, value))}%`;
+          track.appendChild(fill);
+          item.appendChild(track);
+          const valueNode = document.createElement('span');
+          valueNode.className = 'meter-value';
+          valueNode.textContent = formatPercent(value);
+          item.appendChild(valueNode);
+          card.appendChild(item);
+        });
+        return card;
+      }
+
+      function createDivergingList(rows) {
+        const list = document.createElement('div');
+        list.className = 'diverging-list';
+        const max = Math.max(
+          1,
+          ...toArray(rows).flatMap((row) => [Math.abs(Number(row?.left || 0)), Math.abs(Number(row?.right || 0))])
+        );
+        toArray(rows).forEach((row) => {
+          const left = Math.abs(Number(row?.left || 0));
+          const right = Math.abs(Number(row?.right || 0));
+          const item = document.createElement('div');
+          item.className = 'diverging-row';
+          item.innerHTML = `<span>${escapeHtml(row?.label || '')}</span>`;
+          const track = document.createElement('div');
+          track.className = 'diverging-track';
+          const leftFill = document.createElement('div');
+          leftFill.className = 'diverging-fill left';
+          leftFill.style.width = `${(left / max) * 50}%`;
+          const rightFill = document.createElement('div');
+          rightFill.className = 'diverging-fill right';
+          rightFill.style.width = `${(right / max) * 50}%`;
+          track.appendChild(leftFill);
+          track.appendChild(rightFill);
+          item.appendChild(track);
+          const value = document.createElement('span');
+          value.className = 'meter-value';
+          value.textContent = `${formatSignedPercent(row?.right)} / ${formatSignedPercent(-left)}`;
+          item.appendChild(value);
+          list.appendChild(item);
+        });
+        return list;
+      }
+
+      function createStatCard(title, value, note) {
+        const card = document.createElement('section');
+        card.className = 'stat-card';
+        const heading = document.createElement('h4');
+        heading.textContent = title;
+        const stat = document.createElement('span');
+        stat.className = 'stat-value';
+        stat.textContent = value;
+        const description = document.createElement('p');
+        description.className = 'stat-note';
+        description.textContent = note;
+        card.appendChild(heading);
+        card.appendChild(stat);
+        card.appendChild(description);
+        return card;
+      }
+
+      function scoreToColor(value, minValue, maxValue) {
+        const low = [228, 200, 179];
+        const high = [26, 107, 115];
+        const fallback = 'rgb(208, 216, 224)';
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return fallback;
+        const span = maxValue - minValue || 1;
+        const t = Math.max(0, Math.min(1, (numeric - minValue) / span));
+        const rgb = high.map((channel, index) => {
+          const start = low[index];
+          return Math.round(start + (channel - start) * t);
+        });
+        return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+      }
+
+      async function injectSvgMap(hostId, path, selector, colorLookup, ariaLabel) {
+        const host = document.getElementById(hostId);
+        if (!host) return;
+        try {
+          const response = await fetch(path, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          host.innerHTML = await response.text();
+          const svg = host.querySelector('svg');
+          if (svg && ariaLabel) svg.setAttribute('aria-label', ariaLabel);
+          const values = Object.values(colorLookup).map((entry) => Number(entry?.value)).filter(Number.isFinite);
+          const minValue = values.length ? Math.min(...values) : 0;
+          const maxValue = values.length ? Math.max(...values) : 100;
+          host.querySelectorAll(selector).forEach((node) => {
+            const id = node.id || '';
+            const key = id.replace(/^cr_/, '').replace(/^parish-/, '');
+            const entry = colorLookup[key];
+            if (!entry) return;
+            node.style.fill = scoreToColor(entry.value, minValue, maxValue);
+            node.setAttribute('title', `${entry.label}: ${formatPercent(entry.value)}`);
+          });
+        } catch (err) {
+          host.textContent = 'Map unavailable.';
+        }
+      }
+
+      function renderHeader() {
+        const heroMeta = reportData?.hero_meta || {};
+        const meta = reportData?.meta || {};
+        setText('reportTitle', meta.title || 'Louisiana iGaming Public Opinion Analysis');
+        setText('metaPreparedFor', heroMeta.prepared_for || 'Governor Jeff Landry');
+        setText('metaGeography', heroMeta.geography || 'Louisiana Statewide');
+        setText('metaIssue', heroMeta.issue || 'Online Casino Gaming Compact');
+        setText('metaDate', heroMeta.report_date || meta.fieldDates || 'June 2026');
+        setText('metaSample', meta.sample || 'N = 1,708 Louisiana voters');
+      }
+
+      function renderFooter() {
+        const footer = reportData?.footer || {};
+        setText('footerDates', footer.field_dates || 'May 15-21, 2026');
+        setText('footerSample', footer.sample || 'N = 1,708 Louisiana voters');
+        setText('footerMethod', footer.methodology || 'Poststratified ML estimates with experimental treatment effects');
+        setText('footerPreparedBy', footer.prepared_by || 'Prepared by Vantage Data House');
+      }
+
+      function renderBody() {
+        const methodology = findSection('Methodology');
+        const executive = findSection('Executive Summary');
+        const decisionMatrix = findSection('Decision Matrix');
+        const headlineFindings = findSection('Headline Findings');
+        const centralDecision = findSection('The Central Decision');
+        const keyIndicators = findSection('Key Indicators');
+        const experiment = findSection("Section 5: What Happens If Landry Signs vs. Doesn't");
+
+        renderBlocks(document.getElementById('methodologyContent'), methodology?.blocks);
+        renderBlocks(document.getElementById('executiveSummaryContent'), executive?.blocks);
+        renderBlocks(document.getElementById('decisionMatrixContent'), decisionMatrix?.blocks);
+        renderBlocks(document.getElementById('headlineFindingsContent'), headlineFindings?.blocks);
+        renderBlocks(document.getElementById('centralDecisionContent'), centralDecision?.blocks);
+        renderBlocks(document.getElementById('keyIndicatorsContent'), keyIndicators?.blocks);
+
+        renderSectionGroup('landryPositionContent', [
+          'Section 1: Where Landry Stands-2023 vs. 2027',
+          '2023 Actual Result',
+          '2027 Modeled Ballot (Current)',
+          'The Gap',
+        ]);
+        renderSectionGroup('favorabilityContent', [
+          "Section 2: Governor Landry's Favorability",
+          'Current Standing',
+          'Comparison: Other Louisiana Republicans',
+        ]);
+        renderSectionGroup('baselineSupportContent', [
+          'Section 3: Baseline iGaming Support',
+          'Statewide Topline',
+          'Support by Party',
+          'Intensity Favors Supporters',
+        ]);
+        renderSectionGroup('beliefsContent', [
+          'Section 4: What Voters Believe About Gambling',
+          'Current Behavior',
+          'Awareness of Offshore Gambling',
+          'Belief Battery',
+        ]);
+        renderSectionGroup('messageTestingContent', [
+          'Section 8: Message Testing-What Frames Win',
+          'Argument Matchup Results',
+          'The Winning Arguments (Verbatim)',
+          'Recommended Messaging Framework',
+        ]);
+        renderSectionGroup('persuadabilityContent', [
+          'Section 9: How Persuadable Are Voters?',
+          'View Intensity',
+          'Gambling Type Breakdown',
+        ]);
+        renderSectionGroup('revenueContent', [
+          'Section 6: Where Voters Want the Revenue',
+          'Recommended Revenue Framing',
+        ]);
+        renderSectionGroup('conclusionContent', ['Section 11: What the Data Is Saying']);
+
+        const experimentSplit = splitBlocksAtFirstTable(experiment?.blocks);
+        renderBlocks(document.getElementById('experimentDesignContent'), experimentSplit.before);
+        renderSectionGroup('experimentResultsContent', [
+          'Effect on Test Ballot (Net Landry Position)',
+          'Effect on Favorability',
+          'The Asymmetry',
+        ]);
+      }
+
+      function renderLandryFigure() {
+        const target = document.getElementById('landryPositionFigure');
+        if (!target) return;
+        const ballot = reportData?.figures?.ballot || {};
+        if (!toArray(ballot.current_with_view).length || !toArray(ballot.comparison_2023).length) return;
+        const figure = createFigureBlock(
+          'Test ballot statewide comparison',
+          "Landry's current test ballot position trails his 2023 winning share by 15.3 points."
+        );
+        figure.body.classList.add('two-up');
+        figure.body.appendChild(createComparisonCard('2023 actual result', ballot.comparison_2023));
+        figure.body.appendChild(createComparisonCard('2027 modeled ballot', ballot.current_with_view));
+        target.appendChild(figure.section);
+      }
+
+      function renderFavorabilityFigure() {
+        const target = document.getElementById('favorabilityFigure');
+        if (!target) return;
+        const favorability = reportData?.figures?.favorability || {};
+        const figure = createFigureBlock(
+          'Governor Landry favorability',
+          "Landry's image is positive statewide, but it sits below the strongest Republican figures in the state."
+        );
+        figure.body.classList.add('two-up');
+
+        const left = document.createElement('div');
+        left.className = 'comparison-card';
+        const breakdownTitle = document.createElement('h4');
+        breakdownTitle.textContent = 'Statewide breakdown';
+        left.appendChild(breakdownTitle);
+        left.appendChild(createStackedSupportFigure(toArray(favorability.breakdown)));
+        figure.body.appendChild(left);
+
+        const right = document.createElement('div');
+        right.className = 'comparison-card';
+        const rankingTitle = document.createElement('h4');
+        rankingTitle.textContent = 'Republican comparison';
+        right.appendChild(rankingTitle);
+        right.appendChild(
+          createMeterList(
+            toArray(favorability.ranking).map((row) => ({ label: row.title, value: row.net + 50 })),
+            (value, row) => `${row.net > 0 ? '+' : ''}${Number(row.net).toFixed(0)}`
+          )
+        );
+        figure.body.appendChild(right);
+
+        const regions = document.createElement('div');
+        regions.className = 'comparison-card';
+        const regionTitle = document.createElement('h4');
+        regionTitle.textContent = 'Regional net favorability';
+        regions.appendChild(regionTitle);
+        regions.appendChild(
+          createMeterList(
+            toArray(favorability.regional_nets).map((row) => ({ label: row.label, value: row.net + 50 })),
+            (value, row) => `${row.net > 0 ? '+' : ''}${Number(row.net).toFixed(0)}`
+          )
+        );
+        figure.body.appendChild(regions);
+        target.appendChild(figure.section);
+      }
+
+      async function renderSupportFigure() {
+        const target = document.getElementById('baselineSupportFigure');
+        if (!target) return;
+        const support = reportData?.figures?.support || {};
+        const figure = createFigureBlock(
+          'Statewide support and geography',
+          'Support for legalization runs across party lines and remains positive across Louisiana geography.'
+        );
+        figure.body.classList.add('two-up');
+
+        const topline = document.createElement('div');
+        topline.className = 'comparison-card';
+        const toplineTitle = document.createElement('h4');
+        toplineTitle.textContent = 'Statewide topline';
+        topline.appendChild(toplineTitle);
+        topline.appendChild(createStackedSupportFigure(toArray(support.topline?.segments)));
+        figure.body.appendChild(topline);
+
+        const party = document.createElement('div');
+        party.className = 'comparison-card';
+        const partyTitle = document.createElement('h4');
+        partyTitle.textContent = 'Support by party';
+        party.appendChild(partyTitle);
+        party.appendChild(
+          createMeterList(
+            toArray(support.by_party).map((row) => ({ label: row.label, value: row.support })),
+            (value, row) => `${formatPercent(row.support, 0)} support`
+          )
+        );
+        figure.body.appendChild(party);
+
+        const mapCard = document.createElement('div');
+        mapCard.className = 'comparison-card';
+        const mapTitle = document.createElement('h4');
+        mapTitle.textContent = 'Parish support';
+        mapCard.appendChild(mapTitle);
+        const parishShell = document.createElement('div');
+        parishShell.className = 'map-shell';
+        parishShell.innerHTML = '<div class="map-host" id="parishMapHost"></div>';
+        mapCard.appendChild(parishShell);
+        const parishLegend = document.createElement('div');
+        parishLegend.className = 'legend-list';
+        parishLegend.innerHTML = `
+          <span class="legend-chip"><span class="segment-dot" style="background:${scoreToColor(40, 40, 70)}"></span>Lower support</span>
+          <span class="legend-chip"><span class="segment-dot" style="background:${scoreToColor(70, 40, 70)}"></span>Higher support</span>
+        `;
+        mapCard.appendChild(parishLegend);
+        figure.body.appendChild(mapCard);
+
+        const regionCard = document.createElement('div');
+        regionCard.className = 'comparison-card';
+        const regionTitle = document.createElement('h4');
+        regionTitle.textContent = 'Cultural regions';
+        regionCard.appendChild(regionTitle);
+        regionCard.appendChild(
+          createMeterList(
+            toArray(support.regions).map((row) => ({ label: row.label, value: row.support })),
+            (value) => formatPercent(value, 0)
+          )
+        );
+        const regionMapShell = document.createElement('div');
+        regionMapShell.className = 'map-shell';
+        regionMapShell.style.marginTop = '0.9rem';
+        regionMapShell.innerHTML = '<div class="map-host" id="regionMapHost"></div>';
+        regionCard.appendChild(regionMapShell);
+        figure.body.appendChild(regionCard);
+
+        target.appendChild(figure.section);
+
+        const parishLookup = {};
+        Object.entries(support.parish_support || {}).forEach(([key, row]) => {
+          parishLookup[key.replace(/^parish-/, '')] = { label: row.label, value: Number(row.support) };
+        });
+        const regionLookup = {};
+        toArray(support.regions).forEach((row) => {
+          regionLookup[row.id] = { label: row.label, value: Number(row.support) };
+        });
+        await injectSvgMap('parishMapHost', 'data/igaming_louisiana_parish_map.svg', '.parish-region', parishLookup, 'Louisiana parish support map');
+        await injectSvgMap('regionMapHost', 'data/igaming_louisiana_cr_map.svg', '.cr-region', regionLookup, 'Louisiana cultural region support map');
+      }
+
+      function renderBeliefsFigure() {
+        const target = document.getElementById('beliefsFigure');
+        if (!target) return;
+        const attitudes = reportData?.figures?.attitudes || {};
+        const figure = createFigureBlock(
+          'Gambling behavior and belief landscape',
+          'Voters hold both pro-gambling and anti-gambling beliefs at the same time, which makes framing decisive.'
+        );
+        figure.body.classList.add('two-up');
+
+        const summary = document.createElement('div');
+        summary.className = 'stat-grid';
+        summary.appendChild(
+          createStatCard(
+            'Gambled in the past year',
+            `${Math.round(Number(attitudes.participation?.gambled_last_year || 0))}%`,
+            'Gambling is already a normalized behavior for a majority of Louisiana voters.'
+          )
+        );
+        const offshoreAware = toArray(attitudes.offshore_awareness).find((row) => /aware/i.test(String(row.label || '')));
+        summary.appendChild(
+          createStatCard(
+            'Aware of offshore gambling',
+            `${Math.round(Number(offshoreAware?.value || 0))}%`,
+            'Most voters do not know offshore gambling is already available.'
+          )
+        );
+        figure.body.appendChild(summary);
+
+        const beliefCard = document.createElement('div');
+        beliefCard.className = 'comparison-card';
+        const beliefTitle = document.createElement('h4');
+        beliefTitle.textContent = 'Belief statements';
+        beliefCard.appendChild(beliefTitle);
+        beliefCard.appendChild(
+          createMeterList(
+            toArray(attitudes.beliefs).map((row) => ({ label: row.label, value: row.agree })),
+            (value) => formatPercent(value, 0)
+          )
+        );
+        figure.body.appendChild(beliefCard);
+        target.appendChild(figure.section);
+      }
+
+      function renderMessageFigure() {
+        const target = document.getElementById('messageTestingFigure');
+        if (!target) return;
+        const attitudes = reportData?.figures?.attitudes || {};
+        const figure = createFigureBlock(
+          'Argument matchups',
+          'The freedom frame is the clearest winner, while regulation and Louisiana revenue also outpoll the competing case.'
+        );
+
+        const matchups = document.createElement('div');
+        matchups.className = 'comparison-card';
+        const matchupTitle = document.createElement('h4');
+        matchupTitle.textContent = 'Head-to-head frames';
+        matchups.appendChild(matchupTitle);
+        matchups.appendChild(
+          createDivergingList(
+            toArray(attitudes.argument_matchups).map((row) => ({
+              label: row.matchup,
+              left: row.anti_value,
+              right: row.pro_value
+            }))
+          )
+        );
+        figure.body.appendChild(matchups);
+        target.appendChild(figure.section);
+      }
+
+      function renderPersuadabilityFigure() {
+        const target = document.getElementById('persuadabilityFigure');
+        if (!target) return;
+        const attitudes = reportData?.figures?.attitudes || {};
+        const figure = createFigureBlock(
+          'View intensity and gambling behavior',
+          'Only a minority of voters describe themselves as completely locked in, while gambling participation is already widespread.'
+        );
+        figure.body.classList.add('two-up');
+
+        const intensity = document.createElement('div');
+        intensity.className = 'comparison-card';
+        const intensityTitle = document.createElement('h4');
+        intensityTitle.textContent = 'View intensity';
+        intensity.appendChild(intensityTitle);
+        intensity.appendChild(
+          createMeterList(
+            toArray(attitudes.intensity).map((row) => ({ label: row.label, value: row.value })),
+            (value) => formatPercent(value, 0)
+          )
+        );
+        figure.body.appendChild(intensity);
+
+        const types = document.createElement('div');
+        types.className = 'comparison-card';
+        const typesTitle = document.createElement('h4');
+        typesTitle.textContent = 'Gambling types';
+        types.appendChild(typesTitle);
+        types.appendChild(
+          createMeterList(
+            toArray(attitudes.gambling_types).map((row) => ({ label: row.label, value: row.value })),
+            (value) => formatPercent(value, 0)
+          )
+        );
+        figure.body.appendChild(types);
+        target.appendChild(figure.section);
+      }
+
+      function renderExperimentFigure() {
+        const target = document.getElementById('experimentResultsFigure');
+        if (!target) return;
+        const experiment = reportData?.figures?.experiment || {};
+        const effects = experiment.ballot_effects_with_view || {};
+        if (!Object.keys(effects).length) return;
+        const figure = createFigureBlock(
+          'Experimental effects',
+          'The action scenario improves Landry\'s position, while inaction produces the larger movement in the opposite direction.'
+        );
+        figure.body.classList.add('two-up');
+
+        const ballotCard = document.createElement('div');
+        ballotCard.className = 'comparison-card';
+        const ballotTitle = document.createElement('h4');
+        ballotTitle.textContent = 'Effect on test ballot';
+        ballotCard.appendChild(ballotTitle);
+        ballotCard.appendChild(
+          createDivergingList([
+            {
+              label: 'Ballot movement',
+              left: Math.abs(Number(effects.inaction_effect_pp || 0)),
+              right: Number(effects.signing_effect_pp || 0)
+            }
+          ])
+        );
+        const ballotNote = document.createElement('p');
+        ballotNote.className = 'stat-note';
+        ballotNote.textContent = `${formatSignedVotes(effects.signing_votes)} when signing and delivering; ${formatSignedVotes(effects.inaction_votes)} if voters hear the inaction case.`;
+        ballotCard.appendChild(ballotNote);
+        figure.body.appendChild(ballotCard);
+
+        const outcomeCard = document.createElement('div');
+        outcomeCard.className = 'comparison-card';
+        const outcomeTitle = document.createElement('h4');
+        outcomeTitle.textContent = 'Across outcomes';
+        outcomeCard.appendChild(outcomeTitle);
+        outcomeCard.appendChild(
+          createDivergingList(
+            toArray(experiment.outcomes_with_view).map((row) => ({
+              label: row.label,
+              left: Math.abs(Number(row.inaction_pp || 0)),
+              right: Number(row.signing_pp || 0)
+            }))
+          )
+        );
+        figure.body.appendChild(outcomeCard);
+        target.appendChild(figure.section);
+      }
+
+      function renderRevenueFigure() {
+        const target = document.getElementById('revenueFigure');
+        if (!target) return;
+        const attitudes = reportData?.figures?.attitudes || {};
+        const figure = createFigureBlock(
+          'Revenue priorities',
+          'Roads and bridges and income tax elimination are the clearest top-tier priorities for using iGaming revenue.'
+        );
+        figure.body.appendChild(
+          createMeterList(
+            toArray(attitudes.revenue_priorities).map((row) => ({ label: row.label, value: row.value })),
+            (value) => formatPercent(value, 0)
+          )
+        );
+        target.appendChild(figure.section);
+      }
+
+      async function renderPage() {
+        renderHeader();
+        renderFooter();
+        renderSiteNavigation();
+        renderBody();
+        renderLandryFigure();
+        renderFavorabilityFigure();
+        await renderSupportFigure();
+        renderBeliefsFigure();
+        renderMessageFigure();
+        renderPersuadabilityFigure();
+        renderExperimentFigure();
+        renderRevenueFigure();
+        applyThemeToLinks(document);
+      }
+
+      window.addEventListener('DOMContentLoaded', async () => {
+        initThemeControls();
+        await loadReportData();
+        await renderPage();
       });
-    }
-    buildMapLegend(document.getElementById('crMapLegend'), ['53-55%', '56-58%', '59-61%', '62%+'], ['#b9d9dd', '#8ec2c7', '#2f7f8a', '#1a6b73']);
-  } catch (err) {
-    document.getElementById('crMapHost').innerHTML = '<p class="map-note">Cultural region map could not be loaded in this preview.</p>';
-  }
-
-  try {
-    const parishSvg = await injectSvg('data/igaming_louisiana_parish_map.svg', 'parishMapHost');
-    if (parishSvg) {
-      Object.entries(parishRows).forEach(([id, item]) => {
-        const path = parishSvg.querySelector(`#${CSS.escape(id)}`);
-        if (!path) return;
-        path.style.fill = supportColor(item.support);
-      });
-    }
-    buildMapLegend(document.getElementById('parishMapLegend'), ['53-55%', '56-58%', '59-61%', '62%+'], ['#b9d9dd', '#8ec2c7', '#2f7f8a', '#1a6b73']);
-  } catch (err) {
-    document.getElementById('parishMapHost').innerHTML = '<p class="map-note">Parish map could not be loaded in this preview.</p>';
-  }
-
-  const regionHost = document.getElementById('regionSupportBars');
-  regionHost.innerHTML = '';
-  regionRows.forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.support)} support</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.support}%;background:${supportColor(item.support)};"></span></div>
-    `;
-    regionHost.appendChild(row);
-  });
-}
-
-function renderRevenueSection() {
-  const report = reportData?.report || {};
-  document.getElementById('revenueIntro').textContent = report?.section_intros?.revenue || '';
-
-  const revenueHost = document.getElementById('revenuePriorityBars');
-  revenueHost.innerHTML = '';
-  toArray(reportData?.attitudes?.revenue_priorities).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
-    `;
-    revenueHost.appendChild(row);
-  });
-
-  document.getElementById('revenueCallout').innerHTML = `
-    <h4>${escapeHtml(report?.revenue_callout?.headline || '')}</h4>
-    <p>${escapeHtml(report?.revenue_callout?.body || '')}</p>
-  `;
-
-  appendSectionGroup('revenueNarrative', ['section-6-where-voters-want-the-revenue']);
-}
-
-function renderConclusion() {
-  document.getElementById('conclusionPull').innerHTML = `<p>${escapeHtml(reportData?.report?.conclusion_pull || '')}</p>`;
-  renderBlocks(
-    document.getElementById('conclusionNarrative'),
-    toArray(reportData?.report?.conclusion_narrative).map((text) => ({ type: 'paragraph', text }))
-  );
-}
-
-function renderFooter() {
-  const footer = reportData?.report?.source_footer || {};
-  document.getElementById('footerDates').textContent = footer.field_dates || 'May 15-21, 2026';
-  document.getElementById('footerSample').textContent = footer.sample || 'N = 1,708 respondents';
-  document.getElementById('footerMethod').textContent = footer.methodology || '';
-  document.getElementById('footerPreparedBy').textContent = footer.prepared_by || 'Prepared by Vantage Data House';
-}
-
-function renderFeedback() {
-  const section = document.getElementById('feedbackCallout');
-  const cfg = reportData?.template?.feedback_callout || {};
-  if (!section || cfg.enabled === false) return;
-  document.getElementById('feedbackHeading').textContent = cfg.heading || 'Share Your Feedback';
-  document.getElementById('feedbackBody').textContent = cfg.body || '';
-  const cta = document.getElementById('feedbackCta');
-  cta.textContent = cfg.cta_label || 'Get in Touch';
-  cta.href = cfg.cta_url || 'mailto:philipp@vantagedatahouse.com';
-  section.hidden = false;
-}
-
-function renderAll() {
-  renderSiteNavigation();
-  renderHero();
-  renderToc();
-  renderMethodology();
-  renderExecutiveSummary();
-  renderDecisionMatrix();
-  renderDashboard();
-  renderBaselineProblem();
-  renderSupportSection();
-  renderExperimentSection();
-  renderRevenueSection();
-  renderConclusion();
-  renderFooter();
-  renderFeedback();
-  applyThemeToLinks(document);
-}
-
-(async function init() {
-  initThemeControls();
-  await loadReportData();
-  renderAll();
-  await renderMaps();
-  if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
-    window.VDH_PNG_EXPORT.init({
-      siteSlug: 'igaming_analysis',
-      components: [
-        { componentId: 'decision_matrix', label: 'decision-matrix' },
-        { componentId: 'key_indicators_dashboard', label: 'dashboard' },
-        { componentId: 'baseline_problem', label: 'baseline-problem' },
-        { componentId: 'igaming_popularity', label: 'igaming-popularity' },
-        { componentId: 'experiment_effects', label: 'experiment-effects' },
-        { componentId: 'revenue_priorities', label: 'revenue-priorities' }
-      ]
-    });
-  }
-})();
     </script>
   </body>
 </html>
