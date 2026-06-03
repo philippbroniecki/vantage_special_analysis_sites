@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Louisiana iGaming Public Opinion Analysis | Vantage Data House</title>
+    <title>Louisiana iGaming public opinion analysis | Vantage Data House</title>
     <link rel="canonical" href="https://analysis.igaming.vantage.philippbroniecki.com/" />
     <link
       rel="icon"
@@ -182,18 +182,14 @@
         --surface: #ffffff;
         --surface-soft: #f6f9fb;
         --ink: #162433;
-        --ink-soft: #43576b;
-        --muted: #66798c;
+        --ink-soft: #41586e;
+        --muted: #6a7e92;
         --line: #d8e2ea;
         --line-strong: #c4d0da;
         --accent: #1a6b73;
         --accent-soft: rgba(26, 107, 115, 0.1);
-        --warm: #bf6c32;
-        --warm-soft: rgba(191, 108, 50, 0.14);
-        --positive: #2f7a45;
-        --negative: #ae4333;
-        --shadow: 0 16px 42px rgba(12, 28, 46, 0.08);
-        --article-width: 760px;
+        --shadow: 0 18px 46px rgba(12, 28, 46, 0.08);
+        --article-width: 940px;
         --page-width: 1120px;
       }
 
@@ -202,16 +198,12 @@
         --surface: #13202d;
         --surface-soft: #172737;
         --ink: #ebf2f8;
-        --ink-soft: #bbccda;
-        --muted: #95aabf;
+        --ink-soft: #c0cfdd;
+        --muted: #9fb2c5;
         --line: #223446;
         --line-strong: #31475d;
         --accent: #51b8c2;
-        --accent-soft: rgba(81, 184, 194, 0.12);
-        --warm: #e2a06f;
-        --warm-soft: rgba(226, 160, 111, 0.14);
-        --positive: #70c28d;
-        --negative: #ef8f81;
+        --accent-soft: rgba(81, 184, 194, 0.14);
         --shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
       }
 
@@ -319,7 +311,7 @@
       }
 
       .site-nav-row {
-        width: min(100%, 980px);
+        width: min(100%, var(--article-width));
         margin: 0 auto 1.35rem;
         display: flex;
         flex-wrap: wrap;
@@ -357,7 +349,7 @@
       .report-article {
         width: min(100%, var(--article-width));
         margin: 0 auto;
-        padding: 2.2rem clamp(1.15rem, 2.8vw, 2.8rem);
+        padding: 2.4rem clamp(1.2rem, 2.6vw, 2.8rem);
         background: var(--surface);
         border: 1px solid color-mix(in srgb, var(--line) 82%, transparent 18%);
         border-radius: 28px;
@@ -365,127 +357,120 @@
       }
 
       .report-header {
-        margin-bottom: 2.2rem;
-        padding-bottom: 1.75rem;
+        padding-bottom: 1.8rem;
         border-bottom: 1px solid var(--line);
       }
 
-      .report-kicker {
-        margin: 0 0 0.8rem;
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--accent);
-      }
-
       .report-title {
-        margin: 0;
+        margin: 0 0 1.15rem;
         font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-        font-size: clamp(2.15rem, 4.8vw, 3.35rem);
+        font-size: clamp(2.2rem, 4.6vw, 3.4rem);
         line-height: 1.08;
         letter-spacing: -0.02em;
         color: var(--ink);
       }
 
-      .report-meta {
-        margin-top: 1.15rem;
-        display: grid;
-        gap: 0.45rem;
-        color: var(--ink-soft);
-        font-size: 0.98rem;
+      .report-header-copy p {
+        margin: 0 0 0.5rem;
+        max-width: none;
       }
 
-      .report-meta-line {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+      .report-body {
+        padding-top: 1.8rem;
       }
 
-      .report-meta-label {
-        font-weight: 700;
+      .report-heading-major,
+      .report-heading-section,
+      .report-heading-subsection {
+        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
         color: var(--ink);
       }
 
-      .report-section {
-        margin-top: 2.4rem;
-      }
-
-      .part-heading {
-        margin-top: 3rem;
-        padding-top: 2rem;
+      .report-heading-major {
+        margin: 2.7rem 0 1rem;
+        padding-top: 1.95rem;
         border-top: 1px solid var(--line);
+        font-size: clamp(1.7rem, 3vw, 2.25rem);
+        line-height: 1.16;
       }
 
-      .part-heading h2 {
-        margin: 0;
-        font-size: 0.92rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--accent);
-      }
-
-      .section-title {
-        margin: 0 0 1rem;
-        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-        font-size: clamp(1.6rem, 3vw, 2.2rem);
-        line-height: 1.18;
-        color: var(--ink);
-      }
-
-      .subsection-title {
-        margin: 0 0 0.95rem;
-        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-        font-size: clamp(1.32rem, 2.2vw, 1.6rem);
+      .report-heading-section {
+        margin: 2.15rem 0 0.9rem;
+        font-size: clamp(1.42rem, 2.5vw, 1.78rem);
         line-height: 1.2;
-        color: var(--ink);
       }
 
-      .section-copy {
-        color: var(--ink-soft);
+      .report-heading-subsection {
+        margin: 1.65rem 0 0.75rem;
+        font-size: clamp(1.18rem, 2vw, 1.35rem);
+        line-height: 1.24;
+      }
+
+      .report-paragraph,
+      .report-list,
+      .report-quote {
+        max-width: 82ch;
+      }
+
+      .report-paragraph,
+      .report-list,
+      .report-quote,
+      .report-table-wrap table {
         font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-        font-size: 1.13rem;
-        line-height: 1.76;
+        color: var(--ink-soft);
+        font-size: 1.14rem;
+        line-height: 1.78;
       }
 
-      .section-copy > :first-child {
-        margin-top: 0;
+      .report-paragraph {
+        margin: 0 0 1.1rem;
       }
 
-      .section-copy p {
-        margin: 0 0 1.05rem;
-      }
-
-      .section-copy strong {
+      .report-paragraph strong,
+      .report-list strong,
+      .report-quote strong {
         color: var(--ink);
       }
 
-      .section-copy ul,
-      .section-copy ol {
-        margin: 0.2rem 0 1.15rem 1.35rem;
-        padding: 0;
+      .report-paragraph em,
+      .report-list em,
+      .report-quote em {
+        font-style: italic;
       }
 
-      .section-copy li {
-        margin-bottom: 0.55rem;
-        padding-left: 0.15rem;
-      }
-
-      .section-copy blockquote {
-        margin: 1.15rem 0;
-        padding: 0.2rem 0 0.2rem 1rem;
-        border-left: 3px solid var(--accent);
-        color: var(--ink);
-      }
-
-      .section-copy code {
+      .report-paragraph code,
+      .report-list code,
+      .report-quote code,
+      .report-table-wrap code {
         font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
         font-size: 0.9em;
       }
 
-      .table-wrap {
+      .report-list {
+        margin: 0 0 1.15rem 1.3rem;
+        padding: 0;
+      }
+
+      .report-list li {
+        margin-bottom: 0.45rem;
+        padding-left: 0.1rem;
+      }
+
+      .report-quote {
         margin: 1.2rem 0;
+        padding: 0.15rem 0 0.15rem 1rem;
+        border-left: 3px solid var(--accent);
+        color: var(--ink);
+      }
+
+      .report-divider {
+        margin: 2.25rem 0;
+        border: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .report-table-wrap {
+        margin: 1.2rem 0 1.35rem;
         overflow-x: auto;
         border: 1px solid var(--line);
         border-radius: 18px;
@@ -495,10 +480,7 @@
       table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 520px;
-        font-size: 0.97rem;
-        line-height: 1.45;
-        color: var(--ink);
+        min-width: 560px;
       }
 
       th,
@@ -514,7 +496,8 @@
       }
 
       th {
-        font-size: 0.8rem;
+        font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+        font-size: 0.79rem;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -523,25 +506,11 @@
       }
 
       .figure-block {
-        margin: 1.35rem 0 1.5rem;
-        padding: 1.2rem 1.2rem 1rem;
+        margin: 1.3rem 0 1.5rem;
+        padding: 1.1rem;
         border: 1px solid var(--line);
         border-radius: 20px;
         background: var(--surface-soft);
-      }
-
-      .figure-title {
-        margin: 0 0 0.9rem;
-        font-size: 1.02rem;
-        line-height: 1.3;
-        color: var(--ink);
-      }
-
-      .figure-caption {
-        margin: 0.85rem 0 0;
-        color: var(--muted);
-        font-size: 0.94rem;
-        line-height: 1.55;
       }
 
       .figure-grid {
@@ -553,44 +522,51 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .comparison-grid {
-        display: grid;
-        gap: 0.85rem;
-      }
-
-      .comparison-card {
+      .figure-card {
         padding: 1rem;
         border: 1px solid var(--line);
         border-radius: 16px;
         background: var(--surface);
       }
 
-      .comparison-card h4,
-      .stat-card h4 {
-        margin: 0 0 0.75rem;
-        font-size: 0.94rem;
+      .figure-card h4 {
+        margin: 0 0 0.8rem;
+        font-size: 0.95rem;
         color: var(--ink);
       }
 
-      .candidate-row {
+      .comparison-row,
+      .meter-row,
+      .matchup-row {
         display: grid;
-        grid-template-columns: minmax(0, 1.5fr) minmax(0, 2.2fr) auto;
         align-items: center;
-        gap: 0.8rem;
-        margin-bottom: 0.7rem;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
       }
 
-      .candidate-row:last-child,
+      .comparison-row {
+        grid-template-columns: minmax(0, 1.45fr) minmax(0, 2.15fr) auto;
+      }
+
+      .meter-row {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 2fr) auto;
+      }
+
+      .matchup-row {
+        grid-template-columns: minmax(0, 1.45fr) minmax(0, 2.2fr);
+      }
+
+      .comparison-row:last-child,
       .meter-row:last-child,
-      .diverging-row:last-child {
+      .matchup-row:last-child {
         margin-bottom: 0;
       }
 
       .meter-track {
         position: relative;
-        height: 0.72rem;
+        height: 0.78rem;
         border-radius: 999px;
-        background: color-mix(in srgb, var(--line) 72%, transparent 28%);
+        background: color-mix(in srgb, var(--line) 74%, transparent 26%);
         overflow: hidden;
       }
 
@@ -614,7 +590,7 @@
         height: 1rem;
         overflow: hidden;
         border-radius: 999px;
-        background: color-mix(in srgb, var(--line) 75%, transparent 25%);
+        background: color-mix(in srgb, var(--line) 76%, transparent 24%);
       }
 
       .stacked-segment {
@@ -641,45 +617,6 @@
         border-radius: 999px;
       }
 
-      .meter-list {
-        display: grid;
-        gap: 0.7rem;
-      }
-
-      .meter-row {
-        display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(0, 2fr) auto;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .stat-grid {
-        display: grid;
-        gap: 0.9rem;
-      }
-
-      .stat-card {
-        padding: 1rem;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: var(--surface);
-      }
-
-      .stat-value {
-        display: block;
-        font-size: 2rem;
-        line-height: 1;
-        font-weight: 800;
-        color: var(--ink);
-      }
-
-      .stat-note {
-        margin-top: 0.45rem;
-        color: var(--ink-soft);
-        font-size: 0.94rem;
-        line-height: 1.45;
-      }
-
       .diverging-list {
         display: grid;
         gap: 0.85rem;
@@ -687,9 +624,9 @@
 
       .diverging-row {
         display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(0, 2.35fr) auto;
-        gap: 0.75rem;
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.4fr) auto;
         align-items: center;
+        gap: 0.75rem;
       }
 
       .diverging-track {
@@ -719,28 +656,32 @@
       .diverging-fill.left {
         right: 50%;
         border-radius: 999px 0 0 999px;
-        background: color-mix(in srgb, var(--negative) 72%, white 28%);
+        background: rgba(176, 76, 59, 0.72);
       }
 
       .diverging-fill.right {
         left: 50%;
         border-radius: 0 999px 999px 0;
-        background: color-mix(in srgb, var(--positive) 72%, white 28%);
+        background: rgba(34, 127, 81, 0.72);
       }
 
-      .quote-stack {
+      .matchup-bars {
         display: grid;
-        gap: 0.85rem;
+        gap: 0.45rem;
       }
 
-      .quote-chip {
-        padding: 1rem;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: var(--surface);
-        color: var(--ink);
-        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-        line-height: 1.62;
+      .matchup-side {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 0.92rem;
+      }
+
+      .matchup-label {
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+        line-height: 1.45;
       }
 
       .map-shell {
@@ -761,54 +702,6 @@
         height: auto;
       }
 
-      .legend-list {
-        margin-top: 0.85rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.55rem;
-      }
-
-      .legend-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        padding: 0.45rem 0.7rem;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: var(--surface);
-        color: var(--ink-soft);
-        font-size: 0.88rem;
-      }
-
-      .footer-note {
-        margin-top: 3rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--line);
-      }
-
-      .footer-grid {
-        display: grid;
-        gap: 0.8rem;
-      }
-
-      .footer-item {
-        display: grid;
-        gap: 0.18rem;
-        color: var(--ink-soft);
-        font-size: 0.95rem;
-      }
-
-      .footer-item strong {
-        color: var(--ink);
-      }
-
-      .prepared-by {
-        margin-top: 1.35rem;
-        font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-        font-size: 1.02rem;
-        color: var(--ink);
-      }
-
       @media (max-width: 900px) {
         .figure-grid.two-up {
           grid-template-columns: 1fr;
@@ -825,17 +718,21 @@
         }
 
         .report-article {
-          padding: 1.45rem 1rem 1.8rem;
+          padding: 1.5rem 1rem 1.9rem;
           border-radius: 22px;
         }
 
-        .section-copy {
+        .report-paragraph,
+        .report-list,
+        .report-quote,
+        .report-table-wrap table {
           font-size: 1.04rem;
-          line-height: 1.7;
+          line-height: 1.72;
         }
 
-        .candidate-row,
+        .comparison-row,
         .meter-row,
+        .matchup-row,
         .diverging-row {
           grid-template-columns: 1fr;
           gap: 0.45rem;
@@ -870,129 +767,8 @@
       </div>
 
       <article class="report-article">
-        <header class="report-header">
-          <p class="report-kicker">Vantage Data House</p>
-          <h1 class="report-title" id="reportTitle">Louisiana iGaming Public Opinion Analysis</h1>
-          <div class="report-meta">
-            <div class="report-meta-line"><span class="report-meta-label">Prepared for:</span> <span id="metaPreparedFor">Governor Jeff Landry</span></div>
-            <div class="report-meta-line"><span class="report-meta-label">Geography:</span> <span id="metaGeography">Louisiana Statewide</span></div>
-            <div class="report-meta-line"><span class="report-meta-label">Issue:</span> <span id="metaIssue">Online Casino Gaming Compact</span></div>
-            <div class="report-meta-line">
-              <span class="report-meta-label">Date:</span> <span id="metaDate">June 2026</span>
-              <span aria-hidden="true">|</span>
-              <span id="metaSample">N = 1,708 Louisiana voters</span>
-            </div>
-          </div>
-        </header>
-
-        <section id="section-methodology" class="report-section">
-          <h2 class="section-title">Methodology</h2>
-          <div class="section-copy" id="methodologyContent"></div>
-        </section>
-
-        <section id="section-executive-summary" class="report-section">
-          <h2 class="section-title">Executive Summary</h2>
-          <div class="section-copy" id="executiveSummaryContent"></div>
-          <div id="section-decision-matrix" class="report-section">
-            <h3 class="subsection-title">Decision Matrix</h3>
-            <div class="section-copy" id="decisionMatrixContent"></div>
-          </div>
-          <div class="section-copy" id="headlineFindingsContent"></div>
-          <div class="section-copy" id="centralDecisionContent"></div>
-        </section>
-
-        <section id="section-key-indicators" class="report-section">
-          <h2 class="section-title">Key Indicators</h2>
-          <div class="section-copy" id="keyIndicatorsContent"></div>
-        </section>
-
-        <section id="section-part-i" class="part-heading report-section">
-          <h2>Part I: The Baseline Problem</h2>
-        </section>
-
-        <section id="section-landry-position" class="report-section">
-          <h2 class="section-title">Landry's Position: 2023 versus 2027</h2>
-          <div class="section-copy" id="landryPositionContent"></div>
-          <div id="landryPositionFigure"></div>
-        </section>
-
-        <section id="section-favorability" class="report-section">
-          <h2 class="section-title">Favorability</h2>
-          <div class="section-copy" id="favorabilityContent"></div>
-          <div id="favorabilityFigure"></div>
-        </section>
-
-        <section id="section-part-ii" class="part-heading report-section">
-          <h2>Part II: Is iGaming Popular?</h2>
-        </section>
-
-        <section id="section-baseline-support" class="report-section">
-          <h2 class="section-title">Baseline Support</h2>
-          <div class="section-copy" id="baselineSupportContent"></div>
-          <div id="baselineSupportFigure"></div>
-        </section>
-
-        <section id="section-beliefs" class="report-section">
-          <h2 class="section-title">What Voters Believe About Gambling</h2>
-          <div class="section-copy" id="beliefsContent"></div>
-          <div id="beliefsFigure"></div>
-        </section>
-
-        <section id="section-message-testing" class="report-section">
-          <h2 class="section-title">Message Testing</h2>
-          <div class="section-copy" id="messageTestingContent"></div>
-          <div id="messageTestingFigure"></div>
-        </section>
-
-        <section id="section-persuadability" class="report-section">
-          <h2 class="section-title">Persuadability</h2>
-          <div class="section-copy" id="persuadabilityContent"></div>
-          <div id="persuadabilityFigure"></div>
-        </section>
-
-        <section id="section-part-iii" class="part-heading report-section">
-          <h2>Part III: The Experiment</h2>
-        </section>
-
-        <section id="section-experiment-design" class="report-section">
-          <h2 class="section-title">Design and Methodology</h2>
-          <div class="section-copy" id="experimentDesignContent"></div>
-        </section>
-
-        <section id="section-experiment-results" class="report-section">
-          <h2 class="section-title">Results</h2>
-          <div class="section-copy" id="experimentResultsContent"></div>
-          <div id="experimentResultsFigure"></div>
-        </section>
-
-        <section id="section-revenue-priorities" class="report-section">
-          <h2 class="section-title">Revenue Priorities</h2>
-          <div class="section-copy" id="revenueContent"></div>
-          <div id="revenueFigure"></div>
-        </section>
-
-        <section id="section-conclusion" class="part-heading report-section">
-          <h2>Conclusion</h2>
-          <div class="section-copy" id="conclusionContent"></div>
-        </section>
-
-        <footer id="section-report-footer" class="footer-note">
-          <div class="footer-grid">
-            <div class="footer-item">
-              <span>Field dates</span>
-              <strong id="footerDates">May 15-21, 2026</strong>
-            </div>
-            <div class="footer-item">
-              <span>Sample size</span>
-              <strong id="footerSample">N = 1,708 Louisiana voters</strong>
-            </div>
-            <div class="footer-item">
-              <span>Methodology</span>
-              <strong id="footerMethod">Poststratified ML estimates with experimental treatment effects</strong>
-            </div>
-          </div>
-          <p class="prepared-by" id="footerPreparedBy">Prepared by Vantage Data House</p>
-        </footer>
+        <header id="reportHeader" class="report-header"></header>
+        <div id="reportBody" class="report-body"></div>
       </article>
     </main>
 
@@ -1000,12 +776,12 @@
       const FALLBACK_REPORT = {
   "meta": {
     "source": "Vantage Data House",
-    "title": "Louisiana iGaming Public Opinion Analysis",
+    "title": "Louisiana iGaming public opinion analysis",
     "subtitle": "",
     "site": "https://www.vantagedatahouse.com",
-    "sample": "N = 1,708 Louisiana voters",
-    "fieldDates": "May 15-21, 2026",
-    "methodLabel": "Analysis report",
+    "sample": "",
+    "fieldDates": "",
+    "methodLabel": "",
     "group_navigation": {
       "group_id": "louisiana_igaming_baseline_2026",
       "group_label": "Louisiana Voter Opinion Study",
@@ -1063,13 +839,7 @@
   "template": {
     "site_slug": "igaming_analysis",
     "component_order": [],
-    "feedback_callout": {
-      "enabled": true,
-      "heading": "Share Your Feedback",
-      "body": "Have questions about this analysis report or ideas for future additions? We'd love to hear from you.",
-      "cta_label": "Get in Touch",
-      "cta_url": "mailto:philipp@vantagedatahouse.com"
-    }
+    "feedback_callout": []
   },
   "turnout_assumption": [],
   "response_universe": [],
@@ -1094,6 +864,8 @@
 };
 
       let reportData = FALLBACK_REPORT;
+      let mapHostCounter = 0;
+      const pendingAsyncWork = [];
 
       function escapeHtml(value) {
         return String(value == null ? '' : value)
@@ -1105,9 +877,10 @@
       }
 
       function renderInlineMarkdown(value) {
-        let html = escapeHtml(value);
-        html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-        html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+        let html = escapeHtml(value == null ? '' : value);
+        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+        html = html.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/(^|[\s(])\*([^*]+?)\*(?=[$\s.,;:!?)]|$)/g, '$1<em>$2</em>');
         return html;
       }
 
@@ -1237,38 +1010,42 @@
         }
       }
 
-      function formatPercent(value, digits = 1) {
-        const numeric = Number(value);
-        if (!Number.isFinite(numeric)) return 'NA';
-        return `${numeric.toFixed(digits)}%`;
+      function normalizeHeadingId(value) {
+        return String(value || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .replace(/-{2,}/g, '-');
       }
 
-      function formatSignedPercent(value) {
-        const numeric = Number(value);
-        if (!Number.isFinite(numeric)) return 'NA';
-        const sign = numeric > 0 ? '+' : '';
-        return `${sign}${numeric.toFixed(1)} pp`;
-      }
-
-      function formatSignedVotes(value) {
-        const numeric = Number(value);
-        if (!Number.isFinite(numeric)) return 'NA';
-        const sign = numeric > 0 ? '+' : '';
-        return `${sign}${Math.round(numeric).toLocaleString('en-US')} votes`;
+      function renderParagraphHtml(lines) {
+        const source = toArray(lines);
+        const parts = [];
+        source.forEach((line, index) => {
+          const raw = String(line == null ? '' : line);
+          const cleaned = raw.replace(/\s+$/, '');
+          if (!cleaned) return;
+          parts.push(renderInlineMarkdown(cleaned));
+          if (index < source.length - 1) {
+            parts.push(/\s{2,}$/.test(raw) ? '<br>' : ' ');
+          }
+        });
+        return parts.join('').trim();
       }
 
       function createTable(headers, rows) {
         const wrap = document.createElement('div');
-        wrap.className = 'table-wrap';
+        wrap.className = 'report-table-wrap';
+        wrap.setAttribute('data-report-table', 'true');
         const table = document.createElement('table');
         const thead = document.createElement('thead');
-        const headRow = document.createElement('tr');
-        headers.forEach((header) => {
+        const headerRow = document.createElement('tr');
+        toArray(headers).forEach((header) => {
           const th = document.createElement('th');
           th.innerHTML = renderInlineMarkdown(header);
-          headRow.appendChild(th);
+          headerRow.appendChild(th);
         });
-        thead.appendChild(headRow);
+        thead.appendChild(headerRow);
         table.appendChild(thead);
 
         const tbody = document.createElement('tbody');
@@ -1286,112 +1063,24 @@
         return wrap;
       }
 
-      function renderBlocks(container, blocks) {
-        container.innerHTML = '';
-        appendBlocks(container, blocks);
+      function formatPercent(value, digits = 1) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return 'NA';
+        return `${numeric.toFixed(digits)}%`;
       }
 
-      function appendBlocks(container, blocks) {
-        toArray(blocks).forEach((block) => {
-          if (!block || typeof block !== 'object') return;
-          if (block.type === 'paragraph') {
-            const p = document.createElement('p');
-            p.innerHTML = renderInlineMarkdown(block.text);
-            container.appendChild(p);
-          } else if (block.type === 'table') {
-            container.appendChild(createTable(block.headers, block.rows));
-          } else if (block.type === 'list') {
-            const list = document.createElement(block.ordered ? 'ol' : 'ul');
-            toArray(block.items).forEach((item) => {
-              const li = document.createElement('li');
-              li.innerHTML = renderInlineMarkdown(item);
-              list.appendChild(li);
-            });
-            container.appendChild(list);
-          } else if (block.type === 'quote') {
-            const quote = document.createElement('blockquote');
-            const p = document.createElement('p');
-            p.innerHTML = renderInlineMarkdown(block.text);
-            quote.appendChild(p);
-            container.appendChild(quote);
-          }
-        });
-      }
-
-      function renderSectionGroup(containerId, titles, options = {}) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = '';
-        const headingTag = options.headingTag || 'h3';
-        const headingClass = options.headingClass || 'subsection-title';
-        const showFirstHeading = options.showFirstHeading === true;
-
-        titles.forEach((title, index) => {
-          const section = findSection(title);
-          if (!section) return;
-          if (index > 0 || showFirstHeading) {
-            const heading = document.createElement(headingTag);
-            heading.className = headingClass;
-            heading.textContent = section.title;
-            container.appendChild(heading);
-          }
-          appendBlocks(container, section.blocks);
-        });
-      }
-
-      function getSections() {
-        return toArray(reportData?.report_sections);
-      }
-
-      function normalizeSectionKey(value) {
-        return String(value || '')
-          .normalize('NFKD')
-          .replace(/[\u2010-\u2015]/g, '-')
-          .replace(/[^a-zA-Z0-9]+/g, ' ')
-          .trim()
-          .toLowerCase();
-      }
-
-      function findSection(title) {
-        const target = normalizeSectionKey(title);
-        return getSections().find((section) => normalizeSectionKey(section?.title) === target) || null;
-      }
-
-      function splitBlocksAtFirstTable(blocks) {
-        const items = toArray(blocks);
-        const index = items.findIndex((block) => block?.type === 'table');
-        if (index === -1) return { before: items, after: [] };
-        return {
-          before: items.slice(0, index),
-          after: items.slice(index)
-        };
-      }
-
-      function setText(id, value) {
-        const node = document.getElementById(id);
-        if (node) node.textContent = value || '';
-      }
-
-      function createFigureBlock(title, caption) {
+      function createFigureShell(markerText) {
         const section = document.createElement('section');
         section.className = 'figure-block';
-        const heading = document.createElement('h3');
-        heading.className = 'figure-title';
-        heading.textContent = title;
-        section.appendChild(heading);
+        section.setAttribute('data-report-figure', 'true');
+        section.setAttribute('aria-label', markerText || 'Report figure');
         const body = document.createElement('div');
         body.className = 'figure-grid';
         section.appendChild(body);
-        if (caption) {
-          const note = document.createElement('p');
-          note.className = 'figure-caption';
-          note.textContent = caption;
-          section.appendChild(note);
-        }
         return { section, body };
       }
 
-      function createStackedSupportFigure(segments) {
+      function createStackedBarFigure(segments) {
         const wrap = document.createElement('div');
         const bar = document.createElement('div');
         bar.className = 'stacked-bar';
@@ -1425,9 +1114,44 @@
         return wrap;
       }
 
-      function createMeterList(rows, valueFormatter) {
-        const list = document.createElement('div');
-        list.className = 'meter-list';
+      function createComparisonCard(title, rows) {
+        const card = document.createElement('section');
+        card.className = 'figure-card';
+        if (title) {
+          const heading = document.createElement('h4');
+          heading.textContent = title;
+          card.appendChild(heading);
+        }
+        toArray(rows).forEach((row) => {
+          const value = Number(row?.value);
+          if (!Number.isFinite(value)) return;
+          const item = document.createElement('div');
+          item.className = 'comparison-row';
+          item.innerHTML = `<span>${escapeHtml(row?.label || '')}</span>`;
+          const track = document.createElement('div');
+          track.className = 'meter-track';
+          const fill = document.createElement('div');
+          fill.className = 'meter-fill';
+          fill.style.width = `${Math.max(0, Math.min(100, value))}%`;
+          track.appendChild(fill);
+          item.appendChild(track);
+          const stat = document.createElement('span');
+          stat.className = 'meter-value';
+          stat.textContent = formatPercent(value);
+          item.appendChild(stat);
+          card.appendChild(item);
+        });
+        return card;
+      }
+
+      function createMeterListCard(title, rows, formatter) {
+        const card = document.createElement('section');
+        card.className = 'figure-card';
+        if (title) {
+          const heading = document.createElement('h4');
+          heading.textContent = title;
+          card.appendChild(heading);
+        }
         toArray(rows).forEach((row) => {
           const value = Number(row?.value);
           if (!Number.isFinite(value)) return;
@@ -1441,53 +1165,32 @@
           fill.style.width = `${Math.max(0, Math.min(100, value))}%`;
           track.appendChild(fill);
           item.appendChild(track);
-          const valueNode = document.createElement('span');
-          valueNode.className = 'meter-value';
-          valueNode.textContent = valueFormatter(value, row);
-          item.appendChild(valueNode);
-          list.appendChild(item);
-        });
-        return list;
-      }
-
-      function createComparisonCard(title, rows) {
-        const card = document.createElement('section');
-        card.className = 'comparison-card';
-        const heading = document.createElement('h4');
-        heading.textContent = title;
-        card.appendChild(heading);
-        toArray(rows).forEach((row) => {
-          const value = Number(row?.value);
-          if (!Number.isFinite(value)) return;
-          const item = document.createElement('div');
-          item.className = 'candidate-row';
-          item.innerHTML = `<span>${escapeHtml(row?.label || '')}</span>`;
-          const track = document.createElement('div');
-          track.className = 'meter-track';
-          const fill = document.createElement('div');
-          fill.className = 'meter-fill';
-          fill.style.width = `${Math.max(0, Math.min(100, value))}%`;
-          track.appendChild(fill);
-          item.appendChild(track);
-          const valueNode = document.createElement('span');
-          valueNode.className = 'meter-value';
-          valueNode.textContent = formatPercent(value);
-          item.appendChild(valueNode);
+          const stat = document.createElement('span');
+          stat.className = 'meter-value';
+          stat.textContent = formatter(value, row);
+          item.appendChild(stat);
           card.appendChild(item);
         });
         return card;
       }
 
-      function createDivergingList(rows) {
+      function createDivergingCard(title, rows) {
+        const card = document.createElement('section');
+        card.className = 'figure-card';
+        if (title) {
+          const heading = document.createElement('h4');
+          heading.textContent = title;
+          card.appendChild(heading);
+        }
         const list = document.createElement('div');
         list.className = 'diverging-list';
         const max = Math.max(
           1,
-          ...toArray(rows).flatMap((row) => [Math.abs(Number(row?.left || 0)), Math.abs(Number(row?.right || 0))])
+          ...toArray(rows).flatMap((row) => [Math.abs(Number(row?.agree || 0)), Math.abs(Number(row?.disagree || 0))])
         );
         toArray(rows).forEach((row) => {
-          const left = Math.abs(Number(row?.left || 0));
-          const right = Math.abs(Number(row?.right || 0));
+          const agree = Math.abs(Number(row?.agree || 0));
+          const disagree = Math.abs(Number(row?.disagree || 0));
           const item = document.createElement('div');
           item.className = 'diverging-row';
           item.innerHTML = `<span>${escapeHtml(row?.label || '')}</span>`;
@@ -1495,36 +1198,63 @@
           track.className = 'diverging-track';
           const leftFill = document.createElement('div');
           leftFill.className = 'diverging-fill left';
-          leftFill.style.width = `${(left / max) * 50}%`;
+          leftFill.style.width = `${(disagree / max) * 50}%`;
           const rightFill = document.createElement('div');
           rightFill.className = 'diverging-fill right';
-          rightFill.style.width = `${(right / max) * 50}%`;
+          rightFill.style.width = `${(agree / max) * 50}%`;
           track.appendChild(leftFill);
           track.appendChild(rightFill);
           item.appendChild(track);
-          const value = document.createElement('span');
-          value.className = 'meter-value';
-          value.textContent = `${formatSignedPercent(row?.right)} / ${formatSignedPercent(-left)}`;
-          item.appendChild(value);
+          const stat = document.createElement('span');
+          stat.className = 'meter-value';
+          stat.textContent = `${formatPercent(agree, 0)} / ${formatPercent(disagree, 0)}`;
+          item.appendChild(stat);
           list.appendChild(item);
         });
-        return list;
+        card.appendChild(list);
+        return card;
       }
 
-      function createStatCard(title, value, note) {
+      function createMatchupCard(rows) {
         const card = document.createElement('section');
-        card.className = 'stat-card';
-        const heading = document.createElement('h4');
-        heading.textContent = title;
-        const stat = document.createElement('span');
-        stat.className = 'stat-value';
-        stat.textContent = value;
-        const description = document.createElement('p');
-        description.className = 'stat-note';
-        description.textContent = note;
-        card.appendChild(heading);
-        card.appendChild(stat);
-        card.appendChild(description);
+        card.className = 'figure-card';
+        toArray(rows).forEach((row) => {
+          const matchup = document.createElement('div');
+          matchup.className = 'matchup-row';
+          const label = document.createElement('div');
+          label.className = 'matchup-label';
+          label.textContent = row?.matchup || '';
+          matchup.appendChild(label);
+
+          const bars = document.createElement('div');
+          bars.className = 'matchup-bars';
+          [
+            { label: row?.pro_label, value: Number(row?.pro_value) },
+            { label: row?.anti_label, value: Number(row?.anti_value) }
+          ].forEach((item) => {
+            if (!Number.isFinite(item.value)) return;
+            const side = document.createElement('div');
+            side.className = 'matchup-side';
+            const sideLabel = document.createElement('span');
+            sideLabel.textContent = item.label || '';
+            const sideValue = document.createElement('span');
+            sideValue.className = 'meter-value';
+            sideValue.textContent = formatPercent(item.value, 0);
+            side.appendChild(sideLabel);
+            side.appendChild(sideValue);
+            bars.appendChild(side);
+
+            const track = document.createElement('div');
+            track.className = 'meter-track';
+            const fill = document.createElement('div');
+            fill.className = 'meter-fill';
+            fill.style.width = `${Math.max(0, Math.min(100, item.value))}%`;
+            track.appendChild(fill);
+            bars.appendChild(track);
+          });
+          matchup.appendChild(bars);
+          card.appendChild(matchup);
+        });
         return card;
       }
 
@@ -1568,428 +1298,257 @@
         }
       }
 
-      function renderHeader() {
-        const heroMeta = reportData?.hero_meta || {};
-        const meta = reportData?.meta || {};
-        setText('reportTitle', meta.title || 'Louisiana iGaming Public Opinion Analysis');
-        setText('metaPreparedFor', heroMeta.prepared_for || 'Governor Jeff Landry');
-        setText('metaGeography', heroMeta.geography || 'Louisiana Statewide');
-        setText('metaIssue', heroMeta.issue || 'Online Casino Gaming Compact');
-        setText('metaDate', heroMeta.report_date || meta.fieldDates || 'June 2026');
-        setText('metaSample', meta.sample || 'N = 1,708 Louisiana voters');
+      function createParishMapCard(values) {
+        const card = document.createElement('section');
+        card.className = 'figure-card';
+        const hostId = `parishMapHost${++mapHostCounter}`;
+        const shell = document.createElement('div');
+        shell.className = 'map-shell';
+        shell.innerHTML = `<div class="map-host" id="${hostId}"></div>`;
+        card.appendChild(shell);
+        pendingAsyncWork.push(
+          injectSvgMap(hostId, 'data/igaming_louisiana_parish_map.svg', '[id^="parish-"]', values, 'Louisiana parish support map')
+        );
+        return card;
       }
 
-      function renderFooter() {
-        const footer = reportData?.footer || {};
-        setText('footerDates', footer.field_dates || 'May 15-21, 2026');
-        setText('footerSample', footer.sample || 'N = 1,708 Louisiana voters');
-        setText('footerMethod', footer.methodology || 'Poststratified ML estimates with experimental treatment effects');
-        setText('footerPreparedBy', footer.prepared_by || 'Prepared by Vantage Data House');
+      function renderFigureBlock(block) {
+        const shell = createFigureShell(block?.marker || '');
+        const figures = reportData?.figures || {};
+        const key = String(block?.figure_key || '');
+
+        if (key === 'test_ballot_statewide_comparison_chart') {
+          shell.body.classList.add('two-up');
+          shell.body.appendChild(createComparisonCard('2023', figures?.ballot?.comparison_2023));
+          shell.body.appendChild(createComparisonCard('2027 Test', figures?.ballot?.current_with_view));
+          return shell.section;
+        }
+
+        if (key === 'favorability_ranking') {
+          shell.body.classList.add('two-up');
+          const breakdown = document.createElement('section');
+          breakdown.className = 'figure-card';
+          breakdown.appendChild(createStackedBarFigure(figures?.favorability?.breakdown));
+          shell.body.appendChild(breakdown);
+          shell.body.appendChild(
+            createMeterListCard(
+              '',
+              toArray(figures?.favorability?.ranking).map((row) => ({ label: row.title, value: Number(row.net) + 50, net: row.net })),
+              (value, row) => `${Number(row.net) > 0 ? '+' : ''}${Number(row.net).toFixed(0)}`
+            )
+          );
+          return shell.section;
+        }
+
+        if (key === 'support_overview_map') {
+          shell.body.classList.add('two-up');
+          const topline = document.createElement('section');
+          topline.className = 'figure-card';
+          topline.appendChild(createStackedBarFigure(figures?.support?.topline?.segments));
+          shell.body.appendChild(topline);
+          shell.body.appendChild(createParishMapCard(figures?.support?.parish_support || {}));
+          shell.body.appendChild(
+            createMeterListCard(
+              '',
+              toArray(figures?.support?.regions).map((row) => ({ label: row.label, value: row.support })),
+              (value) => formatPercent(value, 0)
+            )
+          );
+          return shell.section;
+        }
+
+        if (key === 'support_demographic_with_view') {
+          shell.body.appendChild(
+            createMeterListCard(
+              '',
+              toArray(figures?.support?.by_party).map((row) => ({ label: row.label, value: row.support })),
+              (value) => formatPercent(value, 0)
+            )
+          );
+          return shell.section;
+        }
+
+        if (key === 'gambling_behavior_offshore_awareness') {
+          shell.body.classList.add('two-up');
+          shell.body.appendChild(
+            createMeterListCard(
+              '',
+              [
+                { label: 'Gambled in past year', value: figures?.attitudes?.participation?.gambled_last_year },
+                { label: 'Did not gamble', value: figures?.attitudes?.participation?.did_not_gamble }
+              ],
+              (value) => formatPercent(value, 0)
+            )
+          );
+          shell.body.appendChild(
+            createMeterListCard(
+              '',
+              toArray(figures?.attitudes?.offshore_awareness),
+              (value) => formatPercent(value, 0)
+            )
+          );
+          return shell.section;
+        }
+
+        if (key === 'belief_landscape') {
+          shell.body.appendChild(createDivergingCard('', figures?.attitudes?.beliefs));
+          return shell.section;
+        }
+
+        if (key === 'argument_matchups') {
+          shell.body.appendChild(createMatchupCard(figures?.attitudes?.argument_matchups));
+          return shell.section;
+        }
+
+        if (key === 'persuadability_bars') {
+          shell.body.appendChild(
+            createMeterListCard(
+              '',
+              toArray(figures?.attitudes?.intensity),
+              (value) => formatPercent(value, 0)
+            )
+          );
+          return shell.section;
+        }
+
+        if (key === 'priorities_and_revenue_uses') {
+          shell.body.appendChild(
+            createMeterListCard(
+              '',
+              toArray(figures?.attitudes?.revenue_priorities),
+              (value) => formatPercent(value, 0)
+            )
+          );
+          return shell.section;
+        }
+
+        const fallback = document.createElement('section');
+        fallback.className = 'figure-card';
+        fallback.textContent = String(block?.marker || '').replace(/^Insert\s+[Cc]hart\s*->\s*/, '');
+        shell.body.appendChild(fallback);
+        return shell.section;
       }
 
-      function renderBody() {
-        const methodology = findSection('Methodology');
-        const executive = findSection('Executive Summary');
-        const decisionMatrix = findSection('Decision Matrix');
-        const headlineFindings = findSection('Headline Findings');
-        const centralDecision = findSection('The Central Decision');
-        const keyIndicators = findSection('Key Indicators');
-        const experiment = findSection("Section 5: What Happens If Landry Signs vs. Doesn't");
-
-        renderBlocks(document.getElementById('methodologyContent'), methodology?.blocks);
-        renderBlocks(document.getElementById('executiveSummaryContent'), executive?.blocks);
-        renderBlocks(document.getElementById('decisionMatrixContent'), decisionMatrix?.blocks);
-        renderBlocks(document.getElementById('headlineFindingsContent'), headlineFindings?.blocks);
-        renderBlocks(document.getElementById('centralDecisionContent'), centralDecision?.blocks);
-        renderBlocks(document.getElementById('keyIndicatorsContent'), keyIndicators?.blocks);
-
-        renderSectionGroup('landryPositionContent', [
-          'Section 1: Where Landry Stands-2023 vs. 2027',
-          '2023 Actual Result',
-          '2027 Modeled Ballot (Current)',
-          'The Gap',
-        ]);
-        renderSectionGroup('favorabilityContent', [
-          "Section 2: Governor Landry's Favorability",
-          'Current Standing',
-          'Comparison: Other Louisiana Republicans',
-        ]);
-        renderSectionGroup('baselineSupportContent', [
-          'Section 3: Baseline iGaming Support',
-          'Statewide Topline',
-          'Support by Party',
-          'Intensity Favors Supporters',
-        ]);
-        renderSectionGroup('beliefsContent', [
-          'Section 4: What Voters Believe About Gambling',
-          'Current Behavior',
-          'Awareness of Offshore Gambling',
-          'Belief Battery',
-        ]);
-        renderSectionGroup('messageTestingContent', [
-          'Section 8: Message Testing-What Frames Win',
-          'Argument Matchup Results',
-          'The Winning Arguments (Verbatim)',
-          'Recommended Messaging Framework',
-        ]);
-        renderSectionGroup('persuadabilityContent', [
-          'Section 9: How Persuadable Are Voters?',
-          'View Intensity',
-          'Gambling Type Breakdown',
-        ]);
-        renderSectionGroup('revenueContent', [
-          'Section 6: Where Voters Want the Revenue',
-          'Recommended Revenue Framing',
-        ]);
-        renderSectionGroup('conclusionContent', ['Section 11: What the Data Is Saying']);
-
-        const experimentSplit = splitBlocksAtFirstTable(experiment?.blocks);
-        renderBlocks(document.getElementById('experimentDesignContent'), experimentSplit.before);
-        renderSectionGroup('experimentResultsContent', [
-          'Effect on Test Ballot (Net Landry Position)',
-          'Effect on Favorability',
-          'The Asymmetry',
-        ]);
+      function splitReportBlocks(blocks) {
+        const items = toArray(blocks);
+        const titleIndex = items.findIndex((block) => block?.type === 'heading' && Number(block?.level) === 1);
+        const firstRuleIndex = items.findIndex((block, index) => index > titleIndex && block?.type === 'rule');
+        return {
+          titleBlock: titleIndex >= 0 ? items[titleIndex] : null,
+          headerBlocks: titleIndex >= 0 && firstRuleIndex > titleIndex ? items.slice(titleIndex + 1, firstRuleIndex) : [],
+          bodyBlocks: firstRuleIndex >= 0 ? items.slice(firstRuleIndex + 1) : items
+        };
       }
 
-      function renderLandryFigure() {
-        const target = document.getElementById('landryPositionFigure');
-        if (!target) return;
-        const ballot = reportData?.figures?.ballot || {};
-        if (!toArray(ballot.current_with_view).length || !toArray(ballot.comparison_2023).length) return;
-        const figure = createFigureBlock(
-          'Test ballot statewide comparison',
-          "Landry's current test ballot position trails his 2023 winning share by 15.3 points."
-        );
-        figure.body.classList.add('two-up');
-        figure.body.appendChild(createComparisonCard('2023 actual result', ballot.comparison_2023));
-        figure.body.appendChild(createComparisonCard('2027 modeled ballot', ballot.current_with_view));
-        target.appendChild(figure.section);
-      }
+      function renderHeader(blocks) {
+        const container = document.getElementById('reportHeader');
+        if (!container) return;
+        container.innerHTML = '';
+        const split = splitReportBlocks(blocks);
 
-      function renderFavorabilityFigure() {
-        const target = document.getElementById('favorabilityFigure');
-        if (!target) return;
-        const favorability = reportData?.figures?.favorability || {};
-        const figure = createFigureBlock(
-          'Governor Landry favorability',
-          "Landry's image is positive statewide, but it sits below the strongest Republican figures in the state."
-        );
-        figure.body.classList.add('two-up');
+        const title = document.createElement('h1');
+        title.className = 'report-title';
+        title.id = 'reportTitle';
+        title.textContent = split.titleBlock?.text || reportData?.meta?.title || 'Louisiana iGaming public opinion analysis';
+        container.appendChild(title);
 
-        const left = document.createElement('div');
-        left.className = 'comparison-card';
-        const breakdownTitle = document.createElement('h4');
-        breakdownTitle.textContent = 'Statewide breakdown';
-        left.appendChild(breakdownTitle);
-        left.appendChild(createStackedSupportFigure(toArray(favorability.breakdown)));
-        figure.body.appendChild(left);
-
-        const right = document.createElement('div');
-        right.className = 'comparison-card';
-        const rankingTitle = document.createElement('h4');
-        rankingTitle.textContent = 'Republican comparison';
-        right.appendChild(rankingTitle);
-        right.appendChild(
-          createMeterList(
-            toArray(favorability.ranking).map((row) => ({ label: row.title, value: row.net + 50 })),
-            (value, row) => `${row.net > 0 ? '+' : ''}${Number(row.net).toFixed(0)}`
-          )
-        );
-        figure.body.appendChild(right);
-
-        const regions = document.createElement('div');
-        regions.className = 'comparison-card';
-        const regionTitle = document.createElement('h4');
-        regionTitle.textContent = 'Regional net favorability';
-        regions.appendChild(regionTitle);
-        regions.appendChild(
-          createMeterList(
-            toArray(favorability.regional_nets).map((row) => ({ label: row.label, value: row.net + 50 })),
-            (value, row) => `${row.net > 0 ? '+' : ''}${Number(row.net).toFixed(0)}`
-          )
-        );
-        figure.body.appendChild(regions);
-        target.appendChild(figure.section);
-      }
-
-      async function renderSupportFigure() {
-        const target = document.getElementById('baselineSupportFigure');
-        if (!target) return;
-        const support = reportData?.figures?.support || {};
-        const figure = createFigureBlock(
-          'Statewide support and geography',
-          'Support for legalization runs across party lines and remains positive across Louisiana geography.'
-        );
-        figure.body.classList.add('two-up');
-
-        const topline = document.createElement('div');
-        topline.className = 'comparison-card';
-        const toplineTitle = document.createElement('h4');
-        toplineTitle.textContent = 'Statewide topline';
-        topline.appendChild(toplineTitle);
-        topline.appendChild(createStackedSupportFigure(toArray(support.topline?.segments)));
-        figure.body.appendChild(topline);
-
-        const party = document.createElement('div');
-        party.className = 'comparison-card';
-        const partyTitle = document.createElement('h4');
-        partyTitle.textContent = 'Support by party';
-        party.appendChild(partyTitle);
-        party.appendChild(
-          createMeterList(
-            toArray(support.by_party).map((row) => ({ label: row.label, value: row.support })),
-            (value, row) => `${formatPercent(row.support, 0)} support`
-          )
-        );
-        figure.body.appendChild(party);
-
-        const mapCard = document.createElement('div');
-        mapCard.className = 'comparison-card';
-        const mapTitle = document.createElement('h4');
-        mapTitle.textContent = 'Parish support';
-        mapCard.appendChild(mapTitle);
-        const parishShell = document.createElement('div');
-        parishShell.className = 'map-shell';
-        parishShell.innerHTML = '<div class="map-host" id="parishMapHost"></div>';
-        mapCard.appendChild(parishShell);
-        const parishLegend = document.createElement('div');
-        parishLegend.className = 'legend-list';
-        parishLegend.innerHTML = `
-          <span class="legend-chip"><span class="segment-dot" style="background:${scoreToColor(40, 40, 70)}"></span>Lower support</span>
-          <span class="legend-chip"><span class="segment-dot" style="background:${scoreToColor(70, 40, 70)}"></span>Higher support</span>
-        `;
-        mapCard.appendChild(parishLegend);
-        figure.body.appendChild(mapCard);
-
-        const regionCard = document.createElement('div');
-        regionCard.className = 'comparison-card';
-        const regionTitle = document.createElement('h4');
-        regionTitle.textContent = 'Cultural regions';
-        regionCard.appendChild(regionTitle);
-        regionCard.appendChild(
-          createMeterList(
-            toArray(support.regions).map((row) => ({ label: row.label, value: row.support })),
-            (value) => formatPercent(value, 0)
-          )
-        );
-        const regionMapShell = document.createElement('div');
-        regionMapShell.className = 'map-shell';
-        regionMapShell.style.marginTop = '0.9rem';
-        regionMapShell.innerHTML = '<div class="map-host" id="regionMapHost"></div>';
-        regionCard.appendChild(regionMapShell);
-        figure.body.appendChild(regionCard);
-
-        target.appendChild(figure.section);
-
-        const parishLookup = {};
-        Object.entries(support.parish_support || {}).forEach(([key, row]) => {
-          parishLookup[key.replace(/^parish-/, '')] = { label: row.label, value: Number(row.support) };
+        const copy = document.createElement('div');
+        copy.className = 'report-header-copy';
+        toArray(split.headerBlocks).forEach((block) => {
+          if (block?.type !== 'paragraph') return;
+          const p = document.createElement('p');
+          p.className = 'report-paragraph';
+          p.setAttribute('data-report-text-block', 'true');
+          p.innerHTML = renderParagraphHtml(block.lines);
+          copy.appendChild(p);
         });
-        const regionLookup = {};
-        toArray(support.regions).forEach((row) => {
-          regionLookup[row.id] = { label: row.label, value: Number(row.support) };
+        container.appendChild(copy);
+      }
+
+      function createHeadingNode(block) {
+        const level = Number(block?.level || 2);
+        const nodeName = level <= 1 ? 'h2' : level === 2 ? 'h3' : 'h4';
+        const heading = document.createElement(nodeName);
+        heading.id = `section-${normalizeHeadingId(block?.text || '')}`;
+        heading.textContent = block?.text || '';
+        heading.setAttribute('data-report-heading', 'true');
+        if (level <= 1) heading.className = 'report-heading-major';
+        else if (level === 2) heading.className = 'report-heading-section';
+        else heading.className = 'report-heading-subsection';
+        return heading;
+      }
+
+      function renderBody(blocks) {
+        const container = document.getElementById('reportBody');
+        if (!container) return;
+        container.innerHTML = '';
+        const split = splitReportBlocks(blocks);
+
+        toArray(split.bodyBlocks).forEach((block) => {
+          if (!block || typeof block !== 'object') return;
+          if (block.type === 'heading') {
+            container.appendChild(createHeadingNode(block));
+            return;
+          }
+          if (block.type === 'paragraph') {
+            const p = document.createElement('p');
+            p.className = 'report-paragraph';
+            p.setAttribute('data-report-text-block', 'true');
+            p.innerHTML = renderParagraphHtml(block.lines);
+            container.appendChild(p);
+            return;
+          }
+          if (block.type === 'table') {
+            container.appendChild(createTable(block.headers, block.rows));
+            return;
+          }
+          if (block.type === 'list') {
+            const list = document.createElement(block.ordered ? 'ol' : 'ul');
+            list.className = 'report-list';
+            list.setAttribute('data-report-text-block', 'true');
+            toArray(block.items).forEach((item) => {
+              const li = document.createElement('li');
+              li.innerHTML = renderInlineMarkdown(item);
+              list.appendChild(li);
+            });
+            container.appendChild(list);
+            return;
+          }
+          if (block.type === 'quote') {
+            const quote = document.createElement('blockquote');
+            quote.className = 'report-quote';
+            quote.setAttribute('data-report-text-block', 'true');
+            quote.innerHTML = `<p>${renderParagraphHtml(block.lines)}</p>`;
+            container.appendChild(quote);
+            return;
+          }
+          if (block.type === 'rule') {
+            const hr = document.createElement('hr');
+            hr.className = 'report-divider';
+            container.appendChild(hr);
+            return;
+          }
+          if (block.type === 'figure_marker') {
+            container.appendChild(renderFigureBlock(block));
+          }
         });
-        await injectSvgMap('parishMapHost', 'data/igaming_louisiana_parish_map.svg', '.parish-region', parishLookup, 'Louisiana parish support map');
-        await injectSvgMap('regionMapHost', 'data/igaming_louisiana_cr_map.svg', '.cr-region', regionLookup, 'Louisiana cultural region support map');
       }
 
-      function renderBeliefsFigure() {
-        const target = document.getElementById('beliefsFigure');
-        if (!target) return;
-        const attitudes = reportData?.figures?.attitudes || {};
-        const figure = createFigureBlock(
-          'Gambling behavior and belief landscape',
-          'Voters hold both pro-gambling and anti-gambling beliefs at the same time, which makes framing decisive.'
-        );
-        figure.body.classList.add('two-up');
-
-        const summary = document.createElement('div');
-        summary.className = 'stat-grid';
-        summary.appendChild(
-          createStatCard(
-            'Gambled in the past year',
-            `${Math.round(Number(attitudes.participation?.gambled_last_year || 0))}%`,
-            'Gambling is already a normalized behavior for a majority of Louisiana voters.'
-          )
-        );
-        const offshoreAware = toArray(attitudes.offshore_awareness).find((row) => /aware/i.test(String(row.label || '')));
-        summary.appendChild(
-          createStatCard(
-            'Aware of offshore gambling',
-            `${Math.round(Number(offshoreAware?.value || 0))}%`,
-            'Most voters do not know offshore gambling is already available.'
-          )
-        );
-        figure.body.appendChild(summary);
-
-        const beliefCard = document.createElement('div');
-        beliefCard.className = 'comparison-card';
-        const beliefTitle = document.createElement('h4');
-        beliefTitle.textContent = 'Belief statements';
-        beliefCard.appendChild(beliefTitle);
-        beliefCard.appendChild(
-          createMeterList(
-            toArray(attitudes.beliefs).map((row) => ({ label: row.label, value: row.agree })),
-            (value) => formatPercent(value, 0)
-          )
-        );
-        figure.body.appendChild(beliefCard);
-        target.appendChild(figure.section);
-      }
-
-      function renderMessageFigure() {
-        const target = document.getElementById('messageTestingFigure');
-        if (!target) return;
-        const attitudes = reportData?.figures?.attitudes || {};
-        const figure = createFigureBlock(
-          'Argument matchups',
-          'The freedom frame is the clearest winner, while regulation and Louisiana revenue also outpoll the competing case.'
-        );
-
-        const matchups = document.createElement('div');
-        matchups.className = 'comparison-card';
-        const matchupTitle = document.createElement('h4');
-        matchupTitle.textContent = 'Head-to-head frames';
-        matchups.appendChild(matchupTitle);
-        matchups.appendChild(
-          createDivergingList(
-            toArray(attitudes.argument_matchups).map((row) => ({
-              label: row.matchup,
-              left: row.anti_value,
-              right: row.pro_value
-            }))
-          )
-        );
-        figure.body.appendChild(matchups);
-        target.appendChild(figure.section);
-      }
-
-      function renderPersuadabilityFigure() {
-        const target = document.getElementById('persuadabilityFigure');
-        if (!target) return;
-        const attitudes = reportData?.figures?.attitudes || {};
-        const figure = createFigureBlock(
-          'View intensity and gambling behavior',
-          'Only a minority of voters describe themselves as completely locked in, while gambling participation is already widespread.'
-        );
-        figure.body.classList.add('two-up');
-
-        const intensity = document.createElement('div');
-        intensity.className = 'comparison-card';
-        const intensityTitle = document.createElement('h4');
-        intensityTitle.textContent = 'View intensity';
-        intensity.appendChild(intensityTitle);
-        intensity.appendChild(
-          createMeterList(
-            toArray(attitudes.intensity).map((row) => ({ label: row.label, value: row.value })),
-            (value) => formatPercent(value, 0)
-          )
-        );
-        figure.body.appendChild(intensity);
-
-        const types = document.createElement('div');
-        types.className = 'comparison-card';
-        const typesTitle = document.createElement('h4');
-        typesTitle.textContent = 'Gambling types';
-        types.appendChild(typesTitle);
-        types.appendChild(
-          createMeterList(
-            toArray(attitudes.gambling_types).map((row) => ({ label: row.label, value: row.value })),
-            (value) => formatPercent(value, 0)
-          )
-        );
-        figure.body.appendChild(types);
-        target.appendChild(figure.section);
-      }
-
-      function renderExperimentFigure() {
-        const target = document.getElementById('experimentResultsFigure');
-        if (!target) return;
-        const experiment = reportData?.figures?.experiment || {};
-        const effects = experiment.ballot_effects_with_view || {};
-        if (!Object.keys(effects).length) return;
-        const figure = createFigureBlock(
-          'Experimental effects',
-          'The action scenario improves Landry\'s position, while inaction produces the larger movement in the opposite direction.'
-        );
-        figure.body.classList.add('two-up');
-
-        const ballotCard = document.createElement('div');
-        ballotCard.className = 'comparison-card';
-        const ballotTitle = document.createElement('h4');
-        ballotTitle.textContent = 'Effect on test ballot';
-        ballotCard.appendChild(ballotTitle);
-        ballotCard.appendChild(
-          createDivergingList([
-            {
-              label: 'Ballot movement',
-              left: Math.abs(Number(effects.inaction_effect_pp || 0)),
-              right: Number(effects.signing_effect_pp || 0)
-            }
-          ])
-        );
-        const ballotNote = document.createElement('p');
-        ballotNote.className = 'stat-note';
-        ballotNote.textContent = `${formatSignedVotes(effects.signing_votes)} when signing and delivering; ${formatSignedVotes(effects.inaction_votes)} if voters hear the inaction case.`;
-        ballotCard.appendChild(ballotNote);
-        figure.body.appendChild(ballotCard);
-
-        const outcomeCard = document.createElement('div');
-        outcomeCard.className = 'comparison-card';
-        const outcomeTitle = document.createElement('h4');
-        outcomeTitle.textContent = 'Across outcomes';
-        outcomeCard.appendChild(outcomeTitle);
-        outcomeCard.appendChild(
-          createDivergingList(
-            toArray(experiment.outcomes_with_view).map((row) => ({
-              label: row.label,
-              left: Math.abs(Number(row.inaction_pp || 0)),
-              right: Number(row.signing_pp || 0)
-            }))
-          )
-        );
-        figure.body.appendChild(outcomeCard);
-        target.appendChild(figure.section);
-      }
-
-      function renderRevenueFigure() {
-        const target = document.getElementById('revenueFigure');
-        if (!target) return;
-        const attitudes = reportData?.figures?.attitudes || {};
-        const figure = createFigureBlock(
-          'Revenue priorities',
-          'Roads and bridges and income tax elimination are the clearest top-tier priorities for using iGaming revenue.'
-        );
-        figure.body.appendChild(
-          createMeterList(
-            toArray(attitudes.revenue_priorities).map((row) => ({ label: row.label, value: row.value })),
-            (value) => formatPercent(value, 0)
-          )
-        );
-        target.appendChild(figure.section);
-      }
-
-      async function renderPage() {
-        renderHeader();
-        renderFooter();
-        renderSiteNavigation();
-        renderBody();
-        renderLandryFigure();
-        renderFavorabilityFigure();
-        await renderSupportFigure();
-        renderBeliefsFigure();
-        renderMessageFigure();
-        renderPersuadabilityFigure();
-        renderExperimentFigure();
-        renderRevenueFigure();
+      async function renderReport() {
+        const blocks = toArray(reportData?.report_blocks);
+        renderHeader(blocks);
+        renderBody(blocks);
         applyThemeToLinks(document);
+        if (pendingAsyncWork.length) {
+          await Promise.allSettled(pendingAsyncWork.splice(0));
+        }
       }
 
-      window.addEventListener('DOMContentLoaded', async () => {
+      document.addEventListener('DOMContentLoaded', async () => {
         initThemeControls();
         await loadReportData();
-        await renderPage();
+        renderSiteNavigation();
+        await renderReport();
       });
     </script>
   </body>
