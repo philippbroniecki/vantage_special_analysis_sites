@@ -1035,11 +1035,622 @@ td strong { color: var(--ink); }
 
 .feedback-cta:hover { background: var(--accent-hover); }
 
+/* Analysis report overrides */
+.layout {
+  max-width: 1160px;
+  padding: 1.35rem 1.6rem 4rem;
+  gap: 1.1rem;
+}
+
+.card {
+  padding: 1.45rem 1.55rem;
+}
+
+.hero {
+  padding: 2rem 2.1rem 1.95rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.78fr);
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+.hero-copy {
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
+
+.hero-kicker {
+  font-size: 0.74rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(215, 235, 255, 0.72);
+}
+
+.hero h1 {
+  font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+  line-height: 1.08;
+  max-width: 780px;
+}
+
+.hero-subtitle {
+  margin: 0;
+  font-size: 0.99rem;
+  max-width: 68ch;
+}
+
+.hero-thesis {
+  max-width: 64ch;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: rgba(233, 243, 255, 0.92);
+}
+
+.hero-meta {
+  margin-top: 0;
+}
+
+.hero-rail {
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+}
+
+.hero-brief,
+.hero-stat,
+.toc-note,
+.thesis-card,
+.aside-card,
+.chart-card,
+.table-card,
+.map-card,
+.finding-card,
+.footer-sheet {
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--surface-alt);
+}
+
+.hero-brief {
+  padding: 1rem 1.05rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: rgba(233, 243, 255, 0.95);
+}
+
+.brief-label,
+.mini-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brief-label { color: rgba(215, 235, 255, 0.72); }
+
+.hero-brief h2 {
+  margin-top: 0.35rem;
+  font-size: 1rem;
+  line-height: 1.28;
+  color: #f4faff;
+}
+
+.hero-brief p {
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  color: rgba(215, 235, 255, 0.82);
+}
+
+.hero-stat-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.hero-stat {
+  padding: 0.82rem 0.88rem;
+  background: rgba(8, 20, 36, 0.22);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.section-head h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.24rem;
+}
+
+.section-head p,
+.section-intro,
+.caption {
+  font-size: 0.83rem;
+  color: var(--muted);
+  max-width: 72ch;
+}
+
+.section-head.compact {
+  margin-bottom: 0.9rem;
+}
+
+.toc-card {
+  position: sticky;
+  top: 66px;
+  z-index: 12;
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 0.85rem;
+}
+
+.toc-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-content: start;
+}
+
+.toc-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.15rem;
+  padding: 0.5rem 0.78rem;
+  text-decoration: none;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  transition: border-color 160ms ease, color 160ms ease, transform 150ms ease;
+}
+
+.toc-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.toc-note {
+  padding: 0.95rem 1rem;
+}
+
+.toc-note p {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.pill-grid,
+.executive-grid,
+.finding-list,
+.decision-grid,
+.kpi-grid,
+.chart-grid,
+.map-grid,
+.quote-grid,
+.scenario-grid,
+.footer-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.pill-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.pill-card {
+  padding: 0.85rem 0.9rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
+}
+
+.pill-card-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pill-card-value {
+  display: block;
+  margin-top: 0.34rem;
+  font-size: 0.92rem;
+  font-weight: 760;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.methodology-callout {
+  margin-top: 0.85rem;
+}
+
+.executive-grid {
+  grid-template-columns: minmax(0, 1.18fr) minmax(260px, 0.82fr);
+}
+
+.thesis-card,
+.aside-card,
+.chart-card,
+.table-card,
+.map-card,
+.footer-sheet {
+  padding: 1rem 1.05rem;
+}
+
+.thesis-card {
+  background: linear-gradient(180deg, rgba(26, 107, 115, 0.08), rgba(26, 107, 115, 0.02)), var(--surface-alt);
+}
+
+.thesis-card h3 {
+  margin-top: 0.42rem;
+  font-size: 1.24rem;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.thesis-card p {
+  margin-top: 0.72rem;
+  max-width: 60ch;
+  font-size: 0.89rem;
+  line-height: 1.62;
+  color: var(--ink-soft);
+}
+
+.bottom-line-card {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  background: linear-gradient(180deg, rgba(196, 101, 37, 0.08), rgba(196, 101, 37, 0.02)), var(--surface-alt);
+}
+
+.bottom-line-card p:last-child,
+.pull-quote-card p,
+.pull-quote-wide p {
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: var(--ink);
+}
+
+.finding-list {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 0.95rem;
+}
+
+.finding-card {
+  padding: 0.95rem 1rem;
+}
+
+.finding-number {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.finding-card h3 {
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.finding-card p {
+  margin-top: 0.5rem;
+  font-size: 0.83rem;
+  line-height: 1.58;
+  color: var(--ink-soft);
+}
+
+.finding-metric {
+  margin-top: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--r-full);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 0.22rem 0.62rem;
+  font-size: 0.73rem;
+  font-weight: 760;
+  color: var(--ink);
+}
+
+.decision-grid {
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+}
+
+.matrix-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.decision-tile {
+  padding: 1rem 1.05rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
+}
+
+.decision-tile.positive {
+  border-color: rgba(46, 125, 50, 0.22);
+}
+
+.decision-tile.negative {
+  border-color: rgba(198, 40, 40, 0.22);
+}
+
+.decision-tile.neutral {
+  border-color: rgba(31, 95, 137, 0.18);
+}
+
+.decision-tile-label,
+.kpi-label {
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.decision-tile-value,
+.kpi-value {
+  margin-top: 0.38rem;
+  font-size: 1.54rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.kpi-value.positive,
+.decision-tile-value.positive { color: var(--pos); }
+.kpi-value.negative,
+.decision-tile-value.negative { color: var(--neg); }
+
+.decision-tile p {
+  margin-top: 0.45rem;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.kpi-grid {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.kpi-card {
+  padding: 1rem 1.02rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
+}
+
+.kpi-supporting {
+  margin-top: 0.34rem;
+  font-size: 0.79rem;
+  font-weight: 760;
+  color: var(--ink);
+}
+
+.kpi-detail {
+  margin-top: 0.34rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.hero-stat .kpi-label { color: rgba(215, 235, 255, 0.78); }
+.hero-stat .kpi-value { color: #fff; font-size: 1.3rem; }
+.hero-stat .kpi-supporting,
+.hero-stat .kpi-detail { color: rgba(220, 238, 255, 0.84); }
+
+.chart-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.chart-grid-wide {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 0.9rem;
+}
+
+.map-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quote-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.scenario-card {
+  padding: 0.9rem 0.95rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
+}
+
+.scenario-card .mini-label { color: var(--accent); }
+
+.scenario-card h4 {
+  margin-top: 0.42rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.scenario-card p {
+  margin-top: 0.45rem;
+  font-size: 0.83rem;
+  line-height: 1.56;
+  color: var(--ink-soft);
+}
+
+.chart-card h3,
+.aside-card h3,
+.map-card h3,
+.table-card h3 {
+  font-size: 0.96rem;
+  font-weight: 760;
+  color: var(--ink);
+  margin-bottom: 0.38rem;
+}
+
+.prose {
+  display: grid;
+  gap: 0.82rem;
+  margin-top: 0.95rem;
+}
+
+.compact-prose {
+  margin-top: 0;
+}
+
+.prose p,
+.prose li,
+.prose blockquote,
+.prose td,
+.prose th {
+  overflow-wrap: anywhere;
+}
+
+.prose p {
+  max-width: 70ch;
+  font-size: 0.87rem;
+  line-height: 1.66;
+  color: var(--ink-soft);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+.prose blockquote {
+  max-width: 62ch;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.9rem;
+  color: var(--ink);
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
+.compact-callout p {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+.compare-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.compare-card,
+.scenario-card,
+.kpi-card,
+.decision-tile,
+.pill-card {
+  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
+}
+
+.compare-card h4 {
+  font-size: 0.85rem;
+}
+
+.insight-note,
+.pull-quote-card,
+.pull-quote-wide {
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-alt), var(--surface-hi));
+  padding: 0.95rem 1rem;
+}
+
+.insight-note h4,
+.pull-quote-card h4 {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.42rem;
+}
+
+.insight-note p {
+  font-size: 0.84rem;
+  line-height: 1.58;
+  color: var(--ink-soft);
+}
+
+.quote-card p {
+  line-height: 1.56;
+}
+
+.map-shell {
+  min-height: 300px;
+}
+
+.footer-sheet {
+  background: linear-gradient(180deg, rgba(12, 34, 64, 0.04), rgba(12, 34, 64, 0.01)), var(--surface-alt);
+}
+
+.footer-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.footer-item {
+  display: grid;
+  gap: 0.32rem;
+}
+
+.footer-item span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.footer-item strong {
+  font-size: 0.87rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.footer-prepared {
+  margin-top: 0.95rem;
+  font-size: 0.84rem;
+  font-weight: 760;
+  color: var(--ink-soft);
+}
+
 @media (max-width: 900px) {
-  .split-grid,
+  .hero-grid,
+  .toc-grid,
+  .executive-grid,
+  .decision-grid,
+  .chart-grid,
+  .chart-grid-wide,
   .map-grid,
+  .footer-grid,
   .compare-row {
     grid-template-columns: 1fr;
+  }
+
+  .toc-card {
+    position: static;
   }
 }
 
@@ -1060,6 +1671,16 @@ td strong { color: var(--ink); }
 
   table {
     min-width: 460px;
+  }
+
+  .kpi-grid,
+  .finding-list,
+  .quote-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
   }
 }
     </style>
@@ -1086,169 +1707,178 @@ td strong { color: var(--ink); }
         <div class="sibling-nav" id="siblingNavLinks" hidden></div>
       </div>
 
-      <section class="hero card reveal" id="componentHero" data-component-id="hero_title">
+      <section class="hero card" id="componentHero" data-component-id="hero_title">
         <div class="hero-inner">
-          <p class="eyebrow"><span class="eyebrow-pip" aria-hidden="true"></span>Vantage Data House</p>
-          <h1 id="heroTitle">Louisiana iGaming Public Opinion Analysis</h1>
-          <p class="hero-subtitle" id="heroSubtitle">A static synthesis of the Louisiana iGaming baseline, attitudes, experiment, and geography artifacts.</p>
-          <div class="hero-meta" aria-label="Survey metadata">
-            <span class="meta-pill"><a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a></span>
-            <span class="meta-pill" id="metaSample">N = 1,708 respondents</span>
-            <span class="meta-pill" id="metaDates">May 15-21, 2026</span>
-            <span class="meta-pill" id="metaMethod">Static analysis report from existing website artifacts</span>
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow"><span class="eyebrow-pip" aria-hidden="true"></span>Vantage Data House</p>
+              <p class="hero-kicker">Executive briefing</p>
+              <h1 id="heroTitle">Louisiana iGaming Public Opinion Analysis</h1>
+              <p class="hero-subtitle" id="heroSubtitle">A report-style synthesis of the existing Louisiana iGaming artifacts.</p>
+              <p class="hero-thesis" id="heroThesis"></p>
+              <div class="hero-meta" aria-label="Survey metadata">
+                <span class="meta-pill"><a id="metaSite" href="https://www.vantagedatahouse.com" target="_blank" rel="noreferrer">vantagedatahouse.com</a></span>
+                <span class="meta-pill" id="metaSample">N = 1,708 respondents</span>
+                <span class="meta-pill" id="metaDates">May 15-21, 2026</span>
+                <span class="meta-pill" id="metaMethod">Static analysis report from existing website artifacts</span>
+              </div>
+            </div>
+            <aside class="hero-rail">
+              <div class="hero-brief">
+                <p class="brief-label">Report brief</p>
+                <h2 id="heroBriefTitle">Governor Jeff Landry · Louisiana Statewide</h2>
+                <p id="heroBriefMeta">Online Casino Gaming Compact · June 2026</p>
+              </div>
+              <div class="hero-stat-grid" id="heroSnapshot"></div>
+            </aside>
           </div>
         </div>
       </section>
 
-      <section class="card" id="componentMethodology" data-component-id="methodology_note">
-        <details class="methodology-details">
-          <summary id="methodologySummary">Methodology Note</summary>
-          <p class="methodology-details-body" id="methodologyBody"></p>
+      <section class="card toc-card" id="section-navigation">
+        <div class="section-head compact">
+          <p class="section-eyebrow">Report map</p>
+          <h2>Readout structure</h2>
+          <p>This page keeps the iGaming family shell, but it reads like a memo rather than a dashboard.</p>
+        </div>
+        <div class="toc-grid">
+          <nav class="toc-list" id="reportToc" aria-label="Report sections"></nav>
+          <div class="toc-note">
+            <p>Every chart and callout below is driven by the current static iGaming artifacts already in the repo. Where the template asked for a chart but only summary values were available, the page now uses a report card or table instead of a placeholder.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card report-section" id="section-methodology" data-component-id="methodology_note">
+        <div class="section-head">
+          <p class="section-eyebrow">Methodology</p>
+          <h2>How to read this report</h2>
+          <p>The methodology note is visible up front so the page reads like a confidence-building report, not a buried appendix.</p>
+        </div>
+        <div class="pill-grid" id="methodologyHighlights"></div>
+        <div class="callout methodology-callout">
+          <p id="methodologySummaryText"></p>
+        </div>
+        <details class="methodology-details" style="margin-top:0.95rem;">
+          <summary id="methodologySummary">Full methodology note</summary>
+          <div class="methodology-details-body prose" id="methodologyBody"></div>
         </details>
       </section>
 
-      <section class="card" id="componentExecutive">
+      <section class="card report-section" id="section-executive-summary">
         <div class="section-head">
           <p class="section-eyebrow">Executive summary</p>
-          <h2>Decision context</h2>
-          <p>The analysis page keeps the report narrative but anchors each visual to the current static iGaming artifacts already in this repo.</p>
+          <h2>The strategic read</h2>
+          <p>A short thesis, a set of decision-grade findings, and a clear bottom line.</p>
         </div>
-        <div class="callout" id="executiveSummaryIntro"></div>
-        <div class="narrative-blocks" id="headlineFindings"></div>
-        <div class="callout" id="centralDecision" style="margin-top:0.95rem;"></div>
+        <div class="executive-grid">
+          <div class="thesis-card">
+            <p class="mini-label" id="thesisLabel"></p>
+            <h3 id="thesisHeadline"></h3>
+            <p id="thesisBody"></p>
+          </div>
+          <aside class="aside-card bottom-line-card">
+            <p class="mini-label">Bottom line</p>
+            <p id="bottomLineText"></p>
+          </aside>
+        </div>
+        <div class="finding-list" id="executiveFindings"></div>
       </section>
 
-      <section class="card" id="componentDecisionMatrix" data-component-id="decision_matrix">
+      <section class="card report-section" id="section-decision-matrix" data-component-id="decision_matrix">
         <div class="section-head">
-          <p class="section-eyebrow">Hero visual</p>
-          <h2>Decision matrix</h2>
-          <p>Baseline risk is rendered from the report template; action and inaction effects are pulled from the current experiment artifact.</p>
+          <p class="section-eyebrow">Decision matrix</p>
+          <h2>What each path does politically</h2>
+          <p>The baseline gap comes from the report template. The action and inaction paths use the current experiment artifact's with-view vote equivalents.</p>
         </div>
-        <div class="table-shell" id="decisionMatrixTable"></div>
+        <div class="decision-grid">
+          <div class="matrix-stack" id="decisionTiles"></div>
+          <div class="table-card">
+            <h3>Decision matrix</h3>
+            <div class="table-shell" id="decisionMatrixTable"></div>
+            <p class="caption">Vote translations use the projected 2027 expected-voter denominator already present in the experiment artifact. The baseline 2023 gap remains the template's translated reference point.</p>
+          </div>
+        </div>
       </section>
 
-      <section class="card" id="componentDashboard" data-component-id="key_indicators_dashboard">
+      <section class="card report-section" id="section-key-indicators" data-component-id="key_indicators_dashboard">
         <div class="section-head">
           <p class="section-eyebrow">Key indicators</p>
-          <h2>Dashboard</h2>
-          <p>Cards use the existing site payloads directly, with the source universe called out in the supporting copy.</p>
+          <h2>Decision-grade numbers</h2>
+          <p>A compact KPI deck for the values most likely to be cited in a memo, briefing deck, or meeting.</p>
         </div>
-        <div class="dashboard-grid" id="dashboardGrid"></div>
+        <div class="kpi-grid" id="dashboardGrid"></div>
       </section>
 
-      <section class="card" id="componentPartI" data-component-id="baseline_problem">
-        <div class="section-divider"><span>Part I: The baseline problem</span></div>
+      <section class="card report-section" id="section-part-i" data-component-id="baseline_problem">
+        <div class="section-divider"><span>Part I</span></div>
         <div class="section-head">
-          <h2>2023 result vs. the current ballot</h2>
-          <p>The current modeled ballot remains the core baseline problem. This card uses the with-view ballot artifact alongside the report template's 2023-gap framing.</p>
+          <h2>The baseline problem</h2>
+          <p id="partIIntro"></p>
         </div>
-        <div class="compare-row" id="ballotComparison"></div>
-        <div class="dual-grid" style="margin-top:0.95rem;">
-          <div class="subcard">
+        <div class="chart-grid chart-grid-wide">
+          <div class="chart-card">
+            <h3>Landry's position: 2023 versus 2027</h3>
+            <div class="compare-row" id="ballotComparison"></div>
+            <p class="caption">The current ballot chart reuses the test-ballot artifact's with-view statewide topline. The 2023 comparison uses the official statewide baseline file.</p>
+          </div>
+          <aside class="aside-card">
             <h3>Gap summary</h3>
-            <div id="baselineGapCallout" class="callout"></div>
-          </div>
-          <div class="subcard">
-            <h3>Favorability baseline</h3>
+            <div id="baselineGapCallout" class="callout compact-callout"></div>
+            <div class="insight-note" id="baselineSidebar" style="margin-top:0.8rem;"></div>
+          </aside>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Governor Landry favorability</h3>
             <div id="landryFavorabilityBreakdown"></div>
+            <p class="caption">The favorability card uses the current favorability artifact's statewide breakdown for Governor Landry.</p>
           </div>
-        </div>
-        <div class="split-grid" style="margin-top:0.95rem;">
-          <div class="subcard">
-            <h3>Republican comparison</h3>
+          <div class="chart-card">
+            <h3>Republican comparison set</h3>
             <div class="bar-list" id="favorabilityRanking"></div>
-          </div>
-          <div class="subcard">
-            <h3>Regional range</h3>
-            <div class="bar-list" id="favorabilityRegions"></div>
+            <p class="caption">This ranking reuses the statewide favorability series already shipped in the sibling favorability page.</p>
           </div>
         </div>
-        <div class="narrative-blocks" id="partINarrative"></div>
+        <div class="chart-card" style="margin-top:0.95rem;">
+          <h3>Regional favorability range</h3>
+          <div class="bar-list" id="favorabilityRegions"></div>
+          <p class="caption">Regional net favorability is rendered as a static bar list because the analysis page only needs a clean readout, not the full geography explorer.</p>
+        </div>
+        <div class="prose" id="partINarrative"></div>
       </section>
 
-      <section class="card" id="componentPartII" data-component-id="igaming_popularity">
-        <div class="section-divider"><span>Part II: Is iGaming popular?</span></div>
-        <div class="split-grid">
-          <div class="subcard">
+      <section class="card report-section" id="section-part-ii" data-component-id="igaming_popularity">
+        <div class="section-divider"><span>Part II</span></div>
+        <div class="section-head">
+          <h2>Is iGaming popular?</h2>
+          <p id="partIIIntro"></p>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
             <h3>Statewide support</h3>
             <div id="supportTopline"></div>
+            <p class="caption">The stacked support bar is pulled directly from the current iGaming support payload.</p>
           </div>
-          <div class="subcard">
+          <aside class="aside-card">
             <h3>Support by party</h3>
             <div class="bar-list" id="supportByParty"></div>
-          </div>
+            <div class="insight-note" id="supportSidebar" style="margin-top:0.8rem;"></div>
+          </aside>
         </div>
-        <div class="split-grid" style="margin-top:0.95rem;">
-          <div class="subcard">
-            <h3>Behavior and awareness</h3>
-            <div id="behaviorSummary"></div>
-          </div>
-          <div class="subcard">
-            <h3>Belief landscape</h3>
-            <div class="bar-list" id="beliefBars"></div>
-          </div>
-        </div>
-        <div class="narrative-blocks" id="partIINarrative"></div>
-      </section>
-
-      <section class="card" id="componentPartIII" data-component-id="experiment_effects">
-        <div class="section-divider"><span>Part III: The experiment</span></div>
-        <div class="split-grid">
-          <div class="subcard">
-            <h3>Action vs. inaction</h3>
-            <div class="diverging-list" id="experimentOutcomes"></div>
-          </div>
-          <div class="subcard">
-            <h3>Revenue priorities</h3>
-            <div class="bar-list" id="revenuePriorityBars"></div>
-          </div>
-        </div>
-        <div class="table-shell" id="experimentEffectsTable" style="margin-top:0.95rem;"></div>
-        <div class="narrative-blocks" id="partIIINarrative"></div>
-      </section>
-
-      <section class="card" id="componentPartIV" data-component-id="concerns_and_messaging">
-        <div class="section-divider"><span>Part IV: Concerns and messaging</span></div>
-        <div class="split-grid">
-          <div class="subcard">
-            <h3>Concern groups in the current experiment artifact</h3>
-            <div class="table-shell" id="subgroupEffectsTable"></div>
-          </div>
-          <div class="subcard">
-            <h3>Trusted messengers</h3>
-            <div class="bar-list" id="messengerBars"></div>
-          </div>
-        </div>
-        <div class="split-grid" style="margin-top:0.95rem;">
-          <div class="subcard">
-            <h3>Argument matchups</h3>
-            <div class="bar-list" id="matchupBars"></div>
-          </div>
-          <div class="subcard">
-            <h3>Persuadability and existing gambling</h3>
-            <div class="bar-list" id="intensityBars"></div>
-            <div class="bar-list" id="gamblingTypeBars" style="margin-top:0.95rem;"></div>
-          </div>
-        </div>
-        <div class="quote-grid" id="quoteCards" style="margin-top:0.95rem;"></div>
-        <div class="narrative-blocks" id="partIVNarrative"></div>
-      </section>
-
-      <section class="card" id="componentPartV" data-component-id="geographic_patterns">
-        <div class="section-divider"><span>Part V: Geographic patterns</span></div>
-        <div class="map-grid">
+        <div class="map-grid" style="margin-top:0.95rem;">
           <div class="map-card">
             <h3>Parish support map</h3>
-            <p>Existing support payload + existing parish SVG asset, with all-respondents support shown as a static choropleth.</p>
+            <p>Existing support payload plus the existing parish SVG asset, rendered here as a clean static report map.</p>
             <div class="map-shell" id="parishMapShell">
               <div class="map-svg-host" id="parishMapHost"></div>
             </div>
             <div class="mini-legend" id="parishMapLegend"></div>
-            <p class="map-note">The map is a static report card built from the current support artifact and the existing parish SVG asset. No geographic model outputs were regenerated.</p>
+            <p class="map-note">No geographic model outputs were regenerated for this section.</p>
           </div>
           <div class="map-card">
             <h3>Cultural region support</h3>
-            <p>The clean cultural-region outline treatment is reused from the existing support page.</p>
+            <p>The clean outline treatment is reused from the existing support page's SVG assets.</p>
             <div class="map-shell" id="crMapShell">
               <div class="map-svg-host" id="crMapHost"></div>
               <div class="map-outline-host" id="crOutlineHost"></div>
@@ -1256,42 +1886,135 @@ td strong { color: var(--ink); }
             <div class="mini-legend" id="crMapLegend"></div>
           </div>
         </div>
-        <div class="subcard" style="margin-top:0.95rem;">
-          <h3>Regional ranking</h3>
-          <div class="bar-list" id="regionSupportBars"></div>
+        <div class="chart-grid" style="margin-top:0.95rem;">
+          <div class="chart-card">
+            <h3>Gambling behavior and offshore awareness</h3>
+            <div id="behaviorSummary"></div>
+            <p class="caption">These cards replace template placeholders with clean static summaries backed by the current attitudes payload.</p>
+          </div>
+          <div class="chart-card">
+            <h3>Belief landscape</h3>
+            <div class="bar-list" id="beliefBars"></div>
+            <p class="caption">Agreement bars are sorted from strongest to weakest belief so the hierarchy is easy to scan.</p>
+          </div>
         </div>
-        <div class="narrative-blocks" id="partVNarrative"></div>
+        <div class="chart-grid" style="margin-top:0.95rem;">
+          <div class="chart-card">
+            <h3>Message testing</h3>
+            <div class="bar-list" id="matchupBars"></div>
+            <p class="caption">The template's "argument matchup" placeholders are rendered as static report bars because the attitudes payload already exposes a clean head-to-head series.</p>
+          </div>
+          <aside class="aside-card">
+            <h3>Winning language</h3>
+            <div class="quote-grid" id="quoteCards"></div>
+          </aside>
+        </div>
+        <div class="chart-grid" style="margin-top:0.95rem;">
+          <div class="chart-card">
+            <h3>Persuadability</h3>
+            <div class="bar-list" id="intensityBars"></div>
+            <p class="caption">This section highlights how much of the electorate remains movable rather than fixed.</p>
+          </div>
+          <div class="chart-card">
+            <h3>Existing gambling behavior</h3>
+            <div class="bar-list" id="gamblingTypeBars"></div>
+            <h3 style="margin-top:1rem;">Trusted messengers</h3>
+            <div class="bar-list" id="messengerBars"></div>
+          </div>
+        </div>
+        <div class="chart-card" style="margin-top:0.95rem;">
+          <h3>Regional support ranking</h3>
+          <div class="bar-list" id="regionSupportBars"></div>
+          <p class="caption">The regional ranking is a deliberate report card rather than a second interactive geography control.</p>
+        </div>
+        <div class="prose" id="partIINarrative"></div>
       </section>
 
-      <section class="card" id="componentConclusion">
+      <section class="card report-section" id="section-part-iii" data-component-id="experiment_effects">
+        <div class="section-divider"><span>Part III</span></div>
+        <div class="section-head">
+          <h2>The experiment</h2>
+          <p id="partIIIIntro"></p>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Design and methodology</h3>
+            <div class="scenario-grid" id="experimentDesign"></div>
+            <p class="caption">The experiment section explains the two tested scenarios directly, so the result cards that follow have narrative context.</p>
+          </div>
+          <aside class="aside-card">
+            <h3>Interpretation notes</h3>
+            <div class="prose compact-prose" id="experimentTakeaways"></div>
+          </aside>
+        </div>
+        <div class="chart-grid" style="margin-top:0.95rem;">
+          <div class="chart-card">
+            <h3>Outcome movement</h3>
+            <div class="diverging-list" id="experimentOutcomes"></div>
+            <p class="caption">These bars use the existing experiment summary rows and default to the with-view universe when available.</p>
+          </div>
+          <div class="table-card">
+            <h3>Ballot result summary</h3>
+            <div class="table-shell" id="experimentEffectsTable"></div>
+            <p class="caption">The template's placeholder experiment summary is replaced by a tighter ballot-only table based on the current summary artifact.</p>
+          </div>
+        </div>
+        <div class="chart-grid" style="margin-top:0.95rem;">
+          <div class="table-card">
+            <h3>Concern groups</h3>
+            <div class="table-shell" id="subgroupEffectsTable"></div>
+          </div>
+          <aside class="aside-card">
+            <h3>Why the concern case is weaker than it looks</h3>
+            <div class="insight-note" id="concernInterpretation"></div>
+          </aside>
+        </div>
+        <div class="prose" id="partIIINarrative"></div>
+      </section>
+
+      <section class="card report-section" id="section-revenue" data-component-id="revenue_priorities">
+        <div class="section-divider"><span>Revenue priorities</span></div>
+        <div class="section-head">
+          <h2>Where voters want the money to go</h2>
+          <p id="revenueIntro"></p>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Priority order</h3>
+            <div class="bar-list" id="revenuePriorityBars"></div>
+            <p class="caption">This replaces the template's chart note with the current attitudes payload's ranked revenue series.</p>
+          </div>
+          <aside class="aside-card pull-quote-card" id="revenueCallout"></aside>
+        </div>
+        <div class="prose" id="revenueNarrative"></div>
+      </section>
+
+      <section class="card report-section" id="section-conclusion">
         <div class="section-head">
           <p class="section-eyebrow">Conclusion</p>
           <h2>What the data is saying</h2>
-          <p>The close uses the template's original narrative, while the cards above stay tied to the current static payloads.</p>
+          <p>The closing section preserves the report logic while keeping every figure anchored to the current analysis inputs.</p>
         </div>
-        <div class="narrative-blocks" id="conclusionNarrative"></div>
+        <div class="pull-quote-wide" id="conclusionPull"></div>
+        <div class="prose" id="conclusionNarrative"></div>
       </section>
 
-      <section class="card" id="componentAppendices">
-        <div class="section-head">
-          <p class="section-eyebrow">Appendices</p>
-          <h2>Data sources, palette, and map assets</h2>
-          <p>Appendix tables are rendered directly as static report tables.</p>
-        </div>
-        <div class="split-grid">
-          <div class="table-card">
-            <h3>Data sources</h3>
-            <div class="table-shell" id="appendixSources"></div>
+      <section class="card footer-sheet" id="section-footer">
+        <div class="footer-grid">
+          <div class="footer-item">
+            <span>Field dates</span>
+            <strong id="footerDates">May 15-21, 2026</strong>
           </div>
-          <div class="table-card">
-            <h3>Chart color palette</h3>
-            <div class="table-shell" id="appendixPalette"></div>
+          <div class="footer-item">
+            <span>Sample size</span>
+            <strong id="footerSample">N = 1,708 respondents</strong>
+          </div>
+          <div class="footer-item">
+            <span>Methodology</span>
+            <strong id="footerMethod">Static analysis report built from existing iGaming JSON and SVG artifacts in this repo.</strong>
           </div>
         </div>
-        <div class="subcard" style="margin-top:0.95rem;">
-          <h3>SVG assets</h3>
-          <div class="narrative-blocks" id="appendixAssets"></div>
-        </div>
+        <p class="footer-prepared" id="footerPreparedBy">Prepared by Vantage Data House</p>
       </section>
 
       <section class="feedback-callout" id="feedbackCallout" hidden>
@@ -1626,38 +2349,100 @@ function appendSectionGroup(containerId, slugs) {
   renderBlocks(container, blocks);
 }
 
+function renderToc() {
+  const host = document.getElementById('reportToc');
+  if (!host) return;
+  host.innerHTML = '';
+  toArray(reportData?.report?.toc).forEach((item) => {
+    const link = document.createElement('a');
+    link.className = 'toc-link';
+    link.href = `#${item.id}`;
+    link.textContent = item.label;
+    host.appendChild(link);
+  });
+}
+
 function renderHero() {
   const heroMeta = reportData?.hero_meta || {};
   const meta = reportData?.meta || {};
+  const report = reportData?.report || {};
   document.getElementById('heroTitle').textContent = meta.title || 'Louisiana iGaming Public Opinion Analysis';
-  document.getElementById('heroSubtitle').textContent = `${heroMeta.prepared_for || 'Governor Jeff Landry'} \u00b7 ${heroMeta.geography || 'Louisiana Statewide'} \u00b7 ${heroMeta.issue || 'Online Casino Gaming Compact'} \u00b7 ${heroMeta.report_date || 'June 2026'}`;
+  document.getElementById('heroSubtitle').textContent = report.deck || meta.subtitle || '';
+  document.getElementById('heroThesis').textContent = report?.thesis?.headline || '';
   document.getElementById('metaSample').textContent = meta.sample || 'N = 1,708 respondents';
   document.getElementById('metaDates').textContent = meta.fieldDates || 'May 15-21, 2026';
   document.getElementById('metaMethod').textContent = meta.methodLabel || 'Static analysis report from existing website artifacts';
+  document.getElementById('heroBriefTitle').textContent = `${heroMeta.prepared_for || 'Governor Jeff Landry'} \u00b7 ${heroMeta.geography || 'Louisiana Statewide'}`;
+  document.getElementById('heroBriefMeta').textContent = `${heroMeta.issue || 'Online Casino Gaming Compact'} \u00b7 ${heroMeta.report_date || 'June 2026'}`;
+
+  const snapshotHost = document.getElementById('heroSnapshot');
+  snapshotHost.innerHTML = '';
+  toArray(report?.hero_snapshot).forEach((item) => {
+    const card = document.createElement('article');
+    card.className = 'hero-stat';
+    card.innerHTML = `
+      <div class="kpi-label">${escapeHtml(item.label)}</div>
+      <div class="kpi-value ${escapeHtml(item.tone || '')}">${escapeHtml(item.value)}</div>
+      <div class="kpi-supporting">${escapeHtml(item.detail || '')}</div>
+    `;
+    snapshotHost.appendChild(card);
+  });
 }
 
 function renderMethodology() {
-  document.getElementById('methodologyBody').textContent = reportData?.methodology_note || '';
+  const report = reportData?.report || {};
+  const highlights = document.getElementById('methodologyHighlights');
+  highlights.innerHTML = '';
+  toArray(report?.methodology_highlights).forEach((item) => {
+    const card = document.createElement('div');
+    card.className = 'pill-card';
+    card.innerHTML = `
+      <span class="pill-card-label">${escapeHtml(item.label)}</span>
+      <span class="pill-card-value">${escapeHtml(item.value)}</span>
+    `;
+    highlights.appendChild(card);
+  });
+  document.getElementById('methodologySummaryText').textContent = report.methodology_summary || '';
+  renderBlocks(document.getElementById('methodologyBody'), sectionBlocks('methodology-note'));
 }
 
 function renderExecutiveSummary() {
-  const intro = document.getElementById('executiveSummaryIntro');
-  const introBlocks = sectionBlocks('executive-summary');
-  intro.innerHTML = '';
-  introBlocks.forEach((block) => {
-    if (block.type !== 'paragraph') return;
-    const p = document.createElement('p');
-    p.innerHTML = renderInlineMarkdown(block.text);
-    intro.appendChild(p);
+  const report = reportData?.report || {};
+  document.getElementById('thesisLabel').textContent = report?.thesis?.label || 'Central thesis';
+  document.getElementById('thesisHeadline').textContent = report?.thesis?.headline || '';
+  document.getElementById('thesisBody').textContent = report?.thesis?.body || '';
+  document.getElementById('bottomLineText').textContent = report?.bottom_line || '';
+
+  const host = document.getElementById('executiveFindings');
+  host.innerHTML = '';
+  toArray(report?.executive_findings).forEach((item) => {
+    const card = document.createElement('article');
+    card.className = 'finding-card';
+    card.innerHTML = `
+      <div class="finding-number">${escapeHtml(item.number)}</div>
+      <h3>${escapeHtml(item.headline)}</h3>
+      <p>${escapeHtml(item.body)}</p>
+      <div class="finding-metric">${escapeHtml(item.metric)}</div>
+    `;
+    host.appendChild(card);
   });
-
-  appendSectionGroup('headlineFindings', ['headline-findings']);
-
-  const central = document.getElementById('centralDecision');
-  renderBlocks(central, sectionBlocks('the-central-decision'));
 }
 
 function renderDecisionMatrix() {
+  const tiles = document.getElementById('decisionTiles');
+  tiles.innerHTML = '';
+  toArray(reportData?.experiment?.decision_matrix).forEach((item) => {
+    const tone = item.path === 'Today (baseline)' ? 'neutral' : (item.effect_votes > 0 ? 'positive' : 'negative');
+    const article = document.createElement('article');
+    article.className = `decision-tile ${tone}`;
+    article.innerHTML = `
+      <div class="decision-tile-label">${escapeHtml(item.path)}</div>
+      <div class="decision-tile-value ${tone === 'neutral' ? '' : tone}">${escapeHtml(item.effect_label)}</div>
+      <p>${escapeHtml(item.description)}</p>
+    `;
+    tiles.appendChild(article);
+  });
+
   const target = document.getElementById('decisionMatrixTable');
   const headers = ['Path', 'Effect on Landry (votes)', 'Where it leaves him'];
   const rows = toArray(reportData?.experiment?.decision_matrix).map((item) => [
@@ -1674,11 +2459,12 @@ function renderDashboard() {
   host.innerHTML = '';
   toArray(reportData?.dashboard_cards).forEach((card) => {
     const article = document.createElement('article');
-    article.className = 'stat-card';
+    article.className = 'kpi-card';
     article.innerHTML = `
-      <div class="stat-card-label">${escapeHtml(card.label)}</div>
-      <div class="stat-card-value ${escapeHtml(card.tone || '')}">${escapeHtml(card.value)}</div>
-      <div class="stat-card-detail">${escapeHtml(card.detail)}</div>
+      <div class="kpi-label">${escapeHtml(card.label)}</div>
+      <div class="kpi-value ${escapeHtml(card.tone || '')}">${escapeHtml(card.value)}</div>
+      <div class="kpi-supporting">${escapeHtml(card.supporting || '')}</div>
+      <div class="kpi-detail">${escapeHtml(card.detail)}</div>
     `;
     host.appendChild(article);
   });
@@ -1705,6 +2491,8 @@ function makeCandidateBars(rows, colorMap) {
 }
 
 function renderBaselineProblem() {
+  const report = reportData?.report || {};
+  document.getElementById('partIIntro').textContent = report?.section_intros?.part_i || '';
   const comparisonWrap = document.getElementById('ballotComparison');
   comparisonWrap.innerHTML = '';
   const currentCard = document.createElement('div');
@@ -1739,9 +2527,13 @@ function renderBaselineProblem() {
 
   const gap = reportData?.baseline?.gap_from_template || {};
   document.getElementById('baselineGapCallout').innerHTML = `
-    <p><strong>Drop from 2023:</strong> ${formatSignedNumber(gap.share_drop, ' pp')}</p>
+    <p><strong>2023 result:</strong> 52.6%</p>
+    <p style="margin-top:0.45rem;"><strong>Drop from 2023:</strong> ${formatSignedNumber(gap.share_drop, ' pp')}</p>
     <p style="margin-top:0.45rem;"><strong>Vote equivalent:</strong> ${formatSignedNumber(gap.vote_gap)}</p>
-    <p style="margin-top:0.45rem;color:var(--muted);font-size:0.78rem;">This translated 2023-gap figure is rendered from the report template because the current ballot comparison artifact does not expose the same precomputed vote-gap card.</p>
+  `;
+  document.getElementById('baselineSidebar').innerHTML = `
+    <h4>${escapeHtml(report?.baseline_sidebar?.title || 'What this means')}</h4>
+    <p>${escapeHtml(report?.baseline_sidebar?.body || '')}</p>
   `;
 
   const favorability = reportData?.favorability?.landry_breakdown || [];
@@ -1796,6 +2588,8 @@ function renderBaselineProblem() {
 }
 
 function renderSupportSection() {
+  const report = reportData?.report || {};
+  document.getElementById('partIIIntro').textContent = report?.section_intros?.part_ii || '';
   const support = reportData?.support || {};
   const toplineHost = document.getElementById('supportTopline');
   toplineHost.innerHTML = `
@@ -1822,6 +2616,10 @@ function renderSupportSection() {
     `;
     partyHost.appendChild(row);
   });
+  document.getElementById('supportSidebar').innerHTML = `
+    <h4>${escapeHtml(report?.support_sidebar?.title || 'Belief environment')}</h4>
+    <p>${escapeHtml(report?.support_sidebar?.body || '')}</p>
+  `;
 
   const behavior = reportData?.attitudes || {};
   const behaviorHost = document.getElementById('behaviorSummary');
@@ -1859,13 +2657,111 @@ function renderSupportSection() {
     beliefHost.appendChild(row);
   });
 
+  const matchupHost = document.getElementById('matchupBars');
+  matchupHost.innerHTML = '';
+  toArray(reportData?.attitudes?.argument_matchups).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.matchup)}</span>
+        <span class="bar-value">${formatSignedNumber(item.gap, ' pp')}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, item.pro_value)}%;background:var(--accent);"></span></div>
+      <p class="section-intro">${escapeHtml(item.winner)} frame: ${formatPercent(item.pro_value)} vs. ${formatPercent(item.anti_value)}</p>
+    `;
+    matchupHost.appendChild(row);
+  });
+
+  const quotesHost = document.getElementById('quoteCards');
+  quotesHost.innerHTML = '';
+  toArray(reportData?.attitudes?.quote_cards).forEach((item) => {
+    const article = document.createElement('article');
+    article.className = 'quote-card';
+    article.innerHTML = `
+      <div class="quote-support">${formatPercent(item.support)} support &middot; ${escapeHtml(item.winner)}</div>
+      <h4>${escapeHtml(item.matchup)}</h4>
+      <p>&ldquo;${escapeHtml(item.text)}&rdquo;</p>
+    `;
+    quotesHost.appendChild(article);
+  });
+
+  const intensityHost = document.getElementById('intensityBars');
+  intensityHost.innerHTML = '';
+  toArray(reportData?.attitudes?.intensity).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
+    `;
+    intensityHost.appendChild(row);
+  });
+
+  const typeHost = document.getElementById('gamblingTypeBars');
+  typeHost.innerHTML = '';
+  toArray(reportData?.attitudes?.gambling_types).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--accent);"></span></div>
+    `;
+    typeHost.appendChild(row);
+  });
+
+  const messengerHost = document.getElementById('messengerBars');
+  messengerHost.innerHTML = '';
+  toArray(reportData?.attitudes?.messengers).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--cool);"></span></div>
+    `;
+    messengerHost.appendChild(row);
+  });
+
   appendSectionGroup('partIINarrative', [
     'section-3-baseline-igaming-support',
-    'section-4-what-voters-believe-about-gambling'
+    'section-4-what-voters-believe-about-gambling',
+    'section-8-message-testing-what-frames-win',
+    'section-9-how-persuadable-are-voters',
+    'section-10-regional-support'
   ]);
 }
 
 function renderExperimentSection() {
+  const report = reportData?.report || {};
+  document.getElementById('partIIIIntro').textContent = report?.section_intros?.part_iii || '';
+
+  const designHost = document.getElementById('experimentDesign');
+  designHost.innerHTML = '';
+  toArray(report?.experiment_design).forEach((item) => {
+    const card = document.createElement('article');
+    card.className = 'scenario-card';
+    card.innerHTML = `
+      <div class="mini-label">${escapeHtml(item.label)}</div>
+      <h4>${escapeHtml(item.title)}</h4>
+      <p>${escapeHtml(item.body)}</p>
+    `;
+    designHost.appendChild(card);
+  });
+
+  renderBlocks(
+    document.getElementById('experimentTakeaways'),
+    [{ type: 'list', items: toArray(report?.experiment_takeaways) }]
+  );
+
   const experiment = reportData?.experiment || {};
   const outcomesHost = document.getElementById('experimentOutcomes');
   outcomesHost.innerHTML = '';
@@ -1889,21 +2785,6 @@ function renderExperimentSection() {
     outcomesHost.appendChild(row);
   });
 
-  const revenueHost = document.getElementById('revenuePriorityBars');
-  revenueHost.innerHTML = '';
-  toArray(reportData?.attitudes?.revenue_priorities).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
-    `;
-    revenueHost.appendChild(row);
-  });
-
   const matrix = experiment?.ballot_effects || {};
   const tableHost = document.getElementById('experimentEffectsTable');
   tableHost.innerHTML = '';
@@ -1916,13 +2797,6 @@ function renderExperimentSection() {
     ]
   ));
 
-  appendSectionGroup('partIIINarrative', [
-    'section-5-what-happens-if-landry-signs-vs-doesn-t',
-    'section-6-where-voters-want-the-revenue'
-  ]);
-}
-
-function renderMessagingSection() {
   const subgroupHost = document.getElementById('subgroupEffectsTable');
   subgroupHost.innerHTML = '';
   subgroupHost.appendChild(createTable(
@@ -1935,85 +2809,15 @@ function renderMessagingSection() {
     ])
   ));
 
-  const messengerHost = document.getElementById('messengerBars');
-  messengerHost.innerHTML = '';
-  toArray(reportData?.attitudes?.messengers).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--cool);"></span></div>
-    `;
-    messengerHost.appendChild(row);
-  });
+  document.getElementById('concernInterpretation').innerHTML = `
+    <h4>Interpretation</h4>
+    <p>Across the selected concern groups, the consistent pattern is that non-delivery does more damage than signing. That asymmetry matters more than the headline worry that simply touching gambling would be toxic.</p>
+  `;
 
-  const matchupHost = document.getElementById('matchupBars');
-  matchupHost.innerHTML = '';
-  toArray(reportData?.attitudes?.argument_matchups).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.matchup)}</span>
-        <span class="bar-value">${formatSignedNumber(item.gap, ' pp')}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${Math.max(0, item.pro_value)}%;background:var(--accent);"></span></div>
-      <p class="section-intro">${escapeHtml(item.winner)} frame: ${formatPercent(item.pro_value)} vs. ${formatPercent(item.anti_value)}</p>
-    `;
-    matchupHost.appendChild(row);
-  });
-
-  const intensityHost = document.getElementById('intensityBars');
-  intensityHost.innerHTML = '<h4 style="font-size:0.83rem;color:var(--ink);margin-bottom:0.6rem;">View intensity</h4>';
-  toArray(reportData?.attitudes?.intensity).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
-    `;
-    intensityHost.appendChild(row);
-  });
-
-  const typeHost = document.getElementById('gamblingTypeBars');
-  typeHost.innerHTML = '<h4 style="font-size:0.83rem;color:var(--ink);margin-bottom:0.6rem;">Gambling types</h4>';
-  toArray(reportData?.attitudes?.gambling_types).forEach((item) => {
-    const row = document.createElement('div');
-    row.className = 'bar-row';
-    row.innerHTML = `
-      <div class="bar-row-top">
-        <span class="bar-label">${escapeHtml(item.label)}</span>
-        <span class="bar-value">${formatPercent(item.value)}</span>
-      </div>
-      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--accent);"></span></div>
-    `;
-    typeHost.appendChild(row);
-  });
-
-  const quotesHost = document.getElementById('quoteCards');
-  quotesHost.innerHTML = '';
-  toArray(reportData?.attitudes?.quote_cards).forEach((item) => {
-    const article = document.createElement('article');
-    article.className = 'quote-card';
-    article.innerHTML = `
-      <div class="quote-support">${formatPercent(item.support)} support &middot; ${escapeHtml(item.winner)}</div>
-      <h4>${escapeHtml(item.matchup)}</h4>
-      <p>&ldquo;${escapeHtml(item.text)}&rdquo;</p>
-    `;
-    quotesHost.appendChild(article);
-  });
-
-  appendSectionGroup('partIVNarrative', [
-    'section-7-will-this-hurt-with-evangelicals-and-conservatives',
-    'section-8-message-testing-what-frames-win',
-    'section-9-how-persuadable-are-voters'
-  ]);
+  renderBlocks(
+    document.getElementById('partIIINarrative'),
+    toArray(report?.experiment_narrative).map((text) => ({ type: 'paragraph', text }))
+  );
 }
 
 function buildMapLegend(host, labels, colors) {
@@ -2090,38 +2894,49 @@ async function renderMaps() {
     `;
     regionHost.appendChild(row);
   });
+}
 
-  appendSectionGroup('partVNarrative', ['section-10-regional-support']);
+function renderRevenueSection() {
+  const report = reportData?.report || {};
+  document.getElementById('revenueIntro').textContent = report?.section_intros?.revenue || '';
+
+  const revenueHost = document.getElementById('revenuePriorityBars');
+  revenueHost.innerHTML = '';
+  toArray(reportData?.attitudes?.revenue_priorities).forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-row-top">
+        <span class="bar-label">${escapeHtml(item.label)}</span>
+        <span class="bar-value">${formatPercent(item.value)}</span>
+      </div>
+      <div class="bar-track"><span class="bar-fill" style="width:${item.value}%;background:var(--warm);"></span></div>
+    `;
+    revenueHost.appendChild(row);
+  });
+
+  document.getElementById('revenueCallout').innerHTML = `
+    <h4>${escapeHtml(report?.revenue_callout?.headline || '')}</h4>
+    <p>${escapeHtml(report?.revenue_callout?.body || '')}</p>
+  `;
+
+  appendSectionGroup('revenueNarrative', ['section-6-where-voters-want-the-revenue']);
 }
 
 function renderConclusion() {
-  appendSectionGroup('conclusionNarrative', ['section-11-what-the-data-is-saying']);
+  document.getElementById('conclusionPull').innerHTML = `<p>${escapeHtml(reportData?.report?.conclusion_pull || '')}</p>`;
+  renderBlocks(
+    document.getElementById('conclusionNarrative'),
+    toArray(reportData?.report?.conclusion_narrative).map((text) => ({ type: 'paragraph', text }))
+  );
 }
 
-function renderAppendices() {
-  const appendix = reportData?.appendices || {};
-  const sourcesHost = document.getElementById('appendixSources');
-  sourcesHost.innerHTML = '';
-  sourcesHost.appendChild(createTable(
-    ['Module', 'Primary file'],
-    toArray(appendix?.sources).map((item) => [item.module, `\`${item.file}\``])
-  ));
-
-  const paletteHost = document.getElementById('appendixPalette');
-  paletteHost.innerHTML = '';
-  paletteHost.appendChild(createTable(
-    ['Element', 'Hex code'],
-    toArray(appendix?.palette).map((item) => [
-      `${item.label} <span class="tone-chip" style="margin-left:0.35rem;background:${item.hex};color:#fff;border-color:${item.hex};">${item.hex}</span>`,
-      `\`${item.hex}\``
-    ])
-  ));
-
-  const assetHost = document.getElementById('appendixAssets');
-  renderBlocks(
-    assetHost,
-    [{ type: 'list', items: toArray(appendix?.svg_assets).map((item) => `\`${item}\``) }]
-  );
+function renderFooter() {
+  const footer = reportData?.report?.source_footer || {};
+  document.getElementById('footerDates').textContent = footer.field_dates || 'May 15-21, 2026';
+  document.getElementById('footerSample').textContent = footer.sample || 'N = 1,708 respondents';
+  document.getElementById('footerMethod').textContent = footer.methodology || '';
+  document.getElementById('footerPreparedBy').textContent = footer.prepared_by || 'Prepared by Vantage Data House';
 }
 
 function renderFeedback() {
@@ -2139,6 +2954,7 @@ function renderFeedback() {
 function renderAll() {
   renderSiteNavigation();
   renderHero();
+  renderToc();
   renderMethodology();
   renderExecutiveSummary();
   renderDecisionMatrix();
@@ -2146,9 +2962,9 @@ function renderAll() {
   renderBaselineProblem();
   renderSupportSection();
   renderExperimentSection();
-  renderMessagingSection();
+  renderRevenueSection();
   renderConclusion();
-  renderAppendices();
+  renderFooter();
   renderFeedback();
   applyThemeToLinks(document);
 }
@@ -2167,8 +2983,7 @@ function renderAll() {
         { componentId: 'baseline_problem', label: 'baseline-problem' },
         { componentId: 'igaming_popularity', label: 'igaming-popularity' },
         { componentId: 'experiment_effects', label: 'experiment-effects' },
-        { componentId: 'concerns_and_messaging', label: 'messaging' },
-        { componentId: 'geographic_patterns', label: 'geography' }
+        { componentId: 'revenue_priorities', label: 'revenue-priorities' }
       ]
     });
   }
