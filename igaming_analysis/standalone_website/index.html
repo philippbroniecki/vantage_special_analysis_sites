@@ -1098,7 +1098,7 @@
       function resolveTestBallotEmbedUrl() {
         const helper = window.VDHTheme;
         const activeTheme = helper?.getActiveTheme?.() || 'light';
-        const rawUrl = `${resolveTestBallotEmbedBaseUrl()}?embed=statewide-comparison`;
+        const rawUrl = `${resolveTestBallotEmbedBaseUrl()}?embed=statewide-comparison&universe=with_view`;
         return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
       }
 
@@ -1249,8 +1249,8 @@
         frame.loading = 'eager';
         frame.setAttribute('scrolling', 'no');
         frame.setAttribute('data-embed-kind', 'test-ballot-statewide-comparison');
-        frame.setAttribute('data-embed-local-src', '../../test_ballot/standalone_website/?embed=statewide-comparison');
-        frame.setAttribute('data-embed-prod-src', 'https://test-ballot.igaming.vantage.philippbroniecki.com/?embed=statewide-comparison');
+        frame.setAttribute('data-embed-local-src', '../../test_ballot/standalone_website/?embed=statewide-comparison&universe=with_view');
+        frame.setAttribute('data-embed-prod-src', 'https://test-ballot.igaming.vantage.philippbroniecki.com/?embed=statewide-comparison&universe=with_view');
         wrap.appendChild(frame);
         shell.body.appendChild(wrap);
         applyThemeToEmbeds(shell.section);
@@ -1794,6 +1794,9 @@
           }
           if (block.type === 'figure_marker') {
             container.appendChild(renderFigureBlock(block, nextBlock));
+            if (block.figure_key === 'test_ballot_statewide_comparison_chart' && nextBlock?.type === 'table') {
+              index += 1;
+            }
           }
         }
       }
