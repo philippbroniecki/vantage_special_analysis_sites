@@ -495,6 +495,24 @@
         border-bottom: 0;
       }
 
+      tr.separator-row td {
+        padding: 0.5rem 1rem;
+        border-bottom: 0;
+        background: transparent;
+      }
+
+      tr.group-row td {
+        font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink);
+        background: color-mix(in srgb, var(--surface-soft) 58%, var(--accent-soft) 42%);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
       th {
         font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
         font-size: 0.79rem;
@@ -518,8 +536,38 @@
         gap: 1rem;
       }
 
+      .figure-stack {
+        display: grid;
+        gap: 1rem;
+      }
+
       .figure-grid.two-up {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .figure-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .figure-toggle {
+        appearance: none;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink-soft);
+        padding: 0.45rem 0.8rem;
+        font: inherit;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .figure-toggle[aria-pressed='true'] {
+        background: var(--accent-soft);
+        color: var(--ink);
+        border-color: color-mix(in srgb, var(--accent) 50%, var(--line-strong) 50%);
       }
 
       .figure-card {
@@ -617,6 +665,44 @@
         border-radius: 999px;
       }
 
+      .metric-chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.95rem;
+      }
+
+      .metric-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.45rem 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink);
+        font-size: 0.88rem;
+      }
+
+      .metric-chip strong {
+        font-size: 0.95rem;
+      }
+
+      .compact-value-list {
+        display: grid;
+        gap: 0.55rem;
+        margin-top: 0.9rem;
+      }
+
+      .compact-value-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.75rem;
+        align-items: center;
+        font-size: 0.94rem;
+        color: var(--ink-soft);
+      }
+
       .diverging-list {
         display: grid;
         gap: 0.85rem;
@@ -702,6 +788,171 @@
         height: auto;
       }
 
+      .dotplot-shell {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .dotplot-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        font-size: 0.88rem;
+        color: var(--ink-soft);
+      }
+
+      .dotplot-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .dotplot-swatch {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 999px;
+      }
+
+      .dotplot-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.5fr);
+        gap: 0.9rem;
+        align-items: center;
+      }
+
+      .dotplot-row-label {
+        font-size: 0.94rem;
+        color: var(--ink);
+      }
+
+      .dotplot-track {
+        position: relative;
+        min-height: 1.8rem;
+      }
+
+      .dotplot-line {
+        position: absolute;
+        top: 50%;
+        height: 2px;
+        background: color-mix(in srgb, var(--line-strong) 62%, var(--ink-soft) 38%);
+        transform: translateY(-50%);
+      }
+
+      .dotplot-point {
+        position: absolute;
+        top: 50%;
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 999px;
+        transform: translate(-50%, -50%);
+        border: 2px solid var(--surface);
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--line-strong) 75%, transparent 25%);
+      }
+
+      .dotplot-point.point-2023 {
+        background: #496780;
+      }
+
+      .dotplot-point.point-2027 {
+        background: var(--accent);
+      }
+
+      .dotplot-value {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        font-size: 0.85rem;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
+      .dotplot-missing {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .dotplot-axis {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.5fr);
+        gap: 0.9rem;
+        align-items: center;
+      }
+
+      .dotplot-axis-track {
+        position: relative;
+        height: 1.2rem;
+      }
+
+      .dotplot-axis-track::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0.25rem;
+        height: 1px;
+        background: var(--line-strong);
+      }
+
+      .dotplot-axis-label {
+        position: absolute;
+        top: 0.35rem;
+        transform: translateX(-50%);
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .lollipop-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(0, 2.35fr);
+        gap: 0.9rem;
+        align-items: center;
+      }
+
+      .lollipop-label {
+        font-size: 0.94rem;
+        color: var(--ink);
+      }
+
+      .lollipop-track {
+        position: relative;
+        min-height: 1.6rem;
+      }
+
+      .lollipop-baseline {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 2px;
+        background: color-mix(in srgb, var(--line-strong) 72%, transparent 28%);
+        transform: translateY(-50%);
+      }
+
+      .lollipop-dot {
+        position: absolute;
+        top: 50%;
+        width: 0.92rem;
+        height: 0.92rem;
+        border-radius: 999px;
+        transform: translate(-50%, -50%);
+        background: var(--accent);
+        border: 2px solid var(--surface);
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--line-strong) 75%, transparent 25%);
+      }
+
+      .lollipop-value {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        font-size: 0.85rem;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
       @media (max-width: 900px) {
         .figure-grid.two-up {
           grid-template-columns: 1fr;
@@ -733,7 +984,10 @@
         .comparison-row,
         .meter-row,
         .matchup-row,
-        .diverging-row {
+        .diverging-row,
+        .dotplot-row,
+        .dotplot-axis,
+        .lollipop-row {
           grid-template-columns: 1fr;
           gap: 0.45rem;
         }
@@ -1051,7 +1305,14 @@
         const tbody = document.createElement('tbody');
         toArray(rows).forEach((row) => {
           const tr = document.createElement('tr');
-          toArray(row).forEach((cell) => {
+          const normalizedCells = toArray(row).map((cell) => String(cell == null ? '' : cell).trim());
+          const nonEmptyCount = normalizedCells.filter(Boolean).length;
+          if (nonEmptyCount === 0) {
+            tr.className = 'separator-row';
+          } else if (nonEmptyCount === 1 && normalizedCells[0]) {
+            tr.className = 'group-row';
+          }
+          normalizedCells.forEach((cell) => {
             const td = document.createElement('td');
             td.innerHTML = renderInlineMarkdown(cell);
             tr.appendChild(td);
@@ -1067,6 +1328,12 @@
         const numeric = Number(value);
         if (!Number.isFinite(numeric)) return 'NA';
         return `${numeric.toFixed(digits)}%`;
+      }
+
+      function formatSignedWhole(value) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return 'NA';
+        return `${numeric > 0 ? '+' : ''}${Math.round(numeric)}`;
       }
 
       function createFigureShell(markerText) {
@@ -1112,6 +1379,30 @@
         });
         wrap.appendChild(key);
         return wrap;
+      }
+
+      function createMetricChips(items) {
+        const row = document.createElement('div');
+        row.className = 'metric-chip-row';
+        toArray(items).forEach((item) => {
+          const chip = document.createElement('div');
+          chip.className = 'metric-chip';
+          chip.innerHTML = `<span>${escapeHtml(item?.label || '')}</span><strong>${escapeHtml(item?.value || '')}</strong>`;
+          row.appendChild(chip);
+        });
+        return row;
+      }
+
+      function createCompactValueList(rows, formatter) {
+        const list = document.createElement('div');
+        list.className = 'compact-value-list';
+        toArray(rows).forEach((row) => {
+          const item = document.createElement('div');
+          item.className = 'compact-value-row';
+          item.innerHTML = `<span>${escapeHtml(row?.label || '')}</span><strong>${escapeHtml(formatter(row))}</strong>`;
+          list.appendChild(item);
+        });
+        return list;
       }
 
       function createComparisonCard(title, rows) {
@@ -1312,59 +1603,288 @@
         return card;
       }
 
-      function renderFigureBlock(block) {
+      function createToggleBar(options, activeValue, onSelect) {
+        const toolbar = document.createElement('div');
+        toolbar.className = 'figure-toolbar';
+        toArray(options).forEach((option) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'figure-toggle';
+          button.textContent = option.label;
+          button.setAttribute('aria-pressed', option.value === activeValue ? 'true' : 'false');
+          button.addEventListener('click', () => onSelect(option.value));
+          toolbar.appendChild(button);
+        });
+        return toolbar;
+      }
+
+      function createDotLegend(items) {
+        const legend = document.createElement('div');
+        legend.className = 'dotplot-legend';
+        toArray(items).forEach((item) => {
+          const node = document.createElement('div');
+          node.className = 'dotplot-legend-item';
+          node.innerHTML = `<span class="dotplot-swatch" style="background:${escapeHtml(item.color)}"></span><span>${escapeHtml(item.label)}</span>`;
+          legend.appendChild(node);
+        });
+        return legend;
+      }
+
+      function percentagePosition(value, minValue, maxValue) {
+        if (value == null || value === '' || value === '—') return null;
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return null;
+        const span = maxValue - minValue || 1;
+        return ((numeric - minValue) / span) * 100;
+      }
+
+      function createConnectedDotPlot(rows, options = {}) {
+        const minValue = Number.isFinite(options.min) ? options.min : 0;
+        const maxValue = Number.isFinite(options.max) ? options.max : 100;
+        const startLabel = options.startLabel || '2023';
+        const endLabel = options.endLabel || '2027 Test';
+        const wrap = document.createElement('div');
+        wrap.className = 'dotplot-shell';
+        wrap.appendChild(
+          createDotLegend([
+            { label: startLabel, color: '#496780' },
+            { label: endLabel, color: 'var(--accent)' }
+          ])
+        );
+
+        toArray(rows).forEach((row) => {
+          const line = document.createElement('div');
+          line.className = 'dotplot-row';
+          const label = document.createElement('div');
+          label.className = 'dotplot-row-label';
+          label.textContent = row?.label || '';
+          line.appendChild(label);
+
+          const track = document.createElement('div');
+          track.className = 'dotplot-track';
+          const start = percentagePosition(row?.start, minValue, maxValue);
+          const end = percentagePosition(row?.end, minValue, maxValue);
+          if (start !== null && end !== null) {
+            const connector = document.createElement('div');
+            connector.className = 'dotplot-line';
+            connector.style.left = `${Math.min(start, end)}%`;
+            connector.style.width = `${Math.abs(end - start)}%`;
+            track.appendChild(connector);
+          }
+          if (start !== null) {
+            const point = document.createElement('div');
+            point.className = 'dotplot-point point-2023';
+            point.style.left = `${start}%`;
+            track.appendChild(point);
+
+            const value = document.createElement('div');
+            value.className = 'dotplot-value';
+            value.style.left = `calc(${start}% + 0.65rem)`;
+            value.textContent = formatPercent(row.start, 1);
+            track.appendChild(value);
+          }
+          if (end !== null) {
+            const point = document.createElement('div');
+            point.className = 'dotplot-point point-2027';
+            point.style.left = `${end}%`;
+            track.appendChild(point);
+
+            const value = document.createElement('div');
+            value.className = 'dotplot-value';
+            value.style.left = `calc(${end}% + 0.65rem)`;
+            value.textContent = formatPercent(row.end, 1);
+            track.appendChild(value);
+          } else if (row?.endMissingLabel) {
+            const missing = document.createElement('div');
+            missing.className = 'dotplot-missing';
+            missing.textContent = row.endMissingLabel;
+            track.appendChild(missing);
+          }
+          line.appendChild(track);
+          wrap.appendChild(line);
+        });
+
+        const axis = document.createElement('div');
+        axis.className = 'dotplot-axis';
+        axis.appendChild(document.createElement('div'));
+        const axisTrack = document.createElement('div');
+        axisTrack.className = 'dotplot-axis-track';
+        const ticks = toArray(options.ticks?.length ? options.ticks : [minValue, (minValue + maxValue) / 2, maxValue]);
+        ticks.forEach((tick) => {
+          const label = document.createElement('span');
+          label.className = 'dotplot-axis-label';
+          label.style.left = `${percentagePosition(tick, minValue, maxValue)}%`;
+          label.textContent = options.tickFormatter ? options.tickFormatter(tick) : `${tick}`;
+          axisTrack.appendChild(label);
+        });
+        axis.appendChild(axisTrack);
+        wrap.appendChild(axis);
+        return wrap;
+      }
+
+      function createLollipopList(rows, options = {}) {
+        const minValue = Number.isFinite(options.min) ? options.min : 0;
+        const maxValue = Number.isFinite(options.max) ? options.max : 100;
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-stack';
+        toArray(rows).forEach((row) => {
+          const item = document.createElement('div');
+          item.className = 'lollipop-row';
+          const label = document.createElement('div');
+          label.className = 'lollipop-label';
+          label.textContent = row?.label || '';
+          item.appendChild(label);
+
+          const track = document.createElement('div');
+          track.className = 'lollipop-track';
+          const position = percentagePosition(row?.value, minValue, maxValue);
+          const baseline = document.createElement('div');
+          baseline.className = 'lollipop-baseline';
+          baseline.style.width = `${Math.max(0, position ?? 0)}%`;
+          track.appendChild(baseline);
+
+          if (position !== null) {
+            const dot = document.createElement('div');
+            dot.className = 'lollipop-dot';
+            dot.style.left = `${position}%`;
+            track.appendChild(dot);
+
+            const value = document.createElement('div');
+            value.className = 'lollipop-value';
+            value.style.left = `calc(${position}% + 0.65rem)`;
+            value.textContent = options.valueFormatter ? options.valueFormatter(row.value, row) : String(row.value);
+            track.appendChild(value);
+          }
+          item.appendChild(track);
+          wrap.appendChild(item);
+        });
+        return wrap;
+      }
+
+      function createBallotFigure(ballot, tableBlock) {
+        const shell = createFigureShell('');
+        shell.section.innerHTML = '';
+        const toolbar = createToggleBar(
+          [
+            { label: 'Table', value: 'table' },
+            { label: 'Dot plot', value: 'dotplot' }
+          ],
+          'table',
+          updateView
+        );
+        const content = document.createElement('div');
+        content.className = 'figure-stack';
+        shell.section.appendChild(toolbar);
+        shell.section.appendChild(content);
+
+        function renderTableView() {
+          content.innerHTML = '';
+          content.appendChild(createTable(tableBlock?.headers || [], tableBlock?.rows || []));
+        }
+
+        function renderDotPlotView() {
+          content.innerHTML = '';
+          content.appendChild(
+            createConnectedDotPlot(
+              toArray(ballot?.manuscript_rows).map((row) => ({
+                label: row.label,
+                start: row.value_2023,
+                end: row.value_2027,
+                endMissingLabel: row.value_2027 == null ? '—' : ''
+              })),
+              {
+                min: 0,
+                max: 60,
+                startLabel: '2023',
+                endLabel: '2027 Test',
+                ticks: [0, 20, 40, 60],
+                tickFormatter: (value) => `${value}%`
+              }
+            )
+          );
+        }
+
+        function updateView(next) {
+          toolbar.querySelectorAll('.figure-toggle').forEach((button) => {
+            button.setAttribute('aria-pressed', button.textContent === (next === 'table' ? 'Table' : 'Dot plot') ? 'true' : 'false');
+          });
+          if (next === 'dotplot') {
+            renderDotPlotView();
+          } else {
+            renderTableView();
+          }
+        }
+
+        renderTableView();
+        return shell.section;
+      }
+
+      function renderFigureBlock(block, nextBlock) {
         const shell = createFigureShell(block?.marker || '');
         const figures = reportData?.figures || {};
         const key = String(block?.figure_key || '');
 
         if (key === 'test_ballot_statewide_comparison_chart') {
-          shell.body.classList.add('two-up');
-          shell.body.appendChild(createComparisonCard('2023', figures?.ballot?.comparison_2023));
-          shell.body.appendChild(createComparisonCard('2027 Test', figures?.ballot?.current_with_view));
-          return shell.section;
+          return createBallotFigure(figures?.ballot || {}, nextBlock);
         }
 
         if (key === 'favorability_ranking') {
-          shell.body.classList.add('two-up');
           const breakdown = document.createElement('section');
           breakdown.className = 'figure-card';
           breakdown.appendChild(createStackedBarFigure(figures?.favorability?.breakdown));
+          breakdown.appendChild(
+            createCompactValueList(
+              figures?.favorability?.breakdown,
+              (row) => formatPercent(row?.value, 1)
+            )
+          );
           shell.body.appendChild(breakdown);
           shell.body.appendChild(
-            createMeterListCard(
-              '',
-              toArray(figures?.favorability?.ranking).map((row) => ({ label: row.title, value: Number(row.net) + 50, net: row.net })),
-              (value, row) => `${Number(row.net) > 0 ? '+' : ''}${Number(row.net).toFixed(0)}`
+            createLollipopList(
+              toArray(figures?.favorability?.ranking).map((row) => ({ label: row.title, value: Number(row.net) })),
+              {
+                min: 0,
+                max: 42,
+                valueFormatter: (value) => formatSignedWhole(value)
+              }
             )
           );
           return shell.section;
         }
 
         if (key === 'support_overview_map') {
-          shell.body.classList.add('two-up');
           const topline = document.createElement('section');
           topline.className = 'figure-card';
           topline.appendChild(createStackedBarFigure(figures?.support?.topline?.segments));
+          topline.appendChild(
+            createMetricChips([
+              { label: 'Support', value: '58%' },
+              { label: 'Oppose', value: '30%' },
+              { label: 'Net support', value: '+28pp' }
+            ])
+          );
           shell.body.appendChild(topline);
-          shell.body.appendChild(createParishMapCard(figures?.support?.parish_support || {}));
           shell.body.appendChild(
-            createMeterListCard(
-              '',
+            createLollipopList(
               toArray(figures?.support?.regions).map((row) => ({ label: row.label, value: row.support })),
-              (value) => formatPercent(value, 0)
+              {
+                min: 50,
+                max: 65,
+                valueFormatter: (value) => formatPercent(value, 1)
+              }
             )
           );
           return shell.section;
         }
 
         if (key === 'support_demographic_with_view') {
-          shell.body.appendChild(
-            createMeterListCard(
-              '',
-              toArray(figures?.support?.by_party).map((row) => ({ label: row.label, value: row.support })),
-              (value) => formatPercent(value, 0)
-            )
-          );
+          const partyRows = toArray(figures?.support?.party_support_display?.rows).map((row) => [
+            row.label,
+            `${Math.round(Number(row.support))}%`,
+            `${Math.round(Number(row.oppose))}%`,
+            formatSignedWhole(row.net),
+          ]);
+          shell.body.appendChild(createTable(['Party', 'Support', 'Oppose', 'Net'], partyRows));
           return shell.section;
         }
 
@@ -1483,12 +2003,15 @@
         if (!container) return;
         container.innerHTML = '';
         const split = splitReportBlocks(blocks);
+        const bodyBlocks = toArray(split.bodyBlocks);
 
-        toArray(split.bodyBlocks).forEach((block) => {
-          if (!block || typeof block !== 'object') return;
+        for (let index = 0; index < bodyBlocks.length; index += 1) {
+          const block = bodyBlocks[index];
+          const nextBlock = bodyBlocks[index + 1];
+          if (!block || typeof block !== 'object') continue;
           if (block.type === 'heading') {
             container.appendChild(createHeadingNode(block));
-            return;
+            continue;
           }
           if (block.type === 'paragraph') {
             const p = document.createElement('p');
@@ -1496,11 +2019,11 @@
             p.setAttribute('data-report-text-block', 'true');
             p.innerHTML = renderParagraphHtml(block.lines);
             container.appendChild(p);
-            return;
+            continue;
           }
           if (block.type === 'table') {
             container.appendChild(createTable(block.headers, block.rows));
-            return;
+            continue;
           }
           if (block.type === 'list') {
             const list = document.createElement(block.ordered ? 'ol' : 'ul');
@@ -1512,7 +2035,7 @@
               list.appendChild(li);
             });
             container.appendChild(list);
-            return;
+            continue;
           }
           if (block.type === 'quote') {
             const quote = document.createElement('blockquote');
@@ -1520,18 +2043,21 @@
             quote.setAttribute('data-report-text-block', 'true');
             quote.innerHTML = `<p>${renderParagraphHtml(block.lines)}</p>`;
             container.appendChild(quote);
-            return;
+            continue;
           }
           if (block.type === 'rule') {
             const hr = document.createElement('hr');
             hr.className = 'report-divider';
             container.appendChild(hr);
-            return;
+            continue;
           }
           if (block.type === 'figure_marker') {
-            container.appendChild(renderFigureBlock(block));
+            container.appendChild(renderFigureBlock(block, nextBlock));
+            if (block.figure_key === 'test_ballot_statewide_comparison_chart' && nextBlock?.type === 'table') {
+              index += 1;
+            }
           }
-        });
+        }
       }
 
       async function renderReport() {
