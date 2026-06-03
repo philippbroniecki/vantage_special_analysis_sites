@@ -292,6 +292,60 @@
   --support-map-cr-boundary-halo: rgba(7, 16, 26, 0.72);
 }
 
+html[data-embed-mode='overview-key-findings'] body,
+html[data-embed-mode='demographic-breakdown'] body {
+  min-height: 0;
+  background: transparent;
+  background-image: none;
+}
+
+html[data-embed-mode='overview-key-findings'] .topbar-wrap,
+html[data-embed-mode='demographic-breakdown'] .topbar-wrap,
+html[data-embed-mode='overview-key-findings'] .back-nav,
+html[data-embed-mode='demographic-breakdown'] .back-nav,
+html[data-embed-mode='overview-key-findings'] #componentHero,
+html[data-embed-mode='demographic-breakdown'] #componentHero,
+html[data-embed-mode='overview-key-findings'] #componentMethodology,
+html[data-embed-mode='demographic-breakdown'] #componentMethodology,
+html[data-embed-mode='overview-key-findings'] #componentResponseUniverse,
+html[data-embed-mode='demographic-breakdown'] #componentResponseUniverse,
+html[data-embed-mode='overview-key-findings'] #componentResponseGeography,
+html[data-embed-mode='demographic-breakdown'] #componentResponseGeography,
+html[data-embed-mode='overview-key-findings'] #componentTopline,
+html[data-embed-mode='demographic-breakdown'] #componentTopline,
+html[data-embed-mode='demographic-breakdown'] #componentTakeaways,
+html[data-embed-mode='overview-key-findings'] #componentDemographics,
+html[data-embed-mode='overview-key-findings'] #componentCrosstabs,
+html[data-embed-mode='demographic-breakdown'] #componentCrosstabs,
+html[data-embed-mode='overview-key-findings'] #componentArchetypes,
+html[data-embed-mode='demographic-breakdown'] #componentArchetypes,
+html[data-embed-mode='overview-key-findings'] #componentStates,
+html[data-embed-mode='demographic-breakdown'] #componentStates,
+html[data-embed-mode='overview-key-findings'] #feedbackCallout,
+html[data-embed-mode='demographic-breakdown'] #feedbackCallout,
+html[data-embed-mode='overview-key-findings'] #supportMapTooltip,
+html[data-embed-mode='demographic-breakdown'] #supportMapTooltip,
+html[data-embed-mode='overview-key-findings'] #dataBanner {
+  display: none !important;
+}
+
+html[data-embed-mode='demographic-breakdown'] #dataBanner {
+  display: none !important;
+}
+
+html[data-embed-mode='overview-key-findings'] .layout,
+html[data-embed-mode='demographic-breakdown'] .layout {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+html[data-embed-mode='overview-key-findings'] #componentTakeaways,
+html[data-embed-mode='demographic-breakdown'] #componentDemographics {
+  margin: 0;
+}
+
 /* ============================================================
    RESET & BASE
    ============================================================ */
@@ -232759,6 +232813,8 @@ let dataSource = 'fallback';
 let crosstabsLoadError = null;
 const crosstabShardCache = new Map();
 let crosstabRenderToken = 0;
+const URL_QUERY = new URLSearchParams(window.location.search || '');
+const EMBED_MODE = String(URL_QUERY.get('embed') || '').trim();
 let activeResponseUniverse = 'all_americans';
 let activeGeographyTypeId = null;
 let activeGeographyUnitId = null;
@@ -232770,6 +232826,125 @@ let activeCrosstabQuestionId = null;
 let activeCrosstabRowVar = null;
 let activeCrosstabColVar = null;
 let activeCrosstabMetricId = null;
+
+function isOverviewKeyFindingsEmbed() {
+  return EMBED_MODE === 'overview-key-findings';
+}
+
+function isDemographicBreakdownEmbed() {
+  return EMBED_MODE === 'demographic-breakdown';
+}
+
+function isSupportEmbedMode() {
+  return isOverviewKeyFindingsEmbed() || isDemographicBreakdownEmbed();
+}
+
+function getRequestedEmbedUniverse(fallbackMode) {
+  const requested = String(URL_QUERY.get('universe') || '').trim();
+  if (requested === 'with_view' || requested === 'all_americans') {
+    return requested;
+  }
+  return fallbackMode;
+}
+
+function normalizeEmbedToken(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function findEmbedMatch(items, requested, fields) {
+  const token = normalizeEmbedToken(requested);
+  if (!token) return null;
+  return toArray(items).find((item) => {
+    if (!item || typeof item !== 'object') return false;
+    return fields.some((field) => normalizeEmbedToken(item?.[field]) === token);
+  }) || null;
+}
+
+function resolveRequestedEmbedGeographyTypeId() {
+  const requested = String(URL_QUERY.get('geography') || '').trim();
+  if (!requested) return null;
+  const cfg = getResponseGeographyConfig();
+  const types = toArray(cfg?.types);
+  const directMatch = findEmbedMatch(types, requested, ['id', 'label', 'selector_label']);
+  if (directMatch?.id) return directMatch.id;
+  const token = normalizeEmbedToken(requested);
+  if (token === 'statewide' || token === 'louisiana') return 'state';
+  if (token === 'parish' || token === 'county') return 'county';
+  if (token === 'cultural-region' || token === 'cultural-regions') return 'cultural_region';
+  return null;
+}
+
+function resolveRequestedEmbedGeographyUnitId(typeId) {
+  const requested = String(URL_QUERY.get('unit') || '').trim();
+  if (!requested || !typeId) return null;
+  const type = getResponseGeographyType(typeId);
+  const units = toArray(type?.units);
+  const directMatch = findEmbedMatch(units, requested, ['id', 'label']);
+  if (directMatch?.id) return directMatch.id;
+  const token = normalizeEmbedToken(requested);
+  if (typeId === 'state' && (token === 'louisiana' || token === 'statewide' || token === 'state-wide')) {
+    return toArray(type?.units)[0]?.id || null;
+  }
+  return null;
+}
+
+function resolveRequestedEmbedQuestionId() {
+  const requested = String(URL_QUERY.get('question') || '').trim();
+  if (!requested) return null;
+  const questions = toArray(reportData?.questions);
+  const directMatch = findEmbedMatch(questions, requested, ['id', 'title']);
+  return directMatch?.id || null;
+}
+
+function resolveRequestedEmbedDemographicId() {
+  const requested = String(URL_QUERY.get('demographic') || '').trim();
+  if (!requested) return null;
+  const options = toArray(reportData?.demographic_controls?.options);
+  const dimensions = toArray(reportData?.demographics);
+  const directMatch = findEmbedMatch([...options, ...dimensions], requested, ['id', 'label']);
+  return directMatch?.id || null;
+}
+
+function resolveRequestedEmbedResponseCategoryId(questionId, demographicId) {
+  const requested = String(URL_QUERY.get('response_category') || '').trim();
+  if (!requested) return null;
+  if (normalizeEmbedToken(requested) === 'net-support' || normalizeEmbedToken(requested) === 'net') {
+    return 'net_support';
+  }
+  const card = getDemographicCard(questionId, demographicId);
+  if (!card) return null;
+  const syntheticNetSupport = {
+    id: 'net_support',
+    label: 'Net support',
+  };
+  const metrics = [syntheticNetSupport, ...toArray(card?.metrics)];
+  const directMatch = findEmbedMatch(metrics, requested, ['id', 'label']);
+  return directMatch?.id || null;
+}
+
+function applyDemographicBreakdownEmbedDefaults() {
+  if (!isDemographicBreakdownEmbed()) return;
+  const requestedQuestionId = resolveRequestedEmbedQuestionId();
+  const requestedDemographicId = resolveRequestedEmbedDemographicId();
+  const nextQuestionId = requestedQuestionId || toArray(reportData?.questions)[0]?.id || null;
+  const nextDemographicId = requestedDemographicId
+    || reportData?.demographic_controls?.default_demographic
+    || toArray(reportData?.demographic_controls?.options)[0]?.id
+    || toArray(reportData?.demographics)[0]?.id
+    || null;
+  const requestedTypeId = resolveRequestedEmbedGeographyTypeId();
+  const nextTypeId = requestedTypeId || activeGeographyTypeId || reportData?.response_geography?.default_type_id || null;
+  const requestedUnitId = resolveRequestedEmbedGeographyUnitId(nextTypeId);
+  setResponseGeography(nextTypeId, requestedUnitId, false);
+  activeDemographicQuestionId = nextQuestionId;
+  activeDemographicDimensionId = nextDemographicId;
+  activeDemographicMetricId = resolveRequestedEmbedResponseCategoryId(nextQuestionId, nextDemographicId) || 'net_support';
+}
 
 function toFiniteNumber(value, fallback = NaN) {
   const num = Number(value);
@@ -233186,7 +233361,7 @@ function initResponseUniverseToggle() {
   const defaultMode = hasWithView && cfg.default_mode === 'with_view'
     ? 'with_view'
     : 'all_americans';
-  setResponseUniverse(defaultMode, false);
+  setResponseUniverse(getRequestedEmbedUniverse(defaultMode), false);
 }
 
 function updateResponseGeographyExplainer() {
@@ -234199,6 +234374,27 @@ function renderTakeaways() {
       <div class="kf-breakdown">Str. support: ${fmt1(c.ss)} · Smw. support: ${fmt1(c.somS)} · Smw. oppose: ${fmt1(c.somO)} · Str. oppose: ${fmt1(c.so)}</div>
     </div>
   `).join('');
+  if (isOverviewKeyFindingsEmbed()) {
+    window.requestAnimationFrame(postSupportEmbedHeight);
+  }
+}
+
+function postSupportEmbedHeight() {
+  if (!isSupportEmbedMode()) return;
+  const embed = isOverviewKeyFindingsEmbed()
+    ? 'overview-key-findings'
+    : (isDemographicBreakdownEmbed() ? 'demographic-breakdown' : null);
+  if (!embed) return;
+  const height = Math.max(
+    document.documentElement.scrollHeight || 0,
+    document.body.scrollHeight || 0
+  );
+  if (height > 0 && window.parent && window.parent !== window) {
+    window.parent.postMessage(
+      { type: 'vdh-support-embed-height', embed, height },
+      '*'
+    );
+  }
 }
 
 function renderMethodology() {
@@ -234654,6 +234850,9 @@ function renderDemographicExplorer() {
   rowsWrap.className = 'chart-rows';
   display.appendChild(rowsWrap);
   renderBarsForMetric(rowsWrap, geographyRows, metric);
+  if (isDemographicBreakdownEmbed()) {
+    window.requestAnimationFrame(postSupportEmbedHeight);
+  }
 }
 
 function initDemographics() {
@@ -236284,10 +236483,54 @@ function initSupportMap() {
 
 async function init() {
   initTheme();
+  if (isOverviewKeyFindingsEmbed()) {
+    document.documentElement.setAttribute('data-embed-mode', 'overview-key-findings');
+    document.title = 'Overview Key Findings | iGaming Support | Vantage Data House';
+  } else if (isDemographicBreakdownEmbed()) {
+    document.documentElement.setAttribute('data-embed-mode', 'demographic-breakdown');
+    document.title = 'Demographic Breakdown | iGaming Support | Vantage Data House';
+  }
   await loadData();
   updateResponseUniverseTheme();
   initResponseUniverseToggle();
+  if (isOverviewKeyFindingsEmbed()) {
+    renderTakeaways();
+    initReveal();
+    if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
+      window.VDH_PNG_EXPORT.init({
+        siteSlug: 'igaming_support',
+        getResponseUniverse: function getResponseUniverse() {
+          return typeof activeResponseUniverse === 'string' ? activeResponseUniverse : null;
+        },
+        components: [
+          { componentId: 'key_takeaways', label: 'overview-key-findings' }
+        ]
+      });
+    }
+    window.addEventListener('resize', postSupportEmbedHeight, { passive: true });
+    window.requestAnimationFrame(postSupportEmbedHeight);
+    return;
+  }
   initResponseGeographyControl();
+  if (isDemographicBreakdownEmbed()) {
+    applyDemographicBreakdownEmbedDefaults();
+    initDemographics();
+    initReveal();
+    if (window.VDH_PNG_EXPORT && typeof window.VDH_PNG_EXPORT.init === 'function') {
+      window.VDH_PNG_EXPORT.init({
+        siteSlug: 'igaming_support',
+        getResponseUniverse: function getResponseUniverse() {
+          return typeof activeResponseUniverse === 'string' ? activeResponseUniverse : null;
+        },
+        components: [
+          { componentId: 'demographic_breakdown', label: 'demographic-breakdown' }
+        ]
+      });
+    }
+    window.addEventListener('resize', postSupportEmbedHeight, { passive: true });
+    window.requestAnimationFrame(postSupportEmbedHeight);
+    return;
+  }
   fillMeta();
   renderSiteNavigation();
   renderTakeaways();

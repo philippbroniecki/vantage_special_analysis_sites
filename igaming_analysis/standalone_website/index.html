@@ -574,8 +574,7 @@
       }
 
       .comparison-row,
-      .meter-row,
-      .matchup-row {
+      .meter-row {
         display: grid;
         align-items: center;
         gap: 0.75rem;
@@ -590,13 +589,8 @@
         grid-template-columns: minmax(0, 1.5fr) minmax(0, 2fr) auto;
       }
 
-      .matchup-row {
-        grid-template-columns: minmax(0, 1.45fr) minmax(0, 2.2fr);
-      }
-
       .comparison-row:last-child,
-      .meter-row:last-child,
-      .matchup-row:last-child {
+      .meter-row:last-child {
         margin-bottom: 0;
       }
 
@@ -739,25 +733,6 @@
         left: 50%;
         border-radius: 0 999px 999px 0;
         background: rgba(34, 127, 81, 0.72);
-      }
-
-      .matchup-bars {
-        display: grid;
-        gap: 0.45rem;
-      }
-
-      .matchup-side {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: center;
-        gap: 0.65rem;
-        font-size: 0.92rem;
-      }
-
-      .matchup-label {
-        color: var(--ink-soft);
-        font-size: 0.92rem;
-        line-height: 1.45;
       }
 
       .map-shell {
@@ -1114,6 +1089,78 @@
         return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
       }
 
+      function resolveSupportEmbedBaseUrl() {
+        if (isLocalPreviewHost()) return '../../igaming_support/standalone_website/';
+        return 'https://support.igaming.vantage.philippbroniecki.com/';
+      }
+
+      function resolveSupportEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveSupportEmbedBaseUrl()}?embed=overview-key-findings&universe=with_view`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function resolveSupportDemographicEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveSupportEmbedBaseUrl()}?embed=demographic-breakdown&universe=with_view&geography=statewide&unit=louisiana&question=support-for-legalizing-online-casino-gaming&demographic=party&response_category=net_support`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function resolveAttitudesEmbedBaseUrl() {
+        if (isLocalPreviewHost()) return '../../attitudes/standalone_website/';
+        return 'https://attitudes.igaming.vantage.philippbroniecki.com/';
+      }
+
+      function resolveAttitudesBehaviorEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveAttitudesEmbedBaseUrl()}?embed=gambling-behavior-offshore-awareness&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function resolveAttitudesBeliefEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveAttitudesEmbedBaseUrl()}?embed=belief-landscape&universe=with_view&metric=net_agree&statement_group=all_statements&geography=statewide&unit=louisiana&demographic=overall&level=overall`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function resolveAttitudesArgumentEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveAttitudesEmbedBaseUrl()}?embed=argument-matchups&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function resolveAttitudesPersuadabilityEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveAttitudesEmbedBaseUrl()}?embed=persuadability-trusted-messengers&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function resolveAttitudesPrioritiesEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveAttitudesEmbedBaseUrl()}?embed=priorities-revenue-uses&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function resolveExperimentEmbedBaseUrl() {
+        if (isLocalPreviewHost()) return '../../experiment/standalone_website/';
+        return 'https://experiments.igaming.vantage.philippbroniecki.com/';
+      }
+
+      function resolveExperimentPoliticalImpactSummaryEmbedUrl(outcomeId) {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const normalizedOutcome = outcomeId === 'favorability' ? 'favorability' : 'test_ballot';
+        const rawUrl = `${resolveExperimentEmbedBaseUrl()}?embed=political-impact-summary&universe=with_view&outcome=${normalizedOutcome}`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
       function applyThemeToEmbeds(root = document) {
         root.querySelectorAll('iframe[data-embed-kind="test-ballot-statewide-comparison"]').forEach((frame) => {
           const nextSrc = resolveTestBallotEmbedUrl();
@@ -1123,6 +1170,60 @@
         });
         root.querySelectorAll('iframe[data-embed-kind="favorability-ranking"]').forEach((frame) => {
           const nextSrc = resolveFavorabilityEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="support-overview-key-findings"]').forEach((frame) => {
+          const nextSrc = resolveSupportEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="support-demographic-breakdown"]').forEach((frame) => {
+          const nextSrc = resolveSupportDemographicEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="attitudes-behavior-offshore-awareness"]').forEach((frame) => {
+          const nextSrc = resolveAttitudesBehaviorEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="attitudes-belief-landscape"]').forEach((frame) => {
+          const nextSrc = resolveAttitudesBeliefEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="attitudes-argument-matchups"]').forEach((frame) => {
+          const nextSrc = resolveAttitudesArgumentEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="attitudes-persuadability-trusted-messengers"]').forEach((frame) => {
+          const nextSrc = resolveAttitudesPersuadabilityEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="attitudes-priorities-revenue-uses"]').forEach((frame) => {
+          const nextSrc = resolveAttitudesPrioritiesEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="experiment-political-impact-summary-ballot"]').forEach((frame) => {
+          const nextSrc = resolveExperimentPoliticalImpactSummaryEmbedUrl('test_ballot');
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="experiment-political-impact-summary-favorability"]').forEach((frame) => {
+          const nextSrc = resolveExperimentPoliticalImpactSummaryEmbedUrl('favorability');
           if (frame.getAttribute('src') !== nextSrc) {
             frame.setAttribute('src', nextSrc);
           }
@@ -1287,6 +1388,164 @@
         frame.setAttribute('data-embed-kind', 'favorability-ranking');
         frame.setAttribute('data-embed-local-src', '../../favorability/standalone_website/?embed=favorability-ranking&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
         frame.setAttribute('data-embed-prod-src', 'https://favorability.igaming.vantage.philippbroniecki.com/?embed=favorability-ranking&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createSupportEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'iGaming support overview key findings';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'support-overview-key-findings');
+        frame.setAttribute('data-embed-local-src', '../../igaming_support/standalone_website/?embed=overview-key-findings&universe=with_view');
+        frame.setAttribute('data-embed-prod-src', 'https://support.igaming.vantage.philippbroniecki.com/?embed=overview-key-findings&universe=with_view');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createSupportDemographicEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'iGaming support demographic breakdown';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'support-demographic-breakdown');
+        frame.setAttribute('data-embed-local-src', '../../igaming_support/standalone_website/?embed=demographic-breakdown&universe=with_view&geography=statewide&unit=louisiana&question=support-for-legalizing-online-casino-gaming&demographic=party&response_category=net_support');
+        frame.setAttribute('data-embed-prod-src', 'https://support.igaming.vantage.philippbroniecki.com/?embed=demographic-breakdown&universe=with_view&geography=statewide&unit=louisiana&question=support-for-legalizing-online-casino-gaming&demographic=party&response_category=net_support');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createAttitudesBehaviorEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'Gambling behavior and offshore awareness';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'attitudes-behavior-offshore-awareness');
+        frame.setAttribute('data-embed-local-src', '../../attitudes/standalone_website/?embed=gambling-behavior-offshore-awareness&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        frame.setAttribute('data-embed-prod-src', 'https://attitudes.igaming.vantage.philippbroniecki.com/?embed=gambling-behavior-offshore-awareness&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createAttitudesBeliefEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'Belief landscape';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'attitudes-belief-landscape');
+        frame.setAttribute('data-embed-local-src', '../../attitudes/standalone_website/?embed=belief-landscape&universe=with_view&metric=net_agree&statement_group=all_statements&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        frame.setAttribute('data-embed-prod-src', 'https://attitudes.igaming.vantage.philippbroniecki.com/?embed=belief-landscape&universe=with_view&metric=net_agree&statement_group=all_statements&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createAttitudesArgumentEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'Argument matchups';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'attitudes-argument-matchups');
+        frame.setAttribute('data-embed-local-src', '../../attitudes/standalone_website/?embed=argument-matchups&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        frame.setAttribute('data-embed-prod-src', 'https://attitudes.igaming.vantage.philippbroniecki.com/?embed=argument-matchups&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createAttitudesPersuadabilityEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'Persuadability and trusted messengers';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'attitudes-persuadability-trusted-messengers');
+        frame.setAttribute('data-embed-local-src', '../../attitudes/standalone_website/?embed=persuadability-trusted-messengers&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        frame.setAttribute('data-embed-prod-src', 'https://attitudes.igaming.vantage.philippbroniecki.com/?embed=persuadability-trusted-messengers&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createAttitudesPrioritiesEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'Priorities and revenue uses';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'attitudes-priorities-revenue-uses');
+        frame.setAttribute('data-embed-local-src', '../../attitudes/standalone_website/?embed=priorities-revenue-uses&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        frame.setAttribute('data-embed-prod-src', 'https://attitudes.igaming.vantage.philippbroniecki.com/?embed=priorities-revenue-uses&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createExperimentPoliticalImpactSummaryEmbedFigure(outcomeId) {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        const normalizedOutcome = outcomeId === 'favorability' ? 'favorability' : 'test_ballot';
+        const localSrc = normalizedOutcome === 'favorability'
+          ? '../../experiment/standalone_website/?embed=political-impact-summary&universe=with_view&outcome=favorability'
+          : '../../experiment/standalone_website/?embed=political-impact-summary&universe=with_view&outcome=test_ballot';
+        const prodSrc = normalizedOutcome === 'favorability'
+          ? 'https://experiments.igaming.vantage.philippbroniecki.com/?embed=political-impact-summary&universe=with_view&outcome=favorability'
+          : 'https://experiments.igaming.vantage.philippbroniecki.com/?embed=political-impact-summary&universe=with_view&outcome=test_ballot';
+        frame.title = normalizedOutcome === 'favorability'
+          ? 'Political impact summary favorability'
+          : 'Political impact summary test ballot';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute(
+          'data-embed-kind',
+          normalizedOutcome === 'favorability'
+            ? 'experiment-political-impact-summary-favorability'
+            : 'experiment-political-impact-summary-ballot'
+        );
+        frame.setAttribute('data-embed-local-src', localSrc);
+        frame.setAttribute('data-embed-prod-src', prodSrc);
         wrap.appendChild(frame);
         shell.body.appendChild(wrap);
         applyThemeToEmbeds(shell.section);
@@ -1460,49 +1719,6 @@
         return card;
       }
 
-      function createMatchupCard(rows) {
-        const card = document.createElement('section');
-        card.className = 'figure-card';
-        toArray(rows).forEach((row) => {
-          const matchup = document.createElement('div');
-          matchup.className = 'matchup-row';
-          const label = document.createElement('div');
-          label.className = 'matchup-label';
-          label.textContent = row?.matchup || '';
-          matchup.appendChild(label);
-
-          const bars = document.createElement('div');
-          bars.className = 'matchup-bars';
-          [
-            { label: row?.pro_label, value: Number(row?.pro_value) },
-            { label: row?.anti_label, value: Number(row?.anti_value) }
-          ].forEach((item) => {
-            if (!Number.isFinite(item.value)) return;
-            const side = document.createElement('div');
-            side.className = 'matchup-side';
-            const sideLabel = document.createElement('span');
-            sideLabel.textContent = item.label || '';
-            const sideValue = document.createElement('span');
-            sideValue.className = 'meter-value';
-            sideValue.textContent = formatPercent(item.value, 0);
-            side.appendChild(sideLabel);
-            side.appendChild(sideValue);
-            bars.appendChild(side);
-
-            const track = document.createElement('div');
-            track.className = 'meter-track';
-            const fill = document.createElement('div');
-            fill.className = 'meter-fill';
-            fill.style.width = `${Math.max(0, Math.min(100, item.value))}%`;
-            track.appendChild(fill);
-            bars.appendChild(track);
-          });
-          matchup.appendChild(bars);
-          card.appendChild(matchup);
-        });
-        return card;
-      }
-
       function scoreToColor(value, minValue, maxValue) {
         const low = [228, 200, 179];
         const high = [26, 107, 115];
@@ -1610,93 +1826,31 @@
         }
 
         if (key === 'support_overview_map') {
-          const topline = document.createElement('section');
-          topline.className = 'figure-card';
-          topline.appendChild(createStackedBarFigure(figures?.support?.topline?.segments));
-          topline.appendChild(
-            createMetricChips([
-              { label: 'Support', value: '58%' },
-              { label: 'Oppose', value: '30%' },
-              { label: 'Net support', value: '+28pp' }
-            ])
-          );
-          shell.body.appendChild(topline);
-          shell.body.appendChild(
-            createLollipopList(
-              toArray(figures?.support?.regions).map((row) => ({ label: row.label, value: row.support })),
-              {
-                min: 50,
-                max: 65,
-                valueFormatter: (value) => formatPercent(value, 1)
-              }
-            )
-          );
-          return shell.section;
+          return createSupportEmbedFigure();
         }
 
         if (key === 'support_demographic_with_view') {
-          const partyRows = toArray(figures?.support?.party_support_display?.rows).map((row) => [
-            row.label,
-            `${Math.round(Number(row.support))}%`,
-            `${Math.round(Number(row.oppose))}%`,
-            formatSignedWhole(row.net),
-          ]);
-          shell.body.appendChild(createTable(['Party', 'Support', 'Oppose', 'Net'], partyRows));
-          return shell.section;
+          return createSupportDemographicEmbedFigure();
         }
 
         if (key === 'gambling_behavior_offshore_awareness') {
-          shell.body.classList.add('two-up');
-          shell.body.appendChild(
-            createMeterListCard(
-              '',
-              [
-                { label: 'Gambled in past year', value: figures?.attitudes?.participation?.gambled_last_year },
-                { label: 'Did not gamble', value: figures?.attitudes?.participation?.did_not_gamble }
-              ],
-              (value) => formatPercent(value, 0)
-            )
-          );
-          shell.body.appendChild(
-            createMeterListCard(
-              '',
-              toArray(figures?.attitudes?.offshore_awareness),
-              (value) => formatPercent(value, 0)
-            )
-          );
-          return shell.section;
+          return createAttitudesBehaviorEmbedFigure();
         }
 
         if (key === 'belief_landscape') {
-          shell.body.appendChild(createDivergingCard('', figures?.attitudes?.beliefs));
-          return shell.section;
+          return createAttitudesBeliefEmbedFigure();
         }
 
         if (key === 'argument_matchups') {
-          shell.body.appendChild(createMatchupCard(figures?.attitudes?.argument_matchups));
-          return shell.section;
+          return createAttitudesArgumentEmbedFigure();
         }
 
         if (key === 'persuadability_bars') {
-          shell.body.appendChild(
-            createMeterListCard(
-              '',
-              toArray(figures?.attitudes?.intensity),
-              (value) => formatPercent(value, 0)
-            )
-          );
-          return shell.section;
+          return createAttitudesPersuadabilityEmbedFigure();
         }
 
         if (key === 'priorities_and_revenue_uses') {
-          shell.body.appendChild(
-            createMeterListCard(
-              '',
-              toArray(figures?.attitudes?.revenue_priorities),
-              (value) => formatPercent(value, 0)
-            )
-          );
-          return shell.section;
+          return createAttitudesPrioritiesEmbedFigure();
         }
 
         const fallback = document.createElement('section');
@@ -1755,12 +1909,25 @@
         return heading;
       }
 
+      function normalizeTableCell(cell) {
+        return String(cell == null ? '' : cell).trim().toLowerCase();
+      }
+
+      function isExperimentResultTable(block, label) {
+        if (!block || block.type !== 'table') return false;
+        const headers = toArray(block.headers).map(normalizeTableCell);
+        return headers.length === 2
+          && headers[0] === 'party'
+          && headers[1] === String(label || '').trim().toLowerCase();
+      }
+
       function renderBody(blocks) {
         const container = document.getElementById('reportBody');
         if (!container) return;
         container.innerHTML = '';
         const split = splitReportBlocks(blocks);
         const bodyBlocks = toArray(split.bodyBlocks);
+        let skipExperimentNoSigningTable = false;
 
         for (let index = 0; index < bodyBlocks.length; index += 1) {
           const block = bodyBlocks[index];
@@ -1779,6 +1946,19 @@
             continue;
           }
           if (block.type === 'table') {
+            if (isExperimentResultTable(block, 'Signing + Delivery Effect')) {
+              container.appendChild(createExperimentPoliticalImpactSummaryEmbedFigure('test_ballot'));
+              skipExperimentNoSigningTable = true;
+              continue;
+            }
+            if (skipExperimentNoSigningTable && isExperimentResultTable(block, 'No Signing / No Delivery Effect')) {
+              skipExperimentNoSigningTable = false;
+              continue;
+            }
+            if (isExperimentResultTable(block, 'Signing Advantage')) {
+              container.appendChild(createExperimentPoliticalImpactSummaryEmbedFigure('favorability'));
+              continue;
+            }
             container.appendChild(createTable(block.headers, block.rows));
             continue;
           }
@@ -1832,6 +2012,68 @@
           const nextHeight = Number(data?.height);
           if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
           frame.style.height = `${Math.max(420, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-support-embed-height' && data.embed === 'overview-key-findings') {
+          const frame = document.querySelector('iframe[data-embed-kind="support-overview-key-findings"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(320, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-support-embed-height' && data.embed === 'demographic-breakdown') {
+          const frame = document.querySelector('iframe[data-embed-kind="support-demographic-breakdown"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(420, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-attitudes-embed-height' && data.embed === 'gambling-behavior-offshore-awareness') {
+          const frame = document.querySelector('iframe[data-embed-kind="attitudes-behavior-offshore-awareness"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(520, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-attitudes-embed-height' && data.embed === 'belief-landscape') {
+          const frame = document.querySelector('iframe[data-embed-kind="attitudes-belief-landscape"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(560, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-attitudes-embed-height' && data.embed === 'argument-matchups') {
+          const frame = document.querySelector('iframe[data-embed-kind="attitudes-argument-matchups"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(560, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-attitudes-embed-height' && data.embed === 'persuadability-trusted-messengers') {
+          const frame = document.querySelector('iframe[data-embed-kind="attitudes-persuadability-trusted-messengers"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(560, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-attitudes-embed-height' && data.embed === 'priorities-revenue-uses') {
+          const frame = document.querySelector('iframe[data-embed-kind="attitudes-priorities-revenue-uses"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(520, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-experiment-embed-height' && data.embed === 'political-impact-summary') {
+          const frames = document.querySelectorAll(
+            'iframe[data-embed-kind="experiment-political-impact-summary-ballot"], iframe[data-embed-kind="experiment-political-impact-summary-favorability"]'
+          );
+          const sourceWindow = event?.source || null;
+          const nextHeight = Number(data?.height);
+          if (!Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frames.forEach((frame) => {
+            if (sourceWindow && frame.contentWindow !== sourceWindow) return;
+            frame.style.height = `${Math.max(380, Math.ceil(nextHeight))}px`;
+          });
         }
       }
 

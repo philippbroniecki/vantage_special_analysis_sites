@@ -234,6 +234,30 @@ body {
   background-image: radial-gradient(ellipse at 14% 7%, rgba(26, 107, 115, 0.14) 0%, transparent 46%), radial-gradient(ellipse at 86% 0%, rgba(37, 86, 163, 0.12) 0%, transparent 38%), linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
   transition: background-color 280ms ease, color 280ms ease;
 }
+html[data-embed-mode='political-impact-summary'] body { min-height: auto; }
+html[data-embed-mode='political-impact-summary'] .topbar-wrap,
+html[data-embed-mode='political-impact-summary'] .back-nav,
+html[data-embed-mode='political-impact-summary'] #componentHero,
+html[data-embed-mode='political-impact-summary'] #componentResponseUniverse,
+html[data-embed-mode='political-impact-summary'] #componentMethodology,
+html[data-embed-mode='political-impact-summary'] #componentArms,
+html[data-embed-mode='political-impact-summary'] #componentStrategicImpact,
+html[data-embed-mode='political-impact-summary'] #componentMainEffects,
+html[data-embed-mode='political-impact-summary'] #componentCalculator,
+html[data-embed-mode='political-impact-summary'] #componentArchetypeCard,
+html[data-embed-mode='political-impact-summary'] #componentSubgroups,
+html[data-embed-mode='political-impact-summary'] #componentGeography,
+html[data-embed-mode='political-impact-summary'] #feedbackCallout {
+  display: none !important;
+}
+html[data-embed-mode='political-impact-summary'] .layout {
+  max-width: 100%;
+  padding: 0.75rem;
+  gap: 0.75rem;
+}
+html[data-embed-mode='political-impact-summary'] #componentSummary {
+  margin: 0;
+}
 .topbar-wrap { position: sticky; top: 0; z-index: 40; background: var(--topbar-bg); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border-bottom: 1px solid var(--line-soft); }
 .topbar { max-width: 1100px; margin: 0 auto; padding: 0 1.6rem; height: 54px; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; }
@@ -1038,6 +1062,43 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 
       let reportData = null;
       let activeResponseUniverse = "all_americans";
+      const URL_QUERY = new URLSearchParams(window.location.search || "");
+      const EMBED_MODE = String(URL_QUERY.get("embed") || "").trim();
+
+      function isPoliticalImpactSummaryEmbed() {
+        return EMBED_MODE === "political-impact-summary";
+      }
+
+      function getEmbedQueryValue(key) {
+        return String(URL_QUERY.get(key) || "").trim();
+      }
+
+      function getRequestedEmbedUniverse(fallbackMode) {
+        const requested = getEmbedQueryValue("universe");
+        if (requested === "with_view" || requested === "all_americans") return requested;
+        return fallbackMode;
+      }
+
+      function getRequestedEmbedOutcome(fallbackOutcome) {
+        const requested = getEmbedQueryValue("outcome");
+        if (requested === "ballot" || requested === "favorability" || requested === "support") return requested;
+        if (requested === "test_ballot") return "ballot";
+        return fallbackOutcome;
+      }
+
+      function postExperimentEmbedHeight() {
+        if (!isPoliticalImpactSummaryEmbed()) return;
+        const height = Math.max(
+          document.documentElement.scrollHeight || 0,
+          document.body.scrollHeight || 0
+        );
+        if (height > 0 && window.parent && window.parent !== window) {
+          window.parent.postMessage(
+            { type: "vdh-experiment-embed-height", embed: "political-impact-summary", height },
+            "*"
+          );
+        }
+      }
       let sharedTooltip = null;
       let tooltipOwner = null;
       let tooltipPinned = false;
@@ -1637,7 +1698,7 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         const defaultMode = cfg.with_view_available && cfg.default_mode === "with_view"
           ? "with_view"
           : "all_americans";
-        setResponseUniverse(defaultMode, false);
+        setResponseUniverse(getRequestedEmbedUniverse(defaultMode), false);
       }
 
       function isLocalPreview() {
@@ -1804,8 +1865,14 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
             el.textContent = opt.label;
             sel.appendChild(el);
           });
-          sel.value = "ballot";
+          sel.value = getRequestedEmbedOutcome("ballot");
           sel.addEventListener("change", renderSummary);
+        }
+        if (sel) {
+          const requestedOutcome = getRequestedEmbedOutcome(sel.value || "ballot");
+          sel.value = Array.from(sel.options).some((option) => option.value === requestedOutcome)
+            ? requestedOutcome
+            : (sel.value || "ballot");
         }
         renderSummary();
       }
@@ -1861,6 +1928,9 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
 
           body.appendChild(tr);
         });
+        if (isPoliticalImpactSummaryEmbed()) {
+          window.requestAnimationFrame(postExperimentEmbedHeight);
+        }
       }
 
       function drawBars(host, items) {
@@ -2695,6 +2765,11 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
         reportData = await loadData();
         normalizeRecordLabels();
 
+        if (isPoliticalImpactSummaryEmbed()) {
+          document.documentElement.setAttribute("data-embed-mode", "political-impact-summary");
+          document.title = "Political Impact Summary | Vantage Data House";
+        }
+
         applyHeroAndMeta();
         hydrateNavigation();
         if (reportData?.load_error) {
@@ -2712,13 +2787,21 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label { 
           return;
         }
         initResponseUniverseToggle();
+        if (isPoliticalImpactSummaryEmbed()) {
+          initSummaryCard();
+          const boot = window.__VDH_THEME_BOOT__ || { theme: "light" };
+          applyTheme(boot.theme || "light", false);
+          window.addEventListener("resize", postExperimentEmbedHeight, { passive: true });
+          window.requestAnimationFrame(postExperimentEmbedHeight);
+          return;
+        }
         renderStrategicImpact();
         initArchetypeCard();
-            initSummaryCard();
+        initSummaryCard();
         initMainEffects();
         initCalculator();
         initSubgroups();
-            initGeography();
+        initGeography();
         applyFeedbackCard();
 
         const themeToggle = document.getElementById("themeToggle");
