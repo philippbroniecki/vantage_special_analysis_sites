@@ -1102,9 +1102,27 @@
         return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
       }
 
+      function resolveFavorabilityEmbedBaseUrl() {
+        if (isLocalPreviewHost()) return '../../favorability/standalone_website/';
+        return 'https://favorability.igaming.vantage.philippbroniecki.com/';
+      }
+
+      function resolveFavorabilityEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveFavorabilityEmbedBaseUrl()}?embed=favorability-ranking&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
       function applyThemeToEmbeds(root = document) {
         root.querySelectorAll('iframe[data-embed-kind="test-ballot-statewide-comparison"]').forEach((frame) => {
           const nextSrc = resolveTestBallotEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+        root.querySelectorAll('iframe[data-embed-kind="favorability-ranking"]').forEach((frame) => {
+          const nextSrc = resolveFavorabilityEmbedUrl();
           if (frame.getAttribute('src') !== nextSrc) {
             frame.setAttribute('src', nextSrc);
           }
@@ -1251,6 +1269,24 @@
         frame.setAttribute('data-embed-kind', 'test-ballot-statewide-comparison');
         frame.setAttribute('data-embed-local-src', '../../test_ballot/standalone_website/?embed=statewide-comparison&universe=with_view');
         frame.setAttribute('data-embed-prod-src', 'https://test-ballot.igaming.vantage.philippbroniecki.com/?embed=statewide-comparison&universe=with_view');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function createFavorabilityEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'Favorability ranking';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'favorability-ranking');
+        frame.setAttribute('data-embed-local-src', '../../favorability/standalone_website/?embed=favorability-ranking&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
+        frame.setAttribute('data-embed-prod-src', 'https://favorability.igaming.vantage.philippbroniecki.com/?embed=favorability-ranking&universe=with_view&geography=statewide&unit=louisiana&demographic=overall&level=overall');
         wrap.appendChild(frame);
         shell.body.appendChild(wrap);
         applyThemeToEmbeds(shell.section);
@@ -1570,27 +1606,7 @@
         }
 
         if (key === 'favorability_ranking') {
-          const breakdown = document.createElement('section');
-          breakdown.className = 'figure-card';
-          breakdown.appendChild(createStackedBarFigure(figures?.favorability?.breakdown));
-          breakdown.appendChild(
-            createCompactValueList(
-              figures?.favorability?.breakdown,
-              (row) => formatPercent(row?.value, 1)
-            )
-          );
-          shell.body.appendChild(breakdown);
-          shell.body.appendChild(
-            createLollipopList(
-              toArray(figures?.favorability?.ranking).map((row) => ({ label: row.title, value: Number(row.net) })),
-              {
-                min: 0,
-                max: 42,
-                valueFormatter: (value) => formatSignedWhole(value)
-              }
-            )
-          );
-          return shell.section;
+          return createFavorabilityEmbedFigure();
         }
 
         if (key === 'support_overview_map') {
@@ -1803,11 +1819,20 @@
 
       function handleEmbedMessage(event) {
         const data = event?.data;
-        if (!data || data.type !== 'vdh-test-ballot-embed-height' || data.embed !== 'statewide-comparison') return;
-        const frame = document.querySelector('iframe[data-embed-kind="test-ballot-statewide-comparison"]');
-        const nextHeight = Number(data?.height);
-        if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
-        frame.style.height = `${Math.max(320, Math.ceil(nextHeight))}px`;
+        if (!data || typeof data !== 'object') return;
+        if (data.type === 'vdh-test-ballot-embed-height' && data.embed === 'statewide-comparison') {
+          const frame = document.querySelector('iframe[data-embed-kind="test-ballot-statewide-comparison"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(320, Math.ceil(nextHeight))}px`;
+          return;
+        }
+        if (data.type === 'vdh-favorability-embed-height' && data.embed === 'favorability-ranking') {
+          const frame = document.querySelector('iframe[data-embed-kind="favorability-ranking"]');
+          const nextHeight = Number(data?.height);
+          if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+          frame.style.height = `${Math.max(420, Math.ceil(nextHeight))}px`;
+        }
       }
 
       async function renderReport() {

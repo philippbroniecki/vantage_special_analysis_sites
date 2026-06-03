@@ -313,6 +313,43 @@
   --scatter-ql:        rgba(185,218,248,0.58);
 }
 
+html[data-embed-mode='favorability-ranking'] body {
+  min-height: 0;
+  background: transparent;
+  background-image: none;
+}
+
+html[data-embed-mode='favorability-ranking'] .topbar-wrap,
+html[data-embed-mode='favorability-ranking'] .back-nav,
+html[data-embed-mode='favorability-ranking'] #componentHero,
+html[data-embed-mode='favorability-ranking'] #componentResponseUniverse,
+html[data-embed-mode='favorability-ranking'] #componentResponseGeography,
+html[data-embed-mode='favorability-ranking'] #componentMethodology,
+html[data-embed-mode='favorability-ranking'] #componentTakeaways,
+html[data-embed-mode='favorability-ranking'] #componentTopline,
+html[data-embed-mode='favorability-ranking'] #componentFavMap,
+html[data-embed-mode='favorability-ranking'] #componentFavScatter,
+html[data-embed-mode='favorability-ranking'] #componentFavCalc,
+html[data-embed-mode='favorability-ranking'] #componentDemographics,
+html[data-embed-mode='favorability-ranking'] #componentCrosstabs,
+html[data-embed-mode='favorability-ranking'] #componentArchetypes,
+html[data-embed-mode='favorability-ranking'] #feedbackCallout,
+html[data-embed-mode='favorability-ranking'] #dataBanner,
+html[data-embed-mode='favorability-ranking'] #favMapTooltip {
+  display: none !important;
+}
+
+html[data-embed-mode='favorability-ranking'] .layout {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+html[data-embed-mode='favorability-ranking'] #componentFavRanking {
+  margin: 0;
+}
+
 /* ============================================================
    RESET & BASE
    ============================================================ */
@@ -3097,6 +3134,8 @@ let crosstabsLoadError = null;
 const crosstabShardCache = new Map();
 const archetypeGeoShardCache = new Map();
 let crosstabRenderToken = 0;
+const URL_QUERY = new URLSearchParams(window.location.search || '');
+const EMBED_MODE = String(URL_QUERY.get('embed') || '').trim();
 const DEFAULT_FAVORABILITY_QUESTION_ID = (toArray(FALLBACK_REPORT?.questions)[0]?.id) || 'fav_la_political_figures_landry_pre';
 let activeResponseUniverse = 'all_americans';
 let activeGeographyTypeId = null;
@@ -3109,6 +3148,66 @@ let activeCrosstabQuestionId = DEFAULT_FAVORABILITY_QUESTION_ID;
 let activeCrosstabRowVar = null;
 let activeCrosstabColVar = null;
 let activeCrosstabMetricId = null;
+
+function isFavorabilityRankingEmbed() {
+  return EMBED_MODE === 'favorability-ranking';
+}
+
+function normalizeEmbedToken(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function getEmbedQueryValue(key) {
+  return String(URL_QUERY.get(key) || '').trim();
+}
+
+function getRequestedEmbedUniverse(fallbackMode) {
+  const requested = getEmbedQueryValue('universe');
+  if (requested === 'with_view' || requested === 'all_americans') {
+    return requested;
+  }
+  return fallbackMode;
+}
+
+function resolveRequestedEmbedGeographyTypeId(types, fallbackTypeId) {
+  const requested = normalizeEmbedToken(getEmbedQueryValue('geography'));
+  if (!requested) return fallbackTypeId;
+  if (requested === 'statewide' || requested === 'state' || requested === 'louisiana') {
+    return 'state';
+  }
+  if (requested === 'parish' || requested === 'county') {
+    return 'parish';
+  }
+  if (requested === 'cultural region' || requested === 'cultural regions' || requested === 'region') {
+    return 'cultural_region';
+  }
+  const directMatch = toArray(types).find((entry) => normalizeEmbedToken(entry?.id) === requested);
+  return directMatch?.id || fallbackTypeId;
+}
+
+function resolveRequestedEmbedUnitId(type) {
+  const requested = normalizeEmbedToken(getEmbedQueryValue('unit'));
+  if (!requested || !type) return null;
+  if (type.id === 'state' && (requested === 'louisiana' || requested === 'statewide' || requested === 'state wide')) {
+    return type.default_unit_id || toArray(type.units)[0]?.id || null;
+  }
+  const match = toArray(type.units).find((unit) => {
+    return normalizeEmbedToken(unit?.id) === requested || normalizeEmbedToken(unit?.label) === requested;
+  });
+  return match?.id || null;
+}
+
+function applyFavorabilityRankingEmbedDefaults() {
+  if (!isFavorabilityRankingEmbed()) return;
+  const requestedDemographicId = getEmbedQueryValue('demographic');
+  const requestedLevelId = getEmbedQueryValue('level');
+  activeFavRankingDemographicId = requestedDemographicId || 'overall';
+  activeFavRankingLevelId = requestedLevelId || 'overall';
+}
 
 function toFiniteNumber(value, fallback = NaN) {
   const num = Number(value);
@@ -3956,7 +4055,7 @@ function initResponseUniverseToggle() {
   const defaultMode = hasWithView && cfg.default_mode === 'with_view'
     ? 'with_view'
     : 'all_americans';
-  setResponseUniverse(defaultMode, false);
+  setResponseUniverse(getRequestedEmbedUniverse(defaultMode), false);
 }
 
 function updateResponseGeographyExplainer() {
@@ -4165,7 +4264,10 @@ function initResponseGeographyControl() {
   const defaultTypeId = (cfg?.default_type_id && types.some((entry) => entry?.id === cfg.default_type_id))
     ? cfg.default_type_id
     : (types[0]?.id || null);
-  setResponseGeography(defaultTypeId, cfg?.default_unit_id || null, false);
+  const requestedTypeId = resolveRequestedEmbedGeographyTypeId(types, defaultTypeId);
+  const requestedType = types.find((entry) => entry?.id === requestedTypeId) || null;
+  const requestedUnitId = resolveRequestedEmbedUnitId(requestedType);
+  setResponseGeography(requestedTypeId, requestedUnitId || cfg?.default_unit_id || null, false);
 
   initAllCardGeographySelects();
 }
@@ -6499,6 +6601,7 @@ function initFavRankingControls() {
   var demographicSel = document.getElementById('favRankingDemographicSelect');
   var levelSel = document.getElementById('favRankingLevelSelect');
   if (!demographicSel || !levelSel) return;
+  applyFavorabilityRankingEmbedDefaults();
 
   demographicSel.addEventListener('change', function() {
     activeFavRankingDemographicId = demographicSel.value || 'overall';
@@ -6583,6 +6686,23 @@ function renderFavRankingChart() {
     row.addEventListener('mousemove',  function(e) { moveFavTooltip(e.clientX, e.clientY); });
     row.addEventListener('mouseleave', hideFavTooltip);
   });
+  if (isFavorabilityRankingEmbed()) {
+    window.requestAnimationFrame(postFavorabilityEmbedHeight);
+  }
+}
+
+function postFavorabilityEmbedHeight() {
+  if (!isFavorabilityRankingEmbed()) return;
+  const height = Math.max(
+    document.documentElement.scrollHeight || 0,
+    document.body.scrollHeight || 0
+  );
+  if (height > 0 && window.parent && window.parent !== window) {
+    window.parent.postMessage(
+      { type: 'vdh-favorability-embed-height', embed: 'favorability-ranking', height },
+      '*'
+    );
+  }
 }
 
 /* ============================================================
@@ -7769,6 +7889,10 @@ function initFavMap() {
    ============================================================ */
 async function init() {
   initTheme();
+  if (isFavorabilityRankingEmbed()) {
+    document.documentElement.setAttribute('data-embed-mode', 'favorability-ranking');
+    document.title = 'Favorability Ranking | Vantage Data House';
+  }
   await loadData();
   updateResponseUniverseTheme();
   initResponseUniverseToggle();
@@ -7808,6 +7932,10 @@ async function init() {
     });
   }
   initReveal();
+  if (isFavorabilityRankingEmbed()) {
+    window.addEventListener('resize', postFavorabilityEmbedHeight, { passive: true });
+    window.requestAnimationFrame(postFavorabilityEmbedHeight);
+  }
 }
 
 document.readyState === 'loading'
