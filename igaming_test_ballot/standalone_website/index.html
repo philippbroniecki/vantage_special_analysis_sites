@@ -406,6 +406,171 @@ body {
   gap: 1.35rem;
 }
 
+html[data-embed-mode='statewide-comparison'] body {
+  min-height: auto;
+  background: transparent;
+  background-image: none;
+}
+
+html[data-embed-mode='statewide-comparison'] .topbar-wrap,
+html[data-embed-mode='statewide-comparison'] .back-nav,
+html[data-embed-mode='statewide-comparison'] #componentHero,
+html[data-embed-mode='statewide-comparison'] #componentResponseUniverse,
+html[data-embed-mode='statewide-comparison'] #componentMethodology,
+html[data-embed-mode='statewide-comparison'] #componentTakeaways,
+html[data-embed-mode='statewide-comparison'] #componentResponseGeography,
+html[data-embed-mode='statewide-comparison'] #componentTopline,
+html[data-embed-mode='statewide-comparison'] #componentDemographics,
+html[data-embed-mode='statewide-comparison'] #componentCrosstabs,
+html[data-embed-mode='statewide-comparison'] #componentCoalition,
+html[data-embed-mode='statewide-comparison'] #componentArchetypes,
+html[data-embed-mode='statewide-comparison'] #componentGeographyExplorer,
+html[data-embed-mode='statewide-comparison'] #feedbackCallout,
+html[data-embed-mode='statewide-comparison'] #ballotMapTooltip {
+  display: none !important;
+}
+
+html[data-embed-mode='statewide-comparison'] .layout {
+  max-width: none;
+  padding: 0;
+  gap: 0;
+}
+
+html[data-embed-mode='statewide-comparison'] #dataBanner {
+  display: none !important;
+}
+
+.embed-figure-card {
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+}
+
+.embed-statewide-comparison {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.embed-comparison-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+.embed-comparison-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.embed-comparison-swatch {
+  width: 0.78rem;
+  height: 0.78rem;
+  border-radius: 999px;
+}
+
+.embed-comparison-swatch.year-2023 {
+  background: #4f6f8b;
+}
+
+.embed-comparison-swatch.year-2027 {
+  background: var(--accent);
+}
+
+.embed-comparison-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.7fr);
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.embed-comparison-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.embed-comparison-track {
+  position: relative;
+  min-height: 2.25rem;
+}
+
+.embed-comparison-line {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  background: color-mix(in srgb, var(--line) 58%, var(--ink-soft) 42%);
+  transform: translateY(-50%);
+}
+
+.embed-comparison-dot {
+  position: absolute;
+  top: 50%;
+  width: 0.92rem;
+  height: 0.92rem;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 76%, transparent 24%);
+}
+
+.embed-comparison-dot.year-2023 {
+  background: #4f6f8b;
+}
+
+.embed-comparison-dot.year-2027 {
+  background: var(--accent);
+}
+
+.embed-comparison-value {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 0.82rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.embed-comparison-missing {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.embed-comparison-axis {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.7fr);
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.embed-comparison-axis-track {
+  position: relative;
+  height: 1.2rem;
+}
+
+.embed-comparison-axis-track::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.25rem;
+  height: 1px;
+  background: var(--line);
+}
+
+.embed-comparison-axis-label {
+  position: absolute;
+  top: 0.35rem;
+  transform: translateX(-50%);
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
 .back-nav {
   display: flex;
   justify-content: flex-start;
@@ -2234,6 +2399,12 @@ body.with-view-mode .card[data-universe-scope='analytic'] .section-mode-label {
   .hero    { padding: 1.6rem 1.3rem 1.5rem; }
   .card    { padding: 1.15rem 1.2rem; }
 
+  .embed-comparison-row,
+  .embed-comparison-axis {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
   .q-opt {
     grid-template-columns: 1fr;
     gap: 0.42rem;
@@ -2854,6 +3025,12 @@ let activeCrosstabQuestionId = null;
 let activeCrosstabRowVar = null;
 let activeCrosstabColVar = null;
 let activeCrosstabMetricId = null;
+const URL_QUERY = new URLSearchParams(window.location.search || '');
+const EMBED_MODE = String(URL_QUERY.get('embed') || '').trim();
+
+function isStatewideComparisonEmbed() {
+  return EMBED_MODE === 'statewide-comparison';
+}
 
 function toFiniteNumber(value, fallback = NaN) {
   const num = Number(value);
@@ -3942,6 +4119,12 @@ async function loadData() {
         ? 'Opened via file:// — report data loaded from embedded fallback. Serve over HTTP for live JSON data and interactive crosstabs.'
         : `Report JSON could not be loaded — using embedded fallback. Check that ${REPORT_DATA_URL} is reachable.`;
     }
+  }
+
+  if (isStatewideComparisonEmbed()) {
+    crosstabsManifest = null;
+    crosstabsLoadError = null;
+    return;
   }
 
   crosstabShardCache.clear();
@@ -5506,6 +5689,166 @@ function getCurrentQuestionOptionsForGeography(typeId, unitId) {
 function getCurrentQuestionOptionValue(typeId, unitId, responseId) {
   const option = getCurrentQuestionOptionsForGeography(typeId, unitId).find((entry) => entry?.id === responseId);
   return resolveUniverseValue(option?.value, option?.values_by_universe);
+}
+
+function getEmbedQuestionUniverseValue(question, typeId, unitId, responseId, universeId) {
+  const option = toArray(question?.options_by_geography?.[typeId]?.[unitId]).find((entry) => entry?.id === responseId);
+  const preferred = toFiniteNumber(option?.values_by_universe?.[universeId]);
+  if (Number.isFinite(preferred)) return preferred;
+  const fallbackAll = toFiniteNumber(option?.values_by_universe?.all_americans);
+  if (Number.isFinite(fallbackAll)) return fallbackAll;
+  return toFiniteNumber(option?.value);
+}
+
+function embedPctPosition(value, minValue, maxValue) {
+  if (!Number.isFinite(Number(value))) return null;
+  const span = maxValue - minValue || 1;
+  return Math.max(0, Math.min(100, ((Number(value) - minValue) / span) * 100));
+}
+
+function getStatewideComparisonEmbedRows() {
+  const comparison = getComparison2023();
+  const question = getQuestionById(comparison?.question_id);
+  const official = comparison?.official_statewide?.raw || {};
+  return [
+    {
+      label: 'Landry',
+      baseline: toFiniteNumber(official.jeff_landry),
+      current: getEmbedQuestionUniverseValue(question, 'state', 'state wide', 'jeff_landry', 'with_view')
+    },
+    {
+      label: 'Democratic option',
+      baseline: toFiniteNumber(official.democratic_candidate),
+      current: getEmbedQuestionUniverseValue(question, 'state', 'state wide', 'democratic_candidate', 'with_view')
+    },
+    {
+      label: 'Republican alternative',
+      baseline: toFiniteNumber(official.republican_challenger),
+      current: getEmbedQuestionUniverseValue(question, 'state', 'state wide', 'republican_challenger', 'with_view')
+    },
+    {
+      label: 'Others',
+      baseline: toFiniteNumber(official.residual_other),
+      current: NaN
+    }
+  ];
+}
+
+function postEmbedHeight() {
+  if (!isStatewideComparisonEmbed()) return;
+  const height = Math.max(
+    document.documentElement.scrollHeight || 0,
+    document.body.scrollHeight || 0
+  );
+  if (height > 0 && window.parent && window.parent !== window) {
+    window.parent.postMessage(
+      { type: 'vdh-test-ballot-embed-height', embed: 'statewide-comparison', height },
+      '*'
+    );
+  }
+}
+
+function renderStatewideComparisonEmbed() {
+  const layout = document.querySelector('main.layout');
+  if (!layout) return;
+  document.documentElement.setAttribute('data-embed-mode', 'statewide-comparison');
+  document.title = 'Statewide Comparison | Test Ballot | Vantage Data House';
+  layout.innerHTML = '';
+
+  const card = document.createElement('section');
+  card.className = 'card embed-figure-card';
+  card.setAttribute('data-embed-component', 'statewide-comparison');
+
+  const host = document.createElement('div');
+  host.className = 'embed-statewide-comparison';
+
+  const legend = document.createElement('div');
+  legend.className = 'embed-comparison-legend';
+  legend.innerHTML = `
+    <span class="embed-comparison-legend-item"><span class="embed-comparison-swatch year-2023"></span><span>2023</span></span>
+    <span class="embed-comparison-legend-item"><span class="embed-comparison-swatch year-2027"></span><span>2027 Test</span></span>
+  `;
+  host.appendChild(legend);
+
+  const rows = getStatewideComparisonEmbedRows();
+  const minValue = 0;
+  const maxValue = 60;
+  rows.forEach((row) => {
+    const baselinePos = embedPctPosition(row.baseline, minValue, maxValue);
+    const currentPos = embedPctPosition(row.current, minValue, maxValue);
+    const line = document.createElement('div');
+    line.className = 'embed-comparison-row';
+    const tooltipBits = [
+      `${row.label}`,
+      Number.isFinite(row.baseline) ? `2023: ${row.baseline.toFixed(1)}%` : null,
+      Number.isFinite(row.current) ? `2027 Test: ${row.current.toFixed(1)}%` : '2027 Test: —',
+      Number.isFinite(row.baseline) && Number.isFinite(row.current) ? `Change: ${(row.current - row.baseline > 0 ? '+' : '')}${(row.current - row.baseline).toFixed(1)} pp` : null
+    ].filter(Boolean);
+    line.innerHTML = `<div class="embed-comparison-label">${escapeHtml(row.label)}</div>`;
+
+    const track = document.createElement('div');
+    track.className = 'embed-comparison-track';
+    track.setAttribute('data-tooltip', tooltipBits.join('\n'));
+    if (baselinePos !== null && currentPos !== null) {
+      const connector = document.createElement('div');
+      connector.className = 'embed-comparison-line';
+      connector.style.left = `${Math.min(baselinePos, currentPos)}%`;
+      connector.style.width = `${Math.abs(currentPos - baselinePos)}%`;
+      track.appendChild(connector);
+    }
+    if (baselinePos !== null) {
+      const dot2023 = document.createElement('div');
+      dot2023.className = 'embed-comparison-dot year-2023';
+      dot2023.style.left = `${baselinePos}%`;
+      dot2023.setAttribute('data-tooltip', tooltipBits.join('\n'));
+      track.appendChild(dot2023);
+
+      const value2023 = document.createElement('div');
+      value2023.className = 'embed-comparison-value';
+      value2023.style.left = `calc(${baselinePos}% + 0.62rem)`;
+      value2023.textContent = `${row.baseline.toFixed(1)}%`;
+      track.appendChild(value2023);
+    }
+    if (currentPos !== null) {
+      const dot2027 = document.createElement('div');
+      dot2027.className = 'embed-comparison-dot year-2027';
+      dot2027.style.left = `${currentPos}%`;
+      dot2027.setAttribute('data-tooltip', tooltipBits.join('\n'));
+      track.appendChild(dot2027);
+
+      const value2027 = document.createElement('div');
+      value2027.className = 'embed-comparison-value';
+      value2027.style.left = `calc(${currentPos}% + 0.62rem)`;
+      value2027.textContent = `${row.current.toFixed(1)}%`;
+      track.appendChild(value2027);
+    } else {
+      const missing = document.createElement('div');
+      missing.className = 'embed-comparison-missing';
+      missing.textContent = '—';
+      track.appendChild(missing);
+    }
+    line.appendChild(track);
+    host.appendChild(line);
+  });
+
+  const axis = document.createElement('div');
+  axis.className = 'embed-comparison-axis';
+  axis.appendChild(document.createElement('div'));
+  const axisTrack = document.createElement('div');
+  axisTrack.className = 'embed-comparison-axis-track';
+  [0, 20, 40, 60].forEach((tick) => {
+    const label = document.createElement('span');
+    label.className = 'embed-comparison-axis-label';
+    label.style.left = `${embedPctPosition(tick, minValue, maxValue)}%`;
+    label.textContent = `${tick}%`;
+    axisTrack.appendChild(label);
+  });
+  axis.appendChild(axisTrack);
+  host.appendChild(axis);
+
+  card.appendChild(host);
+  layout.appendChild(card);
+  postEmbedHeight();
 }
 
 function getComparisonUnitIdCandidates(typeId, unitId) {
@@ -7270,6 +7613,12 @@ function rerenderResponseUniverseSections() {
 function init() {
   initTheme();
   loadData().then(() => {
+    if (isStatewideComparisonEmbed()) {
+      renderStatewideComparisonEmbed();
+      window.addEventListener('resize', postEmbedHeight, { passive: true });
+      window.requestAnimationFrame(postEmbedHeight);
+      return;
+    }
     fillMeta();
     renderSiteNavigation();
     if (isMinimalFallbackReport()) {

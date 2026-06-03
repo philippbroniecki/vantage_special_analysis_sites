@@ -541,33 +541,23 @@
         gap: 1rem;
       }
 
+      .figure-embed-shell {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+      }
+
+      .figure-embed-frame {
+        display: block;
+        width: 100%;
+        min-height: 360px;
+        border: 0;
+        background: transparent;
+      }
+
       .figure-grid.two-up {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .figure-toolbar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.55rem;
-        margin-bottom: 0.9rem;
-      }
-
-      .figure-toggle {
-        appearance: none;
-        border: 1px solid var(--line-strong);
-        border-radius: 999px;
-        background: var(--surface);
-        color: var(--ink-soft);
-        padding: 0.45rem 0.8rem;
-        font: inherit;
-        font-size: 0.9rem;
-        cursor: pointer;
-      }
-
-      .figure-toggle[aria-pressed='true'] {
-        background: var(--accent-soft);
-        color: var(--ink);
-        border-color: color-mix(in srgb, var(--accent) 50%, var(--line-strong) 50%);
       }
 
       .figure-card {
@@ -788,124 +778,6 @@
         height: auto;
       }
 
-      .dotplot-shell {
-        display: grid;
-        gap: 0.9rem;
-      }
-
-      .dotplot-legend {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.9rem;
-        font-size: 0.88rem;
-        color: var(--ink-soft);
-      }
-
-      .dotplot-legend-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-      }
-
-      .dotplot-swatch {
-        width: 0.8rem;
-        height: 0.8rem;
-        border-radius: 999px;
-      }
-
-      .dotplot-row {
-        display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.5fr);
-        gap: 0.9rem;
-        align-items: center;
-      }
-
-      .dotplot-row-label {
-        font-size: 0.94rem;
-        color: var(--ink);
-      }
-
-      .dotplot-track {
-        position: relative;
-        min-height: 1.8rem;
-      }
-
-      .dotplot-line {
-        position: absolute;
-        top: 50%;
-        height: 2px;
-        background: color-mix(in srgb, var(--line-strong) 62%, var(--ink-soft) 38%);
-        transform: translateY(-50%);
-      }
-
-      .dotplot-point {
-        position: absolute;
-        top: 50%;
-        width: 0.9rem;
-        height: 0.9rem;
-        border-radius: 999px;
-        transform: translate(-50%, -50%);
-        border: 2px solid var(--surface);
-        box-shadow: 0 0 0 1px color-mix(in srgb, var(--line-strong) 75%, transparent 25%);
-      }
-
-      .dotplot-point.point-2023 {
-        background: #496780;
-      }
-
-      .dotplot-point.point-2027 {
-        background: var(--accent);
-      }
-
-      .dotplot-value {
-        position: absolute;
-        top: 50%;
-        transform: translate(0, -50%);
-        font-size: 0.85rem;
-        color: var(--ink);
-        white-space: nowrap;
-      }
-
-      .dotplot-missing {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
-        color: var(--muted);
-        font-size: 0.88rem;
-      }
-
-      .dotplot-axis {
-        position: relative;
-        display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.5fr);
-        gap: 0.9rem;
-        align-items: center;
-      }
-
-      .dotplot-axis-track {
-        position: relative;
-        height: 1.2rem;
-      }
-
-      .dotplot-axis-track::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0.25rem;
-        height: 1px;
-        background: var(--line-strong);
-      }
-
-      .dotplot-axis-label {
-        position: absolute;
-        top: 0.35rem;
-        transform: translateX(-50%);
-        font-size: 0.78rem;
-        color: var(--muted);
-      }
-
       .lollipop-row {
         display: grid;
         grid-template-columns: minmax(0, 1.45fr) minmax(0, 2.35fr);
@@ -985,8 +857,6 @@
         .meter-row,
         .matchup-row,
         .diverging-row,
-        .dotplot-row,
-        .dotplot-axis,
         .lollipop-row {
           grid-template-columns: 1fr;
           gap: 0.45rem;
@@ -1220,6 +1090,27 @@
         });
       }
 
+      function resolveTestBallotEmbedBaseUrl() {
+        if (isLocalPreviewHost()) return '../../test_ballot/standalone_website/';
+        return 'https://test-ballot.igaming.vantage.philippbroniecki.com/';
+      }
+
+      function resolveTestBallotEmbedUrl() {
+        const helper = window.VDHTheme;
+        const activeTheme = helper?.getActiveTheme?.() || 'light';
+        const rawUrl = `${resolveTestBallotEmbedBaseUrl()}?embed=statewide-comparison`;
+        return helper?.withThemeParam ? helper.withThemeParam(rawUrl, activeTheme) : rawUrl;
+      }
+
+      function applyThemeToEmbeds(root = document) {
+        root.querySelectorAll('iframe[data-embed-kind="test-ballot-statewide-comparison"]').forEach((frame) => {
+          const nextSrc = resolveTestBallotEmbedUrl();
+          if (frame.getAttribute('src') !== nextSrc) {
+            frame.setAttribute('src', nextSrc);
+          }
+        });
+      }
+
       function applyTheme(theme) {
         const helper = window.VDHTheme;
         const normalized = helper?.normalizeTheme ? helper.normalizeTheme(theme) : null;
@@ -1231,6 +1122,7 @@
         if (icon) icon.textContent = normalized === 'dark' ? '\u263D' : '\u263C';
         if (label) label.textContent = normalized === 'dark' ? 'Dark' : 'Light';
         applyThemeToLinks(document);
+        applyThemeToEmbeds(document);
       }
 
       function initThemeControls() {
@@ -1345,6 +1237,32 @@
         body.className = 'figure-grid';
         section.appendChild(body);
         return { section, body };
+      }
+
+      function createTestBallotEmbedFigure() {
+        const shell = createFigureShell('');
+        const wrap = document.createElement('div');
+        wrap.className = 'figure-embed-shell';
+        const frame = document.createElement('iframe');
+        frame.className = 'figure-embed-frame';
+        frame.title = 'Test ballot statewide comparison';
+        frame.loading = 'eager';
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('data-embed-kind', 'test-ballot-statewide-comparison');
+        frame.setAttribute('data-embed-local-src', '../../test_ballot/standalone_website/?embed=statewide-comparison');
+        frame.setAttribute('data-embed-prod-src', 'https://test-ballot.igaming.vantage.philippbroniecki.com/?embed=statewide-comparison');
+        wrap.appendChild(frame);
+        shell.body.appendChild(wrap);
+        applyThemeToEmbeds(shell.section);
+        return shell.section;
+      }
+
+      function percentagePosition(value, minValue, maxValue) {
+        if (value == null || value === '' || value === '—') return null;
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return null;
+        const span = maxValue - minValue || 1;
+        return ((numeric - minValue) / span) * 100;
       }
 
       function createStackedBarFigure(segments) {
@@ -1603,125 +1521,6 @@
         return card;
       }
 
-      function createToggleBar(options, activeValue, onSelect) {
-        const toolbar = document.createElement('div');
-        toolbar.className = 'figure-toolbar';
-        toArray(options).forEach((option) => {
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'figure-toggle';
-          button.textContent = option.label;
-          button.setAttribute('aria-pressed', option.value === activeValue ? 'true' : 'false');
-          button.addEventListener('click', () => onSelect(option.value));
-          toolbar.appendChild(button);
-        });
-        return toolbar;
-      }
-
-      function createDotLegend(items) {
-        const legend = document.createElement('div');
-        legend.className = 'dotplot-legend';
-        toArray(items).forEach((item) => {
-          const node = document.createElement('div');
-          node.className = 'dotplot-legend-item';
-          node.innerHTML = `<span class="dotplot-swatch" style="background:${escapeHtml(item.color)}"></span><span>${escapeHtml(item.label)}</span>`;
-          legend.appendChild(node);
-        });
-        return legend;
-      }
-
-      function percentagePosition(value, minValue, maxValue) {
-        if (value == null || value === '' || value === '—') return null;
-        const numeric = Number(value);
-        if (!Number.isFinite(numeric)) return null;
-        const span = maxValue - minValue || 1;
-        return ((numeric - minValue) / span) * 100;
-      }
-
-      function createConnectedDotPlot(rows, options = {}) {
-        const minValue = Number.isFinite(options.min) ? options.min : 0;
-        const maxValue = Number.isFinite(options.max) ? options.max : 100;
-        const startLabel = options.startLabel || '2023';
-        const endLabel = options.endLabel || '2027 Test';
-        const wrap = document.createElement('div');
-        wrap.className = 'dotplot-shell';
-        wrap.appendChild(
-          createDotLegend([
-            { label: startLabel, color: '#496780' },
-            { label: endLabel, color: 'var(--accent)' }
-          ])
-        );
-
-        toArray(rows).forEach((row) => {
-          const line = document.createElement('div');
-          line.className = 'dotplot-row';
-          const label = document.createElement('div');
-          label.className = 'dotplot-row-label';
-          label.textContent = row?.label || '';
-          line.appendChild(label);
-
-          const track = document.createElement('div');
-          track.className = 'dotplot-track';
-          const start = percentagePosition(row?.start, minValue, maxValue);
-          const end = percentagePosition(row?.end, minValue, maxValue);
-          if (start !== null && end !== null) {
-            const connector = document.createElement('div');
-            connector.className = 'dotplot-line';
-            connector.style.left = `${Math.min(start, end)}%`;
-            connector.style.width = `${Math.abs(end - start)}%`;
-            track.appendChild(connector);
-          }
-          if (start !== null) {
-            const point = document.createElement('div');
-            point.className = 'dotplot-point point-2023';
-            point.style.left = `${start}%`;
-            track.appendChild(point);
-
-            const value = document.createElement('div');
-            value.className = 'dotplot-value';
-            value.style.left = `calc(${start}% + 0.65rem)`;
-            value.textContent = formatPercent(row.start, 1);
-            track.appendChild(value);
-          }
-          if (end !== null) {
-            const point = document.createElement('div');
-            point.className = 'dotplot-point point-2027';
-            point.style.left = `${end}%`;
-            track.appendChild(point);
-
-            const value = document.createElement('div');
-            value.className = 'dotplot-value';
-            value.style.left = `calc(${end}% + 0.65rem)`;
-            value.textContent = formatPercent(row.end, 1);
-            track.appendChild(value);
-          } else if (row?.endMissingLabel) {
-            const missing = document.createElement('div');
-            missing.className = 'dotplot-missing';
-            missing.textContent = row.endMissingLabel;
-            track.appendChild(missing);
-          }
-          line.appendChild(track);
-          wrap.appendChild(line);
-        });
-
-        const axis = document.createElement('div');
-        axis.className = 'dotplot-axis';
-        axis.appendChild(document.createElement('div'));
-        const axisTrack = document.createElement('div');
-        axisTrack.className = 'dotplot-axis-track';
-        const ticks = toArray(options.ticks?.length ? options.ticks : [minValue, (minValue + maxValue) / 2, maxValue]);
-        ticks.forEach((tick) => {
-          const label = document.createElement('span');
-          label.className = 'dotplot-axis-label';
-          label.style.left = `${percentagePosition(tick, minValue, maxValue)}%`;
-          label.textContent = options.tickFormatter ? options.tickFormatter(tick) : `${tick}`;
-          axisTrack.appendChild(label);
-        });
-        axis.appendChild(axisTrack);
-        wrap.appendChild(axis);
-        return wrap;
-      }
-
       function createLollipopList(rows, options = {}) {
         const minValue = Number.isFinite(options.min) ? options.min : 0;
         const maxValue = Number.isFinite(options.max) ? options.max : 100;
@@ -1761,71 +1560,13 @@
         return wrap;
       }
 
-      function createBallotFigure(ballot, tableBlock) {
-        const shell = createFigureShell('');
-        shell.section.innerHTML = '';
-        const toolbar = createToggleBar(
-          [
-            { label: 'Table', value: 'table' },
-            { label: 'Dot plot', value: 'dotplot' }
-          ],
-          'table',
-          updateView
-        );
-        const content = document.createElement('div');
-        content.className = 'figure-stack';
-        shell.section.appendChild(toolbar);
-        shell.section.appendChild(content);
-
-        function renderTableView() {
-          content.innerHTML = '';
-          content.appendChild(createTable(tableBlock?.headers || [], tableBlock?.rows || []));
-        }
-
-        function renderDotPlotView() {
-          content.innerHTML = '';
-          content.appendChild(
-            createConnectedDotPlot(
-              toArray(ballot?.manuscript_rows).map((row) => ({
-                label: row.label,
-                start: row.value_2023,
-                end: row.value_2027,
-                endMissingLabel: row.value_2027 == null ? '—' : ''
-              })),
-              {
-                min: 0,
-                max: 60,
-                startLabel: '2023',
-                endLabel: '2027 Test',
-                ticks: [0, 20, 40, 60],
-                tickFormatter: (value) => `${value}%`
-              }
-            )
-          );
-        }
-
-        function updateView(next) {
-          toolbar.querySelectorAll('.figure-toggle').forEach((button) => {
-            button.setAttribute('aria-pressed', button.textContent === (next === 'table' ? 'Table' : 'Dot plot') ? 'true' : 'false');
-          });
-          if (next === 'dotplot') {
-            renderDotPlotView();
-          } else {
-            renderTableView();
-          }
-        }
-
-        renderTableView();
-        return shell.section;
-      }
-
       function renderFigureBlock(block, nextBlock) {
         const shell = createFigureShell(block?.marker || '');
         const figures = reportData?.figures || {};
         const key = String(block?.figure_key || '');
 
         if (key === 'test_ballot_statewide_comparison_chart') {
-          return createBallotFigure(figures?.ballot || {}, nextBlock);
+          return createTestBallotEmbedFigure();
         }
 
         if (key === 'favorability_ranking') {
@@ -2053,11 +1794,17 @@
           }
           if (block.type === 'figure_marker') {
             container.appendChild(renderFigureBlock(block, nextBlock));
-            if (block.figure_key === 'test_ballot_statewide_comparison_chart' && nextBlock?.type === 'table') {
-              index += 1;
-            }
           }
         }
+      }
+
+      function handleEmbedMessage(event) {
+        const data = event?.data;
+        if (!data || data.type !== 'vdh-test-ballot-embed-height' || data.embed !== 'statewide-comparison') return;
+        const frame = document.querySelector('iframe[data-embed-kind="test-ballot-statewide-comparison"]');
+        const nextHeight = Number(data?.height);
+        if (!frame || !Number.isFinite(nextHeight) || nextHeight <= 0) return;
+        frame.style.height = `${Math.max(320, Math.ceil(nextHeight))}px`;
       }
 
       async function renderReport() {
@@ -2065,12 +1812,14 @@
         renderHeader(blocks);
         renderBody(blocks);
         applyThemeToLinks(document);
+        applyThemeToEmbeds(document);
         if (pendingAsyncWork.length) {
           await Promise.allSettled(pendingAsyncWork.splice(0));
         }
       }
 
       document.addEventListener('DOMContentLoaded', async () => {
+        window.addEventListener('message', handleEmbedMessage);
         initThemeControls();
         await loadReportData();
         renderSiteNavigation();

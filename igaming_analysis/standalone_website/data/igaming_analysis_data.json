@@ -108,19 +108,13 @@
     {
       "type": "paragraph",
       "lines": [
-        "Vantage organizes voters into detailed profiles, uses a machine learning ensemble to estimate both turnout and opinion, smooths those estimates over time, and projects results across Louisiana's 64 parishes and 8 cultural regions. Stability is measured by bootstrap resampling: the model reruns on many resamples of the survey data, and the spread of those results shows how confident we can be in any given estimate."
+        "Vantage organizes voters into detailed profiles, uses a machine learning ensemble to estimate both turnout and opinion, smooths those estimates over time, and projects results across Louisiana's 64 parishes and 8 cultural regions. The underlying survey has an approximate maximum sampling margin of error of 2.4 percentage points."
       ]
     },
     {
       "type": "paragraph",
       "lines": [
         "The study includes a randomized experiment, described in detail in Part III. Respondents were randomly assigned to read one of two scenarios about the Governor's iGaming decision, then asked about their ballot choice, favorability toward Landry, and support for legalization. Because assignment was random, any differences between groups reflect the causal effect of the scenarios themselves. This experimental design allows us to measure what happens to the Governor's standing when voters learn he signed and delivered versus when they learn he did not."
-      ]
-    },
-    {
-      "type": "paragraph",
-      "lines": [
-        "**How to read these numbers:** Treat a 2pp to 3pp shift as possible noise. Treat a gap of 5pp or more as likely real. Small-area estimates are signals of direction and relative strength, not exact counts."
       ]
     },
     {
@@ -338,7 +332,7 @@
     {
       "type": "paragraph",
       "lines": [
-        "In 2023, Jeff Landry won the Louisiana gubernatorial race decisively with 52.6% of the vote, avoiding a runoff entirely. He consolidated Republican support, dominated the fractured Democratic field, and established himself as the clear choice of Louisiana voters. A majority in an open primary is a strong mandate by any measure."
+        "In 2023, Jeff Landry won the Louisiana gubernatorial race decisively with 52.6% of the vote, avoiding a runoff entirely. He consolidated Republican support, dominated the fractured Democratic field, and established himself as the clear choice of Louisiana voters."
       ]
     },
     {
@@ -884,63 +878,6 @@
     }
   ],
   "figures": {
-    "ballot": {
-      "current_with_view": [
-        {
-          "label": "Jeff Landry, the Republican incumbent",
-          "value": 37.3
-        },
-        {
-          "label": "A Republican challenger from outside the current administration",
-          "value": 20.6
-        },
-        {
-          "label": "A Democratic candidate",
-          "value": 42.0
-        }
-      ],
-      "comparison_2023": [
-        {
-          "label": "Jeff Landry",
-          "value": 52.6
-        },
-        {
-          "label": "Democratic candidate",
-          "value": 25.0
-        },
-        {
-          "label": "Other Republicans",
-          "value": 11.2
-        },
-        {
-          "label": "Others",
-          "value": 11.2
-        }
-      ],
-      "manuscript_rows": [
-        {
-          "label": "Landry",
-          "value_2023": 52.6,
-          "value_2027": 37.3
-        },
-        {
-          "label": "Democratic option",
-          "value_2023": 25.0,
-          "value_2027": 42.0
-        },
-        {
-          "label": "Republican alternative",
-          "value_2023": 11.2,
-          "value_2027": 20.6
-        },
-        {
-          "label": "Others",
-          "value_2023": 11.2,
-          "value_2027": null
-        }
-      ],
-      "gap_pp": -15.3
-    },
     "favorability": {
       "breakdown": [
         {
@@ -1575,7 +1512,6 @@
   "source_files": {
     "favorability": "igaming/favorability/standalone_website/data/igaming_favorability_data.json",
     "test_ballot": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_data.json",
-    "comparison_2023": "igaming/test_ballot/standalone_website/data/igaming_test_ballot_comparison_2023.json",
     "support": "igaming/igaming_support/standalone_website/data/igaming_support_data.json",
     "attitudes": "igaming/attitudes/standalone_website/data/igaming_attitudes_data.json",
     "experiment": "igaming/experiment/standalone_website/data/igaming_experiment_data.json",
